@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '/app/core/singleton_classes/color_schema.dart';
 
 import '/app/core/utils/responsive.dart';
 import '/app/core/values/app_dimension.dart';
-import '/app/core/values/color_schema.dart';
 import 'common_text.dart';
 import 'draw_icon.dart';
 

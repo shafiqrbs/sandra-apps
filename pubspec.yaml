@@ -15,6 +15,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_tabler_icons: ^1.31.0
   get: ^4.6.6
+  google_fonts: ^6.2.1
   internet_connection_checker: ^1.0.0+1
   logger: ^2.3.0
   nb_utils: ^7.0.2

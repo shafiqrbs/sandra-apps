@@ -28,6 +28,11 @@ class LicenseView extends BaseView<LicenseController> {
     );
   }
 
+  @override
+  Widget bottomNavigationBar() {
+    return _buildBottomNavigationBar();
+  }
+
   Widget _buildHeader() {
     return Container();
   }
