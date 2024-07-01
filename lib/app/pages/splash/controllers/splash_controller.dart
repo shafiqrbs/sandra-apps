@@ -4,6 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
+import '/app/routes/app_pages.dart';
 
 class SplashController extends BaseController {
   @override
@@ -38,15 +39,13 @@ class SplashController extends BaseController {
       }
     }
     if (!isLicenseValid) {
-      // go to license screen
-      Get.offAllNamed('');
+      Get.offAllNamed(Routes.license);
     }
 
     if (isLicenseValid && !isLogin) {
       final setupData = await dbHelper.getAll(tbl: dbTables.tableSetup);
       SetUp.fromJson(setupData[0]);
-      // go to login screen
-      Get.offAllNamed('');
+      Get.offAllNamed(Routes.login);
     }
   }
 }
