@@ -130,8 +130,8 @@ abstract class BaseController extends GetxController {
     Get.back();
   }
 
-  Future<void> dataFetcher(
-    Future<void> Function() fetchDataFunction, {
+  Future<void> dataFetcher({
+    required Future<void> Function() future,
     bool shouldShowLoader = true,
     bool shouldCheckInternet = true,
   }) async {
@@ -147,7 +147,7 @@ abstract class BaseController extends GetxController {
     }
 
     try {
-      await fetchDataFunction();
+      await future();
     } finally {
       if (shouldShowLoader) {
         closeLoader();
