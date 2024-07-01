@@ -56,35 +56,6 @@ class Services {
     required String username,
     required String password,
   }) async {
-    final data = {
-      'username': username,
-      'password': password,
-    };
-
-    final response = await dio.post(
-      APIType.public,
-      endpointLogin,
-      data,
-    );
-    if (response.statusCode == 200) {
-      final responseMap = response.data as Map<String, dynamic>;
-      final token = responseMap['token'] as String;
-      final decodedJWT = JwtDecoder.decode(token);
-
-      if (decodedJWT?['data']?['user']?['id'] == null) {
-        return false;
-      }
-
-      responseMap['user_id'] = decodedJWT!['data']['user']['id'];
-      pref
-        ..setIsLogin(isLogin: true)
-        ..setUser(responseMap)
-        ..setLoggedUserName(username)
-        ..setLoggedUserPassword(password);
-
-      LoggedUser.fromJson(responseMap);
-      return true;
-    }
-    return false;
+    return Future.value(true);
   }
 }

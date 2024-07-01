@@ -80,22 +80,6 @@ class SessionManager {
     return prefs.getString(prefsLoggedUserPassword);
   }
 
-  /// Set the user data.
-  Future<void> setUser(
-    Map<String, dynamic> user,
-  ) async {
-    await prefs.setString(
-      prefsUser,
-      jsonEncode(user),
-    );
-  }
-
-  /// Get the user data.
-  Future<Map<String, dynamic>> getUser() async {
-    final user = prefs.getString(prefsUser);
-    return user != null ? jsonDecode(user) as Map<String, dynamic> : {};
-  }
-
   /// set the language of the app.
   Future<void> setLanguage(
     String lang,

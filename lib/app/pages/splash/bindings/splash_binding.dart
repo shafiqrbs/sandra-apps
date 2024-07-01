@@ -5,9 +5,10 @@ class SplashBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SplashController>(
-      () => SplashController(),
+      SplashController.new,
       fenix: true,
     );
   }
 }
+
   
