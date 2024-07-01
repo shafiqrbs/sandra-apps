@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:number_to_character/number_to_character.dart';
-import 'package:terminalbd/utils/parser_functions.dart';
 
 import 'customer.dart';
 import 'entity_manager.dart';
