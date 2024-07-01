@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/app/pages/license/bindings/license_binding.dart';
+import '/app/pages/license/views/license_view.dart';
 import '/app/pages/login/bindings/login_binding.dart';
 import '/app/pages/login/views/login_view.dart';
 import '/app/pages/splash/bindings/splash_binding.dart';
@@ -19,8 +21,13 @@ class AppPages {
       binding: SplashBinding(),
     ),
     GetPage(
+      name: Routes.license,
+      page: LicenseView.new,
+      binding: LicenseBinding(),
+    ),
+    GetPage(
       name: Routes.login,
-      page: () => LoginView(),
+      page: LoginView.new,
       binding: LoginBinding(),
     ),
   ];
