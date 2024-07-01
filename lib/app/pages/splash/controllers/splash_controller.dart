@@ -37,7 +37,8 @@ class SplashController extends BaseController {
         toast('Invalid Credentials');
       }
     }
-
-
+    if (!isLicenseValid) {
+      Get.offAllNamed('');
+    }
   }
 }
