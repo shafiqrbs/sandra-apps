@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/singleton_classes/color_schema.dart';
+
+import '/app/core/singleton_classes/color_schema.dart';
+import '/app/core/singleton_classes/fb_colors.dart';
+import '/app/core/singleton_classes/fb_outline_input_border.dart';
+import '/app/core/singleton_classes/fb_typography.dart';
+import '/app/core/values/app_dimension.dart';
+
+final appDimension = AppDimension();
+final colors = ColorSchema();
 
 InputDecoration getInputDecoration({
   required String hint,
@@ -60,9 +68,9 @@ InputDecoration inputDecorationAppbarSearch({
   return InputDecoration(
     suffixIcon: isSHowSuffixIcon
         ? suffix
-        : Icon(
+        : const Icon(
             MdiIcons.magnify,
-            color: const Color(0xFFd8c8c3),
+            color: Color(0xFFd8c8c3),
           ),
     prefixIcon: isSHowPrefixIcon
         ? IconButton(
@@ -73,38 +81,40 @@ InputDecoration inputDecorationAppbarSearch({
             ),
             onPressed: prefixOnTap,
           )
-        : Icon(MdiIcons.cloudSearch),
+        : const Icon(
+            MdiIcons.cloudSearch,
+          ),
     prefixIconConstraints: const BoxConstraints(),
     contentPadding: EdgeInsets.zero,
     //contentPadding: EdgeInsets.symmetric(horizontal: 8,vertical:10), // Adjust the padding as needed
     hintText: hint.tr,
     hintStyle: TextStyle(
-      fontSize: mixinRoot.regularTFSize,
-      color: mixinRoot.colors.formBaseHintTextColor,
+      fontSize: appDimension.regularTFSize,
+      color: colors.formBaseHintTextColor,
     ), // Optional hint text
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        mixinRoot.containerBorderRadius,
+        appDimension.containerBorderRadius,
       ), // Adjust the border radius as needed
       borderSide: BorderSide(
-        color: mixinRoot.colors.borderColor,
+        color: colors.borderColor,
       ),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        mixinRoot.containerBorderRadius,
+        appDimension.containerBorderRadius,
       ), // Adjust the border radius as needed
       borderSide: BorderSide(
-        color: mixinRoot.colors.borderColor,
+        color: colors.borderColor,
       ),
     ),
 
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        mixinRoot.containerBorderRadius,
+        appDimension.containerBorderRadius,
       ),
       borderSide: BorderSide(
-        color: mixinRoot.colors.borderColor,
+        color: colors.borderColor,
       ),
     ),
   );
@@ -258,9 +268,9 @@ InputDecoration inputDecorationSearch({
             ),
             onPressed: prefixOnTap,
           )
-        : Icon(
+        : const Icon(
             MdiIcons.magnify,
-            color: const Color(0xFFd8c8c3),
+            color: Color(0xFFd8c8c3),
           ),
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 12,
