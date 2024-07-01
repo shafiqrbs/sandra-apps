@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/singleton_classes/fb_init.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '/app/core/singleton_classes/fb_colors.dart';
+import '/app/core/singleton_classes/fb_init.dart';
+import '/app/core/singleton_classes/fb_outline_input_border.dart';
+import '/app/core/singleton_classes/fb_typography.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/utils/style_function.dart';
 
 const TextInputType number = TextInputType.number;
 const TextInputType text = TextInputType.text;
@@ -71,7 +76,7 @@ class FBString extends StatelessWidget {
   //Functions
   Function(String? value)? onChange;
 
-  //TODO: add onClear function
+  // TODO(saiful): add onClear function
   //Function(String? value)? onClear;
 
   //controllers
