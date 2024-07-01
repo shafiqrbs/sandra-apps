@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/tbd_round_button.dart';
-import 'package:getx_template/app/core/widget/tbd_text_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:pie_chart/pie_chart.dart' as pie_chart;
+
 import '/app/core/base/base_view.dart';
+import '/app/core/widget/tbd_round_button.dart';
+import '/app/core/widget/tbd_text_button.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
 
 //ignore: must_be_immutable
@@ -404,21 +406,7 @@ class DashboardView extends BaseView<DashboardController> {
             TbdRoundButton(
               text: 'vendor',
               icon: TablerIcons.credit_card,
-              onTap: () {
-                if (Get.isRegistered<ReceiveModalController>()) {
-                  Get.delete<ReceiveModalController>();
-                }
-                showDialog(
-                  context: Get.context!,
-                  builder: (context) => DialogPattern(
-                    title: 'receive'.tr,
-                    subTitle: 'payment'.tr,
-                    child: ReceiveModalView(
-                      customer: null,
-                    ),
-                  ),
-                );
-              },
+              onTap: () {},
             ),
             TbdRoundButton(
               text: 'stock_item',

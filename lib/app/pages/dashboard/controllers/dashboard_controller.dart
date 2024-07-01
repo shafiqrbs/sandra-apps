@@ -23,6 +23,13 @@ class DashboardController extends BaseController {
     selectedTab.value = dashboard;
   }
 
-  void goToSales() {
-  }
+  void goToSales() {}
+
+  void goToSalesList() {}
+
+  void gotoExpenseScreen() {}
+
+  void gotoPurchaseScreen() {}
+
+  void goToStockList() {}
 }
