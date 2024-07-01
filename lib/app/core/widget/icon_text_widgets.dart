@@ -5,7 +5,7 @@ import '/app/core/widget/asset_image_view.dart';
 
 class IconTextWidget extends StatelessWidget {
   const IconTextWidget({
-    Key? key,
+    super.key,
     this.fileName,
     this.icon,
     this.value,
@@ -13,7 +13,7 @@ class IconTextWidget extends StatelessWidget {
     this.width,
     this.size,
     this.color,
-  }) : super(key: key);
+  });
 
   final String? fileName;
   final IconData? icon;
