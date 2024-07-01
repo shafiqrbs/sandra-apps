@@ -98,6 +98,12 @@ abstract class BaseController extends GetxController {
     return InternetConnectionChecker().hasConnection;
   }
 
+  final dropDownValue = 'english'.obs;
+  final langItems = [
+    'english',
+    'bangla',
+  ].obs;
+
   Future<void> changeLocale() async {
     Get.updateLocale(
       Get.locale == const Locale('en', 'US')
