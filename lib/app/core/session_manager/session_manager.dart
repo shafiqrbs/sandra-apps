@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +31,21 @@ class SessionManager {
         print('Error initializing SharedPreferences: $e');
       }
     }
+  }
+
+  /// set the language of the app.
+  Future<void> setLanguage(
+    String lang,
+  ) async {
+    await prefs.setString(
+      prefsLanguage,
+      lang,
+    );
+  }
+
+  /// get the language of the app.
+  Future<String> getLanguage() async {
+    return prefs.getString(prefsLanguage) ?? 'en';
   }
 
   /// Set the login status of the user.
@@ -80,18 +93,76 @@ class SessionManager {
     return prefs.getString(prefsLoggedUserPassword);
   }
 
-  /// set the language of the app.
-  Future<void> setLanguage(
-    String lang,
-  ) async {
-    await prefs.setString(
-      prefsLanguage,
-      lang,
+  /// Set the license validity status.
+  Future<void> setIsLicenseValid({
+    required bool isLicenseValid,
+  }) async {
+    await prefs.setBool(
+      prefsIsLicenseValid,
+      isLicenseValid,
     );
   }
 
-  /// get the language of the app.
-  Future<String> getLanguage() async {
-    return prefs.getString(prefsLanguage) ?? 'en';
+  /// Get the license validity status.
+  Future<bool> getIsLicenseValid() async {
+    return prefs.getBool(prefsIsLicenseValid) ?? false;
+  }
+
+  /// Set the print paper type.
+  Future<void> setPrintPaperType(
+    String printPaperType,
+  ) async {
+    await prefs.setString(
+      prefsPrinterPaperType,
+      printPaperType,
+    );
+  }
+
+  /// Get the print paper type.
+  Future<String> getPrintPaperType() async {
+    return prefs.getString(prefsPrinterPaperType) ?? '80 mm';
+  }
+
+  /// Set the login status of the user.
+  Future<void> setIsSalesOnline({
+    required bool isSalesOnline,
+  }) async {
+    await prefs.setBool(
+      prefsIsSalesOnline,
+      isSalesOnline,
+    );
+  }
+
+  /// Get the login status of the user.
+  Future<bool> getIsSalesOnline() async {
+    return prefs.getBool(prefsIsSalesOnline) ?? false;
+  }
+
+  /// set is zero allowed
+  Future<void> setIsZeroSalesAllowed({
+    required bool isZeroAllowed,
+  }) async {
+    await prefs.setBool(
+      prefsIsZeroAllowed,
+      isZeroAllowed,
+    );
+  }
+
+  /// get is zero allowed
+  Future<bool> getIsZeroSalesAllowed() async {
+    return prefs.getBool(prefsIsZeroAllowed) ?? true;
+  }
+
+  Future<void> setPurchaseConfig(
+    String config,
+  ) async {
+    await prefs.setString(
+      prefsPurchaseConfig,
+      config,
+    );
+  }
+
+  Future<String> getPurchaseConfig() async {
+    return prefs.getString(prefsPurchaseConfig) ?? 'purchase_price';
   }
 }
