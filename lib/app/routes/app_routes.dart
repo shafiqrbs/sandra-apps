@@ -4,19 +4,9 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
 
-  static const root = _Paths.root;
-  static const home = _Paths.home;
-  static const favorite = _Paths.favorite;
-  static const settings = _Paths.settings;
-  static const other = _Paths.other;
-  static const projectDetails = _Paths.projectDetails;
+  static const splash = _Paths.splash;
 }
 
 abstract class _Paths {
-  static const root = '/root';
-  static const home = '/home';
-  static const favorite = '/favorite';
-  static const settings = '/settings';
-  static const other = '/other';
-  static const projectDetails = '/project-details';
+  static const splash = '/splash';
 }
