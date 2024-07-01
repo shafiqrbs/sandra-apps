@@ -5,4 +5,5 @@ class SplashController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
   }
+
 }

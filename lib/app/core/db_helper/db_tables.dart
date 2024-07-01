@@ -1,17 +1,17 @@
 class DbTables {
-  static const String tableSetup = 'setup';
-  static const String tableProducts = 'products';
-  static const String tableUsers = 'users';
-  static const String tableCustomers = 'customers';
-  static const String tableBankAccounts = 'bank_accounts';
-  static const String tableMobileAccounts = 'mobile_accounts';
-  static const String tableCategories = 'categories';
-  static const String tableVendors = 'vendors';
-  static const String tableStocks = 'stocks';
-  static const String tableTransactionMethods = 'transaction_methods';
-  static const String tablePaymentCards = 'payment_cards';
-  static const String tableUserData = 'user_data';
-  static const String tablePrescription = 'prescription';
-  static const String tableSale = 'sales';
-  static const String tableSalesItem = 'sales_item';
+  final String tableSetup = 'setup';
+  final String tableProducts = 'products';
+  final String tableUsers = 'users';
+  final String tableCustomers = 'customers';
+  final String tableBankAccounts = 'bank_accounts';
+  final String tableMobileAccounts = 'mobile_accounts';
+  final String tableCategories = 'categories';
+  final String tableVendors = 'vendors';
+  final String tableStocks = 'stocks';
+  final String tableTransactionMethods = 'transaction_methods';
+  final String tablePaymentCards = 'payment_cards';
+  final String tableUserData = 'user_data';
+  final String tablePrescription = 'prescription';
+  final String tableSale = 'sales';
+  final String tableSalesItem = 'sales_item';
 }
