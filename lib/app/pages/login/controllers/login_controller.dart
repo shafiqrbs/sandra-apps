@@ -31,26 +31,24 @@ class LoginController extends BaseController {
         return;
       }
 
-      await dbHelper.getAllWhr(
+      final loggedUserdata = await dbHelper.getAllWhr(
         tbl: dbTables.tableUsers,
         where: 'user_name==? AND password==?',
         whereArgs: [
           userNameController.value.text,
           passwordController.value.text,
         ],
-      ).then(
-        (value) async {
-          if (value.isNotEmpty) {
-            await prefs.setIsLogin(isLogin: true);
-            await prefs.setLoggedUserName(userNameController.value.text);
-            await prefs.setLoggedUserPassword(passwordController.value.text);
-            LoggedUser.fromJson(value[0]);
-            Get.offAllNamed(Routes.dashboard);
-          } else {
-            toast('Invalid Credentials');
-          }
-        },
       );
+
+      if (loggedUserdata.isNotEmpty) {
+        await prefs.setIsLogin(isLogin: true);
+        await prefs.setLoggedUserName(userNameController.value.text);
+        await prefs.setLoggedUserPassword(passwordController.value.text);
+        LoggedUser.fromJson(loggedUserdata[0]);
+        Get.offAllNamed(Routes.dashboard);
+      } else {
+        toast('Invalid Credentials');
+      }
     } finally {}
   }
 }
