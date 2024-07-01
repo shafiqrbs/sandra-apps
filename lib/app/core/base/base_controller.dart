@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/db_helper/db_tables.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -27,6 +28,7 @@ abstract class BaseController extends GetxController {
   Services get services => Services();
 
   DbHelper get dbHelper => DbHelper.instance;
+  DbTables get dbTables => DbTables();
 
   final logoutController = false.obs;
 
