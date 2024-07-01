@@ -8,6 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/page_state.dart';
+import '/app/core/db_helper/db_helper.dart';
 import '/app/core/loaders/loader_screen.dart';
 import '/app/core/session_manager/session_manager.dart';
 import '/app/service/client/error_catcher.dart';
@@ -24,6 +25,8 @@ abstract class BaseController extends GetxController {
   SessionManager get prefs => SessionManager();
 
   Services get services => Services();
+
+  DbHelper get dbHelper => DbHelper.instance;
 
   final logoutController = false.obs;
 
