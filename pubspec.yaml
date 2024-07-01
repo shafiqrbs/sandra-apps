@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
+  flutter_tabler_icons: ^1.31.0
   get: ^4.6.6
   internet_connection_checker: ^1.0.0+1
   logger: ^2.3.0

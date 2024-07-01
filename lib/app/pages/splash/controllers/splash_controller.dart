@@ -10,6 +10,7 @@ class SplashController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await navigatePage();
   }
 
   Future<void> navigatePage() async {
@@ -33,7 +34,7 @@ class SplashController extends BaseController {
 
       if (loggedUserData.isNotEmpty) {
         LoggedUser.fromJson(loggedUserData[0]);
-        Get.offAllNamed('');
+        Get.offAllNamed(Routes.dashboard);
       } else {
         toast('Invalid Credentials');
       }
