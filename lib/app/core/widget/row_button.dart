@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/app/core/utils/responsive.dart';
 import '/app/core/values/app_dimension.dart';
+import '/app/core/values/color_schema.dart';
 import 'common_text.dart';
 import 'draw_icon.dart';
 
@@ -28,7 +29,7 @@ class RowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appDimension = AppDimension();
-    final colors = Theme.of(context).colorScheme;
+    final colors = ColorSchema();
 
     return Expanded(
       child: InkWell(
