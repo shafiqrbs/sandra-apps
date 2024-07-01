@@ -7,7 +7,9 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/page_state.dart';
+import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/values/app_colors.dart';
+import '/app/core/values/app_dimension.dart';
 import '/app/core/widget/loading.dart';
 import '/flavors/build_config.dart';
 import 'mixins/shorter_enum_mixin.dart';
@@ -22,6 +24,8 @@ abstract class BaseView<Controller extends BaseController>
   AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
   final Logger logger = BuildConfig.instance.config.logger;
+  final colors = ColorSchema();
+  final dimensions = AppDimension();
 
   Widget body(BuildContext context);
 
