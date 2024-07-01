@@ -14,8 +14,8 @@ Future<void> main() async {
   //await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   final EnvConfig devConfig = EnvConfig(
-    appName: 'Flutter GetX Template Dev',
-    baseUrl: 'https://api.github.com',
+    appName: 'Sandra',
+    baseUrl: 'https://poskeeper.com/flutter-api/',
     shouldCollectCrashLog: true,
   );
 
