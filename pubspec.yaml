@@ -20,6 +20,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   logger: ^2.3.0
   nb_utils: ^7.0.2
+  number_to_character: ^0.0.12
   path: any
   shared_preferences: ^2.2.3
   sqflite: ^2.3.3+1
