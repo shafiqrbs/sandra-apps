@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/app/pages/dashboard/bindings/dashboard_binding.dart';
+import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/license/bindings/license_binding.dart';
 import '/app/pages/license/views/license_view.dart';
 import '/app/pages/login/bindings/login_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: Routes.login,
       page: LoginView.new,
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.dashboard,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }
