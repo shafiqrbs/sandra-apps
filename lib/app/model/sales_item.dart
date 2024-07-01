@@ -1,4 +1,4 @@
-import 'package:terminalbd/utils/parser_functions.dart';
+import '/app/core/utils/parser_functions.dart';
 
 class SalesItem {
   int? stockId;
