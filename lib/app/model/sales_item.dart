@@ -55,21 +55,23 @@ class SalesItem {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'stock_id': stockId,
-        'sales_id': salesId,
-        'barcode': barcode,
-        'stock_name': stockName,
-        'brand_name': brandName,
-        'unit': unit,
-        'mrp_price': mrpPrice,
-        'sales_price': salesPrice,
-        'discount_price': discountPrice,
-        'purchase_price': purchasePrice,
-        'item_percent': itemPercent,
-        'custom_price': customPrice,
-        'quantity': quantity,
-        'sub_total': subTotal,
-        'discount_percent': discountPercent,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'stock_id': stockId,
+      'sales_id': salesId,
+      'barcode': barcode,
+      'stock_name': stockName,
+      'brand_name': brandName,
+      'unit': unit,
+      'mrp_price': mrpPrice,
+      'sales_price': salesPrice,
+      'discount_price': discountPrice,
+      'purchase_price': purchasePrice,
+      'item_percent': itemPercent,
+      'custom_price': customPrice,
+      'quantity': quantity,
+      'sub_total': subTotal,
+      'discount_percent': discountPercent,
+    };
+  }
 }

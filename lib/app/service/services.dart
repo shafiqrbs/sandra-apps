@@ -1,22 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/core_model/logged_user.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
-import '/app/service/endpoints.dart';
-import '/flavors/build_config.dart';
 import 'client/api_options.dart';
 import 'client/rest_client.dart';
 
 class Services {
   final pref = SessionManager();
   final dio = RestClient(
-    baseUrl: BuildConfig.instance.config.baseUrl,
+    baseUrl: 'https://poskeeper.com/flutter-api/',
     token: '',
   );
 
-  Future<Map<String, dynamic>> _buildHeader() async {
-    return {};
+  Map<String, dynamic> _buildHeader() {
+    return {
+      'X-API-KEY': 'terminalbd',
+      'X-API-VALUE': 'terminalbd@aps',
+      'X-API-SECRET': SetUp().uniqueCode ?? '',
+    };
   }
 
   Future<bool> validateResponse(Response<dynamic> response) async {
@@ -27,35 +28,21 @@ class Services {
     }
   }
 
-  Future<bool> registerUser({
-    required String username,
-    required String email,
-    required String password,
+  Future<Map<String, dynamic>?> submitLicense({
+    required bool shouldShowLoader,
+    required String license,
+    required String activeKey,
   }) async {
-    final data = {
-      'username': username,
-      'email': email,
-      'password': password,
-    };
-
     final response = await dio.post(
       APIType.public,
-      endpointRegister,
-      data,
+      'poskeeper-splash',
+      {
+        'mobile': license,
+        'uniqueCode': activeKey,
+        'deviceId': '',
+      },
+      headers: _buildHeader(),
     );
-    if (response.statusCode == 200) {
-      final responseMap = response.data as Map<String, dynamic>;
-      if (responseMap['code'] is int && responseMap['code'] == 200) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  Future<bool> authenticateUser({
-    required String username,
-    required String password,
-  }) async {
-    return Future.value(true);
+    return response.data;
   }
 }
