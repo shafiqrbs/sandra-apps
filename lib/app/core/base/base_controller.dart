@@ -2,14 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/db_helper/db_tables.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/page_state.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/db_helper/db_helper.dart';
+import '/app/core/db_helper/db_tables.dart';
 import '/app/core/loaders/loader_screen.dart';
 import '/app/core/session_manager/session_manager.dart';
 import '/app/service/client/error_catcher.dart';
@@ -28,7 +29,10 @@ abstract class BaseController extends GetxController {
   Services get services => Services();
 
   DbHelper get dbHelper => DbHelper.instance;
+
   DbTables get dbTables => DbTables();
+
+  SetUp get setUp => SetUp();
 
   final logoutController = false.obs;
 

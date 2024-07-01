@@ -6,4 +6,10 @@ class SplashController extends BaseController {
     super.onInit();
   }
 
+  Future<void> navigatePage() async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    final bool isLicenseValid = await prefs.getIsLicenseValid();
+    final bool isLogin = await prefs.getIsLogin();
+  }
 }
