@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
-  import '/app/core/base/base_controller.dart';
-  
+import '/app/core/base/base_controller.dart';
+
 class DashboardController extends BaseController {
- @override
+  @override
   Future<void> onInit() async {
     super.onInit();
   }
-
 }
-  

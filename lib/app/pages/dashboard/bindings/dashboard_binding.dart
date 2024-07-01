@@ -10,4 +10,3 @@ class DashboardBinding extends Bindings {
     );
   }
 }
-  
