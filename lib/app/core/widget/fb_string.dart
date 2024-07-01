@@ -18,63 +18,63 @@ const TextInputAction done = TextInputAction.done;
 
 class FBString extends StatelessWidget {
   //Strings
-  String? label;
-  String? example;
-  String? hint;
-  String? errorMsg;
-  String? toolTipContent;
+  final String? label;
+  final String? example;
+  final String? hint;
+  final String? errorMsg;
+  final String? toolTipContent;
 
   //EdgeInsets
-  EdgeInsets? padding;
-  EdgeInsets? contentPadding;
+  final EdgeInsets? padding;
+  final EdgeInsets? contentPadding;
 
   //TextStyles
-  TextStyle? labelTextStyle;
-  TextStyle? exampleTextStyle;
-  TextStyle? errorMsgTextStyle;
-  TextStyle? hintTextStyle;
-  TextStyle? inputTextStyle;
-  TextStyle? toolTipTextStyle;
+  final TextStyle? labelTextStyle;
+  final TextStyle? exampleTextStyle;
+  final TextStyle? errorMsgTextStyle;
+  final TextStyle? hintTextStyle;
+  final TextStyle? inputTextStyle;
+  final TextStyle? toolTipTextStyle;
 
   //OutlineInputBorder
-  OutlineInputBorder? border;
-  OutlineInputBorder? enabledBorder;
-  OutlineInputBorder? focusedBorder;
-  OutlineInputBorder? errorBorder;
-  OutlineInputBorder? focusedErrorBorder;
-  OutlineInputBorder? disabledBorder;
+  final OutlineInputBorder? border;
+  final OutlineInputBorder? enabledBorder;
+  final OutlineInputBorder? focusedBorder;
+  final OutlineInputBorder? errorBorder;
+  final OutlineInputBorder? focusedErrorBorder;
+  final OutlineInputBorder? disabledBorder;
 
   //Colors
-  Color? fillColor;
-  Color? cursorColor;
-  Color? toolTipContentColor;
-  Color? toolTipColor;
-  Color? toolTipIconColor;
-  Color? prefixIconColor;
+  final Color? fillColor;
+  final Color? cursorColor;
+  final Color? toolTipContentColor;
+  final Color? toolTipColor;
+  final Color? toolTipIconColor;
+  final Color? prefixIconColor;
 
   //IconData
-  IconData? toolTipIcon;
-  IconData? preFixIcon;
-  IconData? suffixIcon;
+  final IconData? toolTipIcon;
+  final IconData? preFixIcon;
+  final IconData? suffixIcon;
 
   //Doubles
-  double? textFieldHeight;
-  double? textFieldWidth;
-  double? prefixIconSize;
+  final double? textFieldHeight;
+  final double? textFieldWidth;
+  final double? prefixIconSize;
 
   //ints
-  int? lines;
+  final int? lines;
 
   //bools
-  bool isRequired;
-  bool? isShowToolTip;
-  bool? isReadOnly;
+  final bool isRequired;
+  final bool? isShowToolTip;
+  final bool? isReadOnly;
 
   //decoration
-  InputDecoration? decoration;
+  final InputDecoration? decoration;
 
   //Functions
-  Function(String? value)? onChange;
+  final Function(String? value)? onChange;
 
   // TODO(saiful): add onClear function
   //Function(String? value)? onClear;
