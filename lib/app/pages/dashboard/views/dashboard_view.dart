@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/tbd_round_button.dart';
 import 'package:getx_template/app/core/widget/tbd_text_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -378,22 +379,22 @@ class DashboardView extends BaseView<DashboardController> {
             TbdRoundButton(
               text: 'pos',
               icon: TablerIcons.garden_cart,
-              onTap: mvc.goToSales,
+              onTap: controller.goToSales,
             ),
             TbdRoundButton(
               text: 'sales_list',
               icon: TablerIcons.point_off,
-              onTap: mvc.goToSalesList,
+              onTap: controller.goToSalesList,
             ),
             TbdRoundButton(
               text: 'stock',
               icon: TablerIcons.shopping_cart,
-              onTap: mvc.goToStockList,
+              onTap: controller.goToStockList,
             ),
             TbdRoundButton(
               text: 'add_purchase',
               icon: TablerIcons.shopping_cart,
-              onTap: mvc.gotoPurchaseScreen,
+              onTap: controller.gotoPurchaseScreen,
             ),
             TbdRoundButton(
               text: 'purchase_return'.tr,
@@ -437,145 +438,11 @@ class DashboardView extends BaseView<DashboardController> {
             TbdRoundButton(
               text: 'expense'.tr,
               icon: TablerIcons.color_swatch,
-              onTap: mvc.gotoExpenseScreen,
+              onTap: controller.gotoExpenseScreen,
             ),
           ],
         ),
       ],
-    );
-
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 8,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'receive_modal'.tr,
-                  subTitle: '567',
-                  backgroundColor: colors.colorOne,
-                  onTap: () {
-                    if (Get.isRegistered<ReceiveModalController>()) {
-                      Get.delete<ReceiveModalController>();
-                    }
-                    showDialog(
-                      context: Get.context!,
-                      builder: (context) => DialogPattern(
-                        title: 'receive'.tr,
-                        subTitle: 'payment'.tr,
-                        child: ReceiveModalView(
-                          customer: null,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  backgroundColor: colors.colorTwo,
-                  title: 'purchase_screen'.tr,
-                  onTap: () {
-                    Get.to(PurchaseScreen());
-                  },
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'sync_sales'.tr,
-                  subTitle: '567',
-                  backgroundColor: colors.colorThree,
-                  onTap: () async {
-                    await newServices.fetchOnlineData(
-                      () async {
-                        final salesList = await dbHelper.getAll(
-                          tbl: tableSale,
-                        );
-
-                        final data = await newServices.postSales(
-                          shouldShowLoader: true,
-                          salesList: salesList,
-                          mode: 'offline',
-                        );
-                        print('Receive Success $data');
-                      },
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  backgroundColor: colors.colorFour,
-                  onTap: () async {
-                    await dbHelper.deleteAll(
-                      tbl: tableSale,
-                    );
-                  },
-                  title: 'clear_sales_table'.tr,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'account_sales'.tr,
-                  subTitle: '567',
-                  backgroundColor: colors.colorFive,
-                  onTap: () {
-                    Get.to(AccountSalesPage.new);
-                  },
-                ),
-              ),
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'Reset Data',
-                  subTitle: '567',
-                  backgroundColor: colors.colorSix,
-                  onTap: mvc.resetData,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'change_sales_mode'.tr,
-                  subTitle: '567',
-                  backgroundColor: colors.colorFive,
-                  onTap: () async {
-                    await prefs.setIsSalesOnline(
-                      isSalesOnline: !(await prefs.getIsSalesOnline()),
-                    );
-                    print(await prefs.getIsSalesOnline());
-                  },
-                ),
-              ),
-              Expanded(
-                child: mvc.commonCardView.copyWith(
-                  title: 'Dummy Data',
-                  subTitle: '567',
-                  backgroundColor: colors.colorSix,
-                  onTap: () {},
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 
@@ -584,17 +451,17 @@ class DashboardView extends BaseView<DashboardController> {
       children: [
         TbdTextButton(
           text: 'inventory',
-          onPressed: () =>
-              mvc.selectedButtonGroup.value = SelectedButtonGroup.inventory,
-          isSelected:
-              mvc.selectedButtonGroup.value == SelectedButtonGroup.inventory,
+          onPressed: () => controller.selectedButtonGroup.value =
+              SelectedButtonGroup.inventory,
+          isSelected: controller.selectedButtonGroup.value ==
+              SelectedButtonGroup.inventory,
         ),
         TbdTextButton(
           text: 'accounting',
-          onPressed: () =>
-              mvc.selectedButtonGroup.value = SelectedButtonGroup.accounting,
-          isSelected:
-              mvc.selectedButtonGroup.value == SelectedButtonGroup.accounting,
+          onPressed: () => controller.selectedButtonGroup.value =
+              SelectedButtonGroup.accounting,
+          isSelected: controller.selectedButtonGroup.value ==
+              SelectedButtonGroup.accounting,
         ),
       ],
     );
