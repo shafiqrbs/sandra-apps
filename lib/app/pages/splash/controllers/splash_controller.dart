@@ -38,6 +38,14 @@ class SplashController extends BaseController {
       }
     }
     if (!isLicenseValid) {
+      // go to license screen
+      Get.offAllNamed('');
+    }
+
+    if (isLicenseValid && !isLogin) {
+      final setupData = await dbHelper.getAll(tbl: dbTables.tableSetup);
+      SetUp.fromJson(setupData[0]);
+      // go to login screen
       Get.offAllNamed('');
     }
   }
