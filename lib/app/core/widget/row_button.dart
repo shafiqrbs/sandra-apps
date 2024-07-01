@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '/app/core/utils/responsive.dart';
 
+import '/app/core/utils/responsive.dart';
+import '/app/core/values/app_dimension.dart';
 import 'common_text.dart';
 import 'draw_icon.dart';
 
@@ -26,6 +27,9 @@ class RowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appDimension = AppDimension();
+    final colors = Theme.of(context).colorScheme;
+
     return Expanded(
       child: InkWell(
         onTap: onTap,
@@ -37,7 +41,9 @@ class RowButton extends StatelessWidget {
                 ((isOutline ?? false)
                     ? colors.backgroundColor
                     : colors.primaryBaseColor),
-            borderRadius: BorderRadius.circular(containerBorderRadius),
+            borderRadius: BorderRadius.circular(
+              appDimension.containerBorderRadius,
+            ),
             border: (isOutline ?? false)
                 ? Border.all(
                     color: colors.primaryBaseColor,
@@ -59,7 +65,7 @@ class RowButton extends StatelessWidget {
                 child: CommonText(
                   text: buttonName,
                   fontWeight: FontWeight.w500,
-                  fontSize: mediumButtonTFSize,
+                  fontSize: appDimension.mediumButtonTFSize,
                   textColor: (isOutline ?? false)
                       ? colors.primaryBaseColor
                       : colors.backgroundColor,
