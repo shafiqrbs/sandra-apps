@@ -28,57 +28,65 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.zero,
-      backgroundColor: Colors.black.withOpacity(.5),
-      shadowColor: Colors.white.withOpacity(.8),
-      elevation: 0,
-      child: Center(
-        child: Container(
-          width: Get.width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              dimensions.containerBorderRadius,
-            ),
-            color: colors.backgroundColor,
-          ),
-          child: Form(
-            key: controller.formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: centerMAA,
-                children: [
-                  _buildSalesItemListView(context),
-                  1.percentHeight,
-                  _buildCustomerSearch(context),
-                  1.percentHeight,
-                  _buildSelectedCustomerView(context),
-                  Stack(
+    return GetX<SalesProcessModalController>(
+      init: SalesProcessModalController(
+        salesItemList: salesItemList,
+        preSales: preSales,
+      ),
+      builder: (controller) {
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          backgroundColor: Colors.black.withOpacity(.5),
+          shadowColor: Colors.white.withOpacity(.8),
+          elevation: 0,
+          child: Center(
+            child: Container(
+              width: Get.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  dimensions.containerBorderRadius,
+                ),
+                color: colors.backgroundColor,
+              ),
+              child: Form(
+                key: controller.formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: centerMAA,
                     children: [
-                      Column(
+                      _buildSalesItemListView(context),
+                      1.percentHeight,
+                      _buildCustomerSearch(context),
+                      1.percentHeight,
+                      _buildSelectedCustomerView(context),
+                      Stack(
                         children: [
-                          _buildInvoiceSummery(),
-                          _buildTransactionMethod(context),
-                          1.percentHeight,
-                          _buildPaymentReceiveRow(context),
-                          1.percentHeight,
-                          _buildUserSelectView(context),
-                          1.percentHeight,
-                          _buildProfitView(context),
-                          1.percentHeight,
-                          _buildBottomButton(context),
-                          1.percentHeight,
+                          Column(
+                            children: [
+                              _buildInvoiceSummery(),
+                              _buildTransactionMethod(context),
+                              1.percentHeight,
+                              _buildPaymentReceiveRow(context),
+                              1.percentHeight,
+                              _buildUserSelectView(context),
+                              1.percentHeight,
+                              _buildProfitView(context),
+                              1.percentHeight,
+                              _buildBottomButton(context),
+                              1.percentHeight,
+                            ],
+                          ),
+                          _buildCustomerListView(context),
                         ],
                       ),
-                      _buildCustomerListView(context),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -308,7 +316,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       controller.updateCustomer(
                         controller.customerManager.searchedItems.value![index],
                       );
-                      //close keyboard
                       FocusScope.of(context).unfocus();
                     },
                     onReceive: () {},

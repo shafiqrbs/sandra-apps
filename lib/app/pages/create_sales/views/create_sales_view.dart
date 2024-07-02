@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/pages/create_sales/component/sales_item_list_view.dart';
-import 'package:getx_template/app/pages/create_sales/component/searched_stock_list.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
@@ -9,7 +7,10 @@ import '/app/core/utils/responsive.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
+import '/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
 import '/app/global_widget/product_search_form.dart';
+import '/app/pages/create_sales/component/sales_item_list_view.dart';
+import '/app/pages/create_sales/component/searched_stock_list.dart';
 import '/app/pages/create_sales/controllers/create_sales_controller.dart';
 
 //ignore: must_be_immutable
@@ -40,36 +41,22 @@ class CreateSalesView extends BaseView<CreateSalesController> {
   @override
   Widget floatingActionButton() {
     return InkWell(
-      onTap: () {
-        if (controller.salesItemList.isEmpty) {
+      onTap: () async {
+        if (controller.salesItemList.value.isEmpty) {
           toast('please_select_item'.tr);
           return;
         }
 
-        /* if (Get.isRegistered<SalesProcessModalController>()) {
-          Get.delete<SalesProcessModalController>();
+        final result = await Get.dialog(
+          SalesProcessModalView(
+            salesItemList: controller.salesItemList.value,
+            preSales: null,
+          ),
+        );
+        if (result != null) {
+          controller.salesItemList.value = result;
+          controller.calculateAllSubtotal();
         }
-
-        showDialog(
-          context: context,
-          builder: (context) {
-            return SalesProcessModalView(
-              salesItemList: mvc.salesItemList,
-              preSales: null,
-            );
-          },
-        ).then(
-          (value) {
-            if (value != null) {
-              mvc
-                ..updateSalesItemList(value)
-                ..salesItemList.value = value
-                ..calculateAllSubtotal();
-
-              mvc.salesItemList.refresh();
-            }
-          },
-        );*/
       },
       child: Container(
         height: 7.ph,
@@ -126,7 +113,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                   mainAxisAlignment: centerMAA,
                   children: [
                     Text(
-                      '${controller.salesItemList.length}',
+                      '${controller.salesItemList.value.length}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -363,7 +350,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
             Obx(
               () {
                 return Visibility(
-                  visible: controller.salesItemList.isNotEmpty,
+                  visible: controller.salesItemList.value.isNotEmpty,
                   child: Column(
                     children: [
                       4.height,
@@ -372,7 +359,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                       SizedBox(
                         height: 65.ph,
                         child: SalesItemListView(
-                          salesItems: controller.salesItemList,
+                          salesItems: controller.salesItemList.value,
                           onItemRemove: controller.onItemRemove,
                           onQtyChange: controller.onQtyChange,
                           onDiscountChange: controller.onDiscountChange,
@@ -392,7 +379,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                   Obx(
                     () {
                       return Visibility(
-                        visible: controller.salesItemList.isEmpty &&
+                        visible: controller.salesItemList.value.isEmpty &&
                             controller.stockList.value.isEmpty,
                         child: Container(
                           alignment: Alignment.center,

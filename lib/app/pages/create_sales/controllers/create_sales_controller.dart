@@ -8,7 +8,7 @@ import '/app/model/sales_item.dart';
 import '/app/model/stock.dart';
 
 class CreateSalesController extends BaseController {
-  final salesItemList = <SalesItem>[].obs;
+  final salesItemList = Rx<List<SalesItem>>([]);
   final stockList = Rx<List<Stock>>([]);
   final selectedStock = Rx<Stock?>(null);
   final qtyFocusNode = FocusNode().obs;
@@ -50,7 +50,7 @@ class CreateSalesController extends BaseController {
     salesReceive.value = 0.00;
     salesDiscountPercent.value = 0.00;
 
-    for (final element in salesItemList) {
+    for (final element in salesItemList.value) {
       salesSubTotal.value += element.subTotal ?? 0;
       salesPurchasePrice.value +=
           (element.purchasePrice ?? 0) * element.quantity!;
@@ -168,7 +168,7 @@ class CreateSalesController extends BaseController {
       ..value = salesSubTotal.value.toPrecision(2);
 
     // Add salesItem to the list and reset state
-    salesItemList.add(salesItem);
+    salesItemList.value.add(salesItem);
     resetAfterItemAdd();
   }
 
@@ -179,6 +179,7 @@ class CreateSalesController extends BaseController {
     stockQtyController.value.clear();
     stockDiscountPercentController.value.clear();
     stockList.value = [];
+    salesItemList.refresh();
   }
 
   Future<void> onStockSelection(Stock? stock) async {
@@ -204,8 +205,8 @@ class CreateSalesController extends BaseController {
     num value,
     int index,
   ) async {
-    final item = salesItemList[index];
-    salesItemList[index]
+    final item = salesItemList.value[index];
+    salesItemList.value[index]
       ..quantity = value
       ..subTotal = (item.salesPrice! * value).toDouble().toPrecision(2);
 
@@ -235,10 +236,10 @@ class CreateSalesController extends BaseController {
     int index,
   ) async {
     log('onDiscountChange called');
-    final item = salesItemList[index];
+    final item = salesItemList.value[index];
     final mrpPrice = item.mrpPrice!;
 
-    salesItemList[index]
+    salesItemList.value[index]
       ..discountPrice = double.parse(
         ((mrpPrice * value.toDouble()) / 100).toStringAsFixed(2),
       )
@@ -260,8 +261,8 @@ class CreateSalesController extends BaseController {
     int index,
   ) async {
     log('onSalesPriceChange called');
-    final item = salesItemList[index];
-    salesItemList[index]
+    final item = salesItemList.value[index];
+    salesItemList.value[index]
       ..salesPrice = value
       ..subTotal = double.parse(
         (item.salesPrice! * item.quantity!).toStringAsFixed(2),
@@ -276,7 +277,11 @@ class CreateSalesController extends BaseController {
   Future<void> onItemRemove(
     int index,
   ) async {
-    salesItemList.removeAt(index);
+    salesItemList.value.removeAt(index);
     calculateAllSubtotal();
+  }
+
+  void updateSalesItemList(value) {
+    salesItemList.value = value;
   }
 }
