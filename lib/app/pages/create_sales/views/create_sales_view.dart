@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/utils/style_function.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/utils/style_function.dart';
+import '/app/core/widget/common_text.dart';
+import '/app/core/widget/selected_stock_list_header.dart';
 import '/app/global_widget/product_search_form.dart';
 import '/app/pages/create_sales/controllers/create_sales_controller.dart';
 
@@ -233,6 +234,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
+/*
             Obx(
               () {
                 return Visibility(
@@ -257,6 +259,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 );
               },
             ),
+*/
             Container(
               color: colors.backgroundColor,
               height: 90.ph,
