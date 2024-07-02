@@ -40,6 +40,15 @@ class CreateSalesController extends BaseController {
     super.onInit();
   }
 
+  Future<void> onClearSearchField() async {
+    selectedStock.value = null;
+    searchController.value.clear();
+    searchController.refresh();
+    stockList
+      ..value = []
+      ..refresh();
+  }
+
   Future<void> getStocks(
     String? pattern,
   ) async {

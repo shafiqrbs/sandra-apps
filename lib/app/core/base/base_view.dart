@@ -15,6 +15,13 @@ import '/flavors/build_config.dart';
 import 'mixins/shorter_enum_mixin.dart';
 import 'mixins/validator_mixin.dart';
 
+final regexDouble = FilteringTextInputFormatter.allow(
+  RegExp(r'^[0-9]*\.?[0-9]*'),
+);
+final regexInteger = FilteringTextInputFormatter.allow(
+  RegExp('^[0-9]*'),
+);
+
 abstract class BaseView<Controller extends BaseController>
     extends GetView<Controller> with ValidatorMixin, ShorterEnumMixin {
   BaseView({super.key});
