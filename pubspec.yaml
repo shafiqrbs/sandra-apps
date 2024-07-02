@@ -10,6 +10,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_advanced_switch: ^3.1.0
   flutter_localizations:
     sdk: flutter
   flutter_material_design_icons: ^1.1.7447

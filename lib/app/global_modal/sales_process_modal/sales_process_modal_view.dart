@@ -2,26 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:terminalbd/advance_select/advance_select_view.dart';
-import 'package:terminalbd/core/base_widget.dart';
-import 'package:terminalbd/global_modal/add_customer_modal/add_customer_modal_controller.dart';
-import 'package:terminalbd/global_modal/add_customer_modal/add_customer_modal_view.dart';
-import 'package:terminalbd/global_modal/sales_process_modal/sales_process_modal_controller.dart';
-import 'package:terminalbd/global_widget/common_text.dart';
-import 'package:terminalbd/global_widget/dialog_pattern.dart';
-import 'package:terminalbd/global_widget/fb_string.dart';
-import 'package:terminalbd/global_widget/row_button.dart';
-import 'package:terminalbd/global_widget/sales_item_list_view.dart';
-import 'package:terminalbd/global_widget/transaction_method_item.dart';
-import 'package:terminalbd/model/customer.dart';
-import 'package:terminalbd/model/sales.dart';
-import 'package:terminalbd/model/sales_item.dart';
-import 'package:terminalbd/model/user.dart';
-import 'package:terminalbd/pages/domain/customer/views/customer_card_view.dart';
-import 'package:terminalbd/utils/responsive.dart';
+import 'package:getx_template/app/core/base/base_widget.dart';
+import 'package:getx_template/app/core/widget/row_button.dart';
+import 'package:getx_template/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
 
-class SalesProcessModalView extends BaseWidget {
+
+class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
   final Sales? preSales;
   final List<SalesItem> salesItemList;
   SalesProcessModalView({
