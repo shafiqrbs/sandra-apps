@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/utils/style_function.dart';
@@ -27,7 +28,7 @@ class SalesListView extends BaseView<SalesListController> {
               ? Container(
                   margin: const EdgeInsets.only(left: 2),
                   height: textFieldHeight,
-                 // width: Get.width,
+                  // width: Get.width,
                   decoration: BoxDecoration(
                     color: colors.backgroundColor,
                     borderRadius: BorderRadius.circular(
@@ -44,8 +45,73 @@ class SalesListView extends BaseView<SalesListController> {
                       color: colors.primaryTextColor,
                     ),
                     cursorColor: colors.formCursorColor,
-                    onChanged: controller.customerManager.searchItemsByNameOnAllItem,
-                   /* decoration: inputDecorationSearch(
+                    onChanged:
+                        controller.customerManager.searchItemsByNameOnAllItem,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        TablerIcons.search,
+                        color: colors.primaryBaseColor,
+                        size: 18,
+                      ),
+                      suffixIcon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: controller.toggleSearchButton,
+                            icon: Icon(
+                              TablerIcons.microphone,
+                              color: colors.primaryBaseColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => controller.showFilterModal(
+                              context: globalKey.currentContext!,
+                            ),
+                            icon: Icon(
+                              TablerIcons.filter,
+                              color: colors.primaryBaseColor.withOpacity(.5),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: controller.toggleSearchButton,
+                            icon: Icon(
+                              TablerIcons.x,
+                              color: Colors.grey.withOpacity(.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ), // Adjust the padding as needed
+                      hintText: 'hint'.tr,
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey.withOpacity(.5),
+                      ), // Optional hint text
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          4,
+                        ),
+                        // Adjust the border radius as needed
+                        borderSide: const BorderSide(color: Color(0xFFece2d9)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        borderSide: const BorderSide(
+                          color: Color(0xFFf5edeb),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        borderSide: const BorderSide(
+                          color: Color(0xFFf5edeb),
+                        ),
+                      ),
+                    ),
+
+                    /* decoration: inputDecorationSearch(
                       hint: 'search_customer'.tr,
                       isSHowPrefixIcon: false,
                       textEditingController: controller.customerManager.searchTextController.value,
@@ -62,9 +128,18 @@ class SalesListView extends BaseView<SalesListController> {
                     ),*/
                   ),
                 )
-              : CommonText(text: 'sales'.tr);
+              : Row(
+                  children: [
+                    IconButton(
+                      onPressed: Get.back,
+                      icon: const Icon(Icons.arrow_back),
+                    ),
+                    CommonText(text: 'sales'.tr),
+                  ],
+                );
         },
       ),
+      automaticallyImplyLeading: false,
       actions: [
         Obx(
           () {
@@ -81,7 +156,7 @@ class SalesListView extends BaseView<SalesListController> {
             }
             return Container(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(4),
               ),
               height: 60,
@@ -95,6 +170,8 @@ class SalesListView extends BaseView<SalesListController> {
                       context: globalKey.currentContext!,
                     ),
                     leftIcon: TablerIcons.library_plus,
+                    buttonBGColor: colors.tertiaryBaseColor,
+                    iconColor: colors.primaryBaseColor,
                   ),
                   2.width,
                   AppBarButton(
@@ -112,7 +189,7 @@ class SalesListView extends BaseView<SalesListController> {
                       context: globalKey.currentContext!,
                     ),
                     leftIcon: TablerIcons.library_plus,
-                    buttonBGColor: Color(0xFFf7dfbb),
+                    buttonBGColor: colors.tertiaryLiteColor,
                     iconColor: colors.primaryBaseColor,
                   ),
                   2.width,
@@ -120,54 +197,6 @@ class SalesListView extends BaseView<SalesListController> {
               ),
             );
           },
-        ),
-      ],
-    );
-
-    return AppBar(
-      title: Text('sales'.tr),
-      actions: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          height: 60,
-          margin: const EdgeInsets.only(right: 16),
-          child: Row(
-            children: [
-              2.width,
-              AppBarButton(
-                buttonName: null,
-                onTap: () => controller.showFilterModal(
-                  context: globalKey.currentContext!,
-                ),
-                leftIcon: TablerIcons.library_plus,
-              ),
-              2.width,
-              AppBarButton(
-                buttonName: null,
-                onTap: () => controller.showFilterModal(
-                  context: globalKey.currentContext!,
-                ),
-                leftIcon: TablerIcons.search,
-                iconColor: colors.primaryBaseColor,
-                buttonBGColor: Colors.white,
-                buttonTextColor: colors.primaryBaseColor,
-              ),
-              2.width,
-              AppBarButton(
-                buttonName: null,
-                onTap: () => controller.showFilterModal(
-                  context: globalKey.currentContext!,
-                ),
-                leftIcon: TablerIcons.library_plus,
-                buttonBGColor: Color(0xFFf7dfbb),
-                iconColor: colors.primaryBaseColor,
-              ),
-              2.width,
-            ],
-          ),
         ),
       ],
     );
@@ -349,27 +378,5 @@ class SalesListView extends BaseView<SalesListController> {
         ),
       ],
     );
-  }
-
-  @override
-  Widget floatingActionButton() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: FloatingActionButton(
-        onPressed: () => controller.showFilterModal(
-          context: globalKey.currentContext!,
-        ),
-        backgroundColor: colors.primaryBaseColor,
-        child: const Icon(
-          TablerIcons.filter,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-
-  @override
-  FloatingActionButtonLocation floatingActionButtonLocation() {
-    return FloatingActionButtonLocation.endFloat;
   }
 }
