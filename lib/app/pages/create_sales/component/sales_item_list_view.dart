@@ -12,9 +12,9 @@ import 'package:nb_utils/nb_utils.dart';
 class SalesItemListView extends BaseWidget {
   final List<SalesItem> salesItems;
   final Function(int index) onItemRemove;
-  final Function(double onQtyChange, int index) onQtyChange;
-  final Function(int onQtyChange, int index) onDiscountChange;
-  final Function(double onSalesPriceChange, int index) onSalesPriceChange;
+  final Function(num onQtyChange, int index) onQtyChange;
+  final Function(num onQtyChange, int index) onDiscountChange;
+  final Function(num onSalesPriceChange, int index) onSalesPriceChange;
   SalesItemListView({
     required this.salesItems,
     required this.onItemRemove,

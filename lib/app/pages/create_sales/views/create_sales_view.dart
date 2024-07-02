@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/pages/create_sales/component/sales_item_list_view.dart';
+import 'package:getx_template/app/pages/create_sales/component/searched_stock_list.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
@@ -31,6 +32,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
             _buildSelectedStockList(),
           ],
         ),
+        _buildSearchedStockList(),
       ],
     );
   }
@@ -284,6 +286,36 @@ class CreateSalesView extends BaseView<CreateSalesController> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchedStockList() {
+    return Obx(
+      () => Visibility(
+        visible: controller.stockList.isNotEmpty,
+        child: Positioned(
+          top: 50,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: Obx(
+            () => DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  dimensions.containerBorderRadius,
+                ),
+                color: colors.evenListColor,
+              ),
+              child: SearchedStockList(
+                stocks: controller.stockList.value,
+                onItemTap: controller.onStockSelection,
+                onQtyChange: controller.onSearchedStockQtyChange,
+                onQtyEditComplete: controller.onSearchedStockQtyEditComplete,
+              ),
+            ),
+          ),
         ),
       ),
     );
