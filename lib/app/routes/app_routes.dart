@@ -9,6 +9,8 @@ abstract class Routes {
   static const login = _Paths.login;
   static const dashboard = _Paths.dashboard;
   static const createSales = _Paths.createSales;
+  static const  customerDetails = _Paths.customerDetails;
+
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const login = '/login';
   static const dashboard = '/dashboard';
   static const createSales = '/create_sales';
+  static const  customerDetails = '/customer_details';
+
 }

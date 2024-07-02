@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '/app/pages/create_sales/bindings/create_sales_binding.dart';
 import '/app/pages/create_sales/views/create_sales_view.dart';
+import '/app/pages/customer_details/bindings/customer_details_binding.dart';
+import '/app/pages/customer_details/views/customer_details_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/license/bindings/license_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: Routes.createSales,
       page: CreateSalesView.new,
       binding: CreateSalesBinding(),
+    ),
+    GetPage(
+      name: Routes.customerDetails,
+      page: CustomerDetailsView.new,
+      binding: CustomerDetailsBinding(),
     ),
   ];
 }
