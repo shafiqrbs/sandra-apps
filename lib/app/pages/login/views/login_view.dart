@@ -130,14 +130,14 @@ class LoginView extends BaseView<LoginController> {
                 alignment: Alignment.topCenter,
                 child: CommonText(
                   text: 'welcome'.tr,
-                  fontSize: dimensions.headerTFSize,
+                  fontSize:headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               1.percentHeight,
               CommonText(
                 text: 'to_store'.tr,
-                fontSize: dimensions.subHeaderTFSize,
+                fontSize:subHeaderTFSize,
                 textColor: colors.secondaryTextColor,
                 textAlign: TextAlign.left,
               ),
@@ -270,7 +270,7 @@ class LoginView extends BaseView<LoginController> {
                           margin: const EdgeInsets.only(right: 16),
                           child: CommonText(
                             text: 'forgot_password'.tr,
-                            fontSize: dimensions.regularTFSize,
+                            fontSize:regularTFSize,
                             textColor: colors.dangerLiteColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -285,13 +285,13 @@ class LoginView extends BaseView<LoginController> {
                     children: [
                       CommonText(
                         text: "don't_have_an_account".tr,
-                        fontSize: dimensions.subHeaderTFSize,
+                        fontSize:subHeaderTFSize,
                         textColor: colors.secondaryTextColor,
                       ),
                       4.width,
                       CommonText(
                         text: 'create_account'.tr,
-                        fontSize: dimensions.subHeaderTFSize,
+                        fontSize:subHeaderTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w600,
                         textDecoration: TextDecoration.underline,

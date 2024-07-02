@@ -26,7 +26,7 @@ class ColumnIconText extends BaseWidget {
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            dimensions.containerBorderRadius,
+           containerBorderRadius,
           ),
           border: Border.all(
             color:
@@ -45,7 +45,7 @@ class ColumnIconText extends BaseWidget {
             Text(
               text,
               style: TextStyle(
-                fontSize: dimensions.mediumTFSize,
+                fontSize:mediumTFSize,
                 color: isSelected ? Colors.black : colorSchema.primaryTextColor,
               ),
             ),

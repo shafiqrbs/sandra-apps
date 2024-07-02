@@ -82,14 +82,14 @@ class LicenseView extends BaseView<LicenseController> {
                 alignment: Alignment.topCenter,
                 child: CommonText(
                   text: 'register'.tr,
-                  fontSize: dimensions.headerTFSize,
+                  fontSize:headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               8.height,
               CommonText(
                 text: 'please_fill_all_the_information_correctly'.tr,
-                fontSize: dimensions.subHeaderTFSize,
+                fontSize:subHeaderTFSize,
                 textColor: colors.secondaryTextColor,
                 textAlign: TextAlign.left,
               ),

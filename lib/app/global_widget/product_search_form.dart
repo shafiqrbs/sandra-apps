@@ -8,7 +8,7 @@ import '/app/core/utils/style_function.dart';
 import '/app/core/values/app_dimension.dart';
 import '/app/model/stock.dart';
 
-class ProductSearchForm extends StatelessWidget {
+class ProductSearchForm extends StatelessWidget with AppDimension {
   final Function(String value) onSearch;
   final VoidCallback onClear;
   final bool isShowSuffixIcon;
@@ -26,14 +26,13 @@ class ProductSearchForm extends StatelessWidget {
   });
 
   final colors = ColorSchema();
-  final dimensions = AppDimension();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          dimensions.containerBorderRadius,
+          containerBorderRadius,
         ),
         border: Border.all(color: colors.borderColor),
         color: colors.selectedColor,
@@ -54,12 +53,12 @@ class ProductSearchForm extends StatelessWidget {
                     left: 2,
                   ),
                   //padding: EdgeInsets.zero,
-                  height: dimensions.textFieldHeight,
+                  height: textFieldHeight,
                   width: Get.width,
                   decoration: BoxDecoration(
                     color: colors.backgroundColor,
                     borderRadius: BorderRadius.circular(
-                      dimensions.containerBorderRadius,
+                      containerBorderRadius,
                     ),
                   ),
 
@@ -78,7 +77,7 @@ class ProductSearchForm extends StatelessWidget {
                       isSHowPrefixIcon: false,
                       textEditingController: searchController,
                       isSHowSuffixIcon: isShowSuffixIcon,
-                      borderRaidus: dimensions.containerBorderRadius,
+                      borderRaidus: containerBorderRadius,
                       suffix: Icons.clear,
                       onTap: onClear,
                     ),
@@ -103,7 +102,7 @@ class ProductSearchForm extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: colors.selectedColor.withOpacity(.6),
                               borderRadius: BorderRadius.circular(
-                                dimensions.containerBorderRadius,
+                                containerBorderRadius,
                               ),
                             ),
                             padding: const EdgeInsets.only(
@@ -128,7 +127,7 @@ class ProductSearchForm extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: colors.selectedColor.withOpacity(.8),
                               borderRadius: BorderRadius.circular(
-                                dimensions.containerBorderRadius,
+                                containerBorderRadius,
                               ),
                             ),
                             padding: const EdgeInsets.only(
@@ -158,7 +157,7 @@ class ProductSearchForm extends StatelessWidget {
                           Text(
                             "MRP ${selectedStock?.salesPrice ?? ''} TK",
                             style: TextStyle(
-                              fontSize: dimensions.smallTFSize,
+                              fontSize: smallTFSize,
                               color: colors.primaryTextColor,
                             ),
                             textAlign: TextAlign.left,
@@ -166,7 +165,7 @@ class ProductSearchForm extends StatelessWidget {
                           Text(
                             "Stock in ${selectedStock?.quantity ?? ''} pc",
                             style: TextStyle(
-                              fontSize: dimensions.smallTFSize,
+                              fontSize: smallTFSize,
                               color: colors.primaryTextColor,
                             ),
                             textAlign: TextAlign.left,
@@ -174,7 +173,7 @@ class ProductSearchForm extends StatelessWidget {
                           Text(
                             "P.P. ${selectedStock?.purchasePrice ?? ''} pc",
                             style: TextStyle(
-                              fontSize: dimensions.smallTFSize,
+                              fontSize: smallTFSize,
                               color: colors.primaryTextColor,
                             ),
                             textAlign: TextAlign.left,

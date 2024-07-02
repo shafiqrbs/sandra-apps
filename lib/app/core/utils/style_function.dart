@@ -10,7 +10,9 @@ import '/app/core/singleton_classes/fb_outline_input_border.dart';
 import '/app/core/singleton_classes/fb_typography.dart';
 import '/app/core/values/app_dimension.dart';
 
-final appDimension = AppDimension();
+class Responsive with AppDimension {}
+
+final appDimension = Responsive();
 final colors = ColorSchema();
 
 InputDecoration getInputDecoration({

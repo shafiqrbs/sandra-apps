@@ -15,11 +15,10 @@ final regexInteger = FilteringTextInputFormatter.allow(
 );
 
 abstract class BaseWidget extends StatelessWidget
-    with ShorterEnumMixin, ShorterDataTypesMixin, ValidatorMixin {
+    with ShorterEnumMixin, ShorterDataTypesMixin, ValidatorMixin,AppDimension {
   BaseWidget({super.key});
 
   final colors = ColorSchema();
-  final dimensions = AppDimension();
 
   @override
   Widget build(BuildContext context);

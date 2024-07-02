@@ -79,7 +79,7 @@ class DashboardView extends BaseView<DashboardController> {
             'dashboard'.tr,
             style: TextStyle(
               color: colors.backgroundColor,
-              fontSize: dimensions.appBarTFSize,
+              fontSize:appBarTFSize,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -157,7 +157,7 @@ class DashboardView extends BaseView<DashboardController> {
             title: 'sales',
             subTitle: '567',
             icon: TablerIcons.report_analytics,
-            onTap: controller.goToSales,
+            onTap: controller.goToSalesList,
           ),
           TitleSubtitleButton(
             title: 'purchase',

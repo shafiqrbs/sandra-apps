@@ -1,28 +1,28 @@
 import '/app/core/utils/responsive.dart';
 
-class AppDimension {
-  double containerBorderRadius = 4;
+mixin AppDimension {
+  final containerBorderRadius = 4.0;
 
-  double appBarTFSize = 24;
-  double headerTFSize = 20;
-  double subHeaderTFSize = 18;
-  double paragraphTFSize = 16;
-  double labelTFSize = 12;
-  double valueTFSize = 12;
-  double regularTFSize = 14;
-  double mediumTFSize = 12;
-  double smallTFSize = 10;
-  double extraSmallTFSize = 8;
-  double largeButtonTFSize = 20;
-  double mediumButtonTFSize = 18;
-  double smallButtonTFSize = 14;
-  double dotMenuTFSize = 10.sp;
+  final appBarTFSize = 24.0;
+  final headerTFSize = 20.0;
+  final subHeaderTFSize = 18.0;
+  final paragraphTFSize = 16.0;
+  final labelTFSize = 12.0;
+  final valueTFSize = 12.0;
+  final regularTFSize = 14.0;
+  final mediumTFSize = 12.0;
+  final smallTFSize = 10.0;
+  final extraSmallTFSize = 8.0;
+  final largeButtonTFSize = 20.0;
+  final mediumButtonTFSize = 18.0;
+  final smallButtonTFSize = 14.0;
+  final dotMenuTFSize = 10.sp;
 
-  double textFieldHeight = 5.ph;
-  double mediumTextFieldHeight = 4.ph;
-  double smallTextFieldHeight = 3.ph;
+  final textFieldHeight = 5.ph;
+  final mediumTextFieldHeight = 4.ph;
+  final smallTextFieldHeight = 3.ph;
 
-  double dropDownFieldHeight = 05.ph;
-  double buttonHeight = 5.ph;
-  double closeIconSize = 24;
+  final dropDownFieldHeight = 05.ph;
+  final buttonHeight = 5.ph;
+  final closeIconSize = 24.0;
 }

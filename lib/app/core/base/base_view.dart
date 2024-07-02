@@ -23,7 +23,8 @@ final regexInteger = FilteringTextInputFormatter.allow(
 );
 
 abstract class BaseView<Controller extends BaseController>
-    extends GetView<Controller> with ValidatorMixin, ShorterEnumMixin {
+    extends GetView<Controller>
+    with ValidatorMixin, ShorterEnumMixin, AppDimension {
   BaseView({super.key});
 
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
@@ -32,7 +33,6 @@ abstract class BaseView<Controller extends BaseController>
 
   final Logger logger = BuildConfig.instance.config.logger;
   final colors = ColorSchema();
-  final dimensions = AppDimension();
 
   Widget body(BuildContext context);
 

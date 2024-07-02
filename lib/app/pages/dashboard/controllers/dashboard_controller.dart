@@ -30,7 +30,11 @@ class DashboardController extends BaseController {
     );
   }
 
-  void goToSalesList() {}
+  void goToSalesList() {
+    Get.toNamed(
+      Routes.salesList,
+    );
+  }
 
   void gotoExpenseScreen() {}
 

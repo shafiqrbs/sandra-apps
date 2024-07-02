@@ -10,9 +10,8 @@ import '/app/core/values/app_dimension.dart';
 
 class LanguageController extends BaseController {}
 
-class LanguageChangeDropDown extends StatelessWidget {
+class LanguageChangeDropDown extends StatelessWidget with AppDimension {
   final colorSchema = ColorSchema();
-  final dimension = AppDimension();
   final BaseController gc = Get.put(LanguageController());
   LanguageChangeDropDown({super.key});
 
@@ -30,7 +29,9 @@ class LanguageChangeDropDown extends StatelessWidget {
         margin: const EdgeInsets.only(top: 8, bottom: 8),
         decoration: BoxDecoration(
           color: colorSchema.primaryLiteColor,
-          borderRadius: BorderRadius.circular(dimension.containerBorderRadius),
+          borderRadius: BorderRadius.circular(
+            containerBorderRadius,
+          ),
         ),
         child: DropdownButton(
           value: gc.dropDownValue.value,
@@ -47,7 +48,7 @@ class LanguageChangeDropDown extends StatelessWidget {
                     Text(
                       langItems.tr,
                       style: TextStyle(
-                        fontSize: dimension.mediumTFSize,
+                        fontSize: mediumTFSize,
                       ),
                     ),
                   ],
@@ -75,7 +76,7 @@ class LanguageChangeDropDown extends StatelessWidget {
             }
           },
           borderRadius: BorderRadius.circular(
-            dimension.containerBorderRadius,
+            containerBorderRadius,
           ),
           underline: Container(
             color: Colors.transparent,

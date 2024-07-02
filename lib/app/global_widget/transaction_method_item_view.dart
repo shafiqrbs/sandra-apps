@@ -27,7 +27,7 @@ class TransactionMethodItemView extends BaseWidget {
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            dimensions.containerBorderRadius,
+           containerBorderRadius,
           ),
           color: isSelected ? colors.selectedColor : colors.evenListColor,
         ),

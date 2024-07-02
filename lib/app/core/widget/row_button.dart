@@ -6,7 +6,7 @@ import '/app/core/values/app_dimension.dart';
 import 'common_text.dart';
 import 'draw_icon.dart';
 
-class RowButton extends StatelessWidget {
+class RowButton extends StatelessWidget with AppDimension {
   final String buttonName;
   final Color? buttonTextColor;
   final Color? buttonBGColor;
@@ -15,7 +15,7 @@ class RowButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool? isOutline;
 
-  const RowButton({
+  RowButton({
     required this.buttonName,
     required this.onTap,
     super.key,
@@ -28,7 +28,6 @@ class RowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appDimension = AppDimension();
     final colors = ColorSchema();
 
     return Expanded(
@@ -43,7 +42,7 @@ class RowButton extends StatelessWidget {
                     ? colors.backgroundColor
                     : colors.primaryBaseColor),
             borderRadius: BorderRadius.circular(
-              appDimension.containerBorderRadius,
+              containerBorderRadius,
             ),
             border: (isOutline ?? false)
                 ? Border.all(
@@ -66,7 +65,7 @@ class RowButton extends StatelessWidget {
                 child: CommonText(
                   text: buttonName,
                   fontWeight: FontWeight.w500,
-                  fontSize: appDimension.mediumButtonTFSize,
+                  fontSize: mediumButtonTFSize,
                   textColor: (isOutline ?? false)
                       ? colors.primaryBaseColor
                       : colors.backgroundColor,

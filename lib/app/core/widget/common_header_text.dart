@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:getx_template/app/core/values/app_dimension.dart';
-import '/app/core/singleton_classes/color_schema.dart';
 
-class CommonHeaderText extends StatelessWidget {
+import '/app/core/singleton_classes/color_schema.dart';
+import '/app/core/values/app_dimension.dart';
+
+class CommonHeaderText extends StatelessWidget with AppDimension {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final double? borderRadius;
@@ -13,7 +14,7 @@ class CommonHeaderText extends StatelessWidget {
   final int? flex;
   final Alignment? alignment;
 
-  const CommonHeaderText({
+  CommonHeaderText({
     required this.header,
     super.key,
     this.padding,
@@ -29,7 +30,6 @@ class CommonHeaderText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorSchema = ColorSchema();
-    final dimensions = AppDimension();
     return Expanded(
       flex: flex ?? 2,
       child: Container(
@@ -49,7 +49,7 @@ class CommonHeaderText extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(
-            dimensions.containerBorderRadius,
+            containerBorderRadius,
           ),
         ),
         child: Text(

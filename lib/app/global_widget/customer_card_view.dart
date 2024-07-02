@@ -34,7 +34,7 @@ class CustomerCardView extends BaseWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  dimensions.containerBorderRadius,
+                 containerBorderRadius,
                 ),
                 color: index.isEven
                     ? colors.evenListColor
@@ -64,7 +64,7 @@ class CustomerCardView extends BaseWidget {
                                   child: Text(
                                     data.name ?? '',
                                     style: TextStyle(
-                                      fontSize: dimensions.paragraphTFSize,
+                                      fontSize:paragraphTFSize,
                                       color: colors.primaryTextColor,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -91,7 +91,7 @@ class CustomerCardView extends BaseWidget {
                                   text: data.balance?.toString() ?? '0',
                                   textColor: colors.dangerBaseColor,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: dimensions.paragraphTFSize,
+                                  fontSize:paragraphTFSize,
                                   icon: TablerIcons.cash,
                                 ),
                               ),

@@ -131,7 +131,7 @@ class SalesItemListView extends BaseWidget {
                               children: [
                                 Container(
                                   margin: EdgeInsets.zero,
-                                  height: dimensions.mediumTextFieldHeight,
+                                  height:mediumTextFieldHeight,
                                   alignment: Alignment.center,
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
@@ -144,7 +144,7 @@ class SalesItemListView extends BaseWidget {
                                     readOnly: true,
                                     onEditingComplete: () {},
                                     style: TextStyle(
-                                      fontSize: dimensions.mediumTFSize,
+                                      fontSize:mediumTFSize,
                                       color: colors.primaryTextColor,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -154,7 +154,7 @@ class SalesItemListView extends BaseWidget {
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                          dimensions.containerBorderRadius,
+                                         containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -165,7 +165,7 @@ class SalesItemListView extends BaseWidget {
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                          dimensions.containerBorderRadius,
+                                         containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -196,7 +196,7 @@ class SalesItemListView extends BaseWidget {
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.zero,
                                 padding: EdgeInsets.zero,
-                                height: dimensions.mediumTextFieldHeight,
+                                height:mediumTextFieldHeight,
                                 //width: Get.width * 0.7,
                                 color: colors.textFieldColor,
                                 child: TextFormField(
@@ -233,7 +233,7 @@ class SalesItemListView extends BaseWidget {
                                         element.discountPercent! > 0;
                                   },
                                   style: TextStyle(
-                                    fontSize: dimensions.mediumTFSize,
+                                    fontSize:mediumTFSize,
                                     color: colors.primaryTextColor,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -245,7 +245,7 @@ class SalesItemListView extends BaseWidget {
                                     hintText: '%', // Optional hint text
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(
-                                        dimensions.containerBorderRadius,
+                                       containerBorderRadius,
                                       ),
                                       borderSide: BorderSide(
                                         color: colors.borderColor,
@@ -254,7 +254,7 @@ class SalesItemListView extends BaseWidget {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(
-                                        dimensions.containerBorderRadius,
+                                       containerBorderRadius,
                                       ),
                                       borderSide: BorderSide(
                                         color: colors.borderColor,
@@ -282,7 +282,7 @@ class SalesItemListView extends BaseWidget {
                                     () => Container(
                                       margin: EdgeInsets.zero,
                                       padding: EdgeInsets.zero,
-                                      height: dimensions.mediumTextFieldHeight,
+                                      height:mediumTextFieldHeight,
                                       //width: Get.width * 0.7,
                                       color: colors.textFieldColor,
                                       child: TextFormField(
@@ -325,7 +325,7 @@ class SalesItemListView extends BaseWidget {
                                         },
 
                                         style: TextStyle(
-                                          fontSize: dimensions.mediumTFSize,
+                                          fontSize:mediumTFSize,
                                           color: colors.primaryTextColor,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -347,7 +347,7 @@ class SalesItemListView extends BaseWidget {
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
                                         height:
-                                            dimensions.mediumTextFieldHeight,
+                                           mediumTextFieldHeight,
                                         //width: Get.width * 0.7,
                                         color: colors.textFieldColor,
                                         child: TextFormField(
@@ -388,7 +388,7 @@ class SalesItemListView extends BaseWidget {
                                             FocusScope.of(context).unfocus();
                                           },
                                           style: TextStyle(
-                                            fontSize: dimensions.mediumTFSize,
+                                            fontSize:mediumTFSize,
                                             color: colors.primaryTextColor,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -417,7 +417,7 @@ class SalesItemListView extends BaseWidget {
                                     left: 2,
                                     right: 2,
                                   ),
-                                  height: dimensions.mediumTextFieldHeight,
+                                  height:mediumTextFieldHeight,
                                   alignment: Alignment.center,
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
@@ -431,7 +431,7 @@ class SalesItemListView extends BaseWidget {
                                     readOnly: true,
                                     onEditingComplete: () {},
                                     style: TextStyle(
-                                      fontSize: dimensions.mediumTFSize,
+                                      fontSize:mediumTFSize,
                                       color: colors.primaryTextColor,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -442,7 +442,7 @@ class SalesItemListView extends BaseWidget {
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                          dimensions.containerBorderRadius,
+                                         containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -453,7 +453,7 @@ class SalesItemListView extends BaseWidget {
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                          dimensions.containerBorderRadius,
+                                         containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -492,7 +492,7 @@ class SalesItemListView extends BaseWidget {
                         padding: const EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                            dimensions.containerBorderRadius,
+                           containerBorderRadius,
                           ),
                           color: colors.dangerLiteColor,
                         ),

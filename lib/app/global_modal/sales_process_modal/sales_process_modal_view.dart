@@ -44,7 +44,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               width: Get.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  dimensions.containerBorderRadius,
+                 containerBorderRadius,
                 ),
                 color: colors.backgroundColor,
               ),
@@ -106,25 +106,25 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
       fillColor: fillColor,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          dimensions.containerBorderRadius,
+         containerBorderRadius,
         ),
         borderSide: BorderSide(color: enabledBorderColor, width: 2),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          dimensions.containerBorderRadius,
+         containerBorderRadius,
         ),
         borderSide: BorderSide(color: focusedBorderColor, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          dimensions.containerBorderRadius,
+         containerBorderRadius,
         ),
         borderSide: BorderSide(color: errorBorderColor),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          dimensions.containerBorderRadius,
+         containerBorderRadius,
         ),
         borderSide: BorderSide(color: focusedBorderColor, width: 0),
       ),
@@ -149,10 +149,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             color: colors.primaryBaseColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(
-                dimensions.containerBorderRadius,
+               containerBorderRadius,
               ),
               topRight: Radius.circular(
-                dimensions.containerBorderRadius,
+               containerBorderRadius,
               ),
             ),
           ),
@@ -162,7 +162,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 flex: 8,
                 child: CommonText(
                   text: 'place_order'.tr,
-                  fontSize: dimensions.subHeaderTFSize,
+                  fontSize:subHeaderTFSize,
                   fontWeight: FontWeight.bold,
                   textColor: colors.backgroundColor,
                 ),
@@ -183,7 +183,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                             !controller.showSalesItem.value
                                 ? TablerIcons.chevron_down
                                 : TablerIcons.chevron_up,
-                            size: dimensions.closeIconSize,
+                            size:closeIconSize,
                             color: colors.backgroundColor,
                           ),
                         ),
@@ -197,7 +197,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         },
                         child: Icon(
                           TablerIcons.x,
-                          size: dimensions.closeIconSize,
+                          size:closeIconSize,
                           color: colors.backgroundColor,
                         ),
                       ),
@@ -346,7 +346,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      dimensions.containerBorderRadius,
+                     containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -358,7 +358,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           return Text(
                             controller.salesSubTotal.value.toString(),
                             style: TextStyle(
-                              fontSize: dimensions.regularTFSize,
+                              fontSize:regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -376,7 +376,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Text(
                         'sub_total'.tr,
                         style: TextStyle(
-                          fontSize: dimensions.smallTFSize,
+                          fontSize:smallTFSize,
                         ),
                       ),
                     ],
@@ -395,7 +395,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      dimensions.containerBorderRadius,
+                     containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -407,7 +407,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           return Text(
                             controller.salesDiscount.value.toString(),
                             style: TextStyle(
-                              fontSize: dimensions.regularTFSize,
+                              fontSize:regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -425,7 +425,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Text(
                         'discount'.tr,
                         style: TextStyle(
-                          fontSize: dimensions.smallTFSize,
+                          fontSize:smallTFSize,
                         ),
                       ),
                     ],
@@ -444,7 +444,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      dimensions.containerBorderRadius,
+                     containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -456,7 +456,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           return Text(
                             controller.salesVat.value.toString(),
                             style: TextStyle(
-                              fontSize: dimensions.regularTFSize,
+                              fontSize:regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -474,7 +474,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Text(
                         'vat'.tr,
                         style: TextStyle(
-                          fontSize: dimensions.smallTFSize,
+                          fontSize:smallTFSize,
                         ),
                       ),
                     ],
@@ -502,7 +502,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         () => Text(
                           controller.netTotal.value.toString(),
                           style: TextStyle(
-                            fontSize: dimensions.regularTFSize,
+                            fontSize:regularTFSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -519,7 +519,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Text(
                         'total'.tr,
                         style: TextStyle(
-                          fontSize: dimensions.smallTFSize,
+                          fontSize:smallTFSize,
                         ),
                       ),
                     ],
@@ -590,10 +590,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       activeColor: colors.successfulBaseColor,
                       inactiveColor: colors.dangerBaseColor,
                       borderRadius: BorderRadius.circular(
-                        dimensions.containerBorderRadius,
+                       containerBorderRadius,
                       ),
                       width: Get.width * .226,
-                      height: dimensions.textFieldHeight,
+                      height:textFieldHeight,
                       controller: controller.discountTypeController.value,
                     ),
                   ),
@@ -614,7 +614,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: dimensions.regularTFSize,
+                        fontSize:regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
                       enabledBorderColor: colors.primaryBaseColor,
@@ -626,7 +626,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     textAlign: centerTA,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: dimensions.regularTFSize,
+                      fontSize:regularTFSize,
                     ),
                     onChanged: controller.onDiscountChange,
                   ),
@@ -650,7 +650,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      dimensions.containerBorderRadius,
+                     containerBorderRadius,
                     ),
                     color: colors.dangerBaseColor.withOpacity(.3),
                   ),
@@ -662,7 +662,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           controller.salesReturnValue.value.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: dimensions.mediumTFSize,
+                            fontSize:mediumTFSize,
                           ),
                         ),
                       ),
@@ -680,7 +680,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   margin: const EdgeInsets.symmetric(
                     horizontal: 4,
                   ),
-                  height: dimensions.textFieldHeight,
+                  height:textFieldHeight,
                   alignment: Alignment.center,
                   child: TextFormField(
                     controller: controller.amountController.value,
@@ -692,7 +692,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: dimensions.regularTFSize,
+                      fontSize:regularTFSize,
                     ),
                     cursorColor: colors.formCursorColor,
                     decoration: buildInputDecoration(
@@ -700,7 +700,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: dimensions.regularTFSize,
+                        fontSize:regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
                       enabledBorderColor: colors.primaryBaseColor,
@@ -750,14 +750,14 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 'Yes'.tr,
                 style: TextStyle(
                   color: colors.primaryTextColor,
-                  fontSize: dimensions.smallTFSize,
+                  fontSize:smallTFSize,
                 ),
               ),
               inactiveChild: Text(
                 'profit'.tr,
                 style: TextStyle(
                   color: colors.primaryTextColor,
-                  fontSize: dimensions.smallTFSize,
+                  fontSize:smallTFSize,
                 ),
               ),
               activeColor: colors.selectedColor,
@@ -776,7 +776,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             decoration: BoxDecoration(
               color: colors.evenListColor,
               borderRadius: BorderRadius.circular(
-                dimensions.containerBorderRadius,
+               containerBorderRadius,
               ),
             ),
             padding: EdgeInsets.zero,
@@ -790,7 +790,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         .toString()
                     : '',
                 fontWeight: FontWeight.w500,
-                fontSize: dimensions.smallTFSize,
+                fontSize:smallTFSize,
                 textColor: colors.primaryBaseColor,
               ),
             ),
