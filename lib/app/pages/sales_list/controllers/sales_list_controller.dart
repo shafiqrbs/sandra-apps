@@ -80,7 +80,6 @@ class SalesListController extends BaseController {
     await dataFetcher(
       future: () async {
         final data = await services.getSalesList(
-          shouldShowLoader: false,
           startDate: startDate,
           endDate: endDate,
           customerId: selectedCustomer?.customerId?.toString(),

@@ -136,7 +136,6 @@ class Services {
   }
 
   Future<List<Sales>?> getSalesList({
-    required bool shouldShowLoader,
     required String? startDate,
     required String? endDate,
     required String? customerId,
@@ -155,7 +154,7 @@ class Services {
       'poskeeper-online-sales-list',
       query,
       query: query,
-      headers: _buildHeader(),
+     // headers: _buildHeader(),
     );
 
     return parseList(

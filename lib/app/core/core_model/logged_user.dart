@@ -16,8 +16,8 @@ class LoggedUser {
   factory LoggedUser.fromJson(Map<String, dynamic> json) {
     return LoggedUser()
       ..userId = json['user_id']
-      ..username = json['username']
-      ..fullName = json['fullName']
+      ..username = json['user_name']
+      ..fullName = json['full_name']
       ..email = json['email']
       ..password = json['password']
       ..roles = json['roles'];
@@ -26,8 +26,8 @@ class LoggedUser {
   Map<String, dynamic> toJson() {
     return {
       'user_id': userId,
-      'username': username,
-      'fullName': fullName,
+      'user_name': username,
+      'full_name': fullName,
       'email': email,
       'password': password,
       'roles': roles,

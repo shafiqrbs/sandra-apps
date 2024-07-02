@@ -6,12 +6,12 @@ import '/app/model/tab_bar_items.dart';
 
 import 'draw_icon.dart';
 
-class SubTabIconItem extends StatelessWidget {
+class SubTabItemView extends StatelessWidget {
   final TabBarItem item;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const SubTabIconItem({
+  const SubTabItemView({
     required this.item,
     required this.isSelected,
     required this.onTap,
