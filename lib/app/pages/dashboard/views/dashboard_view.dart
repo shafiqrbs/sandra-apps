@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/title_subtitle_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart' as pie_chart;
@@ -152,13 +153,13 @@ class DashboardView extends BaseView<DashboardController> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         runSpacing: 8,
         children: [
-          _buildTitleSubTitleButton(
+          TitleSubtitleButton(
             title: 'sales',
             subTitle: '567',
             icon: TablerIcons.report_analytics,
             onTap: controller.goToSales,
           ),
-          _buildTitleSubTitleButton(
+          TitleSubtitleButton(
             title: 'purchase',
             subTitle: '567',
             icon: TablerIcons.cash,
@@ -166,7 +167,7 @@ class DashboardView extends BaseView<DashboardController> {
               //Get.to(PurchaseScreen());
             },
           ),
-          _buildTitleSubTitleButton(
+          TitleSubtitleButton(
             title: 'expense',
             subTitle: '567',
             icon: TablerIcons.moneybag,
@@ -174,7 +175,7 @@ class DashboardView extends BaseView<DashboardController> {
               //Get.to(PurchaseScreen());
             },
           ),
-          _buildTitleSubTitleButton(
+          TitleSubtitleButton(
             title: 'profit',
             subTitle: '567',
             icon: TablerIcons.cash,
@@ -300,70 +301,6 @@ class DashboardView extends BaseView<DashboardController> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildTitleSubTitleButton({
-    final String title = 'Title',
-    final String subTitle = 'Subtitle',
-    final IconData? icon,
-    final VoidCallback? onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 130,
-        padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x14000000),
-              offset: Offset(0, 1),
-              blurRadius: 8,
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Container(
-              height: 32,
-              width: 32,
-              decoration: BoxDecoration(
-                color: const Color(0xffe9e9e9),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Icon(
-                icon ?? TablerIcons.eraser,
-                color: const Color(0xff4d4d4d),
-                size: 20,
-              ),
-            ),
-            6.height,
-            Text(
-              title.tr,
-              style: GoogleFonts.roboto(
-                color: const Color(0xff4d4d4d),
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            4.height,
-            Text(
-              subTitle,
-              style: GoogleFonts.roboto(
-                color: const Color(0xff4d4d4d),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
