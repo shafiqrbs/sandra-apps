@@ -185,8 +185,8 @@ class SalesListView extends BaseView<SalesListController> {
                   2.width,
                   AppBarButton(
                     buttonName: null,
-                    onTap: () => controller.showFilterModal(
-                      context: globalKey.currentContext!,
+                    onTap: () => controller.showQuickNavigateBottomSheet(
+                      globalKey.currentContext!,
                     ),
                     leftIcon: TablerIcons.library_plus,
                     buttonBGColor: colors.tertiaryLiteColor,
