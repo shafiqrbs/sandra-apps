@@ -5,9 +5,8 @@ class CreateSalesBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<CreateSalesController>(
-      () => CreateSalesController(),
+      CreateSalesController.new,
       fenix: true,
     );
   }
 }
-  

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:getx_template/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 
 enum SelectedTab {
@@ -23,7 +24,11 @@ class DashboardController extends BaseController {
     selectedTab.value = dashboard;
   }
 
-  void goToSales() {}
+  void goToSales() {
+    Get.toNamed(
+      Routes.createSales,
+    );
+  }
 
   void goToSalesList() {}
 
