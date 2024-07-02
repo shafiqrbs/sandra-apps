@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
-import 'package:getx_template/app/core/widget/row_button.dart';
-import 'package:getx_template/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
+import 'package:getx_template/app/core/advance_select/advance_select_view.dart';
+import 'package:getx_template/app/core/base/base_view.dart';
+import 'package:getx_template/app/core/utils/responsive.dart';
+import 'package:getx_template/app/core/widget/common_text.dart';
+import 'package:getx_template/app/core/widget/fb_string.dart';
+import 'package:getx_template/app/model/sales.dart';
+import 'package:getx_template/app/model/sales_item.dart';
+import 'package:nb_utils/nb_utils.dart';
+import '/app/core/base/base_widget.dart';
+import '/app/core/widget/row_button.dart';
+import '/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
 
-
-class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
+class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   final Sales? preSales;
   final List<SalesItem> salesItemList;
   SalesProcessModalView({
@@ -37,7 +44,9 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
         child: Container(
           width: Get.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(containerBorderRadius),
+            borderRadius: BorderRadius.circular(
+              dimensions.containerBorderRadius,
+            ),
             color: colors.backgroundColor,
           ),
           child: Form(
@@ -95,19 +104,27 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
       filled: true,
       fillColor: fillColor,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(containerBorderRadius),
+        borderRadius: BorderRadius.circular(
+          dimensions.containerBorderRadius,
+        ),
         borderSide: BorderSide(color: enabledBorderColor, width: 2),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(containerBorderRadius),
+        borderRadius: BorderRadius.circular(
+          dimensions.containerBorderRadius,
+        ),
         borderSide: BorderSide(color: focusedBorderColor, width: 2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(containerBorderRadius),
+        borderRadius: BorderRadius.circular(
+          dimensions.containerBorderRadius,
+        ),
         borderSide: BorderSide(color: errorBorderColor),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(containerBorderRadius),
+        borderRadius: BorderRadius.circular(
+          dimensions.containerBorderRadius,
+        ),
         borderSide: BorderSide(color: focusedBorderColor, width: 0),
       ),
     );
@@ -131,10 +148,10 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
             color: colors.primaryBaseColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(
-                containerBorderRadius,
+                dimensions.containerBorderRadius,
               ),
               topRight: Radius.circular(
-                containerBorderRadius,
+                dimensions.containerBorderRadius,
               ),
             ),
           ),
@@ -144,7 +161,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                 flex: 8,
                 child: CommonText(
                   text: 'place_order'.tr,
-                  fontSize: subHeaderTFSize,
+                  fontSize: dimensions.subHeaderTFSize,
                   fontWeight: FontWeight.bold,
                   textColor: colors.backgroundColor,
                 ),
@@ -165,7 +182,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                             !mvc.showSalesItem.value
                                 ? TablerIcons.chevron_down
                                 : TablerIcons.chevron_up,
-                            size: closeIconSize,
+                            size: dimensions.closeIconSize,
                             color: colors.backgroundColor,
                           ),
                         ),
@@ -179,7 +196,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                         },
                         child: Icon(
                           TablerIcons.x,
-                          size: closeIconSize,
+                          size: dimensions.closeIconSize,
                           color: colors.backgroundColor,
                         ),
                       ),
@@ -365,7 +382,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
+                      dimensions.containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -377,7 +394,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                           return Text(
                             mvc.salesSubTotal.value.toString(),
                             style: TextStyle(
-                              fontSize: regularTFSize,
+                              fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -395,7 +412,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       Text(
                         'sub_total'.tr,
                         style: TextStyle(
-                          fontSize: smallTFSize,
+                          fontSize: dimensions.smallTFSize,
                         ),
                       ),
                     ],
@@ -414,7 +431,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
+                      dimensions.containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -426,7 +443,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                           return Text(
                             mvc.salesDiscount.value.toString(),
                             style: TextStyle(
-                              fontSize: regularTFSize,
+                              fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -444,7 +461,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       Text(
                         'discount'.tr,
                         style: TextStyle(
-                          fontSize: smallTFSize,
+                          fontSize: dimensions.smallTFSize,
                         ),
                       ),
                     ],
@@ -463,7 +480,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
+                      dimensions.containerBorderRadius,
                     ),
                     color: colors.evenListColor,
                   ),
@@ -475,7 +492,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                           return Text(
                             mvc.salesVat.value.toString(),
                             style: TextStyle(
-                              fontSize: regularTFSize,
+                              fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -493,7 +510,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       Text(
                         'vat'.tr,
                         style: TextStyle(
-                          fontSize: smallTFSize,
+                          fontSize: dimensions.smallTFSize,
                         ),
                       ),
                     ],
@@ -521,7 +538,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                         () => Text(
                           mvc.netTotal.value.toString(),
                           style: TextStyle(
-                            fontSize: regularTFSize,
+                            fontSize: dimensions.regularTFSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -538,7 +555,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       Text(
                         'total'.tr,
                         style: TextStyle(
-                          fontSize: smallTFSize,
+                          fontSize: dimensions.smallTFSize,
                         ),
                       ),
                     ],
@@ -607,10 +624,10 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       activeColor: colors.successfulBaseColor,
                       inactiveColor: colors.dangerBaseColor,
                       borderRadius: BorderRadius.circular(
-                        containerBorderRadius,
+                        dimensions.containerBorderRadius,
                       ),
                       width: Get.width * .226,
-                      height: textFieldHeight,
+                      height: dimensions.textFieldHeight,
                       controller: mvc.discountTypeController.value,
                     ),
                   ),
@@ -631,7 +648,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: regularTFSize,
+                        fontSize: dimensions.regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
                       enabledBorderColor: colors.primaryBaseColor,
@@ -643,7 +660,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                     textAlign: centerTA,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: regularTFSize,
+                      fontSize: dimensions.regularTFSize,
                     ),
                     onChanged: mvc.onDiscountChange,
                   ),
@@ -667,7 +684,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
+                      dimensions.containerBorderRadius,
                     ),
                     color: colors.dangerBaseColor.withOpacity(.3),
                   ),
@@ -679,7 +696,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                           mvc.salesReturnValue.value.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: mediumTFSize,
+                            fontSize: dimensions.mediumTFSize,
                           ),
                         ),
                       ),
@@ -697,7 +714,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                   margin: const EdgeInsets.symmetric(
                     horizontal: 4,
                   ),
-                  height: textFieldHeight,
+                  height: dimensions.textFieldHeight,
                   alignment: Alignment.center,
                   child: TextFormField(
                     controller: mvc.amountController.value,
@@ -709,7 +726,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: regularTFSize,
+                      fontSize: dimensions.regularTFSize,
                     ),
                     cursorColor: colors.formCursorColor,
                     decoration: buildInputDecoration(
@@ -717,7 +734,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: regularTFSize,
+                        fontSize: dimensions.regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
                       enabledBorderColor: colors.primaryBaseColor,
@@ -767,14 +784,14 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                 'Yes'.tr,
                 style: TextStyle(
                   color: colors.primaryTextColor,
-                  fontSize: smallTFSize,
+                  fontSize: dimensions.smallTFSize,
                 ),
               ),
               inactiveChild: Text(
                 'profit'.tr,
                 style: TextStyle(
                   color: colors.primaryTextColor,
-                  fontSize: smallTFSize,
+                  fontSize: dimensions.smallTFSize,
                 ),
               ),
               activeColor: colors.selectedColor,
@@ -793,7 +810,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
             decoration: BoxDecoration(
               color: colors.evenListColor,
               borderRadius: BorderRadius.circular(
-                containerBorderRadius,
+                dimensions.containerBorderRadius,
               ),
             ),
             padding: EdgeInsets.zero,
@@ -806,7 +823,7 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
                         .toString()
                     : '',
                 fontWeight: FontWeight.w500,
-                fontSize: smallTFSize,
+                fontSize: dimensions.smallTFSize,
                 textColor: colors.primaryBaseColor,
               ),
             ),
@@ -849,5 +866,17 @@ class SalesProcessModalView extends BaseWidget<SalesProcessModalController> {
         ],
       ),
     );
+  }
+
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    // TODO: implement appBar
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    // TODO: implement body
+    throw UnimplementedError();
   }
 }
