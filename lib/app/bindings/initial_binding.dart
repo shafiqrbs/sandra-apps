@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '/app/core/core_model/voice_recognition.dart';
 import '/app/core/session_manager/session_manager.dart';
 
 class InitialBinding implements Bindings {
@@ -7,5 +9,6 @@ class InitialBinding implements Bindings {
   Future<void> dependencies() async {
     await SessionManager().init();
     await initialize();
+    await VoiceRecognition().initSpeech();
   }
 }
