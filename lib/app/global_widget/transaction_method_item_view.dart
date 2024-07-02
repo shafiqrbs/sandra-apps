@@ -6,12 +6,12 @@ import '/app/core/base/base_widget.dart';
 import '/app/core/widget/common_cache_image_widget.dart';
 import '/app/model/transaction_methods.dart';
 
-class TransactionMethodItem extends BaseWidget {
+class TransactionMethodItemView extends BaseWidget {
   final TransactionMethods method;
   final bool isSelected;
   final VoidCallback onTap;
 
-  TransactionMethodItem({
+  TransactionMethodItemView({
     required this.method,
     required this.isSelected,
     required this.onTap,

@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/advance_select/advance_select_view.dart';
-import 'package:getx_template/app/core/base/base_view.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
-import 'package:getx_template/app/core/widget/fb_string.dart';
-import 'package:getx_template/app/global_widget/customer_card_view.dart';
-import 'package:getx_template/app/model/sales.dart';
-import 'package:getx_template/app/model/sales_item.dart';
-import 'package:getx_template/app/model/user.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/base/base_widget.dart';
+
+import '/app/core/advance_select/advance_select_view.dart';
+import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/widget/common_text.dart';
+import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
+import '/app/global_widget/customer_card_view.dart';
+import '/app/global_widget/transaction_method_item_view.dart';
+import '/app/model/sales.dart';
+import '/app/model/sales_item.dart';
+import '/app/model/user.dart';
 
 class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   final Sales? preSales;
@@ -545,7 +546,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   (e) {
                     final selected =
                         controller.transactionMethodsManager.selectedItem.value;
-                    return TransactionMethodItem(
+                    return TransactionMethodItemView(
                       method: e,
                       isSelected: selected == e,
                       onTap: () {
@@ -829,13 +830,13 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    // TODO: implement appBar
+    // TODO(saiful): implement appBar
     throw UnimplementedError();
   }
 
   @override
   Widget body(BuildContext context) {
-    // TODO: implement body
+    // TODO(saiful): implement body
     throw UnimplementedError();
   }
 }
