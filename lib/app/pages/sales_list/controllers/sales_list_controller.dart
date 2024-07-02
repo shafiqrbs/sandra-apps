@@ -94,4 +94,6 @@ class SalesListController extends BaseController {
       },
     );
   }
+
+  showSalesInformationModal(BuildContext context, Sales element) {}
 }
