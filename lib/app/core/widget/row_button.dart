@@ -7,7 +7,7 @@ import 'common_text.dart';
 import 'draw_icon.dart';
 
 class RowButton extends StatelessWidget with AppDimension {
-  final String buttonName;
+  final String? buttonName;
   final Color? buttonTextColor;
   final Color? buttonBGColor;
   final IconData? leftIcon;
@@ -60,10 +60,11 @@ class RowButton extends StatelessWidget with AppDimension {
                       ? colors.primaryBaseColor
                       : colors.backgroundColor,
                 ),
+              if(buttonName != null)
               Container(
                 margin: const EdgeInsets.only(left: 5, right: 5),
                 child: CommonText(
-                  text: buttonName,
+                  text: buttonName!,
                   fontWeight: FontWeight.w500,
                   fontSize: mediumButtonTFSize,
                   textColor: (isOutline ?? false)

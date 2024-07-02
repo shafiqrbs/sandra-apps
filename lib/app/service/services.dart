@@ -149,12 +149,17 @@ class Services {
     if (vendorId != null) query['vendor_id'] = vendorId;
     if (keyword != null) query['keyword'] = keyword;
 
+    if (query.isEmpty) {
+      query['start_date'] = '01-01-2023';
+      query['end_date'] = '02-01-2023';
+    }
+
     final response = await dio.post(
       APIType.public,
       'poskeeper-online-sales-list',
       query,
       query: query,
-     // headers: _buildHeader(),
+      headers: _buildHeader(),
     );
 
     return parseList(

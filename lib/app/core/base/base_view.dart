@@ -83,7 +83,7 @@ abstract class BaseView<Controller extends BaseController>
       floatingActionButton: floatingActionButton(),
       body: pageContent(context),
       bottomNavigationBar: bottomNavigationBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: floatingActionButtonLocation(),
       drawer: drawer(),
     );
   }
@@ -107,6 +107,10 @@ abstract class BaseView<Controller extends BaseController>
 
   void showToast(String message) {
     toast(message);
+  }
+
+  FloatingActionButtonLocation floatingActionButtonLocation() {
+    return FloatingActionButtonLocation.centerDocked;
   }
 
   Color pageBackgroundColor() {

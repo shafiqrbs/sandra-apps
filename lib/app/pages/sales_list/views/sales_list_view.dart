@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/utils/style_function.dart';
+import 'package:getx_template/app/core/widget/app_bar_button.dart';
 import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_icon_text.dart';
@@ -15,7 +18,159 @@ class SalesListView extends BaseView<SalesListController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
+    return AppBar(
+      centerTitle: false,
+      backgroundColor: colors.primaryBaseColor,
+      title: Obx(
+        () {
+          return controller.isSearchSelected.value
+              ? Container(
+                  margin: const EdgeInsets.only(left: 2),
+                  height: textFieldHeight,
+                 // width: Get.width,
+                  decoration: BoxDecoration(
+                    color: colors.backgroundColor,
+                    borderRadius: BorderRadius.circular(
+                      containerBorderRadius,
+                    ),
+                  ),
+                  child: TextFormField(
+                    controller:
+                        controller.customerManager.searchTextController.value,
+                    autofocus: true,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: colors.primaryTextColor,
+                    ),
+                    cursorColor: colors.formCursorColor,
+                    onChanged: controller.customerManager.searchItemsByNameOnAllItem,
+                   /* decoration: inputDecorationSearch(
+                      hint: 'search_customer'.tr,
+                      isSHowPrefixIcon: false,
+                      textEditingController: controller.customerManager.searchTextController.value,
+                      isSHowSuffixIcon: controller.customerManager.searchTextController.value.text.isNotEmpty,
+                      borderRaidus: containerBorderRadius,
+                      suffix: TablerIcons.e_passport,
+                      onTap: () async {
+                        controller.customerManager.searchTextController.value
+                            .text = '';
+                        controller.customerManager.searchTextController
+                            .refresh();
+                        await controller.customerManager.searchItemsByName('');
+                      },
+                    ),*/
+                  ),
+                )
+              : CommonText(text: 'sales'.tr);
+        },
+      ),
+      actions: [
+        Obx(
+          () {
+            if (controller.isSearchSelected.value) {
+              return Container();
+              return Row(
+                children: [
+                  IconButton(
+                    onPressed: controller.toggleSearchButton,
+                    icon: Obx(() => controller.actionIcon.value),
+                  ),
+                ],
+              );
+            }
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              height: 60,
+              margin: const EdgeInsets.only(right: 16),
+              child: Row(
+                children: [
+                  2.width,
+                  AppBarButton(
+                    buttonName: null,
+                    onTap: () => controller.showFilterModal(
+                      context: globalKey.currentContext!,
+                    ),
+                    leftIcon: TablerIcons.library_plus,
+                  ),
+                  2.width,
+                  AppBarButton(
+                    buttonName: null,
+                    onTap: controller.toggleSearchButton,
+                    leftIcon: TablerIcons.search,
+                    iconColor: colors.primaryBaseColor,
+                    buttonBGColor: Colors.white,
+                    buttonTextColor: colors.primaryBaseColor,
+                  ),
+                  2.width,
+                  AppBarButton(
+                    buttonName: null,
+                    onTap: () => controller.showFilterModal(
+                      context: globalKey.currentContext!,
+                    ),
+                    leftIcon: TablerIcons.library_plus,
+                    buttonBGColor: Color(0xFFf7dfbb),
+                    iconColor: colors.primaryBaseColor,
+                  ),
+                  2.width,
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+
+    return AppBar(
+      title: Text('sales'.tr),
+      actions: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          height: 60,
+          margin: const EdgeInsets.only(right: 16),
+          child: Row(
+            children: [
+              2.width,
+              AppBarButton(
+                buttonName: null,
+                onTap: () => controller.showFilterModal(
+                  context: globalKey.currentContext!,
+                ),
+                leftIcon: TablerIcons.library_plus,
+              ),
+              2.width,
+              AppBarButton(
+                buttonName: null,
+                onTap: () => controller.showFilterModal(
+                  context: globalKey.currentContext!,
+                ),
+                leftIcon: TablerIcons.search,
+                iconColor: colors.primaryBaseColor,
+                buttonBGColor: Colors.white,
+                buttonTextColor: colors.primaryBaseColor,
+              ),
+              2.width,
+              AppBarButton(
+                buttonName: null,
+                onTap: () => controller.showFilterModal(
+                  context: globalKey.currentContext!,
+                ),
+                leftIcon: TablerIcons.library_plus,
+                buttonBGColor: Color(0xFFf7dfbb),
+                iconColor: colors.primaryBaseColor,
+              ),
+              2.width,
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -194,5 +349,27 @@ class SalesListView extends BaseView<SalesListController> {
         ),
       ],
     );
+  }
+
+  @override
+  Widget floatingActionButton() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 40),
+      child: FloatingActionButton(
+        onPressed: () => controller.showFilterModal(
+          context: globalKey.currentContext!,
+        ),
+        backgroundColor: colors.primaryBaseColor,
+        child: const Icon(
+          TablerIcons.filter,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  @override
+  FloatingActionButtonLocation floatingActionButtonLocation() {
+    return FloatingActionButtonLocation.endFloat;
   }
 }
