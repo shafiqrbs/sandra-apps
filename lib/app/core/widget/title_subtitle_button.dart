@@ -46,11 +46,13 @@ class TitleSubtitleButton extends StatelessWidget {
                 color: const Color(0xffe9e9e9),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Icon(
-                icon ?? TablerIcons.eraser,
-                color: const Color(0xff4d4d4d),
-                size: 20,
-              ),
+              child: icon != null
+                  ? Icon(
+                      icon,
+                      color: const Color(0xff4d4d4d),
+                      size: 20,
+                    )
+                  : Container(),
             ),
             6.height,
             Text(

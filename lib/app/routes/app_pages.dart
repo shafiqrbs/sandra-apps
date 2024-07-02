@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/app/pages/create_sales/bindings/create_sales_binding.dart';
+import '/app/pages/create_sales/views/create_sales_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/license/bindings/license_binding.dart';
@@ -34,8 +36,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.dashboard,
-      page: () => DashboardView(),
+      page: DashboardView.new,
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: Routes.createSales,
+      page: CreateSalesView.new,
+      binding: CreateSalesBinding(),
     ),
   ];
 }
