@@ -8,6 +8,8 @@ import '/app/pages/customer_list/bindings/customer_list_binding.dart';
 import '/app/pages/customer_list/views/customer_list_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
+import '/app/pages/edit_sales/bindings/edit_sales_binding.dart';
+import '/app/pages/edit_sales/views/edit_sales_view.dart';
 import '/app/pages/license/bindings/license_binding.dart';
 import '/app/pages/license/views/license_view.dart';
 import '/app/pages/login/bindings/login_binding.dart';
@@ -57,13 +59,18 @@ class AppPages {
     ),
     GetPage(
       name: Routes.salesList,
-      page: () => SalesListView(),
+      page: SalesListView.new,
       binding: SalesListBinding(),
     ),
     GetPage(
       name: Routes.createSales,
       page: CreateSalesView.new,
       binding: CreateSalesBinding(),
+    ),
+    GetPage(
+      name: Routes.editSales,
+      page: () => EditSalesView(),
+      binding: EditSalesBinding(),
     ),
   ];
 }
