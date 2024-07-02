@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/core_model/logged_user.dart';
+import 'package:getx_template/app/core/widget/common_confirmation_modal.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -76,7 +77,7 @@ class SalesProcessModalController extends BaseController {
       }
       if (preSales!.customerId != null) {
         final data = await dbHelper.getAllWhr(
-          tbl: tableCustomers,
+          tbl: dbTables.tableCustomers,
           where: 'customer_id == ?',
           whereArgs: [
             preSales!.customerId.toString(),
@@ -89,7 +90,6 @@ class SalesProcessModalController extends BaseController {
               customerManager.selectedItem.value!.name!;
         }
       }
-      print('preSales!.methodId: ${preSales!.methodId}');
 
       if (preSales!.methodId != null) {
         transactionMethodsManager.selectedItem.value =
@@ -135,6 +135,78 @@ class SalesProcessModalController extends BaseController {
       },
     );
     showProfit.value.addListener(showProfit.refresh);
+  }
+
+  void onDiscountChange(String value) {
+    final discountValue = double.tryParse(value) ?? 0;
+
+    if (discountType.value == 'flat') {
+      handleDiscountChange(discountValue, null);
+    } else if (discountType.value == 'percent') {
+      // Calculate percentage discount
+      final percentDiscount =
+          (salesSubTotal.value * discountValue / 100).toPrecision(2);
+      handleDiscountChange(percentDiscount, discountValue);
+    }
+
+    netTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    salesReturnValue.value = netTotal.value;
+
+    onAmountChange(
+      amountController.value.text.isEmptyOrNull
+          ? '0'
+          : amountController.value.text,
+    );
+
+    salesDiscount.refresh();
+    netTotal.refresh();
+    update();
+    notifyChildrens();
+    refresh();
+  }
+
+  void handleDiscountChange(double discountValue, double? percentValue) {
+    if (discountValue > salesSubTotal.value) {
+      toast('do_not_allow_discount_value_more_then_subtotal_value'.tr);
+      paymentDiscountController.value.text = '0';
+      salesDiscount.value = 0;
+      netTotal.value = 0;
+      salesReturnValue.value = salesSubTotal.value;
+      return;
+    }
+
+    salesDiscount.value = discountValue;
+
+    if (percentValue != null) {
+      salesDiscountPercent.value = percentValue;
+    }
+  }
+
+  void onAmountChange(String value) {
+    if (value.isNotEmpty) {
+      final returnValue = netTotal.value - value.toDouble();
+      returnMsg.value = returnValue < 0 ? 'return'.tr : 'due'.tr;
+      salesReturnValue.value = returnValue.toPrecision(2).abs();
+    } else {
+      returnMsg.value = 'due'.tr;
+      salesReturnValue.value = 0.00;
+    }
+  }
+
+  void calculateAllSubtotal() {
+    salesSubTotal.value = 0;
+    salesPurchasePrice.value = 0;
+
+    for (final element in salesItemList) {
+      salesSubTotal.value += element.subTotal ?? 0;
+      salesPurchasePrice.value += element.purchasePrice! * element.quantity!;
+    }
+    salesSubTotal.value = salesSubTotal.value.toPrecision(2);
+    salesPurchasePrice.value = salesPurchasePrice.value.toPrecision(2);
+
+    salesSubTotal.refresh();
+    salesPurchasePrice.refresh();
+    update();
   }
 
   Future<void> updateCustomer(Customer? customer) async {
@@ -210,7 +282,7 @@ class SalesProcessModalController extends BaseController {
   Future<void> insertSaleToDb(Sales sales) async {
     await dbHelper.insertList(
       deleteBeforeInsert: false,
-      tableName: tableSale,
+      tableName: dbTables.tableSale,
       dataList: [
         sales.toJson(),
       ],
@@ -249,31 +321,6 @@ class SalesProcessModalController extends BaseController {
     }
 
     if (!context.mounted) return;
-
-    if (Get.isRegistered<OrderProcessConfirmationController>()) {
-      Get.delete<OrderProcessConfirmationController>();
-    }
-
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
-          child: OrderProcessConfirmationView(
-            sales: sales,
-            isEdit: preSales != null,
-          ),
-        );
-      },
-    );
-
-    if (confirmed != null && confirmed) {
-      log('order process confirmed');
-      Get.back(
-        result: salesItemList,
-      );
-    }
   }
 
   Future<void> reset(BuildContext context) async {
@@ -288,7 +335,9 @@ class SalesProcessModalController extends BaseController {
       (value) {
         if (value == true) {
           salesItemList.clear();
-          Get.back(result: salesItemList);
+          Get.back(
+            result: salesItemList,
+          );
         }
       },
     );
@@ -303,7 +352,7 @@ class SalesProcessModalController extends BaseController {
     sales.isHold = 1;
     await dbHelper.insertList(
       deleteBeforeInsert: false,
-      tableName: tableSale,
+      tableName: dbTables.tableSale,
       dataList: [sales.toJson()],
     );
     salesItemList.clear();

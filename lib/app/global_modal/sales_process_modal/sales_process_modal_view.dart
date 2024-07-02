@@ -9,6 +9,7 @@ import 'package:getx_template/app/core/widget/common_text.dart';
 import 'package:getx_template/app/core/widget/fb_string.dart';
 import 'package:getx_template/app/model/sales.dart';
 import 'package:getx_template/app/model/sales_item.dart';
+import 'package:getx_template/app/model/user.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/core/widget/row_button.dart';
@@ -23,18 +24,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     super.key,
   });
 
-  // Globally declared for modularity
-  late final SalesProcessModalController mvc;
-
   @override
   Widget build(BuildContext context) {
-    mvc = Get.put(
-      SalesProcessModalController(
-        salesItemList: List<SalesItem>.from(salesItemList),
-        preSales: preSales,
-      ),
-    );
-
     return Dialog(
       insetPadding: EdgeInsets.zero,
       backgroundColor: Colors.black.withOpacity(.5),
@@ -50,7 +41,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             color: colors.backgroundColor,
           ),
           child: Form(
-            key: mvc.formKey,
+            key: controller.formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: centerMAA,
@@ -176,10 +167,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       child: Obx(
                         () => InkWell(
                           onTap: () {
-                            mvc.showSalesItem.toggle();
+                            controller.showSalesItem.toggle();
                           },
                           child: Icon(
-                            !mvc.showSalesItem.value
+                            !controller.showSalesItem.value
                                 ? TablerIcons.chevron_down
                                 : TablerIcons.chevron_up,
                             size: dimensions.closeIconSize,
@@ -192,7 +183,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Get.back(result: mvc.salesItemList);
+                          Get.back(result: controller.salesItemList);
                         },
                         child: Icon(
                           TablerIcons.x,
@@ -209,13 +200,13 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         ),
         Obx(
           () => Visibility(
-            visible: mvc.showSalesItem.value,
+            visible: controller.showSalesItem.value,
             child: Obx(
               () => SalesItemListView(
-                salesItems: mvc.salesItemList.value,
+                salesItems: controller.salesItemList.value,
                 onItemRemove: (int index) {
-                  mvc.salesItemList.removeAt(index);
-                  mvc.calculateAllSubtotal();
+                  controller.salesItemList.removeAt(index);
+                  controller.calculateAllSubtotal();
                 },
                 onQtyChange: (double onQtyChange, int index) {},
                 onDiscountChange: (int onQtyChange, int index) {},
@@ -237,14 +228,15 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           flex: 3,
           child: FBString(
             isRequired: false,
-            textController: mvc.customerManager.searchTextController.value,
+            textController:
+                controller.customerManager.searchTextController.value,
             onChange: (value) async {
               if (value?.isEmpty ?? true) {
-                mvc.customerManager.searchedItems.value = [];
-                mvc.customerManager.selectedItem.value = null;
+                controller.customerManager.searchedItems.value = [];
+                controller.customerManager.selectedItem.value = null;
                 return;
               }
-              await mvc.customerManager.searchItemsByName(value!);
+              await controller.customerManager.searchItemsByName(value!);
             },
             hint: 'search_customer'.tr,
             suffixIcon: TablerIcons.search,
@@ -253,29 +245,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         2.percentWidth,
         Expanded(
           child: GestureDetector(
-            onTap: () {
-              if (Get.isRegistered<AddCustomerModalController>()) {
-                Get.delete<AddCustomerModalController>();
-              }
-              showDialog<Customer?>(
-                context: context,
-                builder: (context) {
-                  return DialogPattern(
-                    title: 'title',
-                    subTitle: 'subTitle',
-                    child: AddCustomerModalView(),
-                  );
-                },
-              ).then(
-                (Customer? value) async {
-                  if (value != null) {
-                    mvc.updateCustomer(
-                      value,
-                    );
-                  }
-                },
-              );
-            },
+            onTap: () {},
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 2),
               decoration: BoxDecoration(
@@ -314,12 +284,12 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     BuildContext context,
   ) {
     return Obx(
-      () => mvc.customerManager.selectedItem.value != null
+      () => controller.customerManager.selectedItem.value != null
           ? Column(
               children: [
                 1.percentHeight,
                 CustomerCardView(
-                  data: mvc.customerManager.selectedItem.value!,
+                  data: controller.customerManager.selectedItem.value!,
                   index: 0,
                   onTap: () {},
                   onReceive: () {},
@@ -336,20 +306,22 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     BuildContext context,
   ) {
     return Obx(
-      () => mvc.customerManager.searchedItems.value?.isNotEmpty ?? false
+      () => controller.customerManager.searchedItems.value?.isNotEmpty ?? false
           ? Container(
               color: Colors.white,
               height: 40.ph,
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: mvc.customerManager.searchedItems.value?.length ?? 0,
+                itemCount:
+                    controller.customerManager.searchedItems.value?.length ?? 0,
                 itemBuilder: (context, index) {
                   return CustomerCardView(
-                    data: mvc.customerManager.searchedItems.value![index],
+                    data:
+                        controller.customerManager.searchedItems.value![index],
                     index: index,
                     onTap: () {
-                      mvc.updateCustomer(
-                        mvc.customerManager.searchedItems.value![index],
+                      controller.updateCustomer(
+                        controller.customerManager.searchedItems.value![index],
                       );
                       //close keyboard
                       FocusScope.of(context).unfocus();
@@ -392,7 +364,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            mvc.salesSubTotal.value.toString(),
+                            controller.salesSubTotal.value.toString(),
                             style: TextStyle(
                               fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
@@ -441,7 +413,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            mvc.salesDiscount.value.toString(),
+                            controller.salesDiscount.value.toString(),
                             style: TextStyle(
                               fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
@@ -490,7 +462,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            mvc.salesVat.value.toString(),
+                            controller.salesVat.value.toString(),
                             style: TextStyle(
                               fontSize: dimensions.regularTFSize,
                               fontWeight: FontWeight.bold,
@@ -536,7 +508,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     children: [
                       Obx(
                         () => Text(
-                          mvc.netTotal.value.toString(),
+                          controller.netTotal.value.toString(),
                           style: TextStyle(
                             fontSize: dimensions.regularTFSize,
                             fontWeight: FontWeight.bold,
@@ -576,7 +548,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
       () => Column(
         children: [
           1.percentHeight,
-          if (mvc.transactionMethodsManager.allItems.value != null)
+          if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
               padding: const EdgeInsets.all(8),
               scrollDirection: Axis.horizontal,
@@ -584,15 +556,17 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 spacing: 8,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 runSpacing: 8,
-                children: mvc.transactionMethodsManager.allItems.value!.map(
+                children:
+                    controller.transactionMethodsManager.allItems.value!.map(
                   (e) {
                     final selected =
-                        mvc.transactionMethodsManager.selectedItem.value;
+                        controller.transactionMethodsManager.selectedItem.value;
                     return TransactionMethodItem(
                       method: e,
                       isSelected: selected == e,
                       onTap: () {
-                        mvc.transactionMethodsManager.selectedItem.value = e;
+                        controller
+                            .transactionMethodsManager.selectedItem.value = e;
                       },
                     );
                   },
@@ -628,7 +602,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       ),
                       width: Get.width * .226,
                       height: dimensions.textFieldHeight,
-                      controller: mvc.discountTypeController.value,
+                      controller: controller.discountTypeController.value,
                     ),
                   ),
                 ),
@@ -640,7 +614,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     horizontal: 4,
                   ),
                   child: TextFormField(
-                    controller: mvc.paymentDiscountController.value,
+                    controller: controller.paymentDiscountController.value,
                     cursorColor: colors.formCursorColor,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: buildInputDecoration(
@@ -662,7 +636,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       fontWeight: FontWeight.w400,
                       fontSize: dimensions.regularTFSize,
                     ),
-                    onChanged: mvc.onDiscountChange,
+                    onChanged: controller.onDiscountChange,
                   ),
                 ),
               ),
@@ -693,7 +667,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     children: [
                       Obx(
                         () => Text(
-                          mvc.salesReturnValue.value.toString(),
+                          controller.salesReturnValue.value.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: dimensions.mediumTFSize,
@@ -702,7 +676,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       ),
                       Obx(
                         () => Text(
-                          mvc.returnMsg.value.tr,
+                          controller.returnMsg.value.tr,
                         ),
                       ),
                     ],
@@ -717,11 +691,11 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   height: dimensions.textFieldHeight,
                   alignment: Alignment.center,
                   child: TextFormField(
-                    controller: mvc.amountController.value,
+                    controller: controller.amountController.value,
                     inputFormatters: doubleInputFormatter,
                     textInputAction: doneInputAction,
                     onEditingComplete: () =>
-                        mvc.showConfirmationDialog(context),
+                        controller.showConfirmationDialog(context),
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -741,7 +715,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       focusedBorderColor: colors.borderColor,
                       errorBorderColor: colors.borderColor,
                     ),
-                    onChanged: mvc.onAmountChange,
+                    onChanged: controller.onAmountChange,
                   ),
                 ),
               ),
@@ -759,7 +733,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
       () => AdvanceSelect<User>(
         isRequired: true,
         isShowSearch: false,
-        controller: mvc.userManager.value.asController,
+        controller: controller.userManager.value.asController,
         itemToString: (data) => data?.fullName ?? '',
         hint: 'select_user'.tr,
       ),
@@ -799,7 +773,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               borderRadius: BorderRadius.circular(4),
               width: Get.width * .23,
               height: 3.ph,
-              controller: mvc.showProfit.value,
+              controller: controller.showProfit.value,
             ),
           ),
         ),
@@ -817,8 +791,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             margin: const EdgeInsets.only(left: 4, right: 4),
             child: Obx(
               () => CommonText(
-                text: mvc.showProfit.value.value
-                    ? (mvc.netTotal.value - mvc.salesPurchasePrice.value)
+                text: controller.showProfit.value.value
+                    ? (controller.netTotal.value -
+                            controller.salesPurchasePrice.value)
                         .toPrecision(2)
                         .toString()
                     : '',
@@ -846,21 +821,21 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         children: [
           RowButton(
             buttonName: 'reset'.tr,
-            onTap: () => mvc.reset(context),
+            onTap: () => controller.reset(context),
             leftIcon: TablerIcons.restore,
             buttonBGColor: colors.dangerLiteColor,
           ),
           4.width,
           RowButton(
             buttonName: 'hold'.tr,
-            onTap: () => mvc.hold(context),
+            onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
             buttonBGColor: Colors.grey,
           ),
           4.width,
           RowButton(
             buttonName: 'order'.tr,
-            onTap: () => mvc.showConfirmationDialog(context),
+            onTap: () => controller.showConfirmationDialog(context),
             leftIcon: TablerIcons.device_floppy,
           ),
         ],
