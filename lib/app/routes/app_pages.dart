@@ -12,6 +12,8 @@ import '/app/pages/license/bindings/license_binding.dart';
 import '/app/pages/license/views/license_view.dart';
 import '/app/pages/login/bindings/login_binding.dart';
 import '/app/pages/login/views/login_view.dart';
+import '/app/pages/sales_list/bindings/sales_list_binding.dart';
+import '/app/pages/sales_list/views/sales_list_view.dart';
 import '/app/pages/splash/bindings/splash_binding.dart';
 import '/app/pages/splash/views/splash_view.dart';
 
@@ -52,6 +54,11 @@ class AppPages {
       name: Routes.customerDetails,
       page: CustomerDetailsView.new,
       binding: CustomerDetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.salesList,
+      page: () => SalesListView(),
+      binding: SalesListBinding(),
     ),
     GetPage(
       name: Routes.createSales,
