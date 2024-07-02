@@ -234,7 +234,6 @@ class CreateSalesView extends BaseView<CreateSalesController> {
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
-/*
             Obx(
               () {
                 return Visibility(
@@ -259,7 +258,6 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 );
               },
             ),
-*/
             Container(
               color: colors.backgroundColor,
               height: 90.ph,

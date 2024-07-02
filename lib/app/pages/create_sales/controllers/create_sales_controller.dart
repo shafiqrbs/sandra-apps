@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/model/sales_item.dart';
@@ -70,5 +72,93 @@ class CreateSalesController extends BaseController {
     stockList
       ..value = stocks.map(Stock.fromJson).toList()
       ..refresh();
+  }
+
+  Future<void> addSaleItem({
+    required String process,
+  }) async {
+    if (kDebugMode) {
+      print('on addSaleItem called');
+    }
+
+    // Check if a stock is selected
+    if (selectedStock.value == null) {
+      toast('select_stock'.tr);
+      return;
+    }
+
+    // Extract values from controllers
+    final stock = selectedStock.value!;
+    final stockQty = double.tryParse(stockQtyController.value.text) ?? 0.0;
+    final stockMrp = double.tryParse(stockMrpController.value.text) ??
+        stock.salesPrice ??
+        0.0;
+    final discountPercent =
+        double.tryParse(stockDiscountPercentController.value.text) ?? 0.0;
+
+    // Create a new SalesItem instance
+    final salesItem = SalesItem(
+      stockId: stock.itemId,
+      stockName: stock.name ?? '',
+      quantity: stockQty.toPrecision(2),
+      brandName: stock.brandName,
+    );
+
+    // Determine salesItem details based on process type
+    if (process == 'inline' ||
+        (stock.salesPrice == stockMrp && discountPercent == 0)) {
+      // Inline process or no discount
+      salesItem
+        ..subTotal = stockQty * stock.salesPrice!
+        ..mrpPrice = stock.salesPrice
+        ..salesPrice = stock.salesPrice
+        ..discountPercent = 0;
+    } else if (stock.salesPrice != stockMrp) {
+      // MRP changed
+      salesItem
+        ..subTotal = stockQty * stockMrp
+        ..mrpPrice = stock.salesPrice
+        ..salesPrice = stockMrp
+        ..discountPrice = stock.salesPrice! - stockMrp
+        ..discountPercent = 0;
+    } else if (discountPercent > 0) {
+      // Discount applied
+      final discountPrice = (stock.salesPrice! * discountPercent) / 100;
+      salesItem
+        ..discountPrice = discountPrice
+        ..salesPrice = stock.salesPrice! - discountPrice
+        ..subTotal = stockQty * salesItem.salesPrice!
+        ..mrpPrice = stock.salesPrice
+        ..discountPercent = discountPercent;
+    }
+
+    // Update salesItem with calculated values
+    salesItem
+      ..purchasePrice =
+          double.parse(stock.purchasePrice?.toStringAsFixed(2) ?? '0')
+      ..subTotal = double.parse(
+        salesItem.subTotal!.toStringAsFixed(2),
+      )
+      ..salesPrice = double.parse(
+        salesItem.salesPrice!.toStringAsFixed(2),
+      );
+
+    // Update salesSubTotal value
+    salesSubTotal
+      ..value += salesItem.subTotal!
+      ..value = salesSubTotal.value.toPrecision(2);
+
+    // Add salesItem to the list and reset state
+    salesItemList.add(salesItem);
+    resetAfterItemAdd();
+  }
+
+  void resetAfterItemAdd() {
+    selectedStock.value = null;
+    searchController.value.clear();
+    stockMrpController.value.clear();
+    stockQtyController.value.clear();
+    stockDiscountPercentController.value.clear();
+    stockList.value = [];
   }
 }
