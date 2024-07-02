@@ -7,6 +7,7 @@ import 'package:getx_template/app/core/base/base_view.dart';
 import 'package:getx_template/app/core/utils/responsive.dart';
 import 'package:getx_template/app/core/widget/common_text.dart';
 import 'package:getx_template/app/core/widget/fb_string.dart';
+import 'package:getx_template/app/global_widget/customer_card_view.dart';
 import 'package:getx_template/app/model/sales.dart';
 import 'package:getx_template/app/model/sales_item.dart';
 import 'package:getx_template/app/model/user.dart';
@@ -196,23 +197,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 ),
               ),
             ],
-          ),
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.showSalesItem.value,
-            child: Obx(
-              () => SalesItemListView(
-                salesItems: controller.salesItemList.value,
-                onItemRemove: (int index) {
-                  controller.salesItemList.removeAt(index);
-                  controller.calculateAllSubtotal();
-                },
-                onQtyChange: (double onQtyChange, int index) {},
-                onDiscountChange: (int onQtyChange, int index) {},
-                onSalesPriceChange: (double onSalesPriceChange, int index) {},
-              ),
-            ),
           ),
         ),
       ],
