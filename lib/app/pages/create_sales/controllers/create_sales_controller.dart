@@ -42,6 +42,25 @@ class CreateSalesController extends BaseController {
     super.onInit();
   }
 
+  void calculateAllSubtotal() {
+    salesSubTotal.value = 0;
+    salesDiscount.value = 0.00;
+    salesVat.value = 0.00;
+    salesTotal.value = 0.00;
+    salesReceive.value = 0.00;
+    salesDiscountPercent.value = 0.00;
+
+    for (final element in salesItemList) {
+      salesSubTotal.value += element.subTotal ?? 0;
+      salesPurchasePrice.value +=
+          (element.purchasePrice ?? 0) * element.quantity!;
+    }
+
+    salesTotal.value = salesSubTotal.value.toPrecision(2);
+    salesSubTotal.refresh();
+    update();
+  }
+
   Future<void> onClearSearchField() async {
     selectedStock.value = null;
     searchController.value.clear();
@@ -160,5 +179,67 @@ class CreateSalesController extends BaseController {
     stockQtyController.value.clear();
     stockDiscountPercentController.value.clear();
     stockList.value = [];
+  }
+
+  Future<void> onQtyChange(
+    double value,
+    int index,
+  ) async {
+    final item = salesItemList[index];
+    salesItemList[index]
+      ..quantity = value
+      ..subTotal = (item.salesPrice! * value).toPrecision(2);
+
+    calculateAllSubtotal();
+  }
+
+  Future<void> onDiscountChange(
+    int value,
+    int index,
+  ) async {
+    log('onDiscountChange called');
+    final item = salesItemList[index];
+    final mrpPrice = item.mrpPrice!;
+
+    salesItemList[index]
+      ..discountPrice = double.parse(
+        ((mrpPrice * value.toDouble()) / 100).toStringAsFixed(2),
+      )
+      ..salesPrice = double.parse(
+        (mrpPrice - item.discountPrice!).toStringAsFixed(2),
+      )
+      ..subTotal = double.parse(
+        (item.salesPrice! * item.quantity!).toStringAsFixed(2),
+      )
+      ..discountPercent = double.parse(
+        value.toDouble().toStringAsFixed(2),
+      );
+
+    calculateAllSubtotal();
+  }
+
+  Future<void> onSalesPriceChange(
+    double value,
+    int index,
+  ) async {
+    log('onSalesPriceChange called');
+    final item = salesItemList[index];
+    salesItemList[index]
+      ..salesPrice = value
+      ..subTotal = double.parse(
+        (item.salesPrice! * item.quantity!).toStringAsFixed(2),
+      )
+      ..discountPrice = double.parse(
+        (item.mrpPrice! - item.salesPrice!).toStringAsFixed(2),
+      );
+
+    calculateAllSubtotal();
+  }
+
+  Future<void> onItemRemove(
+    int index,
+  ) async {
+    salesItemList.removeAt(index);
+    calculateAllSubtotal();
   }
 }
