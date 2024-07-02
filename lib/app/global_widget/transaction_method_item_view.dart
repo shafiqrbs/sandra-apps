@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
-import 'package:getx_template/app/model/transaction_methods.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'common_cache_image_widget.dart';
+import '/app/core/base/base_widget.dart';
+import '/app/core/widget/common_cache_image_widget.dart';
+import '/app/model/transaction_methods.dart';
 
 class TransactionMethodItem extends BaseWidget {
   final TransactionMethods method;
