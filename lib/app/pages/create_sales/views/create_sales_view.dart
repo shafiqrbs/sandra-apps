@@ -270,7 +270,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                     () {
                       return Visibility(
                         visible: controller.salesItemList.isEmpty &&
-                            controller.stockList.isEmpty,
+                            controller.stockList.value.isEmpty,
                         child: Container(
                           alignment: Alignment.center,
                           height: 40.ph,
@@ -294,7 +294,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
   Widget _buildSearchedStockList() {
     return Obx(
       () => Visibility(
-        visible: controller.stockList.isNotEmpty,
+        visible: controller.stockList.value.isNotEmpty,
         child: Positioned(
           top: 50,
           left: 0,

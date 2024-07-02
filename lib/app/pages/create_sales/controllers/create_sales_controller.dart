@@ -9,7 +9,7 @@ import '/app/model/stock.dart';
 
 class CreateSalesController extends BaseController {
   final salesItemList = <SalesItem>[].obs;
-  final stockList = <Stock>[].obs;
+  final stockList = Rx<List<Stock>>([]);
   final selectedStock = Rx<Stock?>(null);
   final qtyFocusNode = FocusNode().obs;
 
@@ -181,20 +181,57 @@ class CreateSalesController extends BaseController {
     stockList.value = [];
   }
 
+  Future<void> onStockSelection(Stock? stock) async {
+    if (stock == null) return;
+
+    selectedStock.value = stock;
+    searchController.value.text = stock.name ?? '';
+    qtyFocusNode.value.requestFocus();
+    stockQtyController.value.text = '';
+    stockMrpController.value.text =
+        selectedStock.value?.salesPrice?.toString() ?? '';
+    stockDiscountPercentController.value.text = '';
+
+    stockQtyController.refresh();
+    stockMrpController.refresh();
+    stockDiscountPercentController.refresh();
+    stockList
+      ..value = []
+      ..refresh();
+  }
+
   Future<void> onQtyChange(
-    double value,
+    num value,
     int index,
   ) async {
     final item = salesItemList[index];
     salesItemList[index]
       ..quantity = value
-      ..subTotal = (item.salesPrice! * value).toPrecision(2);
+      ..subTotal = (item.salesPrice! * value).toDouble().toPrecision(2);
 
     calculateAllSubtotal();
   }
 
+  Future<void> onSearchedStockQtyChange(
+    num value,
+    int index,
+  ) async {}
+
+  Future<void> onSearchedStockQtyEditComplete(
+    num value,
+    int index,
+  ) async {
+    stockQtyController.value.text = value.toString();
+    selectedStock
+      ..value = stockList.value[index]
+      ..refresh();
+    addSaleItem(
+      process: 'inline',
+    );
+  }
+
   Future<void> onDiscountChange(
-    int value,
+    num value,
     int index,
   ) async {
     log('onDiscountChange called');
@@ -219,7 +256,7 @@ class CreateSalesController extends BaseController {
   }
 
   Future<void> onSalesPriceChange(
-    double value,
+    num value,
     int index,
   ) async {
     log('onSalesPriceChange called');
