@@ -37,6 +37,129 @@ class CreateSalesView extends BaseView<CreateSalesController> {
     );
   }
 
+  @override
+  Widget floatingActionButton() {
+    return InkWell(
+      onTap: () {
+        if (controller.salesItemList.isEmpty) {
+          toast('please_select_item'.tr);
+          return;
+        }
+
+        /* if (Get.isRegistered<SalesProcessModalController>()) {
+          Get.delete<SalesProcessModalController>();
+        }
+
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SalesProcessModalView(
+              salesItemList: mvc.salesItemList,
+              preSales: null,
+            );
+          },
+        ).then(
+          (value) {
+            if (value != null) {
+              mvc
+                ..updateSalesItemList(value)
+                ..salesItemList.value = value
+                ..calculateAllSubtotal();
+
+              mvc.salesItemList.refresh();
+            }
+          },
+        );*/
+      },
+      child: Container(
+        height: 7.ph,
+        width: Get.width,
+        color: colors.primaryBaseColor,
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(
+          bottom: 7,
+        ),
+        child: Obx(
+          () => Row(
+            mainAxisAlignment: spaceBetweenMAA,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  bottom: 8,
+                ),
+                margin: const EdgeInsets.only(
+                  left: 8,
+                ),
+                child: Row(
+                  mainAxisAlignment: centerMAA,
+                  children: [
+                    Text(
+                      'place_order'.tr,
+                      style: TextStyle(
+                        color: colors.backgroundColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              60.width,
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  bottom: 8,
+                  left: 32,
+                  right: 32,
+                ),
+                margin: const EdgeInsets.only(
+                  bottom: 4,
+                  top: 4,
+                  right: 8,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: colors.primaryLiteColor,
+                ),
+                child: Row(
+                  mainAxisAlignment: centerMAA,
+                  children: [
+                    Text(
+                      '${controller.salesItemList.length}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      ' | ',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      '${controller.salesSubTotal}',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildProductSearchForm() {
     return Obx(
       () => ProductSearchForm(
