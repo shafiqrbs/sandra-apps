@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/widget/fb_string.dart';
+import '/app/core/widget/row_button.dart';
+import '/app/global_widget/customer_card_view.dart';
+import '/app/global_widget/transaction_method_item_view.dart';
+import '/app/model/customer.dart';
 import 'receive_modal_controller.dart';
 
 class ReceiveModalView extends BaseView<ReceiveModalController> {
@@ -87,7 +93,7 @@ class ReceiveModalView extends BaseView<ReceiveModalController> {
                                         .transactionMethodsManager
                                         .selectedItem
                                         .value;
-                                    return TransactionMethodItem(
+                                    return TransactionMethodItemView(
                                       method: e,
                                       isSelected: selected == e,
                                       onTap: () {

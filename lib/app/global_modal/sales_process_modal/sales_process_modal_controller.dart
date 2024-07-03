@@ -2,23 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/dialog_pattern.dart';
-import 'package:getx_template/app/global_modal/order_process_confirmation_modal/order_process_confirmation_view.dart';
+import 'package:getx_template/app/core/abstract_controller/payment_gateway_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/widget/common_confirmation_modal.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/order_process_confirmation_modal/order_process_confirmation_view.dart';
 import '/app/model/customer.dart';
 import '/app/model/sales.dart';
 import '/app/model/sales_item.dart';
-import '/app/model/transaction_methods.dart';
-import '/app/model/user.dart';
 
-abstract class PaymentGatewayController extends BaseController {}
-
-class SalesProcessModalController extends BaseController {
+class SalesProcessModalController extends PaymentGatewayController {
   Sales? preSales;
   Rx<Sales?> createdSales = Rx<Sales?>(null);
 
@@ -32,43 +28,11 @@ class SalesProcessModalController extends BaseController {
     this.salesItemList.value = salesItemList;
   }
 
-  final salesItemList = <SalesItem>[].obs;
-
-  final formKey = GlobalKey<FormState>();
-
-  final selectedPaymentMode = 'cash'.obs;
-  final discountType = 'flat'.obs;
-  final returnMsg = 'due'.obs;
-
-  final paymentDiscountController = TextEditingController().obs;
-  final amountController = TextEditingController().obs;
-  final paymentTrxIdController = TextEditingController().obs;
-  final paymentMobileController = TextEditingController().obs;
-  final addRemarkController = TextEditingController().obs;
-
-  final customerManager = CustomerManager();
-  final transactionMethodsManager = TransactionMethodsManager();
-  final userManager = UserManager().obs;
-
-  final discountTypeController = ValueNotifier<bool>(false).obs;
-  final showProfit = ValueNotifier<bool>(false).obs;
-  final printWithoutDiscount = ValueNotifier<bool>(false).obs;
-
-  final salesSubTotal = 0.00.obs;
-  final salesDiscount = 0.00.obs;
-  final salesVat = 0.00.obs;
-  final netTotal = 0.00.obs;
-  final salesReceive = 0.00.obs;
-  final salesPurchasePrice = 0.00.obs;
-  final salesDiscountPercent = 0.00.obs;
-  final salesReturnValue = 0.00.obs;
-
   @override
   Future<void> onInit() async {
     super.onInit();
     await baseInit();
     if (preSales != null) {
-      print('Pre sales is not null');
       salesItemList.value = preSales!.salesItem!;
 
       if (preSales!.isHold == 1) {

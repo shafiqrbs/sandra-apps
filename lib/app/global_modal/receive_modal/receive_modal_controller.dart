@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '/app/core/abstract_controller/payment_gateway_controller.dart';
+import '/app/core/core_model/logged_user.dart';
+import '/app/model/customer.dart';
 
 class ReceiveModalController extends PaymentGatewayController {
   ReceiveModalController({
@@ -33,9 +36,9 @@ class ReceiveModalController extends PaymentGatewayController {
       return;
     }
 
-    await newServices.fetchOnlineData(
-      () async {
-        final data = await newServices.postReceive(
+    await dataFetcher(
+      future: () async {
+        final data = await services.postReceive(
           shouldShowLoader: true,
           customer: customerManager.selectedItem.value!.customerId!.toString(),
           method: 'receive',
