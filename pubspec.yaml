@@ -25,6 +25,7 @@ dependencies:
   nb_utils: ^7.0.2
   number_to_character: ^0.0.12
   path: any
+  permission_handler: ^11.3.1
   pie_chart: ^5.4.0
   shared_preferences: ^2.2.3
   speech_to_text: ^6.6.2
