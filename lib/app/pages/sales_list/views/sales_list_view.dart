@@ -132,7 +132,7 @@ class SalesListView extends BaseView<SalesListController> {
               : Row(
                   children: [
                     IconButton(
-                      onPressed: Get.back,
+                      onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.arrow_back),
                     ),
                     CommonText(text: 'sales'.tr),

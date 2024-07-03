@@ -53,17 +53,17 @@ class QuickNavigationButton extends BaseWidget {
                     TbdRoundButton(
                       text: 'pos',
                       icon: TablerIcons.garden_cart,
-                      onTap: () => Get.offNamed(Routes.createSales),
+                      onTap: () => navigatePage(Routes.createSales),
                     ),
                     TbdRoundButton(
                       text: 'sales_list',
                       icon: TablerIcons.point_off,
-                      onTap: () => Get.offNamed(Routes.salesList),
+                      onTap: () => navigatePage(Routes.salesList),
                     ),
                     TbdRoundButton(
                       text: 'stock',
                       icon: TablerIcons.shopping_cart,
-                      onTap: () {},
+                      onTap: () => navigatePage(Routes.stockList),
                     ),
                     TbdRoundButton(
                       text: 'add_purchase',
@@ -108,5 +108,18 @@ class QuickNavigationButton extends BaseWidget {
         );
       },
     );
+  }
+
+  void navigatePage(String routeName) {
+    if (Get.currentRoute != routeName) {
+      Get
+        ..back()
+        ..offNamed(routeName);
+    } else {
+      Get
+        ..back()
+        ..back()
+        ..toNamed(routeName);
+    }
   }
 }
