@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/global_modal/sales_information_modal/sales_information_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -108,7 +109,21 @@ class SalesListController extends BaseController {
     );
   }
 
-  showSalesInformationModal(BuildContext context, Sales element) {}
+  showSalesInformationModal(
+    BuildContext context,
+    Sales element,
+  ) {
+    final result = Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: 'subTitle',
+        child: SalesInformationModalView(
+          sales: element,
+          salesMode: tabPages[selectedIndex.value].slug,
+        ),
+      ),
+    );
+  }
 
   Future<void> showFilterModal({
     required BuildContext context,

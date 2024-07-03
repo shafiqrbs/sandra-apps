@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/add_button.dart';
-import '/app/core/utils/style_function.dart';
-import '/app/core/widget/app_bar_button.dart';
-import '/app/core/widget/app_bar_button_group.dart';
-import '/app/core/widget/app_bar_search_view.dart';
-import '/app/core/widget/filter_button.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/search_button.dart';
 import 'package:intl/intl.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/utils/style_function.dart';
+import '/app/core/widget/add_button.dart';
+import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
 import '/app/pages/sales_list/controllers/sales_list_controller.dart';
 
@@ -101,7 +97,10 @@ class SalesListView extends BaseView<SalesListController> {
                       controller.salesManager.allItems.value![index];
 
                   return InkWell(
-                    onTap: () async {},
+                    onTap: () => controller.showSalesInformationModal(
+                      context,
+                      element,
+                    ),
                     child: Container(
                       margin: const EdgeInsets.all(4),
                       padding: const EdgeInsets.all(8),
