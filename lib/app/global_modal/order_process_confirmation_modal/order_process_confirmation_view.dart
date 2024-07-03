@@ -23,154 +23,165 @@ class OrderProcessConfirmationView
 
   @override
   Widget build(BuildContext context) {
-    final mvc = Get.put(
-      OrderProcessConfirmationController(
+    return GetX<OrderProcessConfirmationController>(
+      init: OrderProcessConfirmationController(
         sales: sales,
         isEdit: isEdit,
       ),
-    );
-
-    return Center(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: colors.backgroundColor,
-          ),
-          child: Column(
-            children: [
-              Obx(
-                () => mvc.isLoader.value || mvc.connected.value
-                    ? Container()
-                    : Column(
-                        children: [
-                          Obx(
-                            () {
-                              return Text(
-                                mvc.msg.value,
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            },
-                          ),
-                          Row(
+      builder: (controller) {
+        return Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: colors.backgroundColor,
+              ),
+              child: Column(
+                children: [
+                  Obx(
+                    () => controller.isLoader.value ||
+                            controller.connected.value
+                        ? Container()
+                        : Column(
                             children: [
-                              RowButton(
-                                buttonName: 'scan'.tr,
-                                onTap: mvc.scanBluetooth,
+                              Obx(
+                                () {
+                                  return Text(
+                                    controller.msg.value,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                              Row(
+                                children: [
+                                  RowButton(
+                                    buttonName: 'scan'.tr,
+                                    onTap: controller.scanBluetooth,
+                                  ),
+                                ],
+                              ),
+                              Obx(
+                                () => SizedBox(
+                                  height: 40.ph,
+                                  child: controller.isConnecting.value
+                                      ? ShimmerListView(
+                                          itemCount: 1,
+                                          msg: 'connecting'.tr,
+                                        )
+                                      : ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: controller
+                                              .availAbleDevices.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return InkWell(
+                                              onTap: () async {
+                                                if (kDebugMode) {
+                                                  print(
+                                                    'macAdress: ${controller.availAbleDevices[index].macAdress}',
+                                                  );
+                                                }
+                                                await controller.connect(
+                                                  controller
+                                                      .availAbleDevices[index]
+                                                      .macAdress,
+                                                );
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                margin: const EdgeInsets.only(
+                                                  top: 4,
+                                                  bottom: 4,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    containerBorderRadius,
+                                                  ),
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      controller
+                                                          .availAbleDevices[
+                                                              index]
+                                                          .name,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    4.width,
+                                                    1.percentHeight,
+                                                    Text(
+                                                      controller
+                                                          .availAbleDevices[
+                                                              index]
+                                                          .macAdress,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                ),
                               ),
                             ],
                           ),
-                          Obx(
-                            () => SizedBox(
-                              height: 40.ph,
-                              child: mvc.isConnecting.value
-                                  ? ShimmerListView(
-                                      itemCount: 1,
-                                      msg: 'connecting'.tr,
-                                    )
-                                  : ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: mvc.availAbleDevices.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return InkWell(
-                                          onTap: () async {
-                                            if (kDebugMode) {
-                                              print(
-                                                'macAdress: ${mvc.availAbleDevices[index].macAdress}',
-                                              );
-                                            }
-                                            await mvc.connect(
-                                              mvc.availAbleDevices[index]
-                                                  .macAdress,
-                                            );
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.all(8),
-                                            margin: const EdgeInsets.only(
-                                              top: 4,
-                                              bottom: 4,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                containerBorderRadius,
-                                              ),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  mvc.availAbleDevices[index]
-                                                      .name,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                4.width,
-                                                1.percentHeight,
-                                                Text(
-                                                  mvc.availAbleDevices[index]
-                                                      .macAdress,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                            ),
-                          ),
-                        ],
-                      ),
-              ),
-              1.percentHeight,
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 4,
-                  right: 4,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => mvc.isLoader.value
-                          ? const CircularProgressIndicator(
-                              color: Colors.red,
-                            )
-                          : RowButton(
-                              buttonName: 'print'.tr,
-                              onTap: mvc.salesPrint,
-                              leftIcon: TablerIcons.printer,
-                              buttonBGColor: mvc.connected.value
-                                  ? Colors.green
-                                  : Colors.red,
-                            ),
+                  ),
+                  1.percentHeight,
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 4,
+                      right: 4,
                     ),
-                    4.width,
-                    RowButton(
-                      buttonName: 'save'.tr,
-                      onTap: mvc.saveSales,
-                      leftIcon: TablerIcons.device_floppy,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Obx(
+                          () => controller.isLoader.value
+                              ? const CircularProgressIndicator(
+                                  color: Colors.red,
+                                )
+                              : RowButton(
+                                  buttonName: 'print'.tr,
+                                  onTap: controller.salesPrint,
+                                  leftIcon: TablerIcons.printer,
+                                  buttonBGColor: controller.connected.value
+                                      ? Colors.green
+                                      : Colors.red,
+                                ),
+                        ),
+                        4.width,
+                        RowButton(
+                          buttonName: 'save'.tr,
+                          onTap: controller.saveSales,
+                          leftIcon: TablerIcons.device_floppy,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
