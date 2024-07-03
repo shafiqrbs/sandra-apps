@@ -1,16 +1,14 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
-import 'package:getx_template/app/core/widget/app_bar_search_view.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
-import 'package:getx_template/app/core/widget/filter_button.dart';
-import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
-import 'package:getx_template/app/core/widget/search_button.dart';
-import 'package:getx_template/app/pages/stock_list/component/stock_card_view.dart';
+import 'package:getx_template/app/core/widget/add_button.dart';
+
 import '/app/core/base/base_view.dart';
+import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/app_bar_search_view.dart';
+import '/app/core/widget/filter_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/search_button.dart';
+import '/app/pages/stock_list/component/stock_card_view.dart';
 import '/app/pages/stock_list/controllers/stock_list_controller.dart';
 
 //ignore: must_be_immutable
@@ -46,10 +44,8 @@ class StockListView extends BaseView<StockListController> {
             }
             return AppBarButtonGroup(
               children: [
-                FilterButton(
-                  onTap: () => controller.showFilterModal(
-                    context: globalKey.currentContext!,
-                  ),
+                AddButton(
+                  onTap: controller.showAddStockModal,
                 ),
                 SearchButton(
                   onTap: controller.isSearchSelected.toggle,

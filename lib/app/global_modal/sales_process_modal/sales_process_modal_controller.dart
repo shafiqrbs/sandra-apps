@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/core_model/logged_user.dart';
-import 'package:getx_template/app/core/widget/common_confirmation_modal.dart';
+import '/app/core/core_model/logged_user.dart';
+import '/app/core/widget/common_confirmation_modal.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 

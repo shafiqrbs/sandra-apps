@@ -4,9 +4,9 @@ import '/app/core/base/base_widget.dart';
 
 import 'app_bar_button.dart';
 
-class AddButton extends BaseWidget {
+class ListButton extends BaseWidget {
   final VoidCallback onTap;
-  AddButton({
+  ListButton({
     required this.onTap,
     super.key,
   });
@@ -16,7 +16,7 @@ class AddButton extends BaseWidget {
     return AppBarButton(
       buttonName: null,
       onTap: onTap,
-      leftIcon: TablerIcons.library_plus,
+      leftIcon: TablerIcons.list,
       buttonBGColor: colors.tertiaryLiteColor,
       iconColor: colors.primaryBaseColor,
     );

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:getx_template/app/routes/app_pages.dart';
+import '/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 
 enum SelectedTab {

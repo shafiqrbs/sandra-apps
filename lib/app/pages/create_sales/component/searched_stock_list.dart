@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
+import '/app/core/base/base_widget.dart';
 import '/app/model/stock.dart';
 import 'package:nb_utils/nb_utils.dart';
 

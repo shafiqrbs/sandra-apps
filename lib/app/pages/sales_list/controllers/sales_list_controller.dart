@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/routes/app_pages.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -153,5 +154,11 @@ class SalesListController extends BaseController {
       searchQuery = value['search_keyword'];
       await changeIndex(selectedIndex.value);
     }
+  }
+
+  void goToCreateSales() {
+    Get.offNamed(
+      Routes.createSales,
+    );
   }
 }

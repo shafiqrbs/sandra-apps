@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/list_button.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/utils/style_function.dart';
+import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
 import '/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
 import '/app/global_widget/product_search_form.dart';
@@ -19,7 +22,29 @@ class CreateSalesView extends BaseView<CreateSalesController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
+    return AppBar(
+      centerTitle: false,
+      backgroundColor: colors.primaryBaseColor,
+      title: Text(
+        'create_sales'.tr,
+        style: TextStyle(
+          color: colors.backgroundColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+      automaticallyImplyLeading: false,
+      actions: [
+        AppBarButtonGroup(
+          children: [
+            ListButton(
+              onTap: controller.goToListPage,
+            ),
+            QuickNavigationButton(),
+          ],
+        ),
+      ],
+    );
   }
 
   @override
@@ -169,7 +194,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-               containerBorderRadius,
+                containerBorderRadius,
               ),
               color: colors.evenListColor,
             ),
@@ -192,7 +217,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                     controller.selectedStock.value?.name ?? '',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize:paragraphTFSize,
+                      fontSize: paragraphTFSize,
                       fontWeight: FontWeight.w600,
                       color: colors.primaryTextColor,
                     ),
@@ -211,7 +236,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                         child: Container(
                           margin: zero,
                           padding: zero,
-                          height:mediumTextFieldHeight,
+                          height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
                           color: colors.textFieldColor,
                           child: TextFormField(
@@ -223,7 +248,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             ],
                             textInputAction: nextInputAction,
                             style: TextStyle(
-                              fontSize:mediumTFSize,
+                              fontSize: mediumTFSize,
                               color: colors.primaryTextColor,
                               fontWeight: FontWeight.w500,
                             ),
@@ -240,7 +265,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                         child: Container(
                           margin: zero,
                           padding: zero,
-                          height:mediumTextFieldHeight,
+                          height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
                           color: colors.textFieldColor,
                           child: TextFormField(
@@ -249,7 +274,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             focusNode: controller.qtyFocusNode.value,
                             controller: controller.stockQtyController.value,
                             style: TextStyle(
-                              fontSize:mediumTFSize,
+                              fontSize: mediumTFSize,
                               color: colors.primaryTextColor,
                               fontWeight: FontWeight.w500,
                             ),
@@ -269,7 +294,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                         child: Container(
                           margin: zero,
                           padding: zero,
-                          height:mediumTextFieldHeight,
+                          height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
                           color: colors.textFieldColor,
                           child: TextFormField(
@@ -289,7 +314,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                               }
                             },
                             style: TextStyle(
-                              fontSize:mediumTFSize,
+                              fontSize: mediumTFSize,
                               color: colors.primaryTextColor,
                               fontWeight: FontWeight.w500,
                             ),
@@ -305,7 +330,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                         flex: 2,
                         child: SizedBox(
                           //  margin: const EdgeInsets.all(5),
-                          height:mediumTextFieldHeight,
+                          height: mediumTextFieldHeight,
                           child: ElevatedButton(
                             onPressed: () {
                               if (controller.selectedStock.value != null) {
@@ -317,7 +342,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
-                                 containerBorderRadius,
+                                  containerBorderRadius,
                                 ),
                               ),
                               backgroundColor: colors.primaryBaseColor,
@@ -414,7 +439,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
             () => DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                 containerBorderRadius,
+                  containerBorderRadius,
                 ),
                 color: colors.evenListColor,
               ),

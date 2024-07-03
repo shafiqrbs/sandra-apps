@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
+import '/app/core/base/base_widget.dart';
 
 import 'app_bar_button.dart';
 

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:getx_template/app/model/customer_ledger.dart';
-import 'package:getx_template/app/model/sales.dart';
+import '/app/model/customer_ledger.dart';
+import '/app/model/sales.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';

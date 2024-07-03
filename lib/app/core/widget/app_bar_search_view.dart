@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
+import '/app/core/base/base_widget.dart';
 
 import 'common_text.dart';
 
@@ -13,6 +13,7 @@ class AppBarSearchView extends BaseWidget {
   final Function()? onFilterTap;
   final Function()? onClearTap;
   final bool showSearchView;
+  final List<Widget> suffixIcon;
   AppBarSearchView({
     required this.pageTitle,
     required this.controller,
@@ -22,6 +23,7 @@ class AppBarSearchView extends BaseWidget {
     required this.onClearTap,
     super.key,
     this.showSearchView = false,
+    this.suffixIcon = const [],
   });
 
   @override
@@ -63,13 +65,11 @@ class AppBarSearchView extends BaseWidget {
                         color: colors.primaryBaseColor,
                       ),
                     ),
-                    IconButton(
-                      onPressed: onFilterTap,
-                      icon: Icon(
-                        TablerIcons.filter,
-                        color: colors.primaryBaseColor.withOpacity(.5),
-                      ),
-                    ),
+                    suffixIcon.isNotEmpty
+                        ? Row(
+                            children: suffixIcon,
+                          )
+                        : const SizedBox(),
                     IconButton(
                       onPressed: onClearTap,
                       icon: Icon(

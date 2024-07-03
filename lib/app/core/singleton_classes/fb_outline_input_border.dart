@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_template/app/core/extensions/outline_input_border_extensions.dart';
+import '/app/core/extensions/outline_input_border_extensions.dart';
 
 class FBOutlineInputBorder {
   static final FBOutlineInputBorder _instance = FBOutlineInputBorder._();
