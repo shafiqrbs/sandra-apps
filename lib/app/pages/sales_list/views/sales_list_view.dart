@@ -72,13 +72,6 @@ class SalesListView extends BaseView<SalesListController> {
   Widget body(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () {
-            controller.implyLeading.toggle();
-            print(controller.implyLeading.value);
-          },
-          child: Text("Add Sales"),
-        ),
         Row(
           children: List.generate(
             controller.tabPages.length,
