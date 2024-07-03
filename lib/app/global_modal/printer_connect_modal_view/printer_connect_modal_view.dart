@@ -15,127 +15,136 @@ class PrinterConnectModalView
 
   @override
   Widget build(BuildContext context) {
-    final mvc = Get.put(
-      PrinterConnectModalViewController(),
-    );
-
-    return Center(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: colors.backgroundColor,
-          ),
-          child: Column(
-            children: [
-              Obx(
-                () {
-                  return mvc.isLoader.value || mvc.connected.value
-                      ? Container()
-                      : Column(
-                          children: [
-                            Obx(
-                              () {
-                                return Text(
-                                  mvc.msg.value,
-                                  style: const TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
-                              },
-                            ),
-                            Row(
+    return GetX<PrinterConnectModalViewController>(
+      init: PrinterConnectModalViewController(),
+      builder: (controller) {
+        return Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: colors.backgroundColor,
+              ),
+              child: Column(
+                children: [
+                  Obx(
+                    () {
+                      return controller.isLoader.value ||
+                              controller.connected.value
+                          ? Container()
+                          : Column(
                               children: [
-                                RowButton(
-                                  buttonName: 'scan'.tr,
-                                  onTap: mvc.getBluetoothList,
+                                Obx(
+                                  () {
+                                    return Text(
+                                      controller.msg.value,
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Row(
+                                  children: [
+                                    RowButton(
+                                      buttonName: 'scan'.tr,
+                                      onTap: controller.getBluetoothList,
+                                    ),
+                                  ],
+                                ),
+                                Obx(
+                                  () => SizedBox(
+                                    height: 40.ph,
+                                    child: controller.isConnecting.value
+                                        ? ShimmerListView(
+                                            itemCount: 1,
+                                            msg: 'connecting'.tr,
+                                          )
+                                        : ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                .availAbleDevices.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return InkWell(
+                                                onTap: () async {
+                                                  if (kDebugMode) {
+                                                    print(
+                                                      'macAdress: ${controller.availAbleDevices[index].macAdress}',
+                                                    );
+                                                  }
+                                                  final isConnected =
+                                                      await controller.connect(
+                                                    controller
+                                                        .availAbleDevices[index]
+                                                        .macAdress,
+                                                  );
+                                                  if (isConnected) {
+                                                    Get.back();
+                                                  }
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  margin: const EdgeInsets.only(
+                                                    top: 4,
+                                                    bottom: 4,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      containerBorderRadius,
+                                                    ),
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        controller
+                                                            .availAbleDevices[
+                                                                index]
+                                                            .name,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      4.width,
+                                                      1.percentHeight,
+                                                      Text(
+                                                        controller
+                                                            .availAbleDevices[
+                                                                index]
+                                                            .macAdress,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                  ),
                                 ),
                               ],
-                            ),
-                            Obx(
-                              () => SizedBox(
-                                height: 40.ph,
-                                child: mvc.isConnecting.value
-                                    ? ShimmerListView(
-                                        itemCount: 1,
-                                        msg: 'connecting'.tr,
-                                      )
-                                    : ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: mvc.availAbleDevices.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return InkWell(
-                                            onTap: () async {
-                                              if (kDebugMode) {
-                                                print(
-                                                  'macAdress: ${mvc.availAbleDevices[index].macAdress}',
-                                                );
-                                              }
-                                              final isConnected =
-                                                  await mvc.connect(
-                                                mvc.availAbleDevices[index]
-                                                    .macAdress,
-                                              );
-                                              if (isConnected) {
-                                                Get.back();
-                                              }
-                                            },
-                                            child: Container(
-                                              padding: const EdgeInsets.all(8),
-                                              margin: const EdgeInsets.only(
-                                                top: 4,
-                                                bottom: 4,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  containerBorderRadius,
-                                                ),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                    mvc.availAbleDevices[index]
-                                                        .name,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  4.width,
-                                                  1.percentHeight,
-                                                  Text(
-                                                    mvc.availAbleDevices[index]
-                                                        .macAdress,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                              ),
-                            ),
-                          ],
-                        );
-                },
+                            );
+                    },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
