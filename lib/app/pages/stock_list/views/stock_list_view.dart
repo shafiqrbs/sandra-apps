@@ -30,7 +30,7 @@ class StockListView extends BaseView<StockListController> {
             onFilterTap: () => controller.showFilterModal(
               context: globalKey.currentContext!,
             ),
-            onClearTap: controller.isSearchSelected.toggle,
+            onClearTap: controller.onClearSearchText,
             showSearchView: controller.isSearchSelected.value,
           );
         },

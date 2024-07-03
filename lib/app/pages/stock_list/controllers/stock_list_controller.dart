@@ -47,4 +47,10 @@ class StockListController extends BaseController {
       print(result);
     }
   }
+
+  Future<void> onClearSearchText() async {
+    stockManager.searchTextController.value.clear();
+    isSearchSelected.toggle();
+    await stockManager.paginate();
+  }
 }
