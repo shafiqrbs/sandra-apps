@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/utils/style_function.dart';
 import 'package:getx_template/app/core/widget/app_bar_button.dart';
+import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -183,15 +184,7 @@ class SalesListView extends BaseView<SalesListController> {
                     buttonTextColor: colors.primaryBaseColor,
                   ),
                   2.width,
-                  AppBarButton(
-                    buttonName: null,
-                    onTap: () => controller.showQuickNavigateBottomSheet(
-                      globalKey.currentContext!,
-                    ),
-                    leftIcon: TablerIcons.library_plus,
-                    buttonBGColor: colors.tertiaryLiteColor,
-                    iconColor: colors.primaryBaseColor,
-                  ),
+                  QuickNavigationButton(),
                   2.width,
                 ],
               ),
