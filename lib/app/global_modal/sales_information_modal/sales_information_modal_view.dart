@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/base/base_view.dart';
+import 'package:getx_template/app/core/utils/responsive.dart';
+import 'package:getx_template/app/core/widget/common_confirmation_modal.dart';
+import 'package:getx_template/app/core/widget/common_icon_text.dart';
+import 'package:getx_template/app/core/widget/common_text.dart';
+import 'package:getx_template/app/core/widget/label_value.dart';
+import 'package:getx_template/app/model/sales.dart';
+import 'package:getx_template/app/routes/app_pages.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:terminalbd/core/base_widget.dart';
-import 'package:terminalbd/global_modal/common_confirmation_modal.dart';
-import 'package:terminalbd/global_widget/common_icon_text.dart';
-import 'package:terminalbd/global_widget/common_text.dart';
-import 'package:terminalbd/global_widget/label_value.dart';
-import 'package:terminalbd/model/sales.dart';
-import 'package:terminalbd/pages/inventory/sales_edit_screen/sales_edit_controller.dart';
-import 'package:terminalbd/pages/inventory/sales_edit_screen/sales_edit_screen.dart';
-import 'package:terminalbd/utils/responsive.dart';
 
 import 'sales_information_modal_controller.dart';
 
-class SalesInformationModalView extends BaseWidget {
+class SalesInformationModalView
+    extends BaseView<SalesInformationModalController> {
   final String salesMode;
   final Sales sales;
   final Function()? onDeleted;
@@ -348,7 +348,6 @@ class SalesInformationModalView extends BaseWidget {
               Expanded(
                 child: InkWell(
                   onTap: () async {
-
                     await showDialog(
                       context: context,
                       builder: (context) {
@@ -414,14 +413,8 @@ class SalesInformationModalView extends BaseWidget {
                 child: Expanded(
                   child: InkWell(
                     onTap: () {
-                      if (Get.isRegistered<SalesEditController>()) {
-                        Get.delete<SalesEditController>();
-                      }
-                      Get.to(
-                        SalesEditScreen(
-                          sales: sales,
-                        ),
-                      );
+                      Get.toNamed(Routes.editSales,
+                          arguments: {'sales': sales});
                     },
                     child: Container(
                       height: 40,
@@ -526,5 +519,17 @@ class SalesInformationModalView extends BaseWidget {
         ],
       ),
     );
+  }
+
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    // TODO: implement appBar
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    // TODO: implement body
+    throw UnimplementedError();
   }
 }

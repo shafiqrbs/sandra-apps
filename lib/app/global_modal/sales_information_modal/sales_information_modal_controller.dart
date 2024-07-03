@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terminalbd/core/abstract_controller/printer_controller.dart';
-import 'package:terminalbd/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
-import 'package:terminalbd/global_modal/printer_connect_modal_view/printer_connect_modal_view_controller.dart';
-import 'package:terminalbd/global_widget/dialog_pattern.dart';
-import 'package:terminalbd/model/sales.dart';
-import 'package:terminalbd/pages/domain/landing_screen/landing_screen.dart';
-import 'package:terminalbd/pages/inventory/pos_screen/pos_controller.dart';
+import 'package:getx_template/app/core/abstract_controller/printer_controller.dart';
+import 'package:getx_template/app/core/widget/dialog_pattern.dart';
+import 'package:getx_template/app/model/sales.dart';
 
 class SalesInformationModalController extends PrinterController {
   final String salesMode;
@@ -28,10 +24,9 @@ class SalesInformationModalController extends PrinterController {
   }
 
   Future<void> getSalesItemList() async {
-    await newServices.fetchOnlineData(
-      () async {
-        final data = await newServices.getOnlineSalesDetails(
-          shouldShowLoader: true,
+    await dataFetcher(
+      future: () async {
+        final data = await services.getOnlineSalesDetails(
           id: sales.value!.salesId!,
         );
         if (data != null) {
@@ -69,7 +64,7 @@ class SalesInformationModalController extends PrinterController {
   }
 
   Future<void> copySales(Sales sales) async {
-    if (salesMode == 'hold' ) {
+    if (salesMode == 'hold') {
       await dbHelper.deleteAllWhr(
         tbl: tableSale,
         where: 'sales_id = ?',

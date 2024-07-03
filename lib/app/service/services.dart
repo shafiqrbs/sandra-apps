@@ -169,7 +169,6 @@ class Services {
   }
 
   Future<Sales?> getOnlineSalesDetails({
-    required bool shouldShowLoader,
     required String id,
   }) async {
     final response = await dio.get(
