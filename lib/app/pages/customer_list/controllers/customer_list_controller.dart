@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:getx_template/app/model/customer.dart';
+import '/app/model/customer.dart';
 import '/app/core/base/base_controller.dart';
 
 class CustomerListController extends BaseController {

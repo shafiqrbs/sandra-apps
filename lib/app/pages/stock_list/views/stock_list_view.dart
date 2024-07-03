@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/add_button.dart';
+import '/app/core/widget/add_button.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/app_bar_button_group.dart';

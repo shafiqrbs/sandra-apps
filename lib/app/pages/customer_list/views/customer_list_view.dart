@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/add_button.dart';
-import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
-import 'package:getx_template/app/core/widget/app_bar_search_view.dart';
-import 'package:getx_template/app/core/widget/common_icon_text.dart';
-import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
-import 'package:getx_template/app/core/widget/search_button.dart';
+
 import '/app/core/base/base_view.dart';
+import '/app/core/widget/add_button.dart';
+import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/app_bar_search_view.dart';
+import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/search_button.dart';
+import '/app/global_widget/customer_card_view.dart';
 import '/app/pages/customer_list/controllers/customer_list_controller.dart';
+import '/app/routes/app_pages.dart';
 
 //ignore: must_be_immutable
 class CustomerListView extends BaseView<CustomerListController> {
@@ -65,24 +67,19 @@ class CustomerListView extends BaseView<CustomerListController> {
           padding: const EdgeInsets.only(bottom: 60),
           itemBuilder: (context, index) {
             final element = controller.customerManager.allItems.value![index];
-
-            return InkWell(
-              onTap: () async {},
-              child: Container(
-                margin: const EdgeInsets.all(4),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: index.isEven
-                      ? colors.evenListColor
-                      : colors.oddListColor,
-                  borderRadius: BorderRadius.circular(containerBorderRadius),
-                ),
-                child: Column(
-                  children: [
-                    Text(element.name ?? ''),
-                  ],
-                ),
-              ),
+            return CustomerCardView(
+              data: element,
+              index: index,
+              onTap: () {
+                Get.toNamed(
+                  Routes.customerDetails,
+                  arguments: {
+                    'customer': element,
+                  },
+                );
+              },
+              onReceive: () {},
+              showReceiveButton: true,
             );
           },
         );

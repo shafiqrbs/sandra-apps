@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/global_modal/add_product_modal/add_product_modal_view.dart';
+import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
