@@ -18,6 +18,8 @@ import '/app/pages/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/sales_list/views/sales_list_view.dart';
 import '/app/pages/splash/bindings/splash_binding.dart';
 import '/app/pages/splash/views/splash_view.dart';
+import '/app/pages/stock_list/bindings/stock_list_binding.dart';
+import '/app/pages/stock_list/views/stock_list_view.dart';
 
 part 'app_routes.dart';
 
@@ -58,6 +60,11 @@ class AppPages {
       binding: CustomerDetailsBinding(),
     ),
     GetPage(
+      name: Routes.stockList,
+      page: StockListView.new,
+      binding: StockListBinding(),
+    ),
+    GetPage(
       name: Routes.salesList,
       page: SalesListView.new,
       binding: SalesListBinding(),
@@ -69,7 +76,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.editSales,
-      page: () => EditSalesView(),
+      page: EditSalesView.new,
       binding: EditSalesBinding(),
     ),
   ];

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_widget.dart';
+import 'package:getx_template/app/routes/app_pages.dart';
 
 import 'app_bar_button.dart';
+import 'tbd_round_button.dart';
 
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
@@ -41,6 +44,63 @@ class QuickNavigationButton extends BaseWidget {
                 ElevatedButton(
                   child: const Text('Close'),
                   onPressed: () => Navigator.pop(context),
+                ),
+                Wrap(
+                  spacing: 8,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  runSpacing: 8,
+                  children: [
+                    TbdRoundButton(
+                      text: 'pos',
+                      icon: TablerIcons.garden_cart,
+                      onTap: () => Get.offNamed(Routes.createSales),
+                    ),
+                    TbdRoundButton(
+                      text: 'sales_list',
+                      icon: TablerIcons.point_off,
+                      onTap: () => Get.offNamed(Routes.salesList),
+                    ),
+                    TbdRoundButton(
+                      text: 'stock',
+                      icon: TablerIcons.shopping_cart,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'add_purchase',
+                      icon: TablerIcons.shopping_cart,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'purchase_return'.tr,
+                      icon: TablerIcons.credit_card,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'vendor',
+                      icon: TablerIcons.credit_card,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'stock_item',
+                      icon: TablerIcons.credit_card,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'category',
+                      icon: TablerIcons.credit_card,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'stock_adjustment'.tr,
+                      icon: TablerIcons.credit_card,
+                      onTap: () {},
+                    ),
+                    TbdRoundButton(
+                      text: 'expense'.tr,
+                      icon: TablerIcons.color_swatch,
+                      onTap: () {},
+                    ),
+                  ],
                 ),
               ],
             ),

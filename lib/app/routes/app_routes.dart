@@ -10,10 +10,10 @@ abstract class Routes {
   static const dashboard = _Paths.dashboard;
   static const customerList = _Paths.customerList;
   static const customerDetails = _Paths.customerDetails;
+  static const stockList = _Paths.stockList;
   static const salesList = _Paths.salesList;
   static const createSales = _Paths.createSales;
-  static const  editSales = _Paths.editSales;
-
+  static const editSales = _Paths.editSales;
 }
 
 abstract class _Paths {
@@ -23,8 +23,8 @@ abstract class _Paths {
   static const dashboard = '/dashboard';
   static const customerList = '/customer_list';
   static const customerDetails = '/customer_details';
+  static const stockList = '/stock_list';
   static const salesList = '/sales_list';
   static const createSales = '/create_sales';
-  static const  editSales = '/edit_sales';
-
+  static const editSales = '/edit_sales';
 }
