@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/dialog_pattern.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/label_value.dart';
 import '/app/model/stock.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import 'stock_details_modal.dart';
 
 final labelValue = LabelValue(
   label: 'label',
@@ -46,7 +49,17 @@ class StockCardView extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.dialog(
+          DialogPattern(
+            title: 'stock_details'.tr,
+            subTitle: '',
+            child: StockDetailsModaL(
+              element: element,
+            ),
+          ),
+        );
+      },
       child: Stack(
         children: [
           Container(
