@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_view.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/widget/row_button.dart';
-import 'package:getx_template/app/global_widget/shimmer_list_view.dart';
+import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/widget/row_button.dart';
+import '/app/global_widget/shimmer_list_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'printer_connect_modal_view_controller.dart';

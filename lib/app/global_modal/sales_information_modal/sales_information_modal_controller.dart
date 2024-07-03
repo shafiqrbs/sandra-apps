@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/abstract_controller/printer_controller.dart';
-import 'package:getx_template/app/core/widget/dialog_pattern.dart';
-import 'package:getx_template/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
-import 'package:getx_template/app/model/sales.dart';
+import '/app/core/abstract_controller/printer_controller.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
+import '/app/model/sales.dart';
+import '/app/routes/app_pages.dart';
 
 class SalesInformationModalController extends PrinterController {
   final String salesMode;
@@ -69,5 +70,14 @@ class SalesInformationModalController extends PrinterController {
         whereArgs: [sales.salesId],
       );
     }
+  }
+
+  void goToEditSales() {
+    Get.toNamed(
+      Routes.createSales,
+      arguments: {
+        'sales': sales.value,
+      },
+    );
   }
 }

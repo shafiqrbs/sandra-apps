@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/core_model/logged_user.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
+import 'package:getx_template/app/core/widget/dialog_pattern.dart';
+import 'package:getx_template/app/global_modal/order_process_confirmation_modal/order_process_confirmation_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/logged_user.dart';
+import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/model/customer.dart';
 import '/app/model/sales.dart';
 import '/app/model/sales_item.dart';
@@ -257,11 +259,14 @@ class SalesProcessModalController extends BaseController {
     );
 
     if (customerManager.selectedItem.value != null) {
-      sales.setCustomerData(customerManager.selectedItem.value!);
+      sales.setCustomerData(
+        customerManager.selectedItem.value!,
+      );
     }
     if (transactionMethodsManager.selectedItem.value != null) {
       sales.setTransactionMethodData(
-          transactionMethodsManager.selectedItem.value!);
+        transactionMethodsManager.selectedItem.value!,
+      );
     }
 
     debugPrint(
@@ -289,7 +294,9 @@ class SalesProcessModalController extends BaseController {
     );
   }
 
-  Future<void> showConfirmationDialog(BuildContext context) async {
+  Future<void> showConfirmationDialog(
+    BuildContext context,
+  ) async {
     if (salesItemList.isEmpty) {
       toast('you_removed_all_item'.tr);
       return;
@@ -321,6 +328,27 @@ class SalesProcessModalController extends BaseController {
     }
 
     if (!context.mounted) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return DialogPattern(
+          title: 'title',
+          subTitle: 'subTitle',
+          child: OrderProcessConfirmationView(
+            sales: sales,
+            isEdit: preSales != null,
+          ),
+        );
+      },
+    );
+
+    if (confirmed != null && confirmed) {
+      log('order process confirmed');
+      Get.back(
+        result: salesItemList,
+      );
+    }
   }
 
   Future<void> reset(BuildContext context) async {

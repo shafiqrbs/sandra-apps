@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_view.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/widget/common_confirmation_modal.dart';
-import 'package:getx_template/app/core/widget/common_icon_text.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
-import 'package:getx_template/app/core/widget/label_value.dart';
-import 'package:getx_template/app/model/sales.dart';
-import 'package:getx_template/app/routes/app_pages.dart';
+import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/widget/common_confirmation_modal.dart';
+import '/app/core/widget/common_icon_text.dart';
+import '/app/core/widget/common_text.dart';
+import '/app/core/widget/label_value.dart';
+import '/app/model/sales.dart';
+import '/app/routes/app_pages.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'sales_information_modal_controller.dart';
@@ -412,10 +412,7 @@ class SalesInformationModalView
                 visible: mvc.salesMode == 'online' || mvc.salesMode == 'local',
                 child: Expanded(
                   child: InkWell(
-                    onTap: () {
-                      Get.toNamed(Routes.editSales,
-                          arguments: {'sales': sales});
-                    },
+                    onTap: controller.goToEditSales,
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(

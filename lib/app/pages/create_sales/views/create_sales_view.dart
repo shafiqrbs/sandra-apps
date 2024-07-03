@@ -75,7 +75,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
         final result = await Get.dialog(
           SalesProcessModalView(
             salesItemList: controller.salesItemList.value,
-            preSales: null,
+            preSales: controller.preSales,
           ),
         );
         if (result != null) {

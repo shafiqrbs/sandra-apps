@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_controller.dart';
+import '/app/core/base/base_controller.dart';
 
 class AddCustomerModalController extends BaseController {
   final formKey = GlobalKey<FormState>();

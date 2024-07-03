@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '/app/model/sales.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -8,6 +9,7 @@ import '/app/model/sales_item.dart';
 import '/app/model/stock.dart';
 
 abstract class SalesController extends BaseController {
+  Sales? preSales;
   final salesItemList = Rx<List<SalesItem>>([]);
   final stockList = Rx<List<Stock>>([]);
   final selectedStock = Rx<Stock?>(null);
