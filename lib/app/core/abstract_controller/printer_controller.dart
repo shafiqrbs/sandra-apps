@@ -4,10 +4,15 @@ import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_controller.dart';
 import 'package:image/image.dart' as img;
 import 'package:nb_utils/nb_utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+
+import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/setup.dart';
+import '/app/model/sales.dart';
+import '/app/model/sales_item.dart';
 
 class PrinterController extends BaseController {
   final msg = ''.obs;
