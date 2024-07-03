@@ -9,8 +9,8 @@ class CreateSalesController extends SalesController {
   Future<void> onInit() async {
     super.onInit();
     print('I am in CreateSalesController');
-    final args = Get.arguments as Map<String, dynamic>;
-    if (args.isNotEmpty && args['sales'] != null) {
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null && args.isNotEmpty && args['sales'] != null) {
       setData(args['sales'] as Sales);
     }
   }
