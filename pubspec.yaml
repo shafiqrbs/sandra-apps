@@ -27,6 +27,7 @@ dependencies:
   path: any
   permission_handler: ^11.3.1
   pie_chart: ^5.4.0
+  print_bluetooth_thermal: ^1.1.0
   shared_preferences: ^2.2.3
   speech_to_text: ^6.6.2
   sqflite: ^2.3.3+1

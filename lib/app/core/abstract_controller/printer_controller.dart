@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_controller.dart';
 import 'package:image/image.dart' as img;
 import 'package:nb_utils/nb_utils.dart';
+import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 class PrinterController extends BaseController {
   final msg = ''.obs;
