@@ -91,7 +91,9 @@ class SalesListView extends BaseView<SalesListController> {
                 controller: controller.selectedIndex.value == 2
                     ? null
                     : controller.salesManager.scrollController,
-                padding: const EdgeInsets.only(bottom: 60),
+                padding: const EdgeInsets.only(
+                  bottom: 60,
+                ),
                 itemBuilder: (context, index) {
                   final element =
                       controller.salesManager.allItems.value![index];

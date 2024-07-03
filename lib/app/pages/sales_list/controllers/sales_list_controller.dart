@@ -50,6 +50,7 @@ class SalesListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await changeIndex(0);
   }
 
   Future<void> changeIndex(int index) async {
