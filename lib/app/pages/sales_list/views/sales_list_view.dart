@@ -32,8 +32,8 @@ class SalesListView extends BaseView<SalesListController> {
         () {
           return AppBarSearchView(
             pageTitle: 'sales'.tr,
-            controller: controller.customerManager.searchTextController.value,
-            onSearch: controller.customerManager.searchItemsByNameOnAllItem,
+            controller: controller.salesManager.searchTextController.value,
+            onSearch: controller.salesManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
             onFilterTap: () => controller.showFilterModal(
               context: globalKey.currentContext!,

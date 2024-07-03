@@ -14,7 +14,6 @@ class SalesListController extends BaseController {
   final salesManager = SalesManager();
   final selectedIndex = 0.obs;
   final isSearchSelected = false.obs;
-  final customerManager = CustomerManager();
   final implyLeading = true.obs;
   final Rx<Icon> actionIcon = const Icon(
     TablerIcons.user_search,
@@ -77,26 +76,6 @@ class SalesListController extends BaseController {
 
   Future<void> toggleSearchButton() async {
     isSearchSelected.value = !isSearchSelected.value;
-    print('isSearchSelected: ${isSearchSelected.value}');
-
-    if (isSearchSelected.value) {
-      actionIcon.value = const Icon(
-        TablerIcons.x,
-        color: Colors.white,
-      );
-    } else {
-      actionIcon.value = const Icon(
-        TablerIcons.user_search,
-        color: Colors.white,
-      );
-      if (!isSearchSelected.value) {
-        customerManager.searchTextController.value.clear();
-        customerManager.searchTextController.refresh();
-        await customerManager.getAllItems(
-          fillSearchListOnly: false,
-        );
-      }
-    }
   }
 
   Future<void> _loadSalesData(String whereClause) async {
@@ -106,10 +85,8 @@ class SalesListController extends BaseController {
       whereArgs: [],
     );
 
-    final salesList = list.map((e) => Sales.fromJson(e)).toList();
+    final salesList = list.map(Sales.fromJson).toList();
     salesManager.allItems.value = salesList;
-
-    print('Loaded sales data: $salesList');
     salesManager.allItems.refresh();
   }
 

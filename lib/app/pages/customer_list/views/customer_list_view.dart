@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/customer_list/controllers/customer_list_controller.dart';
 
@@ -13,7 +14,7 @@ class CustomerListView extends BaseView<CustomerListController> {
   
   @override
   Widget body(BuildContext context) {
-    return Container();
+    return Column();
   }
 }
   
