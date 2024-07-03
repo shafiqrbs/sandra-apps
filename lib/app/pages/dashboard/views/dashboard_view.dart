@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/title_subtitle_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -79,7 +80,7 @@ class DashboardView extends BaseView<DashboardController> {
             'dashboard'.tr,
             style: TextStyle(
               color: colors.backgroundColor,
-              fontSize:appBarTFSize,
+              fontSize: appBarTFSize,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -314,58 +315,7 @@ class DashboardView extends BaseView<DashboardController> {
           spacing: 8,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           runSpacing: 8,
-          children: [
-            TbdRoundButton(
-              text: 'pos',
-              icon: TablerIcons.garden_cart,
-              onTap: controller.goToSales,
-            ),
-            TbdRoundButton(
-              text: 'sales_list',
-              icon: TablerIcons.point_off,
-              onTap: controller.goToSalesList,
-            ),
-            TbdRoundButton(
-              text: 'stock',
-              icon: TablerIcons.shopping_cart,
-              onTap: controller.goToStockList,
-            ),
-            TbdRoundButton(
-              text: 'add_purchase',
-              icon: TablerIcons.shopping_cart,
-              onTap: controller.gotoPurchaseScreen,
-            ),
-            TbdRoundButton(
-              text: 'purchase_return'.tr,
-              icon: TablerIcons.credit_card,
-              onTap: () {},
-            ),
-            TbdRoundButton(
-              text: 'vendor',
-              icon: TablerIcons.credit_card,
-              onTap: () {},
-            ),
-            TbdRoundButton(
-              text: 'stock_item',
-              icon: TablerIcons.credit_card,
-              onTap: () {},
-            ),
-            TbdRoundButton(
-              text: 'category',
-              icon: TablerIcons.credit_card,
-              onTap: () {},
-            ),
-            TbdRoundButton(
-              text: 'stock_adjustment'.tr,
-              icon: TablerIcons.credit_card,
-              onTap: () {},
-            ),
-            TbdRoundButton(
-              text: 'expense'.tr,
-              icon: TablerIcons.color_swatch,
-              onTap: controller.gotoExpenseScreen,
-            ),
-          ],
+          children: buttonList,
         ),
       ],
     );
