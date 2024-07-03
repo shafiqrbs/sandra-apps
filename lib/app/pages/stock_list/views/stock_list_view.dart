@@ -9,6 +9,7 @@ import 'package:getx_template/app/core/widget/common_text.dart';
 import 'package:getx_template/app/core/widget/filter_button.dart';
 import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
 import 'package:getx_template/app/core/widget/search_button.dart';
+import 'package:getx_template/app/pages/stock_list/component/stock_card_view.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/stock_list/controllers/stock_list_controller.dart';
 
@@ -65,39 +66,24 @@ class StockListView extends BaseView<StockListController> {
   @override
   Widget body(BuildContext context) {
     return Obx(
-      () => ListView.builder(
-        shrinkWrap: true,
-        itemCount: controller.stockManager.allItems.value?.length ?? 0,
-        itemBuilder: (context, index) {
-          final element = controller.stockManager.allItems.value![index];
-          return Container(
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.only(bottom: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Text(
-                  element.name ?? '',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+      () {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: controller.stockManager.allItems.value?.length ?? 0,
+          itemBuilder: (context, index) {
+            final element = controller.stockManager.allItems.value![index];
+            final isSelectedItem = false.obs;
+            final isBookmarked = false.obs;
+
+            return StockCardView(
+              element: element,
+              index: index,
+              isSelectedItem: isSelectedItem,
+              isBookmarked: isBookmarked,
+            );
+          },
+        );
+      },
     );
   }
 }

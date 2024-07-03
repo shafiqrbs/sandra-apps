@@ -3,7 +3,31 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_widget.dart';
 import 'package:getx_template/app/core/widget/common_icon_text.dart';
+import 'package:getx_template/app/core/widget/label_value.dart';
 import 'package:getx_template/app/model/stock.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+final labelValue = LabelValue(
+  label: 'label',
+  value: 'value',
+  dividerText: ':',
+  labelFontSize: 12,
+  valueFontSize: 12,
+  labelFlex: 1,
+  valueFlex: 1,
+  labelFontWeight: 400,
+  valueFontWeight: 600,
+  labelColor: Colors.black,
+  valueColor: Colors.black,
+  labelTextAlign: TextAlign.start,
+  valueTextAlign: TextAlign.start,
+  margin: EdgeInsets.zero,
+  padding: EdgeInsets.zero,
+  borderColor: Colors.transparent,
+  borderWidth: 0,
+  fontFamily: GoogleFonts.roboto().fontFamily,
+);
 
 class StockCardView extends BaseWidget {
   final Stock element;
@@ -22,23 +46,7 @@ class StockCardView extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        //show modal
-        toast('StockCardView');
-
-        showDialog(
-          context: context,
-          builder: (context) {
-            return DialogPattern(
-              title: 'title',
-              subTitle: 'subTitle',
-              child: StockDetailsModaL(
-                element: element,
-              ),
-            );
-          },
-        );
-      },
+      onTap: () {},
       child: Stack(
         children: [
           Container(

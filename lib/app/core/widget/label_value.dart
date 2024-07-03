@@ -4,6 +4,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '/app/core/extensions/text_style_extensions.dart';
 import '/app/core/utils/responsive.dart';
 
+LabelValue labelValue = LabelValue(
+  label: 'label',
+  value: 'value',
+  dividerText: ':',
+  labelFontSize: 12,
+  valueFontSize: 12,
+  labelFlex: 1,
+  valueFlex: 1,
+  labelFontWeight: 400,
+  valueFontWeight: 600,
+  labelColor: Colors.black,
+  valueColor: Colors.black,
+  labelTextAlign: TextAlign.start,
+  valueTextAlign: TextAlign.start,
+  margin: EdgeInsets.zero,
+  padding: EdgeInsets.zero,
+  borderColor: Colors.transparent,
+  borderWidth: 0,
+  fontFamily: GoogleFonts.roboto().fontFamily,
+);
+
 class LabelValue extends StatelessWidget {
   final String? label;
   final String? value;
