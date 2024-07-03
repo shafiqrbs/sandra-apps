@@ -12,8 +12,9 @@ import '/app/model/tab_bar_items.dart';
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
   final selectedIndex = 0.obs;
-  final RxBool isSearchSelected = false.obs;
+  final isSearchSelected = false.obs;
   final customerManager = CustomerManager();
+  final implyLeading = true.obs;
   final Rx<Icon> actionIcon = const Icon(
     TablerIcons.user_search,
     color: Colors.white,

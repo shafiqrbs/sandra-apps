@@ -6,6 +6,7 @@ import 'package:getx_template/app/core/base/base_widget.dart';
 import 'common_text.dart';
 
 class AppBarSearchView extends BaseWidget {
+  final String pageTitle;
   final TextEditingController controller;
   final Function(String value)? onSearch;
   final Function()? onMicTap;
@@ -13,6 +14,7 @@ class AppBarSearchView extends BaseWidget {
   final Function()? onClearTap;
   final bool showSearchView;
   AppBarSearchView({
+    required this.pageTitle,
     required this.controller,
     required this.onSearch,
     required this.onMicTap,
@@ -80,18 +82,20 @@ class AppBarSearchView extends BaseWidget {
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 10,
-                ), // Adjust the padding as needed
+                ),
                 hintText: 'hint'.tr,
                 hintStyle: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.withOpacity(.5),
-                ), // Optional hint text
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     4,
                   ),
                   // Adjust the border radius as needed
-                  borderSide: const BorderSide(color: Color(0xFFece2d9)),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFece2d9),
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(0),
@@ -110,11 +114,20 @@ class AppBarSearchView extends BaseWidget {
           )
         : Row(
             children: [
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
+              InkWell(
+                onTap: Get.back,
+                child: const Icon(
+                  TablerIcons.arrow_left,
+                  color: Colors.white,
+                  size: 32,
+                ),
               ),
-              CommonText(text: 'stock_list'.tr),
+              const SizedBox(width: 10),
+              CommonText(
+                text: pageTitle,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ],
           );
   }

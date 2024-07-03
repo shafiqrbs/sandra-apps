@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:getx_template/app/core/utils/style_function.dart';
 import 'package:getx_template/app/core/widget/app_bar_button.dart';
 import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
+import 'package:getx_template/app/core/widget/app_bar_search_view.dart';
 import 'package:getx_template/app/core/widget/filter_button.dart';
 import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
 import 'package:getx_template/app/core/widget/search_button.dart';
@@ -28,119 +29,17 @@ class SalesListView extends BaseView<SalesListController> {
       backgroundColor: colors.primaryBaseColor,
       title: Obx(
         () {
-          return controller.isSearchSelected.value
-              ? Container(
-                  margin: const EdgeInsets.only(left: 2),
-                  height: textFieldHeight,
-                  // width: Get.width,
-                  decoration: BoxDecoration(
-                    color: colors.backgroundColor,
-                    borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
-                    ),
-                  ),
-                  child: TextFormField(
-                    controller:
-                        controller.customerManager.searchTextController.value,
-                    autofocus: true,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: colors.primaryTextColor,
-                    ),
-                    cursorColor: colors.formCursorColor,
-                    onChanged:
-                        controller.customerManager.searchItemsByNameOnAllItem,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        TablerIcons.search,
-                        color: colors.primaryBaseColor,
-                        size: 18,
-                      ),
-                      suffixIcon: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            onPressed: controller.toggleSearchButton,
-                            icon: Icon(
-                              TablerIcons.microphone,
-                              color: colors.primaryBaseColor,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () => controller.showFilterModal(
-                              context: globalKey.currentContext!,
-                            ),
-                            icon: Icon(
-                              TablerIcons.filter,
-                              color: colors.primaryBaseColor.withOpacity(.5),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: controller.toggleSearchButton,
-                            icon: Icon(
-                              TablerIcons.x,
-                              color: Colors.grey.withOpacity(.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 10,
-                      ), // Adjust the padding as needed
-                      hintText: 'hint'.tr,
-                      hintStyle: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey.withOpacity(.5),
-                      ), // Optional hint text
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          4,
-                        ),
-                        // Adjust the border radius as needed
-                        borderSide: const BorderSide(color: Color(0xFFece2d9)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(0),
-                        borderSide: const BorderSide(
-                          color: Color(0xFFf5edeb),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(0),
-                        borderSide: const BorderSide(
-                          color: Color(0xFFf5edeb),
-                        ),
-                      ),
-                    ),
-
-                    /* decoration: inputDecorationSearch(
-                      hint: 'search_customer'.tr,
-                      isSHowPrefixIcon: false,
-                      textEditingController: controller.customerManager.searchTextController.value,
-                      isSHowSuffixIcon: controller.customerManager.searchTextController.value.text.isNotEmpty,
-                      borderRaidus: containerBorderRadius,
-                      suffix: TablerIcons.e_passport,
-                      onTap: () async {
-                        controller.customerManager.searchTextController.value
-                            .text = '';
-                        controller.customerManager.searchTextController
-                            .refresh();
-                        await controller.customerManager.searchItemsByName('');
-                      },
-                    ),*/
-                  ),
-                )
-              : Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back),
-                    ),
-                    CommonText(text: 'sales'.tr),
-                  ],
-                );
+          return AppBarSearchView(
+            pageTitle: 'sales'.tr,
+            controller: controller.customerManager.searchTextController.value,
+            onSearch: controller.customerManager.searchItemsByNameOnAllItem,
+            onMicTap: controller.isSearchSelected.toggle,
+            onFilterTap: () => controller.showFilterModal(
+              context: globalKey.currentContext!,
+            ),
+            onClearTap: controller.isSearchSelected.toggle,
+            showSearchView: controller.isSearchSelected.value,
+          );
         },
       ),
       automaticallyImplyLeading: false,
@@ -158,7 +57,7 @@ class SalesListView extends BaseView<SalesListController> {
                   ),
                 ),
                 SearchButton(
-                  onTap: controller.toggleSearchButton,
+                  onTap: controller.isSearchSelected.toggle,
                 ),
                 QuickNavigationButton(),
               ],
@@ -173,6 +72,13 @@ class SalesListView extends BaseView<SalesListController> {
   Widget body(BuildContext context) {
     return Column(
       children: [
+        ElevatedButton(
+          onPressed: () {
+            controller.implyLeading.toggle();
+            print(controller.implyLeading.value);
+          },
+          child: Text("Add Sales"),
+        ),
         Row(
           children: List.generate(
             controller.tabPages.length,
