@@ -112,7 +112,11 @@ class DbHelper {
     return 0;
   }
 
-  Future<int> deleteAllWhr(String tbl, String where, List whereArgs) async {
+  Future<int> deleteAllWhr({
+    required String tbl,
+    required String where,
+    required List whereArgs,
+  }) async {
     final Database? db = await instance.database;
     if (db != null) {
       return db.rawDelete(

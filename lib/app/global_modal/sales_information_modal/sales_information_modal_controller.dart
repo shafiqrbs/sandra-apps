@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/abstract_controller/printer_controller.dart';
 import 'package:getx_template/app/core/widget/dialog_pattern.dart';
+import 'package:getx_template/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
 import 'package:getx_template/app/model/sales.dart';
 
 class SalesInformationModalController extends PrinterController {
@@ -46,9 +47,6 @@ class SalesInformationModalController extends PrinterController {
       return;
     }
 
-    if (Get.isRegistered<PrinterConnectModalViewController>()) {
-      Get.delete<PrinterConnectModalViewController>();
-    }
     if (context.mounted) {
       showDialog(
         context: context,
@@ -66,18 +64,10 @@ class SalesInformationModalController extends PrinterController {
   Future<void> copySales(Sales sales) async {
     if (salesMode == 'hold') {
       await dbHelper.deleteAllWhr(
-        tbl: tableSale,
+        tbl: dbTables.tableSale,
         where: 'sales_id = ?',
         whereArgs: [sales.salesId],
       );
     }
-
-    Get
-      ..offAll(LandingScreen())
-      ..put(PosController());
-    final posController = Get.find<PosController>();
-    posController.salesItemList.clear();
-    posController.salesItemList.addAll(sales.salesItem!);
-    posController.calculateAllSubtotal();
   }
 }
