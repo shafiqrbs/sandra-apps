@@ -44,24 +44,44 @@ class EntityManager<T> {
   Future<void> _scrollListener() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      // Reached the bottom, load more data
-      // You can adjust this condition based on your pagination logic
-      // For example, you might want to load more data when you are near the bottom, not exactly at the bottom
-      // Add your pagination logic here
-      print('Reached the bottom');
-      await getAllItems(fillSearchListOnly: false);
-      print('Loaded more items');
-      print('Total items: ${allItems.value?.length}');
+      await paginate();
+    }
+  }
+
+  Future<void> paginate() async {
+    try {
+      final List<Map<String, dynamic>> data = await dbHelper.getAll(
+        tbl: tableName,
+        limit: 10,
+        offset: allItems.value?.length ?? 0,
+      ) as List<Map<String, dynamic>>;
+
+      allItems.value ??= <T>[];
+      allItems.value!.addAll(
+        data.map(fromJson).toList(),
+      );
+
       allItems.refresh();
+      print('Len of all items: ${allItems.value!.length}');
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Error paginating: $e');
+      }
     }
   }
 
   Future<void> getAll() async {
     try {
-      final items = await dbHelper.getAll(
+      final List<Map<String, dynamic>> data = await dbHelper.getAll(
         tbl: tableName,
+      ) as List<Map<String, dynamic>>;
+
+      allItems.value ??= <T>[];
+      allItems.value!.addAll(
+        data.map(fromJson).toList(),
       );
-      allItems.value = items.map((e) => fromJson(e)).toList();
+
+      allItems.refresh();
     } on Exception catch (e) {
       if (kDebugMode) {
         print('Error fetching all items: $e');
@@ -145,15 +165,8 @@ class EntityManager<T> {
     }
     try {
       if (query.isEmpty) {
-        allItems.value?.clear();
-        final items = await dbHelper.getAll(
-          tbl: tableName,
-          limit: 10,
-          offset: allItems.value?.length ?? 0,
-        );
-        allItems
-          ..value = items.map((e) => fromJson(e)).toList()
-          ..refresh();
+        allItems.value = null;
+        await paginate();
         return;
       }
 

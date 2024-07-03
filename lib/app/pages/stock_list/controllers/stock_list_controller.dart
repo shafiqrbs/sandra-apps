@@ -12,7 +12,7 @@ class StockListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await stockManager.getAll();
+    await stockManager.paginate();
   }
 
   Future<void> showFilterModal({

@@ -70,6 +70,7 @@ class StockListView extends BaseView<StockListController> {
         return ListView.builder(
           shrinkWrap: true,
           itemCount: controller.stockManager.allItems.value?.length ?? 0,
+          controller: controller.stockManager.scrollController,
           itemBuilder: (context, index) {
             final element = controller.stockManager.allItems.value![index];
             final isSelectedItem = false.obs;
