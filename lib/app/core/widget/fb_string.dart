@@ -244,6 +244,7 @@ class FBString extends StatelessWidget {
                           child: Text(
                             label ?? '',
                             style: labelTextStyle ?? FBTypography().tfLabelTS,
+                            maxLines: 1,
                           ),
                         ),
                         Flexible(
