@@ -4,7 +4,10 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/utils/style_function.dart';
 import 'package:getx_template/app/core/widget/app_bar_button.dart';
+import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
+import 'package:getx_template/app/core/widget/filter_button.dart';
 import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
+import 'package:getx_template/app/core/widget/search_button.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -146,48 +149,19 @@ class SalesListView extends BaseView<SalesListController> {
           () {
             if (controller.isSearchSelected.value) {
               return Container();
-              return Row(
-                children: [
-                  IconButton(
-                    onPressed: controller.toggleSearchButton,
-                    icon: Obx(() => controller.actionIcon.value),
-                  ),
-                ],
-              );
             }
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              height: 60,
-              margin: const EdgeInsets.only(right: 16),
-              child: Row(
-                children: [
-                  2.width,
-                  AppBarButton(
-                    buttonName: null,
-                    onTap: () => controller.showFilterModal(
-                      context: globalKey.currentContext!,
-                    ),
-                    leftIcon: TablerIcons.library_plus,
-                    buttonBGColor: colors.tertiaryBaseColor,
-                    iconColor: colors.primaryBaseColor,
+            return AppBarButtonGroup(
+              children: [
+                FilterButton(
+                  onTap: () => controller.showFilterModal(
+                    context: globalKey.currentContext!,
                   ),
-                  2.width,
-                  AppBarButton(
-                    buttonName: null,
-                    onTap: controller.toggleSearchButton,
-                    leftIcon: TablerIcons.search,
-                    iconColor: colors.primaryBaseColor,
-                    buttonBGColor: Colors.white,
-                    buttonTextColor: colors.primaryBaseColor,
-                  ),
-                  2.width,
-                  QuickNavigationButton(),
-                  2.width,
-                ],
-              ),
+                ),
+                SearchButton(
+                  onTap: controller.toggleSearchButton,
+                ),
+                QuickNavigationButton(),
+              ],
             );
           },
         ),
