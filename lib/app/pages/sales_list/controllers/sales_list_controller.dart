@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/global_modal/global_filter_modal_view/global_filter_modal_controller.dart';
 import '/app/global_modal/sales_information_modal/sales_information_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
@@ -129,18 +130,15 @@ class SalesListController extends BaseController {
   Future<void> showFilterModal({
     required BuildContext context,
   }) async {
-    final value = await showDialog<Map<String, dynamic>>(
-      context: context,
-      builder: (context) {
-        return DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
-          child: GlobalFilterModalView(),
-        );
-      },
+    final value = await Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: 'subTitle',
+        child: GlobalFilterModalView(),
+      ),
     );
 
-    if (value != null) {
+    if (value != null && value is Map) {
       startDate = value['start_date'];
       endDate = value['end_date'];
       selectedCustomer = value['customer'];

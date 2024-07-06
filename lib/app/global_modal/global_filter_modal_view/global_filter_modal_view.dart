@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/model/customer.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_date_picker.dart';
@@ -13,12 +14,13 @@ import 'global_filter_modal_controller.dart';
 class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
   GlobalFilterModalView({super.key});
 
+  final startDateController = TextEditingController().obs;
+  final endDateController = TextEditingController().obs;
+  final searchKeyword = TextEditingController().obs;
+  final customerManager = CustomerManager();
+
   @override
   Widget build(BuildContext context) {
-    final mvc = Get.put(
-      GlobalFilterModalController(),
-    );
-
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -29,8 +31,8 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
           children: [
             FBString(
               isRequired: false,
-              textController: mvc.customerManager.searchTextController.value,
-              onChange: mvc.onCustomerSearch,
+              textController: customerManager.searchTextController.value,
+              onChange: onCustomerSearch,
               hint: 'search_customer'.tr,
               suffixIcon: TablerIcons.users,
             ),
@@ -40,11 +42,11 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                   children: [
                     1.percentHeight,
                     Obx(
-                      () => mvc.customerManager.selectedItem.value != null
+                      () => customerManager.selectedItem.value != null
                           ? Column(
                               children: [
                                 CustomerCardView(
-                                  data: mvc.customerManager.selectedItem.value!,
+                                  data: customerManager.selectedItem.value!,
                                   index: 0,
                                   onTap: () {},
                                   onReceive: () {},
@@ -57,7 +59,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                     ),
                     FBString(
                       isRequired: false,
-                      textController: mvc.searchKeyword.value,
+                      textController: searchKeyword.value,
                       hint: 'enter_search_keyword'.tr,
                       suffixIcon: TablerIcons.search,
                     ),
@@ -67,7 +69,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                         Expanded(
                           child: FBDatePicker(
                             isRequired: false,
-                            textController: mvc.startDateController.value,
+                            textController: startDateController.value,
                             hint: 'start_date'.tr,
                             suffixIcon: TablerIcons.calendar,
                           ),
@@ -76,7 +78,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                         Expanded(
                           child: FBDatePicker(
                             isRequired: false,
-                            textController: mvc.endDateController.value,
+                            textController: endDateController.value,
                             hint: 'end_date'.tr,
                             suffixIcon: TablerIcons.calendar,
                           ),
@@ -88,12 +90,12 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                       children: [
                         RowButton(
                           buttonName: 'close'.tr,
-                          onTap: mvc.onClose,
+                          onTap: onClose,
                         ),
                         1.percentWidth,
                         RowButton(
                           buttonName: 'submit'.tr,
-                          onTap: mvc.onSubmit,
+                          onTap: onSubmit,
                         ),
                       ],
                     ),
@@ -102,15 +104,14 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                 Obx(
                   () => ListView.builder(
                     shrinkWrap: true,
-                    itemCount:
-                        mvc.customerManager.searchedItems.value?.length ?? 0,
+                    itemCount: customerManager.searchedItems.value?.length ?? 0,
                     itemBuilder: (context, index) {
                       return CustomerCardView(
-                        data: mvc.customerManager.searchedItems.value![index],
+                        data: customerManager.searchedItems.value![index],
                         index: index,
                         onTap: () {
-                          mvc.updateCustomer(
-                            mvc.customerManager.searchedItems.value![index],
+                          updateCustomer(
+                            customerManager.searchedItems.value![index],
                           );
                           //close keyboard
                           FocusScope.of(context).unfocus();
@@ -139,5 +140,37 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
   Widget body(BuildContext context) {
     // TODO(saiful): implement body
     throw UnimplementedError();
+  }
+
+  void onClose() {
+    Get.back();
+  }
+
+  void onSubmit() {
+    Get.back(
+      result: {
+        'start_date': startDateController.value.text,
+        'end_date': endDateController.value.text,
+        'customer': customerManager.selectedItem.value,
+        'search_keyword': searchKeyword.value.text,
+      },
+    );
+  }
+
+  Future<void> updateCustomer(Customer? customer) async {
+    if (customer != null) {
+      customerManager.searchTextController.value.text = customer.name!;
+      customerManager.searchedItems.value = null;
+      customerManager.selectedItem.value = customer;
+    }
+  }
+
+  Future<void> onCustomerSearch(String? value) async {
+    if (value?.isEmpty ?? true) {
+      customerManager.searchedItems.value = [];
+      customerManager.selectedItem.value = null;
+      return;
+    }
+    await customerManager.searchItemsByName(value!);
   }
 }
