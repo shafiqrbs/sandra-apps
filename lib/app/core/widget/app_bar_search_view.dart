@@ -65,11 +65,13 @@ class AppBarSearchView extends BaseWidget {
                         color: colors.primaryBaseColor,
                       ),
                     ),
-                    suffixIcon.isNotEmpty
-                        ? Row(
-                            children: suffixIcon,
-                          )
-                        : const SizedBox(),
+                    IconButton(
+                      onPressed: onFilterTap,
+                      icon: Icon(
+                        TablerIcons.filter,
+                        color: colors.primaryBaseColor,
+                      ),
+                    ),
                     IconButton(
                       onPressed: onClearTap,
                       icon: Icon(
