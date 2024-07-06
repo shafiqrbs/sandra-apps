@@ -30,7 +30,7 @@ class SubTabItemView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
-            bottom: BorderSide(
+            top: BorderSide(
               color: color,
             ),
           ),

@@ -67,22 +67,6 @@ class SalesListView extends BaseView<SalesListController> {
   Widget body(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: List.generate(
-            controller.tabPages.length,
-            (index) {
-              return Obx(
-                () => Expanded(
-                  child: SubTabItemView(
-                    isSelected: controller.selectedIndex.value == index,
-                    item: controller.tabPages[index],
-                    onTap: () => controller.changeIndex(index),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
         Obx(
           () {
             return Expanded(
@@ -91,9 +75,7 @@ class SalesListView extends BaseView<SalesListController> {
                 controller: controller.selectedIndex.value == 2
                     ? null
                     : controller.salesManager.scrollController,
-                padding: const EdgeInsets.only(
-                  bottom: 60,
-                ),
+                padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
                   final element =
                       controller.salesManager.allItems.value![index];
@@ -242,6 +224,23 @@ class SalesListView extends BaseView<SalesListController> {
             );
           },
         ),
+        Row(
+          children: List.generate(
+            controller.tabPages.length,
+                (index) {
+              return Obx(
+                    () => Expanded(
+                  child: SubTabItemView(
+                    isSelected: controller.selectedIndex.value == index,
+                    item: controller.tabPages[index],
+                    onTap: () => controller.changeIndex(index),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+
       ],
     );
   }
