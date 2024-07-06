@@ -1,3 +1,4 @@
+import 'dart:isolate';
 import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
@@ -97,9 +98,10 @@ class PrettyDioLogger extends Interceptor {
       if (err.type == DioErrorType.badResponse) {
         final uri = err.response?.requestOptions.uri;
         _printBoxed(
-            header:
-                'DioError ║ Status: ${err.response?.statusCode} ${err.response?.statusMessage}',
-            text: uri.toString(),);
+          header:
+              'DioError ║ Status: ${err.response?.statusCode} ${err.response?.statusMessage}',
+          text: uri.toString(),
+        );
         if (err.response != null && err.response?.data != null) {
           logPrint('╔ ${err.type.toString()}');
           _printResponse(err.response!);
@@ -114,7 +116,7 @@ class PrettyDioLogger extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  Future<void> onResponse(Response response, ResponseInterceptorHandler handler) async {
     _printResponseHeader(response);
     if (responseHeader) {
       final responseHeaders = <String, String>{};
@@ -126,7 +128,9 @@ class PrettyDioLogger extends Interceptor {
     if (responseBody) {
       logPrint('╔ Body');
       logPrint('║');
-      _printResponse(response);
+      await Isolate.run(
+        () => _printResponse(response),
+      );
       logPrint('║');
       _printLine('╚');
     }
@@ -158,9 +162,10 @@ class PrettyDioLogger extends Interceptor {
     final uri = response.requestOptions.uri;
     final method = response.requestOptions.method;
     _printBoxed(
-        header:
-            'Response ║ $method ║ Status: ${response.statusCode} ${response.statusMessage}',
-        text: uri.toString(),);
+      header:
+          'Response ║ $method ║ Status: ${response.statusCode} ${response.statusMessage}',
+      text: uri.toString(),
+    );
   }
 
   void _printRequestHeader(RequestOptions options) {
@@ -187,9 +192,13 @@ class PrettyDioLogger extends Interceptor {
   void _printBlock(String msg) {
     final lines = (msg.length / maxWidth).ceil();
     for (var i = 0; i < lines; ++i) {
-      logPrint((i >= 0 ? '║ ' : '') +
-          msg.substring(i * maxWidth,
-              math.min<int>(i * maxWidth + maxWidth, msg.length),),);
+      logPrint(
+        (i >= 0 ? '║ ' : '') +
+            msg.substring(
+              i * maxWidth,
+              math.min<int>(i * maxWidth + maxWidth, msg.length),
+            ),
+      );
     }
   }
 
@@ -238,7 +247,8 @@ class PrettyDioLogger extends Interceptor {
           final lines = (msg.length / linWidth).ceil();
           for (var i = 0; i < lines; ++i) {
             logPrint(
-                '║${_indent(tabCount)} ${msg.substring(i * linWidth, math.min<int>(i * linWidth + linWidth, msg.length))}',);
+              '║${_indent(tabCount)} ${msg.substring(i * linWidth, math.min<int>(i * linWidth + linWidth, msg.length))}',
+            );
           }
         } else {
           logPrint('║${_indent(tabCount)} "$key": $msg${!isLast ? ',' : ''}');
@@ -283,7 +293,8 @@ class PrettyDioLogger extends Interceptor {
     if (map.isEmpty) return;
     logPrint('╔ $header ');
     map.forEach(
-        (dynamic key, dynamic value) => _printKV(key.toString(), value),);
+      (dynamic key, dynamic value) => _printKV(key.toString(), value),
+    );
     _printLine('╚');
   }
 }
