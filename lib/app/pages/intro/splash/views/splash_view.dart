@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/app/core/base/base_view.dart';
-import '/app/pages/splash/controllers/splash_controller.dart';
+import '/app/pages/intro/splash/controllers/splash_controller.dart';
 
 //ignore: must_be_immutable
 class SplashView extends BaseView<SplashController> {
