@@ -13,7 +13,7 @@ import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
-import '/app/pages/sales_list/controllers/sales_list_controller.dart';
+import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
 
 //ignore: must_be_immutable
 class SalesListView extends BaseView<SalesListController> {
