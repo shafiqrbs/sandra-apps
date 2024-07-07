@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-
+import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
+import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/domain/customer/customer_details/bindings/customer_details_binding.dart';
@@ -71,6 +72,11 @@ class AppPages {
       name: Routes.createSales,
       page: CreateSalesView.new,
       binding: CreateSalesBinding(),
+    ),
+    GetPage(
+      name: Routes.customerLedger,
+      page: CustomerLedgerView.new,
+      binding: CustomerLedgerBinding(),
     ),
   ];
 }

@@ -13,6 +13,7 @@ abstract class Routes {
   static const stockList = _Paths.stockList;
   static const salesList = _Paths.salesList;
   static const createSales = _Paths.createSales;
+  static const customerLedger = _Paths.customerLedger;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const stockList = '/stock_list';
   static const salesList = '/sales_list';
   static const createSales = '/create_sales';
+  static const customerLedger = '/customer_ledger';
 }
