@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/model/customer.dart';
 import '/app/core/base/base_controller.dart';
 
 class AddCustomerModalController extends BaseController {
@@ -17,9 +18,10 @@ class AddCustomerModalController extends BaseController {
 
   final isUserNameFieldValid = true.obs;
 
+  Customer? createdCustomer;
+
   Future<void> addCustomer() async {
     if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
       await dataFetcher(
         future: () async {
           final response = await services.addCustomer(
@@ -30,19 +32,23 @@ class AddCustomerModalController extends BaseController {
             email: emailController.value.text,
             openingBalance: openingBalanceController.value.text,
           );
-
           if (response != null) {
             await dbHelper.insertList(
               deleteBeforeInsert: false,
               tableName: dbTables.tableCustomers,
-              dataList: [response.toJson()],
+              dataList: [
+                response.toJson(),
+              ],
             );
-            Get.back(
-              result: response,
-            );
+            createdCustomer = response;
           }
         },
       );
+      if (createdCustomer != null) {
+        Get.back(
+          result: createdCustomer,
+        );
+      }
     }
   }
 

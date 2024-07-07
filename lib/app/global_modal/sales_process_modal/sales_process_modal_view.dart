@@ -238,7 +238,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         2.percentWidth,
         Expanded(
           child: GestureDetector(
-            onTap: () {},
+            onTap: controller.addCustomer,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 2),
               decoration: BoxDecoration(

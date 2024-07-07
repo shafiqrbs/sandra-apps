@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/abstract_controller/payment_gateway_controller.dart';
+import 'package:getx_template/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -349,5 +350,25 @@ class SalesProcessModalController extends PaymentGatewayController {
     );
     salesItemList.clear();
     Get.back(result: salesItemList);
+  }
+
+  Future<void> addCustomer() async {
+    final result = await Get.dialog(
+      DialogPattern(
+        title: 'add_customer'.tr,
+        subTitle: '',
+        child: AddCustomerModalView(),
+      ),
+    ) as Customer?;
+    print('result: $result');
+
+    if (result != null) {
+      customerManager.selectedItem.value = result;
+      customerManager.searchTextController.value.text = result.name!;
+      customerManager.searchedItems.value = null;
+      update();
+      notifyChildrens();
+      refresh();
+    }
   }
 }
