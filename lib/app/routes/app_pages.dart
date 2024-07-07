@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '/app/pages/create_sales/bindings/create_sales_binding.dart';
-import '/app/pages/create_sales/views/create_sales_view.dart';
 import '/app/pages/customer_details/bindings/customer_details_binding.dart';
 import '/app/pages/customer_details/views/customer_details_view.dart';
 import '/app/pages/customer_list/bindings/customer_list_binding.dart';
@@ -10,6 +8,8 @@ import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/edit_sales/bindings/edit_sales_binding.dart';
 import '/app/pages/edit_sales/views/edit_sales_view.dart';
+import '/app/pages/inventory/sales/create_sales/bindings/create_sales_binding.dart';
+import '/app/pages/inventory/sales/create_sales/views/create_sales_view.dart';
 import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
 import '/app/pages/license/bindings/license_binding.dart';

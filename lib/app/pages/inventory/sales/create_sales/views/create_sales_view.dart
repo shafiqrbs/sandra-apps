@@ -12,9 +12,9 @@ import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
 import '/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
 import '/app/global_widget/product_search_form.dart';
-import '/app/pages/create_sales/component/sales_item_list_view.dart';
-import '/app/pages/create_sales/component/searched_stock_list.dart';
-import '/app/pages/create_sales/controllers/create_sales_controller.dart';
+import '/app/pages/inventory/sales/create_sales/component/sales_item_list_view.dart';
+import '/app/pages/inventory/sales/create_sales/component/searched_stock_list.dart';
+import '/app/pages/inventory/sales/create_sales/controllers/create_sales_controller.dart';
 
 //ignore: must_be_immutable
 class CreateSalesView extends BaseView<CreateSalesController> {
