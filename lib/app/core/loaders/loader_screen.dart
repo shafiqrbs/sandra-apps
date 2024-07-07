@@ -30,11 +30,11 @@ class LoaderScreen extends StatelessWidget {
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SpinKitHourGlass(
+                SpinKitDoubleBounce(
                   color: Colors.blue,
                   //size: 55,
                 ),
-               /* ColorLoader2(),
+                /* ColorLoader2(),
                 SizedBox(
                   height: 20,
                 ),

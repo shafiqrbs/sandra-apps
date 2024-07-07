@@ -155,6 +155,12 @@ class DashboardView extends BaseView<DashboardController> {
         runSpacing: 8,
         children: [
           TitleSubtitleButton(
+            title: 'clear_licence',
+            subTitle: '',
+            icon: TablerIcons.report_analytics,
+            onTap: controller.goToClearLicense,
+          ),
+          TitleSubtitleButton(
             title: 'sales',
             subTitle: '567',
             icon: TablerIcons.report_analytics,
