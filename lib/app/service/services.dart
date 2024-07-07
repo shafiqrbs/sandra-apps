@@ -21,17 +21,32 @@ Future<List<T>?> parseList<T>({
 
   try {
     if (kDebugMode) {
-      print(
-        '\x1B[31m Parsing List $T \x1B[0m\n',
-      );
+      print('\x1B[31m Parsing List $T \x1B[0m\n');
     }
-    return list.map((e) => fromJson(e)).toList();
+    return await compute(
+      _parseListInIsolate,
+      _ParseListParams<T>(
+        list,
+        fromJson,
+      ),
+    );
   } on Exception catch (e) {
     if (kDebugMode) {
       print('Error parsing list: $e');
     }
   }
   return null;
+}
+
+class _ParseListParams<T> {
+  final List<dynamic> list;
+  final T Function(Map<String, dynamic>) fromJson;
+
+  _ParseListParams(this.list, this.fromJson);
+}
+
+List<T> _parseListInIsolate<T>(_ParseListParams<T> params) {
+  return params.list.map((e) => params.fromJson(e)).toList();
 }
 
 class Services {

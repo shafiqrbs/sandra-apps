@@ -61,6 +61,8 @@ class SalesListController extends BaseController {
 
     selectedIndex.value = index;
 
+    salesManager.allItems.refresh();
+
     switch (index) {
       case 0:
         await _loadSalesData('is_hold is null');
