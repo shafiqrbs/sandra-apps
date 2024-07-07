@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/app/core/base/base_view.dart';
-import '/app/pages/domain/customer_details/controllers/customer_details_controller.dart';
+import '/app/pages/domain/customer/customer_details/controllers/customer_details_controller.dart';
 
 //ignore: must_be_immutable
 class CustomerDetailsView extends BaseView<CustomerDetailsController> {

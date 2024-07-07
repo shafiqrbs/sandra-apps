@@ -8,7 +8,7 @@ import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/global_widget/customer_card_view.dart';
-import '/app/pages/domain/customer_list/controllers/customer_list_controller.dart';
+import '/app/pages/domain/customer/customer_list/controllers/customer_list_controller.dart';
 import '/app/routes/app_pages.dart';
 
 //ignore: must_be_immutable

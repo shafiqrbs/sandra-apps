@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
-import '/app/pages/domain/customer_details/bindings/customer_details_binding.dart';
-import '/app/pages/domain/customer_details/views/customer_details_view.dart';
-import '/app/pages/domain/customer_list/bindings/customer_list_binding.dart';
-import '/app/pages/domain/customer_list/views/customer_list_view.dart';
+import '/app/pages/domain/customer/customer_details/bindings/customer_details_binding.dart';
+import '/app/pages/domain/customer/customer_details/views/customer_details_view.dart';
+import '/app/pages/domain/customer/customer_list/bindings/customer_list_binding.dart';
+import '/app/pages/domain/customer/customer_list/views/customer_list_view.dart';
 import '/app/pages/intro/license/bindings/license_binding.dart';
 import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
