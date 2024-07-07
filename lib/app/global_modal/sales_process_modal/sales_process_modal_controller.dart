@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/abstract_controller/payment_gateway_controller.dart';
-import 'package:getx_template/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import '/app/core/abstract_controller/payment_gateway_controller.dart';
+import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 

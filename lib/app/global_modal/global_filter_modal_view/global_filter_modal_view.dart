@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/model/customer.dart';
+import '/app/model/customer.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_date_picker.dart';

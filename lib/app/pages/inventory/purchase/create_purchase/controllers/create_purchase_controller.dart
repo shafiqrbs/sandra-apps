@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/abstract_controller/sales_controller.dart';
-import 'package:getx_template/app/model/sales_item.dart';
+import '/app/core/abstract_controller/sales_controller.dart';
+import '/app/model/sales_item.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_controller.dart';
 

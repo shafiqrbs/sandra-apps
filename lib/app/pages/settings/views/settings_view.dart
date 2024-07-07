@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/language_change_dropdown.dart';
+import '/app/core/widget/language_change_dropdown.dart';
 import 'package:settings_ui/settings_ui.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/settings/controllers/settings_controller.dart';

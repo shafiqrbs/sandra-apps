@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/utils/style_function.dart';
-import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
-import 'package:getx_template/app/core/widget/list_button.dart';
-import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
-import 'package:getx_template/app/core/widget/selected_stock_list_header.dart';
-import 'package:getx_template/app/global_widget/product_search_form.dart';
-import 'package:getx_template/app/pages/inventory/sales/create_sales/component/sales_item_list_view.dart';
-import 'package:getx_template/app/pages/inventory/sales/create_sales/component/searched_stock_list.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/utils/style_function.dart';
+import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/common_text.dart';
+import '/app/core/widget/list_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/selected_stock_list_header.dart';
+import '/app/global_widget/product_search_form.dart';
 import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
+import '/app/pages/inventory/sales/create_sales/component/sales_item_list_view.dart';
+import '/app/pages/inventory/sales/create_sales/component/searched_stock_list.dart';
 
 //ignore: must_be_immutable
 class CreatePurchaseView extends BaseView<CreatePurchaseController> {
