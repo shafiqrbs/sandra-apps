@@ -17,8 +17,8 @@ class AddButton extends BaseWidget {
       buttonName: null,
       onTap: onTap,
       leftIcon: TablerIcons.library_plus,
-      buttonBGColor: colors.tertiaryLiteColor,
-      iconColor: colors.primaryBaseColor,
+      buttonBGColor: Colors.transparent,
+      iconColor: Colors.white,
     );
   }
 }

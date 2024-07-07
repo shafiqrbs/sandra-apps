@@ -20,6 +20,8 @@ class SubTabItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = ColorSchema();
+
     final color = isSelected
         ? ColorSchema().primaryBaseColor
         : ColorSchema().primaryLiteColor;
@@ -28,7 +30,7 @@ class SubTabItemView extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 15.v),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isSelected ? colors.tertiaryBaseColor : Colors.transparent,
           border: Border(
             top: BorderSide(
               color: color,
@@ -36,6 +38,8 @@ class SubTabItemView extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DrawIcon(
               icon: TablerIcons.all[item.icon]!,

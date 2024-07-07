@@ -30,15 +30,15 @@ class SalesListController extends BaseController {
       view: Container(),
     ),
     TabBarItem(
-      name: 'Hold',
-      slug: 'hold',
-      icon: 'notes',
-      view: Container(),
-    ),
-    TabBarItem(
       name: 'Online',
       slug: 'online',
       icon: 'wifi',
+      view: Container(),
+    ),
+    TabBarItem(
+      name: 'Hold',
+      slug: 'hold',
+      icon: 'notes',
       view: Container(),
     ),
   ];
@@ -67,9 +67,10 @@ class SalesListController extends BaseController {
       case 0:
         await _loadSalesData('is_hold is null');
       case 1:
-        await _loadSalesData('is_hold == 1');
-      case 2:
         await _fetchOnlineSalesData();
+      case 2:
+        await _loadSalesData('is_hold == 1');
+
       default:
         break;
     }

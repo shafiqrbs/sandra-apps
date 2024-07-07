@@ -17,9 +17,9 @@ class SearchButton extends BaseWidget {
       buttonName: null,
       onTap: onTap ?? () {},
       leftIcon: TablerIcons.search,
-      iconColor: colors.primaryBaseColor,
-      buttonBGColor: Colors.white,
-      buttonTextColor: colors.primaryBaseColor,
+      iconColor: Colors.white,
+      buttonBGColor: Colors.transparent,
+      buttonTextColor: Colors.white,
     );
   }
 }

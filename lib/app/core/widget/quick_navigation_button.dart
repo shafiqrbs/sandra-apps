@@ -55,11 +55,17 @@ class QuickNavigationButton extends BaseWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'quick_navigation'.tr,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
+                    child: Text(
+                      'quick_navigation'.tr,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   InkWell(
