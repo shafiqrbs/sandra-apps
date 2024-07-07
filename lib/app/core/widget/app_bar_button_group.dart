@@ -11,7 +11,7 @@ class AppBarButtonGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(4),
       ),
       height: 60,

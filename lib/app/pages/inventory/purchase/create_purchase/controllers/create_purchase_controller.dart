@@ -66,7 +66,12 @@ class CreatePurchaseController extends SalesController {
           purchaseMode == 'total_price') {
         salesItem.subTotal = stockQty * (stock.purchasePrice ?? 0.0);
       }
-    } else {
+    }
+
+
+
+
+    else {
       if (purchaseMode == 'purchase_with_mrp') {
         salesItem.subTotal = stockQty * (stock.salesPrice ?? 0.0);
       }

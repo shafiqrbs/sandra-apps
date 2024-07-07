@@ -17,8 +17,8 @@ class ListButton extends BaseWidget {
       buttonName: null,
       onTap: onTap,
       leftIcon: TablerIcons.list,
-      buttonBGColor: colors.tertiaryLiteColor,
-      iconColor: colors.primaryBaseColor,
+      buttonBGColor: Colors.transparent,
+      iconColor: Colors.white,
     );
   }
 }

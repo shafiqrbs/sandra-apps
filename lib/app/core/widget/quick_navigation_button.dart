@@ -17,9 +17,9 @@ class QuickNavigationButton extends BaseWidget {
       onTap: () => showQuickNavigateBottomSheet(
         context: context,
       ),
-      leftIcon: TablerIcons.route,
-      buttonBGColor: colors.tertiaryLiteColor,
-      iconColor: colors.primaryBaseColor,
+      leftIcon: TablerIcons.grid_dots,
+      buttonBGColor: Colors.transparent,
+      iconColor: Colors.white,
     );
   }
 

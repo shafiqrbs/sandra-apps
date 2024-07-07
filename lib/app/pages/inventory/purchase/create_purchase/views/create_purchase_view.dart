@@ -79,8 +79,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
     return Obx(
       () {
         return Visibility(
-          visible: controller.selectedStock.value != null &&
-              !controller.showSalesItem.value,
+          visible: controller.selectedStock.value != null,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
@@ -88,14 +87,16 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               ),
               color: colors.evenListColor,
             ),
-            margin: zero,
+            margin: EdgeInsets.zero,
             padding: const EdgeInsets.only(
               top: 2,
               bottom: 2,
             ),
             child: Column(
-              crossAxisAlignment: startCAA,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(controller.purchaseMode ?? ''),
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 4,
@@ -124,19 +125,19 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          margin: zero,
-                          padding: zero,
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.zero,
                           height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
                           color: colors.textFieldColor,
                           child: TextFormField(
                             controller: controller.stockMrpController.value,
                             textAlign: TextAlign.center,
-                            keyboardType: numberInputType,
+                            keyboardType: TextInputType.number,
                             inputFormatters: [
                               regexDouble,
                             ],
-                            textInputAction: nextInputAction,
+                            textInputAction: TextInputAction.next,
                             style: TextStyle(
                               fontSize: mediumTFSize,
                               color: colors.primaryTextColor,
@@ -153,8 +154,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          margin: zero,
-                          padding: zero,
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.zero,
                           height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
                           color: colors.textFieldColor,
@@ -172,49 +173,52 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                             decoration: getInputDecoration(
                               hint: 'qty'.tr,
                             ),
-                            keyboardType: numberInputType,
-                            inputFormatters: doubleInputFormatter,
-                            textInputAction: nextInputAction,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              regexDouble,
+                            ],
+                            textInputAction: TextInputAction.next,
                           ),
                         ),
                       ),
                       4.width,
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          margin: zero,
-                          padding: zero,
-                          height: mediumTextFieldHeight,
-                          //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
-                          child: TextFormField(
-                            controller:
-                                controller.stockDiscountPercentController.value,
-                            textAlign: TextAlign.center,
-                            keyboardType: numberInputType,
-                            inputFormatters: [
-                              regexDouble,
-                            ],
-                            textInputAction: nextInputAction,
-                            onEditingComplete: () {
-                              if (controller.selectedStock.value != null) {
-                                controller.addSaleItem(
-                                  process: '',
-                                );
-                              }
-                            },
-                            style: TextStyle(
-                              fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            cursorColor: colors.formCursorColor,
-                            decoration: getInputDecoration(
-                              hint: '%',
+                      if (controller.purchaseMode == 'item_percent')
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            margin: EdgeInsets.zero,
+                            padding: EdgeInsets.zero,
+                            height: mediumTextFieldHeight,
+                            //width: Get.width * 0.6,
+                            color: colors.textFieldColor,
+                            child: TextFormField(
+                              controller: controller
+                                  .stockDiscountPercentController.value,
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                regexDouble,
+                              ],
+                              textInputAction: TextInputAction.next,
+                              onEditingComplete: () {
+                                if (controller.selectedStock.value != null) {
+                                  controller.addSaleItem(
+                                    process: '',
+                                  );
+                                }
+                              },
+                              style: TextStyle(
+                                fontSize: mediumTFSize,
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              cursorColor: colors.formCursorColor,
+                              decoration: getInputDecoration(
+                                hint: '%',
+                              ),
                             ),
                           ),
                         ),
-                      ),
                       8.width,
                       Expanded(
                         flex: 2,
@@ -223,6 +227,13 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                           height: mediumTextFieldHeight,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (controller.selectedStock.value != null) {
+                                toast('selected');
+                              } else {
+                                toast(
+                                  'not selected',
+                                );
+                              }
                               if (controller.selectedStock.value != null) {
                                 controller.addSaleItem(
                                   process: '',
