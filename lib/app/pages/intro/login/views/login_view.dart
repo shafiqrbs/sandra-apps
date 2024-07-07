@@ -10,7 +10,7 @@ import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/language_change_dropdown.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/core/widget/setup_bottom_nav_bar.dart';
-import '/app/pages/login/controllers/login_controller.dart';
+import '/app/pages/intro/login/controllers/login_controller.dart';
 
 //ignore: must_be_immutable
 class LoginView extends BaseView<LoginController> {
