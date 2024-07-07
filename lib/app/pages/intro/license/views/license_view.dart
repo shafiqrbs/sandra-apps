@@ -9,7 +9,7 @@ import '/app/core/widget/common_text.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/core/widget/setup_bottom_nav_bar.dart';
-import '/app/pages/license/controllers/license_controller.dart';
+import '/app/pages/intro/license/controllers/license_controller.dart';
 
 //ignore: must_be_immutable
 class LicenseView extends BaseView<LicenseController> {

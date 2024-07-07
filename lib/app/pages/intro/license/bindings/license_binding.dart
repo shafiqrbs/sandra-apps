@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '/app/pages/license/controllers/license_controller.dart';
+import '/app/pages/intro/license/controllers/license_controller.dart';
 
 class LicenseBinding extends Bindings {
   @override

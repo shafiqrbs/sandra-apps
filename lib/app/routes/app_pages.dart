@@ -8,6 +8,8 @@ import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/edit_sales/bindings/edit_sales_binding.dart';
 import '/app/pages/edit_sales/views/edit_sales_view.dart';
+import '/app/pages/intro/license/bindings/license_binding.dart';
+import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
 import '/app/pages/intro/login/views/login_view.dart';
 import '/app/pages/intro/splash/bindings/splash_binding.dart';
@@ -16,8 +18,6 @@ import '/app/pages/inventory/sales/create_sales/bindings/create_sales_binding.da
 import '/app/pages/inventory/sales/create_sales/views/create_sales_view.dart';
 import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
-import '/app/pages/license/bindings/license_binding.dart';
-import '/app/pages/license/views/license_view.dart';
 import '/app/pages/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/stock_list/views/stock_list_view.dart';
 
