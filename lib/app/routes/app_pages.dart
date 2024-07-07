@@ -26,6 +26,8 @@ import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
+import '/app/pages/settings/bindings/settings_binding.dart';
+import '/app/pages/settings/views/settings_view.dart';
 
 part 'app_routes.dart';
 
@@ -99,6 +101,11 @@ class AppPages {
       name: Routes.createPurchase,
       page: CreatePurchaseView.new,
       binding: CreatePurchaseBinding(),
+    ),
+    GetPage(
+      name: Routes.settings,
+      page: SettingsView.new,
+      binding: SettingsBinding(),
     ),
   ];
 }

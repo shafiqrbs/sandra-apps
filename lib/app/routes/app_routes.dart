@@ -16,8 +16,8 @@ abstract class Routes {
   static const customerLedger = _Paths.customerLedger;
   static const vendorLedger = _Paths.vendorLedger;
   static const expense = _Paths.expense;
-  static const  createPurchase = _Paths.createPurchase;
-
+  static const createPurchase = _Paths.createPurchase;
+  static const settings = _Paths.settings;
 }
 
 abstract class _Paths {
@@ -33,6 +33,6 @@ abstract class _Paths {
   static const customerLedger = '/customer_ledger';
   static const vendorLedger = '/vendor_ledger';
   static const expense = '/expense';
-  static const  createPurchase = '/create_purchase';
-
+  static const createPurchase = '/create_purchase';
+  static const settings = '/settings';
 }
