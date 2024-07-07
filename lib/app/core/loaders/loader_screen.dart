@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'color_loader_2.dart';
 import 'color_loader_5.dart';
@@ -29,14 +30,18 @@ class LoaderScreen extends StatelessWidget {
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ColorLoader2(),
+                SpinKitHourGlass(
+                  color: Colors.blue,
+                  //size: 55,
+                ),
+               /* ColorLoader2(),
                 SizedBox(
                   height: 20,
                 ),
                 ColorLoader5(),
                 SizedBox(
                   height: 20,
-                ),
+                ),*/
               ],
             ),
           ),

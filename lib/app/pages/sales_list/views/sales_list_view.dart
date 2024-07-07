@@ -77,6 +77,8 @@ class SalesListView extends BaseView<SalesListController> {
                     : controller.salesManager.scrollController,
                 padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
+                  //check ranger is valid
+
                   final element =
                       controller.salesManager.allItems.value![index];
 
@@ -227,9 +229,9 @@ class SalesListView extends BaseView<SalesListController> {
         Row(
           children: List.generate(
             controller.tabPages.length,
-                (index) {
+            (index) {
               return Obx(
-                    () => Expanded(
+                () => Expanded(
                   child: SubTabItemView(
                     isSelected: controller.selectedIndex.value == index,
                     item: controller.tabPages[index],
@@ -240,7 +242,6 @@ class SalesListView extends BaseView<SalesListController> {
             },
           ),
         ),
-
       ],
     );
   }
