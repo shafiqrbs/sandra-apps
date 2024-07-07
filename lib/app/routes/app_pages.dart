@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
 import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';
+import '/app/pages/accounting/expense/bindings/expense_binding.dart';
+import '/app/pages/accounting/expense/views/expense_view.dart';
 import '/app/pages/accounting/vendor_ledger/bindings/vendor_ledger_binding.dart';
 import '/app/pages/accounting/vendor_ledger/views/vendor_ledger_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
@@ -85,6 +87,11 @@ class AppPages {
       name: Routes.vendorLedger,
       page: VendorLedgerView.new,
       binding: VendorLedgerBinding(),
+    ),
+    GetPage(
+      name: Routes.expense,
+      page: ExpenseView.new,
+      binding: ExpenseBinding(),
     ),
   ];
 }
