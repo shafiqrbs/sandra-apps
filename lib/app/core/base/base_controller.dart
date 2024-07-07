@@ -26,7 +26,7 @@ abstract class BaseController extends GetxController {
 
   SessionManager get prefs => SessionManager();
 
-  Services get services => Services();
+  Services get services => Services.instance;
 
   DbHelper get dbHelper => DbHelper.instance;
 

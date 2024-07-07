@@ -50,6 +50,13 @@ List<T> _parseListInIsolate<T>(_ParseListParams<T> params) {
 }
 
 class Services {
+  factory Services() {
+    return instance;
+  }
+  Services._privateConstructor();
+
+  static final Services instance = Services._privateConstructor();
+
   final pref = SessionManager();
   final dio = RestClient(
     baseUrl: 'https://poskeeper.com/flutter-api/',
