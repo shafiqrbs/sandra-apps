@@ -7,5 +7,8 @@ class CreatePurchaseController extends BaseController {
     super.onInit();
   }
 
+
+  void goToListPage() {
+  }
 }
   
