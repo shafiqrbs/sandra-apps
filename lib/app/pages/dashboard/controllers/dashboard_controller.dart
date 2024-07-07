@@ -53,4 +53,10 @@ class DashboardController extends BaseController {
       Routes.splash,
     );
   }
+
+  void goToSettings() {
+    Get.toNamed(
+      Routes.settings,
+    );
+  }
 }

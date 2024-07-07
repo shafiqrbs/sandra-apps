@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/title_subtitle_button.dart';
+import 'package:getx_template/app/core/widget/common_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart' as pie_chart;
 
 import '/app/core/base/base_view.dart';
-import '/app/core/widget/tbd_round_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_text_button.dart';
+import '/app/core/widget/title_subtitle_button.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
 
 //ignore: must_be_immutable
@@ -20,6 +20,57 @@ class DashboardView extends BaseView<DashboardController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
+  }
+
+  @override
+  Widget drawer() {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          SizedBox(
+            height: AppBar().preferredSize.height + Get.height * .071,
+            child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: colors.primaryBaseColor,
+              ),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: CommonText(
+                      text: 'store_name'.tr,
+                      fontSize: headerTFSize,
+                      fontWeight: FontWeight.w500,
+                      textColor: colors.backgroundColor,
+                    ),
+                  ),
+                  Expanded(
+                    child: CommonText(
+                      text: 'user_name'.tr,
+                      fontSize: regularTFSize,
+                      fontWeight: FontWeight.normal,
+                      textColor: colors.backgroundColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: Text('home'.tr),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: Text('settings'.tr),
+            onTap: controller.goToSettings,
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -67,14 +118,18 @@ class DashboardView extends BaseView<DashboardController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: const Icon(
+                  TablerIcons.menu_2,
+                  color: Colors.white,
+                ),
+              );
             },
-            icon: const Icon(
-              TablerIcons.menu_2,
-              color: Colors.white,
-            ),
           ),
           Text(
             'dashboard'.tr,
@@ -139,9 +194,7 @@ class DashboardView extends BaseView<DashboardController> {
         left: 16,
         right: 16,
       ),
-      child: Column(
-        children: [],
-      ),
+      child: Column(),
     );
   }
 
@@ -270,9 +323,6 @@ class DashboardView extends BaseView<DashboardController> {
             legendOptions: pie_chart.LegendOptions(
               legendPosition: pie_chart.LegendPosition.bottom,
               showLegendsInRow: true,
-            ),
-            chartValuesOptions: pie_chart.ChartValuesOptions(
-              showChartValues: true,
             ),
           ),
           16.height,
