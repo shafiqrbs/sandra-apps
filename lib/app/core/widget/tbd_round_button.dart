@@ -21,8 +21,8 @@ class TbdRoundButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 72,
-            width: 72,
+            height: 56,
+            width: 56,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(60),
@@ -37,7 +37,7 @@ class TbdRoundButton extends StatelessWidget {
             child: Icon(
               icon,
               color: const Color(0xff4d4d4d),
-              size: 32,
+              size: 24,
             ),
           ),
           4.height,

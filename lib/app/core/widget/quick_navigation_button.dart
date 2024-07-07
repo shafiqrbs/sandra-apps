@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/routes/app_pages.dart';
 
@@ -27,32 +28,57 @@ class QuickNavigationButton extends BaseWidget {
     required BuildContext context,
   }) {
     final animationStyle = AnimationStyle(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
       reverseDuration: const Duration(seconds: 1),
     );
     showModalBottomSheet<void>(
       context: context,
       sheetAnimationStyle: animationStyle,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(4),
+          topRight: Radius.circular(4),
+        ),
+      ),
       builder: (BuildContext context) {
-        return SizedBox.expand(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Modal bottom sheet'),
-                ElevatedButton(
-                  child: const Text('Close'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                Wrap(
-                  spacing: 8,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  runSpacing: 8,
-                  children: buttonList,
-                ),
-              ],
-            ),
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 4,
+            right: 4,
+            top: 16,
+            bottom: 16,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'quick_navigation'.tr,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: Get.back,
+                    child: const Icon(
+                      TablerIcons.x,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+              16.height,
+              Wrap(
+                spacing: 4,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                runSpacing: 8,
+                children: buttonList,
+              ),
+            ],
           ),
         );
       },
