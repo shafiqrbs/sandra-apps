@@ -281,6 +281,7 @@ abstract class SalesController extends BaseController {
   ) async {
     salesItemList.value.removeAt(index);
     calculateAllSubtotal();
+    salesItemList.refresh();
   }
 
   void updateSalesItemList(value) {

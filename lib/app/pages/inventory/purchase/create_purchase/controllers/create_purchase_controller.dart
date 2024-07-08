@@ -30,19 +30,12 @@ class CreatePurchaseController extends SalesController {
 
     // Extract values from controllers
     final stock = selectedStock.value!;
-    final stockQty = double.tryParse(
-          stockQtyController.value.text,
-        ) ??
-        0.0;
-    final stockMrp = double.tryParse(
-          stockMrpController.value.text,
-        ) ??
+    final stockQty = double.tryParse(stockQtyController.value.text) ?? 0.0;
+    final stockMrp = double.tryParse(stockMrpController.value.text) ??
         stock.salesPrice ??
         0.0;
-    final discountPercent = double.tryParse(
-          stockDiscountPercentController.value.text,
-        ) ??
-        0.0;
+    final discountPercent =
+        double.tryParse(stockDiscountPercentController.value.text) ?? 0.0;
 
     print('stockQty: $stockQty');
     print('stockMrp: $stockMrp');
@@ -57,34 +50,26 @@ class CreatePurchaseController extends SalesController {
       brandName: stock.brandName,
     );
 
-    if (process == 'inline') {
-      if (purchaseMode == 'purchase_with_mrp') {
-        salesItem.subTotal = stockQty * (stock.salesPrice ?? 0.0);
+    // Calculate subTotal based on purchaseMode
+    double? calculateSubTotal() {
+      switch (purchaseMode) {
+        case 'purchase_with_mrp':
+          return stockQty * (stock.salesPrice ?? 0.0);
+        case 'purchase_price':
+          return stockQty * (stock.purchasePrice ?? 0.0);
+        case 'item_percent':
+          return (stockMrp - ((stockMrp * discountPercent) / 100)) * stockQty;
+        case 'total_price':
+          if (process == 'inline') {
+            return stockQty * (stock.purchasePrice ?? 0.0);
+          }
       }
-      if (purchaseMode == 'purchase_price' ||
-          purchaseMode == 'item_percent' ||
-          purchaseMode == 'total_price') {
-        salesItem.subTotal = stockQty * (stock.purchasePrice ?? 0.0);
-      }
+      return null;
     }
 
+    salesItem.subTotal = calculateSubTotal();
 
-
-
-    else {
-      if (purchaseMode == 'purchase_with_mrp') {
-        salesItem.subTotal = stockQty * (stock.salesPrice ?? 0.0);
-      }
-      if (purchaseMode == 'purchase_price') {
-        salesItem.subTotal = stockQty * (stock.purchasePrice ?? 0.0);
-      }
-      if (purchaseMode == 'item_percent') {
-        salesItem.subTotal =
-            (stockMrp - ((stockMrp * discountPercent) / 100)) * stockQty;
-      }
-    }
-    // Update salesItem with calculated values
-
+    // Handle error if subTotal is null
     if (salesItem.subTotal == null) {
       toast('sub_total_error'.tr);
       return;
@@ -95,8 +80,10 @@ class CreatePurchaseController extends SalesController {
       ..value += salesItem.subTotal!
       ..value = salesSubTotal.value.toPrecision(2);
 
+    // Add salesItem to salesItemList
     salesItemList.value.add(salesItem);
 
+    // Reset fields after item is added
     resetAfterItemAdd();
 
     print('salesItem.subTotal: ${salesItem.subTotal}');

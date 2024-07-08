@@ -80,6 +80,14 @@ abstract class BaseController extends GetxController {
 
   String showSuccessMessage(String msg) => _successMessageController(msg);
 
+  num? parseNum(String? value) {
+    if (value == null) {
+      return null;
+    }
+
+    return num.tryParse(value);
+  }
+
   Future<bool> hasInternet() async {
     final connectivityResults = await Connectivity().checkConnectivity();
 

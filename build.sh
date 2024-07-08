@@ -8,7 +8,7 @@ flutter pub get
 echo "Building Android..."
 
 # Build the APK in release mode
-flutter build apk --release
+flutter build apk --release -t lib/main_dev.dart
 
 # Get the current date and time in the desired format
 current_date=$(date "+%Y-%m-%d_%I:%M:%S_%p")
