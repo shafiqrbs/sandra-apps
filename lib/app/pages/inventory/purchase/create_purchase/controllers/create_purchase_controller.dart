@@ -55,7 +55,7 @@ class CreatePurchaseController extends SalesController {
     double? calculateSubTotal() {
       switch (purchaseMode) {
         case 'purchase_with_mrp':
-          return stockQty * (stock.salesPrice ?? 0.0);
+          return stockQty * stockMrp;
         case 'purchase_price':
           return stockQty * (stock.purchasePrice ?? 0.0);
         case 'item_percent':
@@ -88,6 +88,22 @@ class CreatePurchaseController extends SalesController {
     resetAfterItemAdd();
 
     print('salesItem.subTotal: ${salesItem.subTotal}');
+  }
+
+  @override
+  Future<void> onQtyChange(
+    num value,
+    int index,
+  ) async {
+    salesItemList.value[index].quantity = value;
+    final item = salesItemList.value[index];
+
+    if (purchaseMode == 'purchase_with_mrp') {
+    } else if (purchaseMode == 'purchase_price') {
+    } else if (purchaseMode == 'item_percent') {
+    } else if (purchaseMode == 'total_price') {}
+
+    calculateAllSubtotal();
   }
 
   void goToListPage() {}

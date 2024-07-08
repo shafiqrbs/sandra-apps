@@ -219,109 +219,195 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Container(
-                          margin: EdgeInsets.zero,
-                          padding: EdgeInsets.zero,
-                          height: mediumTextFieldHeight,
-                          //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
-                          child: TextFormField(
-                            controller: controller.stockMrpController.value,
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              regexDouble,
-                            ],
-                            textInputAction: TextInputAction.next,
-                            style: TextStyle(
-                              fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
-                              fontWeight: FontWeight.w500,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
+                              height: mediumTextFieldHeight,
+                              //width: Get.width * 0.6,
+                              color: colors.textFieldColor,
+                              child: TextFormField(
+                                autofocus: true,
+                                textAlign: TextAlign.center,
+                                focusNode: controller.qtyFocusNode.value,
+                                controller: controller.stockQtyController.value,
+                                style: TextStyle(
+                                  fontSize: mediumTFSize,
+                                  color: colors.primaryTextColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                cursorColor: colors.formCursorColor,
+                                decoration: getInputDecoration(
+                                  hint: 'qty'.tr,
+                                ),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  regexDouble,
+                                ],
+                                textInputAction: TextInputAction.next,
+                                onEditingComplete: () {
+                                  if (controller.selectedStock.value != null) {
+                                    controller.addSaleItem(
+                                      process: '',
+                                    );
+                                  }
+                                },
+                              ),
                             ),
-                            cursorColor: colors.formCursorColor,
-                            decoration: getInputDecoration(
-                              hint: 'mrp'.tr,
+                            Text(
+                              'qty'.tr,
+                              style: TextStyle(
+                                fontSize: smallTFSize,
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                       4.width,
                       Expanded(
                         flex: 2,
-                        child: Container(
-                          margin: EdgeInsets.zero,
-                          padding: EdgeInsets.zero,
-                          height: mediumTextFieldHeight,
-                          //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
-                          child: TextFormField(
-                            autofocus: true,
-                            textAlign: TextAlign.center,
-                            focusNode: controller.qtyFocusNode.value,
-                            controller: controller.stockQtyController.value,
-                            style: TextStyle(
-                              fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
-                              fontWeight: FontWeight.w500,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
+                              height: mediumTextFieldHeight,
+                              //width: Get.width * 0.6,
+                              color: colors.textFieldColor,
+                              child: TextFormField(
+                                controller: controller.stockMrpController.value,
+                                readOnly:
+                                    controller.purchaseMode == 'item_percent',
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  regexDouble,
+                                ],
+                                textInputAction: TextInputAction.next,
+                                style: TextStyle(
+                                  fontSize: mediumTFSize,
+                                  color: colors.primaryTextColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                cursorColor: colors.formCursorColor,
+                                decoration: getInputDecoration(
+                                  hint: 'mrp'.tr,
+                                ),
+                              ),
                             ),
-                            cursorColor: colors.formCursorColor,
-                            decoration: getInputDecoration(
-                              hint: 'qty'.tr,
+                            Text(
+                              'mrp'.tr,
+                              style: TextStyle(
+                                fontSize: smallTFSize,
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              regexDouble,
-                            ],
-                            textInputAction: TextInputAction.next,
-                            onEditingComplete: () {
-                              if (controller.selectedStock.value != null) {
-                                controller.addSaleItem(
-                                  process: '',
-                                );
-                              }
-                            },
-                          ),
+                          ],
                         ),
                       ),
                       4.width,
                       if (controller.purchaseMode == 'item_percent')
                         Expanded(
                           flex: 2,
-                          child: Container(
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.zero,
-                            height: mediumTextFieldHeight,
-                            //width: Get.width * 0.6,
-                            color: colors.textFieldColor,
-                            child: TextFormField(
-                              controller: controller
-                                  .stockDiscountPercentController.value,
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                regexDouble,
-                              ],
-                              textInputAction: TextInputAction.next,
-                              onEditingComplete: () {
-                                if (controller.selectedStock.value != null) {
-                                  controller.addSaleItem(
-                                    process: '',
-                                  );
-                                }
-                              },
-                              style: TextStyle(
-                                fontSize: mediumTFSize,
-                                color: colors.primaryTextColor,
-                                fontWeight: FontWeight.w500,
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                height: mediumTextFieldHeight,
+                                //width: Get.width * 0.6,
+                                color: colors.textFieldColor,
+                                child: TextFormField(
+                                  controller: controller
+                                      .stockDiscountPercentController.value,
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    regexDouble,
+                                  ],
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: () {
+                                    if (controller.selectedStock.value !=
+                                        null) {
+                                      controller.addSaleItem(
+                                        process: '',
+                                      );
+                                    }
+                                  },
+                                  style: TextStyle(
+                                    fontSize: mediumTFSize,
+                                    color: colors.primaryTextColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  cursorColor: colors.formCursorColor,
+                                  decoration: getInputDecoration(
+                                    hint: '%',
+                                  ),
+                                ),
                               ),
-                              cursorColor: colors.formCursorColor,
-                              decoration: getInputDecoration(
-                                hint: '%',
+                              Text(
+                                '%',
+                                style: TextStyle(
+                                  fontSize: smallTFSize,
+                                  color: colors.primaryTextColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       8.width,
+                      if (controller.purchaseMode == 'total_price')
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                height: mediumTextFieldHeight,
+                                //width: Get.width * 0.6,
+                                color: colors.textFieldColor,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    regexDouble,
+                                  ],
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: () {
+                                    if (controller.selectedStock.value !=
+                                        null) {
+                                      controller.addSaleItem(
+                                        process: '',
+                                      );
+                                    }
+                                  },
+                                  style: TextStyle(
+                                    fontSize: mediumTFSize,
+                                    color: colors.primaryTextColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  cursorColor: colors.formCursorColor,
+                                  decoration: getInputDecoration(
+                                    hint: 'total_price'.tr,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'total_price'.tr,
+                                style: TextStyle(
+                                  fontSize: smallTFSize,
+                                  color: colors.primaryTextColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       Expanded(
                         flex: 2,
                         child: SizedBox(
@@ -387,6 +473,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       SizedBox(
                         height: 65.ph,
                         child: PurchaseItemListView(
+                          purchaseMode: controller.purchaseMode!,
                           salesItems: controller.salesItemList.value,
                           onItemRemove: controller.onItemRemove,
                           onQtyChange: controller.onQtyChange,
