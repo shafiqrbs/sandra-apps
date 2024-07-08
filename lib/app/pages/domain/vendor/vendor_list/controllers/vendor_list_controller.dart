@@ -16,7 +16,7 @@ class VendorListController extends BaseController {
   void showAddVendorModal() {
     final result = Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: 'add_vendor'.tr,
         subTitle: '',
         child: AddVendorModalView(),
       ),

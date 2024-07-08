@@ -120,8 +120,8 @@ List<Widget> buttonList = [
   ),
   TbdRoundButton(
     text: 'vendor',
-    icon: TablerIcons.credit_card,
-    onTap: () {},
+    icon: TablerIcons.butterfly,
+    onTap: () => navigatePage(Routes.vendorList),
   ),
   TbdRoundButton(
     text: 'stock_item',

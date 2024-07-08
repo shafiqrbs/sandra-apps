@@ -20,9 +20,9 @@ class VendorListView extends BaseView<VendorListController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Obx(
-            () {
+        () {
           return AppBarSearchView(
-            pageTitle: 'customer'.tr,
+            pageTitle: 'vendor'.tr,
             controller: controller.vendorManager.searchTextController.value,
             onSearch: controller.vendorManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
@@ -35,7 +35,7 @@ class VendorListView extends BaseView<VendorListController> {
       automaticallyImplyLeading: false,
       actions: [
         Obx(
-              () {
+          () {
             if (controller.isSearchSelected.value) {
               return Container();
             }
@@ -59,7 +59,7 @@ class VendorListView extends BaseView<VendorListController> {
   @override
   Widget body(BuildContext context) {
     return Obx(
-          () {
+      () {
         return ListView.builder(
           itemCount: controller.vendorManager.allItems.value?.length ?? 0,
           controller: controller.vendorManager.scrollController,
