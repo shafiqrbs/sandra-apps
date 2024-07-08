@@ -23,7 +23,7 @@ class SearchedPurchaseStockList extends StatelessWidget {
     return ListView.builder(
       itemCount: stocks.length,
       itemBuilder: (context, index) {
-        return StockItem(
+        return PurchaseItemView(
           stock: stocks[index],
           onItemTap: onItemTap,
           onQtyChange: onQtyChange,
@@ -35,14 +35,14 @@ class SearchedPurchaseStockList extends StatelessWidget {
   }
 }
 
-class StockItem extends BaseWidget {
+class PurchaseItemView extends BaseWidget {
   final Stock stock;
   final Function(Stock value) onItemTap;
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
   final int index;
 
-  StockItem({
+  PurchaseItemView({
     required this.stock,
     required this.onItemTap,
     required this.onQtyChange,
