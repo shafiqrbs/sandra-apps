@@ -62,6 +62,101 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
     );
   }
 
+  @override
+  Widget floatingActionButton() {
+    return InkWell(
+      onTap: controller.onSave,
+      child: Container(
+        height: 7.ph,
+        width: Get.width,
+        color: colors.primaryBaseColor,
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(
+          bottom: 7,
+        ),
+        child: Obx(
+          () {
+            return Row(
+              mainAxisAlignment: spaceBetweenMAA,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                  ),
+                  margin: const EdgeInsets.only(
+                    left: 8,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: centerMAA,
+                    children: [
+                      Text(
+                        'place_order'.tr,
+                        style: TextStyle(
+                          color: colors.backgroundColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                60.width,
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                    left: 32,
+                    right: 32,
+                  ),
+                  margin: const EdgeInsets.only(
+                    bottom: 4,
+                    top: 4,
+                    right: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: colors.primaryLiteColor,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: centerMAA,
+                    children: [
+                      Text(
+                        '${controller.salesItemList.value.length}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const Text(
+                        ' | ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        '${controller.salesSubTotal}',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
   Widget _buildProductSearchForm() {
     return Obx(
       () => ProductSearchForm(
@@ -178,6 +273,14 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               regexDouble,
                             ],
                             textInputAction: TextInputAction.next,
+                            onEditingComplete: () {
+                              if (controller.selectedStock.value != null) {
+                                controller.addSaleItem(
+                                  process: '',
+                                );
+                              }
+                            },
+
                           ),
                         ),
                       ),

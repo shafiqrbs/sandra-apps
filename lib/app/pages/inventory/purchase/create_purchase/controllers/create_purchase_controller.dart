@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
 import '/app/core/abstract_controller/sales_controller.dart';
 import '/app/model/sales_item.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -90,4 +91,22 @@ class CreatePurchaseController extends SalesController {
   }
 
   void goToListPage() {}
+
+  Future<void> onSave() async {
+    if (salesItemList.value.isEmpty) {
+      toast('please_select_item'.tr);
+      return;
+    }
+
+    final result = await Get.dialog(
+      SalesProcessModalView(
+        salesItemList: salesItemList.value,
+        preSales: preSales,
+      ),
+    );
+    if (result != null) {
+      salesItemList.value = result;
+      calculateAllSubtotal();
+    }
+  }
 }
