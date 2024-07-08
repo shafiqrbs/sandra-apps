@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_controller.dart';
+import 'package:getx_template/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import 'package:getx_template/app/model/purchase_item.dart';
 import 'package:getx_template/app/model/transaction_methods.dart';
 import 'package:getx_template/app/model/vendor.dart';
@@ -361,9 +362,9 @@ class PurchaseProcessModalController extends PaymentGatewayController {
   Future<void> addCustomer() async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'add_customer'.tr,
+        title: 'add_vendor'.tr,
         subTitle: '',
-        child: AddCustomerModalView(),
+        child: AddVendorModalView(),
       ),
     ) as Customer?;
     print('result: $result');

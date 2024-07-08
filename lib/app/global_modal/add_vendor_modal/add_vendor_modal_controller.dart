@@ -21,7 +21,7 @@ class AddVendorModalController extends BaseController {
 
   Customer? createdCustomer;
 
-  Future<void> addCustomer() async {
+  Future<void> addVendor() async {
     if (formKey.currentState!.validate()) {
       await dataFetcher(
         future: () async {

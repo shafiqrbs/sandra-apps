@@ -32,9 +32,9 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                       FBString(
                         textController: controller.userNameController.value,
                         preFixIcon: TablerIcons.user,
-                        label: 'user_name'.tr,
-                        hint: 'enter_username_here'.tr,
-                        errorMsg: 'user_name_required'.tr,
+                        label: 'name'.tr,
+                        hint: 'enter_name'.tr,
+                        errorMsg: 'name_required'.tr,
                         isRequired: true,
                         textFieldHeight: textFieldHeight,
                       ),
@@ -106,7 +106,7 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                       RowButton(
                         buttonName: 'save'.tr,
                         leftIcon: TablerIcons.device_floppy,
-                        onTap: controller.addCustomer,
+                        onTap: controller.addVendor,
                         isOutline: false,
                       ),
                     ],
