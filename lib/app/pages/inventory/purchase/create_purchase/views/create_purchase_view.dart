@@ -11,9 +11,9 @@ import '/app/core/widget/list_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
 import '/app/global_widget/product_search_form.dart';
+import '/app/pages/inventory/purchase/create_purchase/component/purchase_item_list_view.dart';
+import '/app/pages/inventory/purchase/create_purchase/component/searched_purchase_stock_list.dart';
 import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
-import '/app/pages/inventory/sales/create_sales/component/sales_item_list_view.dart';
-import '/app/pages/inventory/sales/create_sales/component/searched_stock_list.dart';
 
 //ignore: must_be_immutable
 class CreatePurchaseView extends BaseView<CreatePurchaseController> {
@@ -280,7 +280,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 );
                               }
                             },
-
                           ),
                         ),
                       ),
@@ -387,7 +386,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       4.height,
                       SizedBox(
                         height: 65.ph,
-                        child: SalesItemListView(
+                        child: PurchaseItemListView(
                           salesItems: controller.salesItemList.value,
                           onItemRemove: controller.onItemRemove,
                           onQtyChange: controller.onQtyChange,
@@ -447,7 +446,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                 ),
                 color: colors.evenListColor,
               ),
-              child: SearchedStockList(
+              child: SearchedPurchaseStockList(
                 stocks: controller.stockList.value,
                 onItemTap: controller.onStockSelection,
                 onQtyChange: controller.onSearchedStockQtyChange,
