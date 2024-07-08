@@ -122,7 +122,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                     mainAxisAlignment: centerMAA,
                     children: [
                       Text(
-                        '${controller.salesItemList.value.length}',
+                        '${controller.purchaseItemList.value.length}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -464,7 +464,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
             Obx(
               () {
                 return Visibility(
-                  visible: controller.salesItemList.value.isNotEmpty && controller.purchaseMode != null,
+                  visible: controller.purchaseItemList.value.isNotEmpty &&
+                      controller.purchaseMode != null,
                   child: Column(
                     children: [
                       4.height,
@@ -494,7 +495,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                   Obx(
                     () {
                       return Visibility(
-                        visible: controller.salesItemList.value.isEmpty &&
+                        visible: controller.purchaseItemList.value.isEmpty &&
                             controller.stockList.value.isEmpty,
                         child: Container(
                           alignment: Alignment.center,
