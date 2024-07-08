@@ -474,7 +474,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       SizedBox(
                         height: 65.ph,
                         child: PurchaseItemListView(
-                          purchaseMode: controller.purchaseMode!,
                           salesItems: controller.purchaseItemList.value,
                           onItemRemove: controller.onItemRemove,
                           onQtyChange: controller.onQtyChange,

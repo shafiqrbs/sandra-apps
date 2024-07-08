@@ -11,14 +11,12 @@ import '/app/model/sales_item.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class PurchaseItemListView extends BaseWidget {
-  final String purchaseMode;
   final List<PurchaseItem> salesItems;
   final Function(int index) onItemRemove;
   final Function(num onQtyChange, int index) onQtyChange;
   final Function(num onQtyChange, int index) onDiscountChange;
   final Function(num onSalesPriceChange, int index) onSalesPriceChange;
   PurchaseItemListView({
-    required this.purchaseMode,
     required this.salesItems,
     required this.onItemRemove,
     required this.onQtyChange,
@@ -40,7 +38,7 @@ class PurchaseItemListView extends BaseWidget {
       itemBuilder: (context, index) {
         final element = salesItems[index];
         final currency = SetUp().currency ?? '';
-        final canEditPrice = purchaseMode == 'item_percent';
+        final canEditPrice = false;
         final mrpController = TextEditingController();
         final qtyController = TextEditingController();
         final subtotalController = TextEditingController();
