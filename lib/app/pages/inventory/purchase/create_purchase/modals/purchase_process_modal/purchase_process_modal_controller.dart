@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_controller.dart';
 import 'package:getx_template/app/model/purchase_item.dart';
 import 'package:getx_template/app/model/transaction_methods.dart';
+import 'package:getx_template/app/model/vendor.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -32,8 +33,7 @@ class PurchaseProcessModalController extends PaymentGatewayController {
   }) {
     purchaseItemList.value = salesItemList;
   }
-
-
+  final vendorManager = VendorManager();
 
   @override
   Future<void> onInit() async {

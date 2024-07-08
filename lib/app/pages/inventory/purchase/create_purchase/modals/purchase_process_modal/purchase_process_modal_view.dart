@@ -219,17 +219,16 @@ class PurchaseProcessModalView
           flex: 3,
           child: FBString(
             isRequired: false,
-            textController:
-                controller.customerManager.searchTextController.value,
+            textController: controller.vendorManager.searchTextController.value,
             onChange: (value) async {
               if (value?.isEmpty ?? true) {
-                controller.customerManager.searchedItems.value = [];
-                controller.customerManager.selectedItem.value = null;
+                controller.vendorManager.searchedItems.value = [];
+                controller.vendorManager.selectedItem.value = null;
                 return;
               }
-              await controller.customerManager.searchItemsByName(value!);
+              await controller.vendorManager.searchItemsByName(value!);
             },
-            hint: 'search_customer'.tr,
+            hint: 'search_vendor'.tr,
             suffixIcon: TablerIcons.search,
           ),
         ),
@@ -256,7 +255,7 @@ class PurchaseProcessModalView
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'customer',
+                    'vendor',
                     style: TextStyle(
                       fontSize: 12,
                       color: colors.secondaryTextColor,
