@@ -14,14 +14,12 @@ class PurchaseItemListView extends BaseWidget {
   final List<PurchaseItem> salesItems;
   final Function(int index) onItemRemove;
   final Function(num onQtyChange, int index) onQtyChange;
-  final Function(num onQtyChange, int index) onDiscountChange;
-  final Function(num onSalesPriceChange, int index) onSalesPriceChange;
+  final Function(num onQtyChange, int index) onPriceChange;
   PurchaseItemListView({
     required this.salesItems,
     required this.onItemRemove,
     required this.onQtyChange,
-    required this.onDiscountChange,
-    required this.onSalesPriceChange,
+    required this.onPriceChange,
     super.key,
   });
 
@@ -39,9 +37,15 @@ class PurchaseItemListView extends BaseWidget {
         final element = salesItems[index];
         final currency = SetUp().currency ?? '';
         final canEditPrice = false;
-        final mrpController = TextEditingController();
-        final qtyController = TextEditingController();
-        final subtotalController = TextEditingController();
+        final priceController = TextEditingController(
+          text: element.price.toString(),
+        );
+        final qtyController = TextEditingController(
+          text: element.quantity.toString(),
+        );
+        final subtotalController = TextEditingController(
+          text: element.subTotal.toString(),
+        );
 
         return Stack(
           alignment: Alignment.center,
@@ -95,64 +99,52 @@ class PurchaseItemListView extends BaseWidget {
                       Row(
                         mainAxisAlignment: spaceBetweenMAA,
                         children: [
-                          //product MRP
+                          //product Price
                           Expanded(
                             flex: 2,
                             child: Column(
                               children: [
                                 Container(
                                   margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
-                                  alignment: Alignment.center,
-                                  //width: Get.width * 0.7,
-                                  color: Colors.transparent,
+                                  color: colors.textFieldColor,
                                   child: TextFormField(
-                                    controller: mrpController,
+                                    controller: qtyController,
                                     textAlign: TextAlign.center,
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [regexDouble],
-                                    textInputAction: TextInputAction.next,
-                                    readOnly: canEditPrice,
-                                    onEditingComplete: () {},
+                                    textInputAction: doneInputAction,
+                                    onChanged: (value) {
+                                      onQtyChange(
+                                        value.toDouble(),
+                                        index,
+                                      );
+                                      setSubTotal(
+                                        qtyController,
+                                        priceController,
+                                        subtotalController,
+                                      );
+                                    },
+                                    onEditingComplete: () {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    onTap: qtyController.clear,
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
                                       color: colors.primaryTextColor,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.zero,
-                                      hintText:
-                                          'price'.tr, // Optional hint text
-                                      border: InputBorder.none,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          containerBorderRadius,
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
-                                          width: 0,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          containerBorderRadius,
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
-                                          width: 0,
-                                        ),
-                                      ),
-                                      fillColor: index.isEven
-                                          ? colors.primaryLiteColor
-                                              .withOpacity(.2)
-                                          : colors.primaryLiteColor
-                                              .withOpacity(.2),
-                                      filled: true,
+                                    decoration: getInputDecoration(
+                                      hint: 'qty'.tr,
                                     ),
+                                  ),
+                                ),
+                                Text(
+                                  'Qty',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: colors.primaryTextColor,
                                   ),
                                 ),
                               ],
@@ -169,20 +161,13 @@ class PurchaseItemListView extends BaseWidget {
                                   margin: EdgeInsets.zero,
                                   padding: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
-                                  //width: Get.width * 0.7,
                                   color: colors.textFieldColor,
                                   child: TextFormField(
-                                    controller: qtyController,
+                                    controller: priceController,
                                     textAlign: TextAlign.center,
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [regexDouble],
                                     textInputAction: doneInputAction,
-                                    onChanged: (value) {
-                                      onQtyChange(
-                                        value.toDouble(),
-                                        index,
-                                      );
-                                    },
                                     onEditingComplete: () {
                                       //close keyboard
                                       FocusScope.of(context).unfocus();
@@ -193,8 +178,27 @@ class PurchaseItemListView extends BaseWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: getInputDecoration(
-                                      hint: 'qty'.tr,
+                                      hint: 'price'.tr,
                                     ),
+                                    onChanged: (value) {
+                                      onPriceChange(
+                                        value.toDouble(),
+                                        index,
+                                      );
+                                      setSubTotal(
+                                        qtyController,
+                                        priceController,
+                                        subtotalController,
+                                      );
+                                    },
+                                    onTap: priceController.clear,
+                                  ),
+                                ),
+                                Text(
+                                  'Price',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: colors.primaryTextColor,
                                   ),
                                 ),
                               ],
@@ -233,8 +237,7 @@ class PurchaseItemListView extends BaseWidget {
                                     ),
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
-                                      hintText:
-                                          'sub_total'.tr, // Optional hint text
+                                      hintText: 'sub_total'.tr,
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
@@ -267,6 +270,13 @@ class PurchaseItemListView extends BaseWidget {
                                     ),
                                   ),
                                 ),
+                                Text(
+                                  'Sub Total',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: colors.primaryTextColor,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -281,8 +291,6 @@ class PurchaseItemListView extends BaseWidget {
                     child: TextButton(
                       onPressed: () async {
                         onItemRemove(index);
-                        //mvc.salesSubTotal.value -= mvc.salesItemList[index].subTotal!;
-                        //mvc.salesItemList.removeAt(index);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(2),
@@ -335,5 +343,15 @@ class PurchaseItemListView extends BaseWidget {
         );
       },
     );
+  }
+
+  void setSubTotal(
+    TextEditingController qtyController,
+    TextEditingController priceController,
+    TextEditingController subtotalController,
+  ) {
+    final qty = double.tryParse(qtyController.text) ?? 0.0;
+    final price = double.tryParse(priceController.text) ?? 0.0;
+    subtotalController.text = (qty * price).toStringAsFixed(2);
   }
 }

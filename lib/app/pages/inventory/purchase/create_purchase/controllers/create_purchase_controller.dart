@@ -103,12 +103,8 @@ class CreatePurchaseController extends StockSelectionController {
     int index,
   ) async {
     purchaseItemList.value[index].quantity = value;
-    final item = purchaseItemList.value[index];
-
-    if (purchaseMode == 'purchase_with_mrp') {
-    } else if (purchaseMode == 'purchase_price') {
-    } else if (purchaseMode == 'item_percent') {
-    } else if (purchaseMode == 'total_price') {}
+    purchaseItemList.value[index].subTotal =
+        value * purchaseItemList.value[index].price!;
 
     calculateAllSubtotal();
   }
@@ -190,5 +186,11 @@ class CreatePurchaseController extends StockSelectionController {
     final qty = double.tryParse(stockQtyController.value.text) ?? 0.0;
     final totalPrice = double.tryParse(totalPriceController.value.text) ?? 0.0;
     priceController.value.text = (totalPrice / qty).toStringAsFixed(2);
+  }
+
+  void onPriceChange(num price, int index) {
+    purchaseItemList.value[index].price = price;
+    purchaseItemList.value[index].subTotal =
+        purchaseItemList.value[index].quantity! * price;
   }
 }
