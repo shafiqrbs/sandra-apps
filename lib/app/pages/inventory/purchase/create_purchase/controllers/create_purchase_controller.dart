@@ -38,7 +38,6 @@ class CreatePurchaseController extends StockSelectionController {
     selectedStock.value = stock;
     searchController.value.text = stock.name ?? '';
     qtyFocusNode.value.requestFocus();
-    stockQtyController.value.clear();
 
     if (purchaseMode == 'purchase_price') {
       priceController.value.text = stock.purchasePrice.toString();
@@ -154,9 +153,8 @@ class CreatePurchaseController extends StockSelectionController {
     int index,
   ) async {
     stockQtyController.value.text = value.toString();
-    selectedStock
-      ..value = stockList.value[index]
-      ..refresh();
+    onStockSelection(stockList.value[index]);
+
     addPurchaseItem(
       process: 'inline',
     );

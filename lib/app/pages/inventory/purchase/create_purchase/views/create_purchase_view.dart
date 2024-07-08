@@ -52,6 +52,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       children: [
         Column(
           children: [
+            if(false)
             Obx(
               () => Container(
                 color: Colors.white,
