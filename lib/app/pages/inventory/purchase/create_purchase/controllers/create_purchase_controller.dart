@@ -10,6 +10,7 @@ class CreatePurchaseController extends StockSelectionController {
   String? purchaseMode;
   final purchaseItemList = Rx<List<PurchaseItem>>([]);
   final priceController = TextEditingController().obs;
+  final totalPriceController = TextEditingController().obs;
   final selectedPurchase = ''.obs;
 
   //int
@@ -61,15 +62,10 @@ class CreatePurchaseController extends StockSelectionController {
     // Extract values from controllers
     final stock = selectedStock.value!;
     final stockQty = double.tryParse(stockQtyController.value.text) ?? 0.0;
-    final stockMrp = double.tryParse(stockMrpController.value.text) ??
-        stock.salesPrice ??
-        0.0;
-    final discountPercent =
-        double.tryParse(stockDiscountPercentController.value.text) ?? 0.0;
+    final price = double.tryParse(priceController.value.text) ?? 0.0;
 
     print('stockQty: $stockQty');
-    print('stockMrp: $stockMrp');
-    print('discountPercent: $discountPercent');
+    print('price : $price');
     print('purchaseMode: $purchaseMode');
 
     // Create a new SalesItem instance
@@ -77,28 +73,10 @@ class CreatePurchaseController extends StockSelectionController {
       stockId: stock.itemId,
       stockName: stock.name ?? '',
       quantity: stockQty.toPrecision(2),
-      price: stockMrp,
+      price: price,
+      subTotal: stockQty * price,
       brandName: stock.brandName,
     );
-
-    // Calculate subTotal based on purchaseMode
-    double? calculateSubTotal() {
-      switch (purchaseMode) {
-        case 'purchase_with_mrp':
-          return stockQty * stockMrp;
-        case 'purchase_price':
-          return stockQty * (stock.purchasePrice ?? 0.0);
-        case 'item_percent':
-          return (stockMrp - ((stockMrp * discountPercent) / 100)) * stockQty;
-        case 'total_price':
-          if (process == 'inline') {
-            return stockQty * (stock.purchasePrice ?? 0.0);
-          }
-      }
-      return null;
-    }
-
-    purchaseItem.subTotal = calculateSubTotal();
 
     // Handle error if subTotal is null
     if (purchaseItem.subTotal == null) {
@@ -199,5 +177,20 @@ class CreatePurchaseController extends StockSelectionController {
     purchaseItemList.value.removeAt(index);
     calculateAllSubtotal();
     purchaseItemList.refresh();
+  }
+
+  void onAddStockQtyChange(String? value) {
+    if (purchaseMode != 'total_price' || value == null) return;
+
+    final qty = double.tryParse(stockQtyController.value.text) ?? 0.0;
+    final price = double.tryParse(priceController.value.text) ?? 0.0;
+    totalPriceController.value.text = (qty * price).toStringAsFixed(2);
+  }
+
+  void onTotalPriceChange(String? value) {
+    if (purchaseMode != 'total_price' || value == null) return;
+    final qty = double.tryParse(stockQtyController.value.text) ?? 0.0;
+    final totalPrice = double.tryParse(totalPriceController.value.text) ?? 0.0;
+    priceController.value.text = (totalPrice / qty).toStringAsFixed(2);
   }
 }
