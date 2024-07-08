@@ -464,7 +464,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
             Obx(
               () {
                 return Visibility(
-                  visible: controller.salesItemList.value.isNotEmpty,
+                  visible: controller.salesItemList.value.isNotEmpty && controller.purchaseMode != null,
                   child: Column(
                     children: [
                       4.height,
@@ -474,7 +474,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                         height: 65.ph,
                         child: PurchaseItemListView(
                           purchaseMode: controller.purchaseMode!,
-                          salesItems: controller.salesItemList.value,
+                          salesItems: controller.purchaseItemList.value,
                           onItemRemove: controller.onItemRemove,
                           onQtyChange: controller.onQtyChange,
                           onDiscountChange: controller.onDiscountChange,

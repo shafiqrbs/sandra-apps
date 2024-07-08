@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/model/purchase_item.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/singleton_classes/color_schema.dart';
@@ -11,7 +12,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 class PurchaseItemListView extends BaseWidget {
   final String purchaseMode;
-  final List<SalesItem> salesItems;
+  final List<PurchaseItem> salesItems;
   final Function(int index) onItemRemove;
   final Function(num onQtyChange, int index) onQtyChange;
   final Function(num onQtyChange, int index) onDiscountChange;
@@ -87,7 +88,7 @@ class PurchaseItemListView extends BaseWidget {
                           ),
                           Expanded(
                             child: Text(
-                              'PP: ${element.purchasePrice}' ?? '',
+                              'PP: ${element.price}' ?? '',
                             ),
                           ),
                         ],
@@ -122,7 +123,8 @@ class PurchaseItemListView extends BaseWidget {
                                     ),
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
-                                      hintText: 'price'.tr, // Optional hint text
+                                      hintText:
+                                          'price'.tr, // Optional hint text
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
