@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:getx_template/app/core/abstract_controller/stock_selection_controller.dart';
 import 'package:getx_template/app/model/purchase_item.dart';
 import 'package:getx_template/app/model/stock.dart';
+import 'package:getx_template/app/pages/inventory/purchase/create_purchase/modals/purchase_process_modal/purchase_process_modal_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CreatePurchaseController extends StockSelectionController {
@@ -163,6 +164,13 @@ class CreatePurchaseController extends StockSelectionController {
       toast('please_select_item'.tr);
       return;
     }
+
+    Get.dialog(
+        PurchaseProcessModalView(
+          purchaseItemList: purchaseItemList.value,
+          preSales: null,
+        ),
+    );
   }
 
   Future<void> onItemRemove(

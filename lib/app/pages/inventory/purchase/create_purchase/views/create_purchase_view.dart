@@ -52,35 +52,35 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       children: [
         Column(
           children: [
-            if(false)
-            Obx(
-              () => Container(
-                color: Colors.white,
-                width: Get.width,
-                child: Column(
-                  children: [
-                    RadioListTile<String>(
-                      title: Text('purchase_with_mrp'.tr),
-                      value: 'purchase_with_mrp',
-                      groupValue: controller.selectedPurchase.value,
-                      onChanged: controller.changePurchase,
-                    ),
-                    RadioListTile<String>(
-                      title: Text('purchase_price'.tr),
-                      value: 'purchase_price',
-                      groupValue: controller.selectedPurchase.value,
-                      onChanged: controller.changePurchase,
-                    ),
-                    RadioListTile<String>(
-                      title: Text('total_price'.tr),
-                      value: 'total_price',
-                      groupValue: controller.selectedPurchase.value,
-                      onChanged: controller.changePurchase,
-                    ),
-                  ],
+            if (false)
+              Obx(
+                () => Container(
+                  color: Colors.white,
+                  width: Get.width,
+                  child: Column(
+                    children: [
+                      RadioListTile<String>(
+                        title: Text('purchase_with_mrp'.tr),
+                        value: 'purchase_with_mrp',
+                        groupValue: controller.selectedPurchase.value,
+                        onChanged: controller.changePurchase,
+                      ),
+                      RadioListTile<String>(
+                        title: Text('purchase_price'.tr),
+                        value: 'purchase_price',
+                        groupValue: controller.selectedPurchase.value,
+                        onChanged: controller.changePurchase,
+                      ),
+                      RadioListTile<String>(
+                        title: Text('total_price'.tr),
+                        value: 'total_price',
+                        groupValue: controller.selectedPurchase.value,
+                        onChanged: controller.changePurchase,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
             _buildProductSearchForm(),
             _buildStockAddForm(),
             _buildSelectedStockList(),
@@ -93,7 +93,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
 
   @override
   Widget? floatingActionButton() {
-    return null;
     return InkWell(
       onTap: controller.onSave,
       child: Container(
@@ -283,7 +282,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                     );
                                   }
                                 },
-                                onChanged:controller.onAddStockQtyChange,
+                                onChanged: controller.onAddStockQtyChange,
                               ),
                             ),
                             Text(
@@ -353,7 +352,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 //width: Get.width * 0.6,
                                 color: colors.textFieldColor,
                                 child: TextFormField(
-                                  controller: controller.totalPriceController.value,
+                                  controller:
+                                      controller.totalPriceController.value,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [
