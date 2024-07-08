@@ -12,6 +12,8 @@ import '/app/pages/domain/customer/customer_details/bindings/customer_details_bi
 import '/app/pages/domain/customer/customer_details/views/customer_details_view.dart';
 import '/app/pages/domain/customer/customer_list/bindings/customer_list_binding.dart';
 import '/app/pages/domain/customer/customer_list/views/customer_list_view.dart';
+import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
+import '/app/pages/domain/vendor/vendor_list/views/vendor_list_view.dart';
 import '/app/pages/intro/license/bindings/license_binding.dart';
 import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: Routes.settings,
       page: SettingsView.new,
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: Routes.vendorList,
+      page: VendorListView.new,
+      binding: VendorListBinding(),
     ),
   ];
 }
