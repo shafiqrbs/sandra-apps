@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
+import 'package:getx_template/app/model/purchase_item.dart';
 import '/app/core/abstract_controller/sales_controller.dart';
 import '/app/model/sales_item.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -8,6 +9,7 @@ import '/app/core/base/base_controller.dart';
 
 class CreatePurchaseController extends SalesController {
   String? purchaseMode;
+  final purchaseItemList = Rx<List<PurchaseItem>>([]);
 
   @override
   Future<void> onInit() async {
@@ -44,7 +46,7 @@ class CreatePurchaseController extends SalesController {
     print('purchaseMode: $purchaseMode');
 
     // Create a new SalesItem instance
-    final salesItem = SalesItem(
+    final purchaseItem = PurchaseItem(
       stockId: stock.itemId,
       stockName: stock.name ?? '',
       quantity: stockQty.toPrecision(2),
@@ -68,26 +70,26 @@ class CreatePurchaseController extends SalesController {
       return null;
     }
 
-    salesItem.subTotal = calculateSubTotal();
+    purchaseItem.subTotal = calculateSubTotal();
 
     // Handle error if subTotal is null
-    if (salesItem.subTotal == null) {
+    if (purchaseItem.subTotal == null) {
       toast('sub_total_error'.tr);
       return;
     }
 
     // Update salesSubTotal value
     salesSubTotal
-      ..value += salesItem.subTotal!
+      ..value += purchaseItem.subTotal!
       ..value = salesSubTotal.value.toPrecision(2);
 
     // Add salesItem to salesItemList
-    salesItemList.value.add(salesItem);
+    purchaseItemList.value.add(purchaseItem);
 
     // Reset fields after item is added
     resetAfterItemAdd();
 
-    print('salesItem.subTotal: ${salesItem.subTotal}');
+    print('salesItem.subTotal: ${purchaseItem.subTotal}');
   }
 
   @override
