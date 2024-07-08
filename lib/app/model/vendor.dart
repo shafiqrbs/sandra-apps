@@ -3,7 +3,7 @@ import 'entity_manager.dart';
 class VendorManager extends EntityManager<Vendor> {
   VendorManager()
       : super(
-          'customers',
+          'vendors',
           Vendor.fromJson,
           (e) => e.toJson(),
         );
@@ -35,7 +35,7 @@ class Vendor {
   factory Vendor.fromJson(Map<String, dynamic> json) {
     return Vendor(
       globalId: json['global_id'],
-      customerId: json['customer_id'],
+      customerId: json['vendor_id'],
       name: json['name'],
       mobile: json['mobile'],
       address: json['address'],
