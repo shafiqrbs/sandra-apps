@@ -182,11 +182,11 @@ class PurchaseProcessModalController extends PaymentGatewayController {
     update();
   }
 
-  Future<void> updateCustomer(Customer? customer) async {
-    if (customer != null) {
-      customerManager.searchTextController.value.text = customer.name!;
-      customerManager.searchedItems.value = null;
-      customerManager.selectedItem.value = customer;
+  Future<void> updateVendor(Vendor? vendor) async {
+    if (vendor != null) {
+      vendorManager.searchTextController.value.text = vendor.name!;
+      vendorManager.searchedItems.value = null;
+      vendorManager.selectedItem.value = vendor;
       //FocusScope.of(Get.context!).unfocus();
     }
   }

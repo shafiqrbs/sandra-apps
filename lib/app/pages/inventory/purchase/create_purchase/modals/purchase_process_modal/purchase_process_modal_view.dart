@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/global_widget/vendor_card_view.dart';
 import 'package:getx_template/app/model/purchase_item.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -274,21 +275,23 @@ class PurchaseProcessModalView
     BuildContext context,
   ) {
     return Obx(
-      () => controller.customerManager.selectedItem.value != null
-          ? Column(
-              children: [
-                1.percentHeight,
-                CustomerCardView(
-                  data: controller.customerManager.selectedItem.value!,
-                  index: 0,
-                  onTap: () {},
-                  onReceive: () {},
-                  showReceiveButton: false,
-                ),
-                1.percentHeight,
-              ],
-            )
-          : Container(),
+      () {
+        return controller.vendorManager.selectedItem.value != null
+            ? Column(
+                children: [
+                  1.percentHeight,
+                  VendorCardView(
+                    data: controller.vendorManager.selectedItem.value!,
+                    index: 0,
+                    onTap: () {},
+                    onReceive: () {},
+                    showReceiveButton: false,
+                  ),
+                  1.percentHeight,
+                ],
+              )
+            : Container();
+      },
     );
   }
 
@@ -296,22 +299,21 @@ class PurchaseProcessModalView
     BuildContext context,
   ) {
     return Obx(
-      () => controller.customerManager.searchedItems.value?.isNotEmpty ?? false
+      () => controller.vendorManager.searchedItems.value?.isNotEmpty ?? false
           ? Container(
               color: Colors.white,
               height: 40.ph,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount:
-                    controller.customerManager.searchedItems.value?.length ?? 0,
+                    controller.vendorManager.searchedItems.value?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return CustomerCardView(
-                    data:
-                        controller.customerManager.searchedItems.value![index],
+                  return VendorCardView(
+                    data: controller.vendorManager.searchedItems.value![index],
                     index: index,
                     onTap: () {
-                      controller.updateCustomer(
-                        controller.customerManager.searchedItems.value![index],
+                      controller.updateVendor(
+                        controller.vendorManager.searchedItems.value![index],
                       );
                       FocusScope.of(context).unfocus();
                     },
