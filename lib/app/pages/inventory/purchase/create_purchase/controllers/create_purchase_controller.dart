@@ -1,12 +1,16 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/abstract_controller/stock_selection_controller.dart';
 import 'package:getx_template/app/model/purchase_item.dart';
+import 'package:getx_template/app/model/stock.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CreatePurchaseController extends StockSelectionController {
   String? purchaseMode;
   final purchaseItemList = Rx<List<PurchaseItem>>([]);
+  final priceController = TextEditingController().obs;
+  final selectedPurchase = ''.obs;
 
   //int
   final purchaseSubTotal = 0.00.obs;
@@ -15,16 +19,40 @@ class CreatePurchaseController extends StockSelectionController {
   Future<void> onInit() async {
     super.onInit();
     purchaseMode = await prefs.getPurchaseConfig();
+    selectedPurchase.value = await prefs.getPurchaseConfig();
   }
 
-  Future<void> addSaleItem({
-    required String process,
-  }) async {
-    if (kDebugMode) {
-      print('on addSaleItem called');
+  Future<void> changePurchase(String? config) async {
+    if (config != null) {
+      selectedPurchase.value = config;
+      await prefs.setPurchaseConfig(config);
+    }
+  }
+
+  Future<void> onStockSelection(
+    Stock? stock,
+  ) async {
+    if (stock == null) return;
+
+    selectedStock.value = stock;
+    searchController.value.text = stock.name ?? '';
+    qtyFocusNode.value.requestFocus();
+    stockQtyController.value.clear();
+
+    if (purchaseMode == 'purchase_price') {
+      priceController.value.text = stock.purchasePrice.toString();
+    } else {
+      priceController.value.text = stock.salesPrice.toString();
     }
 
-    // Check if a stock is selected
+    stockList
+      ..value = []
+      ..refresh();
+  }
+
+  Future<void> addPurchaseItem({
+    required String process,
+  }) async {
     if (selectedStock.value == null) {
       toast('select_stock'.tr);
       return;
@@ -49,6 +77,7 @@ class CreatePurchaseController extends StockSelectionController {
       stockId: stock.itemId,
       stockName: stock.name ?? '',
       quantity: stockQty.toPrecision(2),
+      price: stockMrp,
       brandName: stock.brandName,
     );
 
@@ -87,6 +116,7 @@ class CreatePurchaseController extends StockSelectionController {
 
     // Reset fields after item is added
     resetAfterItemAdd();
+    purchaseItemList.refresh();
 
     print('salesItem.subTotal: ${purchaseItem.subTotal}');
   }
@@ -149,7 +179,7 @@ class CreatePurchaseController extends StockSelectionController {
     selectedStock
       ..value = stockList.value[index]
       ..refresh();
-    addSaleItem(
+    addPurchaseItem(
       process: 'inline',
     );
   }

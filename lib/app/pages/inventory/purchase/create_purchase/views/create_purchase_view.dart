@@ -52,6 +52,40 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       children: [
         Column(
           children: [
+            Obx(
+              () => Container(
+                color: Colors.white,
+                width: Get.width,
+                child: Column(
+                  children: [
+                    RadioListTile<String>(
+                      title: Text('purchase_with_mrp'.tr),
+                      value: 'purchase_with_mrp',
+                      groupValue: controller.selectedPurchase.value,
+                      onChanged: controller.changePurchase,
+                    ),
+                    RadioListTile<String>(
+                      title: Text('purchase_price'.tr),
+                      value: 'purchase_price',
+                      groupValue: controller.selectedPurchase.value,
+                      onChanged: controller.changePurchase,
+                    ),
+                    RadioListTile<String>(
+                      title: Text('total_price'.tr),
+                      value: 'total_price',
+                      groupValue: controller.selectedPurchase.value,
+                      onChanged: controller.changePurchase,
+                    ),
+                    RadioListTile<String>(
+                      title: Text('item_percent'.tr),
+                      value: 'item_percent',
+                      groupValue: controller.selectedPurchase.value,
+                      onChanged: controller.changePurchase,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             _buildProductSearchForm(),
             _buildStockAddForm(),
             _buildSelectedStockList(),
@@ -63,7 +97,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
   }
 
   @override
-  Widget floatingActionButton() {
+  Widget? floatingActionButton() {
+    return null;
     return InkWell(
       onTap: controller.onSave,
       child: Container(
@@ -248,7 +283,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: () {
                                   if (controller.selectedStock.value != null) {
-                                    controller.addSaleItem(
+                                    controller.addPurchaseItem(
                                       process: '',
                                     );
                                   }
@@ -278,7 +313,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               //width: Get.width * 0.6,
                               color: colors.textFieldColor,
                               child: TextFormField(
-                                controller: controller.stockMrpController.value,
+                                controller: controller.priceController.value,
                                 readOnly:
                                     controller.purchaseMode == 'item_percent',
                                 textAlign: TextAlign.center,
@@ -294,12 +329,12 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 ),
                                 cursorColor: colors.formCursorColor,
                                 decoration: getInputDecoration(
-                                  hint: 'mrp'.tr,
+                                  hint: 'price'.tr,
                                 ),
                               ),
                             ),
                             Text(
-                              'mrp'.tr,
+                              controller.purchaseMode ?? '',
                               style: TextStyle(
                                 fontSize: smallTFSize,
                                 color: colors.primaryTextColor,
@@ -333,7 +368,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   onEditingComplete: () {
                                     if (controller.selectedStock.value !=
                                         null) {
-                                      controller.addSaleItem(
+                                      controller.addPurchaseItem(
                                         process: '',
                                       );
                                     }
@@ -381,7 +416,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   onEditingComplete: () {
                                     if (controller.selectedStock.value !=
                                         null) {
-                                      controller.addSaleItem(
+                                      controller.addPurchaseItem(
                                         process: '',
                                       );
                                     }
@@ -423,7 +458,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 );
                               }
                               if (controller.selectedStock.value != null) {
-                                controller.addSaleItem(
+                                controller.addPurchaseItem(
                                   process: '',
                                 );
                               }

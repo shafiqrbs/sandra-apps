@@ -16,24 +16,6 @@ abstract class StockSelectionController extends BaseController {
   final stockDiscountPercentController = TextEditingController().obs;
   final searchController = TextEditingController().obs;
 
-  Future<void> onStockSelection(Stock? stock) async {
-    if (stock == null) return;
-
-    selectedStock.value = stock;
-    searchController.value.text = stock.name ?? '';
-    qtyFocusNode.value.requestFocus();
-    stockQtyController.value.text = '';
-    stockMrpController.value.text =
-        selectedStock.value?.salesPrice?.toString() ?? '';
-    stockDiscountPercentController.value.text = '';
-
-    stockQtyController.refresh();
-    stockMrpController.refresh();
-    stockDiscountPercentController.refresh();
-    stockList
-      ..value = []
-      ..refresh();
-  }
 
   Future<void> getStocks(
     String? pattern,
