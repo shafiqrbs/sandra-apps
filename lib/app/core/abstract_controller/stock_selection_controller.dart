@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx_template/app/core/base/base_controller.dart';
+import 'package:getx_template/app/model/stock.dart';
+
+abstract class StockSelectionController extends BaseController {
+  final stockList = Rx<List<Stock>>([]);
+  final selectedStock = Rx<Stock?>(null);
+  final stockSearchController = TextEditingController().obs;
+  final qtyFocusNode = FocusNode().obs;
+
+  final stockMrpController = TextEditingController().obs;
+  final stockQtyController = TextEditingController().obs;
+  final stockDiscountController = TextEditingController().obs;
+  final stockTotalController = TextEditingController().obs;
+  final stockDiscountPercentController = TextEditingController().obs;
+  final searchController = TextEditingController().obs;
+
+  Future<void> onStockSelection(Stock? stock) async {
+    if (stock == null) return;
+
+    selectedStock.value = stock;
+    searchController.value.text = stock.name ?? '';
+    qtyFocusNode.value.requestFocus();
+    stockQtyController.value.text = '';
+    stockMrpController.value.text =
+        selectedStock.value?.salesPrice?.toString() ?? '';
+    stockDiscountPercentController.value.text = '';
+
+    stockQtyController.refresh();
+    stockMrpController.refresh();
+    stockDiscountPercentController.refresh();
+    stockList
+      ..value = []
+      ..refresh();
+  }
+
+  Future<void> getStocks(
+    String? pattern,
+  ) async {
+    stockSearchController.refresh();
+    selectedStock.value = null;
+
+    if (pattern == null || pattern.isEmpty) {
+      stockList.value = [];
+      return;
+    }
+
+    final stocks = await dbHelper.getAllWhr(
+      tbl: dbTables.tableStocks,
+      where: "name LIKE '$pattern%'",
+      whereArgs: [],
+      limit: 100,
+    );
+
+    stockList
+      ..value = stocks.map(Stock.fromJson).toList()
+      ..refresh();
+  }
+
+  void resetAfterItemAdd() {
+    selectedStock.value = null;
+    searchController.value.clear();
+    stockMrpController.value.clear();
+    stockQtyController.value.clear();
+    stockDiscountPercentController.value.clear();
+    stockList.value = [];
+  }
+
+  Future<void> onClearSearchField() async {
+    selectedStock.value = null;
+    searchController.value.clear();
+    searchController.refresh();
+    stockList
+      ..value = []
+      ..refresh();
+  }
+}

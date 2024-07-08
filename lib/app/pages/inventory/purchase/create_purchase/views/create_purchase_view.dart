@@ -137,7 +137,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                         ),
                       ),
                       Text(
-                        '${controller.salesSubTotal}',
+                        '${controller.purchaseSubTotal}',
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: Colors.white,
