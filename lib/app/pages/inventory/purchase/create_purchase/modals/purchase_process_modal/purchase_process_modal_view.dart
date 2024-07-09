@@ -18,7 +18,8 @@ import '/app/global_widget/transaction_method_item_view.dart';
 import '/app/global_widget/vendor_card_view.dart';
 import 'purchase_process_modal_controller.dart';
 
-class PurchaseProcessModalView extends BaseView<PurchaseProcessModalController> {
+class PurchaseProcessModalView
+    extends BaseView<PurchaseProcessModalController> {
   final Purchase? preSales;
   final List<PurchaseItem> purchaseItemList;
   PurchaseProcessModalView({
@@ -373,6 +374,86 @@ class PurchaseProcessModalView extends BaseView<PurchaseProcessModalController> 
             ),
           ),
         ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: 4,
+                    right: 4,
+                  ),
+                  padding: const EdgeInsets.only(
+                    top: 4,
+                    bottom: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      containerBorderRadius,
+                    ),
+                    color: colors.dangerBaseColor.withOpacity(.3),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: centerMAA,
+                    children: [
+                      Obx(
+                        () => Text(
+                          controller.purchaseReturnValue.value.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: mediumTFSize,
+                          ),
+                        ),
+                      ),
+                      Obx(
+                        () => Text(
+                          controller.returnMsg.value.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                  ),
+                  height: textFieldHeight,
+                  alignment: Alignment.center,
+                  child: TextFormField(
+                    controller: controller.amountController.value,
+                    inputFormatters: doubleInputFormatter,
+                    textInputAction: doneInputAction,
+                    onEditingComplete: () => controller.showConfirmationDialog(
+                      globalKey.currentContext!,
+                    ),
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: regularTFSize,
+                    ),
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      hintText: 'amount'.tr,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: regularTFSize,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.primaryBaseColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    onChanged: controller.onAmountChange,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -411,6 +492,94 @@ class PurchaseProcessModalView extends BaseView<PurchaseProcessModalController> 
             ),
         ],
       ),
+    );
+  }
+
+  Widget _buildPaymentReceiveRow(
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: 4,
+                    right: 4,
+                  ),
+                  padding: const EdgeInsets.only(
+                    top: 4,
+                    bottom: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      containerBorderRadius,
+                    ),
+                    color: colors.dangerBaseColor.withOpacity(.3),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: centerMAA,
+                    children: [
+                      Obx(
+                        () => Text(
+                          controller.purchaseReturnValue.value.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: mediumTFSize,
+                          ),
+                        ),
+                      ),
+                      Obx(
+                        () => Text(
+                          controller.returnMsg.value.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                  ),
+                  height: textFieldHeight,
+                  alignment: Alignment.center,
+                  child: TextFormField(
+                    controller: controller.amountController.value,
+                    inputFormatters: doubleInputFormatter,
+                    textInputAction: doneInputAction,
+                    onEditingComplete: () =>
+                        controller.showConfirmationDialog(context),
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: regularTFSize,
+                    ),
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      hintText: 'amount'.tr,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: regularTFSize,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.primaryBaseColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    onChanged: controller.onAmountChange,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

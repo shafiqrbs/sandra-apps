@@ -35,6 +35,8 @@ class PurchaseProcessModalController extends BaseController {
   final transactionMethodsManager = TransactionMethodsManager();
   final amountController = TextEditingController().obs;
 
+  final returnMsg = 'due'.obs;
+
   PurchaseProcessModalController({
     required List<PurchaseItem> itemList,
     this.prePurchase,
@@ -307,4 +309,6 @@ class PurchaseProcessModalController extends BaseController {
       refresh();
     }
   }
+
+  void onAmountChange(String value) {}
 }
