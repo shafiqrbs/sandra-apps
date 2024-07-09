@@ -27,10 +27,6 @@ class Purchase {
   String? updatedAt;
 
   double? subTotal;
-  double? discount;
-  double? discountCalculation;
-  double? vat;
-  double? sd;
   double? netTotal;
   double? purchasePrice;
   double? received;
@@ -38,7 +34,6 @@ class Purchase {
   int? deliveryCharge;
   String? paymentInWord;
   String? process;
-  String? discountType;
   int? revised;
   int? printWithoutDiscount;
   int? isHold;
@@ -73,10 +68,6 @@ class Purchase {
     this.createdAt,
     this.updatedAt,
     this.subTotal,
-    this.discount,
-    this.discountCalculation,
-    this.vat,
-    this.sd,
     this.netTotal,
     this.purchasePrice,
     this.received,
@@ -84,7 +75,6 @@ class Purchase {
     this.deliveryCharge,
     this.paymentInWord,
     this.process,
-    this.discountType,
     this.revised,
     this.printWithoutDiscount,
     this.isHold,
@@ -118,10 +108,6 @@ class Purchase {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       subTotal: parseDouble(json['sub_total']),
-      discount: parseDouble(json['discount']),
-      discountCalculation: parseDouble(json['discount_calculation']),
-      vat: parseDouble(json['vat']),
-      sd: parseDouble(json['sd']),
       netTotal: parseDouble(json['net_total']),
       purchasePrice: parseDouble(json['purchase_price']),
       received: parseDouble(json['received']),
@@ -131,7 +117,6 @@ class Purchase {
           ? null
           : converter.convertInt(json['payment_in_word']),
       process: json['process'],
-      discountType: json['discount_type'],
       revised: json['revised'],
       printWithoutDiscount: json['print_without_discount'],
       isHold: json['is_hold'],
@@ -176,10 +161,6 @@ class Purchase {
       'created_at': createdAt,
       'updated_at': updatedAt,
       'sub_total': subTotal,
-      'discount': discount,
-      'discount_calculation': discountCalculation,
-      'vat': vat,
-      'sd': sd,
       'net_total': netTotal,
       'purchase_price': purchasePrice,
       'received': received,
@@ -187,7 +168,6 @@ class Purchase {
       'delivery_charge': deliveryCharge,
       'payment_in_word': paymentInWord,
       'process': process,
-      'discount_type': discountType,
       'revised': revised,
       'print_without_discount': printWithoutDiscount,
       'is_hold': isHold,
