@@ -3,7 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
-import '/app/model/customer.dart';
+import '/app/entity/customer.dart';
 
 class ReceiveModalController extends PaymentGatewayController {
   ReceiveModalController({

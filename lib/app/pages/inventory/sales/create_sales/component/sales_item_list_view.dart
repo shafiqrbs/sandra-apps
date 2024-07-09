@@ -6,7 +6,7 @@ import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
-import '/app/model/sales_item.dart';
+import '/app/entity/sales_item.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SalesItemListView extends BaseWidget {

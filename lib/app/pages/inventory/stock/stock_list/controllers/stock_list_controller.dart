@@ -4,7 +4,7 @@ import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import '/app/model/stock.dart';
+import '/app/entity/stock.dart';
 import '/app/core/base/base_controller.dart';
 
 class StockListController extends BaseController {

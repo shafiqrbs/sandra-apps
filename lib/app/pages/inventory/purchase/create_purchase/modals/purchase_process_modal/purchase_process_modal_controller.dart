@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/base/base_controller.dart';
 import 'package:getx_template/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
-import 'package:getx_template/app/model/purchase_item.dart';
-import 'package:getx_template/app/model/transaction_methods.dart';
-import 'package:getx_template/app/model/vendor.dart';
+import 'package:getx_template/app/entity/purchase_item.dart';
+import 'package:getx_template/app/entity/transaction_methods.dart';
+import 'package:getx_template/app/entity/vendor.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -16,9 +16,9 @@ import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/global_modal/order_process_confirmation_modal/order_process_confirmation_view.dart';
-import '/app/model/customer.dart';
-import '/app/model/sales.dart';
-import '/app/model/sales_item.dart';
+import '/app/entity/customer.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/sales_item.dart';
 
 class PurchaseProcessModalController extends PaymentGatewayController {
   Sales? preSales;

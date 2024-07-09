@@ -3,7 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:getx_template/app/global_widget/vendor_card_view.dart';
-import 'package:getx_template/app/model/purchase_item.dart';
+import 'package:getx_template/app/entity/purchase_item.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
@@ -14,9 +14,9 @@ import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/global_widget/customer_card_view.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
-import '/app/model/sales.dart';
-import '/app/model/sales_item.dart';
-import '/app/model/user.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/sales_item.dart';
+import '/app/entity/user.dart';
 import 'purchase_process_modal_controller.dart';
 
 class PurchaseProcessModalView

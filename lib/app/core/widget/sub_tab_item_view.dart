@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/responsive.dart';
-import '/app/model/tab_bar_items.dart';
+import '/app/entity/tab_bar_items.dart';
 
 import 'draw_icon.dart';
 

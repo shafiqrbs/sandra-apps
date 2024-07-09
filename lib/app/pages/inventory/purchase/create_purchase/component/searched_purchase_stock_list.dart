@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/core/base/base_widget.dart';
-import '/app/model/stock.dart';
+import '/app/entity/stock.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SearchedPurchaseStockList extends StatelessWidget {

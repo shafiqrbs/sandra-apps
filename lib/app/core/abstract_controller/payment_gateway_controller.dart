@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
-import '/app/model/customer.dart';
-import '/app/model/sales_item.dart';
-import '/app/model/transaction_methods.dart';
-import '/app/model/user.dart';
+import '/app/entity/customer.dart';
+import '/app/entity/sales_item.dart';
+import '/app/entity/transaction_methods.dart';
+import '/app/entity/user.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 abstract class PaymentGatewayController extends BaseController {

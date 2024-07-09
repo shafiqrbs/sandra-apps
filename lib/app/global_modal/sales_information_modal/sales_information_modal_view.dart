@@ -9,7 +9,7 @@ import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/label_value.dart';
-import '/app/model/sales.dart';
+import '/app/entity/sales.dart';
 import 'sales_information_modal_controller.dart';
 
 class SalesInformationModalView

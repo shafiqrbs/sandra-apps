@@ -6,7 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/values/app_dimension.dart';
-import '/app/model/stock.dart';
+import '/app/entity/stock.dart';
 
 class ProductSearchForm extends StatelessWidget with AppDimension {
   final Function(String value) onSearch;

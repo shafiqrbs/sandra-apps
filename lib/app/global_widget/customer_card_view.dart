@@ -3,7 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/common_icon_text.dart';
-import '/app/model/customer.dart';
+import '/app/entity/customer.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CustomerCardView extends BaseWidget {

@@ -9,7 +9,7 @@ import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/global_widget/customer_card_view.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
-import '/app/model/customer.dart';
+import '/app/entity/customer.dart';
 import 'receive_modal_controller.dart';
 
 class ReceiveModalView extends BaseView<ReceiveModalController> {

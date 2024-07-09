@@ -8,9 +8,9 @@ import '/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import '/app/model/customer.dart';
-import '/app/model/sales.dart';
-import '/app/model/tab_bar_items.dart';
+import '/app/entity/customer.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/tab_bar_items.dart';
 
 class SalesListController extends BaseController {
   final salesManager = SalesManager();

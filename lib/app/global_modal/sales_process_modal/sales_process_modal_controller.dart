@@ -11,9 +11,9 @@ import '/app/core/core_model/logged_user.dart';
 import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/order_process_confirmation_modal/order_process_confirmation_view.dart';
-import '/app/model/customer.dart';
-import '/app/model/sales.dart';
-import '/app/model/sales_item.dart';
+import '/app/entity/customer.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/sales_item.dart';
 
 class SalesProcessModalController extends PaymentGatewayController {
   Sales? preSales;

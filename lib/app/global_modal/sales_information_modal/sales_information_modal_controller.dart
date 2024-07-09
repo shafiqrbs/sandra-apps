@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
-import '/app/model/sales.dart';
+import '/app/entity/sales.dart';
 import '/app/routes/app_pages.dart';
 
 class SalesInformationModalController extends PrinterController {

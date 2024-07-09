@@ -13,9 +13,9 @@ import '/app/core/widget/row_button.dart';
 import '/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
 import '/app/global_widget/customer_card_view.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
-import '/app/model/sales.dart';
-import '/app/model/sales_item.dart';
-import '/app/model/user.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/sales_item.dart';
+import '/app/entity/user.dart';
 
 class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   final Sales? preSales;

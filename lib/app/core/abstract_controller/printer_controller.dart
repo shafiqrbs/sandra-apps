@@ -11,8 +11,8 @@ import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
-import '/app/model/sales.dart';
-import '/app/model/sales_item.dart';
+import '/app/entity/sales.dart';
+import '/app/entity/sales_item.dart';
 
 class PrinterController extends BaseController {
   final msg = ''.obs;

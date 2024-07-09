@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
-import '/app/model/customer.dart';
+import '/app/entity/customer.dart';
 import '/app/core/base/base_controller.dart';
 
 class CustomerListController extends BaseController {

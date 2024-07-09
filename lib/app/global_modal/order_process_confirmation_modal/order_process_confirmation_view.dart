@@ -8,7 +8,7 @@ import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/global_widget/shimmer_list_view.dart';
-import '/app/model/sales.dart';
+import '/app/entity/sales.dart';
 import 'order_process_confirmation_controller.dart';
 
 class OrderProcessConfirmationView

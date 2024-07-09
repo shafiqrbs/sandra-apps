@@ -4,7 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/core/widget/common_cache_image_widget.dart';
-import '/app/model/transaction_methods.dart';
+import '/app/entity/transaction_methods.dart';
 
 class TransactionMethodItemView extends BaseWidget {
   final TransactionMethods method;

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:getx_template/app/core/widget/dialog_pattern.dart';
 import 'package:getx_template/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
-import 'package:getx_template/app/model/vendor.dart';
+import 'package:getx_template/app/entity/vendor.dart';
 import '/app/core/base/base_controller.dart';
 
 class VendorListController extends BaseController {
