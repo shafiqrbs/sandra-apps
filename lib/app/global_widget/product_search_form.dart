@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/core_model/voice_recognition.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/singleton_classes/color_schema.dart';
@@ -112,7 +113,20 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                               right: 4,
                             ),
                             child: InkWell(
-                              onTap: () async {},
+                              onTap: () async {
+                                final voiceRecognition = VoiceRecognition();
+
+                                if (!voiceRecognition.isListening) {
+                                  await voiceRecognition.startListening(
+                                    (result) {
+                                      searchController.text = result;
+                                      onSearch(result);
+                                    },
+                                  );
+                                } else {
+                                  await voiceRecognition.stopListening();
+                                }
+                              },
                               child: Icon(
                                 TablerIcons.microphone,
                                 color: colors.primaryTextColor,
