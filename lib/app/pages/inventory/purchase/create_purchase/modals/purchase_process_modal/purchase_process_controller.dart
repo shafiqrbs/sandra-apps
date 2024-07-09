@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -205,9 +206,9 @@ class PurchaseProcessController extends BaseController {
     if (!formKey.currentState!.validate()) return;
 
     final isZeroSalesAllowed = await prefs.getIsZeroSalesAllowed();
-    final sales = await generatePurchase();
+    final purchase = await generatePurchase();
 
-    if (sales == null) {
+    if (purchase == null) {
       toast('failed_to_generate_sales'.tr);
       return;
     }
@@ -220,24 +221,24 @@ class PurchaseProcessController extends BaseController {
     final isInvalidAmount = amount > 0 && amount < netTotal.value;
 
     if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
-      sales.received = netTotal.value;
+      purchase.received = netTotal.value;
     } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
       toast('this_amount_is_not_valid'.tr);
       return;
     } else if (amount > netTotal.value && isCustomerSelected) {
-      sales.received = netTotal.value;
+      purchase.received = netTotal.value;
     }
 
     if (!context.mounted) return;
 
-/*    final confirmed = await showDialog<bool>(
+    final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return DialogPattern(
           title: 'title',
           subTitle: 'subTitle',
-          child: OrderProcessConfirmationView(
-            sales: sales,
+          child: PurchaseConfirmView(
+            purchase: purchase,
             isEdit: prePurchase != null,
           ),
         );
@@ -249,7 +250,7 @@ class PurchaseProcessController extends BaseController {
       Get.back(
         result: purchaseItemList.value,
       );
-    }*/
+    }
   }
 
   Future<void> reset(BuildContext context) async {

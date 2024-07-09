@@ -8,7 +8,6 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
-import '/app/entity/sales.dart';
 import '/app/global_widget/shimmer_list_view.dart';
 import 'purchase_confirm_controller.dart';
 
@@ -42,110 +41,111 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
               child: Column(
                 children: [
                   Obx(
-                    () => controller.isLoader.value ||
-                            controller.connected.value
-                        ? Container()
-                        : Column(
-                            children: [
-                              Obx(
-                                () {
-                                  return Text(
-                                    controller.msg.value,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                    () {
+                      return controller.isLoader.value || controller.connected.value
+                          ? Container()
+                          : Column(
+                              children: [
+                                Obx(
+                                  () {
+                                    return Text(
+                                      controller.msg.value,
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Row(
+                                  children: [
+                                    RowButton(
+                                      buttonName: 'scan'.tr,
+                                      onTap: controller.scanBluetooth,
                                     ),
-                                  );
-                                },
-                              ),
-                              Row(
-                                children: [
-                                  RowButton(
-                                    buttonName: 'scan'.tr,
-                                    onTap: controller.scanBluetooth,
-                                  ),
-                                ],
-                              ),
-                              Obx(
-                                () => SizedBox(
-                                  height: 40.ph,
-                                  child: controller.isConnecting.value
-                                      ? ShimmerListView(
-                                          itemCount: 1,
-                                          msg: 'connecting'.tr,
-                                        )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: controller
-                                              .availAbleDevices.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return InkWell(
-                                              onTap: () async {
-                                                if (kDebugMode) {
-                                                  print(
-                                                    'macAdress: ${controller.availAbleDevices[index].macAdress}',
+                                  ],
+                                ),
+                                Obx(
+                                  () => SizedBox(
+                                    height: 40.ph,
+                                    child: controller.isConnecting.value
+                                        ? ShimmerListView(
+                                            itemCount: 1,
+                                            msg: 'connecting'.tr,
+                                          )
+                                        : ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                .availAbleDevices.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return InkWell(
+                                                onTap: () async {
+                                                  if (kDebugMode) {
+                                                    print(
+                                                      'macAdress: ${controller.availAbleDevices[index].macAdress}',
+                                                    );
+                                                  }
+                                                  await controller.connect(
+                                                    controller
+                                                        .availAbleDevices[index]
+                                                        .macAdress,
                                                   );
-                                                }
-                                                await controller.connect(
-                                                  controller
-                                                      .availAbleDevices[index]
-                                                      .macAdress,
-                                                );
-                                              },
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                margin: const EdgeInsets.only(
-                                                  top: 4,
-                                                  bottom: 4,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                    containerBorderRadius,
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  margin: const EdgeInsets.only(
+                                                    top: 4,
+                                                    bottom: 4,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      containerBorderRadius,
+                                                    ),
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        controller
+                                                            .availAbleDevices[
+                                                                index]
+                                                            .name,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      4.width,
+                                                      1.percentHeight,
+                                                      Text(
+                                                        controller
+                                                            .availAbleDevices[
+                                                                index]
+                                                            .macAdress,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      controller
-                                                          .availAbleDevices[
-                                                              index]
-                                                          .name,
-                                                      style: const TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    4.width,
-                                                    1.percentHeight,
-                                                    Text(
-                                                      controller
-                                                          .availAbleDevices[
-                                                              index]
-                                                          .macAdress,
-                                                      style: const TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                              );
+                                            },
+                                          ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            );
+                    },
                   ),
                   1.percentHeight,
                   Container(
