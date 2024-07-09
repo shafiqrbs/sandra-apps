@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:getx_template/app/entity/purchase.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -161,14 +162,12 @@ class Services {
     required String? startDate,
     required String? endDate,
     required String? customerId,
-    required String? vendorId,
     required String? keyword,
   }) async {
     final query = <String, dynamic>{};
     if (startDate != null) query['start_date'] = startDate;
     if (endDate != null) query['end_date'] = endDate;
     if (customerId != null) query['customer_id'] = customerId;
-    if (vendorId != null) query['vendor_id'] = vendorId;
     if (keyword != null) query['keyword'] = keyword;
 
     if (query.isEmpty) {
@@ -187,6 +186,37 @@ class Services {
     return parseList(
       list: response.data,
       fromJson: Sales.fromJson,
+    );
+  }
+
+  Future<List<Purchase>?> getPurchaseList({
+    required String? startDate,
+    required String? endDate,
+    required String? vendorId,
+    required String? keyword,
+  }) async {
+    final query = <String, dynamic>{};
+    if (startDate != null) query['start_date'] = startDate;
+    if (endDate != null) query['end_date'] = endDate;
+    if (vendorId != null) query['vendor_id'] = vendorId;
+    if (keyword != null) query['keyword'] = keyword;
+
+    if (query.isEmpty) {
+      query['start_date'] = '01-01-2023';
+      query['end_date'] = '02-01-2023';
+    }
+
+    final response = await dio.post(
+      APIType.public,
+      'poskeeper-online-sales-list',
+      query,
+      query: query,
+      headers: _buildHeader(),
+    );
+
+    return parseList(
+      list: response.data,
+      fromJson: Purchase.fromJson,
     );
   }
 

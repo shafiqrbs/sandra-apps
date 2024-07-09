@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
+import '/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
