@@ -14,4 +14,6 @@ class DbTables {
   final String tablePrescription = 'prescription';
   final String tableSale = 'sales';
   final String tableSalesItem = 'sales_item';
+  final String tablePurchase = 'purchases';
+  final String tablePurchaseItem = 'purchase_item';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_controller.dart';
-import 'package:getx_template/app/entity/stock.dart';
+import '/app/core/base/base_controller.dart';
+import '/app/entity/stock.dart';
 
 abstract class StockSelectionController extends BaseController {
   final stockList = Rx<List<Stock>>([]);

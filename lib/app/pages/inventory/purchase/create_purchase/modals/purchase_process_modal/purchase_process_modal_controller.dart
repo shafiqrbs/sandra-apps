@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_controller.dart';
-import 'package:getx_template/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
-import 'package:getx_template/app/entity/purchase_item.dart';
-import 'package:getx_template/app/entity/transaction_methods.dart';
-import 'package:getx_template/app/entity/vendor.dart';
+import '/app/core/base/base_controller.dart';
+import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
+import '/app/entity/purchase_item.dart';
+import '/app/entity/transaction_methods.dart';
+import '/app/entity/vendor.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
