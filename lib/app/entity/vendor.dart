@@ -11,7 +11,7 @@ class VendorManager extends EntityManager<Vendor> {
 
 class Vendor {
   int? globalId;
-  int? customerId;
+  int? vendorId;
   String? name;
   String? mobile;
   String? address;
@@ -22,7 +22,7 @@ class Vendor {
 
   Vendor({
     this.globalId,
-    this.customerId,
+    this.vendorId,
     this.name,
     this.mobile,
     this.address,
@@ -35,7 +35,7 @@ class Vendor {
   factory Vendor.fromJson(Map<String, dynamic> json) {
     return Vendor(
       globalId: json['global_id'],
-      customerId: json['vendor_id'],
+      vendorId: json['vendor_id'],
       name: json['name'],
       mobile: json['mobile'],
       address: json['address'],
@@ -51,7 +51,7 @@ class Vendor {
   Map<String, dynamic> toJson() {
     return {
       'global_id': globalId,
-      'customer_id': customerId,
+      'customer_id': vendorId,
       'name': name,
       'mobile': mobile,
       'address': address,

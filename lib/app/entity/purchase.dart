@@ -197,10 +197,10 @@ class Purchase {
       'sales_by': salesBy,
       'approved_by_id': approvedById,
       'approved_by': approvedBy,
-      'customer_id': vendorId,
-      'customer_name': vendorName,
-      'customer_mobile': vendorMobile,
-      'customer_address': vendorAddress,
+      'vendor_id': vendorId,
+      'vendor_name': vendorName,
+      'vendor_mobile': vendorMobile,
+      'vendor_address': vendorAddress,
       'method_id': methodId,
       'method_name': methodName,
       'method_mode': methodMode,
@@ -214,8 +214,8 @@ class Purchase {
     };
   }
 
-  void setCustomerData(Vendor vendor) {
-    vendorId = vendor.customerId;
+  void setVendorData(Vendor vendor) {
+    vendorId = vendor.vendorId;
     vendorName = vendor.name;
     vendorMobile = vendor.mobile;
     vendorAddress = vendor.address;
