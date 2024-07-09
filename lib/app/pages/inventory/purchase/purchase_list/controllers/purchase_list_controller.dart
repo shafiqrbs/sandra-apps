@@ -78,7 +78,7 @@ class PurchaseListController extends BaseController {
 
   Future<void> _loadSalesData(String whereClause) async {
     final list = await dbHelper.getAllWhr(
-      tbl: dbTables.tableSale,
+      tbl: dbTables.tablePurchase,
       where: whereClause,
       whereArgs: [],
     );
@@ -130,4 +130,6 @@ class PurchaseListController extends BaseController {
       Routes.createPurchase,
     );
   }
+
+  showSalesInformationModal(BuildContext context, Purchase element) {}
 }

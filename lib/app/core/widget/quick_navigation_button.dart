@@ -124,9 +124,9 @@ List<Widget> buttonList = [
     onTap: () => navigatePage(Routes.vendorList),
   ),
   TbdRoundButton(
-    text: 'stock_item',
-    icon: TablerIcons.credit_card,
-    onTap: () {},
+    text: 'purchase_list',
+    icon: TablerIcons.shopping_cart,
+    onTap: () => navigatePage(Routes.purchaseList),
   ),
   TbdRoundButton(
     text: 'category',
