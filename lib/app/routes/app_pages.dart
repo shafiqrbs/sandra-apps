@@ -22,6 +22,8 @@ import '/app/pages/intro/splash/bindings/splash_binding.dart';
 import '/app/pages/intro/splash/views/splash_view.dart';
 import '/app/pages/inventory/purchase/create_purchase/bindings/create_purchase_binding.dart';
 import '/app/pages/inventory/purchase/create_purchase/views/create_purchase_view.dart';
+import '/app/pages/inventory/purchase/purchase_list/bindings/purchase_list_binding.dart';
+import '/app/pages/inventory/purchase/purchase_list/views/purchase_list_view.dart';
 import '/app/pages/inventory/sales/create_sales/bindings/create_sales_binding.dart';
 import '/app/pages/inventory/sales/create_sales/views/create_sales_view.dart';
 import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
@@ -113,6 +115,11 @@ class AppPages {
       name: Routes.vendorList,
       page: VendorListView.new,
       binding: VendorListBinding(),
+    ),
+    GetPage(
+      name: Routes.purchaseList,
+      page: PurchaseListView.new,
+      binding: PurchaseListBinding(),
     ),
   ];
 }
