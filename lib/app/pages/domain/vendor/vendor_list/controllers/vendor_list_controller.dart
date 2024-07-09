@@ -25,6 +25,8 @@ class VendorListController extends BaseController {
 
   Future<void> onClearSearchText() async {
     vendorManager.searchTextController.value.clear();
+    vendorManager.allItems.value?.clear();
+    vendorManager.allItems.refresh();
     isSearchSelected.value = false;
     await vendorManager.paginate();
   }

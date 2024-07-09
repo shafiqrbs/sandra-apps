@@ -147,4 +147,12 @@ class PurchaseListController extends BaseController {
       ),
     );
   }
+
+  Future<void> onClearSearchText() async {
+    purchaseManager.searchTextController.value.clear();
+    purchaseManager.allItems.value?.clear();
+    purchaseManager.allItems.refresh();
+    isSearchSelected.toggle();
+    await changeIndex(selectedIndex.value);
+  }
 }

@@ -26,6 +26,8 @@ class CustomerListController extends BaseController {
 
   Future<void> onClearSearchText() async {
     customerManager.searchTextController.value.clear();
+    customerManager.allItems.value?.clear();
+    customerManager.allItems.refresh();
     isSearchSelected.value = false;
     await customerManager.paginate();
   }

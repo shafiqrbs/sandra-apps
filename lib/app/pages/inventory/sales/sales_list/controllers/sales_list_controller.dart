@@ -112,11 +112,11 @@ class SalesListController extends BaseController {
     );
   }
 
-  showSalesInformationModal(
+  Future<void> showSalesInformationModal(
     BuildContext context,
     Sales element,
-  ) {
-    final result = Get.dialog(
+  ) async {
+    final result = await Get.dialog(
       DialogPattern(
         title: 'title',
         subTitle: 'subTitle',
@@ -152,5 +152,13 @@ class SalesListController extends BaseController {
     Get.offNamed(
       Routes.createSales,
     );
+  }
+
+  Future<void> onClearSearchText() async {
+    salesManager.searchTextController.value.clear();
+    salesManager.allItems.value?.clear();
+    salesManager.allItems.refresh();
+    isSearchSelected.toggle();
+    await changeIndex(selectedIndex.value);
   }
 }

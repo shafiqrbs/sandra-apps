@@ -50,6 +50,8 @@ class StockListController extends BaseController {
 
   Future<void> onClearSearchText() async {
     stockManager.searchTextController.value.clear();
+    stockManager.allItems.value?.clear();
+    stockManager.allItems.refresh();
     isSearchSelected.toggle();
     await stockManager.paginate();
   }
