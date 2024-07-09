@@ -234,6 +234,20 @@ class Services {
     return Sales.fromJson(response.data);
   }
 
+  Future<Purchase?> getOnlinePurchaseDetails({
+    required String id,
+  }) async {
+    final response = await dio.get(
+      APIType.public,
+      'poskeeper-online-sales-details',
+      query: {
+        'id': id,
+      },
+      headers: _buildHeader(),
+    );
+    return Purchase.fromJson(response.data);
+  }
+
   Future<bool> postReceive({
     required bool shouldShowLoader,
     required String customer,
@@ -276,7 +290,6 @@ class Services {
     if (response.data == null) return false;
     return response.data['message'] == 'success';
   }
-
 
   Future<bool> postPurchase({
     required List purchaseList,
