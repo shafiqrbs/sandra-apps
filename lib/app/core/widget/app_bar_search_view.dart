@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/core_model/voice_recognition.dart';
 import '/app/core/base/base_widget.dart';
 
 import 'common_text.dart';
@@ -59,7 +60,22 @@ class AppBarSearchView extends BaseWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: onMicTap,
+                      onPressed: () async {
+                        final voiceRecognition = VoiceRecognition();
+
+                        if (!voiceRecognition.isListening) {
+                          await voiceRecognition.startListening(
+                            (result) {
+                              controller.text = result;
+                              if (onSearch != null) {
+                                onSearch!(result)!;
+                              }
+                            },
+                          );
+                        } else {
+                          await voiceRecognition.stopListening();
+                        }
+                      },
                       icon: Icon(
                         TablerIcons.microphone,
                         color: colors.primaryBaseColor,
