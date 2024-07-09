@@ -82,7 +82,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                       controller.purchaseManager.allItems.value![index];
 
                   return InkWell(
-                    onTap: () => controller.showSalesInformationModal(
+                    onTap: () => controller.showPurchaseInformationModal(
                       context,
                       element,
                     ),
@@ -137,7 +137,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                               Expanded(
                                 child: InkWell(
                                   onTap: () =>
-                                      controller.showSalesInformationModal(
+                                      controller.showPurchaseInformationModal(
                                     context,
                                     element,
                                   ),

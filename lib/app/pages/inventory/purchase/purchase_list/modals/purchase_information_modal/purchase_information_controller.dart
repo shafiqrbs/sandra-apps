@@ -10,12 +10,12 @@ import '/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.
 import '/app/routes/app_pages.dart';
 
 class PurchaseInformationController extends BaseController {
-  final String salesMode;
+  final String purchaseMode;
   final purchase = Rx<Purchase?>(null);
 
   PurchaseInformationController({
     required Purchase purchase,
-    required this.salesMode,
+    required this.purchaseMode,
   }) {
     this.purchase.value = purchase;
   }
@@ -23,7 +23,7 @@ class PurchaseInformationController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    if (salesMode == 'online') {
+    if (purchaseMode == 'online') {
       await getSalesItemList();
     }
   }
@@ -66,7 +66,7 @@ class PurchaseInformationController extends BaseController {
   }
 
   Future<void> copyPurchase(Purchase purchase) async {
-    if (salesMode == 'hold') {
+    if (purchaseMode == 'hold') {
       await dbHelper.deleteAllWhr(
         tbl: dbTables.tablePurchase,
         where: 'purchase_id = ?',

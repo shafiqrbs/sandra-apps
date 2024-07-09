@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/routes/app_pages.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';
@@ -157,7 +158,11 @@ class CreatePurchaseController extends StockSelectionController {
     );
   }
 
-  void goToListPage() {}
+  void goToListPage() {
+    Get.offNamed(
+      Routes.purchaseList,
+    );
+  }
 
   Future<void> onSave() async {
     if (purchaseItemList.value.isEmpty) {
@@ -166,10 +171,10 @@ class CreatePurchaseController extends StockSelectionController {
     }
 
     Get.dialog(
-        PurchaseProcessView(
-          purchaseItemList: purchaseItemList.value,
-          preSales: null,
-        ),
+      PurchaseProcessView(
+        purchaseItemList: purchaseItemList.value,
+        preSales: null,
+      ),
     );
   }
 
