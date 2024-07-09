@@ -155,7 +155,7 @@ class Purchase {
 
   Map<String, dynamic> toJson() {
     return {
-      'sales_id': purchaseId,
+      'purchase_id': purchaseId,
       'device_sales_id': deviceSalesId,
       'invoice': invoice,
       'created_at': createdAt,

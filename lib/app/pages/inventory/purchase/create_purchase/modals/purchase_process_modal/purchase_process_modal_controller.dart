@@ -19,13 +19,21 @@ import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 class PurchaseProcessModalController extends BaseController {
   Purchase? prePurchase;
   final formKey = GlobalKey<FormState>();
+
   final netTotal = 0.00.obs;
+  final purchaseSubTotal = 0.00.obs;
+  final purchaseReturnValue = 0.00.obs;
+
+  final showPurchaseItem = false.obs;
+  final isHold = false.obs;
 
   Rx<Purchase?> createdPurchase = Rx<Purchase?>(null);
   final purchaseItemList = Rx<List<PurchaseItem>>([]);
 
-  final showPurchaseItem = false.obs;
-  final isHold = false.obs;
+  final vendorManager = VendorManager();
+  final userManager = UserManager().obs;
+  final transactionMethodsManager = TransactionMethodsManager();
+  final amountController = TextEditingController().obs;
 
   PurchaseProcessModalController({
     required List<PurchaseItem> itemList,
@@ -33,12 +41,6 @@ class PurchaseProcessModalController extends BaseController {
   }) {
     purchaseItemList.value = itemList;
   }
-  final vendorManager = VendorManager();
-  final userManager = UserManager().obs;
-  final transactionMethodsManager = TransactionMethodsManager();
-  final amountController = TextEditingController().obs;
-  final purchaseSubTotal = 0.00.obs;
-  final purchaseReturnValue = 0.00.obs;
 
   @override
   Future<void> onInit() async {
