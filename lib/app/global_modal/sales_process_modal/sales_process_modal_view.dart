@@ -18,7 +18,7 @@ import '/app/entity/sales_item.dart';
 import '/app/entity/user.dart';
 
 class SalesProcessModalView extends BaseView<SalesProcessModalController> {
-  final Purchase? preSales;
+  final Sales? preSales;
   final List<SalesItem> salesItemList;
   SalesProcessModalView({
     required this.salesItemList,

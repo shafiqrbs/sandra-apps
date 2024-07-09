@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/abstract_controller/stock_selection_controller.dart';
 import '/app/entity/purchase_item.dart';
 import '/app/entity/stock.dart';
-import '/app/pages/inventory/purchase/create_purchase/modals/purchase_process_modal/purchase_process_modal_view.dart';
-import 'package:nb_utils/nb_utils.dart';
+import '/app/pages/inventory/purchase/create_purchase/modals/purchase_process_modal/purchase_process_view.dart';
 
 class CreatePurchaseController extends StockSelectionController {
   String? purchaseMode;
@@ -166,7 +166,7 @@ class CreatePurchaseController extends StockSelectionController {
     }
 
     Get.dialog(
-        PurchaseProcessModalView(
+        PurchaseProcessView(
           purchaseItemList: purchaseItemList.value,
           preSales: null,
         ),

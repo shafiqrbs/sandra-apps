@@ -15,7 +15,7 @@ import 'sales_information_modal_controller.dart';
 class SalesInformationModalView
     extends BaseView<SalesInformationModalController> {
   final String salesMode;
-  final Purchase sales;
+  final Sales sales;
   final Function()? onDeleted;
   SalesInformationModalView({
     required this.salesMode,

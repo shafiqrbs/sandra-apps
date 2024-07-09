@@ -157,7 +157,7 @@ class Services {
     return response.data;
   }
 
-  Future<List<Purchase>?> getSalesList({
+  Future<List<Sales>?> getSalesList({
     required String? startDate,
     required String? endDate,
     required String? customerId,
@@ -186,11 +186,11 @@ class Services {
 
     return parseList(
       list: response.data,
-      fromJson: Purchase.fromJson,
+      fromJson: Sales.fromJson,
     );
   }
 
-  Future<Purchase?> getOnlineSalesDetails({
+  Future<Sales?> getOnlineSalesDetails({
     required String id,
   }) async {
     final response = await dio.get(
@@ -201,7 +201,7 @@ class Services {
       },
       headers: _buildHeader(),
     );
-    return Purchase.fromJson(response.data);
+    return Sales.fromJson(response.data);
   }
 
   Future<bool> postReceive({
@@ -230,7 +230,6 @@ class Services {
   }
 
   Future<bool> postSales({
-    required bool shouldShowLoader,
     required List salesList,
     required String mode,
   }) async {
@@ -239,6 +238,25 @@ class Services {
       'poskeeper-sales',
       {
         'sales': jsonEncode(salesList),
+        'mode': mode,
+      },
+      headers: _buildHeader(),
+    );
+
+    if (response.data == null) return false;
+    return response.data['message'] == 'success';
+  }
+
+
+  Future<bool> postPurchase({
+    required List purchaseList,
+    required String mode,
+  }) async {
+    final response = await dio.post(
+      APIType.public,
+      'poskeeper-sales',
+      {
+        'sales': jsonEncode(purchaseList),
         'mode': mode,
       },
       headers: _buildHeader(),

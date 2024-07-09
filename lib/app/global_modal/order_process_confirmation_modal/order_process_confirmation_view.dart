@@ -13,7 +13,7 @@ import 'order_process_confirmation_controller.dart';
 
 class OrderProcessConfirmationView
     extends BaseView<OrderProcessConfirmationController> {
-  final Purchase sales;
+  final Sales sales;
   final bool isEdit;
   OrderProcessConfirmationView({
     required this.sales,

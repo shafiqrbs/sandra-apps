@@ -14,13 +14,12 @@ import '/app/entity/purchase_item.dart';
 import '/app/entity/user.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
 import '/app/global_widget/vendor_card_view.dart';
-import 'purchase_process_modal_controller.dart';
+import 'purchase_process_controller.dart';
 
-class PurchaseProcessModalView
-    extends BaseView<PurchaseProcessModalController> {
+class PurchaseProcessView extends BaseView<PurchaseProcessController> {
   final Purchase? preSales;
   final List<PurchaseItem> purchaseItemList;
-  PurchaseProcessModalView({
+  PurchaseProcessView({
     required this.purchaseItemList,
     required this.preSales,
     super.key,
@@ -28,8 +27,8 @@ class PurchaseProcessModalView
 
   @override
   Widget build(BuildContext context) {
-    return GetX<PurchaseProcessModalController>(
-      init: PurchaseProcessModalController(
+    return GetX<PurchaseProcessController>(
+      init: PurchaseProcessController(
         itemList: purchaseItemList,
         prePurchase: preSales,
       ),

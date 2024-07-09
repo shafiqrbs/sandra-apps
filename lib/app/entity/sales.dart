@@ -8,16 +8,16 @@ import 'entity_manager.dart';
 import 'sales_item.dart';
 import 'transaction_methods.dart';
 
-class SalesManager extends EntityManager<Purchase> {
+class SalesManager extends EntityManager<Sales> {
   SalesManager()
       : super(
           'sales',
-          (json) => Purchase.fromJson(json),
+          (json) => Sales.fromJson(json),
           (e) => e.toJson(),
         );
 }
 
-class Purchase {
+class Sales {
   String? salesId;
   int? deviceSalesId;
   String? invoice;
@@ -65,7 +65,7 @@ class Purchase {
 
   int? isOnline;
 
-  Purchase({
+  Sales({
     this.salesId,
     this.deviceSalesId,
     this.invoice,
@@ -107,10 +107,10 @@ class Purchase {
     this.isOnline,
   });
 
-  factory Purchase.fromJson(Map<String, dynamic> json) {
+  factory Sales.fromJson(Map<String, dynamic> json) {
     final converter = NumberToCharacterConverter('en');
 
-    return Purchase(
+    return Sales(
       salesId: json['sales_id'],
       deviceSalesId: json['device_sales_id'],
       invoice: json['invoice'],

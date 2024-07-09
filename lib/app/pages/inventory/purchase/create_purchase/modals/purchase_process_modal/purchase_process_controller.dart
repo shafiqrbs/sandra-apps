@@ -16,7 +16,7 @@ import '/app/entity/user.dart';
 import '/app/entity/vendor.dart';
 import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 
-class PurchaseProcessModalController extends BaseController {
+class PurchaseProcessController extends BaseController {
   Purchase? prePurchase;
   final formKey = GlobalKey<FormState>();
 
@@ -37,7 +37,7 @@ class PurchaseProcessModalController extends BaseController {
 
   final returnMsg = 'due'.obs;
 
-  PurchaseProcessModalController({
+  PurchaseProcessController({
     required List<PurchaseItem> itemList,
     this.prePurchase,
   }) {

@@ -164,7 +164,9 @@ class PrinterController extends BaseController {
     return connected.value;
   }
 
-  Future<bool> printSales(Purchase sales) async {
+  Future<bool> printSales(
+    Sales sales,
+  ) async {
     final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
     if (connectionStatus) {
       final data = await templateOne(sales: sales);
@@ -181,7 +183,9 @@ class PrinterController extends BaseController {
     connected.value = false;
   }
 
-  Future<List<int>> templateOne({required Purchase sales}) async {
+  Future<List<int>> templateOne({
+    required Sales sales,
+  }) async {
     List<int> bytes = [];
     // Using default profile
     final profile = await CapabilityProfile.load();

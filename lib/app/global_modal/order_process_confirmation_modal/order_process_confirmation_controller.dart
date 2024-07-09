@@ -6,7 +6,7 @@ import '/app/routes/app_pages.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class OrderProcessConfirmationController extends PrinterController {
-  final Purchase sales;
+  final Sales sales;
   final bool isEdit;
   OrderProcessConfirmationController({
     required this.sales,
@@ -89,7 +89,6 @@ class OrderProcessConfirmationController extends PrinterController {
       await dataFetcher(
         future: () async {
           final isSynced = await services.postSales(
-            shouldShowLoader: false,
             salesList: [sales],
             mode: 'online',
           );
