@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:getx_template/app/core/db_helper/db_tables.dart';
+import '/app/core/db_helper/db_tables.dart';
 import 'package:number_to_character/number_to_character.dart';
 
 import '/app/core/utils/parser_functions.dart';

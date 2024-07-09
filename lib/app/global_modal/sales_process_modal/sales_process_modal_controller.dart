@@ -16,8 +16,8 @@ import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 
 class SalesProcessModalController extends PaymentGatewayController {
-  Sales? preSales;
-  Rx<Sales?> createdSales = Rx<Sales?>(null);
+  Purchase? preSales;
+  Rx<Purchase?> createdSales = Rx<Purchase?>(null);
 
   final showSalesItem = false.obs;
   final isHold = false.obs;
@@ -185,7 +185,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     }
   }
 
-  Future<Sales?> generateSales() async {
+  Future<Purchase?> generateSales() async {
     if (salesItemList.isEmpty) {
       return null;
     }
@@ -193,7 +193,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     final timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
     calculateAllSubtotal();
 
-    final sales = Sales(
+    final sales = Purchase(
       salesId: preSales == null ? timeStamp : preSales!.salesId,
       invoice: preSales == null ? timeStamp : preSales!.invoice,
       createdAt: preSales == null
@@ -249,7 +249,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     return sales;
   }
 
-  Future<void> insertSaleToDb(Sales sales) async {
+  Future<void> insertSaleToDb(Purchase sales) async {
     await dbHelper.insertList(
       deleteBeforeInsert: false,
       tableName: dbTables.tableSale,

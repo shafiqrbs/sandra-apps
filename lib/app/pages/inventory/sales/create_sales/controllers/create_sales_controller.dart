@@ -10,7 +10,7 @@ import '/app/entity/sales_item.dart';
 import '/app/entity/stock.dart';
 
 class CreateSalesController extends BaseController {
-  Sales? preSales;
+  Purchase? preSales;
   final salesItemList = Rx<List<SalesItem>>([]);
   final stockList = Rx<List<Stock>>([]);
   final selectedStock = Rx<Stock?>(null);
@@ -46,7 +46,7 @@ class CreateSalesController extends BaseController {
     print('I am in CreateSalesController');
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null && args.isNotEmpty && args['sales'] != null) {
-      setData(args['sales'] as Sales);
+      setData(args['sales'] as Purchase);
     }
   }
 
@@ -57,7 +57,7 @@ class CreateSalesController extends BaseController {
   }
 
   void setData(
-    Sales sales,
+    Purchase sales,
   ) {
     preSales = sales;
     salesItemList.value = sales.salesItem ?? [];

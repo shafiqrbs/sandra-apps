@@ -8,10 +8,10 @@ import '/app/routes/app_pages.dart';
 
 class SalesInformationModalController extends PrinterController {
   final String salesMode;
-  Rx<Sales?> sales = Rx<Sales?>(null);
+  Rx<Purchase?> sales = Rx<Purchase?>(null);
 
   SalesInformationModalController({
-    required Sales sales,
+    required Purchase sales,
     required this.salesMode,
   }) {
     this.sales.value = sales;
@@ -62,7 +62,7 @@ class SalesInformationModalController extends PrinterController {
     }
   }
 
-  Future<void> copySales(Sales sales) async {
+  Future<void> copySales(Purchase sales) async {
     if (salesMode == 'hold') {
       await dbHelper.deleteAllWhr(
         tbl: dbTables.tableSale,

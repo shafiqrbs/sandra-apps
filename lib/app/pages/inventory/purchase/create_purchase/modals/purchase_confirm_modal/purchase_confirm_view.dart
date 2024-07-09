@@ -7,16 +7,15 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
-import '/app/global_widget/shimmer_list_view.dart';
 import '/app/entity/sales.dart';
-import 'order_process_confirmation_controller.dart';
+import '/app/global_widget/shimmer_list_view.dart';
+import 'purchase_confirm_controller.dart';
 
-class OrderProcessConfirmationView
-    extends BaseView<OrderProcessConfirmationController> {
-  final Purchase sales;
+class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
+  final Purchase purchase;
   final bool isEdit;
-  OrderProcessConfirmationView({
-    required this.sales,
+  PurchaseConfirmView({
+    required this.purchase,
     required this.isEdit,
     super.key,
   });
@@ -24,9 +23,9 @@ class OrderProcessConfirmationView
 
   @override
   Widget build(BuildContext context) {
-    return GetX<OrderProcessConfirmationController>(
-      init: OrderProcessConfirmationController(
-        sales: sales,
+    return GetX<PurchaseConfirmController>(
+      init: PurchaseConfirmController(
+        purchase: purchase,
         isEdit: isEdit,
       ),
       builder: (controller) {

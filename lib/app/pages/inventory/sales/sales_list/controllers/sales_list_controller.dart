@@ -91,7 +91,7 @@ class SalesListController extends BaseController {
       whereArgs: [],
     );
 
-    final salesList = list.map(Sales.fromJson).toList();
+    final salesList = list.map(Purchase.fromJson).toList();
     salesManager.allItems.value = salesList;
     salesManager.allItems.refresh();
   }
@@ -116,7 +116,7 @@ class SalesListController extends BaseController {
 
   showSalesInformationModal(
     BuildContext context,
-    Sales element,
+    Purchase element,
   ) {
     final result = Get.dialog(
       DialogPattern(

@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/sales.dart';
 import '/app/routes/app_pages.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-class OrderProcessConfirmationController extends PrinterController {
-  final Purchase sales;
+class PurchaseConfirmController extends PrinterController {
+  final Purchase purchase;
   final bool isEdit;
-  OrderProcessConfirmationController({
-    required this.sales,
+  PurchaseConfirmController({
+    required this.purchase,
     required this.isEdit,
   });
 
@@ -20,11 +21,11 @@ class OrderProcessConfirmationController extends PrinterController {
   }
 
   Future<void> saveHold() async {
-    sales.isHold = 1;
+    purchase.isHold = 1;
     await dbHelper.insertList(
       deleteBeforeInsert: false,
       tableName: dbTables.tableSale,
-      dataList: [sales.toJson()],
+      dataList: [purchase.toJson()],
     );
     Get.offAllNamed(
       Routes.dashboard,
@@ -34,7 +35,7 @@ class OrderProcessConfirmationController extends PrinterController {
   Future<void> salesPrint() async {
     if (kDebugMode) {
       print('print');
-      print('sales: ${sales.toJson()}');
+      print('sales: ${purchase.toJson()}');
     }
 
     if (!connected.value) {
@@ -42,7 +43,7 @@ class OrderProcessConfirmationController extends PrinterController {
       return;
     }
 
-    final isPrinted = await printSales(sales);
+    final isPrinted = await printSales(purchase);
     if (isPrinted) {
       await saveSales();
 
@@ -61,14 +62,14 @@ class OrderProcessConfirmationController extends PrinterController {
   }
 
   Future<void> _updateSales() async {
-    final isSalesOnline = sales.isOnline == 1;
+    final isSalesOnline = purchase.isOnline == 1;
 
     if (isSalesOnline) {
       await dataFetcher(
         future: () async {
           final isUpdated = await services.updateSales(
             shouldShowLoader: false,
-            salesList: [sales],
+            salesList: [purchase],
           );
           if (isUpdated) {
             _navigateToLanding();
@@ -90,7 +91,7 @@ class OrderProcessConfirmationController extends PrinterController {
         future: () async {
           final isSynced = await services.postSales(
             shouldShowLoader: false,
-            salesList: [sales],
+            salesList: [purchase],
             mode: 'online',
           );
           if (isSynced) {
@@ -109,7 +110,7 @@ class OrderProcessConfirmationController extends PrinterController {
     await dbHelper.insertList(
       deleteBeforeInsert: false,
       tableName: dbTables.tableSale,
-      dataList: [sales.toJson()],
+      dataList: [purchase.toJson()],
     );
     _navigateToLanding();
   }
@@ -117,9 +118,9 @@ class OrderProcessConfirmationController extends PrinterController {
   Future<void> _localUpdate() async {
     await dbHelper.updateWhere(
       tbl: dbTables.tableSale,
-      data: sales.toJson(),
+      data: purchase.toJson(),
       where: 'sales_id = ?',
-      whereArgs: [sales.salesId],
+      whereArgs: [purchase.salesId],
     );
     _navigateToLanding();
   }

@@ -157,7 +157,7 @@ class Services {
     return response.data;
   }
 
-  Future<List<Sales>?> getSalesList({
+  Future<List<Purchase>?> getSalesList({
     required String? startDate,
     required String? endDate,
     required String? customerId,
@@ -186,11 +186,11 @@ class Services {
 
     return parseList(
       list: response.data,
-      fromJson: Sales.fromJson,
+      fromJson: Purchase.fromJson,
     );
   }
 
-  Future<Sales?> getOnlineSalesDetails({
+  Future<Purchase?> getOnlineSalesDetails({
     required String id,
   }) async {
     final response = await dio.get(
@@ -201,7 +201,7 @@ class Services {
       },
       headers: _buildHeader(),
     );
-    return Sales.fromJson(response.data);
+    return Purchase.fromJson(response.data);
   }
 
   Future<bool> postReceive({
