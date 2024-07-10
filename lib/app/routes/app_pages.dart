@@ -22,6 +22,8 @@ import '/app/pages/intro/login/bindings/login_binding.dart';
 import '/app/pages/intro/login/views/login_view.dart';
 import '/app/pages/intro/splash/bindings/splash_binding.dart';
 import '/app/pages/intro/splash/views/splash_view.dart';
+import '/app/pages/inventory/particular/bindings/particular_binding.dart';
+import '/app/pages/inventory/particular/views/particular_view.dart';
 import '/app/pages/inventory/purchase/create_purchase/bindings/create_purchase_binding.dart';
 import '/app/pages/inventory/purchase/create_purchase/views/create_purchase_view.dart';
 import '/app/pages/inventory/purchase/purchase_list/bindings/purchase_list_binding.dart';
@@ -127,6 +129,11 @@ class AppPages {
       name: Routes.expenseDetails,
       page: ExpenseDetailsView.new,
       binding: ExpenseDetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.particular,
+      page: ParticularView.new,
+      binding: ParticularBinding(),
     ),
   ];
 }
