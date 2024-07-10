@@ -138,11 +138,6 @@ List<Widget> buttonList = [
     icon: TablerIcons.credit_card,
     onTap: () => navigatePage(Routes.particular),
   ),
-  TbdRoundButton(
-    text: 'create_expense'.tr,
-    icon: TablerIcons.exchange,
-    onTap: () => navigatePage(Routes.createExpense),
-  ),
 ];
 void navigatePage(String routeName) {
   final currentRoute = Get.currentRoute;
