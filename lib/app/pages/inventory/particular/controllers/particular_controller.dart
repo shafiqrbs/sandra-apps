@@ -7,5 +7,8 @@ class ParticularController extends BaseController {
     super.onInit();
   }
 
+
+  void showAddParticularModal() {
+  }
 }
   
