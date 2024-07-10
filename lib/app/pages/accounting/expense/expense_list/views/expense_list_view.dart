@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '/app/core/base/base_view.dart';
-import '/app/pages/accounting/expense/controllers/expense_controller.dart';
+import '/app/pages/expense_list/controllers/expense_list_controller.dart';
 
 //ignore: must_be_immutable
-class ExpenseView extends BaseView<ExpenseController> {
-  ExpenseView({super.key});
+class ExpenseListView extends BaseView<ExpenseListController> {
+  ExpenseListView({super.key});
     
   @override
   PreferredSizeWidget? appBar(BuildContext context) {

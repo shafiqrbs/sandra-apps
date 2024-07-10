@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
+import 'package:getx_template/app/pages/accounting/expense/expense_list/bindings/expense_list_binding.dart';
+import 'package:getx_template/app/pages/accounting/expense/expense_list/views/expense_list_view.dart';
 
 import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
 import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';
-import '/app/pages/accounting/expense/bindings/expense_binding.dart';
-import '/app/pages/accounting/expense/views/expense_view.dart';
 import '/app/pages/accounting/vendor_ledger/bindings/vendor_ledger_binding.dart';
 import '/app/pages/accounting/vendor_ledger/views/vendor_ledger_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
@@ -97,11 +97,6 @@ class AppPages {
       binding: VendorLedgerBinding(),
     ),
     GetPage(
-      name: Routes.expense,
-      page: ExpenseView.new,
-      binding: ExpenseBinding(),
-    ),
-    GetPage(
       name: Routes.createPurchase,
       page: CreatePurchaseView.new,
       binding: CreatePurchaseBinding(),
@@ -120,6 +115,11 @@ class AppPages {
       name: Routes.purchaseList,
       page: PurchaseListView.new,
       binding: PurchaseListBinding(),
+    ),
+    GetPage(
+      name: Routes.expenseList,
+      page: ExpenseListView.new,
+      binding: ExpenseListBinding(),
     ),
   ];
 }
