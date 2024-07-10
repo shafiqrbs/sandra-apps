@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
-  import '/app/core/base/base_controller.dart';
-  
+import 'package:getx_template/app/routes/app_pages.dart';
+import '/app/core/base/base_controller.dart';
+
 class CreateExpenseController extends BaseController {
- @override
+  @override
   Future<void> onInit() async {
     super.onInit();
   }
 
+  void goToListPage() {
+    Get.offNamed(
+      Routes.expenseList,
+    );
+  }
 }
-  

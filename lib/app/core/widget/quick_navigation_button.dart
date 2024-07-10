@@ -141,7 +141,7 @@ List<Widget> buttonList = [
   TbdRoundButton(
     text: 'create_expense'.tr,
     icon: TablerIcons.exchange,
-    onTap: () {},
+    onTap: () => navigatePage(Routes.createExpense),
   ),
 ];
 void navigatePage(String routeName) {
