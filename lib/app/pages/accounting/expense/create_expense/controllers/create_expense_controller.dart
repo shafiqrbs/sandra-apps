@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/entity/user.dart';
-import 'package:getx_template/app/routes/app_pages.dart';
+import '/app/entity/user.dart';
+import '/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 
 class CreateExpenseController extends BaseController {

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:getx_template/app/pages/accounting/expense/create_expense/bindings/create_expense_binding.dart';
-import 'package:getx_template/app/pages/accounting/expense/create_expense/views/create_expense_view.dart';
+import '/app/pages/accounting/expense/create_expense/bindings/create_expense_binding.dart';
+import '/app/pages/accounting/expense/create_expense/views/create_expense_view.dart';
 
 import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
 import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';

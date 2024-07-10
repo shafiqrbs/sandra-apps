@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/routes/app_pages.dart';
+import '/app/routes/app_pages.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:getx_template/app/entity/purchase.dart';
+import '/app/entity/purchase.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';

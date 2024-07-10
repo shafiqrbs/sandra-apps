@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_controller.dart';
-import 'package:getx_template/app/entity/purchase.dart';
+import '/app/core/base/base_controller.dart';
+import '/app/entity/purchase.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';

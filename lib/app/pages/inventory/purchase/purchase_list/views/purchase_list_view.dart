@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/common_icon_text.dart';
-import 'package:getx_template/app/core/widget/common_text.dart';
-import 'package:getx_template/app/core/widget/sub_tab_item_view.dart';
+import '/app/core/widget/common_icon_text.dart';
+import '/app/core/widget/common_text.dart';
+import '/app/core/widget/sub_tab_item_view.dart';
 import 'package:intl/intl.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';

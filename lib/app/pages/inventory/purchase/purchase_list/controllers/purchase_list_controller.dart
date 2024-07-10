@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/dialog_pattern.dart';
-import 'package:getx_template/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import 'package:getx_template/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
+import '/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/purchase.dart';
