@@ -51,14 +51,16 @@ abstract class PaymentGatewayController extends BaseController {
     calculateAllSubtotal();
     salesReturnValue.value = salesSubTotal.value;
     netTotal.value = salesSubTotal.value;
-    discountTypeController.value.addListener(() {
-      if (discountTypeController.value.value) {
-        discountType.value = 'percent';
-      } else {
-        discountType.value = 'flat';
-      }
-      onDiscountChange(paymentDiscountController.value.text);
-    });
+    discountTypeController.value.addListener(
+      () {
+        if (discountTypeController.value.value) {
+          discountType.value = 'percent';
+        } else {
+          discountType.value = 'flat';
+        }
+        onDiscountChange(paymentDiscountController.value.text);
+      },
+    );
     showProfit.value.addListener(showProfit.refresh);
   }
 

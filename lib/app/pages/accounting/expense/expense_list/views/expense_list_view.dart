@@ -29,7 +29,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
         AppBarButtonGroup(
           children: [
             AddButton(
-              onTap: controller.goToCreatePage,
+              onTap: controller.showAddExpenseModal,
             ),
             QuickNavigationButton(),
           ],
