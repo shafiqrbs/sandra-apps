@@ -106,16 +106,19 @@ class Services {
     required String email,
     required String openingBalance,
   }) async {
+    final data = {
+      'name': name,
+      'mobile': mobile,
+      'address': address,
+      'email': email,
+      'openingBalance': openingBalance,
+    };
+
     final response = await dio.post(
       APIType.public,
       'poskeeper-customer-create',
-      {
-        'name': name,
-        'mobile': mobile,
-        'address': address,
-        'email': email,
-        'openingBalance': openingBalance,
-      },
+      data,
+      query: data,
       headers: _buildHeader(),
     );
 
