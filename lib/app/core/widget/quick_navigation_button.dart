@@ -129,14 +129,14 @@ List<Widget> buttonList = [
     onTap: () => navigatePage(Routes.purchaseList),
   ),
   TbdRoundButton(
-    text: 'category',
+    text: 'expense_list',
     icon: TablerIcons.credit_card,
-    onTap: () {},
+    onTap: () => navigatePage(Routes.expenseList),
   ),
   TbdRoundButton(
-    text: 'stock_adjustment'.tr,
+    text: 'particular'.tr,
     icon: TablerIcons.credit_card,
-    onTap: () {},
+    onTap: () => navigatePage(Routes.particular),
   ),
   TbdRoundButton(
     text: 'expense'.tr,
