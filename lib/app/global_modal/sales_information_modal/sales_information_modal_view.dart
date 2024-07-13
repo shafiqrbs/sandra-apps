@@ -301,7 +301,7 @@ class SalesInformationModalView
                           crossAxisAlignment: endCAA,
                           children: [
                             labelValue.copyWith(
-                              label: 'sub_total'.tr,
+                              label: appLocalization.subTotal,
                               value: '${controller.sales.value!.subTotal}',
                             ),
                             labelValue.copyWith(

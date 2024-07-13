@@ -237,7 +237,7 @@ class PurchaseItemListView extends BaseWidget {
                                     ),
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
-                                      hintText: 'sub_total'.tr,
+                                      hintText: appLocalization.subTotal,
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(

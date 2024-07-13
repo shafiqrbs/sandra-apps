@@ -231,7 +231,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               }
               await controller.customerManager.searchItemsByName(value!);
             },
-            hint: 'search_customer'.tr,
+            hint: appLocalization.searchCustomer,
             suffixIcon: TablerIcons.search,
           ),
         ),
@@ -258,7 +258,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'customer',
+                    appLocalization.customer,
                     style: TextStyle(
                       fontSize: 12,
                       color: colors.secondaryTextColor,
@@ -374,7 +374,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         color: const Color(0xFFff3232),
                       ),
                       Text(
-                        'sub_total'.tr,
+                        appLocalization.subTotal,
                         style: TextStyle(
                           fontSize:smallTFSize,
                         ),

@@ -438,7 +438,7 @@ class SalesItemListView extends BaseWidget {
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
                                       hintText:
-                                          'sub_total'.tr, // Optional hint text
+                                          appLocalization.subTotal, // Optional hint text
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(

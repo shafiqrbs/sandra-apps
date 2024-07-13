@@ -346,7 +346,7 @@ class PrinterController extends BaseController {
     bytes += generator.text('------------------------------------------------');
     bytes += generator.row([
       PosColumn(
-        text: 'sub_total'.tr,
+        text: appLocalization.subTotal,
         width: 9,
         styles: const PosStyles(
           align: PosAlign.right,

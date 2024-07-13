@@ -379,7 +379,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                   child: Column(
                     children: [
                       4.height,
-                      const SelectedStockListHeader(),
+                      SelectedStockListHeader(),
                       4.height,
                       SizedBox(
                         height: 65.ph,

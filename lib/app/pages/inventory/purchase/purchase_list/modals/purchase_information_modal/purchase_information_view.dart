@@ -300,7 +300,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                         crossAxisAlignment: endCAA,
                         children: [
                           labelValue.copyWith(
-                            label: 'sub_total'.tr,
+                            label: appLocalization.subTotal,
                             value: '${controller.purchase.value!.subTotal}',
                           ),
                           labelValue.copyWith(

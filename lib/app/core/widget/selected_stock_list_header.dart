@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/base/base_widget.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 
 import 'common_header_text.dart';
 
-class SelectedStockListHeader extends StatelessWidget {
-  const SelectedStockListHeader({super.key});
+class SelectedStockListHeader extends BaseWidget {
+  SelectedStockListHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class SelectedStockListHeader extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
-            header: 'mrp'.tr,
+            header: appLocalization.mrp,
           ),
           CommonHeaderText(
             flex: 2,
@@ -41,14 +42,14 @@ class SelectedStockListHeader extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.zero,
                   margin: EdgeInsets.zero,
-                  header: 'price'.tr,
+                  header: appLocalization.price,
                 ),
                 CommonHeaderText(
                   flex: 2,
                   alignment: Alignment.center,
                   padding: EdgeInsets.zero,
                   margin: EdgeInsets.zero,
-                  header: 'quantity'.tr,
+                  header: appLocalization.quantity,
                 ),
               ],
             ),
@@ -58,7 +59,7 @@ class SelectedStockListHeader extends StatelessWidget {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(right: 8),
             margin: EdgeInsets.zero,
-            header: 'sub_total'.tr,
+            header: appLocalization.subTotal,
           ),
         ],
       ),
