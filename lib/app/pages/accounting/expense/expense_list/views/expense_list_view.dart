@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
-import '/app/core/widget/list_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/base/base_view.dart';
 import '/app/pages/accounting/expense/expense_list/controllers/expense_list_controller.dart';
 
 //ignore: must_be_immutable
@@ -17,7 +17,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Text(
-        'expense_list'.tr,
+        appLocalization.expenseList,
         style: TextStyle(
           color: colors.backgroundColor,
           fontWeight: FontWeight.bold,

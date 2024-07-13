@@ -79,7 +79,6 @@
   "list" : "List",
   "outstanding" : "Outstanding",
   "brand" : "Brand",
-  "purchasePrice" : "Purchase",
   "salesPrice" : "Sales",
   "damagePrice" : "Damage",
   "openQuantity" : "Opening",
@@ -180,5 +179,15 @@
   "stockAdjustment" : "Stock adjustment",
   "purchaseReturn" : "Purchase return",
   "inventory" : "Inventory",
-  "accounting" : "Accounting"
+  "accounting" : "Accounting",
+  "expenseList" : "Expense List",
+  "account" : "Account",
+  "printer" : "Printer",
+  "sync" : "Sync",
+  "additional" : "Additional",
+  "privacy" : "Privacy",
+  "purchaseConfig" : "Purchase Config",
+  "purchaseWithMrp" : "Purchase with MRP",
+  "purchasePrice" : "Purchase Price",
+  "totalPrice" : "Total Price"
 }
