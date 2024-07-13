@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
-import 'package:nb_utils/nb_utils.dart';
-
 import 'add_customer_modal_controller.dart';
 
 class AddCustomerModalView extends BaseView<AddCustomerModalController> {
@@ -32,9 +32,9 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                       FBString(
                         textController: controller.userNameController.value,
                         preFixIcon: TablerIcons.user,
-                        label: 'user_name'.tr,
-                        hint: 'enter_username_here'.tr,
-                        errorMsg: 'user_name_required'.tr,
+                        label: appLocalization.name,
+                        hint: appLocalization.enterNameHere,
+                        errorMsg: appLocalization.nameRequired,
                         isRequired: true,
                         textFieldHeight: textFieldHeight,
                       ),
@@ -43,9 +43,9 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                         textController: controller.mobileController.value,
                         keyboardType: phoneInputType,
                         preFixIcon: TablerIcons.device_mobile,
-                        label: 'mobile'.tr,
-                        hint: 'enter_mobile_number_here'.tr,
-                        errorMsg: 'mobile_no_required'.tr,
+                        label: appLocalization.mobile,
+                        hint: appLocalization.enterMobileNumberHere,
+                        errorMsg: appLocalization.mobileNoRequired,
                         isRequired: true,
                         textFieldHeight: textFieldHeight,
                       ),
@@ -55,8 +55,8 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                             controller.openingBalanceController.value,
                         keyboardType: numberInputType,
                         preFixIcon: TablerIcons.cash,
-                        label: 'opening_balance'.tr,
-                        hint: 'enter_your_balance'.tr,
+                        label: appLocalization.openingBalance,
+                        hint: appLocalization.enterOpeningBalance,
                         errorMsg: ''.tr,
                         isRequired: false,
                         textFieldHeight: textFieldHeight,
@@ -65,8 +65,8 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                       FBString(
                         textController: controller.emailController.value,
                         isRequired: false,
-                        label: 'Email'.tr,
-                        hint: 'enter_email'.tr,
+                        label: appLocalization.email,
+                        hint: appLocalization.enterEmail,
                         errorMsg: ''.tr,
                         preFixIcon: TablerIcons.mail,
                         textFieldHeight: textFieldHeight,
@@ -75,8 +75,8 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                       FBString(
                         textController: controller.addressController.value,
                         isRequired: false,
-                        label: 'address'.tr,
-                        hint: 'enter_address_here'.tr,
+                        label: appLocalization.address,
+                        hint: appLocalization.enterAddressHere,
                         errorMsg: ''.tr,
                         lines: 4,
                         textInputAction: TextInputAction.done,
@@ -97,14 +97,14 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RowButton(
-                        buttonName: 'reset'.tr,
+                        buttonName: appLocalization.reset,
                         leftIcon: TablerIcons.restore,
                         onTap: controller.resetField,
                         isOutline: true,
                       ),
                       16.width,
                       RowButton(
-                        buttonName: 'save'.tr,
+                        buttonName: appLocalization.save,
                         leftIcon: TablerIcons.device_floppy,
                         onTap: controller.addCustomer,
                         isOutline: false,

@@ -281,5 +281,8 @@
   "selectBrand" : "ব্র্যান্ড নির্বাচন করুন",
   "categoryRequired" : "বিভাগ প্রয়োজন",
   "selectCategory" : "বিভাগ নির্বাচন করুন",
-  "productNameRequired" : "পণ্যের নাম প্রয়োজন"
+  "productNameRequired" : "পণ্যের নাম প্রয়োজন",
+  "enterNameHere" : "এখানে নাম লিখুন",
+  "nameRequired" : "নাম প্রয়োজন",
+  "enterOpeningBalance" : "প্রারম্ভিক ব্যালেন্স লিখুন"
 }

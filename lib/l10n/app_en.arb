@@ -206,5 +206,9 @@
   "selectBrand" : "Select brand",
   "categoryRequired" : "Category required",
   "selectCategory" : "Select category",
-  "productNameRequired" : "Product name required"
+  "productNameRequired" : "Product name required",
+  "email" : "Email",
+  "enterNameHere" : "Enter name here",
+  "nameRequired" : "Name required",
+  "enterOpeningBalance" : "Enter opening balance"
 }
