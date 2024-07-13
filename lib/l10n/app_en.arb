@@ -189,5 +189,11 @@
   "purchaseConfig" : "Purchase Config",
   "purchaseWithMrp" : "Purchase with MRP",
   "purchasePrice" : "Purchase Price",
-  "totalPrice" : "Total Price"
+  "totalPrice" : "Total Price",
+  "salesList" : "Sales List",
+  "stockList" : "Stock List",
+  "createPurchase" : "Create Purchase",
+  "vendorList" : "Vendor List",
+  "purchaseList" : "Purchase List",
+  "particular" : "Particular"
 }

@@ -7,6 +7,7 @@ import '/app/routes/app_pages.dart';
 
 import 'app_bar_button.dart';
 import 'tbd_round_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
@@ -91,52 +92,64 @@ class QuickNavigationButton extends BaseWidget {
     );
   }
 }
+AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
+
 
 List<Widget> buttonList = [
   TbdRoundButton(
-    text: 'create_sales',
+    text: appLocalization.createSales,
     icon: TablerIcons.sort_ascending_letters,
     onTap: () => navigatePage(Routes.createSales),
+    localeMethod: () => appLocalization.createSales,
   ),
   TbdRoundButton(
-    text: 'sales_list',
+    text: appLocalization.salesList,
     icon: TablerIcons.point_off,
     onTap: () => navigatePage(Routes.salesList),
+    localeMethod: () => appLocalization.salesList,
   ),
   TbdRoundButton(
-    text: 'stock_list',
+    text: appLocalization.stockList,
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.stockList),
+    localeMethod: () => appLocalization.stockList,
   ),
   TbdRoundButton(
     text: 'customer_list',
     icon: TablerIcons.robot_face,
     onTap: () => navigatePage(Routes.customerList),
+    localeMethod: ()=> appLocalization.customerList,
   ),
   TbdRoundButton(
     text: 'create_purchase'.tr,
     icon: TablerIcons.shopping_bag,
     onTap: () => navigatePage(Routes.createPurchase),
+    localeMethod: () => appLocalization.createPurchase,
   ),
   TbdRoundButton(
     text: 'vendor',
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.vendorList),
+    localeMethod: () => appLocalization.vendorList,
   ),
   TbdRoundButton(
     text: 'purchase_list',
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
+    localeMethod: () => appLocalization.purchaseList,
+
   ),
   TbdRoundButton(
     text: 'expense_list',
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.expenseList),
+    localeMethod: () => appLocalization.expenseList,
   ),
   TbdRoundButton(
     text: 'particular'.tr,
     icon: TablerIcons.credit_card,
     onTap: () => navigatePage(Routes.particular),
+    localeMethod: () => appLocalization.particular,
   ),
 ];
 void navigatePage(String routeName) {
@@ -158,3 +171,5 @@ void navigatePage(String routeName) {
       ..toNamed(routeName);
   }
 }
+
+

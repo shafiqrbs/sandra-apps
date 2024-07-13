@@ -6,11 +6,14 @@ import 'package:nb_utils/nb_utils.dart';
 class TbdRoundButton extends StatelessWidget {
   final String text;
   final Function()? onTap;
+  final String Function()? localeMethod;
   final IconData? icon;
+
   const TbdRoundButton({
     required this.text,
     super.key,
     this.onTap,
+    this.localeMethod,
     this.icon,
   });
 
@@ -46,7 +49,7 @@ class TbdRoundButton extends StatelessWidget {
             height: 40,
             child: Center(
               child: Text(
-                text.tr,
+                localeMethod?.call() ?? text.tr,
                 style: GoogleFonts.inter(
                   color: const Color(0xff4d4d4d),
                   fontSize: 12,

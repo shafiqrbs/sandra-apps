@@ -263,5 +263,11 @@
   "purchaseConfig" : "ক্রয় কনফিগারেশন",
   "purchaseWithMrp" : "এমআরপি দিয়ে ক্রয়",
   "purchasePrice" : "ক্রয় মূল্য",
-  "totalPrice" : "মোট মূল্য"
+  "totalPrice" : "মোট মূল্য",
+  "salesList" : "বিক্রয়ের তালিকা",
+  "stockList" : "স্টক তালিকা",
+  "createPurchase" : "ক্রয় তৈরি করুন",
+  "vendorList" : "বিক্রেতার তালিকা",
+  "purchaseList" : "ক্রয়ের তালিকা",
+  "particular" : "বিশেষ"
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/values/app_dimension.dart';
@@ -15,10 +17,11 @@ final regexInteger = FilteringTextInputFormatter.allow(
 );
 
 abstract class BaseWidget extends StatelessWidget
-    with ShorterEnumMixin, ShorterDataTypesMixin, ValidatorMixin,AppDimension {
+    with ShorterEnumMixin, ShorterDataTypesMixin, ValidatorMixin, AppDimension {
   BaseWidget({super.key});
 
   final colors = ColorSchema();
+  AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
   @override
   Widget build(BuildContext context);
