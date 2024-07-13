@@ -87,7 +87,6 @@ class ${pageClassName}View extends BaseView<${pageClassName}Controller> {
   );
   final lowerCamelCasePageFileName = lowerCamelCase(pageFileName);
 
-
   // Print the necessary route and path constants
 
   print(
@@ -102,7 +101,6 @@ class ${pageClassName}View extends BaseView<${pageClassName}Controller> {
     binding: ${pageClassName}Binding(),
   ),
   ''');
-
 
   print(
     "static const  $lowerCamelCasePageFileName = '/$pageFileName';",
@@ -139,9 +137,11 @@ String className(String input) {
 
 String lowerCamelCase(String input) {
   final List<String> words = input.split('_');
-  final List<String> capitalizedWords = words.map((word) {
-    return word.capitalize();
-  }).toList();
+  final List<String> capitalizedWords = words.map(
+    (word) {
+      return word.capitalize();
+    },
+  ).toList();
   final String firstWord = capitalizedWords.removeAt(0).toLowerCase();
   capitalizedWords.insert(0, firstWord);
   return capitalizedWords.join();

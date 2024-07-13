@@ -102,7 +102,7 @@ class LoginView extends BaseView<LoginController> {
                     size: 60,
                   ),
                   Text(
-                    'login'.tr,
+                    appLocalization.login,
                     style: TextStyle(
                       color: colors.primaryTextColor,
                       fontSize: 18,
@@ -129,14 +129,14 @@ class LoginView extends BaseView<LoginController> {
                 color: Colors.transparent,
                 alignment: Alignment.topCenter,
                 child: CommonText(
-                  text: 'welcome'.tr,
+                  text: appLocalization.welcome,
                   fontSize:headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               1.percentHeight,
               CommonText(
-                text: 'to_store'.tr,
+                text: appLocalization.toStore,
                 fontSize:subHeaderTFSize,
                 textColor: colors.secondaryTextColor,
                 textAlign: TextAlign.left,
@@ -159,7 +159,7 @@ class LoginView extends BaseView<LoginController> {
                         bottom: 12,
                       ),
                       child: Text(
-                        'login'.tr,
+                        appLocalization.login,
                         style: boldTextStyle(
                           color: !controller.isSignUp.value
                               ? white
@@ -189,7 +189,7 @@ class LoginView extends BaseView<LoginController> {
                         bottom: 12,
                       ),
                       child: Text(
-                        'otp_login'.tr,
+                        appLocalization.otpLogin,
                         style: boldTextStyle(
                           color: controller.isSignUp.value
                               ? white
@@ -229,10 +229,10 @@ class LoginView extends BaseView<LoginController> {
                   FBString(
                     textController: controller.userNameController,
                     preFixIcon: TablerIcons.user,
-                    label: 'user_name'.tr,
+                    label: appLocalization.userName,
                     textInputAction: done,
-                    hint: 'enter_username_here'.tr,
-                    errorMsg: 'user_name_required'.tr,
+                    hint: appLocalization.enterUsernameHere,
+                    errorMsg: appLocalization.userNameRequired,
                     isRequired: true,
                     isShowToolTip: false,
                     toolTipIcon: TablerIcons.info_square_rounded,
@@ -244,20 +244,20 @@ class LoginView extends BaseView<LoginController> {
                   FBString(
                     textController: controller.passwordController,
                     isRequired: true,
-                    label: 'password'.tr,
+                    label: appLocalization.password,
                     //example: 'example'.tr,
-                    hint: 'enter_password'.tr,
-                    errorMsg: 'password_required'.tr,
+                    hint: appLocalization.enterPassword,
+                    errorMsg: appLocalization.passwordRequired,
                     preFixIcon: TablerIcons.key,
                   ).visible(!controller.isSignUp.value),
 
                   FBString(
                     textController: controller.otpController,
                     isRequired: true,
-                    label: 'mobile_no'.tr,
-                    hint: 'enter_mobile_no'.tr,
+                    label: appLocalization.mobileNo,
+                    hint: appLocalization.enterMobileNo,
                     //example: "017**********".tr,
-                    errorMsg: 'mobile_no_required'.tr,
+                    errorMsg: appLocalization.mobileNoRequired,
                     preFixIcon: TablerIcons.device_mobile,
                   ).visible(controller.isSignUp.value),
 
@@ -269,7 +269,7 @@ class LoginView extends BaseView<LoginController> {
                         child: Container(
                           margin: const EdgeInsets.only(right: 16),
                           child: CommonText(
-                            text: 'forgot_password'.tr,
+                            text: appLocalization.forgotPassword,
                             fontSize:regularTFSize,
                             textColor: colors.dangerLiteColor,
                             fontWeight: FontWeight.w700,
@@ -284,13 +284,13 @@ class LoginView extends BaseView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CommonText(
-                        text: "don't_have_an_account".tr,
+                        text: appLocalization.donNotHaveAnAccount,
                         fontSize:subHeaderTFSize,
                         textColor: colors.secondaryTextColor,
                       ),
                       4.width,
                       CommonText(
-                        text: 'create_account'.tr,
+                        text: appLocalization.createAccount,
                         fontSize:subHeaderTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w600,
@@ -315,15 +315,14 @@ class LoginView extends BaseView<LoginController> {
     return SetupBottomNavBar(
       buttonList: [
         RowButton(
-          buttonName: 'close'.tr,
+          buttonName: appLocalization.close,
           leftIcon: TablerIcons.x,
-          rightIcon: TablerIcons.blade,
           isOutline: true,
           onTap: Get.back,
         ),
         1.percentWidth,
         RowButton(
-          buttonName: 'login'.tr,
+          buttonName: appLocalization.login,
           leftIcon: TablerIcons.login,
           isOutline: false,
           onTap: controller.submitLogin,
