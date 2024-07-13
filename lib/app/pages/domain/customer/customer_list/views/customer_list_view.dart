@@ -23,7 +23,7 @@ class CustomerListView extends BaseView<CustomerListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: 'customer'.tr,
+            pageTitle: appLocalization.customerList,
             controller: controller.customerManager.searchTextController.value,
             onSearch: controller.customerManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,

@@ -22,7 +22,7 @@ class VendorListView extends BaseView<VendorListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: 'vendor'.tr,
+            pageTitle: appLocalization.vendorList,
             controller: controller.vendorManager.searchTextController.value,
             onSearch: controller.vendorManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
