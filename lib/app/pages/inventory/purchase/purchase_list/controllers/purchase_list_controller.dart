@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
 import '/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
@@ -27,18 +28,21 @@ class PurchaseListController extends BaseController {
       slug: 'local',
       icon: 'wifi_off',
       view: Container(),
+      localeMethod: () => appLocalization.local,
     ),
     TabBarItem(
       name: 'Online',
       slug: 'online',
       icon: 'wifi',
       view: Container(),
+      localeMethod: () => appLocalization.online,
     ),
     TabBarItem(
       name: 'Hold',
       slug: 'hold',
       icon: 'notes',
       view: Container(),
+      localeMethod: () => appLocalization.hold,
     ),
   ];
 

@@ -25,7 +25,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Text(
-        'create_purchase'.tr,
+        appLocalization.createPurchase,
         style: TextStyle(
           color: colors.backgroundColor,
           fontWeight: FontWeight.bold,

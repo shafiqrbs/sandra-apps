@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/common_icon_text.dart';
-import '/app/core/widget/common_text.dart';
-import '/app/core/widget/sub_tab_item_view.dart';
 import 'package:intl/intl.dart';
+
+import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
+import '/app/core/widget/common_icon_text.dart';
+import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/search_button.dart';
-import '/app/core/base/base_view.dart';
+import '/app/core/widget/sub_tab_item_view.dart';
 import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
 
 //ignore: must_be_immutable
@@ -25,7 +26,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: 'purchase'.tr,
+            pageTitle: appLocalization.purchase,
             controller: controller.purchaseManager.searchTextController.value,
             onSearch: controller.purchaseManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
@@ -228,13 +229,14 @@ class PurchaseListView extends BaseView<PurchaseListController> {
         Row(
           children: List.generate(
             controller.tabPages.length,
-            (index) {
+                (index) {
               return Obx(
-                () => Expanded(
+                    () => Expanded(
                   child: SubTabItemView(
                     isSelected: controller.selectedIndex.value == index,
                     item: controller.tabPages[index],
                     onTap: () => controller.changeIndex(index),
+                    localeMethod: controller.tabPages[index].localeMethod,
                   ),
                 ),
               );

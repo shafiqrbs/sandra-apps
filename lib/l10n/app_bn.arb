@@ -284,5 +284,7 @@
   "productNameRequired" : "পণ্যের নাম প্রয়োজন",
   "enterNameHere" : "এখানে নাম লিখুন",
   "nameRequired" : "নাম প্রয়োজন",
-  "enterOpeningBalance" : "প্রারম্ভিক ব্যালেন্স লিখুন"
+  "enterOpeningBalance" : "প্রারম্ভিক ব্যালেন্স লিখুন",
+  "addVendor" : "বিক্রেতা যোগ করুন",
+  "purchase" : "ক্রয়"
 }
