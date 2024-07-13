@@ -196,5 +196,7 @@
   "vendorList" : "Vendor List",
   "purchaseList" : "Purchase List",
   "particular" : "Particular",
-    "pleaseSelectItem" : "Please select item"
+  "pleaseSelectItem" : "Please select item",
+  "local" : "Local",
+  "online" : "Online"
 }

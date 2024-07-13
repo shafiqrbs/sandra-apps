@@ -9,12 +9,14 @@ import 'draw_icon.dart';
 class SubTabItemView extends StatelessWidget {
   final TabBarItem item;
   final bool isSelected;
+  final String Function()? localeMethod;
   final VoidCallback onTap;
 
   const SubTabItemView({
     required this.item,
     required this.isSelected,
     required this.onTap,
+    this.localeMethod,
     super.key,
   });
 
@@ -39,7 +41,6 @@ class SubTabItemView extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DrawIcon(
               icon: TablerIcons.all[item.icon]!,
@@ -48,7 +49,7 @@ class SubTabItemView extends StatelessWidget {
             ),
             2.percentWidth,
             Text(
-              item.name,
+              item.localeMethod?.call()??'',
               style: TextStyle(
                 color: color,
                 fontSize: 14.fSize,

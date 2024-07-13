@@ -27,7 +27,7 @@ class SalesListView extends BaseView<SalesListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: 'sales'.tr,
+            pageTitle: appLocalization.sales,
             controller: controller.salesManager.searchTextController.value,
             onSearch: controller.salesManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
@@ -236,6 +236,7 @@ class SalesListView extends BaseView<SalesListController> {
                     isSelected: controller.selectedIndex.value == index,
                     item: controller.tabPages[index],
                     onTap: () => controller.changeIndex(index),
+                    localeMethod: controller.tabPages[index].localeMethod,
                   ),
                 ),
               );

@@ -271,5 +271,7 @@
   "vendorList" : "বিক্রেতার তালিকা",
   "purchaseList" : "ক্রয়ের তালিকা",
   "particular" : "বিশেষ",
-  "pleaseSelectItem" : "দয়া করে আইটেম নির্বাচন করুন"
+  "pleaseSelectItem" : "দয়া করে আইটেম নির্বাচন করুন",
+  "local" : "স্থানীয়",
+  "online" : "অনলাইন"
 }
