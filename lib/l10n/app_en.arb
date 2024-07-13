@@ -195,5 +195,6 @@
   "createPurchase" : "Create Purchase",
   "vendorList" : "Vendor List",
   "purchaseList" : "Purchase List",
-  "particular" : "Particular"
+  "particular" : "Particular",
+    "pleaseSelectItem" : "Please select item"
 }

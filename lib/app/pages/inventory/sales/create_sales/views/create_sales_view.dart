@@ -26,7 +26,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Text(
-        'create_sales'.tr,
+        appLocalization.createSales,
         style: TextStyle(
           color: colors.backgroundColor,
           fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
     return InkWell(
       onTap: () async {
         if (controller.salesItemList.value.isEmpty) {
-          toast('please_select_item'.tr);
+          toast(appLocalization.pleaseSelectItem);
           return;
         }
 
@@ -107,7 +107,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                   mainAxisAlignment: centerMAA,
                   children: [
                     Text(
-                      'place_order'.tr,
+                      appLocalization.placeOrder,
                       style: TextStyle(
                         color: colors.backgroundColor,
                         fontWeight: FontWeight.bold,
