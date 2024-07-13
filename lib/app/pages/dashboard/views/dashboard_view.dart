@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/common_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart' as pie_chart;
 
 import '/app/core/base/base_view.dart';
+import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_text_button.dart';
 import '/app/core/widget/title_subtitle_button.dart';
@@ -60,12 +60,16 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: Text('home'.tr),
+            title: Text(
+              appLocalization.home,
+            ),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: Text('settings'.tr),
+            title: Text(
+              appLocalization.settings,
+            ),
             onTap: controller.goToSettings,
           ),
         ],
@@ -160,12 +164,12 @@ class DashboardView extends BaseView<DashboardController> {
         return Row(
           children: [
             TbdTextButton(
-              text: 'dashboard'.tr,
+              text: appLocalization.dashboard,
               onPressed: () => controller.changeTab(SelectedTab.dashboard),
               isSelected: controller.selectedTab.value == SelectedTab.dashboard,
             ),
             TbdTextButton(
-              text: 'report'.tr,
+              text: appLocalization.report,
               onPressed: () => controller.changeTab(SelectedTab.report),
               isSelected: controller.selectedTab.value == SelectedTab.report,
             ),
@@ -214,13 +218,13 @@ class DashboardView extends BaseView<DashboardController> {
             onTap: controller.goToClearLicense,
           ),
           TitleSubtitleButton(
-            title: 'sales',
+            title: appLocalization.sales,
             subTitle: '567',
             icon: TablerIcons.report_analytics,
             onTap: controller.goToSalesList,
           ),
           TitleSubtitleButton(
-            title: 'purchase',
+            title: appLocalization.purchase,
             subTitle: '567',
             icon: TablerIcons.cash,
             onTap: () {
@@ -228,7 +232,7 @@ class DashboardView extends BaseView<DashboardController> {
             },
           ),
           TitleSubtitleButton(
-            title: 'expense',
+            title: appLocalization.expense,
             subTitle: '567',
             icon: TablerIcons.moneybag,
             onTap: () {
@@ -236,7 +240,7 @@ class DashboardView extends BaseView<DashboardController> {
             },
           ),
           TitleSubtitleButton(
-            title: 'profit',
+            title: appLocalization.due,
             subTitle: '567',
             icon: TablerIcons.cash,
             onTap: () {
@@ -269,7 +273,7 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               Expanded(
                 child: _buildTitleSubTitle(
-                  title: 'sales',
+                  title: appLocalization.sales,
                   subTitle: '567',
                 ),
               ),
@@ -280,7 +284,7 @@ class DashboardView extends BaseView<DashboardController> {
               ),
               Expanded(
                 child: _buildTitleSubTitle(
-                  title: 'purchase',
+                  title: appLocalization.purchase,
                   subTitle: '567',
                 ),
               ),
@@ -381,14 +385,14 @@ class DashboardView extends BaseView<DashboardController> {
     return Row(
       children: [
         TbdTextButton(
-          text: 'inventory',
+          text: appLocalization.inventory,
           onPressed: () => controller.selectedButtonGroup.value =
               SelectedButtonGroup.inventory,
           isSelected: controller.selectedButtonGroup.value ==
               SelectedButtonGroup.inventory,
         ),
         TbdTextButton(
-          text: 'accounting',
+          text: appLocalization.accounting,
           onPressed: () => controller.selectedButtonGroup.value =
               SelectedButtonGroup.accounting,
           isSelected: controller.selectedButtonGroup.value ==
