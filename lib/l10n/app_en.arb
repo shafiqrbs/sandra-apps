@@ -198,5 +198,13 @@
   "particular" : "Particular",
   "pleaseSelectItem" : "Please select item",
   "local" : "Local",
-  "online" : "Online"
+  "online" : "Online",
+  "salesPriceRequired" : "Sales price required",
+  "purchasePriceRequired" : "Purchase price required",
+  "unitRequired" : "Unit required",
+  "brandRequired" : "Brand required",
+  "selectBrand" : "Select brand",
+  "categoryRequired" : "Category required",
+  "selectCategory" : "Select category",
+  "productNameRequired" : "Product name required"
 }

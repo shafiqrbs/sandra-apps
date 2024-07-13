@@ -23,7 +23,7 @@ class StockListView extends BaseView<StockListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: 'stock_list'.tr,
+            pageTitle:appLocalization.stockList,
             controller: controller.stockManager.searchTextController.value,
             onSearch: controller.stockManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,

@@ -35,10 +35,9 @@ class StockListController extends BaseController {
   }
 
   Future<void> showAddStockModal() async {
-    toast('showAddStockModal');
     final result = await Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: appLocalization.addProduct,
         subTitle: '',
         child: AddProductModalView(),
       ),
