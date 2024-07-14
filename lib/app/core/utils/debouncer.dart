@@ -9,12 +9,19 @@ class Debouncer {
   VoidCallback? action;
   Timer? _timer;
 
-  Debouncer({this.milliseconds = AppValues.defaultDebounceTimeInMilliSeconds});
+  Debouncer({
+    this.milliseconds = AppValues.defaultDebounceTimeInMilliSeconds,
+  });
 
-  run(VoidCallback action) {
+  void run(VoidCallback action) {
     if (_timer != null) {
       _timer!.cancel();
     }
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
+    _timer = Timer(
+      Duration(
+        milliseconds: milliseconds,
+      ),
+      action,
+    );
   }
 }

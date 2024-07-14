@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import '/app/core/advance_select/advance_select_controller.dart';
@@ -42,8 +43,12 @@ class EntityManager<T> {
 
   // Pagination listener
   Future<void> _scrollListener() async {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+    final triggerFetchMoreSize =
+        0.75 * scrollController.position.maxScrollExtent;
+
+    if (scrollController.position.pixels >= triggerFetchMoreSize &&
+        (scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse)) {
       await paginate();
     }
   }

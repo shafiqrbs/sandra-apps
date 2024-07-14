@@ -54,4 +54,10 @@ class StockListController extends BaseController {
     isSearchSelected.toggle();
     await stockManager.paginate();
   }
+
+  Future<void> refreshList() {
+    stockManager.allItems.value?.clear();
+    stockManager.allItems.refresh();
+    return stockManager.paginate();
+  }
 }
