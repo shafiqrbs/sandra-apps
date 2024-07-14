@@ -1,1 +1,0 @@
-# getx_template
