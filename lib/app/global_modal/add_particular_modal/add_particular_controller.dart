@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/entity/transaction_methods.dart';
+import '/app/entity/transaction_methods.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';

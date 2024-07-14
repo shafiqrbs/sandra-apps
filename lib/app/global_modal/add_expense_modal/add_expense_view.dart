@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/utils/responsive.dart';
-import 'package:getx_template/app/core/widget/row_button.dart';
-import 'package:getx_template/app/global_widget/transaction_method_item_view.dart';
+import '/app/core/utils/responsive.dart';
+import '/app/core/widget/row_button.dart';
+import '/app/global_widget/transaction_method_item_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';

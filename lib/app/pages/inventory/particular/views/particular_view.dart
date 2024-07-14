@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/add_button.dart';
-import 'package:getx_template/app/core/widget/app_bar_button_group.dart';
-import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/add_button.dart';
+import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/inventory/particular/controllers/particular_controller.dart';
 

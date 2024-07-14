@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/dialog_pattern.dart';
-import 'package:getx_template/app/global_modal/add_expense_modal/add_expense_view.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/add_expense_modal/add_expense_view.dart';
 import '/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 

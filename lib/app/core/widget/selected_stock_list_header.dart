@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/base/base_widget.dart';
+import '/app/core/base/base_widget.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 
 import 'common_header_text.dart';

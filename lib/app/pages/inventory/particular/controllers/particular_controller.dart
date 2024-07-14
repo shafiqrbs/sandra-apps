@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/dialog_pattern.dart';
-import 'package:getx_template/app/global_modal/add_particular_modal/add_particular_view.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/add_particular_modal/add_particular_view.dart';
 import '/app/core/base/base_controller.dart';
 
 class ParticularController extends BaseController {

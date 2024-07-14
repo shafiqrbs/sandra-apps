@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:getx_template/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/core_model/voice_recognition.dart';
 import 'package:nb_utils/nb_utils.dart';
 
