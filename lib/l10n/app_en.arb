@@ -212,5 +212,7 @@
   "nameRequired" : "Name required",
   "enterOpeningBalance" : "Enter opening balance",
   "addVendor" : "Add Vendor",
-  "config" : "Config"
+  "config" : "Config",
+  "configuration" : "Configuration",
+  "upcomingFeature" : "Upcoming Feature"
 }

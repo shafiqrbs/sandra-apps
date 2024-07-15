@@ -17,7 +17,7 @@ class SettingsView extends BaseView<SettingsController> {
       backgroundColor: colors.primaryBaseColor,
       centerTitle: false,
       title: Text(
-        appLocalization.settings,
+        appLocalization.configuration,
         style: TextStyle(
           fontSize: headerTFSize,
         ),

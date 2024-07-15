@@ -116,37 +116,31 @@ List<Widget> buttonList = [
     localeMethod: () => appLocalization.stockList,
   ),
   TbdRoundButton(
-    text: 'customer_list',
     icon: TablerIcons.robot_face,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customerList,
   ),
   TbdRoundButton(
-    text: 'create_purchase'.tr,
     icon: TablerIcons.shopping_bag,
     onTap: () => navigatePage(Routes.createPurchase),
     localeMethod: () => appLocalization.createPurchase,
   ),
   TbdRoundButton(
-    text: 'vendor',
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendorList,
   ),
   TbdRoundButton(
-    text: 'purchase_list',
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchaseList,
   ),
   TbdRoundButton(
-    text: 'expense_list',
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.expenseList),
     localeMethod: () => appLocalization.expenseList,
   ),
   TbdRoundButton(
-    text: 'particular'.tr,
     icon: TablerIcons.credit_card,
     onTap: () => navigatePage(Routes.particular),
     localeMethod: () => appLocalization.particular,

@@ -287,5 +287,8 @@
   "enterOpeningBalance" : "প্রারম্ভিক ব্যালেন্স লিখুন",
   "addVendor" : "বিক্রেতা যোগ করুন",
   "purchase" : "ক্রয়",
-  "config" : "কনফিগারেশন"
+  "config" : "কনফিগারেশন",
+  "configuration" : "কনফিগারেশন",
+  "pos" : "পস",
+  "upcomingFeature" : "আসন্ন বৈশিষ্ট্য"
 }
