@@ -375,7 +375,7 @@ class DashboardView extends BaseView<DashboardController> {
           spacing: 8,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           runSpacing: 8,
-          children: buttonList,
+          children: controller.dashboardButtonList,
         ),
       ],
     );
@@ -386,17 +386,27 @@ class DashboardView extends BaseView<DashboardController> {
       children: [
         TbdTextButton(
           text: appLocalization.inventory,
-          onPressed: () => controller.selectedButtonGroup.value =
-              SelectedButtonGroup.inventory,
+          onPressed: () => controller.updateSelectedButtonGroup(
+            SelectedButtonGroup.inventory,
+          ),
           isSelected: controller.selectedButtonGroup.value ==
               SelectedButtonGroup.inventory,
         ),
         TbdTextButton(
           text: appLocalization.accounting,
-          onPressed: () => controller.selectedButtonGroup.value =
-              SelectedButtonGroup.accounting,
+          onPressed: () => controller.updateSelectedButtonGroup(
+            SelectedButtonGroup.accounting,
+          ),
           isSelected: controller.selectedButtonGroup.value ==
               SelectedButtonGroup.accounting,
+        ),
+        TbdTextButton(
+          text: appLocalization.config,
+          onPressed: () => controller.updateSelectedButtonGroup(
+            SelectedButtonGroup.config,
+          ),
+          isSelected: controller.selectedButtonGroup.value ==
+              SelectedButtonGroup.config,
         ),
       ],
     );

@@ -211,5 +211,6 @@
   "enterNameHere" : "Enter name here",
   "nameRequired" : "Name required",
   "enterOpeningBalance" : "Enter opening balance",
-  "addVendor" : "Add Vendor"
+  "addVendor" : "Add Vendor",
+  "config" : "Config"
 }

@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import '/app/entity/purchase.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
+import '/app/entity/purchase.dart';
 import '/app/entity/sales.dart';
 import 'client/api_options.dart';
 import 'client/rest_client.dart';
@@ -248,6 +248,8 @@ class Services {
       },
       headers: _buildHeader(),
     );
+    final responseData = response.data as Map<String, dynamic>?;
+    if (responseData == null) return null;
     return Purchase.fromJson(response.data);
   }
 
@@ -290,8 +292,11 @@ class Services {
       headers: _buildHeader(),
     );
 
-    if (response.data == null) return false;
-    return response.data['message'] == 'success';
+    final responseData = response.data as Map<String, dynamic>?;
+
+    if (responseData == null) return false;
+
+    return responseData['message'] == 'success';
   }
 
   Future<bool> postPurchase({
@@ -308,8 +313,11 @@ class Services {
       headers: _buildHeader(),
     );
 
-    if (response.data == null) return false;
-    return response.data['message'] == 'success';
+    final responseData = response.data as Map<String, dynamic>?;
+
+    if (responseData == null) return false;
+
+    return responseData['message'] == 'success';
   }
 
   Future<bool> updateSales({
@@ -325,9 +333,11 @@ class Services {
       },
       headers: _buildHeader(),
     );
+    final responseData = response.data as Map<String, dynamic>?;
 
-    if (response.data == null) return false;
-    return response.data['message'] == 'success';
+    if (responseData == null) return false;
+
+    return responseData['message'] == 'success';
   }
 
   Future<bool> deleteSales({
@@ -343,8 +353,11 @@ class Services {
       headers: _buildHeader(),
     );
 
-    if (response.data == null) return false;
-    return response.data['message'] == 'success';
+    final responseData = response.data as Map<String, dynamic>?;
+
+    if (responseData == null) return false;
+
+    return responseData['message'] == 'success';
   }
 
   Future<List<CustomerLedger>?> getCustomerLedgerReport({

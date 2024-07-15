@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_widget.dart';
 import '/app/routes/app_pages.dart';
-
 import 'app_bar_button.dart';
 import 'tbd_round_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
@@ -92,6 +92,7 @@ class QuickNavigationButton extends BaseWidget {
     );
   }
 }
+
 AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
 
@@ -118,7 +119,7 @@ List<Widget> buttonList = [
     text: 'customer_list',
     icon: TablerIcons.robot_face,
     onTap: () => navigatePage(Routes.customerList),
-    localeMethod: ()=> appLocalization.customerList,
+    localeMethod: () => appLocalization.customerList,
   ),
   TbdRoundButton(
     text: 'create_purchase'.tr,
@@ -137,7 +138,6 @@ List<Widget> buttonList = [
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchaseList,
-
   ),
   TbdRoundButton(
     text: 'expense_list',
@@ -171,5 +171,3 @@ void navigatePage(String routeName) {
       ..toNamed(routeName);
   }
 }
-
-
