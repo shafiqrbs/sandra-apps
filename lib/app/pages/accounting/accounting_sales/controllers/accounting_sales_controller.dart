@@ -1,5 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
 import '/app/core/base/base_controller.dart';
@@ -43,4 +45,16 @@ class AccountingSalesController extends BaseController {
   void goToCreateSales() {}
 
   showSalesInformationModal(BuildContext context, CustomerLedger element) {}
+
+  void showCustomerReceiveModal() {
+    Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: '',
+        child: CustomerReceiveModalView(
+          customer: null,
+        ),
+      ),
+    );
+  }
 }

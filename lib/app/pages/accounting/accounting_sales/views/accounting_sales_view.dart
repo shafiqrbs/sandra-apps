@@ -47,7 +47,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             return AppBarButtonGroup(
               children: [
                 AddButton(
-                  onTap: controller.goToCreateSales,
+                  onTap: controller.showCustomerReceiveModal,
                 ),
                 SearchButton(
                   onTap: controller.isSearchSelected.toggle,
