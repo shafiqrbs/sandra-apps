@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/global_widget/vendor_card_view.dart';
-import '/app/routes/app_pages.dart';
-import '/app/core/base/base_view.dart';
 import '/app/pages/domain/vendor/vendor_list/controllers/vendor_list_controller.dart';
+import '/app/routes/app_pages.dart';
 
 //ignore: must_be_immutable
 class VendorListView extends BaseView<VendorListController> {
@@ -71,7 +72,7 @@ class VendorListView extends BaseView<VendorListController> {
               index: index,
               onTap: () {
                 Get.toNamed(
-                  Routes.customerDetails,
+                  Routes.vendorLedger,
                   arguments: {
                     'vendor': element,
                   },
