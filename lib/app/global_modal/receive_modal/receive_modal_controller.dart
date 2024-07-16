@@ -5,8 +5,8 @@ import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/entity/customer.dart';
 
-class ReceiveModalController extends PaymentGatewayController {
-  ReceiveModalController({
+class CustomerReceiveModalController extends PaymentGatewayController {
+  CustomerReceiveModalController({
     Customer? customer,
   }) {
     customerManager.selectedItem.value = customer;
@@ -58,5 +58,14 @@ class ReceiveModalController extends PaymentGatewayController {
       customerManager.searchedItems.value = null;
       customerManager.selectedItem.value = customer;
     }
+  }
+
+  Future<void> onSearchCustomer(String? value) async {
+    if (value?.isEmpty ?? true) {
+      customerManager.searchedItems.value = [];
+      customerManager.selectedItem.value = null;
+      return;
+    }
+    await customerManager.searchItemsByName(value!);
   }
 }

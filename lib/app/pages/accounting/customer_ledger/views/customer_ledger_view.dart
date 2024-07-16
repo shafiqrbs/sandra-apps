@@ -3,7 +3,6 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/global_widget/customer_card_view.dart';
 import '/app/core/base/base_view.dart';
@@ -45,24 +44,24 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
           Expanded(
             flex: 2,
             child: Center(
-              child: Obx(
-                () {
-                  return Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(
-                      left: 8,
+              child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(
+                  left: 8,
+                ),
+                padding: EdgeInsets.zero,
+                height: textFieldHeight,
+                decoration: BoxDecoration(
+                  color: colors.textFieldColor,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(
+                      4,
                     ),
-                    padding: EdgeInsets.zero,
-                    height: textFieldHeight,
-                    decoration: BoxDecoration(
-                      color: colors.textFieldColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(
-                          4,
-                        ),
-                      ),
-                    ),
-                    child: TextFormField(
+                  ),
+                ),
+                child: Obx(
+                  () {
+                    return TextFormField(
                       controller:
                           controller.customerManager.searchTextController.value,
                       style: TextStyle(
@@ -71,23 +70,15 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                         color: colors.primaryTextColor,
                       ),
                       cursorColor: colors.formCursorColor,
-                      onChanged: controller.customerManager.searchItemsByName,
+                      onChanged: controller.searchCustomer,
                       decoration: inputDecorationAppbarSearch(
-                        hint: 'search_customer'.tr,
+                        hint: appLocalization.searchCustomer,
                         textEditingController: controller
                             .customerManager.searchTextController.value,
                         isSHowSuffixIcon: controller.customerManager
                             .searchTextController.value.text.isNotEmpty,
                         suffix: InkWell(
-                          onTap: () {
-                            controller
-                                .customerManager.searchTextController.value
-                                .clear();
-                            controller.customerManager.searchTextController
-                                .refresh();
-                            controller.customerManager.searchedItems.value =
-                                null;
-                          },
+                          onTap: controller.clearSearch,
                           child: Icon(
                             TablerIcons.x,
                             size: 18,
@@ -96,14 +87,12 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                         ),
                         onTap: () {},
                         isSHowPrefixIcon: true,
-                        prefixOnTap: () {
-                          Get.back();
-                        },
+                        prefixOnTap: Get.back,
                         prefix: TablerIcons.chevron_left,
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -129,7 +118,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       right: 4,
                     ),
                     child: InkWell(
-                      // onTap: controller.speechToText.value.isNotListening ? controller.startListening : controller.stopListening,
+                      onTap: controller.startVoiceSearch,
                       child: Icon(
                         TablerIcons.microphone,
                         color: colors.primaryTextColor,
@@ -207,7 +196,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
             data: controller.customerManager.selectedItem.value!,
             index: 0,
             onTap: () {},
-            onReceive: () {},
+            onReceive: controller.showReceiveModal,
             showReceiveButton: true,
           ),
         ),
@@ -268,6 +257,16 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
         ),
         Obx(
           () {
+
+            if(controller.customerLedgerReport.value == null) {
+             ElevatedButton(
+                onPressed: () async {
+                  await controller.fetchLedgerReport();
+                },
+                child: Text('Load Data'),
+              );
+            }
+
             return Expanded(
               child: ListView.builder(
                 itemCount: controller.customerLedgerReport.value?.length ?? 0,

@@ -89,16 +89,15 @@ InputDecoration inputDecorationAppbarSearch({
           ),
     prefixIconConstraints: const BoxConstraints(),
     contentPadding: EdgeInsets.zero,
-    //contentPadding: EdgeInsets.symmetric(horizontal: 8,vertical:10), // Adjust the padding as needed
     hintText: hint.tr,
     hintStyle: TextStyle(
       fontSize: appDimension.regularTFSize,
       color: colors.formBaseHintTextColor,
-    ), // Optional hint text
+    ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         appDimension.containerBorderRadius,
-      ), // Adjust the border radius as needed
+      ),
       borderSide: BorderSide(
         color: colors.borderColor,
       ),
@@ -106,12 +105,11 @@ InputDecoration inputDecorationAppbarSearch({
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         appDimension.containerBorderRadius,
-      ), // Adjust the border radius as needed
+      ),
       borderSide: BorderSide(
         color: colors.borderColor,
       ),
     ),
-
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         appDimension.containerBorderRadius,

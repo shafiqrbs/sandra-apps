@@ -7,22 +7,23 @@ import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
+import '/app/entity/customer.dart';
 import '/app/global_widget/customer_card_view.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
-import '/app/entity/customer.dart';
 import 'receive_modal_controller.dart';
 
-class ReceiveModalView extends BaseView<ReceiveModalController> {
+class CustomerReceiveModalView
+    extends BaseView<CustomerReceiveModalController> {
   final Customer? customer;
-  ReceiveModalView({
+  CustomerReceiveModalView({
     required this.customer,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GetX<ReceiveModalController>(
-      init: ReceiveModalController(
+    return GetX<CustomerReceiveModalController>(
+      init: CustomerReceiveModalController(
         customer: customer,
       ),
       builder: (controller) {
@@ -38,18 +39,8 @@ class ReceiveModalView extends BaseView<ReceiveModalController> {
                   isRequired: false,
                   textController:
                       controller.customerManager.searchTextController.value,
-                  onChange: (value) async {
-                    if (value?.isEmpty ?? true) {
-                      controller.customerManager.searchedItems.value = [];
-                      controller.customerManager.selectedItem.value = null;
-                      return;
-                    }
-                    await controller.customerManager.searchItemsByName(value!);
-
-                    print('search: $value');
-                    //print('search: ${controller.customerManager.allItems.value!.length}');
-                  },
-                  hint: 'search_customer'.tr,
+                  onChange: controller.onSearchCustomer,
+                  hint: appLocalization.searchCustomer,
                   suffixIcon: TablerIcons.search,
                 ),
                 1.percentHeight,
@@ -129,7 +120,7 @@ class ReceiveModalView extends BaseView<ReceiveModalController> {
                             ),
                             cursorColor: colors.formCursorColor,
                             decoration: InputDecoration(
-                              hintText: 'Amount',
+                              hintText: appLocalization.amount,
                               filled: true,
                               fillColor: colors.textFieldColor,
                               enabledBorder: OutlineInputBorder(
@@ -155,7 +146,7 @@ class ReceiveModalView extends BaseView<ReceiveModalController> {
                           textController: controller.addRemarkController.value,
                           isRequired: false,
                           lines: 2,
-                          hint: 'add_remark'.tr,
+                          hint: appLocalization.addRemark,
                         ),
                         1.percentHeight,
                         Container(
@@ -169,14 +160,14 @@ class ReceiveModalView extends BaseView<ReceiveModalController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RowButton(
-                                buttonName: 'reset'.tr,
+                                buttonName: appLocalization.reset,
                                 leftIcon: TablerIcons.restore,
                                 onTap: controller.resetField,
                                 isOutline: true,
                               ),
                               16.width,
                               RowButton(
-                                buttonName: 'save'.tr,
+                                buttonName: appLocalization.save,
                                 leftIcon: TablerIcons.device_floppy,
                                 onTap: controller.processReceive,
                                 isOutline: false,

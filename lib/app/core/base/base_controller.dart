@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/voice_recognition.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/page_state.dart';
@@ -33,6 +34,8 @@ abstract class BaseController extends GetxController {
   DbTables get dbTables => DbTables();
 
   SetUp get setUp => SetUp();
+
+  final voiceRecognition = VoiceRecognition();
 
   final logoutController = false.obs;
 

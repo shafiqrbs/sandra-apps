@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
+import 'package:sandra/app/global_modal/receive_modal/receive_modal_view.dart';
 import '/app/core/base/base_controller.dart';
 
 class CustomerLedgerController extends BaseController {
@@ -56,5 +58,41 @@ class CustomerLedgerController extends BaseController {
     update();
     notifyChildrens();
     refresh();
+  }
+
+  void clearSearch() {
+    customerManager.searchTextController.value.clear();
+    customerManager.searchedItems.value = null;
+    customerManager.searchTextController.refresh();
+  }
+
+  Future<void> startVoiceSearch() async {
+    if (!voiceRecognition.isListening) {
+      await voiceRecognition.startListening(
+        (result) {
+          customerManager.searchTextController.value.text = result;
+          customerManager.searchItemsByName(result);
+        },
+      );
+    } else {
+      await voiceRecognition.stopListening();
+    }
+  }
+
+  void searchCustomer(String value) {
+    customerManager.searchItemsByName(value);
+    customerManager.searchTextController.refresh();
+  }
+
+  void showReceiveModal() {
+    Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: 'subTitle',
+        child: CustomerReceiveModalView(
+          customer: customer,
+        ),
+      ),
+    );
   }
 }
