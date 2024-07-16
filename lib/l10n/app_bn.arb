@@ -290,5 +290,7 @@
   "config" : "কনফিগারেশন",
   "configuration" : "কনফিগারেশন",
   "pos" : "পস",
-  "upcomingFeature" : "আসন্ন বৈশিষ্ট্য"
+  "upcomingFeature" : "আসন্ন বৈশিষ্ট্য",
+  "accountSales" : "বিক্রয় হিসাব",
+  "approve" : "অনুমোদন"
 }

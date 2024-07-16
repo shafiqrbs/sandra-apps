@@ -214,5 +214,7 @@
   "addVendor" : "Add Vendor",
   "config" : "Config",
   "configuration" : "Configuration",
-  "upcomingFeature" : "Upcoming Feature"
+  "upcomingFeature" : "Upcoming Feature",
+  "accountSales" : "Account Sales",
+  "approve" : "Approve"
 }

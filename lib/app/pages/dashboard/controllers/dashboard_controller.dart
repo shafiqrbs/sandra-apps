@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_round_button.dart';
-
-import '/app/core/base/base_controller.dart';
 import '/app/routes/app_pages.dart';
 
 enum SelectedTab {
@@ -29,7 +29,7 @@ List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.point_off,
     onTap: () => navigatePage(Routes.salesList),
-    localeMethod: () => appLocalization.sales,
+    localeMethod: () => appLocalization.invoice,
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_bag,
@@ -77,6 +77,11 @@ List<Widget> accountingButtonList = [
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendorList,
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.butterfly,
+    onTap: () => navigatePage(Routes.accountingSales),
+    localeMethod: () => appLocalization.sales,
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
