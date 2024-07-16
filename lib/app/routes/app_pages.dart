@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/accounting/accounting_sales/bindings/accounting_sales_binding.dart';
+import 'package:sandra/app/pages/accounting/accounting_sales/views/accounting_sales_view.dart';
 
 import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
 import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';
@@ -134,6 +136,11 @@ class AppPages {
       name: Routes.vendorDetails,
       page: VendorDetailsView.new,
       binding: VendorDetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.accountingSales,
+      page: AccountingSalesView.new,
+      binding: AccountingSalesBinding(),
     ),
   ];
 }
