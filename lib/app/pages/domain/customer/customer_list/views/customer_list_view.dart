@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -72,7 +73,7 @@ class CustomerListView extends BaseView<CustomerListController> {
               index: index,
               onTap: () {
                 Get.toNamed(
-                  Routes.customerDetails,
+                  Routes.customerLedger,
                   arguments: {
                     'customer': element,
                   },

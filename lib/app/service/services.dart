@@ -361,17 +361,16 @@ class Services {
   }
 
   Future<List<CustomerLedger>?> getCustomerLedgerReport({
-    required bool shouldShowLoader,
     required String? customerId,
   }) async {
     final response = await dio.post(
       APIType.public,
       'poskeeper-customer-ledger',
       {
-        'customerId': customerId,
+        'customer_id': customerId,
       },
       query: {
-        'customerId': customerId,
+        'customer_id': customerId,
       },
       headers: _buildHeader(),
     );
