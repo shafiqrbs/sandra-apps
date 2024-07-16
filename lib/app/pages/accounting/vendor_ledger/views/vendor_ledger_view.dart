@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
+import 'package:sandra/app/global_widget/vendor_card_view.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/accounting/vendor_ledger/controllers/vendor_ledger_controller.dart';
 
@@ -58,7 +63,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                   () {
                     return TextFormField(
                       controller:
-                          controller.customerManager.searchTextController.value,
+                          controller.vendorManager.searchTextController.value,
                       style: TextStyle(
                         fontSize: regularTFSize,
                         fontWeight: FontWeight.w400,
@@ -68,9 +73,9 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                       onChanged: controller.searchCustomer,
                       decoration: inputDecorationAppbarSearch(
                         hint: appLocalization.searchCustomer,
-                        textEditingController: controller
-                            .customerManager.searchTextController.value,
-                        isSHowSuffixIcon: controller.customerManager
+                        textEditingController:
+                            controller.vendorManager.searchTextController.value,
+                        isSHowSuffixIcon: controller.vendorManager
                             .searchTextController.value.text.isNotEmpty,
                         suffix: InkWell(
                           onTap: controller.clearSearch,
@@ -187,8 +192,8 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
     return Column(
       children: [
         Obx(
-          () => CustomerCardView(
-            data: controller.customerManager.selectedItem.value!,
+          () => VendorCardView(
+            data: controller.vendorManager.selectedItem.value!,
             index: 0,
             onTap: () {},
             onReceive: controller.showReceiveModal,
@@ -252,7 +257,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
         ),
         Obx(
           () {
-            if (controller.customerLedgerReport.value == null) {
+            if (controller.vendorLedgerList.value == null) {
               ElevatedButton(
                 onPressed: () async {
                   await controller.fetchLedgerReport();
@@ -263,11 +268,11 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
 
             return Expanded(
               child: ListView.builder(
-                itemCount: controller.customerLedgerReport.value?.length ?? 0,
+                itemCount: controller.vendorLedgerList.value?.length ?? 0,
                 shrinkWrap: true,
                 physics: const ScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  final data = controller.customerLedgerReport.value![index];
+                  final data = controller.vendorLedgerList.value![index];
                   return Stack(
                     alignment: Alignment.center,
                     children: [
@@ -381,8 +386,8 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
     return Obx(
       () {
         return Visibility(
-          visible: controller.customerManager.searchedItems.value?.isNotEmpty ??
-              false,
+          visible:
+              controller.vendorManager.searchedItems.value?.isNotEmpty ?? false,
           child: Positioned(
             top: 0,
             left: 0,
@@ -397,14 +402,14 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               ),
               child: ListView.builder(
                 itemCount:
-                    controller.customerManager.searchedItems.value?.length ?? 0,
+                    controller.vendorManager.searchedItems.value?.length ?? 0,
                 itemBuilder: (context, index) {
                   final data =
-                      controller.customerManager.searchedItems.value?[index];
-                  return CustomerCardView(
+                      controller.vendorManager.searchedItems.value?[index];
+                  return VendorCardView(
                     data: data!,
                     index: index,
-                    onTap: () => controller.updateCustomer(data),
+                    onTap: () => controller.updateVendor(data),
                     onReceive: () {},
                     showReceiveButton: true,
                   );

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sandra/app/entity/vendor_ledger.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -253,7 +254,7 @@ class Services {
     return Purchase.fromJson(response.data);
   }
 
-  Future<bool> postReceive({
+  Future<bool> postCustomerReceive({
     required bool shouldShowLoader,
     required String customer,
     required String method,
@@ -266,16 +267,18 @@ class Services {
       APIType.public,
       'poskeeper-account-receive',
       {
-        'customer': customer,
-        'method': method,
+        'customer_id': customer,
+        'method_id': method,
         'mode': mode,
         'amount': amount,
-        'userId': userId,
+        'user_id': userId,
         'remark': remark,
       },
       headers: _buildHeader(),
     );
-    return false;
+    final responseData = response.data as Map<String, dynamic>?;
+    if (responseData == null || responseData['status'] == null) return false;
+    return responseData['status'] == 'success';
   }
 
   Future<bool> postVendorPayment({
@@ -289,18 +292,20 @@ class Services {
   }) async {
     final response = await dio.post(
       APIType.public,
-      'poskeeper-account-receive',
+      'poskeeper-account-payment',
       {
-        'vendor': vendor,
-        'method': method,
+        'vendor_id': vendor,
+        'method_id': method,
         'mode': mode,
         'amount': amount,
-        'userId': userId,
+        'user_id': userId,
         'remark': remark,
       },
       headers: _buildHeader(),
     );
-    return false;
+    final responseData = response.data as Map<String, dynamic>?;
+    if (responseData == null || responseData['status'] == null) return false;
+    return responseData['status'] == 'success';
   }
 
   Future<bool> postSales({
@@ -403,6 +408,27 @@ class Services {
     return parseList(
       list: response.data,
       fromJson: CustomerLedger.fromJson,
+    );
+  }
+
+  Future<List<VendorLedger>?> getVendorLedgerReport({
+    required String? vendorId,
+  }) async {
+    final response = await dio.post(
+      APIType.public,
+      'poskeeper-vendor-ledger',
+      {
+        'vendor_id': vendorId,
+      },
+      query: {
+        'vendor_id': vendorId,
+      },
+      headers: _buildHeader(),
+    );
+
+    return parseList(
+      list: response.data,
+      fromJson: VendorLedger.fromJson,
     );
   }
 }

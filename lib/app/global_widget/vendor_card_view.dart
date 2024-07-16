@@ -134,7 +134,7 @@ class VendorCardView extends BaseWidget {
               ),
               if (showReceiveButton)
                 _buildIconButton(
-                  onTap: () {},
+                  onTap: onReceive,
                   icon: TablerIcons.coin_bitcoin,
                   color: colors.primaryBaseColor,
                 ),
