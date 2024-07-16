@@ -5,7 +5,7 @@ import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
-import '/app/global_modal/receive_modal/customer_receive_modal_view.dart';
+import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 
 class CustomerLedgerController extends BaseController {
   Customer? customer;

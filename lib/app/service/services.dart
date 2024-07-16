@@ -278,6 +278,31 @@ class Services {
     return false;
   }
 
+  Future<bool> postVendorPayment({
+    required bool shouldShowLoader,
+    required String vendor,
+    required String method,
+    required String mode,
+    required String amount,
+    required String userId,
+    required String? remark,
+  }) async {
+    final response = await dio.post(
+      APIType.public,
+      'poskeeper-account-receive',
+      {
+        'vendor': vendor,
+        'method': method,
+        'mode': mode,
+        'amount': amount,
+        'userId': userId,
+        'remark': remark,
+      },
+      headers: _buildHeader(),
+    );
+    return false;
+  }
+
   Future<bool> postSales({
     required List salesList,
     required String mode,
