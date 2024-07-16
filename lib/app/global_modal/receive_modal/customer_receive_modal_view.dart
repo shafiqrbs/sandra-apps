@@ -10,7 +10,7 @@ import '/app/core/widget/row_button.dart';
 import '/app/entity/customer.dart';
 import '/app/global_widget/customer_card_view.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
-import 'receive_modal_controller.dart';
+import 'customer_receive_modal_controller.dart';
 
 class CustomerReceiveModalView
     extends BaseView<CustomerReceiveModalController> {

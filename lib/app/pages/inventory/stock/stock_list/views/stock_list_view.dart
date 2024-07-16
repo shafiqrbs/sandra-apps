@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/paging_view.dart';
+import '/app/core/widget/paging_view.dart';
 import '/app/core/widget/add_button.dart';
 
 import '/app/core/base/base_view.dart';
