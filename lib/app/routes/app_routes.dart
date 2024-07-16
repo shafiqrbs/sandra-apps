@@ -24,6 +24,7 @@ abstract class Routes {
   static const expenseDetails = _Paths.expenseDetails;
   static const particular = _Paths.particular;
   static const createExpense = _Paths.createExpense;
+  static const vendorDetails = _Paths.vendorDetails;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const expenseDetails = '/expense_details';
   static const particular = '/particular';
   static const createExpense = '/create_expense';
+  static const vendorDetails = '/vendor_details';
 }
