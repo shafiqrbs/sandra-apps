@@ -3,8 +3,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/style_function.dart';
-import 'package:sandra/app/global_widget/vendor_card_view.dart';
+import '/app/core/utils/style_function.dart';
+import '/app/global_widget/vendor_card_view.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/accounting/vendor_ledger/controllers/vendor_ledger_controller.dart';
 

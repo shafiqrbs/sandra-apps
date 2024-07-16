@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
-import 'package:sandra/app/pages/accounting/accounting_sales/bindings/accounting_sales_binding.dart';
-import 'package:sandra/app/pages/accounting/accounting_sales/views/accounting_sales_view.dart';
 
+import '/app/pages/accounting/accounting_sales/bindings/accounting_sales_binding.dart';
+import '/app/pages/accounting/accounting_sales/views/accounting_sales_view.dart';
 import '/app/pages/accounting/customer_ledger/bindings/customer_ledger_binding.dart';
 import '/app/pages/accounting/customer_ledger/views/customer_ledger_view.dart';
 import '/app/pages/accounting/expense/expense_list/bindings/expense_list_binding.dart';
 import '/app/pages/accounting/expense/expense_list/views/expense_list_view.dart';
 import '/app/pages/accounting/vendor_ledger/bindings/vendor_ledger_binding.dart';
 import '/app/pages/accounting/vendor_ledger/views/vendor_ledger_view.dart';
+import '/app/pages/accounting_purchase/bindings/accounting_purchase_binding.dart';
+import '/app/pages/accounting_purchase/views/accounting_purchase_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/domain/customer/customer_details/bindings/customer_details_binding.dart';
@@ -141,6 +143,11 @@ class AppPages {
       name: Routes.accountingSales,
       page: AccountingSalesView.new,
       binding: AccountingSalesBinding(),
+    ),
+    GetPage(
+      name: Routes.accountingPurchase,
+      page: AccountingPurchaseView.new,
+      binding: AccountingPurchaseBinding(),
     ),
   ];
 }
