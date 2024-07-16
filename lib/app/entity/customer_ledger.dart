@@ -1,4 +1,3 @@
-import '/app/core/utils/parser_functions.dart';
 import 'entity_manager.dart';
 
 class CustomerLedgerManager extends EntityManager<CustomerLedger> {

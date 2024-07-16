@@ -1,3 +1,14 @@
+import 'entity_manager.dart';
+
+class VendorLedgerManager extends EntityManager<VendorLedger> {
+  VendorLedgerManager()
+      : super(
+          '',
+          (json) => VendorLedger.fromJson(json),
+          (e) => e.toJson(),
+        );
+}
+
 class VendorLedger {
   final int? id;
   final String? method;
@@ -43,6 +54,24 @@ class VendorLedger {
       mobile: json['mobile'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'method': method,
+      'sales': sales,
+      'receive': receive,
+      'balance': balance,
+      'source_invoice': sourceInvoice,
+      'invoice': invoice,
+      'created': created,
+      'updated': updated,
+      'vendor_name': vendorName,
+      'vendor_id': vendorId,
+      'mobile': mobile,
+    };
+  }
+
   static double _parseDouble(dynamic value) {
     if (value is int) {
       return value.toDouble();
@@ -52,6 +81,7 @@ class VendorLedger {
       throw const FormatException('Invalid format for double');
     }
   }
+
   static int _parseInt(dynamic value) {
     if (value is double) {
       return value.toInt();
@@ -61,5 +91,4 @@ class VendorLedger {
       throw const FormatException('Invalid format for double');
     }
   }
-
 }
