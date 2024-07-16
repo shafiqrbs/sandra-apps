@@ -1,7 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/entity/customer.dart';
-import 'package:sandra/app/entity/customer_ledger.dart';
+import '/app/entity/customer.dart';
+import '/app/entity/customer_ledger.dart';
 import '/app/core/base/base_controller.dart';
 
 class AccountingSalesController extends BaseController {

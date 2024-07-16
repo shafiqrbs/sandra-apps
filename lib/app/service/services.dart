@@ -460,4 +460,33 @@ class Services {
       fromJson: CustomerLedger.fromJson,
     );
   }
+
+  Future<List<VendorLedger>?> getAccountPurchaseList({
+    required String? vendorId,
+    required String? startDate,
+    required String? endDate,
+    required String? keyword,
+  }) async {
+    final data = {
+      'vendor_id': vendorId,
+      'start_date': startDate,
+      'end_date': endDate,
+      'keyword': keyword,
+    };
+
+    data.removeWhere((key, value) => value == null);
+
+    final response = await dio.post(
+      APIType.public,
+      'poskeeper-account-purchase',
+      data,
+      query: data,
+      headers: _buildHeader(),
+    );
+
+    return parseList(
+      list: response.data,
+      fromJson: VendorLedger.fromJson,
+    );
+  }
 }

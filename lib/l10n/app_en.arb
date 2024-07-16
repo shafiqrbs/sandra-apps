@@ -216,5 +216,7 @@
   "configuration" : "Configuration",
   "upcomingFeature" : "Upcoming Feature",
   "accountSales" : "Account Sales",
-  "approve" : "Approve"
+  "approve" : "Approve",
+  "accountPurchase" : "Account Purchase",
+  "searchVendor" : "Search vendor"
 }

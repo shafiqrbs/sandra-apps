@@ -41,7 +41,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                   textController:
                       controller.vendorManager.searchTextController.value,
                   onChange: controller.onSearchCustomer,
-                  hint: appLocalization.searchCustomer,
+                  hint: appLocalization.searchVendor,
                   suffixIcon: TablerIcons.search,
                 ),
                 1.percentHeight,

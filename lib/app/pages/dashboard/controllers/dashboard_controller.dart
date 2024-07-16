@@ -85,8 +85,8 @@ List<Widget> accountingButtonList = [
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
-    onTap: () => navigatePage(Routes.purchaseList),
-    localeMethod: () => appLocalization.purchaseList,
+    onTap: () => navigatePage(Routes.accountingPurchase),
+    localeMethod: () => appLocalization.purchase,
   ),
 ];
 
