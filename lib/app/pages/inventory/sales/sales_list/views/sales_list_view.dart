@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/widget/no_record_found_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/style_function.dart';
@@ -73,7 +74,7 @@ class SalesListView extends BaseView<SalesListController> {
               child: controller.salesManager.allItems.value == null
                   ? _buildRetryView()
                   : controller.salesManager.allItems.value!.isEmpty
-                      ? _buildNoDataView()
+                      ? const NoRecordFoundView()
                       : _buildListView(),
             );
           },
@@ -270,21 +271,6 @@ class SalesListView extends BaseView<SalesListController> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildNoDataView() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CommonText(
-            text: "no_data_found".tr,
-            fontSize: regularTFSize,
-            textColor: colors.primaryTextColor,
-          ),
-        ],
-      ),
     );
   }
 }
