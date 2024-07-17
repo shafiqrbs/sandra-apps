@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
+import 'package:sandra/app/core/widget/retry_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/style_function.dart';
@@ -70,12 +71,23 @@ class SalesListView extends BaseView<SalesListController> {
       children: [
         Obx(
           () {
+            final items = controller.salesManager.allItems.value;
+
+            Widget content;
+            if (items == null) {
+              content = RetryView(
+                onRetry: () => controller.changeIndex(
+                  controller.selectedIndex.value,
+                ),
+              );
+            } else if (items.isEmpty) {
+              content = const NoRecordFoundView();
+            } else {
+              content = _buildListView();
+            }
+
             return Expanded(
-              child: controller.salesManager.allItems.value == null
-                  ? _buildRetryView()
-                  : controller.salesManager.allItems.value!.isEmpty
-                      ? const NoRecordFoundView()
-                      : _buildListView(),
+              child: content,
             );
           },
         ),
