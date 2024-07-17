@@ -179,18 +179,21 @@ class Services {
       query['end_date'] = '02-01-2023';
     }
 
-    final response = await dio.post(
-      APIType.public,
-      'poskeeper-online-sales-list',
-      query,
-      query: query,
-      headers: _buildHeader(),
-    );
-
-    return parseList(
-      list: response.data,
-      fromJson: Sales.fromJson,
-    );
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-online-sales-list',
+        query,
+        query: query,
+        headers: _buildHeader(),
+      );
+      return parseList(
+        list: response.data,
+        fromJson: Sales.fromJson,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<List<Purchase>?> getPurchaseList({

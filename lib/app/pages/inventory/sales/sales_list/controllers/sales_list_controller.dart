@@ -28,21 +28,21 @@ class SalesListController extends BaseController {
       slug: 'local',
       icon: 'wifi_off',
       view: Container(),
-      localeMethod:()=> appLocalization.local,
+      localeMethod: () => appLocalization.local,
     ),
     TabBarItem(
       name: 'Online',
       slug: 'online',
       icon: 'wifi',
       view: Container(),
-      localeMethod:()=> appLocalization.online,
+      localeMethod: () => appLocalization.online,
     ),
     TabBarItem(
       name: 'Hold',
       slug: 'hold',
       icon: 'notes',
       view: Container(),
-      localeMethod:()=> appLocalization.hold,
+      localeMethod: () => appLocalization.hold,
     ),
   ];
 
@@ -58,10 +58,6 @@ class SalesListController extends BaseController {
   }
 
   Future<void> changeIndex(int index) async {
-    salesManager.allItems.value ??= [];
-
-    salesManager.allItems.value?.clear();
-
     selectedIndex.value = index;
 
     salesManager.allItems.refresh();
@@ -108,10 +104,7 @@ class SalesListController extends BaseController {
           customerId: selectedCustomer?.customerId?.toString(),
           keyword: searchQuery,
         );
-        if (data != null) {
-          salesManager.allItems.value = data;
-          print('Loaded online sales data len: ${data.length}');
-        }
+        salesManager.allItems.value = data;
       },
     );
   }

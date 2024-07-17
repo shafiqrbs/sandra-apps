@@ -70,159 +70,11 @@ class SalesListView extends BaseView<SalesListController> {
         Obx(
           () {
             return Expanded(
-              child: ListView.builder(
-                itemCount: controller.salesManager.allItems.value?.length ?? 0,
-                controller: controller.selectedIndex.value == 2
-                    ? null
-                    : controller.salesManager.scrollController,
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  //check ranger is valid
-
-                  final element =
-                      controller.salesManager.allItems.value![index];
-
-                  return InkWell(
-                    onTap: () => controller.showSalesInformationModal(
-                      context,
-                      element,
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.all(4),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: index.isEven
-                            ? colors.evenListColor
-                            : colors.oddListColor,
-                        borderRadius:
-                            BorderRadius.circular(containerBorderRadius),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CommonIconText(
-                                  text: '${element.salesId}',
-                                  icon: TablerIcons.device_mobile,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      TablerIcons.calendar,
-                                      size: 18,
-                                      color: colors.iconColor,
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Expanded(
-                                      child: Text(
-                                        element.createdAt != null
-                                            ? DateFormat('dd MMM yyyy').format(
-                                                DateFormat('dd-MM-yyyy hh:mm a')
-                                                    .parse(element.createdAt!),
-                                              )
-                                            : '',
-                                        style: TextStyle(
-                                          color: colors.primaryTextColor,
-                                          fontSize: regularTFSize,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () =>
-                                      controller.showSalesInformationModal(
-                                    context,
-                                    element,
-                                  ),
-                                  child: Container(
-                                    alignment: Alignment.topRight,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        containerBorderRadius,
-                                      ),
-                                    ),
-                                    margin: const EdgeInsets.only(right: 12),
-                                    child: Icon(
-                                      TablerIcons.eye,
-                                      color: colors.primaryBaseColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 2),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CommonIconText(
-                                  text: element.customerName ?? '',
-                                  icon: TablerIcons.user,
-                                  textOverflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Expanded(
-                                child: CommonIconText(
-                                  text: element.customerMobile ?? '',
-                                  icon: TablerIcons.device_mobile,
-                                ),
-                              ),
-                              Expanded(child: Container()),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 4),
-                                  child: CommonText(
-                                    text:
-                                        "${"total".tr} : ${element.netTotal ?? ''}",
-                                    fontSize: regularTFSize,
-                                    textColor: colors.primaryTextColor,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 4),
-                                  child: CommonText(
-                                    text:
-                                        "${"receive".tr} : ${element.received ?? ''}",
-                                    fontSize: regularTFSize,
-                                    textColor: colors.primaryTextColor,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 4),
-                                  child: CommonText(
-                                    text: "${"due".tr} : ${element.due ?? ""}",
-                                    fontSize: regularTFSize,
-                                    textColor: colors.primaryTextColor,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+              child: controller.salesManager.allItems.value == null
+                  ? _buildRetryView()
+                  : controller.salesManager.allItems.value!.isEmpty
+                      ? _buildNoDataView()
+                      : _buildListView(),
             );
           },
         ),
@@ -244,6 +96,195 @@ class SalesListView extends BaseView<SalesListController> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildRetryView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonText(
+            text: "no_data_found".tr,
+            fontSize: regularTFSize,
+            textColor: colors.primaryTextColor,
+          ),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () => controller.changeIndex(
+              controller.selectedIndex.value,
+            ),
+            child: CommonText(
+              text: 'retry'.tr,
+              textColor: colors.primaryTextColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListView() {
+    return ListView.builder(
+      itemCount: controller.salesManager.allItems.value?.length ?? 0,
+      controller: controller.selectedIndex.value == 2
+          ? null
+          : controller.salesManager.scrollController,
+      padding: EdgeInsets.zero,
+      itemBuilder: (context, index) {
+        //check ranger is valid
+
+        final element = controller.salesManager.allItems.value![index];
+
+        return InkWell(
+          onTap: () => controller.showSalesInformationModal(
+            context,
+            element,
+          ),
+          child: Container(
+            margin: const EdgeInsets.all(4),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              borderRadius: BorderRadius.circular(containerBorderRadius),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: CommonIconText(
+                        text: '${element.salesId}',
+                        icon: TablerIcons.device_mobile,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            TablerIcons.calendar,
+                            size: 18,
+                            color: colors.iconColor,
+                          ),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              element.createdAt != null
+                                  ? DateFormat('dd MMM yyyy').format(
+                                      DateFormat('dd-MM-yyyy hh:mm a')
+                                          .parse(element.createdAt!),
+                                    )
+                                  : '',
+                              style: TextStyle(
+                                color: colors.primaryTextColor,
+                                fontSize: regularTFSize,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () => controller.showSalesInformationModal(
+                          context,
+                          element,
+                        ),
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              containerBorderRadius,
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(right: 12),
+                          child: Icon(
+                            TablerIcons.eye,
+                            color: colors.primaryBaseColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CommonIconText(
+                        text: element.customerName ?? '',
+                        icon: TablerIcons.user,
+                        textOverflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Expanded(
+                      child: CommonIconText(
+                        text: element.customerMobile ?? '',
+                        icon: TablerIcons.device_mobile,
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text: "${"total".tr} : ${element.netTotal ?? ''}",
+                          fontSize: regularTFSize,
+                          textColor: colors.primaryTextColor,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text: "${"receive".tr} : ${element.received ?? ''}",
+                          fontSize: regularTFSize,
+                          textColor: colors.primaryTextColor,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text: "${"due".tr} : ${element.due ?? ""}",
+                          fontSize: regularTFSize,
+                          textColor: colors.primaryTextColor,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildNoDataView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonText(
+            text: "no_data_found".tr,
+            fontSize: regularTFSize,
+            textColor: colors.primaryTextColor,
+          ),
+        ],
+      ),
     );
   }
 }
