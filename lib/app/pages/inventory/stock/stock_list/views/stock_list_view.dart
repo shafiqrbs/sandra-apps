@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/no_record_found_view.dart';
+import 'package:sandra/app/core/widget/retry_view.dart';
 import '/app/core/widget/paging_view.dart';
 import '/app/core/widget/add_button.dart';
 
@@ -63,52 +65,42 @@ class StockListView extends BaseView<StockListController> {
   @override
   Widget body(BuildContext context) {
     return Obx(
-          () {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: controller.stockManager.allItems.value?.length ?? 0,
-          controller: controller.stockManager.scrollController,
-          itemBuilder: (context, index) {
-            final element = controller.stockManager.allItems.value![index];
-            final isSelectedItem = false.obs;
-            final isBookmarked = false.obs;
+      () {
+        final items = controller.stockManager.allItems.value;
 
-            return StockCardView(
-              element: element,
-              index: index,
-              isSelectedItem: isSelectedItem,
-              isBookmarked: isBookmarked,
-            );
-          },
+        Widget content;
+        if (items == null) {
+          content = RetryView(
+            onRetry: () {},
+          );
+        } else if (items.isEmpty) {
+          content = const NoRecordFoundView();
+        } else {
+          content = _buildListView();
+        }
+
+        return content;
+      },
+    );
+  }
+
+  Widget _buildListView() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: controller.stockManager.allItems.value?.length ?? 0,
+      controller: controller.stockManager.scrollController,
+      itemBuilder: (context, index) {
+        final element = controller.stockManager.allItems.value![index];
+        final isSelectedItem = false.obs;
+        final isBookmarked = false.obs;
+
+        return StockCardView(
+          element: element,
+          index: index,
+          isSelectedItem: isSelectedItem,
+          isBookmarked: isBookmarked,
         );
       },
     );
-
-    return PagingView(
-      onLoadNextPage: controller.stockManager.paginate,
-      onRefresh: controller.refreshList,
-      child: Obx(
-        () {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.stockManager.allItems.value?.length ?? 0,
-            controller: controller.stockManager.scrollController,
-            itemBuilder: (context, index) {
-              final element = controller.stockManager.allItems.value![index];
-              final isSelectedItem = false.obs;
-              final isBookmarked = false.obs;
-
-              return StockCardView(
-                element: element,
-                index: index,
-                isSelectedItem: isSelectedItem,
-                isBookmarked: isBookmarked,
-              );
-            },
-          );
-        },
-      ),
-    );
-
   }
 }
