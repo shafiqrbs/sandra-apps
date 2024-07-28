@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -120,6 +121,11 @@ class SalesListController extends BaseController {
         child: SalesInformationModalView(
           sales: element,
           salesMode: tabPages[selectedIndex.value].slug,
+          onDeleted: () async {
+            Get.back();
+            toast('Sales deleted successfully');
+            await changeIndex(selectedIndex.value);
+          },
         ),
       ),
     );

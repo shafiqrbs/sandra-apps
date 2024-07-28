@@ -5,7 +5,6 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/label_value.dart';
@@ -349,21 +348,9 @@ class SalesInformationModalView
                   children: [
                     Expanded(
                       child: InkWell(
-                        onTap: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return CommonConfirmationModal(
-                                title: 'do_you_want_to_delete_this_sales?'.tr,
-                              );
-                            },
-                          ).then(
-                            (value) {
-                              print('value: $value');
-                              if (value) onDeleted?.call();
-                            },
-                          );
-                        },
+                        onTap: () => controller.deleteSales(
+                          onDeleted: onDeleted,
+                        ),
                         child: Container(
                           height: 40,
                           decoration: BoxDecoration(

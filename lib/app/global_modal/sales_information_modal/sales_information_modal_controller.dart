@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/common_confirmation_modal.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -80,5 +81,28 @@ class SalesInformationModalController extends PrinterController {
         'sales': sales.value,
       },
     );
+  }
+
+  Future<void> deleteSales({
+   required Function? onDeleted,
+  }) async {
+    final confirmation = await showDialog(
+      context: Get.overlayContext!,
+      builder: (context) {
+        return CommonConfirmationModal(
+          title: 'do_you_want_to_delete_this_sales?'.tr,
+        );
+      },
+    );
+
+    if (confirmation) {
+      print('delete sales');
+      await dbHelper.deleteAllWhr(
+        tbl: dbTables.tableSale,
+        where: 'sales_id = ?',
+        whereArgs: [sales.value!.salesId],
+      );
+      onDeleted!();
+    }
   }
 }
