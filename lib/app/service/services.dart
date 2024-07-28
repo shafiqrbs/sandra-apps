@@ -23,7 +23,7 @@ Future<List<T>?> parseList<T>({
 
   try {
     if (kDebugMode) {
-      print('\x1B[31m Parsing List $T \x1B[0m\n');
+      print('\x1B[31m Parsing List $T ${list.length} \x1B[0m\n');
     }
     return await compute(
       _parseListInIsolate,
@@ -182,9 +182,9 @@ class Services {
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-online-sales-list',
+        'poskeeper-online-sales',
         query,
-        query: query,
+       // query: query,
         headers: _buildHeader(),
       );
       return parseList(
