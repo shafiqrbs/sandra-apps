@@ -15,4 +15,8 @@ class SyncModalController extends BaseController{
       },
     );
   }
+
+  void sync() {
+    final
+  }
 }

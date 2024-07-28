@@ -20,6 +20,10 @@ class SyncModalView extends BaseView<SyncModalController> {
                   title: appLocalization.customer,
                   onTap: controller.syncCustomer,
                 ),
+                _buildButton(
+                  title: appLocalization.sync,
+                  onTap: controller.sync,
+                ),
               ],
             ),
           ),
@@ -34,17 +38,21 @@ class SyncModalView extends BaseView<SyncModalController> {
   }) {
     return InkWell(
       onTap: onTap,
-      child: Row(
-        mainAxisAlignment: spaceBetweenMAA,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 24,
+      child: Container(
+        padding: EdgeInsets.all(16),
+
+        child: Row(
+          mainAxisAlignment: spaceBetweenMAA,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 24,
+              ),
             ),
-          ),
-          Icon(Icons.arrow_forward_ios),
-        ],
+            Icon(Icons.arrow_forward_ios),
+          ],
+        ),
       ),
     );
   }

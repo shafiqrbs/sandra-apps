@@ -8,3 +8,5 @@ const prefsIsSalesOnline = 'isSalesOnline';
 const prefsIsZeroAllowed = 'isZeroAllowed';
 const prefsPurchaseConfig = 'purchaseConfig';
 const prefsLanguage = 'language';
+const prefsLicenseKey = 'licenseKey';
+const prefsActiveKey = 'activeKey';

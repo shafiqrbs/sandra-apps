@@ -103,6 +103,36 @@ class SessionManager {
     );
   }
 
+  /// set license key
+  Future<void> setLicenseKey(
+    String licenseKey,
+  ) async {
+    await prefs.setString(
+      prefsLicenseKey,
+      licenseKey,
+    );
+  }
+
+  /// get license key
+  Future<String> getLicenseKey() async {
+    return prefs.getString(prefsLicenseKey) ?? '';
+  }
+
+  /// set active key
+  Future<void> setActiveKey(
+    String activeKey,
+  ) async {
+    await prefs.setString(
+      prefsActiveKey,
+      activeKey,
+    );
+  }
+
+  /// get active key
+  Future<String> getActiveKey() async {
+    return prefs.getString(prefsActiveKey) ?? '';
+  }
+
   /// Get the license validity status.
   Future<bool> getIsLicenseValid() async {
     return prefs.getBool(prefsIsLicenseValid) ?? false;
@@ -153,6 +183,7 @@ class SessionManager {
     return prefs.getBool(prefsIsZeroAllowed) ?? true;
   }
 
+  /// set is zero allowed
   Future<void> setPurchaseConfig(
     String config,
   ) async {
@@ -162,6 +193,7 @@ class SessionManager {
     );
   }
 
+  /// get is zero allowed
   Future<String> getPurchaseConfig() async {
     return prefs.getString(prefsPurchaseConfig) ?? 'purchase_price';
   }
