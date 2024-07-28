@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/dialog_pattern.dart';
-import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import '/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/tab_bar_items.dart';
 import '/app/entity/vendor.dart';
+import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
+import '/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
 import '/app/routes/app_pages.dart';
 
 class PurchaseListController extends BaseController {
@@ -66,11 +66,11 @@ class PurchaseListController extends BaseController {
 
     switch (index) {
       case 0:
-        await _loadSalesData('is_hold is null');
+        await _loadPurchaseData('is_hold is null');
       case 1:
-        await _fetchOnlineSalesData();
+        await _fetchOnlinePurchaseData();
       case 2:
-        await _loadSalesData('is_hold == 1');
+        await _loadPurchaseData('is_hold == 1');
 
       default:
         break;
@@ -81,7 +81,7 @@ class PurchaseListController extends BaseController {
     refresh();
   }
 
-  Future<void> _loadSalesData(String whereClause) async {
+  Future<void> _loadPurchaseData(String whereClause) async {
     final list = await dbHelper.getAllWhr(
       tbl: dbTables.tablePurchase,
       where: whereClause,
@@ -93,7 +93,7 @@ class PurchaseListController extends BaseController {
     purchaseManager.allItems.refresh();
   }
 
-  Future<void> _fetchOnlineSalesData() async {
+  Future<void> _fetchOnlinePurchaseData() async {
     await dataFetcher(
       future: () async {
         final data = await services.getPurchaseList(
@@ -104,7 +104,6 @@ class PurchaseListController extends BaseController {
         );
         if (data != null) {
           purchaseManager.allItems.value = data;
-          print('Loaded online sales data len: ${data.length}');
         }
       },
     );

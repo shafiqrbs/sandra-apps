@@ -215,7 +215,7 @@ class Services {
 
     final response = await dio.post(
       APIType.public,
-      'poskeeper-online-sales-list',
+      'poskeeper-online-purchase',
       query,
       query: query,
       headers: _buildHeader(),
