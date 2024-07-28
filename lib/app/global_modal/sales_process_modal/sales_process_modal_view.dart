@@ -10,12 +10,12 @@ import '/app/core/utils/responsive.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
-import '/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
-import '/app/global_widget/customer_card_view.dart';
-import '/app/global_widget/transaction_method_item_view.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/user.dart';
+import '/app/global_modal/sales_process_modal/sales_process_modal_controller.dart';
+import '/app/global_widget/customer_card_view.dart';
+import '/app/global_widget/transaction_method_item_view.dart';
 
 class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   final Sales? preSales;

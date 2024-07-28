@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/sales.dart';
+import '/app/pages/inventory/sales/create_sales/controllers/create_sales_controller.dart';
 import '/app/routes/app_pages.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class OrderProcessConfirmationController extends PrinterController {
   final Sales sales;
@@ -124,9 +126,14 @@ class OrderProcessConfirmationController extends PrinterController {
   }
 
   void _navigateToLanding() {
-    Get.offAllNamed(
-      Routes.dashboard,
-    );
+    Get
+      ..back()
+      ..back();
+    if (Get.isRegistered<CreateSalesController>()) {
+      final createSalesController = Get.find<CreateSalesController>();
+      createSalesController.salesItemList.value = [];
+      createSalesController.calculateAllSubtotal();
+    }
   }
 
   void _showUpdateError() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sandra/app/core/utils/responsive.dart';
+import '/app/core/utils/responsive.dart';
 
 class NoRecordFoundView extends StatelessWidget {
   const NoRecordFoundView({super.key});

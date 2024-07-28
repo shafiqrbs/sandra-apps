@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/no_record_found_view.dart';
-import 'package:sandra/app/core/widget/retry_view.dart';
+import '/app/core/widget/no_record_found_view.dart';
+import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/paging_view.dart';
 import '/app/core/widget/add_button.dart';
 

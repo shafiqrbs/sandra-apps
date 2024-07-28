@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/base/base_view.dart';
-import 'package:sandra/app/global_modal/sync_modal/sync_modal_controller.dart';
+import '/app/core/base/base_view.dart';
+import '/app/global_modal/sync_modal/sync_modal_controller.dart';
 
 class SyncModalView extends BaseView<SyncModalController> {
   final falsePadding = 0.0.obs;

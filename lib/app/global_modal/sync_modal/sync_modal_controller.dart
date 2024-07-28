@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/base/base_controller.dart';
-import 'package:sandra/app/core/core_model/setup.dart';
+import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/setup.dart';
 
 class SyncModalController extends BaseController {
   @override
