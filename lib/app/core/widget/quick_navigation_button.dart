@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/global_modal/sync_modal/sync_modal_view.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/routes/app_pages.dart';
@@ -95,7 +97,6 @@ class QuickNavigationButton extends BaseWidget {
 
 AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
-
 List<Widget> buttonList = [
   TbdRoundButton(
     text: appLocalization.createSales,
@@ -144,6 +145,19 @@ List<Widget> buttonList = [
     icon: TablerIcons.credit_card,
     onTap: () => navigatePage(Routes.particular),
     localeMethod: () => appLocalization.particular,
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.loader,
+    onTap: () {
+      Get.dialog(
+        DialogPattern(
+          title: 'title',
+          subTitle: 'subTitle',
+          child: SyncModalView(),
+        ),
+      );
+    },
+    localeMethod: () => appLocalization.sync,
   ),
 ];
 void navigatePage(String routeName) {
