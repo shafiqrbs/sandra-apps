@@ -104,9 +104,9 @@ class SessionManager {
   }
 
   /// set license key
-  Future<void> setLicenseKey(
-    String licenseKey,
-  ) async {
+  Future<void> setLicenseKey({
+    required String licenseKey,
+  }) async {
     await prefs.setString(
       prefsLicenseKey,
       licenseKey,
@@ -119,9 +119,9 @@ class SessionManager {
   }
 
   /// set active key
-  Future<void> setActiveKey(
-    String activeKey,
-  ) async {
+  Future<void> setActiveKey({
+    required String activeKey,
+  }) async {
     await prefs.setString(
       prefsActiveKey,
       activeKey,

@@ -29,6 +29,8 @@ class LicenseController extends BaseController {
             );
 
             if (isInserted) {
+              await prefs.setLicenseKey(licenseKey: licenseNumber);
+              await prefs.setActiveKey(activeKey: activeKey);
               Get.offAllNamed(Routes.login);
             }
           }
@@ -71,7 +73,7 @@ class LicenseController extends BaseController {
     }
 
     await prefs.setIsLicenseValid(isLicenseValid: true);
-    toast('license_and_key_validated_successfully'.tr);
+    toast(appLocalization.licenseAndKeyValidatedSuccessfully);
     return true;
   }
 }

@@ -218,5 +218,6 @@
   "accountSales" : "Account Sales",
   "approve" : "Approve",
   "accountPurchase" : "Account Purchase",
-  "searchVendor" : "Search vendor"
+  "searchVendor" : "Search vendor",
+  "licenseAndKeyValidatedSuccessfully" : "License and key validated successfully"
 }
