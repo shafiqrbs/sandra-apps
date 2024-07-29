@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -86,6 +87,14 @@ class OrderProcessConfirmationController extends PrinterController {
       tableName: dbTables.tableSale,
       dataList: [sales.toJson()],
     );
+    final isOnline = await prefs.getIsSalesOnline();
+    if (isOnline) {
+      toast(
+        'Online Sales Failed Save Locally',
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
     _navigateToLanding();
   }
 
@@ -100,6 +109,7 @@ class OrderProcessConfirmationController extends PrinterController {
   }
 
   void _navigateToLanding() {
+    logger.i('saving');
     Get
       ..back()
       ..back();
@@ -127,6 +137,7 @@ class OrderProcessConfirmationController extends PrinterController {
           salesList: [sales],
         );
       },
+      shouldShowErrorModal: false,
     );
     if (isUpdated ?? false) {
       _navigateToLanding();
@@ -144,7 +155,9 @@ class OrderProcessConfirmationController extends PrinterController {
           mode: 'online',
         );
       },
+      shouldShowErrorModal: false,
     );
+
     if (isInserted ?? false) {
       _navigateToLanding();
     } else {

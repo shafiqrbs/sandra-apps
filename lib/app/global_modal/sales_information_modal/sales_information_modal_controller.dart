@@ -75,16 +75,18 @@ class SalesInformationModalController extends PrinterController {
   }
 
   void goToEditSales() {
-    Get.toNamed(
-      Routes.createSales,
-      arguments: {
-        'sales': sales.value,
-      },
-    );
+    Get
+      ..back()
+      ..offNamed(
+        Routes.createSales,
+        arguments: {
+          'sales': sales.value,
+        },
+      );
   }
 
   Future<void> deleteSales({
-   required Function? onDeleted,
+    required Function? onDeleted,
   }) async {
     final confirmation = await showDialog(
       context: Get.overlayContext!,

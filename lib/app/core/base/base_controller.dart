@@ -151,17 +151,26 @@ abstract class BaseController extends GetxController {
     required Future<void> Function() future,
     bool shouldShowLoader = true,
     bool shouldCheckInternet = true,
+    bool shouldShowErrorModal = true,
   }) async {
-    if (shouldCheckInternet && !(await hasInternet())) {
-      handleNoInternet();
-      return;
-    }
-
-    ErrorCatcher.setError(hasError: false, statusCode: null);
-
     if (shouldShowLoader) {
       await showLoader();
     }
+
+    if (shouldCheckInternet) {
+      final isOnline = await hasInternet();
+      if (!isOnline) {
+        if (shouldShowLoader) closeLoader();
+
+        if (shouldShowErrorModal) {
+          handleNoInternet();
+        }
+        updatePageState(PageState.noInternet);
+        return;
+      }
+    }
+
+    ErrorCatcher.setError(hasError: false, statusCode: null);
 
     try {
       await future();
@@ -172,11 +181,19 @@ abstract class BaseController extends GetxController {
       final hasError = ErrorCatcher().hasError ?? false;
 
       if (hasError) {
-        _handleException(
-          exception: ErrorCatcher().exception!,
-          stackTrace: ErrorCatcher().stackTrace!,
-          statusCode: ErrorCatcher().statusCode!,
-        );
+        if (kDebugMode) {
+          logger.e(
+            'Exception From Data fetcher: ${ErrorCatcher().exception!}',
+          );
+        }
+
+        if (shouldShowErrorModal) {
+          _handleException(
+            exception: ErrorCatcher().exception!,
+            stackTrace: ErrorCatcher().stackTrace!,
+            statusCode: ErrorCatcher().statusCode!,
+          );
+        }
       }
     }
   }
