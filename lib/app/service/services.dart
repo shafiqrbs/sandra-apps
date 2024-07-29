@@ -181,7 +181,7 @@ class Services {
         APIType.public,
         'poskeeper-online-sales',
         query,
-       // query: query,
+        // query: query,
         headers: _buildHeader(),
       );
       return parseList(
@@ -310,21 +310,25 @@ class Services {
     required List salesList,
     required String mode,
   }) async {
-    final response = await dio.post(
-      APIType.public,
-      'poskeeper-sales',
-      {
-        'sales': jsonEncode(salesList),
-        'mode': mode,
-      },
-      headers: _buildHeader(),
-    );
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-sales',
+        {
+          'sales': jsonEncode(salesList),
+          'mode': mode,
+        },
+        headers: _buildHeader(),
+      );
 
-    final responseData = response.data as Map<String, dynamic>?;
+      final responseData = response.data as Map<String, dynamic>?;
 
-    if (responseData == null) return false;
+      if (responseData == null) return false;
 
-    return responseData['message'] == 'success';
+      return responseData['message'] == 'success';
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<bool> postPurchase({
@@ -333,7 +337,7 @@ class Services {
   }) async {
     final response = await dio.post(
       APIType.public,
-      'poskeeper-sales',
+      'poskeeper-purchase',
       {
         'sales': jsonEncode(purchaseList),
         'mode': mode,

@@ -54,18 +54,7 @@ class OrderProcessConfirmationController extends PrinterController {
     final isSalesOnline = sales.isOnline == 1;
 
     if (isSalesOnline) {
-      await dataFetcher(
-        future: () async {
-          final isUpdated = await services.updateSales(
-            salesList: [sales],
-          );
-          if (isUpdated) {
-            _navigateToLanding();
-          } else {
-            _showUpdateError();
-          }
-        },
-      );
+      await _onlineUpdate();
     } else {
       await _localUpdate();
     }
@@ -75,20 +64,7 @@ class OrderProcessConfirmationController extends PrinterController {
     final isOnline = await prefs.getIsSalesOnline();
 
     if (isOnline) {
-      bool? isSynced;
-      await dataFetcher(
-        future: () async {
-          isSynced = await services.postSales(
-            salesList: [sales],
-            mode: 'online',
-          );
-        },
-      );
-      if (isSynced ?? false) {
-        _navigateToLanding();
-      } else {
-        await _localInsert();
-      }
+      await _onlineInsert();
     } else {
       await _localInsert();
     }
@@ -131,5 +107,38 @@ class OrderProcessConfirmationController extends PrinterController {
 
   Future<void> scanBluetooth() async {
     await getBluetoothList();
+  }
+
+  Future<void> _onlineUpdate() async {
+    bool? isUpdated;
+    await dataFetcher(
+      future: () async {
+        isUpdated = await services.updateSales(
+          salesList: [sales],
+        );
+      },
+    );
+    if (isUpdated ?? false) {
+      _navigateToLanding();
+    } else {
+      _showUpdateError();
+    }
+  }
+
+  Future<void> _onlineInsert() async {
+    bool? isInserted;
+    await dataFetcher(
+      future: () async {
+        isInserted = await services.postSales(
+          salesList: [sales],
+          mode: 'online',
+        );
+      },
+    );
+    if (isInserted ?? false) {
+      _navigateToLanding();
+    } else {
+      await _localInsert();
+    }
   }
 }
