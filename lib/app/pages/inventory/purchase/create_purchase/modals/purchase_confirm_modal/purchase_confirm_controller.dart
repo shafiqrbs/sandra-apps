@@ -72,7 +72,6 @@ class PurchaseConfirmController extends PrinterController {
       await dataFetcher(
         future: () async {
           final isUpdated = await services.updateSales(
-            shouldShowLoader: false,
             salesList: [
               purchase,
             ],

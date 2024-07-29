@@ -26,7 +26,6 @@ class AddCustomerModalController extends BaseController {
       await dataFetcher(
         future: () async {
           final response = await services.addCustomer(
-            shouldShowLoader: true,
             name: userNameController.value.text,
             mobile: mobileController.value.text,
             address: addressController.value.text,

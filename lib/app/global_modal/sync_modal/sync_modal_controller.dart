@@ -26,7 +26,6 @@ class SyncModalController extends BaseController {
         final value = await services.submitLicense(
           license: license,
           activeKey: activeKey,
-          shouldShowLoader: false,
         );
         if (value != null) {
           final isInserted = await insertSplashDataToDb(

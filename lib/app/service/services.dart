@@ -82,7 +82,6 @@ class Services {
   }
 
   Future<Map<String, dynamic>?> submitLicense({
-    required bool shouldShowLoader,
     required String license,
     required String activeKey,
   }) async {
@@ -100,7 +99,6 @@ class Services {
   }
 
   Future<Customer?> addCustomer({
-    required bool shouldShowLoader,
     required String name,
     required String mobile,
     required String address,
@@ -127,7 +125,6 @@ class Services {
   }
 
   Future<Map<String, dynamic>?>? addStock({
-    required bool shouldShowLoader,
     required String productName,
     required String category,
     required String brand,
@@ -258,7 +255,6 @@ class Services {
   }
 
   Future<bool> postCustomerReceive({
-    required bool shouldShowLoader,
     required String customer,
     required String method,
     required String mode,
@@ -285,7 +281,6 @@ class Services {
   }
 
   Future<bool> postVendorPayment({
-    required bool shouldShowLoader,
     required String vendor,
     required String method,
     required String mode,
@@ -354,7 +349,6 @@ class Services {
   }
 
   Future<bool> updateSales({
-    required bool shouldShowLoader,
     required List salesList,
   }) async {
     final response = await dio.post(
@@ -374,7 +368,6 @@ class Services {
   }
 
   Future<bool> deleteSales({
-    required bool shouldShowLoader,
     required String id,
   }) async {
     final response = await dio.get(

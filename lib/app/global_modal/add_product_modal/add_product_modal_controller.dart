@@ -59,7 +59,6 @@ class AddProductModalViewController extends BaseController {
     await dataFetcher(
       future: () async {
         final value = await services.addStock(
-          shouldShowLoader: false,
           productName: productName,
           category: category!,
           brand: brand!,

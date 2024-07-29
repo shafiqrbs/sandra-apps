@@ -39,7 +39,6 @@ class CustomerReceiveModalController extends PaymentGatewayController {
     await dataFetcher(
       future: () async {
         final data = await services.postCustomerReceive(
-          shouldShowLoader: true,
           customer: customerManager.selectedItem.value!.customerId!.toString(),
           method: 'receive',
           mode: selectedPaymentMode.value,

@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/routes/app_pages.dart';
-import '/app/entity/sales.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/stock.dart';
+import '/app/routes/app_pages.dart';
 
 class CreateSalesController extends BaseController {
   Sales? preSales;

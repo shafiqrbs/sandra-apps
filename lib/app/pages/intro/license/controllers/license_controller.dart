@@ -21,7 +21,6 @@ class LicenseController extends BaseController {
           final value = await services.submitLicense(
             license: licenseNumber,
             activeKey: activeKey,
-            shouldShowLoader: false,
           );
           if (value != null) {
             final isInserted = await insertSplashDataToDb(

@@ -57,7 +57,6 @@ class OrderProcessConfirmationController extends PrinterController {
       await dataFetcher(
         future: () async {
           final isUpdated = await services.updateSales(
-            shouldShowLoader: false,
             salesList: [sales],
           );
           if (isUpdated) {
@@ -76,19 +75,20 @@ class OrderProcessConfirmationController extends PrinterController {
     final isOnline = await prefs.getIsSalesOnline();
 
     if (isOnline) {
+      bool? isSynced;
       await dataFetcher(
         future: () async {
-          final isSynced = await services.postSales(
+          isSynced = await services.postSales(
             salesList: [sales],
             mode: 'online',
           );
-          if (isSynced) {
-            _navigateToLanding();
-          } else {
-            await _localInsert();
-          }
         },
       );
+      if (isSynced ?? false) {
+        _navigateToLanding();
+      } else {
+        await _localInsert();
+      }
     } else {
       await _localInsert();
     }

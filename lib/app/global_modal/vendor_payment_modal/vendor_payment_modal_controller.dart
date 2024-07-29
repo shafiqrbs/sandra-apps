@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/logged_user.dart';
 import '/app/entity/transaction_methods.dart';
 import '/app/entity/vendor.dart';
-
-import '/app/core/abstract_controller/payment_gateway_controller.dart';
-import '/app/core/core_model/logged_user.dart';
-import '/app/entity/customer.dart';
 
 class VendorPaymentModalController extends BaseController {
   final vendorManager = VendorManager();
@@ -48,7 +46,6 @@ class VendorPaymentModalController extends BaseController {
     await dataFetcher(
       future: () async {
         final data = await services.postVendorPayment(
-          shouldShowLoader: true,
           vendor: vendorManager.selectedItem.value!.vendorId!.toString(),
           method: 'receive',
           mode: selectedPaymentMode.value,
