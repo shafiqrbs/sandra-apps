@@ -296,5 +296,7 @@
   "accountPurchase" : "ক্রয় হিসাব",
   "searchVendor" : "বিক্রেতা অনুসন্ধান করুন",
   "licenseAndKeyValidatedSuccessfully" : "লাইসেন্স এবং কী সফলভাবে যাচাই করা হয়েছে",
-  "scan" : "স্ক্যান"
+  "scan" : "স্ক্যান",
+  "isZeroSalesAllowed" : "শূন্য বিক্রয় অনুমোদিত?",
+  "isSalesOnline" : "বিক্রয় অনলাইন?"
 }

@@ -220,5 +220,7 @@
   "accountPurchase" : "Account Purchase",
   "searchVendor" : "Search vendor",
   "licenseAndKeyValidatedSuccessfully" : "License and key validated successfully",
-  "scan" : "Scan"
+  "scan" : "Scan",
+  "isZeroSalesAllowed" : "Is zero sales allowed",
+  "isSalesOnline" : "Is sales online"
 }
