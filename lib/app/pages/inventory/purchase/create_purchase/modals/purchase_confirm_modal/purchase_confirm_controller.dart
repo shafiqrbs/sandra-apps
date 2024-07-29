@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '/app/entity/purchase.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
+import '/app/entity/purchase.dart';
 import '/app/routes/app_pages.dart';
 
 class PurchaseConfirmController extends PrinterController {
