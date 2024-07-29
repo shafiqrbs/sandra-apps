@@ -13,6 +13,8 @@ class PrinterConnectModalView
     extends BaseView<PrinterConnectModalViewController> {
   PrinterConnectModalView({super.key});
 
+  final falsePadding = 16.0.obs;
+
   @override
   Widget build(BuildContext context) {
     return GetX<PrinterConnectModalViewController>(
@@ -21,7 +23,7 @@ class PrinterConnectModalView
         return Center(
           child: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding:  EdgeInsets.all(falsePadding.value),
               decoration: BoxDecoration(
                 color: colors.backgroundColor,
               ),

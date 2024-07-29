@@ -23,7 +23,7 @@ class OrderProcessConfirmationController extends PrinterController {
 
   Future<void> salesPrint() async {
     if (kDebugMode) {
-      print('print');
+      print('salesPrint invoked');
       print('sales: ${sales.toJson()}');
     }
 
@@ -32,13 +32,23 @@ class OrderProcessConfirmationController extends PrinterController {
       return;
     }
 
-    final isPrinted = await printSales(sales);
-    if (isPrinted) {
-      await saveSales();
+    // Attempt to save sales
+    try {
+      await saveSales().then(
+        (value) async {
+          final isPrinted = await printSales(sales);
 
-      toast('print_success'.tr);
-    } else {
-      toast('print_failed'.tr);
+          if (isPrinted) {
+            toast('print_success'.tr);
+          } else {
+            toast('print_failed'.tr);
+          }
+        },
+      );
+    } catch (e) {
+      // Handle any errors that occur during the save operation
+      toast('save_failed'.tr);
+      print('Error saving sales: $e');
     }
   }
 

@@ -5,6 +5,7 @@ import '/app/core/core_model/voice_recognition.dart';
 import '/app/core/base/base_widget.dart';
 
 import 'common_text.dart';
+import 'page_back_button.dart';
 
 class AppBarSearchView extends BaseWidget {
   final String pageTitle;
@@ -130,23 +131,8 @@ class AppBarSearchView extends BaseWidget {
               ),
             ),
           )
-        : Row(
-            children: [
-              InkWell(
-                onTap: Get.back,
-                child: const Icon(
-                  TablerIcons.arrow_left,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              ),
-              const SizedBox(width: 10),
-              CommonText(
-                text: pageTitle,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ],
+        : PageBackButton(
+            pageTitle: pageTitle,
           );
   }
 }

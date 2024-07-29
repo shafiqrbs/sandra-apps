@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/sync_modal/sync_modal_view.dart';
 
@@ -159,6 +160,20 @@ List<Widget> buttonList = [
     },
     localeMethod: () => appLocalization.sync,
   ),
+  TbdRoundButton(
+    icon: TablerIcons.shopping_cart,
+    onTap: () {
+      Get.dialog(
+        DialogPattern(
+          title: 'title',
+          subTitle: 'subTitle',
+          child: PrefsSettingsModalView(),
+        ),
+      );
+    },
+    localeMethod: () => appLocalization.settings,
+  ),
+
 ];
 void navigatePage(String routeName) {
   final currentRoute = Get.currentRoute;
