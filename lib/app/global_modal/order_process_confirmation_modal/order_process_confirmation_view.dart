@@ -62,7 +62,7 @@ class OrderProcessConfirmationView
                               Row(
                                 children: [
                                   RowButton(
-                                    buttonName: 'scan'.tr,
+                                    buttonName: appLocalization.scan,
                                     onTap: controller.scanBluetooth,
                                   ),
                                 ],
@@ -162,7 +162,7 @@ class OrderProcessConfirmationView
                                   color: Colors.red,
                                 )
                               : RowButton(
-                                  buttonName: 'print'.tr,
+                                  buttonName: appLocalization.print,
                                   onTap: controller.salesPrint,
                                   leftIcon: TablerIcons.printer,
                                   buttonBGColor: controller.connected.value
@@ -172,7 +172,7 @@ class OrderProcessConfirmationView
                         ),
                         4.width,
                         RowButton(
-                          buttonName: 'save'.tr,
+                          buttonName: appLocalization.save,
                           onTap: controller.saveSales,
                           leftIcon: TablerIcons.device_floppy,
                         ),

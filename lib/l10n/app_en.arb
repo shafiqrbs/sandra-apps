@@ -219,5 +219,6 @@
   "approve" : "Approve",
   "accountPurchase" : "Account Purchase",
   "searchVendor" : "Search vendor",
-  "licenseAndKeyValidatedSuccessfully" : "License and key validated successfully"
+  "licenseAndKeyValidatedSuccessfully" : "License and key validated successfully",
+  "scan" : "Scan"
 }

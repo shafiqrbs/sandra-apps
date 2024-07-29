@@ -295,5 +295,6 @@
   "approve" : "অনুমোদন",
   "accountPurchase" : "ক্রয় হিসাব",
   "searchVendor" : "বিক্রেতা অনুসন্ধান করুন",
-  "licenseAndKeyValidatedSuccessfully" : "লাইসেন্স এবং কী সফলভাবে যাচাই করা হয়েছে"
+  "licenseAndKeyValidatedSuccessfully" : "লাইসেন্স এবং কী সফলভাবে যাচাই করা হয়েছে",
+  "scan" : "স্ক্যান"
 }

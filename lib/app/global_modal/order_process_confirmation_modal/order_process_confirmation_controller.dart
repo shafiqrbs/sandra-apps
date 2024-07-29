@@ -21,18 +21,6 @@ class OrderProcessConfirmationController extends PrinterController {
     return super.onInit();
   }
 
-  Future<void> saveHold() async {
-    sales.isHold = 1;
-    await dbHelper.insertList(
-      deleteBeforeInsert: false,
-      tableName: dbTables.tableSale,
-      dataList: [sales.toJson()],
-    );
-    Get.offAllNamed(
-      Routes.dashboard,
-    );
-  }
-
   Future<void> salesPrint() async {
     if (kDebugMode) {
       print('print');
