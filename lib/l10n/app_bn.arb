@@ -299,5 +299,7 @@
   "scan" : "স্ক্যান",
   "isZeroSalesAllowed" : "শূন্য বিক্রয় অনুমোদিত?",
   "isSalesOnline" : "বিক্রয় অনলাইন?",
-  "onlineSalesFailed" : "Online Sales Failed"
+  "onlineSalesFailed" : "Online Sales Failed",
+  "areYouSure" : "Are You Sure?",
+  "retry" : "Retry"
 }

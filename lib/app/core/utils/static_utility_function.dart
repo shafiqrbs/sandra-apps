@@ -87,3 +87,18 @@ Future<void> messageCustomer(
     );
   }
 }
+
+Future<bool> confirmationModal({
+  required String msg,
+}) async {
+  final confirmation = await showDialog(
+    context: Get.overlayContext!,
+    builder: (context) {
+      return CommonConfirmationModal(
+        title: msg,
+      );
+    },
+  );
+
+  return confirmation;
+}

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import '/app/entity/vendor_ledger.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -10,6 +9,7 @@ import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/sales.dart';
+import '/app/entity/vendor_ledger.dart';
 import 'client/api_options.dart';
 import 'client/rest_client.dart';
 
@@ -443,9 +443,9 @@ class Services {
       'start_date': startDate,
       'end_date': endDate,
       'keyword': keyword,
-    };
-
-    data.removeWhere((key, value) => value == null);
+    }..removeWhere(
+        (key, value) => value == null,
+      );
 
     final response = await dio.post(
       APIType.public,
@@ -472,9 +472,9 @@ class Services {
       'start_date': startDate,
       'end_date': endDate,
       'keyword': keyword,
-    };
-
-    data.removeWhere((key, value) => value == null);
+    }..removeWhere(
+        (key, value) => value == null,
+      );
 
     final response = await dio.post(
       APIType.public,

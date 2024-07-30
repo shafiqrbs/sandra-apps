@@ -112,31 +112,6 @@ class SalesListView extends BaseView<SalesListController> {
     );
   }
 
-  Widget _buildRetryView() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CommonText(
-            text: "no_data_found".tr,
-            fontSize: regularTFSize,
-            textColor: colors.primaryTextColor,
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () => controller.changeIndex(
-              controller.selectedIndex.value,
-            ),
-            child: CommonText(
-              text: 'retry'.tr,
-              textColor: colors.primaryTextColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildListView() {
     return ListView.builder(
       itemCount: controller.salesManager.allItems.value?.length ?? 0,

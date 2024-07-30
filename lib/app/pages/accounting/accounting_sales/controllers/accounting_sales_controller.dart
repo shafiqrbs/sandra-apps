@@ -1,10 +1,13 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
+
+import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
-import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
-import '/app/core/base/base_controller.dart';
+import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 
 class AccountingSalesController extends BaseController {
   final salesList = CustomerLedgerManager();
@@ -38,13 +41,21 @@ class AccountingSalesController extends BaseController {
     );
   }
 
-  onClearSearchText() {}
+  void onClearSearchText() {
+    salesList.searchTextController.value.clear();
+    isSearchSelected.value = false;
+  }
 
-  showFilterModal({required BuildContext context}) {}
+  void showFilterModal({
+    required BuildContext context,
+  }) {}
 
   void goToCreateSales() {}
 
-  showSalesInformationModal(BuildContext context, CustomerLedger element) {}
+  void showSalesInformationModal(
+    BuildContext context,
+    CustomerLedger element,
+  ) {}
 
   void showCustomerReceiveModal() {
     Get.dialog(
@@ -56,5 +67,23 @@ class AccountingSalesController extends BaseController {
         ),
       ),
     );
+  }
+
+  Future<void> deleteSale() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (confirmation) {
+      toast('Under Development');
+    } else {}
+  }
+
+  Future<void> approveSale() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (confirmation) {
+      toast('Under Development');
+    } else {}
   }
 }

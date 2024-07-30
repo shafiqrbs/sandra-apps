@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sandra/app/core/base/base_widget.dart';
 import '/app/core/utils/responsive.dart';
+import 'common_text.dart';
 
-class RetryView extends StatelessWidget {
+class RetryView extends BaseWidget {
   final VoidCallback? onRetry;
-  const RetryView({
+  RetryView({
     super.key,
     this.onRetry,
   });
@@ -12,17 +14,40 @@ class RetryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.center,
-          height: 40.ph,
-          width: 100.pw,
-          child: Image.asset(
-            'assets/images/no-record-found.png',
+        Center(
+          child: InkWell(
+            onTap: onRetry,
+            child: Container(
+              height: 40,
+              width: 100,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 4,
+              ),
+              margin: const EdgeInsets.only(
+                top: 200,
+              ),
+              decoration: BoxDecoration(
+                color: colors.primaryBaseColor,
+                borderRadius: BorderRadius.circular(
+                  containerBorderRadius,
+                ),
+                border: Border.all(
+                  color: colors.primaryBaseColor,
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CommonText(
+                    text: appLocalization.retry,
+                    fontWeight: FontWeight.w500,
+                    fontSize: mediumButtonTFSize,
+                    textColor: colors.backgroundColor,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: onRetry,
-          child: const Text('Retry'),
         ),
       ],
     );

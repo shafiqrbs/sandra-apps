@@ -86,59 +86,5 @@ class AppBarButton extends StatelessWidget with AppDimension {
         ),
       ),
     );
-
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        //height: 6.ph,
-        //width: 10.pw,
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
-        decoration: BoxDecoration(
-          color: buttonBGColor ??
-              ((isOutline ?? false)
-                  ? colors.backgroundColor
-                  : colors.primaryBaseColor),
-          borderRadius: BorderRadius.circular(
-            containerBorderRadius,
-          ),
-          border: (isOutline ?? false)
-              ? Border.all(
-                  color: colors.primaryBaseColor,
-                )
-              : null,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (leftIcon != null)
-              DrawIcon(
-                icon: leftIcon!,
-                color: (isOutline ?? false)
-                    ? colors.primaryBaseColor
-                    : colors.backgroundColor,
-              ),
-            if (buttonName != null)
-              Container(
-                margin: const EdgeInsets.only(left: 5, right: 5),
-                child: CommonText(
-                  text: buttonName!,
-                  fontWeight: FontWeight.w500,
-                  fontSize: mediumButtonTFSize,
-                  textColor: (isOutline ?? false)
-                      ? colors.primaryBaseColor
-                      : colors.backgroundColor,
-                ),
-              ),
-            if (rightIcon != null)
-              DrawIcon(
-                icon: rightIcon!,
-                color: (isOutline ?? false)
-                    ? colors.primaryBaseColor
-                    : colors.backgroundColor,
-              ),
-          ],
-        ),
-      ),
-    );
   }
 }

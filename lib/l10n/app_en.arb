@@ -222,5 +222,9 @@
   "licenseAndKeyValidatedSuccessfully" : "License and key validated successfully",
   "scan" : "Scan",
   "isZeroSalesAllowed" : "Is zero sales allowed",
-  "isSalesOnline" : "Is sales online"
+  "isSalesOnline" : "Is sales online",
+  "areYouSure" : "Are You Sure?",
+  "retry" : "Retry"
+
+
 }
