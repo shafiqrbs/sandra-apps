@@ -84,7 +84,10 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             }
 
             return Expanded(
-              child: content,
+              child: RefreshIndicator(
+                onRefresh: controller.fetchSalesList,
+                child: content,
+              ),
             );
           },
         ),
@@ -118,15 +121,15 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                   children: [
                     Expanded(
                       child: CommonIconText(
-                        text: '{element.salesId}',
+                        text: '${element.created}',
                         icon: TablerIcons.calendar_due,
                         iconColor: iconColor,
                       ),
                     ),
                     Expanded(
                       child: CommonIconText(
-                        text: '{element.salesId}',
-                        icon: TablerIcons.calendar,
+                        text: '${element.invoice}',
+                        icon: TablerIcons.file_invoice,
                         iconColor: iconColor,
                       ),
                     ),
@@ -140,7 +143,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                   children: [
                     Expanded(
                       child: CommonIconText(
-                        text: element.customerName ?? '',
+                        text: element.method ?? '',
                         icon: TablerIcons.cash,
                         iconColor: iconColor,
                       ),
@@ -163,7 +166,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                     Expanded(
                       child: CommonIconText(
                         text: element.customerName ?? '',
-                        icon: TablerIcons.user,
+                        icon: TablerIcons.user_share,
                         iconColor: iconColor,
                       ),
                     ),

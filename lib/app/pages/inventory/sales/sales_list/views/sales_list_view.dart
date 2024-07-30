@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/retry_view.dart';
 
@@ -20,6 +21,8 @@ import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.
 //ignore: must_be_immutable
 class SalesListView extends BaseView<SalesListController> {
   SalesListView({super.key});
+
+  final currency = SetUp().currency ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -128,6 +131,11 @@ class SalesListView extends BaseView<SalesListController> {
         //check ranger is valid
 
         final element = controller.salesManager.allItems.value![index];
+        final createdDate = element.createdAt != null
+            ? DateFormat('dd MMM yyyy').format(
+                DateFormat('MM-dd-yyyy hh:mm a').parse(element.createdAt!),
+              )
+            : '';
 
         return InkWell(
           onTap: () => controller.showSalesInformationModal(
@@ -135,11 +143,19 @@ class SalesListView extends BaseView<SalesListController> {
             element,
           ),
           child: Container(
-            margin: const EdgeInsets.all(4),
+            margin: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              bottom: 8,
+              top: index == 0 ? 8 : 0,
+            ),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: index.isEven ? colors.evenListColor : colors.oddListColor,
               borderRadius: BorderRadius.circular(containerBorderRadius),
+              border: Border.all(
+                color: colors.tertiaryBaseColor,
+              ),
             ),
             child: Column(
               children: [
@@ -147,62 +163,21 @@ class SalesListView extends BaseView<SalesListController> {
                   children: [
                     Expanded(
                       child: CommonIconText(
+                        text: createdDate,
+                        icon: TablerIcons.calendar_due,
+                        fontSize: valueTFSize,
+                      ),
+                    ),
+                    Expanded(
+                      child: CommonIconText(
                         text: '${element.salesId}',
-                        icon: TablerIcons.device_mobile,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            TablerIcons.calendar,
-                            size: 18,
-                            color: colors.iconColor,
-                          ),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              element.createdAt != null
-                                  ? DateFormat('dd MMM yyyy').format(
-                                      DateFormat('dd-MM-yyyy hh:mm a')
-                                          .parse(element.createdAt!),
-                                    )
-                                  : '',
-                              style: TextStyle(
-                                color: colors.primaryTextColor,
-                                fontSize: regularTFSize,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => controller.showSalesInformationModal(
-                          context,
-                          element,
-                        ),
-                        child: Container(
-                          alignment: Alignment.topRight,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
-                            ),
-                          ),
-                          margin: const EdgeInsets.only(right: 12),
-                          child: Icon(
-                            TablerIcons.eye,
-                            color: colors.primaryBaseColor,
-                          ),
-                        ),
+                        icon: TablerIcons.file_invoice,
+                        fontSize: valueTFSize,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     Expanded(
@@ -210,18 +185,21 @@ class SalesListView extends BaseView<SalesListController> {
                         text: element.customerName ?? '',
                         icon: TablerIcons.user,
                         textOverflow: TextOverflow.ellipsis,
+                        fontSize: valueTFSize,
                       ),
                     ),
                     Expanded(
                       child: CommonIconText(
                         text: element.customerMobile ?? '',
                         icon: TablerIcons.device_mobile,
+                        fontSize: valueTFSize,
                       ),
                     ),
-                    Expanded(child: Container()),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const Divider(
+                  thickness: 0.4,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -229,8 +207,9 @@ class SalesListView extends BaseView<SalesListController> {
                       child: Container(
                         padding: const EdgeInsets.only(left: 4),
                         child: CommonText(
-                          text: "${"total".tr} : ${element.netTotal ?? ''}",
-                          fontSize: regularTFSize,
+                          text:
+                              "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
+                          fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
                         ),
                       ),
@@ -239,8 +218,9 @@ class SalesListView extends BaseView<SalesListController> {
                       child: Container(
                         padding: const EdgeInsets.only(left: 4),
                         child: CommonText(
-                          text: "${"receive".tr} : ${element.received ?? ''}",
-                          fontSize: regularTFSize,
+                          text:
+                              "${appLocalization.receive} : $currency ${element.received ?? ''}",
+                          fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
                         ),
                       ),
@@ -249,8 +229,8 @@ class SalesListView extends BaseView<SalesListController> {
                       child: Container(
                         padding: const EdgeInsets.only(left: 4),
                         child: CommonText(
-                          text: "${"due".tr} : ${element.due ?? ""}",
-                          fontSize: regularTFSize,
+                          text: "${appLocalization.due} :$currency ${element.due ?? ""}",
+                          fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
                           textAlign: TextAlign.start,
                         ),

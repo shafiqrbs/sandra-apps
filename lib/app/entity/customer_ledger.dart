@@ -49,7 +49,7 @@ class CustomerLedger {
       invoice: json['invoice'],
       created: json['created'],
       updated: json['updated'],
-      customerName: json['customer_name'],
+      customerName: json['name'],
       customerId: json['customer_id'],
       mobile: json['mobile'],
     );

@@ -438,27 +438,31 @@ class Services {
     required String? endDate,
     required String? keyword,
   }) async {
-    final data = {
-      'customer_id': customerId,
-      'start_date': startDate,
-      'end_date': endDate,
-      'keyword': keyword,
-    }..removeWhere(
-        (key, value) => value == null,
+    try {
+      final data = {
+        'customer_id': customerId,
+        'start_date': startDate,
+        'end_date': endDate,
+        'keyword': keyword,
+      }..removeWhere(
+          (key, value) => value == null,
+        );
+
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-account-sales',
+        data,
+        query: data,
+        headers: _buildHeader(),
       );
 
-    final response = await dio.post(
-      APIType.public,
-      'poskeeper-account-sales',
-      data,
-      query: data,
-      headers: _buildHeader(),
-    );
-
-    return parseList(
-      list: response.data,
-      fromJson: CustomerLedger.fromJson,
-    );
+      return parseList(
+        list: response.data,
+        fromJson: CustomerLedger.fromJson,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<List<VendorLedger>?> getAccountPurchaseList({
