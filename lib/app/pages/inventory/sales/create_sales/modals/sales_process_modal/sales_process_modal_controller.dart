@@ -282,13 +282,23 @@ class SalesProcessModalController extends PaymentGatewayController {
     final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = double.tryParse(amountText) ?? 0;
     final isInvalidAmount = amount > 0 && amount < netTotal.value;
+    print('Amount $amount');
+
+    if (!isZeroSalesAllowed &&
+        isCustomerNotSelected &&
+        amount < netTotal.value) {
+      toast(appLocalization.dueSalesWithoutCustomer);
+      return;
+    }
 
     if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
       sales.received = netTotal.value;
     } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
       toast('this_amount_is_not_valid'.tr);
       return;
-    } else if (amount > netTotal.value && isCustomerSelected) {
+    }
+
+    if (amount > netTotal.value) {
       sales.received = netTotal.value;
     }
 

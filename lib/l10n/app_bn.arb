@@ -301,5 +301,7 @@
   "isSalesOnline" : "বিক্রয় অনলাইন?",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
-  "retry" : "Retry"
+  "retry" : "Retry",
+  "dueSalesWithoutCustomer" : "Due Sales Without Customer"
+
 }
