@@ -72,7 +72,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                   children: [
                                     _buildInvoiceSummery(),
                                     _buildTransactionMethod(context),
-                                    1.percentHeight,
+                                    0.25.percentHeight,
                                     _buildPaymentReceiveRow(context),
                                     1.percentHeight,
                                     _buildUserSelectView(context),
@@ -573,7 +573,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     return Obx(
       () => Column(
         children: [
-          1.percentHeight,
+          0.25.percentHeight,
           if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
               padding: const EdgeInsets.all(8),

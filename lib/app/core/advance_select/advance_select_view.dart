@@ -162,6 +162,7 @@ class AdvanceSelect<T> extends FormField<T> {
                       vertical: 0.v,
                       horizontal: 0.h,
                     ),
+
                     child: Column(
                       children: [
                         if (label != null || example != null)
@@ -241,7 +242,10 @@ class AdvanceSelect<T> extends FormField<T> {
                                                       const EdgeInsets.all(8),
                                                   margin:
                                                       const EdgeInsets.all(10),
-                                                  color: Colors.white,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(4),
+                                                    color: Colors.white,
+                                                  ),
                                                   child: Column(
                                                     //shrinkWrap: true,
                                                     children: [
@@ -251,17 +255,22 @@ class AdvanceSelect<T> extends FormField<T> {
                                                                 .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            'Select ${label ?? ''}',
-                                                            style:
-                                                                boldTextStyle(),
+                                                            'Select Anyone ${label ?? ''}',
+                                                            style:const TextStyle(
+                                                              fontSize: 14,
+                                                              fontWeight: FontWeight.normal,
+                                                            ),
                                                           ).paddingOnly(
                                                             right: 16,
                                                             top: 16,
                                                             bottom: 16,
+                                                            left: 4,
                                                           ),
                                                           IconButton(
-                                                            icon: const Icon(
+                                                            icon:  Icon(
                                                               Icons.close,
+                                                              color: colors.primaryBaseColor,
+                                                              size: 16,
                                                             ),
                                                             onPressed: () {
                                                               controller
@@ -325,7 +334,7 @@ class AdvanceSelect<T> extends FormField<T> {
                                                               child: Container(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8),
+                                                                        .all(2),
                                                                 child: Row(
                                                                   children: [
                                                                     Expanded(
@@ -335,7 +344,7 @@ class AdvanceSelect<T> extends FormField<T> {
                                                                             BoxDecoration(
                                                                           color: index.isEven
                                                                               ? ColorSchema().evenListColor
-                                                                              : ColorSchema().oddListColor,
+                                                                              : ColorSchema().evenListColor.withOpacity(0.6),
                                                                           //color: index.isEven ? Colors.blue : Colors.red,
                                                                           borderRadius:
                                                                               BorderRadius.circular(4),
@@ -368,7 +377,11 @@ class AdvanceSelect<T> extends FormField<T> {
                                                                             ),
                                                                             if (controller.selectedValue ==
                                                                                 controller.filteredItems![index])
-                                                                              const Icon(Icons.check),
+                                                                               Icon(
+                                                                                Icons.check,
+                                                                                size: 16,
+                                                                                color: Colors.red,
+                                                                              ),
                                                                           ],
                                                                         ),
                                                                       ),

@@ -30,11 +30,15 @@ class TransactionMethodItemView extends BaseWidget {
            containerBorderRadius,
           ),
           color: isSelected ? colors.selectedColor : colors.evenListColor,
+          border: Border.all(
+            color: isSelected ? colors.primaryColor : Colors.transparent,
+            width: 1,
+          ),
         ),
         child: Column(
           children: [
             Container(
-              height: 72,
+              height: 42,
               width: 72,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -49,14 +53,14 @@ class TransactionMethodItemView extends BaseWidget {
               ),
               child: commonCacheImageWidget(
                 method.imagePath,
-                60,
-                width: 60,
+                36,
+                width: 36,
               ),
             ),
             4.height,
             SizedBox(
               width: 70,
-              height: 40,
+              height: 20,
               child: Center(
                 child: Text(
                   method.methodName?.toString() ?? '',
@@ -66,6 +70,7 @@ class TransactionMethodItemView extends BaseWidget {
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
+                  maxLines: 1,
                 ),
               ),
             ),
