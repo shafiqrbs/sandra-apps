@@ -87,7 +87,12 @@ class SalesListView extends BaseView<SalesListController> {
             }
 
             return Expanded(
-              child: content,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await controller.changeIndex(controller.selectedIndex.value);
+                },
+                child: content,
+              ),
             );
           },
         ),
