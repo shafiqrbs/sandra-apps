@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/entity/sales_item.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class SalesItemListView extends BaseWidget {
   final List<SalesItem> salesItems;
@@ -77,9 +78,21 @@ class SalesItemListView extends BaseWidget {
           children: [
             Container(
               //  height: 100,
-              color: index.isEven ? colors.evenListColor : colors.oddListColor,
+             // color: index.isEven ? colors.evenListColor : colors.oddListColor,
               margin: const EdgeInsets.only(bottom: 4, left: 16, right: 2),
               padding: const EdgeInsets.only(left: 16, right: 8, bottom: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                 containerBorderRadius,
+                ),
+                color: index.isEven
+                    ? colors.evenListColor
+                    : colors.oddListColor,
+                border: Border.all(
+                  color: colors.tertiaryBaseColor,
+                  width: 0,
+                ),
+              ),
               child: Stack(
                 children: [
                   Column(

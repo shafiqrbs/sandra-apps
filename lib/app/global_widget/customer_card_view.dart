@@ -39,14 +39,6 @@ class CustomerCardView extends BaseWidget {
                 color: index.isEven
                     ? colors.evenListColor
                     : colors.evenListColor.withOpacity(.4),
-                boxShadow: [
-                  BoxShadow(
-                    color: colors.backgroundColor,
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
