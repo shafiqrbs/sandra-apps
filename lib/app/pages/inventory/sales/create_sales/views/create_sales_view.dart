@@ -12,7 +12,6 @@ import '/app/core/widget/common_text.dart';
 import '/app/core/widget/list_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
-import '/app/global_modal/sales_process_modal/sales_process_modal_view.dart';
 import '/app/global_widget/product_search_form.dart';
 import '/app/pages/inventory/sales/create_sales/component/sales_item_list_view.dart';
 import '/app/pages/inventory/sales/create_sales/component/searched_stock_list.dart';
@@ -63,23 +62,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
   @override
   Widget floatingActionButton() {
     return InkWell(
-      onTap: () async {
-        if (controller.salesItemList.value.isEmpty) {
-          toast(appLocalization.pleaseSelectItem);
-          return;
-        }
-
-        final result = await Get.dialog(
-          SalesProcessModalView(
-            salesItemList: controller.salesItemList.value,
-            preSales: controller.preSales,
-          ),
-        );
-        if (result != null) {
-          controller.salesItemList.value = result;
-          controller.calculateAllSubtotal();
-        }
-      },
+      onTap: controller.showOrderProcessModal,
       child: Container(
         height: 7.ph,
         width: Get.width,

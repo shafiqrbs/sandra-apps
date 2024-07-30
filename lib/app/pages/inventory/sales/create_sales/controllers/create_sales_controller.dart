@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/sales.dart';
@@ -306,5 +307,23 @@ class CreateSalesController extends BaseController {
 
   void updateSalesItemList(value) {
     salesItemList.value = value;
+  }
+
+  Future<void> showOrderProcessModal() async {
+    if (salesItemList.value.isEmpty) {
+      toast(appLocalization.pleaseSelectItem);
+      return;
+    }
+
+    final result = await Get.dialog(
+      SalesProcessModalView(
+        salesItemList: salesItemList.value,
+        preSales: preSales,
+      ),
+    );
+    if (result != null) {
+      salesItemList.value = result;
+      calculateAllSubtotal();
+    }
   }
 }

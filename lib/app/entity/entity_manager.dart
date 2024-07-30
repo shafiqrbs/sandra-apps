@@ -57,7 +57,7 @@ class EntityManager<T> {
     try {
       final List<Map<String, dynamic>> data = await dbHelper.getAll(
         tbl: tableName,
-        limit: 10,
+        limit: 25,
         offset: allItems.value?.length ?? 0,
       ) as List<Map<String, dynamic>>;
 
