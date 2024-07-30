@@ -178,7 +178,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                       child: Row(
                         children: [
                           InkWell(
-                            onTap:controller.approveSale,
+                            onTap: controller.approveSale,
                             child: Container(
                               height: 40,
                               padding: const EdgeInsets.symmetric(
