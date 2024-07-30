@@ -11,7 +11,7 @@ import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/search_button.dart';
-import '/app/pages/accounting_purchase/controllers/accounting_purchase_controller.dart';
+import '/app/pages/accounting/accounting_purchase/controllers/accounting_purchase_controller.dart';
 
 //ignore: must_be_immutable
 class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
