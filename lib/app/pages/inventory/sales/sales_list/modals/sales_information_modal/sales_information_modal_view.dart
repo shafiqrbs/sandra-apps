@@ -99,8 +99,8 @@ class SalesInformationModalView
                             ),
                             Expanded(
                               child: CommonIconText(
-                                icon: TablerIcons.wallet,
-                                text: '',
+                                icon: TablerIcons.user,
+                                text: controller.sales.value?.createdBy ?? '',
                                 fontSize: mediumTFSize,
                               ),
                             ),
@@ -119,32 +119,13 @@ class SalesInformationModalView
                             Expanded(
                               child: CommonIconText(
                                 icon: TablerIcons.info_square_rounded,
-                                text: controller.sales.value!.process ?? '',
+                                text: controller.sales.value!.methodName ?? '',
                                 fontSize: mediumTFSize,
                               ),
                             ),
                           ],
                         ),
                         4.height,
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CommonIconText(
-                                icon: TablerIcons.clock_hour_3,
-                                text: 'Time',
-                                fontSize: mediumTFSize,
-                              ),
-                            ),
-                            Expanded(
-                              child: CommonIconText(
-                                icon: TablerIcons.user,
-                                text: 'Not found',
-                                fontSize: mediumTFSize,
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -169,7 +150,7 @@ class SalesInformationModalView
                       Expanded(
                         flex: 3,
                         child: CommonText(
-                          text: 'name'.tr,
+                          text: appLocalization.name,
                           fontSize: mediumTFSize,
                           textColor: colors.primaryTextColor,
                           fontWeight: FontWeight.w400,
@@ -178,7 +159,7 @@ class SalesInformationModalView
                       ),
                       Expanded(
                         child: CommonText(
-                          text: 'price'.tr,
+                          text: appLocalization.price,
                           fontSize: mediumTFSize,
                           textColor: colors.primaryTextColor,
                           fontWeight: FontWeight.w400,
@@ -187,7 +168,7 @@ class SalesInformationModalView
                       ),
                       Expanded(
                         child: CommonText(
-                          text: 'qty'.tr,
+                          text: appLocalization.qty,
                           fontSize: mediumTFSize,
                           textColor: colors.primaryTextColor,
                           fontWeight: FontWeight.w400,
@@ -196,7 +177,7 @@ class SalesInformationModalView
                       ),
                       Expanded(
                         child: CommonText(
-                          text: 'total'.tr,
+                          text: appLocalization.total,
                           fontSize: mediumTFSize,
                           textColor: colors.primaryTextColor,
                           fontWeight: FontWeight.w400,
@@ -239,7 +220,7 @@ class SalesInformationModalView
                                 child: CommonText(
                                   text:
                                       '${index + 1}. ${elementItem.stockName ?? ''}',
-                                  fontSize: mediumTFSize,
+                                  fontSize: 10,
                                   textColor: colors.primaryTextColor,
                                   fontWeight: FontWeight.w400,
                                   textAlign: TextAlign.left,
@@ -305,7 +286,7 @@ class SalesInformationModalView
                             ),
                             labelValue.copyWith(
                               label:
-                                  "${"discount".tr} (${controller.sales.value!.discountCalculation})",
+                                  '${appLocalization.discount} (${controller.sales.value!.discountCalculation})',
                               value: '${controller.sales.value!.discount}',
                             ),
                             Container(
@@ -316,11 +297,11 @@ class SalesInformationModalView
                               ),
                             ),
                             labelValue.copyWith(
-                              label: 'total'.tr,
+                              label: appLocalization.total,
                               value: '${controller.sales.value!.netTotal}',
                             ),
                             labelValue.copyWith(
-                              label: 'receive'.tr,
+                              label: appLocalization.receive,
                               value: '${controller.sales.value!.received}',
                             ),
                             Container(
@@ -331,7 +312,7 @@ class SalesInformationModalView
                               ),
                             ),
                             labelValue.copyWith(
-                              label: 'due'.tr,
+                              label: appLocalization.due,
                               value: (
                                 (controller.sales.value!.netTotal!) -
                                     (controller.sales.value!.received ?? 0),
