@@ -166,7 +166,6 @@ abstract class BaseController extends GetxController {
         if (shouldShowErrorModal) {
           handleNoInternet();
         }
-        updatePageState(PageState.noInternet);
         return;
       }
     }

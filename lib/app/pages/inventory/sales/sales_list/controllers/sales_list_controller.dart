@@ -60,7 +60,7 @@ class SalesListController extends BaseController {
 
   Future<void> changeIndex(int index) async {
     selectedIndex.value = index;
-
+    salesManager.allItems.value=null;
     salesManager.allItems.refresh();
 
     switch (index) {
