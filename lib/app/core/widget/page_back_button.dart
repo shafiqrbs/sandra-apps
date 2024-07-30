@@ -24,10 +24,12 @@ class PageBackButton extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        CommonText(
-          text: pageTitle??'',
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
+        Expanded(
+          child: CommonText(
+            text: pageTitle??'',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
