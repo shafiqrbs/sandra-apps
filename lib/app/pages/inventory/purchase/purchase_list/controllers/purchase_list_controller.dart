@@ -53,15 +53,13 @@ class PurchaseListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await changeIndex(0);
+
   }
 
   Future<void> changeIndex(int index) async {
-    purchaseManager.allItems.value ??= [];
-
-    purchaseManager.allItems.value?.clear();
-
     selectedIndex.value = index;
-
+    purchaseManager.allItems.value = null;
     purchaseManager.allItems.refresh();
 
     switch (index) {
