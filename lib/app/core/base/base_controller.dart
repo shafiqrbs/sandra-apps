@@ -164,7 +164,12 @@ abstract class BaseController extends GetxController {
         if (shouldShowLoader) closeLoader();
 
         if (shouldShowErrorModal) {
-          handleNoInternet();
+          _navigateToScreen(
+            () => ErrorScreen(
+              errorCode: '-1',
+              errorMessage: appLocalization.noInternet,
+            ),
+          );
         }
         return;
       }

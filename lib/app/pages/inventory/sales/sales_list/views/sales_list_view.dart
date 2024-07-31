@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/delete_button.dart';
 import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/retry_view.dart';
 
@@ -142,104 +144,121 @@ class SalesListView extends BaseView<SalesListController> {
             context,
             element,
           ),
-          child: Container(
-            margin: EdgeInsets.only(
-              left: 8,
-              right: 8,
-              bottom: 8,
-              top: index == 0 ? 8 : 0,
-            ),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: index.isEven ? colors.evenListColor : colors.oddListColor,
-              borderRadius: BorderRadius.circular(containerBorderRadius),
-              border: Border.all(
-                color: colors.tertiaryBaseColor,
+          child: Stack(
+            alignment: Alignment.centerRight,
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  left: 8,
+                  right: 8,
+                  bottom: 8,
+                  top: index == 0 ? 8 : 0,
+                ),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color:
+                      index.isEven ? colors.evenListColor : colors.oddListColor,
+                  borderRadius: BorderRadius.circular(containerBorderRadius),
+                  border: Border.all(
+                    color: colors.tertiaryBaseColor,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CommonIconText(
+                            text: createdDate,
+                            icon: TablerIcons.calendar_due,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                        Expanded(
+                          child: CommonIconText(
+                            text: '${element.salesId}',
+                            icon: TablerIcons.file_invoice,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.customerName ?? '',
+                            icon: TablerIcons.user,
+                            textOverflow: TextOverflow.ellipsis,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.customerMobile ?? '',
+                            icon: TablerIcons.device_mobile,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 0.4,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                                  "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                                  "${appLocalization.receive} : $currency ${element.received ?? ''}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                                  "${appLocalization.due} :$currency ${element.due ?? ""}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonIconText(
-                        text: createdDate,
-                        icon: TablerIcons.calendar_due,
-                        fontSize: valueTFSize,
-                      ),
-                    ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: '${element.salesId}',
-                        icon: TablerIcons.file_invoice,
-                        fontSize: valueTFSize,
-                      ),
-                    ),
-                  ],
+              if(LoggedUser().roles?.contains('ROLE_MANAGER')??false)
+              Positioned(
+                right: 10,
+                top: 18,
+                child: DeleteButton(
+                  onTap:()=> controller.deleteSales(
+                    salesId: element.salesId!
+                  ),
                 ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.customerName ?? '',
-                        icon: TablerIcons.user,
-                        textOverflow: TextOverflow.ellipsis,
-                        fontSize: valueTFSize,
-                      ),
-                    ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.customerMobile ?? '',
-                        icon: TablerIcons.device_mobile,
-                        fontSize: valueTFSize,
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 0.4,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 4),
-                        child: CommonText(
-                          text:
-                              "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
-                          fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 4),
-                        child: CommonText(
-                          text:
-                              "${appLocalization.receive} : $currency ${element.received ?? ''}",
-                          fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 4),
-                        child: CommonText(
-                          text: "${appLocalization.due} :$currency ${element.due ?? ""}",
-                          fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

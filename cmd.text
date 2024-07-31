@@ -1,0 +1,2 @@
+// when inspection is not working
+adb kill-server adb start_server

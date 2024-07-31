@@ -362,7 +362,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                       SelectedStockListHeader(),
                       4.height,
                       SizedBox(
-                        height: 65.ph,
+                        height: 75.ph,
                         child: SalesItemListView(
                           salesItems: controller.salesItemList.value,
                           onItemRemove: controller.onItemRemove,

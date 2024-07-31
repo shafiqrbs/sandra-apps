@@ -225,7 +225,8 @@
   "isSalesOnline" : "Is sales online",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",
-  "dueSalesWithoutCustomer" : "Due Sales Without Customer"
+  "dueSalesWithoutCustomer" : "Due Sales Without Customer",
+  "noInternet" : "No Internet"
 
 
 }

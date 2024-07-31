@@ -12,44 +12,40 @@ class RetryView extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: InkWell(
-            onTap: onRetry,
-            child: Container(
-              height: 40,
-              width: 100,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 4,
-              ),
-              margin: const EdgeInsets.only(
-                top: 200,
-              ),
-              decoration: BoxDecoration(
-                color: colors.primaryBaseColor,
-                borderRadius: BorderRadius.circular(
-                  containerBorderRadius,
-                ),
-                border: Border.all(
-                  color: colors.primaryBaseColor,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CommonText(
-                    text: appLocalization.retry,
-                    fontWeight: FontWeight.w500,
-                    fontSize: mediumButtonTFSize,
-                    textColor: colors.backgroundColor,
-                  ),
-                ],
-              ),
+    return Center(
+      child: InkWell(
+        onTap: onRetry,
+        child: Container(
+          height: 40,
+          width: 100,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+          ),
+          margin: const EdgeInsets.only(
+            top: 200,
+          ),
+          decoration: BoxDecoration(
+            color: colors.primaryBaseColor,
+            borderRadius: BorderRadius.circular(
+              containerBorderRadius,
+            ),
+            border: Border.all(
+              color: colors.primaryBaseColor,
             ),
           ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CommonText(
+                text: appLocalization.retry,
+                fontWeight: FontWeight.w500,
+                fontSize: mediumButtonTFSize,
+                textColor: colors.backgroundColor,
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }
