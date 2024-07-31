@@ -16,7 +16,7 @@ import '/app/routes/app_pages.dart';
 
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
-  final selectedIndex = 0.obs;
+  final selectedIndex = 100.obs;
   final isSearchSelected = false.obs;
   final implyLeading = true.obs;
   final Rx<Icon> actionIcon = const Icon(
@@ -60,6 +60,9 @@ class SalesListController extends BaseController {
   }
 
   Future<void> changeIndex(int index) async {
+    if (selectedIndex.value == index) {
+      return;
+    }
     selectedIndex.value = index;
     salesManager.allItems.value = null;
     salesManager.allItems.refresh();
@@ -173,7 +176,18 @@ class SalesListController extends BaseController {
       msg: appLocalization.areYouSure,
     );
     if (confirmation) {
-      if (selectedIndex.value == 2) {
+      if (selectedIndex.value == 1) {
+        bool? isDeleted;
+        await dataFetcher(
+          future: () async {
+            isDeleted = await services.deleteSales(
+              id: salesId,
+            );
+          },
+        );
+        if (isDeleted ?? false) {
+          await changeIndex(selectedIndex.value);
+        }
       } else {
         await dbHelper.deleteAllWhr(
           tbl: dbTables.tableSale,

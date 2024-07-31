@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/core_model/setup.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/routes/app_pages.dart';
 
 class LicenseController extends BaseController {

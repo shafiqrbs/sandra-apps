@@ -226,7 +226,8 @@
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
-  "noInternet" : "No Internet"
+  "noInternet" : "No Internet",
+  "noDataFound" : "No Data Found"
 
 
 }

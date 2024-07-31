@@ -3,10 +3,21 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
 
+enum SyncType {
+  export,
+  import,
+}
+
 class SyncModalController extends BaseController {
+  final selectedSyncType = SyncType.export.obs;
+
   @override
   void onInit() {
     super.onInit();
+  }
+
+  void changeType(SyncType type) {
+    selectedSyncType.value = type;
   }
 
   Future<void> syncCustomer() async {
@@ -76,5 +87,61 @@ class SyncModalController extends BaseController {
     await prefs.setIsLicenseValid(isLicenseValid: true);
     toast('license_and_key_validated_successfully'.tr);
     return true;
+  }
+
+  Future<void> exportSales() async {
+    final salesList = await dbHelper.getAll(
+      tbl: dbTables.tableSale,
+    );
+
+    if (salesList.isEmpty) {
+      toast(appLocalization.noDataFound);
+      return;
+    }
+
+    bool? isSalesSynced;
+
+    await dataFetcher(
+      future: () async {
+        isSalesSynced = await services.postSales(
+          salesList: salesList,
+          mode: 'offline',
+        );
+      },
+    );
+
+    if (isSalesSynced ?? false) {
+      await dbHelper.deleteAll(
+        tbl: dbTables.tableSale,
+      );
+    }
+  }
+
+  Future<void> exportPurchase() async {
+    final purchaseList = await dbHelper.getAll(
+      tbl: dbTables.tablePurchase,
+    );
+
+    if (purchaseList.isEmpty) {
+      toast(appLocalization.noDataFound);
+      return;
+    }
+
+    bool? isPurchaseSynced;
+
+    await dataFetcher(
+      future: () async {
+        isPurchaseSynced = await services.postPurchase(
+          purchaseList: purchaseList,
+          mode: 'offline',
+        );
+      },
+    );
+
+    if (isPurchaseSynced ?? false) {
+      await dbHelper.deleteAll(
+        tbl: dbTables.tablePurchase,
+      );
+    }
   }
 }

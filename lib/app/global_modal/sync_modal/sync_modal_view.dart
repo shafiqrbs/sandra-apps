@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/tbd_text_button.dart';
 import '/app/core/base/base_view.dart';
 import '/app/global_modal/sync_modal/sync_modal_controller.dart';
 
 class SyncModalView extends BaseView<SyncModalController> {
+  SyncModalView({super.key});
+
   final falsePadding = 0.0.obs;
   @override
   Widget build(BuildContext context) {
@@ -16,19 +18,66 @@ class SyncModalView extends BaseView<SyncModalController> {
             padding: EdgeInsets.all(falsePadding.value),
             child: Column(
               children: [
-                _buildButton(
-                  title: appLocalization.customer,
-                  onTap: controller.syncCustomer,
+                Row(
+                  children: [
+                    TbdTextButton(
+                      text: appLocalization.dataImport,
+                      onPressed: () => controller.changeType(
+                        SyncType.import,
+                      ),
+                      isSelected:
+                          controller.selectedSyncType.value == SyncType.import,
+                    ),
+                    TbdTextButton(
+                      text: appLocalization.dataExport,
+                      onPressed: () => controller.changeType(
+                        SyncType.export,
+                      ),
+                      isSelected:
+                          controller.selectedSyncType.value == SyncType.export,
+                    ),
+                  ],
                 ),
-                _buildButton(
-                  title: appLocalization.sync,
-                  onTap: controller.sync,
-                ),
+                controller.selectedSyncType.value == SyncType.export
+                    ? _exportButtonList()
+                    : _importButtonList(),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _exportButtonList() {
+    return Column(
+      children: [
+        _buildButton(
+          title: appLocalization.sales,
+          onTap:controller.exportSales,
+        ),
+        _buildButton(
+          title: appLocalization.purchase,
+          onTap: controller.exportPurchase,
+        ),
+      ],
+    );
+  }
+
+  Widget _importButtonList() {
+    return Column(
+      children: [
+        _buildButton(
+          title: appLocalization.customer,
+          onTap: () {
+            controller.changeType(SyncType.import);
+          },
+        ),
+        _buildButton(
+          title: appLocalization.sync,
+          onTap: controller.sync,
+        ),
+      ],
     );
   }
 
@@ -39,8 +88,7 @@ class SyncModalView extends BaseView<SyncModalController> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(16),
-
+        padding: const EdgeInsets.all(16),
         child: Row(
           mainAxisAlignment: spaceBetweenMAA,
           children: [
