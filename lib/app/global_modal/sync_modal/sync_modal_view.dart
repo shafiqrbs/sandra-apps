@@ -53,12 +53,20 @@ class SyncModalView extends BaseView<SyncModalController> {
     return Column(
       children: [
         _buildButton(
+          title: 'Generate sales',
+          onTap: controller.generateSales,
+        ),
+        _buildButton(
           title: appLocalization.sales,
-          onTap:controller.exportSales,
+          onTap: controller.exportSales,
         ),
         _buildButton(
           title: appLocalization.purchase,
           onTap: controller.exportPurchase,
+        ),
+        _buildButton(
+          title: appLocalization.expense,
+          onTap: controller.exportExpense,
         ),
       ],
     );
@@ -95,10 +103,13 @@ class SyncModalView extends BaseView<SyncModalController> {
             Text(
               title,
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 16,
               ),
             ),
-            Icon(Icons.arrow_forward_ios),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+            ),
           ],
         ),
       ),

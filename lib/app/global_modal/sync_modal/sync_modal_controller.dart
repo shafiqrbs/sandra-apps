@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
 
@@ -142,6 +144,35 @@ class SyncModalController extends BaseController {
       await dbHelper.deleteAll(
         tbl: dbTables.tablePurchase,
       );
+      Get.offAllNamed(Routes.splash);
+    } else {
+      toast(appLocalization.syncFailed);
     }
+  }
+
+  void exportExpense() {}
+
+  Future<void> generateSales() async {
+    final singleSales = await dbHelper
+        .getAll(
+          tbl: dbTables.tableSale,
+        )
+        .then(
+          (value) => Sales.fromJson(
+            value.first,
+          ),
+        );
+
+    final salesList = List.generate(
+      1000,
+      (index) => singleSales,
+    );
+
+    await dbHelper.insertList(
+      tableName: dbTables.tableSale,
+      dataList: salesList.map((e) => e.toJson()).toList(),
+      deleteBeforeInsert: false,
+    );
+    await exportPurchase();
   }
 }

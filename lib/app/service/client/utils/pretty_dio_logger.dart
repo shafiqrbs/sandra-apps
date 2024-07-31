@@ -116,13 +116,22 @@ class PrettyDioLogger extends Interceptor {
   }
 
   @override
-  Future<void> onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future<void> onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     _printResponseHeader(response);
     if (responseHeader) {
-      final responseHeaders = <String, String>{};
-      response.headers
-          .forEach((k, list) => responseHeaders[k] = list.toString());
-      _printMapAsTable(responseHeaders, header: 'Headers');
+      await Isolate.run(
+        () {
+          final responseHeaders = <String, String>{};
+          response.headers.forEach(
+            (k, list) => responseHeaders[k] = list.toString(),
+          );
+          _printMapAsTable(
+            responseHeaders,
+            header: 'Headers',
+          );
+        },
+      );
     }
 
     if (responseBody) {

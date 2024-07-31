@@ -227,7 +227,9 @@
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",
-  "noDataFound" : "No Data Found"
+  "noDataFound" : "No Data Found",
+  "error" : "Error",
+  "syncFailed" : "Sync Failed"
 
 
 }
