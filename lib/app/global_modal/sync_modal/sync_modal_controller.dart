@@ -141,13 +141,13 @@ class SyncModalController extends BaseController {
         tbl: dbTables.tableSale,
       );
       if (Get.isRegistered<SalesListController>()) {
-        print('SalesListController is registered');
         final salesListController = Get.find<SalesListController>();
 
         final selectedIndex = salesListController.selectedIndex.value;
-        salesListController.selectedIndex.value = 100;
-
-        await salesListController.changeIndex(selectedIndex);
+        if (selectedIndex == 0) {
+          salesListController.selectedIndex.value = 100;
+          await salesListController.changeIndex(selectedIndex);
+        }
       }
     }
   }
