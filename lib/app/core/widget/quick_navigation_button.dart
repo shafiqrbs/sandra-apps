@@ -118,36 +118,43 @@ List<Widget> buttonList = [
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.stockList),
     localeMethod: () => appLocalization.stockList,
+    bgColor: const Color(0xffFF6F61),
   ),
   TbdRoundButton(
     icon: TablerIcons.robot_face,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customerList,
+    bgColor: const Color(0xff32CD32),
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_bag,
     onTap: () => navigatePage(Routes.createPurchase),
     localeMethod: () => appLocalization.createPurchase,
+    bgColor: const Color(0xff4CBB17),
   ),
   TbdRoundButton(
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendorList,
+    bgColor: const Color(0xff5D6D7E),
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchaseList,
+    bgColor: const Color(0xff6D28D9),
   ),
   TbdRoundButton(
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.expenseList),
     localeMethod: () => appLocalization.expenseList,
+    bgColor: const Color(0xff1E90FF),
   ),
   TbdRoundButton(
     icon: TablerIcons.credit_card,
     onTap: () => navigatePage(Routes.particular),
     localeMethod: () => appLocalization.particular,
+    bgColor: const Color(0xff004D40),
   ),
   TbdRoundButton(
     icon: TablerIcons.loader,
@@ -161,6 +168,7 @@ List<Widget> buttonList = [
       );
     },
     localeMethod: () => appLocalization.sync,
+    bgColor: const Color(0xffFF6F61),
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
@@ -174,6 +182,7 @@ List<Widget> buttonList = [
       );
     },
     localeMethod: () => appLocalization.settings,
+    bgColor: const Color(0xff32CD32),
   ),
 ];
 void navigatePage(String routeName) {
