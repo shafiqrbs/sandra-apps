@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -54,7 +55,6 @@ class PurchaseListController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     await changeIndex(0);
-
   }
 
   Future<void> changeIndex(int index) async {
@@ -155,5 +155,39 @@ class PurchaseListController extends BaseController {
     purchaseManager.allItems.refresh();
     isSearchSelected.toggle();
     await changeIndex(selectedIndex.value);
+  }
+
+  Future<void> deletePurchase({
+    required String purchaseId,
+  }) async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (confirmation) {
+      if (selectedIndex.value == 1) {
+        bool? isDeleted;
+        await dataFetcher(
+          future: () async {
+            isDeleted = await services.deletePurchase(
+              id: purchaseId,
+            );
+          },
+        );
+        if (isDeleted ?? false) {
+          selectedIndex.value = 100;
+          await changeIndex(1);
+        }
+      } else {
+        await dbHelper.deleteAllWhr(
+          tbl: dbTables.tablePurchase,
+          where: 'purchase_id = ?',
+          whereArgs: [purchaseId],
+        );
+        purchaseManager.allItems.value?.removeWhere(
+          (element) => element.purchaseId == purchaseId,
+        );
+        purchaseManager.allItems.refresh();
+      }
+    }
   }
 }

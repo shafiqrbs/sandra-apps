@@ -360,7 +360,7 @@ class Services {
         APIType.public,
         'poskeeper-purchase',
         {
-          'sales': jsonEncode(purchaseList),
+          'purchase': jsonEncode(purchaseList),
           'mode': mode,
         },
         headers: _buildHeader(),
@@ -429,6 +429,29 @@ class Services {
       final response = await dio.get(
         APIType.public,
         'poskeeper-sales-delete',
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+
+      final responseData = response.data as Map<String, dynamic>?;
+
+      if (responseData == null) return false;
+
+      return responseData['message'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> deletePurchase({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-purchase-delete',
         query: {
           'id': id,
         },
