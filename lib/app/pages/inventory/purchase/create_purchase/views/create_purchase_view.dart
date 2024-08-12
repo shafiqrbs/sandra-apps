@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/app_bar_tittle.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/widget/app_bar_button_group.dart';
+import '/app/core/widget/app_bar_tittle.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/list_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
@@ -117,7 +116,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                     mainAxisAlignment: centerMAA,
                     children: [
                       Text(
-                        'place_order'.tr,
+                        appLocalization.placeOrder,
                         style: TextStyle(
                           color: colors.backgroundColor,
                           fontWeight: FontWeight.bold,
@@ -217,7 +216,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(controller.purchaseMode ?? ''),
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 4,
@@ -452,7 +450,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                       SelectedStockListHeader(),
                       4.height,
                       SizedBox(
-                        height: 65.ph,
+                        height: 75.ph,
                         child: PurchaseItemListView(
                           salesItems: controller.purchaseItemList.value,
                           onItemRemove: controller.onItemRemove,

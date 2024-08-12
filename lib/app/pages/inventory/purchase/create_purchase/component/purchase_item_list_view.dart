@@ -1,14 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/entity/purchase_item.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
-import '/app/entity/sales_item.dart';
-import 'package:nb_utils/nb_utils.dart';
+import '/app/entity/purchase_item.dart';
 
 class PurchaseItemListView extends BaseWidget {
   final List<PurchaseItem> salesItems;
