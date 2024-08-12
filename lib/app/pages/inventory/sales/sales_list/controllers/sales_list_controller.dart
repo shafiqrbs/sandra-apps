@@ -192,7 +192,8 @@ class SalesListController extends BaseController {
           },
         );
         if (isDeleted ?? false) {
-          await changeIndex(selectedIndex.value);
+          selectedIndex.value = 100;
+          await changeIndex(1);
         }
       } else {
         await dbHelper.deleteAllWhr(
@@ -200,6 +201,10 @@ class SalesListController extends BaseController {
           where: 'sales_id = ?',
           whereArgs: [salesId],
         );
+        salesManager.allItems.value?.removeWhere(
+          (element) => element.salesId == salesId,
+        );
+        salesManager.allItems.refresh();
         await changeIndex(selectedIndex.value);
       }
     }
