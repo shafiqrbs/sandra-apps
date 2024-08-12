@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
 import 'package:sandra/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
@@ -23,6 +25,13 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> syncCustomer() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
     await dataFetcher(
       future: () async {
         await 5.delay();
@@ -32,6 +41,13 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> sync() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
     final license = await prefs.getLicenseKey();
     final activeKey = await prefs.getActiveKey();
     await dataFetcher(
@@ -92,8 +108,16 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> exportSales() async {
-    final salesList = await dbHelper.getAll(
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+    final salesList = await dbHelper.getAllWhr(
       tbl: dbTables.tableSale,
+      where: 'is_hold is null or is_hold == 0',
+      whereArgs: [],
     );
 
     if (salesList.isEmpty) {
@@ -116,10 +140,25 @@ class SyncModalController extends BaseController {
       await dbHelper.deleteAll(
         tbl: dbTables.tableSale,
       );
+      if (Get.isRegistered<SalesListController>()) {
+        print('SalesListController is registered');
+        final salesListController = Get.find<SalesListController>();
+
+        final selectedIndex = salesListController.selectedIndex.value;
+        salesListController.selectedIndex.value = 100;
+
+        await salesListController.changeIndex(selectedIndex);
+      }
     }
   }
 
   Future<void> exportPurchase() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
     final purchaseList = await dbHelper.getAll(
       tbl: dbTables.tablePurchase,
     );

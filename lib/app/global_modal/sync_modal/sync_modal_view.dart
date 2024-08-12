@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/tbd_text_button.dart';
@@ -52,6 +53,7 @@ class SyncModalView extends BaseView<SyncModalController> {
   Widget _exportButtonList() {
     return Column(
       children: [
+        if(kDebugMode)
         _buildButton(
           title: 'Generate sales',
           onTap: controller.generateSales,
@@ -102,11 +104,11 @@ class SyncModalView extends BaseView<SyncModalController> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               size: 16,
             ),

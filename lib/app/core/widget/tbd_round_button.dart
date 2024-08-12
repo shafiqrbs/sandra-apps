@@ -21,7 +21,6 @@ class TbdRoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('BgColor: $bgColor');
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -30,7 +29,7 @@ class TbdRoundButton extends StatelessWidget {
             height: 56,
             width: 56,
             decoration: BoxDecoration(
-              color: bgColor??Colors.blue,
+              color: bgColor ?? Colors.blue,
               borderRadius: BorderRadius.circular(60),
               boxShadow: const [
                 BoxShadow(
@@ -42,7 +41,7 @@ class TbdRoundButton extends StatelessWidget {
             ),
             child: Icon(
               icon,
-              color:  Colors.white,
+              color: Colors.white,
               size: 24,
             ),
           ),

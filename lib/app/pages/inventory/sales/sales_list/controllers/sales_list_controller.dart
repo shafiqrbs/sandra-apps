@@ -14,6 +14,12 @@ import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart
 import '/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
+enum SalesListPageTabs{
+  local,
+  online,
+  hold,
+}
+
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
   final selectedIndex = 100.obs;
