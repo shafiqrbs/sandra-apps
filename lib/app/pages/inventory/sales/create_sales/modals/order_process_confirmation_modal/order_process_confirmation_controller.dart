@@ -6,7 +6,6 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/sales.dart';
 import '/app/pages/inventory/sales/create_sales/controllers/create_sales_controller.dart';
-import '/app/routes/app_pages.dart';
 
 class OrderProcessConfirmationController extends PrinterController {
   final Sales sales;

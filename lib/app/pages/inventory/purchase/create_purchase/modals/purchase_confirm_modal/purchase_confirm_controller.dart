@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/entity/purchase.dart';
+import 'package:sandra/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/purchase.dart';
-import '/app/routes/app_pages.dart';
 
 class PurchaseConfirmController extends PrinterController {
   final Purchase purchase;
@@ -20,24 +22,10 @@ class PurchaseConfirmController extends PrinterController {
     return super.onInit();
   }
 
-  Future<void> saveHold() async {
-    purchase.isHold = 1;
-    await dbHelper.insertList(
-      deleteBeforeInsert: false,
-      tableName: dbTables.tablePurchase,
-      dataList: [
-        purchase.toJson(),
-      ],
-    );
-    Get.offAllNamed(
-      Routes.dashboard,
-    );
-  }
-
   Future<void> purchasePrint() async {
     if (kDebugMode) {
-      print('print');
-      print('purchase : ${purchase.toJson()}');
+      print('purchasePrint invoked');
+      print('purchase: ${purchase.toJson()}');
     }
 
     if (!connected.value) {
@@ -45,15 +33,23 @@ class PurchaseConfirmController extends PrinterController {
       return;
     }
 
-    final isPrinted = await printPurchase(
-      purchase,
-    );
-    if (isPrinted) {
-      await savePurchase();
+    // Attempt to save purchase
+    try {
+      await savePurchase().then(
+        (value) async {
+          final isPrinted = await printPurchase(purchase);
 
-      toast('print_success'.tr);
-    } else {
-      toast('print_failed'.tr);
+          if (isPrinted) {
+            toast('print_success'.tr);
+          } else {
+            toast('print_failed'.tr);
+          }
+        },
+      );
+    } catch (e) {
+      // Handle any errors that occur during the save operation
+      toast('save_failed'.tr);
+      print('Error saving purchase: $e');
     }
   }
 
@@ -66,45 +62,20 @@ class PurchaseConfirmController extends PrinterController {
   }
 
   Future<void> _updatePurchase() async {
-    final isSalesOnline = purchase.isOnline == 1;
+    final isPurchaseOnline = purchase.isOnline == 1;
 
-    if (isSalesOnline) {
-      await dataFetcher(
-        future: () async {
-          final isUpdated = await services.updateSales(
-            salesList: [
-              purchase,
-            ],
-          );
-          if (isUpdated) {
-            _navigateToLanding();
-          } else {
-            _showUpdateError();
-          }
-        },
-      );
+    if (isPurchaseOnline) {
+      await _onlineUpdate();
     } else {
       await _localUpdate();
     }
   }
 
   Future<void> _insertPurchase() async {
-    final isOnline = await prefs.getIsSalesOnline();
+    final isOnline = await prefs.getIsPurchaseOnline();
 
     if (isOnline) {
-      await dataFetcher(
-        future: () async {
-          final isSynced = await services.postPurchase(
-            purchaseList: [purchase],
-            mode: 'online',
-          );
-          if (isSynced) {
-            _navigateToLanding();
-          } else {
-            await _localInsert();
-          }
-        },
-      );
+      await _onlineInsert();
     } else {
       await _localInsert();
     }
@@ -116,6 +87,14 @@ class PurchaseConfirmController extends PrinterController {
       tableName: dbTables.tablePurchase,
       dataList: [purchase.toJson()],
     );
+    final isOnline = await prefs.getIsPurchaseOnline();
+    if (isOnline) {
+      toast(
+        'Online Purchase Failed Save Locally',
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
     _navigateToLanding();
   }
 
@@ -124,27 +103,65 @@ class PurchaseConfirmController extends PrinterController {
       tbl: dbTables.tablePurchase,
       data: purchase.toJson(),
       where: 'purchase_id = ?',
-      whereArgs: [
-        purchase.purchaseId,
-      ],
+      whereArgs: [purchase.purchaseId],
     );
     _navigateToLanding();
   }
 
   void _navigateToLanding() {
-    Get.offAllNamed(
-      Routes.dashboard,
-    );
+    logger.i('saving');
+    Get
+      ..back()
+      ..back();
+    if (Get.isRegistered<CreatePurchaseController>()) {
+      final createPurchaseController = Get.find<CreatePurchaseController>();
+      createPurchaseController.purchaseItemList.value = [];
+      createPurchaseController.calculateAllSubtotal();
+    }
   }
 
   void _showUpdateError() {
     // Display an error message to the user
-    print('Failed to update sales online.');
+    print('Failed to update purchase online.');
   }
 
   Future<void> scanBluetooth() async {
     await getBluetoothList();
   }
 
-  printPurchase(Purchase purchase) {}
+  Future<void> _onlineUpdate() async {
+    bool? isUpdated;
+    await dataFetcher(
+      future: () async {
+        isUpdated = await services.updatePurchase(
+          purchaseList: [purchase],
+        );
+      },
+      shouldShowErrorModal: false,
+    );
+    if (isUpdated ?? false) {
+      _navigateToLanding();
+    } else {
+      _showUpdateError();
+    }
+  }
+
+  Future<void> _onlineInsert() async {
+    bool? isInserted;
+    await dataFetcher(
+      future: () async {
+        isInserted = await services.postPurchase(
+          purchaseList: [purchase],
+          mode: 'online',
+        );
+      },
+      shouldShowErrorModal: false,
+    );
+
+    if (isInserted ?? false) {
+      _navigateToLanding();
+    } else {
+      await _localInsert();
+    }
+  }
 }

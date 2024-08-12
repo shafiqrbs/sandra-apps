@@ -399,6 +399,29 @@ class Services {
     }
   }
 
+  Future<bool> updatePurchase({
+    required List purchaseList,
+  }) async {
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-purchase-update',
+        {
+          'sales': jsonEncode(purchaseList),
+          'mode': 'online',
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+
+      if (responseData == null) return false;
+
+      return responseData['message'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> deleteSales({
     required String id,
   }) async {

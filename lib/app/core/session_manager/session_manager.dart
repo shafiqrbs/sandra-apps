@@ -153,7 +153,7 @@ class SessionManager {
     return prefs.getString(prefsPrinterPaperType) ?? '80 mm';
   }
 
-  /// Set the login status of the user.
+  /// Set is sales online
   Future<void> setIsSalesOnline({
     required bool isSalesOnline,
   }) async {
@@ -163,9 +163,24 @@ class SessionManager {
     );
   }
 
-  /// Get the login status of the user.
+  /// Get is sales online
   Future<bool> getIsSalesOnline() async {
     return prefs.getBool(prefsIsSalesOnline) ?? false;
+  }
+
+  /// Set is purchase online
+  Future<void> setIsPurchaseOnline({
+    required bool isPurchaseOnline,
+  }) async {
+    await prefs.setBool(
+      prefsIsPurchaseOnline,
+      isPurchaseOnline,
+    );
+  }
+
+  /// Get is purchase online
+  Future<bool> getIsPurchaseOnline() async {
+    return prefs.getBool(prefsIsPurchaseOnline) ?? false;
   }
 
   /// set is zero allowed

@@ -8,6 +8,8 @@ import 'package:image/image.dart' as img;
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+import 'package:sandra/app/entity/purchase.dart';
+import 'package:sandra/app/entity/purchase_item.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
@@ -177,6 +179,21 @@ class PrinterController extends BaseController {
     }
   }
 
+  Future<bool> printPurchase(
+    Purchase purchase,
+  ) async {
+    final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+    if (connectionStatus) {
+      final data = await purchaseTemplateOne(
+        purchase: purchase,
+      );
+      return PrintBluetoothThermal.writeBytes(data); // init
+    } else {
+      toast('please_connect_printer'.tr);
+      return false;
+    }
+  }
+
   //disconnect the connected printer
   Future<void> disconnect() async {
     await PrintBluetoothThermal.disconnect;
@@ -199,8 +216,9 @@ class PrinterController extends BaseController {
     //bytes += generator.setGlobalFont(PosFontType.fontA);
     bytes += generator.reset();
 
-    final ByteData data =
-        await rootBundle.load('assets/images/cover_poster_3.jpg');
+    final ByteData data = await rootBundle.load(
+      'assets/images/cover_poster_3.jpg',
+    );
     final Uint8List bytesImg = data.buffer.asUint8List();
     final img.Image? image = img.decodeImage(bytesImg);
 
@@ -445,6 +463,243 @@ class PrinterController extends BaseController {
         ),
         PosColumn(
           text: sales.received?.toString() ?? '',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+      ],
+    );
+    bytes += generator.feed(1);
+
+    //bytes += generator.text(SetUp().printFooter ?? '');
+    bytes += generator.feed(1);
+    bytes += generator.text(
+      SetUp().website ?? 'TerminalBd.com',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+    return bytes;
+  }
+
+  Future<List<int>> purchaseTemplateOne({
+    required Purchase purchase,
+  }) async {
+    List<int> bytes = [];
+    // Using default profile
+    final profile = await CapabilityProfile.load();
+
+    final paperType = await prefs.getPrintPaperType();
+
+    final generator = Generator(
+      paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+      profile,
+    );
+    //bytes += generator.setGlobalFont(PosFontType.fontA);
+    bytes += generator.reset();
+
+    final ByteData data = await rootBundle.load(
+      'assets/images/cover_poster_3.jpg',
+    );
+    final Uint8List bytesImg = data.buffer.asUint8List();
+    final img.Image? image = img.decodeImage(bytesImg);
+
+    if (Platform.isIOS) {
+      // Resizes the image to half its original size and reduces the quality to 80%
+      final resizedImage = img.copyResize(
+        image!,
+        width: image.width ~/ 1.3,
+        height: image.height ~/ 1.3,
+      );
+      final bytesimg = Uint8List.fromList(img.encodeJpg(resizedImage));
+      //image = img.decodeImage(bytesimg);
+    }
+
+// Add shop name
+    bytes += generator.text(
+      SetUp().name ?? '',
+      styles: const PosStyles(
+        bold: true,
+        height: PosTextSize.size2,
+        align: PosAlign.center,
+      ),
+    );
+
+    // Add subtitle
+    bytes += generator.text(
+      SetUp().address ?? '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+      linesAfter: 1,
+    );
+
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${"bill".tr}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: purchase.invoice ?? '',
+          width: 4,
+        ),
+        PosColumn(
+          text: '${"sales".tr}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: purchase.purchaseId ?? '',
+          width: 4,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${"date".tr}: ',
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
+          text: purchase.createdAt.toString(),
+          width: 4,
+        ),
+        PosColumn(
+          text: '${"mode".tr}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: ' Now it empty ',
+          width: 4,
+        ),
+      ],
+    );
+    bytes += generator.feed(1);
+
+    // Add table headers
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'item_name'.tr,
+          width: 7,
+        ),
+        PosColumn(
+          text: 'rate'.tr,
+          styles: const PosStyles(
+            align: PosAlign.center,
+          ),
+        ),
+        PosColumn(
+          text: 'qty'.tr,
+          width: 1,
+          styles: const PosStyles(
+            align: PosAlign.center,
+          ),
+        ),
+        PosColumn(
+          text: 'total'.tr,
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+      ],
+    );
+    bytes += generator.text('------------------------------------------------');
+
+    if (purchase.purchaseItem != null && purchase.purchaseItem!.isNotEmpty) {
+      for (final PurchaseItem rowData in purchase.purchaseItem!) {
+        bytes += generator.row(
+          [
+            PosColumn(
+              text: rowData.stockName ?? '',
+              width: 7,
+            ),
+            PosColumn(
+              text: rowData.price?.toString() ?? '',
+              styles: const PosStyles(
+                align: PosAlign.center,
+              ),
+            ),
+            PosColumn(
+              text: rowData.quantity?.toString() ?? '',
+              width: 1,
+              styles: const PosStyles(
+                align: PosAlign.center,
+              ),
+            ),
+            PosColumn(
+              text: rowData.subTotal.toString() ?? '',
+              styles: const PosStyles(
+                align: PosAlign.right,
+              ),
+            ),
+          ],
+        );
+      }
+    }
+    bytes += generator.text('------------------------------------------------');
+    bytes += generator.row([
+      PosColumn(
+        text: appLocalization.subTotal,
+        width: 9,
+        styles: const PosStyles(
+          align: PosAlign.right,
+        ),
+      ),
+      PosColumn(
+        text: 'Tk',
+        width: 1,
+        styles: const PosStyles(
+          align: PosAlign.center,
+        ),
+      ),
+      PosColumn(
+        text: purchase.subTotal?.toString() ?? '',
+        styles: const PosStyles(
+          align: PosAlign.right,
+        ),
+      ),
+    ]);
+
+    bytes += generator.text('------------------------------------------------');
+    bytes += generator.row([
+      PosColumn(
+        text: 'net_payable'.tr,
+        width: 9,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+      PosColumn(
+        text: 'Tk',
+        width: 1,
+        styles: const PosStyles(align: PosAlign.center),
+      ),
+      PosColumn(
+        text: purchase.netTotal?.toString() ?? '',
+        styles: const PosStyles(
+          align: PosAlign.right,
+        ),
+      ),
+    ]);
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'paid',
+          width: 9,
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
+          text: 'Tk',
+          width: 1,
+          styles: const PosStyles(align: PosAlign.center),
+        ),
+        PosColumn(
+          text: purchase.received?.toString() ?? '',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
