@@ -185,7 +185,7 @@ class DashboardView extends BaseView<DashboardController> {
         20.height,
         _buildTitleSubTitleButtonList(),
         20.height,
-        _buildChart(),
+       // _buildChart(),
         20.height,
         _buildButtons(),
       ],

@@ -92,13 +92,14 @@ Future<bool> confirmationModal({
   required String msg,
 }) async {
   final confirmation = await showDialog(
-    context: Get.overlayContext!,
-    builder: (context) {
-      return CommonConfirmationModal(
-        title: msg,
-      );
-    },
-  );
+        context: Get.overlayContext!,
+        builder: (context) {
+          return CommonConfirmationModal(
+            title: msg,
+          );
+        },
+      ) ??
+      false;
 
   return confirmation;
 }
