@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -10,10 +11,10 @@ class LoginController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final userNameController = TextEditingController(
-    text: 'alshefa4_shafiq',
+    text: kDebugMode?'alshefa4_shafiq': '',
   );
   final passwordController = TextEditingController(
-    text: 'android',
+    text: kDebugMode?'android': '',
   );
   final otpController = TextEditingController();
   final isUserNameFieldValid = true.obs;

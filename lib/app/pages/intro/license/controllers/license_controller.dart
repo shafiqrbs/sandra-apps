@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -8,8 +9,12 @@ import '/app/routes/app_pages.dart';
 
 class LicenseController extends BaseController {
   final formKey = GlobalKey<FormState>();
-  final licenseNumberController = TextEditingController(text: '01737701702');
-  final activeKeyController = TextEditingController(text: '1593579882');
+  final licenseNumberController = TextEditingController(
+    text: kDebugMode ? '01737701702' : '',
+  );
+  final activeKeyController = TextEditingController(
+    text:  kDebugMode ? '1593579882' : '',
+  );
 
   Future<void> submitLicense() async {
     if (formKey.currentState!.validate()) {
