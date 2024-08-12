@@ -216,12 +216,14 @@ class DashboardView extends BaseView<DashboardController> {
             subTitle: '',
             icon: TablerIcons.report_analytics,
             onTap: controller.goToClearLicense,
+            bgColor: const Color(0xff5D6D7E),
           ),
           TitleSubtitleButton(
             title: appLocalization.sales,
             subTitle: '567',
             icon: TablerIcons.report_analytics,
             onTap: controller.goToSalesList,
+            bgColor: const Color(0xff004D40),
           ),
           TitleSubtitleButton(
             title: appLocalization.purchase,
@@ -230,6 +232,7 @@ class DashboardView extends BaseView<DashboardController> {
             onTap: () {
               //Get.to(PurchaseScreen());
             },
+            bgColor: const Color(0xff5D6D7E),
           ),
           TitleSubtitleButton(
             title: appLocalization.expense,
@@ -238,6 +241,7 @@ class DashboardView extends BaseView<DashboardController> {
             onTap: () {
               //Get.to(PurchaseScreen());
             },
+            bgColor: const Color(0xff004D40),
           ),
           TitleSubtitleButton(
             title: appLocalization.due,
@@ -246,6 +250,7 @@ class DashboardView extends BaseView<DashboardController> {
             onTap: () {
               //Get.to(PurchaseScreen());
             },
+            bgColor: const Color(0xff5D6D7E),
           ),
         ],
       ),

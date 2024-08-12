@@ -4,10 +4,10 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
-import '/app/core/widget/dialog_pattern.dart';
-import '/app/global_modal/sync_modal/sync_modal_view.dart';
 
 import '/app/core/base/base_widget.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/sync_modal/sync_modal_view.dart';
 import '/app/routes/app_pages.dart';
 import 'app_bar_button.dart';
 import 'tbd_round_button.dart';
@@ -104,12 +104,14 @@ List<Widget> buttonList = [
     icon: TablerIcons.sort_ascending_letters,
     onTap: () => navigatePage(Routes.createSales),
     localeMethod: () => appLocalization.createSales,
+    bgColor: const Color(0xff1E90FF),
   ),
   TbdRoundButton(
     text: appLocalization.salesList,
     icon: TablerIcons.point_off,
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.salesList,
+    bgColor: const Color(0xff004D40),
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
@@ -173,7 +175,6 @@ List<Widget> buttonList = [
     },
     localeMethod: () => appLocalization.settings,
   ),
-
 ];
 void navigatePage(String routeName) {
   final currentRoute = Get.currentRoute;

@@ -21,31 +21,47 @@ enum SelectedButtonGroup {
   config,
 }
 
+List<Color> colorList = [
+  const Color(0xff1E90FF),
+  const Color(0xff004D40),
+  const Color(0xffFF6F61),
+  const Color(0xff32CD32),
+  const Color(0xff4CBB17),
+  const Color(0xff5D6D7E),
+  const Color(0xff6D28D9),
+];
+
+
 List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.sort_ascending_letters,
     onTap: () => navigatePage(Routes.createSales),
     localeMethod: () => appLocalization.pos,
+    bgColor: colorList[0],
   ),
   TbdRoundButton(
     icon: TablerIcons.point_off,
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.invoice,
+    bgColor: colorList[1],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_bag,
     onTap: () => navigatePage(Routes.createPurchase),
     localeMethod: () => appLocalization.createPurchase,
+    bgColor: colorList[2],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchaseList,
+    bgColor: colorList[3],
   ),
   TbdRoundButton(
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.stockList),
     localeMethod: () => appLocalization.stockList,
+    bgColor: colorList[4],
   ),
   TbdRoundButton(
     icon: TablerIcons.list,
@@ -55,6 +71,7 @@ List<Widget> inventoryButtonList = [
       );
     },
     localeMethod: () => appLocalization.salesReturn,
+    bgColor: colorList[5],
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
@@ -65,6 +82,7 @@ List<Widget> inventoryButtonList = [
       );
     },
     localeMethod: () => appLocalization.purchaseReturn,
+    bgColor: colorList[6],
   ),
 ];
 
@@ -73,21 +91,25 @@ List<Widget> accountingButtonList = [
     icon: TablerIcons.robot_face,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customerList,
+    bgColor: colorList[0],
   ),
   TbdRoundButton(
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendorList,
+    bgColor: colorList[1],
   ),
   TbdRoundButton(
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.accountingSales),
     localeMethod: () => appLocalization.sales,
+    bgColor: colorList[2],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.accountingPurchase),
     localeMethod: () => appLocalization.purchase,
+    bgColor: colorList[3],
   ),
 ];
 
@@ -96,6 +118,7 @@ List<Widget> configButtonList = [
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.settings),
     localeMethod: () => appLocalization.settings,
+    bgColor: colorList[0],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
@@ -109,6 +132,7 @@ List<Widget> configButtonList = [
       );
     },
     localeMethod: () => appLocalization.settings,
+    bgColor: colorList[1],
   ),
 ];
 

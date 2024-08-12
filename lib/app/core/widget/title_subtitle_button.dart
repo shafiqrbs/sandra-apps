@@ -8,12 +8,15 @@ class TitleSubtitleButton extends StatelessWidget {
   final String? subTitle;
   final IconData? icon;
   final VoidCallback? onTap;
+  final Color? bgColor;
+
   const TitleSubtitleButton({
     this.title = 'Title',
     this.subTitle = 'Subtitle',
     super.key,
     this.icon,
     this.onTap,
+    this.bgColor,
   });
 
   @override
@@ -27,7 +30,7 @@ class TitleSubtitleButton extends StatelessWidget {
           bottom: 10,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color:bgColor?? Colors.red,
           borderRadius: BorderRadius.circular(4),
           boxShadow: const [
             BoxShadow(
@@ -58,7 +61,7 @@ class TitleSubtitleButton extends StatelessWidget {
             Text(
               title!,
               style: GoogleFonts.roboto(
-                color: const Color(0xff4d4d4d),
+                color: const Color(0xffFFFFFF),
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
@@ -67,7 +70,7 @@ class TitleSubtitleButton extends StatelessWidget {
             Text(
               subTitle!,
               style: GoogleFonts.roboto(
-                color: const Color(0xff4d4d4d),
+                color: const Color(0xffFFFFFF),
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
