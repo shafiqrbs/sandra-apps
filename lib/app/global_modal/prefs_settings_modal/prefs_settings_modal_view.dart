@@ -43,6 +43,27 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   mainAxisAlignment: spaceBetweenMAA,
                   children: [
                     Text(
+                      appLocalization.isPurchaseOnline,
+                      style: GoogleFonts.roboto(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Switch(
+                      value: controller.isPurchaseOnline.value,
+                      onChanged: (value) async {
+                        controller.isPurchaseOnline.value = value;
+                        await controller.prefs.setIsPurchaseOnline(
+                          isPurchaseOnline: value,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: spaceBetweenMAA,
+                  children: [
+                    Text(
                       appLocalization.isZeroSalesAllowed,
                       style: GoogleFonts.roboto(
                         fontSize: 24,

@@ -229,7 +229,9 @@
   "noInternet" : "No Internet",
   "noDataFound" : "No Data Found",
   "error" : "Error",
-  "syncFailed" : "Sync Failed"
+  "syncFailed" : "Sync Failed",
+  "isPurchaseOnline" : "Is Purchase Online"
+
 
 
 }
