@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
+import '/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/sales.dart';

@@ -3,8 +3,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema.dart';
-import 'package:sandra/app/core/widget/quick_navigation_button.dart';
+import '/app/core/singleton_classes/color_schema.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 
 class ErrorScreen extends StatefulWidget {
   final String errorMessage;

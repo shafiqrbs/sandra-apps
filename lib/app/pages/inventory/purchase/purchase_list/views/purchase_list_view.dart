@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sandra/app/core/widget/no_record_found_view.dart';
-import 'package:sandra/app/core/widget/retry_view.dart';
+import '/app/core/widget/no_record_found_view.dart';
+import '/app/core/widget/retry_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';

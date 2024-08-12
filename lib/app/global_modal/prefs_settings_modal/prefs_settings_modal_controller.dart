@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sandra/app/core/base/base_controller.dart';
+import '/app/core/base/base_controller.dart';
 
 class PrefsSettingsModalController extends BaseController {
   final isSalesOnline = false.obs;

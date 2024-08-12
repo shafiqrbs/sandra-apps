@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/widget/common_confirmation_modal.dart';
+import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/core_model/voice_recognition.dart';
 
 import '/app/core/core_model/logged_user.dart';

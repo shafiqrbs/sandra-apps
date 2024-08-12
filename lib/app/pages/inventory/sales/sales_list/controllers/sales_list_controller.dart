@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/entity/customer.dart';

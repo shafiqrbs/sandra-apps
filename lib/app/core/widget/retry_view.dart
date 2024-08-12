@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sandra/app/core/base/base_widget.dart';
+import '/app/core/base/base_widget.dart';
 import '/app/core/utils/responsive.dart';
 import 'common_text.dart';
 

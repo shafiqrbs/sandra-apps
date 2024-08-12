@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sandra/app/core/base/base_view.dart';
+import '/app/core/base/base_view.dart';
 
 import 'prefs_settings_modal_controller.dart';
 
