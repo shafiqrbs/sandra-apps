@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import '/app/core/db_helper/db_tables.dart';
 import 'package:number_to_character/number_to_character.dart';
 
+import '/app/core/db_helper/db_tables.dart';
 import '/app/core/utils/parser_functions.dart';
 import '/app/entity/vendor.dart';
 import 'entity_manager.dart';
@@ -13,7 +13,7 @@ class PurchaseManager extends EntityManager<Purchase> {
   PurchaseManager()
       : super(
           DbTables().tablePurchase,
-          Purchase.fromJson,
+          (json) => Purchase.fromJson(json),
           (e) => e.toJson(),
         );
 }
@@ -141,12 +141,12 @@ class Purchase {
           : json['purchase_item'] is String
               ? List<PurchaseItem>.from(
                   jsonDecode(json['purchase_item']).map(
-                    PurchaseItem.fromJson,
+                    (x) => PurchaseItem.fromJson(x),
                   ),
                 )
               : List<PurchaseItem>.from(
                   json['purchase_item']!.map(
-                    PurchaseItem.fromJson,
+                    (x) => PurchaseItem.fromJson(x),
                   ),
                 ),
       isOnline: json['is_online'],
