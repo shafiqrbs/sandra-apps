@@ -377,7 +377,7 @@ class DashboardView extends BaseView<DashboardController> {
         _buildButtonGroup(),
         20.height,
         Wrap(
-          spacing: 8,
+          spacing: 24,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           runSpacing: 8,
           children: controller.dashboardButtonList,
