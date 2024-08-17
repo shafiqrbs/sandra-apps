@@ -204,17 +204,16 @@ class PrinterController extends BaseController {
     required Sales sales,
   }) async {
     List<int> bytes = [];
-    // Using default profile
     final profile = await CapabilityProfile.load();
-
     final paperType = await prefs.getPrintPaperType();
 
     final generator = Generator(
       paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
       profile,
     );
-    //bytes += generator.setGlobalFont(PosFontType.fontA);
-    bytes += generator.reset();
+
+
+ /*   bytes += generator.reset();
 
     final ByteData data = await rootBundle.load(
       'assets/images/cover_poster_3.jpg',
@@ -231,7 +230,7 @@ class PrinterController extends BaseController {
       );
       final bytesimg = Uint8List.fromList(img.encodeJpg(resizedImage));
       //image = img.decodeImage(bytesimg);
-    }
+    }*/
 
 // Add shop name
     bytes += generator.text(
@@ -265,7 +264,7 @@ class PrinterController extends BaseController {
           width: 4,
         ),
         PosColumn(
-          text: '${"sales".tr}: ',
+          text: '${appLocalization.sales}: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -389,7 +388,7 @@ class PrinterController extends BaseController {
         [
           PosColumn(
             text:
-                '${"discount".tr} (${sales.discountCalculation?.toString() ?? 0}%)',
+                '${appLocalization.discount} (${sales.discountCalculation?.toString() ?? 0}%)',
             width: 9,
             styles: const PosStyles(
               align: PosAlign.right,
@@ -433,7 +432,7 @@ class PrinterController extends BaseController {
     bytes += generator.text('------------------------------------------------');
     bytes += generator.row([
       PosColumn(
-        text: 'net_payable'.tr,
+        text: appLocalization.netPayable,
         width: 9,
         styles: const PosStyles(align: PosAlign.right),
       ),
@@ -469,10 +468,10 @@ class PrinterController extends BaseController {
         ),
       ],
     );
-    bytes += generator.feed(1);
 
     //bytes += generator.text(SetUp().printFooter ?? '');
-    bytes += generator.feed(1);
+    // TODO: do it dynamic
+    bytes += generator.feed(8);
     bytes += generator.text(
       SetUp().website ?? 'TerminalBd.com',
       styles: const PosStyles(
