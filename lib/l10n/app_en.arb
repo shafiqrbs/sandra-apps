@@ -230,7 +230,12 @@
   "noDataFound" : "No Data Found",
   "error" : "Error",
   "syncFailed" : "Sync Failed",
-  "isPurchaseOnline" : "Is Purchase Online"
+  "isPurchaseOnline" : "Is Purchase Online",
+  "licenseSetUp" : "License Setup",
+  "setUp" : "SETUP,",
+  "pleaseTryAgain" : "Please try again",
+  "underDevelopment" : "Under Development"
+
 
 
 

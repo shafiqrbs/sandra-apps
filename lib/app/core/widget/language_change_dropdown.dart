@@ -40,18 +40,11 @@ class LanguageChangeDropDown extends StatelessWidget with AppDimension {
             (String langItems) {
               return DropdownMenuItem(
                 value: langItems,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(TablerIcons.world),
-                    1.percentWidth,
-                    Text(
-                      langItems.tr,
-                      style: TextStyle(
-                        fontSize: mediumTFSize,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  langItems.tr,
+                  style: TextStyle(
+                    fontSize: mediumTFSize,
+                  ),
                 ),
               );
             },

@@ -10,10 +10,10 @@ import '/app/routes/app_pages.dart';
 class LicenseController extends BaseController {
   final formKey = GlobalKey<FormState>();
   final licenseNumberController = TextEditingController(
-    text: kDebugMode ? '01737701702' : '',
+    text: kDebugMode ? '01717845608' : '',
   );
   final activeKeyController = TextEditingController(
-    text:  kDebugMode ? '1593579882' : '',
+    text: kDebugMode ? '1550912442' : '',
   );
 
   Future<void> submitLicense() async {
@@ -51,7 +51,7 @@ class LicenseController extends BaseController {
         SetUp.fromJson(splashData['setup'][0]);
       } else {
         await prefs.setIsLicenseValid(isLicenseValid: false);
-        toast('please_try_again'.tr);
+        toast(appLocalization.pleaseTryAgain);
         return false;
       }
       final keys = splashData.keys.toList();
@@ -61,7 +61,11 @@ class LicenseController extends BaseController {
         keys,
         (key) async {
           final value = splashData[key];
-          if (value != null && value is List && value.isNotEmpty) {
+          if (value != null && value is List) {
+            if (value.isEmpty) {
+              await dbHelper.deleteAll(tbl: key);
+              return;
+            }
             await dbHelper.insertList(
               deleteBeforeInsert: true,
               tableName: key,
@@ -72,7 +76,7 @@ class LicenseController extends BaseController {
       );
     } else {
       await prefs.setIsLicenseValid(isLicenseValid: false);
-      toast('please_try_again'.tr);
+      toast(appLocalization.pleaseTryAgain);
       return false;
     }
 

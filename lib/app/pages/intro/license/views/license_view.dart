@@ -32,6 +32,17 @@ class LicenseView extends BaseView<LicenseController> {
   }
 
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colors.primaryBaseColor,
+      ),
+      body: body(context),
+      bottomNavigationBar: bottomNavigationBar(),
+    );
+  }
+
+  @override
   Widget bottomNavigationBar() {
     return _buildBottomNavigationBar();
   }
@@ -81,7 +92,7 @@ class LicenseView extends BaseView<LicenseController> {
                 color: Colors.transparent,
                 alignment: Alignment.topCenter,
                 child: CommonText(
-                  text: appLocalization.license,
+                  text: appLocalization.licenseSetUp,
                   fontSize: headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
@@ -174,15 +185,7 @@ class LicenseView extends BaseView<LicenseController> {
     return SetupBottomNavBar(
       buttonList: [
         RowButton(
-          buttonName: appLocalization.close,
-          leftIcon: TablerIcons.x,
-          isOutline: true,
-          onTap: Get.back,
-        ),
-        1.percentWidth,
-        RowButton(
-          buttonName: appLocalization.login,
-          leftIcon: TablerIcons.login,
+          buttonName: appLocalization.setUp,
           isOutline: false,
           onTap: controller.submitLicense,
         ),

@@ -11,10 +11,10 @@ class LoginController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final userNameController = TextEditingController(
-    text: kDebugMode?'alshefa4_shafiq': '',
+    text: kDebugMode?'amsc': '',
   );
   final passwordController = TextEditingController(
-    text: kDebugMode?'android': '',
+    text: kDebugMode?'@123456': '',
   );
   final otpController = TextEditingController();
   final isUserNameFieldValid = true.obs;
@@ -51,5 +51,11 @@ class LoginController extends BaseController {
         toast('Invalid Credentials');
       }
     } finally {}
+  }
+
+  void resetForm() {
+    userNameController.clear();
+    passwordController.clear();
+    otpController.clear();
   }
 }

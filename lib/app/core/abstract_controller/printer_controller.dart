@@ -8,8 +8,8 @@ import 'package:image/image.dart' as img;
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
-import 'package:sandra/app/entity/purchase.dart';
-import 'package:sandra/app/entity/purchase_item.dart';
+import '/app/entity/purchase.dart';
+import '/app/entity/purchase_item.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';

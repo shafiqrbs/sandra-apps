@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/core_model/setup.dart';
-import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/utils/responsive.dart';
+import '/app/core/widget/common_cache_image_widget.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/language_change_dropdown.dart';
@@ -20,7 +20,15 @@ class LoginView extends BaseView<LoginController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
+    return AppBar(
+      backgroundColor: colors.primaryBaseColor,
+      actions: [
+        Container(
+          margin: const EdgeInsets.all(8),
+          child: LanguageChangeDropDown(),
+        ),
+      ],
+    );
   }
 
   @override
@@ -69,11 +77,6 @@ class LoginView extends BaseView<LoginController> {
               bottomLeft: Radius.circular(8),
             ),
           ),
-        ),
-        Positioned(
-          top: AppBar().preferredSize.height - 24,
-          right: 16,
-          child: LanguageChangeDropDown(),
         ),
         _buildAvatar(),
       ],
@@ -126,16 +129,6 @@ class LoginView extends BaseView<LoginController> {
                 color: Colors.transparent,
                 alignment: Alignment.topCenter,
                 child: CommonText(
-                  text: appLocalization.login,
-                  fontSize: headerTFSize,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              1.percentHeight,
-              Container(
-                color: Colors.transparent,
-                alignment: Alignment.topCenter,
-                child: CommonText(
                   text: appLocalization.welcome,
                   fontSize: headerTFSize,
                   fontWeight: FontWeight.w600,
@@ -143,12 +136,13 @@ class LoginView extends BaseView<LoginController> {
               ),
               1.percentHeight,
               CommonText(
-                text: appLocalization.toStore,
+                text: SetUp().name ?? '',
                 fontSize: subHeaderTFSize,
                 textColor: colors.secondaryTextColor,
                 textAlign: TextAlign.left,
+                fontWeight: FontWeight.w600,
               ),
-              1.percentHeight,
+              4.percentHeight,
               Obx(
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -272,7 +266,9 @@ class LoginView extends BaseView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          toast(appLocalization.underDevelopment);
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(right: 16),
                           child: CommonText(
@@ -285,7 +281,7 @@ class LoginView extends BaseView<LoginController> {
                       ),
                     ],
                   ),
-                  20.percentHeight,
+                  20.height,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -304,7 +300,7 @@ class LoginView extends BaseView<LoginController> {
                         textDecoration: TextDecoration.underline,
                       ).onTap(
                         () {
-                          // Get.to(RegisterScreen());
+                          toast(appLocalization.underDevelopment);
                         },
                       ),
                     ],
@@ -322,10 +318,10 @@ class LoginView extends BaseView<LoginController> {
     return SetupBottomNavBar(
       buttonList: [
         RowButton(
-          buttonName: appLocalization.close,
+          buttonName: appLocalization.reset,
           leftIcon: TablerIcons.x,
           isOutline: true,
-          onTap: Get.back,
+          onTap: controller.resetForm,
         ),
         1.percentWidth,
         RowButton(
