@@ -171,7 +171,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               Expanded(
                 flex: 8,
                 child: CommonText(
-                  text: 'place_order'.tr,
+                  text: appLocalization.placeOrder,
                   fontSize: subHeaderTFSize,
                   fontWeight: FontWeight.bold,
                   textColor: colors.backgroundColor,
@@ -183,23 +183,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                      child: Obx(
-                        () => InkWell(
-                          onTap: () {
-                            controller.showSalesItem.toggle();
-                          },
-                          child: Icon(
-                            !controller.showSalesItem.value
-                                ? TablerIcons.chevron_down
-                                : TablerIcons.chevron_up,
-                            size: closeIconSize,
-                            color: colors.backgroundColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    4.width,
                     Expanded(
                       child: InkWell(
                         onTap: () {

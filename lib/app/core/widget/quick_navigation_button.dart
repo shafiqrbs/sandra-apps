@@ -65,7 +65,7 @@ class QuickNavigationButton extends BaseWidget {
                       right: 16,
                     ),
                     child: Text(
-                      'quick_navigation'.tr,
+                      appLocalization.quickNavigation,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

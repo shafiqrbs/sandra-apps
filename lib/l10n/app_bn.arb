@@ -311,7 +311,8 @@
   "licenseSetUp" : "License Setup",
   "setUp" : "SETUP",
   "pleaseTryAgain" : "Please Try Again",
-  "underDevelopment" : "Under Development"
+  "underDevelopment" : "Under Development",
+  "quickNavigation" : "Quick Navigation"
 
 
 }

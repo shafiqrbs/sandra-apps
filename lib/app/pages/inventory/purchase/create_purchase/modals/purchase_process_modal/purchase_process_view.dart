@@ -156,7 +156,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
               Expanded(
                 flex: 8,
                 child: CommonText(
-                  text: 'place_order'.tr,
+                  text: appLocalization.placeOrder,
                   fontSize: subHeaderTFSize,
                   fontWeight: FontWeight.bold,
                   textColor: colors.backgroundColor,
@@ -169,26 +169,9 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Expanded(
-                      child: Obx(
-                        () => InkWell(
-                          onTap: () {
-                            controller.showPurchaseItem.toggle();
-                          },
-                          child: Icon(
-                            !controller.showPurchaseItem.value
-                                ? TablerIcons.chevron_down
-                                : TablerIcons.chevron_up,
-                            size: closeIconSize,
-                            color: colors.backgroundColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    4.width,
-                    Expanded(
                       child: InkWell(
                         onTap: () {
-                          // Get.back(result: controller.salesItemList);
+                           Get.back(result: controller.purchaseItemList);
                         },
                         child: Icon(
                           TablerIcons.x,
