@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -96,17 +98,12 @@ class LoginView extends BaseView<LoginController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    TablerIcons.user_square,
-                    color: colors.iconColor,
-                    size: 60,
-                  ),
-                  Text(
-                    appLocalization.login,
-                    style: TextStyle(
-                      color: colors.primaryTextColor,
-                      fontSize: 18,
-                    ),
+                  commonCacheImageWidget(
+                    SetUp().logo,
+                    130,
+                    width: 130,
+                    fit: BoxFit.cover,
+                    isOval: true,
                   ),
                 ],
               ),
@@ -129,15 +126,25 @@ class LoginView extends BaseView<LoginController> {
                 color: Colors.transparent,
                 alignment: Alignment.topCenter,
                 child: CommonText(
+                  text: appLocalization.login,
+                  fontSize: headerTFSize,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              1.percentHeight,
+              Container(
+                color: Colors.transparent,
+                alignment: Alignment.topCenter,
+                child: CommonText(
                   text: appLocalization.welcome,
-                  fontSize:headerTFSize,
+                  fontSize: headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               1.percentHeight,
               CommonText(
                 text: appLocalization.toStore,
-                fontSize:subHeaderTFSize,
+                fontSize: subHeaderTFSize,
                 textColor: colors.secondaryTextColor,
                 textAlign: TextAlign.left,
               ),
@@ -270,7 +277,7 @@ class LoginView extends BaseView<LoginController> {
                           margin: const EdgeInsets.only(right: 16),
                           child: CommonText(
                             text: appLocalization.forgotPassword,
-                            fontSize:regularTFSize,
+                            fontSize: regularTFSize,
                             textColor: colors.dangerLiteColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -285,13 +292,13 @@ class LoginView extends BaseView<LoginController> {
                     children: [
                       CommonText(
                         text: appLocalization.donNotHaveAnAccount,
-                        fontSize:subHeaderTFSize,
+                        fontSize: subHeaderTFSize,
                         textColor: colors.secondaryTextColor,
                       ),
                       4.width,
                       CommonText(
                         text: appLocalization.createAccount,
-                        fontSize:subHeaderTFSize,
+                        fontSize: subHeaderTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w600,
                         textDecoration: TextDecoration.underline,

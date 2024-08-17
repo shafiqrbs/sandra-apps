@@ -40,17 +40,6 @@ class TransactionMethodItemView extends BaseWidget {
             Container(
               height: 42,
               width: 72,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(60),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x14000000),
-                    offset: Offset(0, 1),
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
               child: commonCacheImageWidget(
                 method.imagePath,
                 36,

@@ -81,7 +81,7 @@ class LicenseView extends BaseView<LicenseController> {
                 color: Colors.transparent,
                 alignment: Alignment.topCenter,
                 child: CommonText(
-                  text: appLocalization.register,
+                  text: appLocalization.license,
                   fontSize: headerTFSize,
                   fontWeight: FontWeight.w600,
                 ),
@@ -118,16 +118,12 @@ class LicenseView extends BaseView<LicenseController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    TablerIcons.user_square,
-                    color: colors.iconColor,
-                    size: 60,
-                  ),
-                  Text(
-                    appLocalization.license,
-                    style: TextStyle(
-                      color: colors.primaryTextColor,
-                      fontSize: 18,
+                  CircleAvatar(
+                    maxRadius: 65,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/app_logo.png',
+                      ),
                     ),
                   ),
                 ],
