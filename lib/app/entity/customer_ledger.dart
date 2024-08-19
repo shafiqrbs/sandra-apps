@@ -15,7 +15,7 @@ class CustomerLedger {
   final int? sales;
   final int? receive;
   final double? balance;
-  final String? sourceInvoice;
+  final int? sourceInvoice;
   final String? invoice;
   final String? created;
   final String? updated;

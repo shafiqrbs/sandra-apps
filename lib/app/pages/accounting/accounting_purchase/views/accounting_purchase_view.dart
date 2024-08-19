@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/delete_button.dart';
-import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/retry_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -12,7 +9,10 @@ import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/delete_button.dart';
+import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/pages/accounting/accounting_purchase/controllers/accounting_purchase_controller.dart';
 
@@ -176,6 +176,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                     ),
                     Expanded(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
                             onTap: controller.approvePurchase,
@@ -206,6 +207,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                               ),
                             ),
                           ),
+                          if(controller.isManager)
                           DeleteButton(
                             onTap: controller.deletePurchase,
                           ),

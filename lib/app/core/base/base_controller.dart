@@ -42,6 +42,9 @@ abstract class BaseController extends GetxController {
 
   LoggedUser get loggedUser => LoggedUser();
 
+  final isManager = LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
+
+
   //Reload the page
   final _refreshController = false.obs;
 

@@ -248,7 +248,7 @@ class SalesListView extends BaseView<SalesListController> {
                   ],
                 ),
               ),
-              if(LoggedUser().roles?.contains('ROLE_MANAGER')??false)
+              if(controller.isManager)
               Positioned(
                 right: 10,
                 top: 18,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
+import 'package:sandra/app/entity/expense.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -612,6 +613,67 @@ class Services {
       return response;
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<List<Expense>?> getExpenseList() async {
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-account-expense',
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List?;
+      if (responseData == null) return null;
+
+      return parseList(
+        list: responseData,
+        fromJson: Expense.fromJson,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<bool> deleteExpense({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-expense-delete',
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> approveExpense({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-expense-approve',
+        query: {
+          'id': id,
+          'user_id': LoggedUser().userId,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
     }
   }
 }
