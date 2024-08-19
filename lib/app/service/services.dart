@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -579,6 +580,36 @@ class Services {
         list: response.data,
         fromJson: VendorLedger.fromJson,
       );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  addExpense({
+    required amount,
+    required String remark,
+    required expenseCategoryId,
+    required userId,
+    required transactionMethodId,
+  }) async {
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-expense-create',
+        {
+          'amount': amount,
+          'remark': remark,
+          'category_id': expenseCategoryId,
+          'to_user_id': userId,
+          'method_id': transactionMethodId,
+          'created_by_id': LoggedUser().userId!,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+      return response;
     } catch (e) {
       return null;
     }

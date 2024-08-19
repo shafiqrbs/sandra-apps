@@ -40,16 +40,29 @@ class AddExpenseController extends BaseController {
     transactionMethodsManager.selectedItem.value = null;
   }
 
-  void onSaveTap() {
+  Future<void> onSaveTap() async {
     if (formKey.currentState!.validate()) {
       if (transactionMethodsManager.selectedItem.value == null) {
         toast('Please select a transaction method');
         return;
       }
+      bool? isSubmitted;
+      await dataFetcher(
+        future: () async {
+          isSubmitted = await services.addExpense(
+            amount: amountController.value.text,
+            remark: remarkController.text,
+            expenseCategoryId:
+                expenseCategoryManager.asController.selectedValue!.itemId,
+            userId: userManager.asController.selectedValue!.userId,
+            transactionMethodId:
+                transactionMethodsManager.selectedItem.value!.methodId,
+          );
+        },
+      );
+      if(isSubmitted??false){
 
-      toast('Field is valid');
-      toast('Under development the API');
-      // Get.back();
+      }
     }
   }
 }
