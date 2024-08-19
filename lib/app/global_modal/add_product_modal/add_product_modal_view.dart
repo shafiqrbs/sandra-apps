@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 import '/app/core/advance_select/advance_select_view.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
-import 'package:nb_utils/nb_utils.dart';
-
 import 'add_product_modal_controller.dart';
 
 class AddProductModalView extends BaseView<AddProductModalViewController> {
@@ -103,6 +103,7 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                           Expanded(
                             child: FBString(
                               textController: controller.salePriceController,
+                              keyboardType: number,
                               preFixIcon: TablerIcons.coin,
                               label: appLocalization.salesPrice,
                               hint: appLocalization.price,

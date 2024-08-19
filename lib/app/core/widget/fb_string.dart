@@ -264,11 +264,12 @@ class FBString extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      //height: lines != null && lines! > 1 ? null : textFieldHeight ?? FBInit().tfHeight,
+                      height: lines != null && lines! > 1 ? null : textFieldHeight ?? FBInit().tfHeight,
                       width: textFieldWidth ?? FBInit().tfWidth,
                       margin: EdgeInsets.zero,
                       //color: Colors.red,
                       child: TextFormField(
+
                         controller: textController,
                         maxLines: lines ?? 1,
                         cursorColor: FBColors().cursorColor,
@@ -277,13 +278,11 @@ class FBString extends StatelessWidget {
                           isFieldValid.refresh();
                         },
                         readOnly: isReadOnly ?? false,
-                        decoration: decoration ??
-                            formBuilderInputDecorationWithIcon(
+                        decoration: decoration ?? formBuilderInputDecorationWithIcon(
                               hint: hint ?? '',
                               hintTextStyle: hintTextStyle,
                               textEditingController: textController,
-                              isShowClearIcon:
-                                  textController.value.text.isNotEmpty,
+                              isShowClearIcon: textController.value.text.isNotEmpty,
                               isShowToolTip: isShowToolTip,
                               toolTipContent: toolTipContent,
                               toolTipContentColor: toolTipContentColor,
@@ -295,16 +294,11 @@ class FBString extends StatelessWidget {
                               prefixIconSize: prefixIconSize,
                               isValid: isFieldValid.value,
                               border: border ?? FBOutlineInputBorder().border,
-                              enabledBorder: enabledBorder ??
-                                  FBOutlineInputBorder().enabledBorder,
-                              focusedBorder: focusedBorder ??
-                                  FBOutlineInputBorder().focusedBorder,
-                              disabledBorder: disabledBorder ??
-                                  FBOutlineInputBorder().disabledBorder,
-                              errorBorder: errorBorder ??
-                                  FBOutlineInputBorder().errorBorder,
-                              focusedErrorBorder: focusedErrorBorder ??
-                                  FBOutlineInputBorder().focusedErrorBorder,
+                              enabledBorder: enabledBorder ?? FBOutlineInputBorder().enabledBorder,
+                              focusedBorder: focusedBorder ?? FBOutlineInputBorder().focusedBorder,
+                              disabledBorder: disabledBorder ?? FBOutlineInputBorder().disabledBorder,
+                              errorBorder: errorBorder ?? FBOutlineInputBorder().errorBorder,
+                              focusedErrorBorder: focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
                               prefix: preFixIcon,
                               suffix: suffixIcon,
                               onTap: () {

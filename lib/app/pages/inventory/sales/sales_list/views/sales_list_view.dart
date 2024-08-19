@@ -254,7 +254,7 @@ class SalesListView extends BaseView<SalesListController> {
                 top: 18,
                 child: DeleteButton(
                   onTap:()=> controller.deleteSales(
-                    salesId: element.salesId!
+                    salesId: element.salesId!,
                   ),
                 ),
               ),

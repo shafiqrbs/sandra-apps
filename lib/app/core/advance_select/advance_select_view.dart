@@ -196,12 +196,12 @@ class AdvanceSelect<T> extends FormField<T> {
                           children: [
                             Expanded(
                               child: Container(
-                                height: lines != null && lines > 1
-                                    ? null
-                                    : textFieldHeight ?? FBInit().tfHeight,
+                                height: lines != null && lines > 1 ? null : textFieldHeight ?? FBInit().tfHeight,
                                 width: textFieldWidth ?? FBInit().tfWidth,
                                 margin: EdgeInsets.zero,
                                 child: Stack(
+                                  alignment: Alignment.centerRight,
+
                                   children: [
                                     TextFormField(
                                       controller: TextEditingController(
@@ -496,7 +496,7 @@ class AdvanceSelect<T> extends FormField<T> {
                                     if (controller.selectedValue == null)
                                       Positioned(
                                         right: 10,
-                                        bottom: 5,
+                                        top: 10,
                                         child: Container(
                                           margin:
                                               const EdgeInsets.only(right: 5),

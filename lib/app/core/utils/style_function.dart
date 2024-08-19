@@ -160,13 +160,12 @@ InputDecoration formBuilderInputDecorationWithIcon({
     fillColor: FBColors().fillColor,
     //don't remove this errorStyle it is used to remove the error text space
     errorStyle: const TextStyle(
-      height: 0,
+      height: -10,
     ),
     enabledBorder: enabledBorder ?? FBOutlineInputBorder().enabledBorder,
     focusedBorder: focusedBorder ?? FBOutlineInputBorder().focusedBorder,
     errorBorder: errorBorder ?? FBOutlineInputBorder().errorBorder,
-    focusedErrorBorder:
-        focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
+    focusedErrorBorder: focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
     disabledBorder: disabledBorder ?? FBOutlineInputBorder().disabledBorder,
     border: border ?? FBOutlineInputBorder().border,
     prefixIcon: prefix == null
