@@ -264,11 +264,10 @@ class FBString extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      height: lines != null && lines! > 1
-                          ? null
-                          : textFieldHeight ?? FBInit().tfHeight,
+                      //height: lines != null && lines! > 1 ? null : textFieldHeight ?? FBInit().tfHeight,
                       width: textFieldWidth ?? FBInit().tfWidth,
                       margin: EdgeInsets.zero,
+                      //color: Colors.red,
                       child: TextFormField(
                         controller: textController,
                         maxLines: lines ?? 1,

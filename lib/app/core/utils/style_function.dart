@@ -152,7 +152,7 @@ InputDecoration formBuilderInputDecorationWithIcon({
   Function()? onTap,
 }) {
   return InputDecoration(
-    contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(8, 8, 8, 0),
+    contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(8, 8, 8, 8),
     hintText: hint,
     hintStyle: hintTextStyle ?? FBTypography().tfHintTS,
 
@@ -235,6 +235,7 @@ InputDecoration formBuilderInputDecorationWithIcon({
       ],
     ),
     suffixIconConstraints: const BoxConstraints(),
+   // isDense: true,
   );
 }
 
