@@ -223,7 +223,7 @@ class SessionManager {
     );
   }
 
-  /// get is zero allowed
+  /// get number of printer new line
   Future<int> getNumberOfPrinterNewLine() async {
     return prefs.getInt(prefsNumberOfPrinterNewLine) ?? 0;
   }

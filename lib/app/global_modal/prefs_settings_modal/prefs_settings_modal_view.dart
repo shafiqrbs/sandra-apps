@@ -30,12 +30,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     ),
                     Switch(
                       value: controller.isSalesOnline.value,
-                      onChanged: (value) async {
-                        controller.isSalesOnline.value = value;
-                        await controller.prefs.setIsSalesOnline(
-                          isSalesOnline: value,
-                        );
-                      },
+                      onChanged: controller.setSalesOnline,
                     ),
                   ],
                 ),
@@ -51,12 +46,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     ),
                     Switch(
                       value: controller.isPurchaseOnline.value,
-                      onChanged: (value) async {
-                        controller.isPurchaseOnline.value = value;
-                        await controller.prefs.setIsPurchaseOnline(
-                          isPurchaseOnline: value,
-                        );
-                      },
+                      onChanged: controller.setPurchaseOnline,
                     ),
                   ],
                 ),
@@ -72,12 +62,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     ),
                     Switch(
                       value: controller.isZeroSalesAllowed.value,
-                      onChanged: (value) async {
-                        controller.isZeroSalesAllowed.value = value;
-                        await controller.prefs.setIsZeroSalesAllowed(
-                          isZeroAllowed: value,
-                        );
-                      },
+                      onChanged: controller.setZeroSalesAllowed,
                     ),
                   ],
                 ),
@@ -96,19 +81,33 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     else
                       DropdownButton<String>(
                         value: controller.printerType.value,
-                        items: <String>['80 mm', '58 mm']
-                            .map<DropdownMenuItem<String>>(
-                              (String value) => DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              ),
-                            )
-                            .toList(),
+                        items: controller.printerTypeList,
                         onChanged: (value) async {
-                          controller.printerType.value = value!;
-                          await controller.prefs.setPrintPaperType(
-                            value,
-                          );
+                          if (value == null) return;
+                          controller.setPrinterType(value);
+                        },
+                      ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: spaceBetweenMAA,
+                  children: [
+                    Text(
+                      'Print End New Line',
+                      style: GoogleFonts.roboto(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    if (controller.printerType.value.isEmpty)
+                      const CircularProgressIndicator()
+                    else
+                      DropdownButton<int>(
+                        value: controller.printerNewLine.value,
+                        items: controller.newLineList,
+                        onChanged: (value) async {
+                          if (value == null) return;
+                          controller.setPrinterNewLine(value);
                         },
                       ),
                   ],
