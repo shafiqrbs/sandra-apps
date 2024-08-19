@@ -30,6 +30,8 @@ class PrinterController extends BaseController {
 
   final isConnecting = false.obs;
 
+  int newLine = 0;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -37,6 +39,7 @@ class PrinterController extends BaseController {
     await getBluetoothPermission();
     await initPlatformState();
     isLoader.value = false;
+    newLine = await prefs.getNumberOfPrinterNewLine();
   }
 
   Future<void> getBluetoothPermission() async {
@@ -471,7 +474,7 @@ class PrinterController extends BaseController {
 
     //bytes += generator.text(SetUp().printFooter ?? '');
     // TODO: do it dynamic
-    bytes += generator.feed(8);
+    bytes += generator.feed(newLine);
     bytes += generator.text(
       SetUp().website ?? 'TerminalBd.com',
       styles: const PosStyles(

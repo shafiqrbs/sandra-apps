@@ -212,4 +212,19 @@ class SessionManager {
   Future<String> getPurchaseConfig() async {
     return prefs.getString(prefsPurchaseConfig) ?? 'purchase_price';
   }
+
+  /// set number of printer new line
+  Future<void> setNumberOfPrinterNewLine(
+    int newLine,
+  ) async {
+    await prefs.setInt(
+      prefsNumberOfPrinterNewLine,
+      newLine,
+    );
+  }
+
+  /// get is zero allowed
+  Future<int> getNumberOfPrinterNewLine() async {
+    return prefs.getInt(prefsNumberOfPrinterNewLine) ?? 0;
+  }
 }
