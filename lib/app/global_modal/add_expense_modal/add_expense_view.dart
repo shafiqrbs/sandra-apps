@@ -33,11 +33,11 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                   AdvanceSelect(
                     isRequired: true,
                     controller: controller.userManager.asController,
-                    hint: 'user'.tr,
+                    hint: appLocalization.user,
                     isShowSearch: false,
                     itemToString: (data) => data?.username ?? '',
-                    label: 'user'.tr,
-                    errorMsg: 'user_required'.tr,
+                    label: appLocalization.user,
+                    errorMsg: appLocalization.userRequired,
                   ),
                   Row(
                     children: [
@@ -45,11 +45,11 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                         child: AdvanceSelect(
                           isRequired: true,
                           controller: controller.expenseCategoryManager.asController,
-                          hint: 'select_category'.tr,
+                          hint: appLocalization.selectCategory,
                           isShowSearch: false,
                           itemToString: (data) => data?.name ?? '',
-                          label: 'category'.tr,
-                          errorMsg: 'category_required'.tr,
+                          label: appLocalization.category,
+                          errorMsg: appLocalization.categoryRequired,
                         ),
                       ),
                       10.width,
@@ -57,9 +57,9 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                         child: FBString(
                           textController: controller.amountController.value,
                           keyboardType: numberInputType,
-                          label: 'amount'.tr,
+                          label: appLocalization.amount,
                           //example: 'sample_model'.tr,
-                          hint: 'amount'.tr,
+                          hint: appLocalization.amount,
                           isRequired: true,
                           errorMsg: '',
                         ),
@@ -106,9 +106,9 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                   ),
                   FBString(
                     textController: controller.remarkController,
-                    label: 'remark'.tr,
+                    label: appLocalization.remark,
                     //example: 'sample_model'.tr,
-                    hint: 'remark'.tr,
+                    hint: appLocalization.remark,
                     isRequired: false,
                     errorMsg: '',
                     lines: 4,
@@ -116,13 +116,13 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                   Row(
                     children: [
                       RowButton(
-                        buttonName: 'reset'.tr,
+                        buttonName: appLocalization.reset,
                         onTap: controller.onResetTap,
                         leftIcon: TablerIcons.restore,
                       ),
                       2.percentWidth,
                       RowButton(
-                        buttonName: 'save'.tr,
+                        buttonName: appLocalization.save,
                         onTap: controller.onSaveTap,
                         leftIcon: TablerIcons.device_floppy,
                       ),

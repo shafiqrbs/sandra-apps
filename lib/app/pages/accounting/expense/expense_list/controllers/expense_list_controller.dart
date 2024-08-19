@@ -13,8 +13,8 @@ class ExpenseListController extends BaseController {
   Future<void> showAddExpenseModal() async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'add_expense'.tr,
-        subTitle: 'add_expense'.tr,
+        title: appLocalization.addExpense,
+        subTitle: '',
         child: AddExpenseView(),
       ),
     );

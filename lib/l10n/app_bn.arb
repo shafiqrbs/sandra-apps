@@ -312,7 +312,12 @@
   "setUp" : "SETUP",
   "pleaseTryAgain" : "Please Try Again",
   "underDevelopment" : "Under Development",
-  "quickNavigation" : "Quick Navigation"
+  "quickNavigation" : "Quick Navigation",
+  "user" : "User",
+  "userRequired" : "User required",
+  "remark" : "Remark",
+  "remarkRequired" : "Remark required",
+  "addExpense" : "Add Expense"
 
 
 }

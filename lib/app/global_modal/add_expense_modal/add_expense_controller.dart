@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/entity/transaction_methods.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/expense_category.dart';
+import '/app/entity/transaction_methods.dart';
 import '/app/entity/user.dart';
 import '/app/routes/app_pages.dart';
 
@@ -32,19 +32,24 @@ class AddExpenseController extends BaseController {
     );
   }
 
-  void onResetTap() {}
+  void onResetTap() {
+    amountController.value.clear();
+    remarkController.clear();
+    expenseCategoryManager.asController.selectedValue = null;
+    userManager.asController.selectedValue = null;
+    transactionMethodsManager.selectedItem.value = null;
+  }
 
   void onSaveTap() {
     if (formKey.currentState!.validate()) {
-
-      if(transactionMethodsManager.selectedItem.value == null){
+      if (transactionMethodsManager.selectedItem.value == null) {
         toast('Please select a transaction method');
         return;
       }
 
       toast('Field is valid');
       toast('Under development the API');
-     // Get.back();
+      // Get.back();
     }
   }
 }
