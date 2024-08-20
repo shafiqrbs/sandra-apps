@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
@@ -86,23 +87,21 @@ class DashboardView extends BaseView<DashboardController> {
         _buildTopBar(context),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-            ),
+            padding: EdgeInsets.zero,
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  10.height,
-                  _buildTabSelection(),
-                  Obx(
+                  16.height,
+                  _buildDashboard(),
+                  //_buildTabSelection(),
+                  /*Obx(
                     () {
                       final selectedTab = controller.selectedTab.value;
                       return selectedTab == SelectedTab.dashboard
                           ? _buildDashboard()
                           : _buildReport();
                     },
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -114,6 +113,10 @@ class DashboardView extends BaseView<DashboardController> {
 
   Widget _buildTopBar(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 8,
+      ),
       height: AppBar().preferredSize.height,
       width: Get.width,
       decoration: BoxDecoration(
@@ -122,34 +125,57 @@ class DashboardView extends BaseView<DashboardController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Builder(
-            builder: (context) {
-              return IconButton(
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(
-                  TablerIcons.menu_2,
-                  color: Colors.white,
-                ),
-              );
-            },
-          ),
           Text(
             'dashboard'.tr,
             style: TextStyle(
               color: colors.backgroundColor,
-              fontSize: appBarTFSize,
-              fontWeight: FontWeight.bold,
+              fontSize: regularTFSize,
+              fontWeight: FontWeight.w600,
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(MdiIcons.bell),
-                color: Colors.white,
+              CommonText(
+                text: 'online'.tr,
+                fontSize: 10,
+                textColor: Colors.white,
+                fontWeight: FontWeight.w400,
               ),
+              4.width,
+              Obx(
+                () {
+                  return AdvancedSwitch(
+                    activeColor: Colors.white,
+                    inactiveColor: const Color(0xFFE9E9E9),
+                    borderRadius: BorderRadius.circular(
+                      containerBorderRadius,
+                    ),
+                    width: 30,
+                    height: 16,
+                    controller: controller.showOnlineController.value,
+                  );
+                },
+              ),
+              12.width,
+              InkWell(
+                onTap: () {},
+                child: const Icon(
+                  TablerIcons.clipboard_text,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+              12.width,
+              InkWell(
+                onTap: () {},
+                child: const Icon(
+                  TablerIcons.dots_vertical,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+
               // GlobalThreeDotMenu(isAddOption: false,)
             ],
           ),
@@ -182,10 +208,11 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
-        20.height,
+        _buildBalanceList(),
+        16.height,
         _buildTitleSubTitleButtonList(),
         20.height,
-       // _buildChart(),
+        // _buildChart(),
         20.height,
         _buildButtons(),
       ],
@@ -199,6 +226,82 @@ class DashboardView extends BaseView<DashboardController> {
         right: 16,
       ),
       child: Column(),
+    );
+  }
+
+  Widget _buildBalanceList() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 16,
+      ),
+      decoration: const BoxDecoration(
+        color: Color(0xFFEEDBD1),
+      ),
+      child: Row(
+        children: [
+          _buildBalanceCard(
+            title: appLocalization.sales,
+            amount: '567',
+          ),
+          8.width,
+          _buildBalanceCard(
+            title: appLocalization.purchase,
+            amount: '567',
+          ),
+          8.width,
+          _buildBalanceCard(
+            title: appLocalization.due,
+            amount: '567',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBalanceCard({
+    final String title = 'Title',
+    final String amount = 'Subtitle',
+  }) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 4,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          crossAxisAlignment: startCAA,
+          children: [
+            Row(
+              mainAxisAlignment: spaceBetweenMAA,
+              children: [
+                CommonText(
+                  text: title,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  textColor: const Color(0xff5F646F),
+                ),
+                6.width,
+                const Icon(
+                  TablerIcons.chevron_right,
+                  color: Color(0xff202020),
+                  size: 16,
+                ),
+              ],
+            ),
+            CommonText(
+              text: amount,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              textColor: const Color(0xff202020),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

@@ -139,6 +139,7 @@ List<Widget> configButtonList = [
 class DashboardController extends BaseController {
   final selectedTab = SelectedTab.dashboard.obs;
   final selectedButtonGroup = SelectedButtonGroup.inventory.obs;
+  final showOnlineController = ValueNotifier<bool>(false).obs;
 
   List<Widget> dashboardButtonList = [];
 
