@@ -211,9 +211,7 @@ class DashboardView extends BaseView<DashboardController> {
         _buildBalanceList(),
         16.height,
         _buildTitleSubTitleButtonList(),
-        20.height,
-        // _buildChart(),
-        20.height,
+        14.height,
         _buildButtons(),
       ],
     );
@@ -482,7 +480,7 @@ class DashboardView extends BaseView<DashboardController> {
         return Column(
           children: [
             _buildButtonGroup(),
-            20.height,
+            24.height,
             Wrap(
               spacing: 24,
               clipBehavior: Clip.antiAliasWithSaveLayer,
