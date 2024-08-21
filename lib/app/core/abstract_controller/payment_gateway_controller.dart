@@ -16,6 +16,7 @@ abstract class PaymentGatewayController extends BaseController {
   final selectedPaymentMode = 'cash'.obs;
   final discountType = 'flat'.obs;
   final returnMsg = 'due'.obs;
+  final isShowClearIcon = false.obs;
 
   final paymentDiscountController = TextEditingController().obs;
   final amountController = TextEditingController().obs;

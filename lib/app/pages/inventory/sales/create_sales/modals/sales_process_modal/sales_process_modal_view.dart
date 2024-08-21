@@ -107,6 +107,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     required Color focusedBorderColor,
     required Color errorBorderColor,
     EdgeInsetsGeometry? contentPadding,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
   }) {
     return InputDecoration(
       contentPadding: contentPadding ??
@@ -118,6 +120,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
       hintStyle: hintStyle,
       filled: true,
       fillColor: fillColor,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           containerBorderRadius,
@@ -229,8 +233,84 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           Row(
             children: [
               Expanded(
-                flex: 3,
-                child: FBString(
+                child: SizedBox(
+                  height: 40,
+                  child: TextFormField(
+                    controller:
+                        controller.customerManager.searchTextController.value,
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      prefixIcon: Icon(
+                        TablerIcons.search,
+                        size: 16,
+                        color: colors.formBaseHintTextColor,
+                      ),
+                      suffixIcon: Obx(
+                        () {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              controller.isShowClearIcon.value
+                                  ? InkWell(
+                                      onTap: () {
+                                        controller.customerManager
+                                            .searchTextController.value
+                                            .clear();
+                                        controller.isShowClearIcon.value =
+                                            false;
+                                      },
+                                      child: Icon(
+                                        TablerIcons.x,
+                                        size: 16,
+                                        color: colors.dangerLiteColor,
+                                      ),
+                                    )
+                                  : Container(),
+                              IconButton(
+                                onPressed: controller.addCustomer,
+                                icon: const Icon(
+                                  TablerIcons.user_plus,
+                                  size: 16,
+                                  color: Color(0xFFC98A69),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 4,
+                      ),
+                      hintText: appLocalization.searchCustomer,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: mediumTFSize,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.tertiaryBaseColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    textAlign: startTA,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: mediumTFSize,
+                    ),
+                    onChanged: (value) async {
+                      if (value.isEmpty ?? true) {
+                        controller.isShowClearIcon.value = false;
+                        controller.customerManager.searchedItems.value = [];
+                        controller.customerManager.selectedItem.value = null;
+                        return;
+                      }
+                      controller.isShowClearIcon.value = true;
+                      await controller.customerManager.searchItemsByName(value);
+                    },
+                  ),
+                ),
+                /*child: FBString(
                   isRequired: false,
                   textController:
                       controller.customerManager.searchTextController.value,
@@ -243,43 +323,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     await controller.customerManager.searchItemsByName(value!);
                   },
                   hint: appLocalization.searchCustomer,
-                  suffixIcon: TablerIcons.search,
+                  suffixIcon: TablerIcons.user_plus,
                   preFixIcon: TablerIcons.search,
-                ),
-              ),
-              2.percentWidth,
-              Expanded(
-                child: GestureDetector(
-                  onTap: controller.addCustomer,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: colors.moduleHeaderColor,
-                      ),
-                      borderRadius: BorderRadius.circular(4),
-                      color: colors.moduleHeaderColor,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          TablerIcons.user_plus,
-                          size: 18,
-                          color: colors.secondaryTextColor,
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          appLocalization.customer,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: colors.secondaryTextColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                ),*/
               ),
             ],
           ),
