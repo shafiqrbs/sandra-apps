@@ -56,12 +56,39 @@ class CustomerCardView extends BaseWidget {
                                   child: Text(
                                     data.name ?? '',
                                     style: TextStyle(
-                                      fontSize:paragraphTFSize,
-                                      color: colors.primaryTextColor,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: mediumTFSize,
+                                      color: colors.defaultFontColor,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  _buildIconButton(
+                                    onTap: () => makeCall(data.mobile ?? '', context),
+                                    icon: TablerIcons.phone_outgoing,
+                                    color: colors.colorTwo,
+                                  ),
+                                  _buildIconButton(
+                                    onTap: () => messageCustomer(data.mobile ?? '', context),
+                                    icon: TablerIcons.message_circle,
+                                    color: colors.colorFour,
+                                  ),
+                                  _buildIconButton(
+                                    onTap: () {},
+                                    icon: TablerIcons.eye,
+                                    color: colors.primaryBaseColor,
+                                  ),
+                                  if (showReceiveButton)
+                                    _buildIconButton(
+                                      onTap: onReceive,
+                                      icon: TablerIcons.coin_bitcoin,
+                                      color: colors.primaryBaseColor,
+                                    ),
+                                ],
                               ),
                             ],
                           ),
@@ -73,7 +100,9 @@ class CustomerCardView extends BaseWidget {
                                 child: Text(
                                   data.mobile ?? '',
                                   style: TextStyle(
-                                    color: colors.secondaryTextColor,
+                                    color: const Color(0xFF4D4D4D),
+                                    fontSize: mediumTFSize,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -102,7 +131,7 @@ class CustomerCardView extends BaseWidget {
             ),
           ),
         ),
-        Positioned(
+        /*Positioned(
           right: 16,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +160,7 @@ class CustomerCardView extends BaseWidget {
                 ),
             ],
           ),
-        ),
+        ),*/
       ],
     );
   }
@@ -146,16 +175,14 @@ class CustomerCardView extends BaseWidget {
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(4),
-        margin: const EdgeInsets.only(left: 4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          border: Border.all(
-            color: colors.primaryLiteColor.withOpacity(.5),
-          ),
+          color: color.withOpacity(.2),
+
         ),
         child: Icon(
           icon,
-          size: 20,
+          size: 12,
           color: color,
         ),
       ),

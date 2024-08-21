@@ -29,6 +29,7 @@ class ColorSchema {
   Color secondaryTextColor = const Color(0xFF5f5b58);
   Color textFieldColor = const Color(0xFFfffbff);
   Color selectedColor = const Color(0xFFF7DFBB);
+  Color buttonColor = const Color(0xFFC98A69);
 
   Color formLabelColor = const Color(0xFF4d4538);
   Color formExampleColor = const Color(0xFF5f5b58);
@@ -63,7 +64,7 @@ class ColorSchema {
   //Color primaryTextColor = Colors.blue.shade900;
   //Color secondaryTextColor = Colors.grey;
   Color backgroundColor = Colors.white;
-  Color defaultFontColor = Colors.black;
+  Color defaultFontColor = const Color(0xFF202020);
 
   Color textColorH1 = Colors.black;
   Color textColorH2 = Colors.black;
@@ -623,6 +624,10 @@ class ColorSchema {
       ..processButtonIconColor = parseColor(
         json['editButtonTextColor'],
         const Color(0xffffffff),
+      )
+      ..buttonColor = parseColor(
+        json['buttonColor'],
+        const Color(0xFFC98A69),
       );
   }
 
@@ -763,6 +768,7 @@ class ColorSchema {
       'removeButtonIconColor': removeButtonIconColor,
       'processButtonIconColor': processButtonIconColor,
       'warningButtonIconColor': warningButtonIconColor,
+      'buttonColor': buttonColor,
       //'formSuffixIconColor' : formSuffixIconColor,
       //'formPrefixIconColor' : formPrefixIconColor,
       //'formClearIconColor' : formClearIconColor,
