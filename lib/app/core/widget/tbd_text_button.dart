@@ -14,9 +14,9 @@ class TbdTextButton extends StatelessWidget {
   const TbdTextButton({
     required this.text,
     required this.onPressed,
-    this.selectedBgColor = const Color(0xffC98A69),
+    this.selectedBgColor = const Color(0xff8F624B),
     this.selectedTextColor = Colors.white,
-    this.unselectedBgColor = const Color(0xffF7EDE9),
+    this.unselectedBgColor = Colors.transparent,
     this.unselectedTextColor = const Color(0xff202020),
     this.isSelected = false,
     super.key,

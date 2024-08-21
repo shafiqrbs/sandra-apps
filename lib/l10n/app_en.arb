@@ -240,7 +240,10 @@
   "userRequired" : "User required",
   "remark" : "Remark",
   "remarkRequired" : "Remark required",
-  "addExpense" : "Add Expense"
+  "addExpense" : "Add Expense",
+  "cash" : "Cash",
+  "bank" : "Bank",
+  "mobile" : "Mobile"
 
 
 

@@ -31,7 +31,6 @@ List<Color> colorList = [
   const Color(0xff6D28D9),
 ];
 
-
 List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.sort_ascending_letters,
@@ -201,4 +200,10 @@ class DashboardController extends BaseController {
       dashboardButtonList = configButtonList;
     }
   }
+
+  Future<void> cashOnTap() async {}
+
+  Future<void> bankOnTap() async {}
+
+  Future<void> mobileOnTap() async {}
 }

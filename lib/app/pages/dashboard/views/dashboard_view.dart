@@ -219,16 +219,6 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildReport() {
-    return const Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-      ),
-      child: Column(),
-    );
-  }
-
   Widget _buildBalanceList() {
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -241,17 +231,20 @@ class DashboardView extends BaseView<DashboardController> {
       child: Row(
         children: [
           _buildBalanceCard(
-            title: appLocalization.sales,
+            onTap: controller.cashOnTap,
+            title: appLocalization.cash,
             amount: '567',
           ),
           8.width,
           _buildBalanceCard(
-            title: appLocalization.purchase,
+            onTap: controller.bankOnTap,
+            title: appLocalization.bank,
             amount: '567',
           ),
           8.width,
           _buildBalanceCard(
-            title: appLocalization.due,
+            onTap: controller.mobileOnTap,
+            title: appLocalization.mobile,
             amount: '567',
           ),
         ],
@@ -262,98 +255,107 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildBalanceCard({
     final String title = 'Title',
     final String amount = 'Subtitle',
+    final Function()? onTap,
   }) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 4,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          crossAxisAlignment: startCAA,
-          children: [
-            Row(
-              mainAxisAlignment: spaceBetweenMAA,
-              children: [
-                CommonText(
-                  text: title,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  textColor: const Color(0xff5F646F),
-                ),
-                6.width,
-                const Icon(
-                  TablerIcons.chevron_right,
-                  color: Color(0xff202020),
-                  size: 16,
-                ),
-              ],
-            ),
-            CommonText(
-              text: amount,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              textColor: const Color(0xff202020),
-            ),
-          ],
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 4,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Column(
+            crossAxisAlignment: startCAA,
+            children: [
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  CommonText(
+                    text: title,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    textColor: const Color(0xff5F646F),
+                  ),
+                  6.width,
+                  const Icon(
+                    TablerIcons.chevron_right,
+                    color: Color(0xff202020),
+                    size: 16,
+                  ),
+                ],
+              ),
+              CommonText(
+                text: amount,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                textColor: const Color(0xff202020),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildTitleSubTitleButtonList() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(8),
-      scrollDirection: Axis.horizontal,
-      child: Wrap(
-        spacing: 8,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        runSpacing: 8,
+    return Container(
+      width: Get.width,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      child: Column(
         children: [
-          TitleSubtitleButton(
-            title: 'clear_licence',
-            subTitle: '',
-            icon: TablerIcons.report_analytics,
-            onTap: controller.goToClearLicense,
-            bgColor: const Color(0xff5D6D7E),
+          Row(
+            mainAxisAlignment: spaceBetweenMAA,
+            children: [
+              TitleSubtitleButton(
+                title: appLocalization.sales,
+                subTitle: '৳ 567',
+                icon: TablerIcons.report_analytics,
+                onTap: controller.goToSalesList,
+                bgColor: const Color(0xff1E90FF),
+              ),
+              10.width,
+              TitleSubtitleButton(
+                title: appLocalization.purchase,
+                subTitle: '৳ 567',
+                icon: TablerIcons.cash,
+                onTap: () {
+                  //Get.to(PurchaseScreen());
+                },
+                bgColor: const Color(0xff004D40),
+              ),
+            ],
           ),
-          TitleSubtitleButton(
-            title: appLocalization.sales,
-            subTitle: '567',
-            icon: TablerIcons.report_analytics,
-            onTap: controller.goToSalesList,
-            bgColor: const Color(0xff004D40),
-          ),
-          TitleSubtitleButton(
-            title: appLocalization.purchase,
-            subTitle: '567',
-            icon: TablerIcons.cash,
-            onTap: () {
-              //Get.to(PurchaseScreen());
-            },
-            bgColor: const Color(0xff5D6D7E),
-          ),
-          TitleSubtitleButton(
-            title: appLocalization.expense,
-            subTitle: '567',
-            icon: TablerIcons.moneybag,
-            onTap: () {
-              //Get.to(PurchaseScreen());
-            },
-            bgColor: const Color(0xff004D40),
-          ),
-          TitleSubtitleButton(
-            title: appLocalization.due,
-            subTitle: '567',
-            icon: TablerIcons.cash,
-            onTap: () {
-              //Get.to(PurchaseScreen());
-            },
-            bgColor: const Color(0xff5D6D7E),
+          10.height,
+          Row(
+            mainAxisAlignment: spaceBetweenMAA,
+            children: [
+              TitleSubtitleButton(
+                title: appLocalization.expense,
+                subTitle: '৳ 567',
+                icon: TablerIcons.moneybag,
+                onTap: () {
+                  //Get.to(PurchaseScreen());
+                },
+                bgColor: const Color(0xff4CBB17),
+              ),
+              10.width,
+              TitleSubtitleButton(
+                title: appLocalization.due,
+                subTitle: '৳ 567',
+                icon: TablerIcons.cash,
+                onTap: () {
+                  //Get.to(PurchaseScreen());
+                },
+                bgColor: const Color(0xffFF6F61),
+              ),
+            ],
           ),
         ],
       ),
@@ -475,48 +477,61 @@ class DashboardView extends BaseView<DashboardController> {
   }
 
   Widget _buildButtons() {
-    return Column(
-      children: [
-        _buildButtonGroup(),
-        20.height,
-        Wrap(
-          spacing: 24,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          runSpacing: 8,
-          children: controller.dashboardButtonList,
-        ),
-      ],
+    return Obx(
+      () {
+        return Column(
+          children: [
+            _buildButtonGroup(),
+            20.height,
+            Wrap(
+              spacing: 24,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              runSpacing: 8,
+              children: controller.dashboardButtonList,
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildButtonGroup() {
-    return Row(
-      children: [
-        TbdTextButton(
-          text: appLocalization.inventory,
-          onPressed: () => controller.updateSelectedButtonGroup(
-            SelectedButtonGroup.inventory,
-          ),
-          isSelected: controller.selectedButtonGroup.value ==
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 4,
+      ),
+      decoration: const BoxDecoration(
+        color: Color(0xffF7EDE9),
+      ),
+      child: Row(
+        children: [
+          TbdTextButton(
+            text: appLocalization.inventory,
+            onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.inventory,
-        ),
-        TbdTextButton(
-          text: appLocalization.accounting,
-          onPressed: () => controller.updateSelectedButtonGroup(
-            SelectedButtonGroup.accounting,
+            ),
+            isSelected: controller.selectedButtonGroup.value ==
+                SelectedButtonGroup.inventory,
           ),
-          isSelected: controller.selectedButtonGroup.value ==
+          TbdTextButton(
+            text: appLocalization.accounting,
+            onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.accounting,
-        ),
-        TbdTextButton(
-          text: appLocalization.config,
-          onPressed: () => controller.updateSelectedButtonGroup(
-            SelectedButtonGroup.config,
+            ),
+            isSelected: controller.selectedButtonGroup.value ==
+                SelectedButtonGroup.accounting,
           ),
-          isSelected: controller.selectedButtonGroup.value ==
+          TbdTextButton(
+            text: appLocalization.config,
+            onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.config,
-        ),
-      ],
+            ),
+            isSelected: controller.selectedButtonGroup.value ==
+                SelectedButtonGroup.config,
+          ),
+        ],
+      ),
     );
   }
 }
