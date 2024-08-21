@@ -56,22 +56,24 @@ class RowButton extends StatelessWidget with AppDimension {
               if (leftIcon != null)
                 DrawIcon(
                   icon: leftIcon!,
-                  color: (isOutline ?? false)
-                      ? colors.primaryBaseColor
-                      : colors.backgroundColor,
+                  color: buttonTextColor ??
+                      ((isOutline ?? false)
+                          ? colors.primaryBaseColor
+                          : colors.backgroundColor),
                 ),
-              if(buttonName != null)
-              Container(
-                margin: const EdgeInsets.only(left: 5, right: 5),
-                child: CommonText(
-                  text: buttonName!,
-                  fontWeight: FontWeight.w500,
-                  fontSize: mediumButtonTFSize,
-                  textColor: (isOutline ?? false)
-                      ? colors.primaryBaseColor
-                      : colors.backgroundColor,
+              if (buttonName != null)
+                Container(
+                  margin: const EdgeInsets.only(left: 5, right: 5),
+                  child: CommonText(
+                    text: buttonName!,
+                    fontWeight: FontWeight.w500,
+                    fontSize: mediumButtonTFSize,
+                    textColor: buttonTextColor ??
+                        ((isOutline ?? false)
+                            ? colors.primaryBaseColor
+                            : colors.backgroundColor),
+                  ),
                 ),
-              ),
               if (rightIcon != null)
                 DrawIcon(
                   icon: rightIcon!,

@@ -58,9 +58,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       1.percentHeight,
                       _buildCustomerSearch(context),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 8,
-                          right: 8,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
                         ),
                         child: Column(
                           children: [
@@ -221,8 +220,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     BuildContext context,
   ) {
     return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
       color: colors.backgroundColor,
-      padding: const EdgeInsets.all(4),
       child: Column(
         children: [
           Row(
@@ -389,7 +390,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.only(
-                    left: 4,
                     right: 4,
                   ),
                   padding: const EdgeInsets.only(
@@ -525,7 +525,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 child: Container(
                   margin: const EdgeInsets.only(
                     left: 4,
-                    right: 4,
                   ),
                   padding: const EdgeInsets.only(
                     top: 4,
@@ -647,8 +646,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                               containerBorderRadius,
                             ),
                             height: 24,
-                            controller:
-                                controller.discountTypeController.value,
+                            controller: controller.discountTypeController.value,
                           );
                         },
                       ),
@@ -947,16 +945,18 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             buttonName: 'reset'.tr,
             onTap: () => controller.reset(context),
             leftIcon: TablerIcons.restore,
-            buttonBGColor: colors.dangerLiteColor,
+            buttonBGColor: Colors.transparent,
+            isOutline: true,
           ),
-          4.width,
+          8.width,
           RowButton(
             buttonName: 'hold'.tr,
             onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
-            buttonBGColor: Colors.grey,
+            buttonBGColor: const Color(0xFFFAF3F0),
+            buttonTextColor: const Color(0xFFC98A69),
           ),
-          4.width,
+          8.width,
           RowButton(
             buttonName: 'order'.tr,
             onTap: () => controller.showConfirmationDialog(context),
