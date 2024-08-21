@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart' as pie_chart;
+import 'package:sandra/app/core/widget/custom_animation_widget.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_text.dart';
@@ -118,7 +118,7 @@ class DashboardView extends BaseView<DashboardController> {
         right: 8,
       ),
       height: AppBar().preferredSize.height,
-      width: Get.width,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: colors.primaryBaseColor,
       ),
@@ -231,19 +231,19 @@ class DashboardView extends BaseView<DashboardController> {
           _buildBalanceCard(
             onTap: controller.cashOnTap,
             title: appLocalization.cash,
-            amount: '567',
+            amount: '৳ 567',
           ),
           8.width,
           _buildBalanceCard(
             onTap: controller.bankOnTap,
             title: appLocalization.bank,
-            amount: '567',
+            amount: '৳ 567',
           ),
           8.width,
           _buildBalanceCard(
             onTap: controller.mobileOnTap,
             title: appLocalization.mobile,
-            amount: '567',
+            amount: '৳ 567',
           ),
         ],
       ),
@@ -261,7 +261,7 @@ class DashboardView extends BaseView<DashboardController> {
         child: Container(
           padding: const EdgeInsets.symmetric(
             vertical: 12,
-            horizontal: 4,
+            horizontal: 16,
           ),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -277,7 +277,7 @@ class DashboardView extends BaseView<DashboardController> {
                     text: title,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    textColor: const Color(0xff5F646F),
+                    textColor: colors.primaryTextColor,
                   ),
                   6.width,
                   const Icon(
@@ -302,7 +302,7 @@ class DashboardView extends BaseView<DashboardController> {
 
   Widget _buildTitleSubTitleButtonList() {
     return Container(
-      width: Get.width,
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
       ),
@@ -481,11 +481,14 @@ class DashboardView extends BaseView<DashboardController> {
           children: [
             _buildButtonGroup(),
             24.height,
-            Wrap(
-              spacing: 24,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              runSpacing: 8,
-              children: controller.dashboardButtonList,
+            CustomAnimationWidget(
+              leftPosition: true,
+              child: Wrap(
+                spacing: 18,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                runSpacing: 16,
+                children: controller.dashboardButtonList,
+              ),
             ),
           ],
         );

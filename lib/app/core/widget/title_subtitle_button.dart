@@ -27,11 +27,9 @@ class TitleSubtitleButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: 130,
-          padding: const EdgeInsets.only(
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
           ),
           decoration: BoxDecoration(
             color: bgColor ?? Colors.red,
