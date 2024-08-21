@@ -13,25 +13,26 @@ class PageBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: Get.back,
-          child: const Icon(
-            TablerIcons.arrow_left,
+    return InkWell(
+      onTap: Get.back,
+      child: Row(
+        children: [
+          const Icon(
+            TablerIcons.chevron_left,
             color: Colors.white,
-            size: 32,
+            size: 20,
           ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: CommonText(
-            text: pageTitle??'',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+          const SizedBox(width: 10),
+          Expanded(
+            child: CommonText(
+              text: pageTitle??'',
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              textColor: Colors.white,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

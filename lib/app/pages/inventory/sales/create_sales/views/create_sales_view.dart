@@ -421,7 +421,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.evenListColor,
+                color: colors.backgroundColor,
               ),
               child: SearchedStockList(
                 stocks: controller.stockList.value,
