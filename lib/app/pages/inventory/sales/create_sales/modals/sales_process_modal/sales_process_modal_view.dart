@@ -107,9 +107,14 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     required Color enabledBorderColor,
     required Color focusedBorderColor,
     required Color errorBorderColor,
+    EdgeInsetsGeometry? contentPadding,
   }) {
     return InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+      contentPadding: contentPadding ??
+          const EdgeInsets.symmetric(
+            vertical: 6,
+            horizontal: 8,
+          ),
       hintText: hintText,
       hintStyle: hintStyle,
       filled: true,
@@ -118,13 +123,17 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         borderRadius: BorderRadius.circular(
           containerBorderRadius,
         ),
-        borderSide: BorderSide(color: enabledBorderColor, width: 2),
+        borderSide: BorderSide(
+          color: enabledBorderColor,
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           containerBorderRadius,
         ),
-        borderSide: BorderSide(color: focusedBorderColor, width: 2),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
@@ -136,7 +145,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         borderRadius: BorderRadius.circular(
           containerBorderRadius,
         ),
-        borderSide: BorderSide(color: focusedBorderColor, width: 0),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+          width: 0,
+        ),
       ),
     );
   }
@@ -384,7 +396,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     top: 4,
                     bottom: 4,
                   ),
-
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -430,7 +441,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     top: 4,
                     bottom: 4,
                   ),
-
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -476,7 +486,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     top: 4,
                     bottom: 4,
                   ),
-
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -607,273 +616,201 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   Widget _buildPaymentReceiveRow(
     BuildContext context,
   ) {
-
-    /*return Container(
-      height: 100,
-      color: Colors.blue,
-      width: Get.width,
-      child: Row(
-        children: [
-          Container(
-            height: 80,
-            width: Get.width * .4,
-            color: Colors.red,
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: colors.borderColor,
+              ),
+            ),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Obx(
-                          () => Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                        ),
-                        child: AdvancedSwitch(
-                          activeChild: Text('%'.tr),
-                          inactiveChild: Text('flat'.tr),
-                          activeColor: colors.successfulBaseColor,
-                          inactiveColor: colors.primaryBaseColor,
-                          borderRadius: BorderRadius.circular(
-                            containerBorderRadius,
-                          ),
-                          width: 64,
-                          height: 24,
-                          controller: controller.discountTypeController.value,
-                        ),
+                    Expanded(
+                      flex: 3,
+                      child: Obx(
+                        () {
+                          return AdvancedSwitch(
+                            activeChild: Text('%'.tr),
+                            inactiveChild: Text('flat'.tr),
+                            activeColor: colors.successfulBaseColor,
+                            inactiveColor: colors.primaryLiteColor,
+                            borderRadius: BorderRadius.circular(
+                              containerBorderRadius,
+                            ),
+                            height: 24,
+                            controller:
+                                controller.discountTypeController.value,
+                          );
+                        },
                       ),
                     ),
-                    const SizedBox(width: 4),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 4,
-                      ),
-                      height: 24,
-                      child: TextFormField(
-                        controller: controller.paymentDiscountController.value,
-                        cursorColor: colors.formCursorColor,
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: buildInputDecoration(
-                          hintText: appLocalization.discount,
-                          hintStyle: TextStyle(
-                            color: colors.formBaseHintTextColor,
-                            fontWeight: FontWeight.normal,
-                            fontSize: regularTFSize,
+                    8.width,
+                    Expanded(
+                      flex: 5,
+                      child: SizedBox(
+                        height: 24,
+                        child: TextFormField(
+                          controller:
+                              controller.paymentDiscountController.value,
+                          cursorColor: colors.formCursorColor,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: buildInputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                            ),
+                            hintText: appLocalization.discount,
+                            hintStyle: TextStyle(
+                              color: colors.formBaseHintTextColor,
+                              fontWeight: FontWeight.normal,
+                              fontSize: mediumTFSize,
+                            ),
+                            fillColor: colors.textFieldColor,
+                            enabledBorderColor: colors.tertiaryBaseColor,
+                            focusedBorderColor: colors.borderColor,
+                            errorBorderColor: colors.borderColor,
                           ),
-                          fillColor: colors.textFieldColor,
-                          enabledBorderColor: colors.tertiaryBaseColor,
-                          focusedBorderColor: colors.borderColor,
-                          errorBorderColor: colors.borderColor,
+                          inputFormatters: doubleInputFormatter,
+                          keyboardType: numberInputType,
+                          textAlign: centerTA,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: mediumTFSize,
+                          ),
+                          onChanged: controller.onDiscountChange,
                         ),
-                        inputFormatters: doubleInputFormatter,
-                        keyboardType: numberInputType,
-                        textAlign: centerTA,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: regularTFSize,
-                        ),
-                        onChanged: controller.onDiscountChange,
                       ),
                     ),
                   ],
                 ),
-                _buildProfitView(context),
+                8.height,
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: AdvancedSwitch(
+                        activeChild: Text(
+                          'Yes'.tr,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: smallTFSize,
+                          ),
+                        ),
+                        inactiveChild: Text(
+                          'profit'.tr,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: smallTFSize,
+                          ),
+                        ),
+                        activeColor: colors.selectedColor,
+                        inactiveColor: colors.primaryBaseColor,
+                        borderRadius: BorderRadius.circular(4),
+                        height: 24,
+                        controller: controller.showProfit.value,
+                      ),
+                    ),
+                    8.width,
+                    Expanded(
+                      flex: 5,
+                      child: Container(
+                        width: 100,
+                        child: Obx(
+                          () => CommonText(
+                            text: controller.showProfit.value.value
+                                ? (controller.netTotal.value -
+                                        controller.salesPurchasePrice.value)
+                                    .toPrecision(2)
+                                    .toString()
+                                : '',
+                            fontWeight: FontWeight.w400,
+                            fontSize: smallTFSize,
+                            textColor: colors.defaultFontColor,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          Container(
-            height: 80,
-            width: Get.width * .4,
-            color: Colors.green,
+        ),
+        8.width,
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: colors.borderColor,
+              ),
+            ),
             child: Row(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: 4,
-                    right: 4,
-                  ),
-                  padding: const EdgeInsets.only(
-                    top: 4,
-                    bottom: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
-                    ),
-                    color: colors.dangerBaseColor.withOpacity(.3),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: centerMAA,
-                    children: [
-                      Obx(
-                            () => Text(
-                          controller.salesReturnValue.value.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: mediumTFSize,
-                          ),
-                        ),
-                      ),
-                      Obx(
-                            () => Text(
-                          controller.returnMsg.value.tr,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 4,
-                  ),
-                  //height:textFieldHeight,
-                  alignment: Alignment.center,
-                  child: TextFormField(
-                    controller: controller.amountController.value,
-                    inputFormatters: doubleInputFormatter,
-                    textInputAction: doneInputAction,
-                    onEditingComplete: () =>
-                        controller.showConfirmationDialog(context),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: regularTFSize,
-                    ),
-                    cursorColor: colors.formCursorColor,
-                    decoration: buildInputDecoration(
-                      hintText: appLocalization.amount,
-                      hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: regularTFSize,
-                      ),
-                      fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.primaryBaseColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
-                    ),
-                    onChanged: controller.onAmountChange,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );*/
-
-    return Row(
-      children: [
-        Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Obx(
-                    () => Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 4,
-                      ),
-                      child: AdvancedSwitch(
-                        activeChild: Text('%'.tr),
-                        inactiveChild: Text('flat'.tr),
-                        activeColor: colors.successfulBaseColor,
-                        inactiveColor: colors.primaryBaseColor,
-                        borderRadius: BorderRadius.circular(
-                          containerBorderRadius,
-                        ),
-                        width: 64,
-                        height: 24,
-                        controller: controller.discountTypeController.value,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 4),
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 4,
+                    padding: const EdgeInsets.only(
+                      top: 4,
+                      bottom: 4,
                     ),
-                    height: 24,
-                    child: TextFormField(
-                      controller: controller.paymentDiscountController.value,
-                      cursorColor: colors.formCursorColor,
-                      textAlignVertical: TextAlignVertical.center,
-                      decoration: buildInputDecoration(
-                        hintText: appLocalization.discount,
-                        hintStyle: TextStyle(
-                          color: colors.formBaseHintTextColor,
-                          fontWeight: FontWeight.normal,
-                          fontSize: regularTFSize,
-                        ),
-                        fillColor: colors.textFieldColor,
-                        enabledBorderColor: colors.tertiaryBaseColor,
-                        focusedBorderColor: colors.borderColor,
-                        errorBorderColor: colors.borderColor,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        containerBorderRadius,
                       ),
-                      inputFormatters: doubleInputFormatter,
-                      keyboardType: numberInputType,
-                      textAlign: centerTA,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: regularTFSize,
-                      ),
-                      onChanged: controller.onDiscountChange,
+                      color: const Color(0xFFEEDBD1),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            _buildProfitView(context),
-          ],
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    left: 4,
-                    right: 4,
-                  ),
-                  padding: const EdgeInsets.only(
-                    top: 4,
-                    bottom: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
-                    ),
-                    color: colors.dangerBaseColor.withOpacity(.3),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: centerMAA,
-                    children: [
-                      Obx(
-                        () => Text(
-                          controller.salesReturnValue.value.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: mediumTFSize,
+                    child: Column(
+                      mainAxisAlignment: centerMAA,
+                      children: [
+                        Obx(
+                          () => Text(
+                            controller.salesReturnValue.value.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: mediumTFSize,
+                            ),
                           ),
                         ),
-                      ),
-                      Obx(
-                        () => Text(
-                          controller.returnMsg.value.tr,
+                        4.height,
+                        Container(
+                          height: 1,
+                          margin: const EdgeInsets.only(
+                            top: 1,
+                            bottom: 1,
+                          ),
+                          width: Get.width * 0.1,
+                          color: const Color(0xFFC98A69),
                         ),
-                      ),
-                    ],
+                        4.height,
+                        Obx(
+                          () => Text(
+                            controller.returnMsg.value.tr,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: mediumTFSize,
+                              color: colors.secondaryTextColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 4,
-                  ),
-                  //height:textFieldHeight,
-                  alignment: Alignment.center,
+                8.width,
+                Expanded(
                   child: TextFormField(
                     controller: controller.amountController.value,
                     inputFormatters: doubleInputFormatter,
@@ -888,6 +825,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     ),
                     cursorColor: colors.formCursorColor,
                     decoration: buildInputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 4,
+                      ),
                       hintText: appLocalization.amount,
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
@@ -895,15 +836,15 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         fontSize: regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.primaryBaseColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      enabledBorderColor: colors.borderColor,
+                      focusedBorderColor: colors.primaryBaseColor,
+                      errorBorderColor: colors.primaryBaseColor,
                     ),
                     onChanged: controller.onAmountChange,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
@@ -927,63 +868,67 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   Widget _buildProfitView(
     BuildContext context,
   ) {
-    return Row(
-      children: [
-
-        Container(
-          margin: const EdgeInsets.only(
-            left: 4,
-            right: 4,
+    return Container(
+      alignment: Alignment.centerLeft,
+      width: Get.width * .4,
+      child: Row(
+        mainAxisAlignment: startMAA,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              left: 4,
+              right: 4,
+            ),
+            child: AdvancedSwitch(
+              activeChild: Text(
+                'Yes'.tr,
+                style: TextStyle(
+                  color: colors.primaryTextColor,
+                  fontSize: smallTFSize,
+                ),
+              ),
+              inactiveChild: Text(
+                'profit'.tr,
+                style: TextStyle(
+                  color: colors.primaryTextColor,
+                  fontSize: smallTFSize,
+                ),
+              ),
+              activeColor: colors.selectedColor,
+              inactiveColor: colors.moduleHeaderColor,
+              borderRadius: BorderRadius.circular(4),
+              width: 64,
+              height: 24,
+              controller: controller.showProfit.value,
+            ),
           ),
-          child: AdvancedSwitch(
-            activeChild: Text(
-              'Yes'.tr,
-              style: TextStyle(
-                color: colors.primaryTextColor,
-                fontSize: smallTFSize,
-              ),
-            ),
-            inactiveChild: Text(
-              'profit'.tr,
-              style: TextStyle(
-                color: colors.primaryTextColor,
-                fontSize: smallTFSize,
-              ),
-            ),
-            activeColor: colors.selectedColor,
-            inactiveColor: colors.moduleHeaderColor,
-            borderRadius: BorderRadius.circular(4),
-            width: Get.width * .23,
+          Container(
             height: 3.ph,
-            controller: controller.showProfit.value,
-          ),
-        ),
-        Container(
-          height: 3.ph,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: colors.evenListColor,
-            borderRadius: BorderRadius.circular(
-              containerBorderRadius,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: colors.evenListColor,
+              borderRadius: BorderRadius.circular(
+                containerBorderRadius,
+              ),
+            ),
+            padding: EdgeInsets.zero,
+            margin: const EdgeInsets.only(left: 4, right: 4),
+            child: Obx(
+              () => CommonText(
+                text: controller.showProfit.value.value
+                    ? (controller.netTotal.value -
+                            controller.salesPurchasePrice.value)
+                        .toPrecision(2)
+                        .toString()
+                    : '',
+                fontWeight: FontWeight.w500,
+                fontSize: smallTFSize,
+                textColor: colors.primaryBaseColor,
+              ),
             ),
           ),
-          padding: EdgeInsets.zero,
-          margin: const EdgeInsets.only(left: 4, right: 4),
-          child: Obx(
-            () => CommonText(
-              text: controller.showProfit.value.value
-                  ? (controller.netTotal.value -
-                          controller.salesPurchasePrice.value)
-                      .toPrecision(2)
-                      .toString()
-                  : '',
-              fontWeight: FontWeight.w500,
-              fontSize: smallTFSize,
-              textColor: colors.primaryBaseColor,
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
