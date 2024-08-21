@@ -25,25 +25,34 @@ class TransactionMethodItemView extends BaseWidget {
       child: Container(
         margin: const EdgeInsets.all(4),
         padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-           containerBorderRadius,
-          ),
-          color: isSelected ? colors.selectedColor : colors.evenListColor,
-          border: Border.all(
-            color: isSelected ? colors.primaryColor : Colors.transparent,
-            width: 1,
-          ),
-        ),
         child: Column(
           children: [
             Container(
-              height: 42,
-              width: 72,
-              child: commonCacheImageWidget(
-                method.imagePath,
-                36,
-                width: 36,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  100,
+                ),
+                color: isSelected
+                    ? colors.primaryColor
+                    : colors.primaryColor.withOpacity(.2),
+              ),
+              child: Container(
+                height: 56,
+                width: 56,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    100,
+                  ),
+                  color: Colors.transparent,
+                ),
+                child: commonCacheImageWidget(
+                  method.imagePath,
+                  30,
+                  width: 30,
+                  fit: BoxFit.fill,
+                  isOval: true,
+                ),
               ),
             ),
             4.height,
@@ -54,8 +63,8 @@ class TransactionMethodItemView extends BaseWidget {
                 child: Text(
                   method.methodName?.toString() ?? '',
                   style: GoogleFonts.inter(
-                    color: const Color(0xff4d4d4d),
-                    fontSize: 10,
+                    color: const Color(0xff4D4D4D),
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
