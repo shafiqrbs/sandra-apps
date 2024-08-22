@@ -3,6 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
 import '/app/core/base/base_view.dart';
@@ -337,7 +338,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CommonText(
-                text: 'Don\’t you have customer?',
+                text: appLocalization.donNotHaveAnAccount,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
                 textColor: colors.textColorH6,
@@ -345,7 +346,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               InkWell(
                 onTap: controller.addCustomer,
                 child: CommonText(
-                  text: 'Add customer',
+                  text: appLocalization.addCustomer,
                   fontSize: mediumTFSize,
                   fontWeight: FontWeight.w500,
                   textColor: colors.primaryBaseColor,
@@ -452,7 +453,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            controller.salesSubTotal.value.toString(),
+                            '${SetUp().currency ?? ''} ${controller.salesSubTotal.value.toString()}',
                             style: TextStyle(
                               fontSize: regularTFSize,
                               fontWeight: FontWeight.w600,
@@ -497,7 +498,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            controller.salesDiscount.value.toString(),
+                            '${SetUp().currency ?? ''} ${controller.salesDiscount.value.toString()}',
                             style: TextStyle(
                               fontSize: regularTFSize,
                               fontWeight: FontWeight.w600,
@@ -542,7 +543,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       Obx(
                         () {
                           return Text(
-                            controller.salesVat.value.toString(),
+                            '${SetUp().currency ?? ''} ${controller.salesVat.value.toString()}',
                             style: TextStyle(
                               fontSize: regularTFSize,
                               fontWeight: FontWeight.w600,
@@ -588,14 +589,16 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     mainAxisAlignment: centerMAA,
                     children: [
                       Obx(
-                        () => Text(
-                          controller.netTotal.value.toString(),
-                          style: TextStyle(
-                            fontSize: regularTFSize,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
+                        () {
+                          return Text(
+                            '${SetUp().currency ?? ''} ${controller.netTotal.value.toString()}',
+                            style: TextStyle(
+                              fontSize: regularTFSize,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
                       ),
                       4.height,
                       Container(

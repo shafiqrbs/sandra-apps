@@ -256,7 +256,8 @@
   "order" : "Order",
   "yes" : "Yes",
   "selectUser" : "Select User",
-  "flat" : "Flat"
+  "flat" : "Flat",
+  "dontYouHaveCustomer" : "Don’t you have customer?"
 
 
 

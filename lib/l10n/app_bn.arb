@@ -315,6 +315,7 @@
   "yes" : "হ্যাঁ",
   "selectUser" : "ব্যবহারকারী নির্বাচন করুন",
   "flat" : "ফ্ল্যাট",
+  "dontYouHaveCustomer" : "আপনার কোন গ্রাহক নেই?",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",
