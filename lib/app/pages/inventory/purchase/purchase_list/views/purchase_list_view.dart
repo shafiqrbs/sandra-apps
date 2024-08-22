@@ -85,7 +85,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                 ),
               );
             } else if (items.isEmpty) {
-              content = const NoRecordFoundView();
+              content = NoRecordFoundView();
             } else {
               content = _buildListView();
             }

@@ -74,7 +74,7 @@ class StockListView extends BaseView<StockListController> {
             onRetry: () {},
           );
         } else if (items.isEmpty) {
-          content = const NoRecordFoundView();
+          content = NoRecordFoundView();
         } else {
           content = _buildListView();
         }

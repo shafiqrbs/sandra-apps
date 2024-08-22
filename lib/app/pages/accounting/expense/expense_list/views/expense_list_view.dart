@@ -63,7 +63,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                 onRetry: () => controller.getExpenseList(),
               );
             } else if (items.isEmpty) {
-              content = const NoRecordFoundView();
+              content = NoRecordFoundView();
             } else {
               content = _buildListView();
             }

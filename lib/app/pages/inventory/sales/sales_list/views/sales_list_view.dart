@@ -86,7 +86,10 @@ class SalesListView extends BaseView<SalesListController> {
                 ),
               );
             } else if (items.isEmpty) {
-              content = const NoRecordFoundView();
+              content = NoRecordFoundView(
+                buttonText: appLocalization.pos,
+                onTap: controller.goToCreateSales,
+              );
             } else {
               content = _buildListView();
             }
@@ -248,16 +251,16 @@ class SalesListView extends BaseView<SalesListController> {
                   ],
                 ),
               ),
-              if(controller.isManager)
-              Positioned(
-                right: 10,
-                top: 18,
-                child: DeleteButton(
-                  onTap:()=> controller.deleteSales(
-                    salesId: element.salesId!,
+              if (controller.isManager)
+                Positioned(
+                  right: 10,
+                  top: 18,
+                  child: DeleteButton(
+                    onTap: () => controller.deleteSales(
+                      salesId: element.salesId!,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         );

@@ -62,5 +62,6 @@ flutter:
   assets:
     - assets/db/
     - assets/images/
+    - assets/lottieFiles/
 
 

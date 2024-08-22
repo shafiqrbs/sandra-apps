@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
@@ -385,10 +386,19 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             controller.stockList.value.isEmpty,
                         child: Container(
                           alignment: Alignment.center,
-                          height: 40.ph,
+                          height: 80.ph,
                           width: 100.pw,
-                          child: Image.asset(
-                            'assets/images/no-record-found.png',
+                          child: Column(
+                            children: [
+                              Lottie.asset(
+                                'assets/lottieFiles/no_record_found.json',
+                              ),
+                              CommonText(
+                                text: appLocalization.noDataFound,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
                           ),
                         ),
                       );
