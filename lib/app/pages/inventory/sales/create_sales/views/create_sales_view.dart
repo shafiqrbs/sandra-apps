@@ -68,9 +68,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
         width: Get.width,
         color: colors.primaryBaseColor,
         alignment: Alignment.center,
-        margin: const EdgeInsets.only(
-          bottom: 7,
-        ),
+        margin: EdgeInsets.zero,
         child: Obx(
           () => Row(
             mainAxisAlignment: spaceBetweenMAA,
@@ -414,7 +412,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
           top: 50,
           left: 0,
           right: 0,
-          bottom: 0,
+          bottom: 60,
           child: Obx(
             () => DecoratedBox(
               decoration: BoxDecoration(
