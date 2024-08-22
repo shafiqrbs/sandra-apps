@@ -152,10 +152,10 @@ class SalesProcessModalController extends PaymentGatewayController {
   void onAmountChange(String value) {
     if (value.isNotEmpty) {
       final returnValue = netTotal.value - value.toDouble();
-      returnMsg.value = returnValue < 0 ? 'return'.tr : 'due'.tr;
+      returnMsg.value = returnValue < 0 ? 'Return' : 'Due';
       salesReturnValue.value = returnValue.toPrecision(2).abs();
     } else {
-      returnMsg.value = 'due'.tr;
+      returnMsg.value = 'Due';
       salesReturnValue.value = 0.00;
     }
   }

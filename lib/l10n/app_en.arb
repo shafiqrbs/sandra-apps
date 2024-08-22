@@ -252,7 +252,11 @@
   "payable" : "Payable",
   "payment" : "Payment",
   "pos" : "POS",
-  "sale" : "Sale"
+  "sale" : "Sale",
+  "order" : "Order",
+  "yes" : "Yes",
+  "selectUser" : "Select User",
+  "flat" : "Flat"
 
 
 

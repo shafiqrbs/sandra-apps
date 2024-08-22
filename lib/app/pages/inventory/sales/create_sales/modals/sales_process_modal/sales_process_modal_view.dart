@@ -59,23 +59,27 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       _buildCustomerSearch(context),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
+                          horizontal: 12,
                         ),
                         child: Column(
                           children: [
-                            1.percentHeight,
                             //_buildSelectedCustomerView(context),
                             Stack(
                               children: [
                                 Column(
                                   children: [
+                                    Container(
+                                      height: 1,
+                                      color: colors.borderColor,
+                                    ),
+                                    8.height,
                                     _buildInvoiceSummery(),
                                     8.height,
                                     Container(
                                       height: 1,
                                       color: colors.borderColor,
                                     ),
-                                    8.height,
+                                    4.height,
                                     _buildTransactionMethod(context),
                                     0.25.percentHeight,
                                     _buildPaymentReceiveRow(context),
@@ -83,7 +87,11 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                     _buildUserSelectView(context),
                                     1.percentHeight,
                                     //_buildProfitView(context),
-                                    1.percentHeight,
+                                    Container(
+                                      height: 1,
+                                      color: colors.borderColor,
+                                    ),
+                                    8.height,
                                     _buildBottomButton(context),
                                     1.percentHeight,
                                   ],
@@ -172,9 +180,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           width: Get.width,
           padding: const EdgeInsets.only(
             top: 8,
-            left: 8,
+            left: 12,
             bottom: 8,
-            right: 4,
+            right: 12,
           ),
           decoration: BoxDecoration(
             color: colors.primaryBaseColor,
@@ -205,14 +213,17 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          Get.back(result: controller.salesItemList);
-                        },
-                        child: Icon(
-                          TablerIcons.x,
-                          size: closeIconSize,
-                          color: colors.backgroundColor,
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: InkWell(
+                          onTap: () {
+                            Get.back(result: controller.salesItemList);
+                          },
+                          child: Icon(
+                            TablerIcons.x,
+                            size: closeIconSize,
+                            color: colors.backgroundColor,
+                          ),
                         ),
                       ),
                     ),
@@ -240,7 +251,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             children: [
               Expanded(
                 child: SizedBox(
-                  height: 40,
+                  height: textFieldHeight,
                   child: TextFormField(
                     controller:
                         controller.customerManager.searchTextController.value,
@@ -264,11 +275,13 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                             .clear();
                                         controller.isShowClearIcon.value =
                                             false;
+                                        controller.customerManager.selectedItem
+                                            .value = null;
                                       },
                                       child: Icon(
                                         TablerIcons.x,
-                                        size: 16,
-                                        color: colors.dangerLiteColor,
+                                        size: 12,
+                                        color: colors.formClearIconColor,
                                       ),
                                     )
                                   : Container(),
@@ -276,7 +289,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                 onPressed: controller.addCustomer,
                                 icon: const Icon(
                                   TablerIcons.user_plus,
-                                  size: 16,
+                                  size: 20,
                                   color: Color(0xFFC98A69),
                                 ),
                               ),
@@ -285,24 +298,24 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         },
                       ),
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: 12,
                         vertical: 4,
                       ),
                       hintText: appLocalization.searchCustomer,
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: mediumTFSize,
+                        fontSize: mediumTFSize.sp,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.tertiaryBaseColor,
+                      enabledBorderColor: colors.borderColor,
                       focusedBorderColor: colors.borderColor,
                       errorBorderColor: colors.borderColor,
                     ),
                     textAlign: startTA,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: mediumTFSize,
+                      fontSize: mediumTFSize.sp,
                     ),
                     onChanged: (value) async {
                       if (value.isEmpty ?? true) {
@@ -316,7 +329,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     },
                   ),
                 ),
-
               ),
             ],
           ),
@@ -358,6 +370,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   )
                 : Container(),
           ),
+          8.height,
         ],
       ),
     );
@@ -504,7 +517,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       ),
                       4.height,
                       Text(
-                        'discount'.tr,
+                        appLocalization.discount,
                         style: TextStyle(
                           fontSize: smallTFSize,
                         ),
@@ -549,7 +562,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       ),
                       4.height,
                       Text(
-                        'vat'.tr,
+                        appLocalization.vat,
                         style: TextStyle(
                           fontSize: smallTFSize,
                         ),
@@ -596,7 +609,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       ),
                       4.height,
                       Text(
-                        'total'.tr,
+                        appLocalization.total,
                         style: TextStyle(
                           fontSize: smallTFSize,
                           color: Colors.white,
@@ -623,9 +636,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8),
               child: Wrap(
-                spacing: 18,
+                spacing: 4,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 runSpacing: 8,
                 children:
@@ -672,12 +684,11 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 Row(
                   children: [
                     Expanded(
-                      flex: 3,
                       child: Obx(
                         () {
                           return AdvancedSwitch(
                             activeChild: Text('%'.tr),
-                            inactiveChild: Text('flat'.tr),
+                            inactiveChild: Text(appLocalization.flat),
                             activeColor: colors.successfulBaseColor,
                             inactiveColor: colors.primaryLiteColor,
                             borderRadius: BorderRadius.circular(
@@ -691,7 +702,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     ),
                     8.width,
                     Expanded(
-                      flex: 5,
                       child: SizedBox(
                         height: 24,
                         child: TextFormField(
@@ -710,7 +720,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                               fontSize: mediumTFSize,
                             ),
                             fillColor: colors.textFieldColor,
-                            enabledBorderColor: colors.tertiaryBaseColor,
+                            enabledBorderColor: colors.primaryBaseColor,
                             focusedBorderColor: colors.borderColor,
                             errorBorderColor: colors.borderColor,
                           ),
@@ -731,17 +741,16 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                 Row(
                   children: [
                     Expanded(
-                      flex: 3,
                       child: AdvancedSwitch(
                         activeChild: Text(
-                          'Yes'.tr,
+                          appLocalization.yes,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: smallTFSize,
                           ),
                         ),
                         inactiveChild: Text(
-                          'profit'.tr,
+                          appLocalization.profit,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: smallTFSize,
@@ -756,7 +765,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     ),
                     8.width,
                     Expanded(
-                      flex: 5,
                       child: Container(
                         width: 100,
                         child: Obx(
@@ -833,7 +841,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         4.height,
                         Obx(
                           () => Text(
-                            controller.returnMsg.value.tr,
+                            controller.returnMsg.value,
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: mediumTFSize,
@@ -872,7 +880,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         fontSize: regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.borderColor,
+                      enabledBorderColor: colors.primaryBaseColor,
                       focusedBorderColor: colors.primaryBaseColor,
                       errorBorderColor: colors.primaryBaseColor,
                     ),
@@ -896,7 +904,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         isShowSearch: false,
         controller: controller.userManager.value.asController,
         itemToString: (data) => data?.fullName ?? '',
-        hint: 'select_user'.tr,
+        hint: appLocalization.selectUser,
       ),
     );
   }
@@ -917,14 +925,14 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             ),
             child: AdvancedSwitch(
               activeChild: Text(
-                'Yes'.tr,
+                appLocalization.yes,
                 style: TextStyle(
                   color: colors.primaryTextColor,
                   fontSize: smallTFSize,
                 ),
               ),
               inactiveChild: Text(
-                'profit'.tr,
+                appLocalization.profit,
                 style: TextStyle(
                   color: colors.primaryTextColor,
                   fontSize: smallTFSize,
@@ -980,7 +988,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RowButton(
-            buttonName: 'reset'.tr,
+            buttonName: appLocalization.reset,
             onTap: () => controller.reset(context),
             leftIcon: TablerIcons.restore,
             buttonBGColor: Colors.transparent,
@@ -988,15 +996,16 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           ),
           8.width,
           RowButton(
-            buttonName: 'hold'.tr,
+            buttonName: appLocalization.hold,
             onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
             buttonBGColor: const Color(0xFFFAF3F0),
             buttonTextColor: const Color(0xFFC98A69),
+            isOutline: true,
           ),
           8.width,
           RowButton(
-            buttonName: 'order'.tr,
+            buttonName: appLocalization.order,
             onTap: () => controller.showConfirmationDialog(context),
             leftIcon: TablerIcons.device_floppy,
           ),

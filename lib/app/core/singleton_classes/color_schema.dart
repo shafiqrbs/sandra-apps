@@ -24,10 +24,10 @@ class ColorSchema {
   Color moduleHeaderColor = const Color(0xFFf5edeb);
   Color moduleBodyColor = const Color(0xFFfffbff);
   Color moduleFooterColor = const Color(0xfff6f1f6);
-  Color borderColor = const Color(0xFFece2d9);
+  Color borderColor = const Color(0xFFE3E0E0);
   Color primaryTextColor = const Color(0xFF4d4538);
   Color secondaryTextColor = const Color(0xFF5f5b58);
-  Color textFieldColor = const Color(0xFFfffbff);
+  Color textFieldColor = const Color(0xFFF3F3F3);
   Color selectedColor = const Color(0xFFF7DFBB);
   Color buttonColor = const Color(0xFFC98A69);
 
@@ -38,7 +38,7 @@ class ColorSchema {
 
   Color formPrefixIconColor = const Color(0xFFd8c8c3);
   Color formSuffixIconColor = const Color(0xFFd8c8c3);
-  Color formClearIconColor = const Color(0xfffc1919).withOpacity(.5);
+  Color formClearIconColor = const Color(0xFFB3261E);
   Color formCursorColor = const Color(0xff000000);
 
   Color formBaseFillColor = const Color(0xFFfffbff);

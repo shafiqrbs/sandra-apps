@@ -105,6 +105,7 @@ class SalesItemListView extends BaseWidget {
                           textAlign: TextAlign.left,
                           maxLines: 2,
                           style: const TextStyle(
+                            fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -118,17 +119,30 @@ class SalesItemListView extends BaseWidget {
                               element.brandName ?? '',
                               textAlign: TextAlign.left,
                               maxLines: 1,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Text(
-                              'In Stock: ${element.quantity}' ?? '',
+                              'Stock: ${element.quantity}' ?? '',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                           Expanded(
                             child: Text(
                               'PP: ${element.purchasePrice}' ?? '',
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],
@@ -150,7 +164,7 @@ class SalesItemListView extends BaseWidget {
                                 Container(
                                   margin: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
-                                  alignment: Alignment.center,
+                                  alignment: Alignment.centerLeft,
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
                                   child: CommonText(

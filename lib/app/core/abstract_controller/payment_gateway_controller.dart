@@ -15,7 +15,7 @@ abstract class PaymentGatewayController extends BaseController {
 
   final selectedPaymentMode = 'cash'.obs;
   final discountType = 'flat'.obs;
-  final returnMsg = 'due'.obs;
+  final returnMsg = 'Due'.obs;
   final isShowClearIcon = false.obs;
 
   final paymentDiscountController = TextEditingController().obs;
@@ -117,10 +117,10 @@ abstract class PaymentGatewayController extends BaseController {
   void onAmountChange(String value) {
     if (value.isNotEmpty) {
       final returnValue = netTotal.value - value.toDouble();
-      returnMsg.value = returnValue < 0 ? 'return'.tr : 'due'.tr;
+      returnMsg.value = returnValue < 0 ? 'Return' : 'Due';
       salesReturnValue.value = returnValue.toPrecision(2).abs();
     } else {
-      returnMsg.value = 'due'.tr;
+      returnMsg.value = 'Due';
       salesReturnValue.value = 0.00;
     }
   }

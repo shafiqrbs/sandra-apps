@@ -34,7 +34,7 @@ class RowButton extends StatelessWidget with AppDimension {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: 6.ph,
+          height: 5.ph,
           padding: const EdgeInsets.only(top: 8, bottom: 8),
           decoration: BoxDecoration(
             color: buttonBGColor ??
@@ -46,7 +46,7 @@ class RowButton extends StatelessWidget with AppDimension {
             ),
             border: (isOutline ?? false)
                 ? Border.all(
-                    color: colors.primaryBaseColor,
+                    color: colors.borderColor,
                   )
                 : null,
           ),
@@ -60,14 +60,15 @@ class RowButton extends StatelessWidget with AppDimension {
                       ((isOutline ?? false)
                           ? colors.primaryBaseColor
                           : colors.backgroundColor),
+                  size: 20,
                 ),
               if (buttonName != null)
                 Container(
                   margin: const EdgeInsets.only(left: 5, right: 5),
                   child: CommonText(
                     text: buttonName!,
-                    fontWeight: FontWeight.w500,
-                    fontSize: mediumButtonTFSize,
+                    fontWeight: FontWeight.w400,
+                    fontSize: paragraphTFSize,
                     textColor: buttonTextColor ??
                         ((isOutline ?? false)
                             ? colors.primaryBaseColor

@@ -21,7 +21,7 @@ class SelectedStockListHeader extends BaseWidget {
         children: [
           CommonHeaderText(
             flex: 2,
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
             header: appLocalization.mrp,

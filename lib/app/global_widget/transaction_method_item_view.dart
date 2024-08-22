@@ -23,7 +23,6 @@ class TransactionMethodItemView extends BaseWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.all(4),
         padding: EdgeInsets.zero,
         child: Column(
           children: [
@@ -55,17 +54,17 @@ class TransactionMethodItemView extends BaseWidget {
                 ),
               ),
             ),
-            4.height,
+            //4.height,
             SizedBox(
               width: 70,
               height: 20,
               child: Center(
                 child: Text(
-                  method.methodName?.toString() ?? '',
+                  (method.methodName?.toString() ?? '').capitalizeFirstLetter(),
                   style: GoogleFonts.inter(
                     color: const Color(0xff4D4D4D),
                     fontSize: 10,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 1,
