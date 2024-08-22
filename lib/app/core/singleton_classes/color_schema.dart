@@ -14,7 +14,7 @@ class ColorSchema {
   Color tertiaryLiteColor = const Color(0xFFFCECD8);
   Color secondaryBaseColor = const Color(0xFFEEDBD1);
   Color secondaryLiteColor = const Color(0xffadc9f8);
-  Color primaryBaseColor = const Color(0xFF8F624B);
+  Color primaryBaseColor = const Color(0xFFC98A69);
   Color primaryLiteColor = const Color(0xFFe3b39e);
   Color ordinaryBaseColor = const Color(0xFFafbec6);
   Color ordinaryLiteColor = const Color(0xFFe1e5e8);

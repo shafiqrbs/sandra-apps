@@ -13,6 +13,7 @@ class SearchButton extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return AppBarButton(
       buttonName: null,
       onTap: onTap ?? () {},

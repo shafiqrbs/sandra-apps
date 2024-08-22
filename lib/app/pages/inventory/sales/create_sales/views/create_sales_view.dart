@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/no_record_found_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -376,30 +377,17 @@ class CreateSalesView extends BaseView<CreateSalesController> {
             ),
             Container(
               color: colors.backgroundColor,
-              height: 90.ph,
+              height: 80.ph,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Obx(
                     () {
                       return Visibility(
                         visible: controller.salesItemList.value.isEmpty &&
                             controller.stockList.value.isEmpty,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 80.ph,
-                          width: 100.pw,
-                          child: Column(
-                            children: [
-                              Lottie.asset(
-                                'assets/lottieFiles/no_record_found.json',
-                              ),
-                              CommonText(
-                                text: appLocalization.noDataFound,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ],
-                          ),
+                        child: NoRecordFoundView(
+                          buttonText: appLocalization.pos,
                         ),
                       );
                     },

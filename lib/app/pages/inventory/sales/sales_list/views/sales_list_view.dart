@@ -1,21 +1,22 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '/app/core/core_model/logged_user.dart';
-import '/app/core/core_model/setup.dart';
-import '/app/core/widget/delete_button.dart';
-import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/retry_view.dart';
+import 'package:sandra/app/global_widget/animated_search_bar.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/delete_button.dart';
+import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
@@ -53,6 +54,7 @@ class SalesListView extends BaseView<SalesListController> {
             if (controller.isSearchSelected.value) {
               return Container();
             }
+
             return AppBarButtonGroup(
               children: [
                 AddButton(
