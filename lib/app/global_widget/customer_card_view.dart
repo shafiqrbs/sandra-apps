@@ -110,7 +110,7 @@ class CustomerCardView extends BaseWidget {
                     Row(
                       children: [
                         CommonText(
-                          text: 'Outstanding',
+                          text: appLocalization.due,
                           textColor: colors.secondaryTextColor.withOpacity(.5),
                           fontWeight: FontWeight.w400,
                           fontSize: mediumTFSize,

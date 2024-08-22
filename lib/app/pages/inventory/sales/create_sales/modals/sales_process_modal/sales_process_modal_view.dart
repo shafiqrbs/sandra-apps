@@ -310,22 +310,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     },
                   ),
                 ),
-                /*child: FBString(
-                  isRequired: false,
-                  textController:
-                      controller.customerManager.searchTextController.value,
-                  onChange: (value) async {
-                    if (value?.isEmpty ?? true) {
-                      controller.customerManager.searchedItems.value = [];
-                      controller.customerManager.selectedItem.value = null;
-                      return;
-                    }
-                    await controller.customerManager.searchItemsByName(value!);
-                  },
-                  hint: appLocalization.searchCustomer,
-                  suffixIcon: TablerIcons.user_plus,
-                  preFixIcon: TablerIcons.search,
-                ),*/
+
               ),
             ],
           ),

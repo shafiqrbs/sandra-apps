@@ -234,6 +234,7 @@
   "connectPrinter" : "অনুগ্রহ করে প্রিন্টার সংযুক্ত করুন",
   "due" : "বাকি",
   "returnn" : "ফিরে আসা",
+  "change" : "পরিবর্তন",
   "bank" : "ব্যাংক",
   "paymentCard" : "পেমেন্ট কার্ড",
   "bankAccount" : " ব্যাঙ্ক একাউন্ট",
@@ -302,6 +303,14 @@
   "cash" : "নগদ",
   "bank" : "ব্যাংক",
   "mobile" : "মোবাইল",
+  "due" : "বাকি",
+  "balance" : "ব্যালান্স",
+  "outstanding" : "বকেয়া",
+  "receivable" : "গ্রহণযোগ্য",
+  "payable" : "প্রদায়",
+  "payment" : "পেমেন্ট",
+  "pos" : "পস",
+  "sales" : "বিক্রয়",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",
@@ -321,6 +330,7 @@
   "remark" : "Remark",
   "remarkRequired" : "Remark required",
   "addExpense" : "Add Expense"
+
 
 
 }

@@ -49,7 +49,7 @@ class ColorSchema {
   Color formFocusBorderColor = const Color(0xFFf5edeb);
   Color formFocusFontTextColor = const Color(0xFFe5f0ff);
 
-  Color evenListColor = const Color(0xffF6F1F7);
+  Color evenListColor = const Color(0xffFAF4FB);
   Color oddListColor = const Color(0xFFffffff);
 
   Color successfulBaseColor = Colors.green;

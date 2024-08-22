@@ -3,7 +3,7 @@
   "searchProduct" : "Search Products",
   "placeOrder" : "Place Order",
   "price" : "Price",
-  "qty" : "Qty",
+  "qty" : "QTY",
   "quantity" : "Quantity",
   "female" : "Female",
   "male" : "Male",
@@ -30,6 +30,7 @@
   "paymentCard" : "Payment Card",
   "bank" : "Bank",
   "returnn" : "Return",
+  "change" : "Change",
   "due" : "Due",
   "connectPrinter" : "Please Connect Printer",
   "searchHere" : "Search Your Desired Product",
@@ -243,7 +244,16 @@
   "addExpense" : "Add Expense",
   "cash" : "Cash",
   "bank" : "Bank",
-  "mobile" : "Mobile"
+  "mobile" : "Mobile",
+  "due" : "Due",
+  "balance" : "Balance",
+  "outstanding" : "Outstanding",
+  "receivable" : "Receivable",
+  "payable" : "Payable",
+  "payment" : "Payment",
+  "pos" : "POS",
+  "sale" : "Sale"
+
 
 
 

@@ -91,7 +91,7 @@ class DashboardView extends BaseView<DashboardController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  16.height,
+                  1.height,
                   _buildDashboard(),
                   //_buildTabSelection(),
                   /*Obx(
@@ -223,8 +223,8 @@ class DashboardView extends BaseView<DashboardController> {
         vertical: 10,
         horizontal: 16,
       ),
-      decoration: const BoxDecoration(
-        color: Color(0xFFEEDBD1),
+      decoration: BoxDecoration(
+        color: colors.primaryBaseColor.withOpacity(.5),
       ),
       child: Row(
         children: [

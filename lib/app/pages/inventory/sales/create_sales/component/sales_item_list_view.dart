@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/common_text.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
@@ -78,16 +79,15 @@ class SalesItemListView extends BaseWidget {
           children: [
             Container(
               //  height: 100,
-             // color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              // color: index.isEven ? colors.evenListColor : colors.oddListColor,
               margin: const EdgeInsets.only(bottom: 4, left: 16, right: 2),
               padding: const EdgeInsets.only(left: 16, right: 8, bottom: 4),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                 containerBorderRadius,
+                  containerBorderRadius,
                 ),
-                color: index.isEven
-                    ? colors.evenListColor
-                    : colors.oddListColor,
+                color:
+                    index.isEven ? colors.evenListColor : colors.oddListColor,
                 border: Border.all(
                   color: colors.tertiaryBaseColor,
                   width: 0,
@@ -134,6 +134,11 @@ class SalesItemListView extends BaseWidget {
                         ],
                       ),
                       8.height,
+                      Container(
+                        height: 1,
+                        color: colors.borderColor,
+                      ),
+                      8.height,
                       Row(
                         mainAxisAlignment: spaceBetweenMAA,
                         children: [
@@ -144,56 +149,16 @@ class SalesItemListView extends BaseWidget {
                               children: [
                                 Container(
                                   margin: EdgeInsets.zero,
-                                  height:mediumTextFieldHeight,
+                                  height: mediumTextFieldHeight,
                                   alignment: Alignment.center,
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
-                                  child: TextFormField(
-                                    controller: mrpController,
-                                    textAlign: TextAlign.center,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: [regexDouble],
-                                    textInputAction: TextInputAction.next,
-                                    readOnly: true,
-                                    onEditingComplete: () {},
-                                    style: TextStyle(
-                                      fontSize:mediumTFSize,
-                                      color: colors.primaryTextColor,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.zero,
-                                      hintText: 'mrp'.tr, // Optional hint text
-                                      border: InputBorder.none,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                         containerBorderRadius,
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
-                                          width: 0,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                         containerBorderRadius,
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
-                                          width: 0,
-                                        ),
-                                      ),
-                                      fillColor: index.isEven
-                                          ? colors.primaryLiteColor
-                                              .withOpacity(.2)
-                                          : colors.primaryLiteColor
-                                              .withOpacity(.2),
-                                      filled: true,
-                                    ),
+                                  child: CommonText(
+                                    text:
+                                        '${SetUp().currency ?? ''} ${mrpController.value.text}',
+                                    fontSize: mediumTFSize,
+                                    fontWeight: FontWeight.w500,
+                                    textColor: colors.primaryTextColor,
                                   ),
                                 ),
                               ],
@@ -205,81 +170,60 @@ class SalesItemListView extends BaseWidget {
                           Expanded(
                             flex: 2,
                             child: Obx(
-                              () => Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.zero,
-                                padding: EdgeInsets.zero,
-                                height:mediumTextFieldHeight,
-                                //width: Get.width * 0.7,
-                                color: colors.textFieldColor,
-                                child: TextFormField(
-                                  controller:
-                                      salesItemDiscountPercentController.value,
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [regexDouble],
-                                  textInputAction: TextInputAction.next,
-                                  readOnly:
-                                      canEditSalesItemDiscountPercent.value,
-                                  onChanged: (value) {
-                                    if (value.isEmptyOrNull) {
-                                      value = '0';
-                                    }
-                                    onDiscountChange(
-                                      value.toInt(),
-                                      index,
-                                    );
-                                    final salesPrice = (element.mrpPrice! -
-                                            (element.mrpPrice! *
-                                                    value.toDouble()) /
-                                                100)
-                                        .toPrecision(2);
-                                    final subTotal =
-                                        (salesPrice * element.quantity!)
-                                            .toPrecision(2);
-                                    final discountPercent = value.toDouble();
-                                    salesItemSalesPriceController.value.text =
-                                        salesPrice.toString();
-                                    salesItemSubTotalController.value.text =
-                                        subTotal.toString();
-                                    canEditSalesItemPrice.value =
-                                        element.discountPercent! > 0;
-                                  },
-                                  style: TextStyle(
-                                    fontSize:mediumTFSize,
-                                    color: colors.primaryTextColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  cursorColor: colors.formCursorColor,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                    ), // Adjust the padding as needed
-                                    hintText: '%', // Optional hint text
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                       containerBorderRadius,
-                                      ),
-                                      borderSide: BorderSide(
-                                        color: colors.borderColor,
-                                        width: 0,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                       containerBorderRadius,
-                                      ),
-                                      borderSide: BorderSide(
-                                        color: colors.borderColor,
-                                        width: 0,
-                                      ),
-                                    ),
-                                    fillColor: colors.textFieldColor,
-                                    filled:
+                              () {
+                                return Container(
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero,
+                                  height: mediumTextFieldHeight,
+                                  //width: Get.width * 0.7,
+                                  color: colors.textFieldColor,
+                                  child: TextFormField(
+                                    controller:
+                                        salesItemDiscountPercentController
+                                            .value,
+                                    textAlign: TextAlign.center,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [regexDouble],
+                                    textInputAction: TextInputAction.next,
+                                    readOnly:
                                         canEditSalesItemDiscountPercent.value,
+                                    onChanged: (value) {
+                                      if (value.isEmptyOrNull) {
+                                        value = '0';
+                                      }
+                                      onDiscountChange(
+                                        value.toInt(),
+                                        index,
+                                      );
+                                      final salesPrice = (element.mrpPrice! -
+                                              (element.mrpPrice! *
+                                                      value.toDouble()) /
+                                                  100)
+                                          .toPrecision(2);
+                                      final subTotal =
+                                          (salesPrice * element.quantity!)
+                                              .toPrecision(2);
+                                      final discountPercent = value.toDouble();
+                                      salesItemSalesPriceController.value.text =
+                                          salesPrice.toString();
+                                      salesItemSubTotalController.value.text =
+                                          subTotal.toString();
+                                      canEditSalesItemPrice.value =
+                                          element.discountPercent! > 0;
+                                    },
+                                    style: TextStyle(
+                                      fontSize: mediumTFSize,
+                                      color: colors.primaryTextColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    cursorColor: colors.formCursorColor,
+                                    decoration: getInputDecoration(
+                                      hint: '%',
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
                           ),
                           4.width,
@@ -292,62 +236,66 @@ class SalesItemListView extends BaseWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Obx(
-                                    () => Container(
-                                      margin: EdgeInsets.zero,
-                                      padding: EdgeInsets.zero,
-                                      height:mediumTextFieldHeight,
-                                      //width: Get.width * 0.7,
-                                      color: colors.textFieldColor,
-                                      child: TextFormField(
-                                        controller:
-                                            salesItemSalesPriceController.value,
-                                        textAlign: TextAlign.center,
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [regexDouble],
-                                        textInputAction: TextInputAction.next,
-                                        readOnly: canEditSalesItemPrice.value,
-                                        //readOnly: true,
-                                        onChanged: (value) {
-                                          if (value.isEmpty) {
-                                            value = element.mrpPrice.toString();
-                                          }
+                                    () {
+                                      return Container(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero,
+                                        height: mediumTextFieldHeight,
+                                        //width: Get.width * 0.7,
+                                        color: colors.textFieldColor,
+                                        child: TextFormField(
+                                          controller:
+                                              salesItemSalesPriceController
+                                                  .value,
+                                          textAlign: TextAlign.center,
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [regexDouble],
+                                          textInputAction: TextInputAction.next,
+                                          readOnly: canEditSalesItemPrice.value,
+                                          //readOnly: true,
+                                          onChanged: (value) {
+                                            if (value.isEmpty) {
+                                              value =
+                                                  element.mrpPrice.toString();
+                                            }
 
-                                          onSalesPriceChange(
-                                            value.toDouble(),
-                                            index,
-                                          );
+                                            onSalesPriceChange(
+                                              value.toDouble(),
+                                              index,
+                                            );
 
-                                          salesItemSubTotalController
-                                                  .value.text =
-                                              element.subTotal.toString();
-                                          salesItemSalesPriceController
-                                              .value.text = value;
-                                          salesItemSalesPriceController
-                                                  .value.selection =
-                                              TextSelection.fromPosition(
-                                            TextPosition(
-                                              offset:
-                                                  salesItemSalesPriceController
-                                                      .value.text.length,
-                                            ),
-                                          );
-                                          canEditSalesItemDiscountPercent
-                                              .value = element.salesPrice !=
-                                                  element.mrpPrice &&
-                                              element.discountPercent == 0;
-                                        },
+                                            salesItemSubTotalController
+                                                    .value.text =
+                                                element.subTotal.toString();
+                                            salesItemSalesPriceController
+                                                .value.text = value;
+                                            salesItemSalesPriceController
+                                                    .value.selection =
+                                                TextSelection.fromPosition(
+                                              TextPosition(
+                                                offset:
+                                                    salesItemSalesPriceController
+                                                        .value.text.length,
+                                              ),
+                                            );
+                                            canEditSalesItemDiscountPercent
+                                                .value = element.salesPrice !=
+                                                    element.mrpPrice &&
+                                                element.discountPercent == 0;
+                                          },
 
-                                        style: TextStyle(
-                                          fontSize:mediumTFSize,
-                                          color: colors.primaryTextColor,
-                                          fontWeight: FontWeight.w500,
+                                          style: TextStyle(
+                                            fontSize: mediumTFSize,
+                                            color: colors.primaryTextColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+
+                                          decoration: getInputDecoration(
+                                            hint: 'price'.tr,
+                                          ),
                                         ),
-
-                                        decoration: getInputDecoration(
-                                          hint: 'price'.tr,
-                                        ),
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   ),
                                 ),
                                 4.width,
@@ -359,8 +307,7 @@ class SalesItemListView extends BaseWidget {
                                       Container(
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
-                                        height:
-                                           mediumTextFieldHeight,
+                                        height: mediumTextFieldHeight,
                                         //width: Get.width * 0.7,
                                         color: colors.textFieldColor,
                                         child: TextFormField(
@@ -401,7 +348,7 @@ class SalesItemListView extends BaseWidget {
                                             FocusScope.of(context).unfocus();
                                           },
                                           style: TextStyle(
-                                            fontSize:mediumTFSize,
+                                            fontSize: mediumTFSize,
                                             color: colors.primaryTextColor,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -430,7 +377,7 @@ class SalesItemListView extends BaseWidget {
                                     left: 2,
                                     right: 2,
                                   ),
-                                  height:mediumTextFieldHeight,
+                                  height: mediumTextFieldHeight,
                                   alignment: Alignment.center,
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
@@ -444,18 +391,18 @@ class SalesItemListView extends BaseWidget {
                                     readOnly: true,
                                     onEditingComplete: () {},
                                     style: TextStyle(
-                                      fontSize:mediumTFSize,
+                                      fontSize: mediumTFSize,
                                       color: colors.primaryTextColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
-                                      hintText:
-                                          appLocalization.subTotal, // Optional hint text
+                                      hintText: appLocalization
+                                          .subTotal, // Optional hint text
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                         containerBorderRadius,
+                                          containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -466,7 +413,7 @@ class SalesItemListView extends BaseWidget {
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                         containerBorderRadius,
+                                          containerBorderRadius,
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
@@ -475,11 +422,7 @@ class SalesItemListView extends BaseWidget {
                                           width: 0,
                                         ),
                                       ),
-                                      fillColor: index.isEven
-                                          ? colors.primaryLiteColor
-                                              .withOpacity(.2)
-                                          : colors.primaryLiteColor
-                                              .withOpacity(.2),
+                                      fillColor: Colors.transparent,
                                       filled: true,
                                     ),
                                   ),
@@ -505,7 +448,7 @@ class SalesItemListView extends BaseWidget {
                         padding: const EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                           containerBorderRadius,
+                            containerBorderRadius,
                           ),
                           color: colors.dangerLiteColor,
                         ),
