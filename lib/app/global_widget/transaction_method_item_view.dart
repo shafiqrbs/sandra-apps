@@ -34,8 +34,8 @@ class TransactionMethodItemView extends BaseWidget {
                   100,
                 ),
                 color: isSelected
-                    ? colors.primaryColor
-                    : colors.primaryColor.withOpacity(.2),
+                    ? colors.primaryBaseColor
+                    : colors.secondaryBaseColor,
               ),
               child: Container(
                 height: 56,
@@ -64,7 +64,7 @@ class TransactionMethodItemView extends BaseWidget {
                   method.methodName?.toString() ?? '',
                   style: GoogleFonts.inter(
                     color: const Color(0xff4D4D4D),
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,

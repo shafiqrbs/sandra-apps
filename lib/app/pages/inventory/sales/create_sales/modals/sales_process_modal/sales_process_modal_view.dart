@@ -70,6 +70,12 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                 Column(
                                   children: [
                                     _buildInvoiceSummery(),
+                                    8.height,
+                                    Container(
+                                      height: 1,
+                                      color: colors.borderColor,
+                                    ),
+                                    8.height,
                                     _buildTransactionMethod(context),
                                     0.25.percentHeight,
                                     _buildPaymentReceiveRow(context),
@@ -616,6 +622,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           0.25.percentHeight,
           if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.all(8),
               child: Wrap(
                 spacing: 18,
