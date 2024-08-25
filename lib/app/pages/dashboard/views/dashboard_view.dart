@@ -481,14 +481,11 @@ class DashboardView extends BaseView<DashboardController> {
           children: [
             _buildButtonGroup(),
             24.height,
-            CustomAnimationWidget(
-              leftPosition: true,
-              child: Wrap(
-                spacing: 18,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                runSpacing: 16,
-                children: controller.dashboardButtonList,
-              ),
+            Wrap(
+              spacing: 18,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              runSpacing: 16,
+              children: controller.dashboardButtonList,
             ),
           ],
         );
@@ -505,36 +502,39 @@ class DashboardView extends BaseView<DashboardController> {
       decoration: const BoxDecoration(
         color: Color(0xffF7EDE9),
       ),
-      child: Row(
-        children: [
-          TbdTextButton(
-            selectedBgColor: colors.primaryBaseColor,
-            text: appLocalization.inventory,
-            onPressed: () => controller.updateSelectedButtonGroup(
-              SelectedButtonGroup.inventory,
-            ),
-            isSelected: controller.selectedButtonGroup.value ==
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 800),
+        child: Row(
+          children: [
+            TbdTextButton(
+              selectedBgColor: colors.primaryBaseColor,
+              text: appLocalization.inventory,
+              onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.inventory,
-          ),
-          TbdTextButton(
-            selectedBgColor: colors.primaryBaseColor,
-            text: appLocalization.accounting,
-            onPressed: () => controller.updateSelectedButtonGroup(
-              SelectedButtonGroup.accounting,
+              ),
+              isSelected: controller.selectedButtonGroup.value ==
+                  SelectedButtonGroup.inventory,
             ),
-            isSelected: controller.selectedButtonGroup.value ==
+            TbdTextButton(
+              selectedBgColor: colors.primaryBaseColor,
+              text: appLocalization.accounting,
+              onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.accounting,
-          ),
-          TbdTextButton(
-            selectedBgColor: colors.primaryBaseColor,
-            text: appLocalization.config,
-            onPressed: () => controller.updateSelectedButtonGroup(
-              SelectedButtonGroup.config,
+              ),
+              isSelected: controller.selectedButtonGroup.value ==
+                  SelectedButtonGroup.accounting,
             ),
-            isSelected: controller.selectedButtonGroup.value ==
+            TbdTextButton(
+              selectedBgColor: colors.primaryBaseColor,
+              text: appLocalization.config,
+              onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.config,
-          ),
-        ],
+              ),
+              isSelected: controller.selectedButtonGroup.value ==
+                  SelectedButtonGroup.config,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -32,13 +32,13 @@ class AppBarSearchView extends BaseWidget {
   @override
   Widget build(BuildContext context) {
 
-    if(!showSearchView){
+    /*if(!showSearchView){
       return PageBackButton(
         pageTitle: pageTitle,
       );
-    }
+    }*/
 
-    return AnimatedContainer(
+    /*return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         width: showSearchView ? Get.width : 0,
@@ -145,7 +145,7 @@ class AppBarSearchView extends BaseWidget {
               ),
             )
             : null,
-    );
+    );*/
 
     return showSearchView
         ? Container(
