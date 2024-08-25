@@ -677,6 +677,48 @@ class Services {
     }
   }
 
+  Future<bool> approveAccountSale({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-account-sales-approve',
+        query: {
+          'id': id,
+          'user_id': LoggedUser().userId,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> approveAccountPurchase({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-account-purchase-approve',
+        query: {
+          'id': id,
+          'user_id': LoggedUser().userId,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> deleteAccountSale({
     required String id,
   }) async {
@@ -684,6 +726,26 @@ class Services {
       final response = await dio.get(
         APIType.public,
         'poskeeper-account-sales-delete',
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> deleteAccountPurchase({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-account-purchase-delete',
         query: {
           'id': id,
         },
