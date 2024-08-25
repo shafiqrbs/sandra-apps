@@ -681,9 +681,13 @@ class Services {
     required String id,
   }) async {
     try {
-      final response = await dio.get(
+      final response = await dio.post(
         APIType.public,
         'poskeeper-account-sales-approve',
+        {
+          'id': id,
+          'user_id': LoggedUser().userId,
+        },
         query: {
           'id': id,
           'user_id': LoggedUser().userId,
@@ -702,9 +706,13 @@ class Services {
     required String id,
   }) async {
     try {
-      final response = await dio.get(
+      final response = await dio.post(
         APIType.public,
         'poskeeper-account-purchase-approve',
+        {
+          'id': id,
+          'user_id': LoggedUser().userId,
+        },
         query: {
           'id': id,
           'user_id': LoggedUser().userId,

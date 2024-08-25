@@ -22,6 +22,7 @@ class CustomerLedger {
   final String? customerName;
   final int? customerId;
   final String? mobile;
+  String? approvedBy;
 
   CustomerLedger({
     this.id,
@@ -36,6 +37,7 @@ class CustomerLedger {
     this.customerName,
     this.customerId,
     this.mobile,
+    this.approvedBy,
   });
 
   factory CustomerLedger.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class CustomerLedger {
       customerName: json['name'],
       customerId: json['customer_id'],
       mobile: json['mobile'],
+      approvedBy: json['approved_by'],
     );
   }
 
@@ -69,6 +72,7 @@ class CustomerLedger {
       'customer_name': customerName,
       'customer_id': customerId,
       'mobile': mobile,
+      'approved_by': approvedBy,
     };
   }
 

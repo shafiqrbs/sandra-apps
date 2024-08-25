@@ -22,6 +22,7 @@ class VendorLedger {
   final String? vendorName;
   final int? vendorId;
   final String? mobile;
+  String? approvedBy;
 
   VendorLedger({
     this.id,
@@ -36,6 +37,7 @@ class VendorLedger {
     this.vendorName,
     this.vendorId,
     this.mobile,
+    this.approvedBy,
   });
 
   factory VendorLedger.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class VendorLedger {
       vendorName: json['vendor_name'],
       vendorId: json['vendor_id'],
       mobile: json['mobile'],
+      approvedBy: json['approved_by'],
     );
   }
 
@@ -69,6 +72,7 @@ class VendorLedger {
       'vendor_name': vendorName,
       'vendor_id': vendorId,
       'mobile': mobile,
+      'approved_by': approvedBy,
     };
   }
 

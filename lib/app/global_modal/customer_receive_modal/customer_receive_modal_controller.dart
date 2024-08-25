@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -27,6 +28,11 @@ class CustomerReceiveModalController extends PaymentGatewayController {
   }
 
   Future<void> processReceive() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) return;
+
     if (amountController.value.text.isEmpty) {
       toast('please_enter_amount'.tr);
       return;
@@ -36,9 +42,11 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       return;
     }
 
+    bool? isSubmitted;
+
     await dataFetcher(
       future: () async {
-        final data = await services.postCustomerReceive(
+        isSubmitted = await services.postCustomerReceive(
           customer: customerManager.selectedItem.value!.customerId!.toString(),
           method: 'receive',
           mode: selectedPaymentMode.value,
@@ -46,9 +54,14 @@ class CustomerReceiveModalController extends PaymentGatewayController {
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
         );
-        log('Receive Success $data');
       },
     );
+    if (isSubmitted ?? false) {
+      await resetField();
+      Get.back(
+        result: true,
+      );
+    }
   }
 
   Future<void> updateCustomer(Customer? customer) async {

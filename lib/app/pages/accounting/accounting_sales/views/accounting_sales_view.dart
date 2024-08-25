@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/delete_button.dart';
-import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/retry_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -12,7 +9,10 @@ import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/delete_button.dart';
+import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/pages/accounting/accounting_sales/controllers/accounting_sales_controller.dart';
 
@@ -134,6 +134,13 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                       ),
                     ),
                     Expanded(
+                      child: CommonIconText(
+                        text: '${element.id}',
+                        icon: TablerIcons.file_invoice,
+                        iconColor: iconColor,
+                      ),
+                    ),
+                    Expanded(
                       child: Container(),
                     ),
                   ],
@@ -178,44 +185,51 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                       ),
                     ),
                     Expanded(
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: controller.approveSale,
-                            child: Container(
-                              height: 40,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: colors.primaryBaseColor,
-                                borderRadius: BorderRadius.circular(
-                                  containerBorderRadius,
-                                ),
-                                border: Border.all(
-                                  color: colors.primaryBaseColor,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CommonText(
-                                    text: appLocalization.approve,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: mediumButtonTFSize,
-                                    textColor: colors.backgroundColor,
+                      child: element.approvedBy == null
+                          ? Row(
+                              children: [
+                                InkWell(
+                                  onTap: () => controller.approveSale(
+                                    salesId: element.id!,
+                                    index: index,
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          DeleteButton(
-                            onTap: () => controller.deleteSale(
-                              element.id!,
-                            ),
-                          ),
-                        ],
-                      ),
+                                  child: Container(
+                                    height: 40,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: colors.primaryBaseColor,
+                                      borderRadius: BorderRadius.circular(
+                                        containerBorderRadius,
+                                      ),
+                                      border: Border.all(
+                                        color: colors.primaryBaseColor,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CommonText(
+                                          text: appLocalization.approve,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: mediumButtonTFSize,
+                                          textColor: colors.backgroundColor,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                if (controller.isManager)
+                                  DeleteButton(
+                                    onTap: () => controller.deleteSale(
+                                      element.id!,
+                                    ),
+                                  ),
+                              ],
+                            )
+                          : Container(),
                     ),
                   ],
                 ),

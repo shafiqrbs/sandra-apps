@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/vendor.dart';
@@ -53,8 +54,8 @@ class AccountingPurchaseController extends BaseController {
     VendorLedger element,
   ) {}
 
-  void showVendorPaymentModal() {
-    Get.dialog(
+  Future<void> showVendorPaymentModal() async {
+    final isNewReceived = await Get.dialog(
       DialogPattern(
         title: 'title',
         subTitle: 'subTitle',
@@ -63,23 +64,56 @@ class AccountingPurchaseController extends BaseController {
         ),
       ),
     );
+    if (isNewReceived == true) {
+      purchaseList.allItems.value = null;
+      purchaseList.allItems.refresh();
+      await fetchPurchaseList();
+    }
   }
 
-  Future<void> deletePurchase() async {
+  Future<void> deletePurchase(int purchaseId) async {
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (confirmation) {
-      toast('Under Development');
-    } else {}
+      bool? isDeleted;
+      await dataFetcher(
+        future: () async {
+          isDeleted = await services.deleteAccountPurchase(
+            id: purchaseId.toString(),
+          );
+        },
+      );
+      if (isDeleted ?? false) {
+        purchaseList.allItems.value?.removeWhere(
+          (element) => element.id == purchaseId,
+        );
+        purchaseList.allItems.refresh();
+      }
+    }
   }
 
-  Future<void> approvePurchase() async {
+  Future<void> approvePurchase({
+    required int purchaseId,
+    required int index,
+  }) async {
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (confirmation) {
-      toast('Under Development');
-    } else {}
+      bool? isApproved;
+      await dataFetcher(
+        future: () async {
+          isApproved = await services.approveAccountPurchase(
+            id: purchaseId.toString(),
+          );
+        },
+      );
+      if (isApproved ?? false) {
+        // update the status of the item
+        purchaseList.allItems.value?[index].approvedBy = LoggedUser().username;
+        purchaseList.allItems.refresh();
+      }
+    }
   }
 }

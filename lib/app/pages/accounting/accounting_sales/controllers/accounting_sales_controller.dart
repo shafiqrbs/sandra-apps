@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 import '/app/core/utils/static_utility_function.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -57,8 +58,8 @@ class AccountingSalesController extends BaseController {
     CustomerLedger element,
   ) {}
 
-  void showCustomerReceiveModal() {
-    Get.dialog(
+  Future<void> showCustomerReceiveModal() async {
+    final isNewReceived = await Get.dialog(
       DialogPattern(
         title: 'title',
         subTitle: '',
@@ -67,6 +68,11 @@ class AccountingSalesController extends BaseController {
         ),
       ),
     );
+    if (isNewReceived == true) {
+      salesList.allItems.value = null;
+      salesList.allItems.refresh();
+      await fetchSalesList();
+    }
   }
 
   Future<void> deleteSale(int salesId) async {
@@ -83,20 +89,34 @@ class AccountingSalesController extends BaseController {
         },
       );
       if (isDeleted ?? false) {
-        //remove one item from the list
         salesList.allItems.value?.removeWhere(
           (element) => element.id == salesId,
         );
+        salesList.allItems.refresh();
       }
     }
   }
 
-  Future<void> approveSale() async {
+  Future<void> approveSale({
+    required int salesId,
+    required int index,
+  }) async {
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (confirmation) {
-      toast('Under Development');
-    } else {}
+      bool? isApproved;
+      await dataFetcher(
+        future: () async {
+          isApproved = await services.approveAccountSale(
+            id: salesId.toString(),
+          );
+        },
+      );
+      if (isApproved ?? false) {
+        salesList.allItems.value?[index].approvedBy = LoggedUser().username;
+        salesList.allItems.refresh();
+      }
+    }
   }
 }

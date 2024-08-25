@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -34,6 +35,11 @@ class VendorPaymentModalController extends BaseController {
   }
 
   Future<void> processReceive() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) return;
+
     if (amountController.value.text.isEmpty) {
       toast('please_enter_amount'.tr);
       return;
@@ -43,9 +49,12 @@ class VendorPaymentModalController extends BaseController {
       return;
     }
 
+    bool? isSubmitted;
+
+
     await dataFetcher(
       future: () async {
-        final data = await services.postVendorPayment(
+        isSubmitted = await services.postVendorPayment(
           vendor: vendorManager.selectedItem.value!.vendorId!.toString(),
           method: 'receive',
           mode: selectedPaymentMode.value,
@@ -53,9 +62,14 @@ class VendorPaymentModalController extends BaseController {
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
         );
-        log('Receive Success $data');
       },
     );
+    if (isSubmitted ?? false) {
+      await resetField();
+      Get.back(
+        result: true,
+      );
+    }
   }
 
   Future<void> updateCustomer(Vendor? vendor) async {

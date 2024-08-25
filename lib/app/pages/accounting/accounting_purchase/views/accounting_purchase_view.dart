@@ -84,7 +84,10 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
             }
 
             return Expanded(
-              child: content,
+              child: RefreshIndicator(
+                onRefresh: controller.fetchPurchaseList,
+                child: content,
+              ),
             );
           },
         ),
@@ -175,44 +178,52 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                       ),
                     ),
                     Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: controller.approvePurchase,
-                            child: Container(
-                              height: 40,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: colors.primaryBaseColor,
-                                borderRadius: BorderRadius.circular(
-                                  containerBorderRadius,
-                                ),
-                                border: Border.all(
-                                  color: colors.primaryBaseColor,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CommonText(
-                                    text: appLocalization.approve,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: mediumButtonTFSize,
-                                    textColor: colors.backgroundColor,
+                      child: element.approvedBy == null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () => controller.approvePurchase(
+                                    purchaseId: element.id!,
+                                    index: index,
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          if(controller.isManager)
-                          DeleteButton(
-                            onTap: controller.deletePurchase,
-                          ),
-                        ],
-                      ),
+                                  child: Container(
+                                    height: 40,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: colors.primaryBaseColor,
+                                      borderRadius: BorderRadius.circular(
+                                        containerBorderRadius,
+                                      ),
+                                      border: Border.all(
+                                        color: colors.primaryBaseColor,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CommonText(
+                                          text: appLocalization.approve,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: mediumButtonTFSize,
+                                          textColor: colors.backgroundColor,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                if (controller.isManager)
+                                  DeleteButton(
+                                    onTap: () => controller.deletePurchase(
+                                      element.id!,
+                                    ),
+                                  ),
+                              ],
+                            )
+                          : Container(),
                     ),
                   ],
                 ),
