@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/core/base/base_controller.dart';
 
+enum Buttons {
+  printPaperType,
+}
+
 class PrefsSettingsModalController extends BaseController {
-  final isSalesOnline = false.obs;
-  final isPurchaseOnline = false.obs;
-  final isZeroSalesAllowed = false.obs;
+  final buttons = Rx<Buttons?>(null);
+  final isSalesOnline = ValueNotifier(false);
+  final isPurchaseOnline = ValueNotifier(false);
+  final isZeroSalesAllowed = ValueNotifier(false);
   final printerType = ''.obs;
   final printerNewLine = 0.obs;
+  final printNewLineController = TextEditingController();
   final printerTypeList = [
     const DropdownMenuItem(value: '80 mm', child: Text('80 mm')),
     const DropdownMenuItem(value: '58 mm', child: Text('58 mm')),
@@ -28,6 +34,7 @@ class PrefsSettingsModalController extends BaseController {
     isZeroSalesAllowed.value = await prefs.getIsZeroSalesAllowed();
     printerType.value = await prefs.getPrintPaperType();
     printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
+    printNewLineController.text = printerNewLine.value.toString();
   }
 
   Future<void> setSalesOnline(bool value) async {
@@ -51,17 +58,28 @@ class PrefsSettingsModalController extends BaseController {
     );
   }
 
-  Future<void> setPrinterType(String value) async {
-    printerType.value = value;
-    await prefs.setPrintPaperType(
-      value,
-    );
+  Future<void> setPrinterType(String? value) async {
+    if (value != null) {
+      printerType.value = value;
+      await prefs.setPrintPaperType(
+        value,
+      );
+    }
   }
 
   Future<void> setPrinterNewLine(int value) async {
     printerNewLine.value = value;
+    printNewLineController.text = value.toString();
     await prefs.setNumberOfPrinterNewLine(
       value,
     );
+  }
+
+  void changeButton(Buttons button) {
+    if (buttons.value == button) {
+      buttons.value = null;
+      return;
+    }
+    buttons.value = button;
   }
 }

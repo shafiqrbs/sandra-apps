@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -31,29 +33,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       ),
                     ),
                     AdvancedSwitch(
-                      controller: ValueNotifier(controller.isSalesOnline.value),
+                      controller: controller.isSalesOnline,
                       onChanged: (value) async {
-                        controller.setSalesOnline(value);
+                        await controller.setSalesOnline(value);
                       },
                       borderRadius: BorderRadius.circular(4),
                       height: 20,
                       width: 40,
-                      activeColor: Color(0xFFFAF3F0),
+                      activeColor: colors.primaryBaseColor,
                       initialValue: controller.isSalesOnline.value,
                     ),
-                    /*Switch(
-                      value: controller.isSalesOnline.value,
-                      onChanged: controller.setSalesOnline,
-                      activeColor: Color(0xFFFAF3F0),
-                      activeTrackColor: Color(0xFFE6C9BA),
-                      thumbColor: MaterialStateProperty.resolveWith ((Set  states) {
-                        if (states.contains(MaterialState.disabled)) {
-                          return Colors.blue.withOpacity(.48);
-                        }
-                        return controller.isSalesOnline.value ? colors.primaryBaseColor : colors.secondaryBaseColor;
-                      }),
-                      inactiveTrackColor: Colors.white,
-                    ),*/
                   ],
                 ),
                 dividerWidget(),
@@ -68,19 +57,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       ),
                     ),
                     AdvancedSwitch(
-                      controller: ValueNotifier(controller.isPurchaseOnline.value),
+                      controller: controller.isPurchaseOnline,
                       onChanged: (value) async {
-                        controller.setPurchaseOnline(value);
+                        await controller.setPurchaseOnline(value);
                       },
                       borderRadius: BorderRadius.circular(4),
                       height: 20,
                       width: 40,
+                      activeColor: colors.primaryBaseColor,
                       initialValue: controller.isPurchaseOnline.value,
                     ),
-                    /*Switch(
-                      value: controller.isPurchaseOnline.value,
-                      onChanged: controller.setPurchaseOnline,
-                    ),*/
                   ],
                 ),
                 dividerWidget(),
@@ -95,54 +81,60 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       ),
                     ),
                     AdvancedSwitch(
-                      controller: ValueNotifier(controller.isZeroSalesAllowed.value),
+                      controller: controller.isZeroSalesAllowed,
                       onChanged: (value) async {
-                        controller.setZeroSalesAllowed(value);
+                        await controller.setZeroSalesAllowed(value);
                       },
                       borderRadius: BorderRadius.circular(4),
                       height: 20,
                       width: 40,
+                      activeColor: colors.primaryBaseColor,
                       initialValue: controller.isZeroSalesAllowed.value,
                     ),
-                    /*Switch(
-                      value: controller.isZeroSalesAllowed.value,
-                      onChanged: controller.setZeroSalesAllowed,
-                    ),*/
                   ],
                 ),
                 dividerWidget(),
                 Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: spaceBetweenMAA,
-                      children: [
-                        Text(
-                          'Print Paper Type',
-                          style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
+                    _buildSettingButton(
+                      text: appLocalization.printPaperType,
+                      icon: TablerIcons.printer,
+                      trailingIcon: TablerIcons.chevron_right,
+                      isOpen:
+                          controller.buttons.value == Buttons.printPaperType,
+                      onTap: () {
+                        controller.changeButton(Buttons.printPaperType);
+                      },
+                    ),
+                    if (controller.buttons.value == Buttons.printPaperType)
+                      Container(
+                        color: Colors.white,
+                        width: Get.width,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: controller.printerTypeList.length,
+                          itemBuilder: (context, index) {
+                            final item = controller.printerTypeList[index];
+                            return RadioListTile<String>(
+                              title: Text(
+                                item.value ?? '',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: colors.defaultFontColor,
+                                ),
+                              ),
+                              value: item.value ?? '',
+                              groupValue: controller.printerType.value,
+                              onChanged: controller.setPrinterType,
+                              activeColor: colors.primaryBaseColor,
+                              contentPadding: const EdgeInsets.only(
+                                left: 24,
+                              ),
+                            );
+                          },
                         ),
-                        if (controller.printerType.value.isEmpty)
-                          const CircularProgressIndicator()
-                        else
-                          DropdownButton<String>(
-                            value: controller.printerType.value,
-                            items: controller.printerTypeList,
-                            onChanged: (value) async {
-                              if (value == null) return;
-                              controller.setPrinterType(value);
-                            },
-                          ),
-                      ],
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-
-                        ],
                       ),
-                    ),
                   ],
                 ),
                 dividerWidget(),
@@ -150,13 +142,65 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   mainAxisAlignment: spaceBetweenMAA,
                   children: [
                     Text(
-                      'Print End New Line',
+                      appLocalization.printEndNewLine,
                       style: GoogleFonts.roboto(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    if (controller.printerType.value.isEmpty)
+                    SizedBox(
+                      width: 80,
+                      height: textFieldHeight,
+                      child: TextFormField(
+                        controller: controller.printNewLineController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        onChanged: (value) {
+                          controller
+                              .setPrinterNewLine(int.tryParse(value) ?? 0);
+                        },
+                        onFieldSubmitted: (value) {
+                          controller
+                              .setPrinterNewLine(int.tryParse(value) ?? 0);
+                        },
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: '1',
+                          hintStyle: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: colors.secondaryTextColor,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          filled: true,
+                          fillColor: colors.textFieldColor,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(
+                              color: colors.borderColor,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(
+                              color: colors.borderColor,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(
+                              color: colors.borderColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    /*if (controller.printerType.value.isEmpty)
                       const CircularProgressIndicator()
                     else
                       DropdownButton<int>(
@@ -166,7 +210,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           if (value == null) return;
                           controller.setPrinterNewLine(value);
                         },
-                      ),
+                      ),*/
                   ],
                 ),
               ],
@@ -177,7 +221,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
     );
   }
 
-  Widget dividerWidget(){
+  Widget dividerWidget() {
     return Column(
       children: [
         12.height,
@@ -187,6 +231,40 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
         ),
         12.height,
       ],
+    );
+  }
+
+  Widget _buildSettingButton({
+    required IconData icon,
+    required String text,
+    required IconData trailingIcon,
+    required bool isOpen,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: colors.defaultFontColor,
+            size: 24,
+          ),
+          8.width,
+          Text(
+            text,
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const Spacer(),
+          Icon(
+            isOpen ? TablerIcons.chevron_down : trailingIcon,
+            color: colors.defaultFontColor,
+          ),
+        ],
+      ),
     );
   }
 

@@ -316,6 +316,8 @@
   "selectUser" : "ব্যবহারকারী নির্বাচন করুন",
   "flat" : "ফ্ল্যাট",
   "dontYouHaveCustomer" : "আপনার কোন গ্রাহক নেই?",
+  "printPaperType" : "প্রিন্ট কাগজের ধরণ",
+  "printEndNewLine" : "প্রিন্ট শেষ নতুন লাইন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

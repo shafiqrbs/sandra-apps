@@ -257,7 +257,9 @@
   "yes" : "Yes",
   "selectUser" : "Select User",
   "flat" : "Flat",
-  "dontYouHaveCustomer" : "Don’t you have customer?"
+  "dontYouHaveCustomer" : "Don’t you have customer?",
+  "printPaperType" : "Print Paper Type",
+  "printEndNewLine" : "Print End New Line"
 
 
 
