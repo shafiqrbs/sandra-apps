@@ -69,13 +69,26 @@ class AccountingSalesController extends BaseController {
     );
   }
 
-  Future<void> deleteSale() async {
+  Future<void> deleteSale(int salesId) async {
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (confirmation) {
-      toast('Under Development');
-    } else {}
+      bool? isDeleted;
+      await dataFetcher(
+        future: () async {
+          isDeleted = await services.deleteAccountSale(
+            id: salesId.toString(),
+          );
+        },
+      );
+      if (isDeleted ?? false) {
+        //remove one item from the list
+        salesList.allItems.value?.removeWhere(
+          (element) => element.id == salesId,
+        );
+      }
+    }
   }
 
   Future<void> approveSale() async {

@@ -210,7 +210,9 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                             ),
                           ),
                           DeleteButton(
-                            onTap: controller.deleteSale,
+                            onTap: () => controller.deleteSale(
+                              element.id!,
+                            ),
                           ),
                         ],
                       ),

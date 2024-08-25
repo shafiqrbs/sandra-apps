@@ -676,4 +676,24 @@ class Services {
       return false;
     }
   }
+
+  Future<bool> deleteAccountSale({
+    required String id,
+  }) async {
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-account-sales-delete',
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e) {
+      return false;
+    }
+  }
 }
