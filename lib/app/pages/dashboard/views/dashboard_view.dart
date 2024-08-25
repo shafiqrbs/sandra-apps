@@ -126,7 +126,7 @@ class DashboardView extends BaseView<DashboardController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'dashboard'.tr,
+            appLocalization.dashboard,
             style: TextStyle(
               color: colors.backgroundColor,
               fontSize: regularTFSize,
@@ -137,7 +137,7 @@ class DashboardView extends BaseView<DashboardController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CommonText(
-                text: 'online'.tr,
+                text: appLocalization.online,
                 fontSize: 10,
                 textColor: Colors.white,
                 fontWeight: FontWeight.w400,
@@ -403,7 +403,7 @@ class DashboardView extends BaseView<DashboardController> {
               ),
               Expanded(
                 child: _buildTitleSubTitle(
-                  title: 'due',
+                  title: appLocalization.due,
                   subTitle: '567',
                 ),
               ),
@@ -508,6 +508,7 @@ class DashboardView extends BaseView<DashboardController> {
       child: Row(
         children: [
           TbdTextButton(
+            selectedBgColor: colors.primaryBaseColor,
             text: appLocalization.inventory,
             onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.inventory,
@@ -516,6 +517,7 @@ class DashboardView extends BaseView<DashboardController> {
                 SelectedButtonGroup.inventory,
           ),
           TbdTextButton(
+            selectedBgColor: colors.primaryBaseColor,
             text: appLocalization.accounting,
             onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.accounting,
@@ -524,6 +526,7 @@ class DashboardView extends BaseView<DashboardController> {
                 SelectedButtonGroup.accounting,
           ),
           TbdTextButton(
+            selectedBgColor: colors.primaryBaseColor,
             text: appLocalization.config,
             onPressed: () => controller.updateSelectedButtonGroup(
               SelectedButtonGroup.config,
