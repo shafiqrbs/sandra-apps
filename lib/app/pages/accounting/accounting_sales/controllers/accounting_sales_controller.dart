@@ -61,7 +61,7 @@ class AccountingSalesController extends BaseController {
   Future<void> showCustomerReceiveModal() async {
     final isNewReceived = await Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: appLocalization.newReceive,
         subTitle: '',
         child: CustomerReceiveModalView(
           customer: null,

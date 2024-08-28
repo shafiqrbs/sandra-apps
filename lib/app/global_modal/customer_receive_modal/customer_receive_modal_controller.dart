@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -79,5 +81,25 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       return;
     }
     await customerManager.searchItemsByName(value!);
+  }
+
+  Future<void> addCustomer() async {
+    final result = await Get.dialog(
+      DialogPattern(
+        title: 'add_customer'.tr,
+        subTitle: '',
+        child: AddCustomerModalView(),
+      ),
+    ) as Customer?;
+    print('result: $result');
+
+    if (result != null) {
+      customerManager.selectedItem.value = result;
+      customerManager.searchTextController.value.text = result.name!;
+      customerManager.searchedItems.value = null;
+      update();
+      notifyChildrens();
+      refresh();
+    }
   }
 }

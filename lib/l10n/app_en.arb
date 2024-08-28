@@ -201,6 +201,8 @@
   "local" : "Local",
   "online" : "Online",
   "offline" : "Offline",
+  "sms" : "SMS",
+  "newReceive" : "New Receive",
   "salesPriceRequired" : "Sales price required",
   "purchasePriceRequired" : "Purchase price required",
   "unitRequired" : "Unit required",

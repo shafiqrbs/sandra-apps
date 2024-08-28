@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/common_text.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -35,7 +37,8 @@ class CustomerReceiveModalView
             ),
             child: Column(
               children: [
-                FBString(
+                Obx(() => _buildCustomerSearch(context)),
+                /*FBString(
                   isRequired: false,
                   textController:
                       controller.customerManager.searchTextController.value,
@@ -43,12 +46,12 @@ class CustomerReceiveModalView
                   hint: appLocalization.searchCustomer,
                   suffixIcon: TablerIcons.search,
                 ),
-                1.percentHeight,
+                1.percentHeight,*/
                 Stack(
                   children: [
                     Column(
                       children: [
-                        Obx(
+                        /*Obx(
                           () => controller.customerManager.selectedItem.value !=
                                   null
                               ? Column(
@@ -65,7 +68,7 @@ class CustomerReceiveModalView
                                   ],
                                 )
                               : Container(),
-                        ),
+                        ),*/
                         Obx(
                           () => Column(
                             children: [
@@ -105,10 +108,77 @@ class CustomerReceiveModalView
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                        1.percentHeight,
+                        FBString(
+                          textController: controller.addRemarkController.value,
+                          isRequired: false,
+                          lines: 2,
+                          hint: appLocalization.addRemark,
+                        ),
+                        1.percentHeight,
+                      ],
+                    ),
+                    Obx(
+                      () => Container(
+                        color: Colors.white,
+                        height: 35.ph,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: controller.customerManager.searchedItems
+                                  .value?.length ??
+                              0,
+                          itemBuilder: (context, index) {
+                            return CustomerCardView(
+                              data: controller
+                                  .customerManager.searchedItems.value![index],
+                              index: index,
+                              onTap: () {
+                                controller.updateCustomer(
+                                  controller.customerManager.searchedItems
+                                      .value![index],
+                                );
+                                //close keyboard
+                                FocusScope.of(context).unfocus();
+                              },
+                              onReceive: () {},
+                              showReceiveButton: false,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  //height: 100,
+                  width: Get.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CommonText(text: appLocalization.sms),
+                            8.width,
+                            AdvancedSwitch(
+                              controller: controller.isSms,
+                              onChanged: (value) async {},
+                              borderRadius: BorderRadius.circular(4),
+                              height: 20,
+                              width: 40,
+                              activeColor: colors.primaryBaseColor,
+                              initialValue: controller.isSms.value,
+                            ),
+                          ],
+                        ),
+                      ),
+                      16.width,
+                      Expanded(
+                        child: Container(
                           alignment: Alignment.center,
-                          height: 50,
+                          height: 5.ph,
                           child: TextFormField(
                             controller: controller.amountController.value,
                             inputFormatters: [regexDouble],
@@ -120,9 +190,10 @@ class CustomerReceiveModalView
                             ),
                             cursorColor: colors.formCursorColor,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
                               hintText: appLocalization.amount,
                               filled: true,
-                              fillColor: colors.textFieldColor,
+                              fillColor: Colors.white,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
@@ -141,74 +212,215 @@ class CustomerReceiveModalView
                             onChanged: (value) {},
                           ),
                         ),
-                        1.percentHeight,
-                        FBString(
-                          textController: controller.addRemarkController.value,
-                          isRequired: false,
-                          lines: 2,
-                          hint: appLocalization.addRemark,
-                        ),
-                        1.percentHeight,
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: colors.moduleFooterColor,
-                          ),
-                          //height: 100,
-                          width: Get.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RowButton(
-                                buttonName: appLocalization.reset,
-                                leftIcon: TablerIcons.restore,
-                                onTap: controller.resetField,
-                                isOutline: true,
-                              ),
-                              16.width,
-                              RowButton(
-                                buttonName: appLocalization.save,
-                                leftIcon: TablerIcons.device_floppy,
-                                onTap: controller.processReceive,
-                                isOutline: false,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Obx(
-                      () => ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller
-                                .customerManager.searchedItems.value?.length ??
-                            0,
-                        itemBuilder: (context, index) {
-                          return CustomerCardView(
-                            data: controller
-                                .customerManager.searchedItems.value![index],
-                            index: index,
-                            onTap: () {
-                              controller.updateCustomer(
-                                controller.customerManager.searchedItems
-                                    .value![index],
-                              );
-                              //close keyboard
-                              FocusScope.of(context).unfocus();
-                            },
-                            onReceive: () {},
-                            showReceiveButton: false,
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                      16.width,
+                      RowButton(
+                        buttonName: appLocalization.save,
+                        leftIcon: TablerIcons.device_floppy,
+                        onTap: controller.processReceive,
+                        isOutline: false,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  InputDecoration buildInputDecoration({
+    required String hintText,
+    required TextStyle hintStyle,
+    required Color fillColor,
+    required Color enabledBorderColor,
+    required Color focusedBorderColor,
+    required Color errorBorderColor,
+    EdgeInsetsGeometry? contentPadding,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+  }) {
+    return InputDecoration(
+      contentPadding: contentPadding ??
+          const EdgeInsets.symmetric(
+            vertical: 6,
+            horizontal: 8,
+          ),
+      hintText: hintText,
+      hintStyle: hintStyle,
+      filled: true,
+      fillColor: fillColor,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: enabledBorderColor,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(color: errorBorderColor),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+          width: 0,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCustomerSearch(
+    BuildContext context,
+  ) {
+    return Container(
+      color: colors.backgroundColor,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: textFieldHeight,
+                  child: TextFormField(
+                    controller:
+                        controller.customerManager.searchTextController.value,
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      prefixIcon: Icon(
+                        TablerIcons.search,
+                        size: 16,
+                        color: colors.formBaseHintTextColor,
+                      ),
+                      suffixIcon: Obx(
+                        () {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              controller.isShowClearIcon.value
+                                  ? InkWell(
+                                      onTap: () {
+                                        controller.customerManager
+                                            .searchTextController.value
+                                            .clear();
+                                        controller.isShowClearIcon.value =
+                                            false;
+                                        controller.customerManager.selectedItem
+                                            .value = null;
+                                      },
+                                      child: Icon(
+                                        TablerIcons.x,
+                                        size: 12,
+                                        color: colors.formClearIconColor,
+                                      ),
+                                    )
+                                  : Container(),
+                              IconButton(
+                                onPressed: controller.addCustomer,
+                                icon: const Icon(
+                                  TablerIcons.user_plus,
+                                  size: 20,
+                                  color: Color(0xFFC98A69),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      hintText: appLocalization.searchCustomer,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: mediumTFSize.sp,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.borderColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    textAlign: startTA,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: mediumTFSize.sp,
+                    ),
+                    onChanged: (value) async {
+                      if (value.isEmpty ?? true) {
+                        controller.isShowClearIcon.value = false;
+                        controller.customerManager.searchedItems.value = [];
+                        controller.customerManager.selectedItem.value = null;
+                        return;
+                      }
+                      controller.isShowClearIcon.value = true;
+                      await controller.customerManager.searchItemsByName(value);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          4.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CommonText(
+                text: appLocalization.donNotHaveAnAccount,
+                fontSize: smallTFSize,
+                fontWeight: FontWeight.w400,
+                textColor: colors.textColorH6,
+              ),
+              InkWell(
+                onTap: controller.addCustomer,
+                child: CommonText(
+                  text: appLocalization.addCustomer,
+                  fontSize: mediumTFSize,
+                  fontWeight: FontWeight.w500,
+                  textColor: colors.primaryBaseColor,
+                  textDecoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+          Obx(
+            () => controller.customerManager.selectedItem.value != null
+                ? Column(
+                    children: [
+                      1.percentHeight,
+                      CustomerCardView(
+                        data: controller.customerManager.selectedItem.value!,
+                        index: 0,
+                        onTap: () {},
+                        onReceive: () {},
+                        showReceiveButton: false,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ),
+          8.height,
+        ],
+      ),
     );
   }
 
