@@ -143,7 +143,37 @@ class DashboardView extends BaseView<DashboardController> {
                 fontWeight: FontWeight.w400,
               ),
               4.width,
-              Obx(
+
+              Container(
+                height: 20,
+                width: 20,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Center(
+                  child: Obx(
+                        () {
+                      return GestureDetector(
+                        onTap: controller.onTapIsOnline,
+                        child: Container(
+                          height: 16,
+                          width: 16,
+                          decoration: BoxDecoration(
+                            color: controller.isOnline.value
+                                ? colors.primaryBaseColor
+                                : Colors.grey,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+
+              /*Obx(
                 () {
                   return AdvancedSwitch(
                     activeColor: Colors.white,
@@ -156,7 +186,7 @@ class DashboardView extends BaseView<DashboardController> {
                     controller: controller.showOnlineController.value,
                   );
                 },
-              ),
+              ),*/
               12.width,
               InkWell(
                 onTap: () {},

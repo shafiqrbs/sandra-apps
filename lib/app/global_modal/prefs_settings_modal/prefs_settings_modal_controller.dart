@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/dashboard/controllers/dashboard_controller.dart';
 import '/app/core/base/base_controller.dart';
 
 enum Buttons {
@@ -42,6 +43,9 @@ class PrefsSettingsModalController extends BaseController {
     await prefs.setIsSalesOnline(
       isSalesOnline: value,
     );
+    final dashboardController = Get.find<DashboardController>();
+    dashboardController.isOnline.value = value;
+
   }
 
   Future<void> setPurchaseOnline(bool value) async {

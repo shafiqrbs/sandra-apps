@@ -139,6 +139,7 @@ class DashboardController extends BaseController {
   final selectedTab = SelectedTab.dashboard.obs;
   final selectedButtonGroup = SelectedButtonGroup.inventory.obs;
   final showOnlineController = ValueNotifier<bool>(false).obs;
+  final isOnline = false.obs;
 
   List<Widget> dashboardButtonList = [];
 
@@ -146,6 +147,7 @@ class DashboardController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
+    isOnline.value = await prefs.getIsSalesOnline();
   }
 
   void changeTab(SelectedTab dashboard) {
@@ -206,4 +208,12 @@ class DashboardController extends BaseController {
   Future<void> bankOnTap() async {}
 
   Future<void> mobileOnTap() async {}
+
+  Future<void> onTapIsOnline() async {
+    isOnline.value = !isOnline.value;
+    await prefs.setIsSalesOnline(
+      isSalesOnline: isOnline.value,
+    );
+  }
+
 }
