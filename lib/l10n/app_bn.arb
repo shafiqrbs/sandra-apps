@@ -275,6 +275,7 @@
   "pleaseSelectItem" : "দয়া করে আইটেম নির্বাচন করুন",
   "local" : "স্থানীয়",
   "online" : "অনলাইন",
+  "offline" : "অফলাইন",
   "salesPriceRequired" : "বিক্রয় মূল্য প্রয়োজন",
   "purchasePriceRequired" : "ক্রয় মূল্য প্রয়োজন",
   "unitRequired" : "একক প্রয়োজন",

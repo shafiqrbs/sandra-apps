@@ -136,11 +136,17 @@ class DashboardView extends BaseView<DashboardController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CommonText(
-                text: appLocalization.online,
-                fontSize: 10,
-                textColor: Colors.white,
-                fontWeight: FontWeight.w400,
+              Obx(
+                () {
+                  return CommonText(
+                    text: controller.isOnline.value
+                        ? appLocalization.online
+                        : appLocalization.offline,
+                    fontSize: 10,
+                    textColor: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  );
+                },
               ),
               4.width,
 
@@ -153,7 +159,7 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
                 child: Center(
                   child: Obx(
-                        () {
+                    () {
                       return GestureDetector(
                         onTap: controller.onTapIsOnline,
                         child: Container(
@@ -161,8 +167,8 @@ class DashboardView extends BaseView<DashboardController> {
                           width: 16,
                           decoration: BoxDecoration(
                             color: controller.isOnline.value
-                                ? colors.primaryBaseColor
-                                : Colors.grey,
+                                ? colors.successButtonBorderColor
+                                : colors.dangerBaseColor,
                             borderRadius: BorderRadius.circular(100),
                           ),
                         ),
@@ -171,7 +177,6 @@ class DashboardView extends BaseView<DashboardController> {
                   ),
                 ),
               ),
-
 
               /*Obx(
                 () {

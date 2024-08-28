@@ -200,6 +200,7 @@
   "pleaseSelectItem" : "Please select item",
   "local" : "Local",
   "online" : "Online",
+  "offline" : "Offline",
   "salesPriceRequired" : "Sales price required",
   "purchasePriceRequired" : "Purchase price required",
   "unitRequired" : "Unit required",
