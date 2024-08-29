@@ -122,8 +122,7 @@ class CustomerReceiveModalView
                       () => Container(
                         color: Colors.white,
                         height: 35.ph,
-                        child: ListView.builder(
-                          shrinkWrap: true,
+                        child: ListView.builder(shrinkWrap: true,
                           itemCount: controller.customerManager.searchedItems
                                   .value?.length ??
                               0,
