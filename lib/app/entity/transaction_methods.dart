@@ -24,16 +24,17 @@ class TransactionMethods {
     this.imagePath,
   });
 
-  factory TransactionMethods.fromJson(Map<String, dynamic> json) =>
-      TransactionMethods(
-        methodId: json['method_id'],
-        methodName: json['method_name'],
-        methodMode: json['method_mode'],
-        serviceCharge: double.tryParse(
-          json['service_charge']?.toString() ?? '0',
-        ),
-        imagePath: json['image_path'],
-      );
+  factory TransactionMethods.fromJson(Map<String, dynamic> json) {
+    return TransactionMethods(
+      methodId: json['method_id'],
+      methodName: json['method_name'],
+      methodMode: json['method_mode'],
+      serviceCharge: double.tryParse(
+        json['service_charge']?.toString() ?? '0',
+      ),
+      imagePath: json['image_path'],
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

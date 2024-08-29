@@ -30,19 +30,25 @@ class CustomerReceiveModalController extends PaymentGatewayController {
   }
 
   Future<void> processReceive() async {
+    if (customerManager.selectedItem.value == null) {
+      toast(appLocalization.pleaseSelectCustomer);
+      return;
+    }
+
+    if (transactionMethodsManager.selectedItem.value == null) {
+      toast(appLocalization.pleaseSelectPaymentMethod);
+      return;
+    }
+
+    if (amountController.value.text.isEmpty) {
+      toast(appLocalization.pleaseEnterAmount);
+      return;
+    }
+
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (!confirmation) return;
-
-    if (amountController.value.text.isEmpty) {
-      toast('please_enter_amount'.tr);
-      return;
-    }
-    if (customerManager.selectedItem.value == null) {
-      toast('please_select_customer'.tr);
-      return;
-    }
 
     bool? isSubmitted;
 
@@ -51,7 +57,8 @@ class CustomerReceiveModalController extends PaymentGatewayController {
         isSubmitted = await services.postCustomerReceive(
           customer: customerManager.selectedItem.value!.customerId!.toString(),
           method: 'receive',
-          mode: selectedPaymentMode.value,
+          mode: transactionMethodsManager.selectedItem.value!.methodId!
+              .toString(),
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
