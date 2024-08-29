@@ -324,6 +324,7 @@
   "pleaseSelectCustomer" : "দয়া করে গ্রাহক নির্বাচন করুন",
   "pleaseSelectPaymentMode" : "দয়া করে পেমেন্ট মোড নির্বাচন করুন",
   "pleaseEnterAmount" : "দয়া করে পরিমাণ লিখুন",
+  "doNotAllowDiscountValueMoreThenSubtotalValue" : "সাবটোটাল মানের চেয়ে বেশি ডিসকাউন্ট মান অনুমোদিত নয়",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

@@ -100,7 +100,7 @@ abstract class PaymentGatewayController extends BaseController {
 
   void handleDiscountChange(double discountValue, double? percentValue) {
     if (discountValue > salesSubTotal.value) {
-      toast('do_not_allow_discount_value_more_then_subtotal_value'.tr);
+      toast(appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue);
       paymentDiscountController.value.text = '0';
       salesDiscount.value = 0;
       netTotal.value = 0;

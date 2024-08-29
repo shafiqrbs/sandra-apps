@@ -201,6 +201,7 @@
   "pleaseSelectCustomer" : "Please select customer",
   "pleaseSelectPaymentMethod" : "Please select payment method",
   "pleaseEnterAmount" : "Please enter amount",
+  "doNotAllowDiscountValueMoreThenSubtotalValue" : "Do not allow discount value more then subtotal value",
   "local" : "Local",
   "online" : "Online",
   "offline" : "Offline",

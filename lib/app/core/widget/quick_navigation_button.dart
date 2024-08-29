@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/asset_image_view.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -17,6 +18,14 @@ class QuickNavigationButton extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => showQuickNavigateBottomSheet(context: context),
+      child: const AssetImageView(
+        width: 32,
+        height: 32,
+        fileName: 'ic_menu.svg',
+      ),
+    );
     return AppBarButton(
       buttonName: null,
       onTap: () => showQuickNavigateBottomSheet(
