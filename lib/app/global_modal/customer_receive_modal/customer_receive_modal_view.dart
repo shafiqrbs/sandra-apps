@@ -38,37 +38,10 @@ class CustomerReceiveModalView
             child: Column(
               children: [
                 Obx(() => _buildCustomerSearch(context)),
-                /*FBString(
-                  isRequired: false,
-                  textController:
-                      controller.customerManager.searchTextController.value,
-                  onChange: controller.onSearchCustomer,
-                  hint: appLocalization.searchCustomer,
-                  suffixIcon: TablerIcons.search,
-                ),
-                1.percentHeight,*/
                 Stack(
                   children: [
                     Column(
                       children: [
-                        /*Obx(
-                          () => controller.customerManager.selectedItem.value !=
-                                  null
-                              ? Column(
-                                  children: [
-                                    CustomerCardView(
-                                      data: controller
-                                          .customerManager.selectedItem.value!,
-                                      index: 0,
-                                      onTap: () {},
-                                      onReceive: () {},
-                                      showReceiveButton: false,
-                                    ),
-                                    1.percentHeight,
-                                  ],
-                                )
-                              : Container(),
-                        ),*/
                         Obx(
                           () => Column(
                             children: [
@@ -119,32 +92,37 @@ class CustomerReceiveModalView
                       ],
                     ),
                     Obx(
-                      () => Container(
-                        color: Colors.white,
-                        height: 35.ph,
-                        child: ListView.builder(shrinkWrap: true,
-                          itemCount: controller.customerManager.searchedItems
-                                  .value?.length ??
-                              0,
-                          itemBuilder: (context, index) {
-                            return CustomerCardView(
-                              data: controller
-                                  .customerManager.searchedItems.value![index],
-                              index: index,
-                              onTap: () {
-                                controller.updateCustomer(
-                                  controller.customerManager.searchedItems
-                                      .value![index],
-                                );
-                                //close keyboard
-                                FocusScope.of(context).unfocus();
-                              },
-                              onReceive: () {},
-                              showReceiveButton: false,
-                            );
-                          },
-                        ),
-                      ),
+                      () => controller.customerManager.searchedItems.value
+                                  ?.isNotEmpty ??
+                              false
+                          ? Container(
+                              color: Colors.white,
+                              height: 35.ph,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.customerManager
+                                        .searchedItems.value?.length ??
+                                    0,
+                                itemBuilder: (context, index) {
+                                  return CustomerCardView(
+                                    data: controller.customerManager
+                                        .searchedItems.value![index],
+                                    index: index,
+                                    onTap: () {
+                                      controller.updateCustomer(
+                                        controller.customerManager.searchedItems
+                                            .value![index],
+                                      );
+                                      //close keyboard
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    onReceive: () {},
+                                    showReceiveButton: false,
+                                  );
+                                },
+                              ),
+                            )
+                          : Container(),
                     ),
                   ],
                 ),
@@ -324,6 +302,8 @@ class CustomerReceiveModalView
                                             false;
                                         controller.customerManager.selectedItem
                                             .value = null;
+                                        controller.customerManager.searchedItems
+                                            .value = [];
                                       },
                                       child: Icon(
                                         TablerIcons.x,
@@ -365,7 +345,7 @@ class CustomerReceiveModalView
                       fontSize: mediumTFSize.sp,
                     ),
                     onChanged: (value) async {
-                      if (value.isEmpty ?? true) {
+                      if (value.isEmpty) {
                         controller.isShowClearIcon.value = false;
                         controller.customerManager.searchedItems.value = [];
                         controller.customerManager.selectedItem.value = null;
