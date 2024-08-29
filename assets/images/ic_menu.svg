@@ -1,20 +1,12 @@
 <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_108_271)">
-<rect width="500" height="500" fill="white"/>
-<circle cx="250" cy="250" r="250" fill="#FAF3F0"/>
-<rect x="87" y="87" width="95.4449" height="95.4449" fill="#2975F0"/>
-<rect x="87" y="202.278" width="95.4449" height="95.4449" fill="#F0A12E"/>
-<rect x="87" y="317.555" width="95.4449" height="95.4449" fill="#3D9048"/>
-<rect x="202.609" y="87" width="95.4449" height="95.4449" fill="#E22A25"/>
-<rect x="202.609" y="202.278" width="95.4449" height="95.4449" fill="#2874F1"/>
-<rect x="202.609" y="317.555" width="95.4449" height="95.4449" fill="#F0A12E"/>
-<rect x="318.219" y="87" width="95.4449" height="95.4449" fill="#3D9048"/>
-<rect x="318.219" y="202.278" width="95.4449" height="95.4449" fill="#E22A25"/>
-<rect x="318.219" y="317.555" width="95.4449" height="95.4449" fill="#2874F1"/>
-</g>
-<defs>
-<clipPath id="clip0_108_271">
-<rect width="500" height="500" fill="white"/>
-</clipPath>
-</defs>
+<rect width="500" height="500" rx="250" fill="white"/>
+<rect x="85" y="86" width="96.1697" height="96.1697" rx="30.3427" fill="#2975F0"/>
+<rect x="85" y="202.15" width="96.1697" height="96.1697" rx="30.3427" fill="#F0A12E"/>
+<rect x="85" y="318.304" width="96.1697" height="96.1697" rx="30.3427" fill="#3D9048"/>
+<rect x="201.488" y="86" width="96.1697" height="96.1697" rx="30.3427" fill="#E22A25"/>
+<rect x="201.488" y="202.15" width="96.1697" height="96.1697" rx="30.3427" fill="#2874F1"/>
+<rect x="201.488" y="318.304" width="96.1697" height="96.1697" rx="30.3427" fill="#F0A12E"/>
+<rect x="317.976" y="86" width="96.1697" height="96.1697" rx="30.3427" fill="#3D9048"/>
+<rect x="317.976" y="202.15" width="96.1697" height="96.1697" rx="30.3427" fill="#E22A25"/>
+<rect x="317.976" y="318.304" width="96.1697" height="96.1697" rx="30.3427" fill="#2874F1"/>
 </svg>

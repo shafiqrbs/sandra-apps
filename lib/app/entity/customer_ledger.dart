@@ -23,6 +23,10 @@ class CustomerLedger {
   final int? customerId;
   final String? mobile;
   String? approvedBy;
+  final String? accountBank;
+  final int? total;
+  final int? amount;
+  final String? createdBy;
 
   CustomerLedger({
     this.id,
@@ -38,6 +42,10 @@ class CustomerLedger {
     this.customerId,
     this.mobile,
     this.approvedBy,
+    this.accountBank,
+    this.total,
+    this.amount,
+    this.createdBy,
   });
 
   factory CustomerLedger.fromJson(Map<String, dynamic> json) {
@@ -55,6 +63,10 @@ class CustomerLedger {
       customerId: json['customer_id'],
       mobile: json['mobile'],
       approvedBy: json['approved_by'],
+      accountBank: json['account_bank'],
+      total: json['total'],
+      amount: json['amount'],
+      createdBy: json['created_by'],
     );
   }
 
@@ -73,6 +85,10 @@ class CustomerLedger {
       'customer_id': customerId,
       'mobile': mobile,
       'approved_by': approvedBy,
+      'account_bank': accountBank,
+      'total': total,
+      'amount': amount,
+      'created_by': createdBy,
     };
   }
 

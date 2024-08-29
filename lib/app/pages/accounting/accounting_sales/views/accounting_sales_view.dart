@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -19,6 +21,8 @@ import '/app/pages/accounting/accounting_sales/controllers/accounting_sales_cont
 //ignore: must_be_immutable
 class AccountingSalesView extends BaseView<AccountingSalesController> {
   AccountingSalesView({super.key});
+
+  final currency = SetUp().currency ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -102,6 +106,148 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
       itemBuilder: (context, index) {
         final element = controller.salesList.allItems.value![index];
         const iconColor = Color(0xff989898);
+
+        final createdDate = element.created != null
+            ? DateFormat('dd MMM yyyy').format(
+          DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+        )
+            : '';
+
+        return InkWell(
+          onTap: () => controller.showSalesInformationModal(
+            context,
+            element,
+          ),
+          child: Stack(
+            alignment: Alignment.centerRight,
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  left: 8,
+                  right: 8,
+                  bottom: 8,
+                  top: index == 0 ? 8 : 0,
+                ),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color:
+                  index.isEven ? colors.evenListColor : colors.oddListColor,
+                  borderRadius: BorderRadius.circular(containerBorderRadius),
+                  border: Border.all(
+                    color: colors.tertiaryBaseColor,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.created.toString(),
+                            icon: TablerIcons.calendar_due,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                        Expanded(
+                          child: CommonIconText(
+                            text: '${element.invoice}',
+                            icon: TablerIcons.file_invoice,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.customerName ?? '',
+                            icon: TablerIcons.user,
+                            textOverflow: TextOverflow.ellipsis,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.method ?? '',
+                            icon: TablerIcons.device_mobile,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CommonIconText(
+                            text: element.mobile ?? '',
+                            icon: TablerIcons.device_mobile,
+                            fontSize: valueTFSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      thickness: 0.4,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                              "${appLocalization.total} : $currency ${element.total ?? ''}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                              "${appLocalization.amount} : $currency ${element.amount ?? ''}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: CommonText(
+                              text:
+                              "${appLocalization.balance} :$currency ${element.balance ?? ""}",
+                              fontSize: valueTFSize,
+                              textColor: colors.primaryTextColor,
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              /*if (controller.isManager)
+                Positioned(
+                  right: 10,
+                  top: 18,
+                  child: DeleteButton(
+                    onTap: () => controller.deleteSales(
+                      salesId: element.salesId!,
+                    ),
+                  ),
+                ),*/
+            ],
+          ),
+        );
+
 
         return InkWell(
           onTap: () => controller.showSalesInformationModal(
