@@ -109,8 +109,8 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
 
         final createdDate = element.created != null
             ? DateFormat('dd MMM yyyy').format(
-          DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
-        )
+                DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+              )
             : '';
 
         return InkWell(
@@ -118,267 +118,176 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             context,
             element,
           ),
-          child: Stack(
-            alignment: Alignment.centerRight,
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  left: 8,
-                  right: 8,
-                  bottom: 8,
-                  top: index == 0 ? 8 : 0,
-                ),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color:
-                  index.isEven ? colors.evenListColor : colors.oddListColor,
-                  borderRadius: BorderRadius.circular(containerBorderRadius),
-                  border: Border.all(
-                    color: colors.tertiaryBaseColor,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.created.toString(),
-                            icon: TablerIcons.calendar_due,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                        Expanded(
-                          child: CommonIconText(
-                            text: '${element.invoice}',
-                            icon: TablerIcons.file_invoice,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.customerName ?? '',
-                            icon: TablerIcons.user,
-                            textOverflow: TextOverflow.ellipsis,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.method ?? '',
-                            icon: TablerIcons.device_mobile,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.mobile ?? '',
-                            icon: TablerIcons.device_mobile,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 0.4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                              "${appLocalization.total} : $currency ${element.total ?? ''}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                              "${appLocalization.amount} : $currency ${element.amount ?? ''}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                              "${appLocalization.balance} :$currency ${element.balance ?? ""}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              /*if (controller.isManager)
-                Positioned(
-                  right: 10,
-                  top: 18,
-                  child: DeleteButton(
-                    onTap: () => controller.deleteSales(
-                      salesId: element.salesId!,
-                    ),
-                  ),
-                ),*/
-            ],
-          ),
-        );
-
-
-        return InkWell(
-          onTap: () => controller.showSalesInformationModal(
-            context,
-            element,
-          ),
           child: Container(
-            margin: const EdgeInsets.all(4),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: index.isEven ? colors.evenListColor : colors.oddListColor,
-              borderRadius: BorderRadius.circular(containerBorderRadius),
+            margin: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              bottom: 8,
+              top: index == 0 ? 8 : 0,
             ),
-            child: Column(
+            child: Stack(
+              alignment: Alignment.centerRight,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonIconText(
-                        text: '${element.created}',
-                        icon: TablerIcons.calendar_due,
-                        iconColor: iconColor,
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: index.isEven
+                        ? colors.evenListColor
+                        : colors.oddListColor,
+                    borderRadius: BorderRadius.circular(containerBorderRadius),
+                    border: Border.all(
+                      color: colors.tertiaryBaseColor,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CommonIconText(
+                              text: createdDate,
+                              icon: TablerIcons.calendar_due,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                          Expanded(
+                            child: CommonIconText(
+                              text: '${element.invoice}',
+                              icon: TablerIcons.file_invoice,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: '${element.invoice}',
-                        icon: TablerIcons.file_invoice,
-                        iconColor: iconColor,
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CommonIconText(
+                              text: element.customerName ?? '',
+                              icon: TablerIcons.user,
+                              textOverflow: TextOverflow.ellipsis,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                          Expanded(
+                            child: CommonIconText(
+                              text: element.method ?? 'N/A',
+                              icon: TablerIcons.paywall,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: '${element.id}',
-                        icon: TablerIcons.file_invoice,
-                        iconColor: iconColor,
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CommonIconText(
+                              text: element.mobile ?? '',
+                              icon: TablerIcons.device_mobile,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                          Expanded(
+                            child: CommonIconText(
+                              text: element.createdBy ?? '',
+                              icon: TablerIcons.user_heart,
+                              textOverflow: TextOverflow.ellipsis,
+                              fontSize: valueTFSize,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
+                      const Divider(
+                        thickness: 0.4,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: CommonText(
+                                text:
+                                    "${appLocalization.total} : $currency ${element.total ?? ''}",
+                                fontSize: valueTFSize,
+                                textColor: colors.primaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: CommonText(
+                                text:
+                                    "${appLocalization.amount} : $currency ${element.amount ?? ''}",
+                                fontSize: valueTFSize,
+                                textColor: colors.primaryTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: CommonText(
+                                text:
+                                    "${appLocalization.due} :$currency ${element.balance ?? ""}",
+                                fontSize: valueTFSize,
+                                textColor: colors.primaryTextColor,
+                                textAlign: TextAlign.start,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                10.height,
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.method ?? '',
-                        icon: TablerIcons.cash,
-                        iconColor: iconColor,
+                if (element.approvedBy == null)
+                  if (controller.isManager)
+                    Positioned(
+                      right: 0,
+                      top: 4,
+                      child: DeleteButton(
+                        onTap: () => controller.deleteSale(
+                          element.id!,
+                        ),
                       ),
                     ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.customerName ?? '',
-                        icon: TablerIcons.tag,
-                        iconColor: iconColor,
+                if (element.approvedBy == null)
+                  Positioned(
+                    right: 0,
+                    top: 34,
+                    child: IconButton(
+                      onPressed: () => controller.approveSale(
+                        salesId: element.id!,
+                        index: index,
+                      ),
+                      icon: Icon(
+                        TablerIcons.check,
+                        color: colors.successfulBaseColor,
                       ),
                     ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
-                ),
-                10.height,
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.customerName ?? '',
-                        icon: TablerIcons.user_share,
-                        iconColor: iconColor,
+                  ),
+                if (element.sourceInvoice != null)
+                  Positioned(
+                    right: 10,
+                    bottom: 8,
+                    child: GestureDetector(
+                      onTap: () => controller.showSalesInformationModal(
+                        context,
+                        element,
+                      ),
+                      child: Icon(
+                        TablerIcons.eye,
+                        color: colors.primaryBaseColor,
                       ),
                     ),
-                    Expanded(
-                      child: CommonIconText(
-                        text: element.customerName ?? '',
-                        icon: TablerIcons.user,
-                        iconColor: iconColor,
-                      ),
-                    ),
-                    Expanded(
-                      child: element.approvedBy == null
-                          ? Row(
-                              children: [
-                                InkWell(
-                                  onTap: () => controller.approveSale(
-                                    salesId: element.id!,
-                                    index: index,
-                                  ),
-                                  child: Container(
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: colors.primaryBaseColor,
-                                      borderRadius: BorderRadius.circular(
-                                        containerBorderRadius,
-                                      ),
-                                      border: Border.all(
-                                        color: colors.primaryBaseColor,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CommonText(
-                                          text: appLocalization.approve,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: mediumButtonTFSize,
-                                          textColor: colors.backgroundColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                if (controller.isManager)
-                                  DeleteButton(
-                                    onTap: () => controller.deleteSale(
-                                      element.id!,
-                                    ),
-                                  ),
-                              ],
-                            )
-                          : Container(),
-                    ),
-                  ],
-                ),
+                  ),
               ],
             ),
           ),

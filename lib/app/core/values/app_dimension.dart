@@ -5,7 +5,7 @@ mixin AppDimension {
 
   final appBarTFSize = 24.0;
   final headerTFSize = 20.0;
-  final subHeaderTFSize = 18.0;
+  final subHeaderTFSize = 14.0;
   final paragraphTFSize = 16.0;
   final labelTFSize = 12.0;
   final valueTFSize = 12.0;

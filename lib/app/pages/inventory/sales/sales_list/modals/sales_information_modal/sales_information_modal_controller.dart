@@ -34,8 +34,9 @@ class SalesInformationModalController extends PrinterController {
           id: sales.value!.salesId!,
         );
         if (data != null) {
-          sales.value!.salesItem = data.salesItem;
-          sales.refresh();
+          sales
+            ..value = data
+            ..refresh();
           update();
           notifyChildrens();
           refresh();

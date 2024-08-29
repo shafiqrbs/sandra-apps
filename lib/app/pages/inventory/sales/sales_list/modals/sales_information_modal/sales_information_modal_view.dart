@@ -16,10 +16,12 @@ class SalesInformationModalView
   final String salesMode;
   final Sales sales;
   final Function()? onDeleted;
+  final bool? isShowFooter;
   SalesInformationModalView({
     required this.salesMode,
     required this.sales,
     this.onDeleted,
+    this.isShowFooter,
     super.key,
   });
 
@@ -61,6 +63,7 @@ class SalesInformationModalView
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
+                      top: 8,
                       left: 16,
                       right: 16,
                     ),
@@ -314,7 +317,7 @@ class SalesInformationModalView
                             labelValue.copyWith(
                               label: appLocalization.due,
                               value: (
-                                (controller.sales.value!.netTotal!) -
+                                (controller.sales.value!.netTotal ?? 0) -
                                     (controller.sales.value!.received ?? 0),
                               ).toString(),
                             ),
@@ -325,166 +328,167 @@ class SalesInformationModalView
                   ),
                 ),
                 16.height,
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => controller.deleteSales(
-                          onDeleted: onDeleted,
-                        ),
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
-                            ),
-                            color: colors.removeButtonFillColor,
-                          ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              TablerIcons.trash,
-                              color: colors.removeButtonIconColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: controller.salesMode == 'online' ||
-                          controller.salesMode == 'local',
-                      child: Expanded(
+                if (isShowFooter ?? true)
+                  Row(
+                    children: [
+                      Expanded(
                         child: InkWell(
-                          onTap: () => controller.salesPrint(context),
+                          onTap: () => controller.deleteSales(
+                            onDeleted: onDeleted,
+                          ),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),
-                              color: colors.iconBackgroundColor,
-                            ),
-                            margin: const EdgeInsets.only(
-                              left: 4,
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                TablerIcons.printer,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: controller.salesMode == 'online' ||
-                          controller.salesMode == 'local',
-                      child: Expanded(
-                        child: InkWell(
-                          onTap: controller.goToEditSales,
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                containerBorderRadius,
-                              ),
-                              color: colors.editButtonFillColor,
+                              color: colors.removeButtonFillColor,
                             ),
                             margin: const EdgeInsets.only(
                               left: 4,
                             ),
                             child: Center(
                               child: Icon(
-                                TablerIcons.pencil,
-                                color: colors.editButtonIconColor,
+                                TablerIcons.trash,
+                                color: colors.removeButtonIconColor,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => controller.copySales(sales),
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
+                      Visibility(
+                        visible: controller.salesMode == 'online' ||
+                            controller.salesMode == 'local',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () => controller.salesPrint(context),
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.iconBackgroundColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  TablerIcons.printer,
+                                  color: Colors.green,
+                                ),
+                              ),
                             ),
-                            color: colors.selectedColor,
                           ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: const Center(child: Icon(TablerIcons.copy)),
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: controller.salesMode == 'online' ||
-                          controller.salesMode == 'local',
-                      child: Expanded(
+                      Visibility(
+                        visible: controller.salesMode == 'online' ||
+                            controller.salesMode == 'local',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: controller.goToEditSales,
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.editButtonFillColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  TablerIcons.pencil,
+                                  color: colors.editButtonIconColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
                         child: InkWell(
-                          onTap: () {
-                            //shareContent();
-                            // Get.to(OnlineSalesInvoice(element: controller.sales,));
-                          },
+                          onTap: () => controller.copySales(sales),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),
-                              color: colors.infoButtonFillColor,
+                              color: colors.selectedColor,
                             ),
                             margin: const EdgeInsets.only(
                               left: 4,
                             ),
-                            child: Center(
-                              child: Icon(
-                                TablerIcons.share,
-                                color: colors.infoButtonIconColor,
+                            child: const Center(child: Icon(TablerIcons.copy)),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: controller.salesMode == 'online' ||
+                            controller.salesMode == 'local',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              //shareContent();
+                              // Get.to(OnlineSalesInvoice(element: controller.sales,));
+                            },
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.infoButtonFillColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  TablerIcons.share,
+                                  color: colors.infoButtonIconColor,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: controller.salesMode == 'online',
-                      child: Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            toast('Sales return is under development');
-                          },
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                containerBorderRadius,
+                      Visibility(
+                        visible: controller.salesMode == 'online',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              toast('Sales return is under development');
+                            },
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.primaryLiteColor,
                               ),
-                              color: colors.primaryLiteColor,
-                            ),
-                            margin: const EdgeInsets.only(
-                              left: 4,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                TablerIcons.receipt_refund,
-                                color: colors.editButtonIconColor,
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  TablerIcons.receipt_refund,
+                                  color: colors.editButtonIconColor,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    4.width,
-                  ],
-                ),
+                      4.width,
+                    ],
+                  ),
                 1.percentHeight,
               ],
             ),
