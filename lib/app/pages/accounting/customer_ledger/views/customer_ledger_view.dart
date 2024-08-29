@@ -279,7 +279,10 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                     children: [
                       InkWell(
                         onTap: () {
-                          // toast('INVOICE DETAILS MODAL is under developement');
+                          controller.showSalesInformationModal(
+                            context,
+                            data,
+                          );
                         },
                         child: Container(
                           padding: const EdgeInsets.only(
@@ -325,7 +328,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  data.sales.toString(),
+                                  data.total.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
@@ -335,7 +338,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  data.receive.toString(),
+                                  data.amount.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
@@ -366,9 +369,10 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                                 : colors.oddListColor,
                             borderRadius: BorderRadius.circular(100),
                           ),
-                          child: const Icon(
-                            TablerIcons.info_small,
+                          child: Icon(
+                            TablerIcons.eye,
                             size: 18,
+                            color: colors.primaryTextColor,
                           ),
                         ),
                       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -24,6 +26,29 @@ class CustomerLedgerController extends BaseController {
     }
 
     await fetchLedgerReport();
+  }
+
+  Future<void> showSalesInformationModal(
+      BuildContext context,
+      CustomerLedger element,
+      ) async {
+    if (element.sourceInvoice != null) {
+      final invoice = Sales(
+        salesId: element.sourceInvoice.toString(),
+      );
+      await Get.dialog(
+        DialogPattern(
+          title: appLocalization.salesDetails,
+          subTitle: element.customerName ?? '',
+          child: SalesInformationModalView(
+            sales: invoice,
+            salesMode: 'online',
+            isShowFooter: false,
+          ),
+        ),
+      );
+
+    }
   }
 
   Future<void> fetchLedgerReport() async {
