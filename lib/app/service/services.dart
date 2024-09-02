@@ -174,6 +174,7 @@ class Services {
     required String? endDate,
     required String? customerId,
     required String? keyword,
+    required int page,
   }) async {
     final query = <String, dynamic>{};
     if (startDate != null) query['start_date'] = startDate;
@@ -185,6 +186,8 @@ class Services {
       query['start_date'] = '01-01-2023';
       query['end_date'] = '02-01-2023';
     }
+
+    query['page'] = page;
 
     try {
       final response = await dio.post(

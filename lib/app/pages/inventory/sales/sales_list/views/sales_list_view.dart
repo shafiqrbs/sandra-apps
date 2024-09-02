@@ -130,8 +130,8 @@ class SalesListView extends BaseView<SalesListController> {
   Widget _buildListView() {
     return ListView.builder(
       itemCount: controller.salesManager.allItems.value?.length ?? 0,
-      controller: controller.selectedIndex.value == 2
-          ? null
+      controller: controller.selectedIndex.value == 1
+          ? controller.scrollController
           : controller.salesManager.scrollController,
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {

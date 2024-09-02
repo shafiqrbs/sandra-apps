@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -14,7 +18,7 @@ import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart
 import '/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
-enum SalesListPageTabs{
+enum SalesListPageTabs {
   local,
   online,
   hold,
@@ -22,6 +26,8 @@ enum SalesListPageTabs{
 
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
+  final scrollController = ScrollController();
+
   final selectedIndex = 100.obs;
   final isSearchSelected = false.obs;
   final implyLeading = true.obs;
@@ -58,18 +64,22 @@ class SalesListController extends BaseController {
   String? startDate;
   String? endDate;
   String? searchQuery;
+  int page = 1;
+  Timer? _debounce;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    scrollController.addListener(_scrollListener);
+
     await changeIndex(0);
   }
 
   Future<void> changeIndex(int index) async {
-
     selectedIndex.value = index;
     salesManager.allItems.value = null;
     salesManager.allItems.refresh();
+    page = 1;
 
     switch (index) {
       case 0:
@@ -112,10 +122,24 @@ class SalesListController extends BaseController {
           endDate: endDate,
           customerId: selectedCustomer?.customerId?.toString(),
           keyword: searchQuery,
+          page: page,
         );
-        salesManager.allItems.value = data;
+        page++;
+        if (data?.isNotEmpty ?? false) {
+          salesManager.allItems.value = [
+            ...salesManager.allItems.value ?? [],
+            ...data!,
+          ];
+          salesManager.allItems.refresh();
+        }
       },
+      shouldShowLoader: salesManager.allItems.value == null,
     );
+
+    if (kDebugMode) {
+      print('Sales data len ${salesManager.allItems.value?.length}');
+      print('Page $page');
+    }
   }
 
   Future<void> showSalesInformationModal(
@@ -205,6 +229,24 @@ class SalesListController extends BaseController {
         salesManager.allItems.refresh();
         await changeIndex(selectedIndex.value);
       }
+    }
+  }
+
+  Future<void> _scrollListener() async {
+    final triggerFetchMoreSize =
+        0.75 * scrollController.position.maxScrollExtent;
+
+    // Check if we need to fetch more data
+    if (scrollController.position.pixels >= triggerFetchMoreSize &&
+        (scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse)) {
+      // Cancel the previous timer if it exists
+      if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+      // Start a new debounce timer
+      _debounce = Timer(const Duration(milliseconds: 300), () async {
+        await _fetchOnlineSalesData();
+      });
     }
   }
 }
