@@ -11,10 +11,10 @@ class LoginController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final userNameController = TextEditingController(
-    text: kDebugMode?'alshefa3_shafiq': '',
+    text: kDebugMode?'Gazi': '',
   );
   final passwordController = TextEditingController(
-    text: kDebugMode?'android': '',
+    text: kDebugMode?'@123456': '',
   );
   final otpController = TextEditingController();
   final isUserNameFieldValid = true.obs;
