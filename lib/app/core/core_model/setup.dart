@@ -66,6 +66,7 @@ class SetUp {
   int? homeSlider;
   String? lang;
   String? printFooter;
+  String? symbol;
 
   static SetUp? _instance;
 
@@ -140,7 +141,8 @@ class SetUp {
       ..bodyBg = json['bodyBg']
       ..inputBgColor = json['inputBgColor']
       ..inputBgFocusColor = json['inputBgFocusColor']
-      ..printFooter = json['printFooter'];
+      ..printFooter = json['printFooter']
+      ..symbol = json['symbol'];
   }
 
   Map<String, dynamic> toJson() {
@@ -211,6 +213,7 @@ class SetUp {
       'inputBgColor': inputBgColor,
       'inputBgFocusColor': inputBgFocusColor,
       'printFooter': printFooter,
+      'symbol': symbol,
     };
   }
 }

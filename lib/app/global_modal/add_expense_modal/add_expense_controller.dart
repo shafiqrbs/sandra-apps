@@ -53,7 +53,7 @@ class AddExpenseController extends BaseController {
             amount: amountController.value.text,
             remark: remarkController.text,
             expenseCategoryId:
-                expenseCategoryManager.asController.selectedValue!.itemId,
+                expenseCategoryManager.asController.selectedValue!.categoryId,
             userId: userManager.asController.selectedValue!.userId,
             transactionMethodId:
                 transactionMethodsManager.selectedItem.value!.methodId,

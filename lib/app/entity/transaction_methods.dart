@@ -15,6 +15,7 @@ class TransactionMethods {
   String? methodMode;
   double? serviceCharge;
   String? imagePath;
+  int? isDefault;
 
   TransactionMethods({
     this.methodId,
@@ -22,6 +23,7 @@ class TransactionMethods {
     this.methodMode,
     this.serviceCharge,
     this.imagePath,
+    this.isDefault,
   });
 
   factory TransactionMethods.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class TransactionMethods {
         json['service_charge']?.toString() ?? '0',
       ),
       imagePath: json['image_path'],
+      isDefault: json['is_default'],
     );
   }
 
@@ -43,6 +46,7 @@ class TransactionMethods {
       'method_mode': methodMode,
       'service_charge': serviceCharge,
       'image_path': imagePath,
+      'is_default': isDefault,
     };
   }
 }

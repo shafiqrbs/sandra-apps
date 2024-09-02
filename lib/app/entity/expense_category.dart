@@ -12,24 +12,24 @@ class ExpenseCategoryManager extends EntityManager<ExpenseCategory> {
 }
 
 class ExpenseCategory {
-  int? itemId;
+  int? categoryId;
   String? name;
 
   ExpenseCategory({
-    this.itemId,
+    this.categoryId,
     this.name,
   });
 
   factory ExpenseCategory.fromJson(Map<String, dynamic> json) {
     return ExpenseCategory(
-      itemId: json['item_id'],
+      categoryId: json['category_id'],
       name: json['name'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'item_id': itemId,
+      'category_id': categoryId,
       'name': name,
     };
   }
