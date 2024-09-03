@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -26,15 +27,12 @@ enum SalesListPageTabs {
 
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
-  final scrollController = ScrollController();
+  final PagingController<int, Sales> pagingController = PagingController(
+    firstPageKey: 0,
+  );
 
   final selectedIndex = 100.obs;
   final isSearchSelected = false.obs;
-  final implyLeading = true.obs;
-  final Rx<Icon> actionIcon = const Icon(
-    TablerIcons.user_search,
-    color: Colors.white,
-  ).obs;
 
   List<TabBarItem> tabPages = [
     TabBarItem(
@@ -65,12 +63,17 @@ class SalesListController extends BaseController {
   String? endDate;
   String? searchQuery;
   int page = 1;
-  Timer? _debounce;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    scrollController.addListener(_scrollListener);
+    pagingController.addPageRequestListener(
+      (pageKey) {
+        _fetchOnlineSalesData(
+          page: pageKey,
+        );
+      },
+    );
 
     await changeIndex(0);
   }
@@ -78,6 +81,7 @@ class SalesListController extends BaseController {
   Future<void> changeIndex(int index) async {
     selectedIndex.value = index;
     salesManager.allItems.value = null;
+    pagingController.itemList = [];
     salesManager.allItems.refresh();
     page = 1;
 
@@ -85,7 +89,9 @@ class SalesListController extends BaseController {
       case 0:
         await _loadSalesData('is_hold is null');
       case 1:
-        await _fetchOnlineSalesData();
+        await _fetchOnlineSalesData(
+          page: page,
+        );
       case 2:
         await _loadSalesData('is_hold == 1');
 
@@ -103,6 +109,7 @@ class SalesListController extends BaseController {
   }
 
   Future<void> _loadSalesData(String whereClause) async {
+    pagingController.itemList = [];
     final list = await dbHelper.getAllWhr(
       tbl: dbTables.tableSale,
       where: whereClause,
@@ -114,7 +121,9 @@ class SalesListController extends BaseController {
     salesManager.allItems.refresh();
   }
 
-  Future<void> _fetchOnlineSalesData() async {
+  Future<void> _fetchOnlineSalesData({
+    required int page,
+  }) async {
     await dataFetcher(
       future: () async {
         final data = await services.getSalesList(
@@ -131,6 +140,7 @@ class SalesListController extends BaseController {
             ...data!,
           ];
           salesManager.allItems.refresh();
+          pagingController.appendPage(data, page);
         }
       },
       shouldShowLoader: salesManager.allItems.value == null,
@@ -229,24 +239,6 @@ class SalesListController extends BaseController {
         salesManager.allItems.refresh();
         await changeIndex(selectedIndex.value);
       }
-    }
-  }
-
-  Future<void> _scrollListener() async {
-    final triggerFetchMoreSize =
-        0.75 * scrollController.position.maxScrollExtent;
-
-    // Check if we need to fetch more data
-    if (scrollController.position.pixels >= triggerFetchMoreSize &&
-        (scrollController.position.userScrollDirection ==
-            ScrollDirection.reverse)) {
-      // Cancel the previous timer if it exists
-      if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-      // Start a new debounce timer
-      _debounce = Timer(const Duration(milliseconds: 300), () async {
-        await _fetchOnlineSalesData();
-      });
     }
   }
 }

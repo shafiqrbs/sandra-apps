@@ -188,6 +188,7 @@ class Services {
     }
 
     query['page'] = page;
+    query['limit'] = 10;
 
     try {
       final response = await dio.post(
@@ -197,11 +198,16 @@ class Services {
         // query: query,
         headers: _buildHeader(),
       );
+
       return parseList(
         list: response.data,
         fromJson: Sales.fromJson,
       );
-    } catch (e) {
+    } catch (e, ee) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $ee');
+      }
       return null;
     }
   }
