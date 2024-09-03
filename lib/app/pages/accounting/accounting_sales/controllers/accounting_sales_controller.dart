@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
 import 'package:sandra/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 import '/app/core/utils/static_utility_function.dart';
 
@@ -13,7 +16,12 @@ import '/app/entity/customer_ledger.dart';
 import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 
 class AccountingSalesController extends BaseController {
-  final salesList = CustomerLedgerManager();
+  final searchTextController = TextEditingController().obs;
+  final pagingController = Rx<PagingController<int, CustomerLedger>>(
+    PagingController<int, CustomerLedger>(
+      firstPageKey: 1,
+    ),
+  );
   final isSearchSelected = false.obs;
 
   Customer? selectedCustomer;
@@ -24,10 +32,31 @@ class AccountingSalesController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await fetchSalesList();
+
+    pagingController.value.addPageRequestListener(
+      (pageKey) {
+        fetchSalesList(
+          pageKey: pageKey,
+        );
+      },
+    );
+    try {
+      updatePageState(PageState.loading);
+      await fetchSalesList(
+        pageKey: 1,
+      );
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
   }
 
-  Future<void> fetchSalesList() async {
+  Future<void> fetchSalesList({
+    required int pageKey,
+  }) async {
     await dataFetcher(
       future: () async {
         final value = await services.getAccountSalesList(
@@ -35,23 +64,62 @@ class AccountingSalesController extends BaseController {
           startDate: startDate,
           endDate: endDate,
           keyword: searchQuery,
+          page: pageKey,
         );
 
-        if (value != null) {
-          salesList.allItems.value = value;
+        if (value == null) return;
+
+        if ((value.length) < pageLimit) {
+          pagingController.value.appendLastPage(value);
+        } else {
+          pagingController.value.appendPage(
+            value,
+            pageKey + 1,
+          );
         }
+
+        update();
+        refresh();
+        notifyChildrens();
       },
+      shouldShowLoader: false,
     );
   }
 
-  void onClearSearchText() {
-    salesList.searchTextController.value.clear();
+  Future<void> onClearSearchText() async {
+    searchTextController.value.clear();
     isSearchSelected.value = false;
+    if (searchQuery != null ||
+        selectedCustomer != null ||
+        startDate != null ||
+        endDate != null) {
+      searchQuery = null;
+      selectedCustomer = null;
+      startDate = null;
+      endDate = null;
+      await refreshData();
+    }
   }
 
-  void showFilterModal({
+  Future<void> showFilterModal({
     required BuildContext context,
-  }) {}
+  }) async {
+    final value = await Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: 'subTitle',
+        child: GlobalFilterModalView(),
+      ),
+    );
+
+    if (value != null && value is Map) {
+      startDate = value['start_date'];
+      endDate = value['end_date'];
+      selectedCustomer = value['customer'];
+      searchQuery = value['search_keyword'];
+      await refreshData();
+    }
+  }
 
   void goToCreateSales() {}
 
@@ -63,18 +131,17 @@ class AccountingSalesController extends BaseController {
       final invoice = Sales(
         salesId: element.sourceInvoice.toString(),
       );
-        await Get.dialog(
-          DialogPattern(
-            title: appLocalization.salesDetails,
-            subTitle: element.customerName ?? '',
-            child: SalesInformationModalView(
-              sales: invoice,
-              salesMode: 'online',
-              isShowFooter: false,
-            ),
+      await Get.dialog(
+        DialogPattern(
+          title: appLocalization.salesDetails,
+          subTitle: element.customerName ?? '',
+          child: SalesInformationModalView(
+            sales: invoice,
+            salesMode: 'online',
+            isShowFooter: false,
           ),
-        );
-
+        ),
+      );
     }
   }
 
@@ -89,9 +156,7 @@ class AccountingSalesController extends BaseController {
       ),
     );
     if (isNewReceived == true) {
-      salesList.allItems.value = null;
-      salesList.allItems.refresh();
-      await fetchSalesList();
+      await refreshData();
     }
   }
 
@@ -109,10 +174,7 @@ class AccountingSalesController extends BaseController {
         },
       );
       if (isDeleted ?? false) {
-        salesList.allItems.value?.removeWhere(
-          (element) => element.id == salesId,
-        );
-        salesList.allItems.refresh();
+        await refreshData();
       }
     }
   }
@@ -134,8 +196,26 @@ class AccountingSalesController extends BaseController {
         },
       );
       if (isApproved ?? false) {
-        salesList.allItems.value?[index].approvedBy = LoggedUser().username;
-        salesList.allItems.refresh();
+        await refreshData();
+      }
+    }
+  }
+
+  onSearch(String value) {}
+
+  Future<void> refreshData() async {
+    updatePageState(PageState.loading);
+    try {
+      pagingController.value.itemList = [];
+
+      await fetchSalesList(
+        pageKey: 1,
+      );
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
       }
     }
   }

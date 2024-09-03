@@ -44,6 +44,7 @@ abstract class BaseController extends GetxController {
 
   final isManager = LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
 
+  final pageLimit = 25;
 
   //Reload the page
   final _refreshController = false.obs;

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -534,6 +535,7 @@ class Services {
     required String? startDate,
     required String? endDate,
     required String? keyword,
+    required int page,
   }) async {
     try {
       final data = {
@@ -541,9 +543,12 @@ class Services {
         'start_date': startDate,
         'end_date': endDate,
         'keyword': keyword,
+        'page': page,
       }..removeWhere(
           (key, value) => value == null,
         );
+
+      log('page: $page');
 
       final response = await dio.post(
         APIType.public,
@@ -557,7 +562,11 @@ class Services {
         list: response.data,
         fromJson: CustomerLedger.fromJson,
       );
-    } catch (e) {
+    } catch (e, ee) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $ee');
+      }
       return null;
     }
   }

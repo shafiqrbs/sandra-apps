@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
-import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/entity/customer_ledger.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -23,6 +25,12 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
   AccountingSalesView({super.key});
 
   final currency = SetUp().currency ?? '';
+  static const iconColor = Color(0xff989898);
+
+  @override
+  Widget body(BuildContext context) {
+    throw UnimplementedError();
+  }
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -33,8 +41,8 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
         () {
           return AppBarSearchView(
             pageTitle: appLocalization.accountSales,
-            controller: controller.salesList.searchTextController.value,
-            onSearch: controller.salesList.searchItemsByNameOnAllItem,
+            controller: controller.searchTextController.value,
+            onSearch: controller.onSearch,
             onMicTap: controller.isSearchSelected.toggle,
             onFilterTap: () => controller.showFilterModal(
               context: globalKey.currentContext!,
@@ -69,230 +77,260 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Column(
-      children: [
-        Obx(
-          () {
-            final items = controller.salesList.allItems.value;
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: globalKey,
+      appBar: appBar(context),
+      body: Column(
+        children: [
+          Obx(
+            () {
+              final pageState = controller.pageState;
+              if (pageState == PageState.loading) {
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.green,
+                    ),
+                  ),
+                );
+              }
 
-            Widget content;
-            if (items == null) {
-              content = RetryView(
-                onRetry: controller.fetchSalesList,
-              );
-            } else if (items.isEmpty) {
-              content = NoRecordFoundView();
-            } else {
-              content = _buildListView();
-            }
+              if (pageState == PageState.failed) {
+                return RetryView(
+                  onRetry: controller.refreshData,
+                );
+              }
 
-            return Expanded(
-              child: RefreshIndicator(
-                onRefresh: controller.fetchSalesList,
-                child: content,
-              ),
-            );
-          },
-        ),
-      ],
+              if (pageState == PageState.success) {
+                final items = controller.pagingController.value.itemList;
+
+                final isEmpty = items?.isEmpty ?? true;
+                if (isEmpty) {
+                  return NoRecordFoundView(
+                    onTap: controller.refreshData,
+                  );
+                }
+
+                return Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: controller.refreshData,
+                    child: _buildListView(),
+                  ),
+                );
+              }
+
+              return Container();
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildListView() {
-    return ListView.builder(
-      itemCount: controller.salesList.allItems.value!.length,
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        final element = controller.salesList.allItems.value![index];
-        const iconColor = Color(0xff989898);
+    return PagedListView<int, CustomerLedger>(
+      pagingController: controller.pagingController.value,
+      shrinkWrap: true,
+      builderDelegate: PagedChildBuilderDelegate<CustomerLedger>(
+        itemBuilder: (context, item, index) {
+          return _buildCardView(
+            element: item,
+            index: index,
+            context: context,
+          );
+        },
+      ),
+    );
+  }
 
-        final createdDate = element.created != null
-            ? DateFormat('dd MMM yyyy').format(
-                DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
-              )
-            : '';
-
-        return InkWell(
-          onTap: () => controller.showSalesInformationModal(
-            context,
-            element,
-          ),
-          child: Container(
-            margin: EdgeInsets.only(
-              left: 8,
-              right: 8,
-              bottom: 8,
-              top: index == 0 ? 8 : 0,
-            ),
-            child: Stack(
-              alignment: Alignment.centerRight,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: index.isEven
-                        ? colors.evenListColor
-                        : colors.oddListColor,
-                    borderRadius: BorderRadius.circular(containerBorderRadius),
-                    border: Border.all(
-                      color: colors.tertiaryBaseColor,
-                    ),
-                  ),
-                  child: Column(
+  Widget _buildCardView({
+    required CustomerLedger element,
+    required int index,
+    required BuildContext context,
+  }) {
+    final createdDate = element.created != null
+        ? DateFormat('dd MMM yyyy').format(
+            DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+          )
+        : '';
+    return InkWell(
+      onTap: () => controller.showSalesInformationModal(
+        context,
+        element,
+      ),
+      child: Container(
+        margin: EdgeInsets.only(
+          left: 8,
+          right: 8,
+          bottom: 8,
+          top: index == 0 ? 8 : 0,
+        ),
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color:
+                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                borderRadius: BorderRadius.circular(containerBorderRadius),
+                border: Border.all(
+                  color: colors.tertiaryBaseColor,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CommonIconText(
-                              text: createdDate,
-                              icon: TablerIcons.calendar_due,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                          Expanded(
-                            child: CommonIconText(
-                              text: '${element.invoice}',
-                              icon: TablerIcons.file_invoice,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                        ],
+                      Expanded(
+                        child: CommonIconText(
+                          text: createdDate,
+                          icon: TablerIcons.calendar_due,
+                          fontSize: valueTFSize,
+                        ),
                       ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CommonIconText(
-                              text: element.customerName ?? '',
-                              icon: TablerIcons.user,
-                              textOverflow: TextOverflow.ellipsis,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                          Expanded(
-                            child: CommonIconText(
-                              text: element.method ?? 'N/A',
-                              icon: TablerIcons.paywall,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CommonIconText(
-                              text: element.mobile ?? '',
-                              icon: TablerIcons.device_mobile,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                          Expanded(
-                            child: CommonIconText(
-                              text: element.createdBy ?? '',
-                              icon: TablerIcons.user_heart,
-                              textOverflow: TextOverflow.ellipsis,
-                              fontSize: valueTFSize,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 0.4,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: CommonText(
-                                text:
-                                    "${appLocalization.total} : $currency ${element.total ?? ''}",
-                                fontSize: valueTFSize,
-                                textColor: colors.primaryTextColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: CommonText(
-                                text:
-                                    "${appLocalization.amount} : $currency ${element.amount ?? ''}",
-                                fontSize: valueTFSize,
-                                textColor: colors.primaryTextColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: CommonText(
-                                text:
-                                    "${appLocalization.due} :$currency ${element.balance ?? ""}",
-                                fontSize: valueTFSize,
-                                textColor: colors.primaryTextColor,
-                                textAlign: TextAlign.start,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Expanded(
+                        child: CommonIconText(
+                          text: '${element.invoice}',
+                          icon: TablerIcons.file_invoice,
+                          fontSize: valueTFSize,
+                        ),
                       ),
                     ],
                   ),
-                ),
-                if (element.approvedBy == null)
-                  if (controller.isManager)
-                    Positioned(
-                      right: 0,
-                      top: 4,
-                      child: DeleteButton(
-                        onTap: () => controller.deleteSale(
-                          element.id!,
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.customerName ?? '',
+                          icon: TablerIcons.user,
+                          textOverflow: TextOverflow.ellipsis,
+                          fontSize: valueTFSize,
                         ),
                       ),
-                    ),
-                if (element.approvedBy == null)
-                  Positioned(
-                    right: 0,
-                    top: 34,
-                    child: IconButton(
-                      onPressed: () => controller.approveSale(
-                        salesId: element.id!,
-                        index: index,
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.method ?? 'N/A',
+                          icon: TablerIcons.paywall,
+                          fontSize: valueTFSize,
+                        ),
                       ),
-                      icon: Icon(
-                        TablerIcons.check,
-                        color: colors.successfulBaseColor,
-                      ),
-                    ),
+                    ],
                   ),
-                if (element.sourceInvoice != null)
-                  Positioned(
-                    right: 10,
-                    bottom: 8,
-                    child: GestureDetector(
-                      onTap: () => controller.showSalesInformationModal(
-                        context,
-                        element,
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.mobile ?? '',
+                          icon: TablerIcons.device_mobile,
+                          fontSize: valueTFSize,
+                        ),
                       ),
-                      child: Icon(
-                        TablerIcons.eye,
-                        color: colors.primaryBaseColor,
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.createdBy ?? '',
+                          icon: TablerIcons.user_heart,
+                          textOverflow: TextOverflow.ellipsis,
+                          fontSize: valueTFSize,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-              ],
+                  const Divider(
+                    thickness: 0.4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                '${appLocalization.total} : $currency ${element.total ?? ''}',
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                '${appLocalization.amount} : $currency ${element.amount ?? ''}',
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                "${appLocalization.due} :$currency ${element.balance ?? ""}",
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            textAlign: TextAlign.start,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+            if (element.approvedBy == null)
+              if (controller.isManager)
+                Positioned(
+                  right: 0,
+                  top: 4,
+                  child: DeleteButton(
+                    onTap: () => controller.deleteSale(
+                      element.id!,
+                    ),
+                  ),
+                ),
+            if (element.approvedBy == null)
+              Positioned(
+                right: 0,
+                top: 34,
+                child: IconButton(
+                  onPressed: () => controller.approveSale(
+                    salesId: element.id!,
+                    index: index,
+                  ),
+                  icon: Icon(
+                    TablerIcons.check,
+                    color: colors.successfulBaseColor,
+                  ),
+                ),
+              ),
+            if (element.sourceInvoice != null)
+              Positioned(
+                right: 10,
+                bottom: 8,
+                child: GestureDetector(
+                  onTap: () => controller.showSalesInformationModal(
+                    context,
+                    element,
+                  ),
+                  child: Icon(
+                    TablerIcons.eye,
+                    color: colors.primaryBaseColor,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }
