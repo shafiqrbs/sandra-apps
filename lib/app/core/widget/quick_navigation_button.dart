@@ -170,8 +170,8 @@ List<Widget> buttonList = [
     onTap: () {
       Get.dialog(
         DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.sync,
+          subTitle: '',
           child: SyncModalView(),
         ),
       );

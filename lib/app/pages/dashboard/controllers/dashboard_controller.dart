@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
@@ -73,7 +74,7 @@ List<Widget> inventoryButtonList = [
     bgColor: colorList[1],
   ),
   TbdRoundButton(
-    icon: TablerIcons.point_off,
+    icon: TablerIcons.file_description,
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.invoice,
     bgColor: colorList[2],
@@ -81,19 +82,19 @@ List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
-    localeMethod: () => appLocalization.purchaseList,
+    localeMethod: () => appLocalization.purchase,
     bgColor: colorList[3],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_bag,
     onTap: () => navigatePage(Routes.createPurchase),
-    localeMethod: () => appLocalization.createPurchase,
+    localeMethod: () => appLocalization.order,
     bgColor: colorList[4],
   ),
   TbdRoundButton(
     icon: TablerIcons.list,
     onTap: () => navigatePage(Routes.stockList),
-    localeMethod: () => appLocalization.stockList,
+    localeMethod: () => appLocalization.stocks,
     bgColor: colorList[5],
   ),
   TbdRoundButton(
@@ -121,28 +122,58 @@ List<Widget> inventoryButtonList = [
 
 List<Widget> accountingButtonList = [
   TbdRoundButton(
+    icon: TablerIcons.credit_card_pay,
+    onTap: () async {
+      await Get.dialog(
+        DialogPattern(
+          title: appLocalization.addExpense,
+          subTitle: '',
+          child: AddExpenseView(),
+        ),
+      );
+    },
+    localeMethod: () => appLocalization.addExpense,
+    bgColor: colorList[0],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.indent_increase,
+    onTap: () => navigatePage(Routes.expenseList),
+    localeMethod: () => appLocalization.expenseList,
+    bgColor: colorList[1],
+  ),
+  TbdRoundButton(
     icon: TablerIcons.user,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customer,
-    bgColor: colorList[0],
+    bgColor: colorList[2],
   ),
   TbdRoundButton(
     icon: TablerIcons.users,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendor,
-    bgColor: colorList[1],
+    bgColor: colorList[3],
   ),
   TbdRoundButton(
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.accountingSales),
     localeMethod: () => appLocalization.sales,
-    bgColor: colorList[2],
+    bgColor: colorList[4],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.accountingPurchase),
     localeMethod: () => appLocalization.purchase,
-    bgColor: colorList[3],
+    bgColor: colorList[5],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.report,
+    onTap: () {
+      toast(
+        appLocalization.upcomingFeature,
+      );
+    },
+    localeMethod: () => appLocalization.journal,
+    bgColor: colorList[6],
   ),
 ];
 

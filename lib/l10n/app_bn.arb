@@ -332,6 +332,8 @@
   "create" : "তৈরি করুন",
   "product" : "পণ্য",
   "global" : "গ্লোবাল",
+  "stocks" : "স্টক",
+  "journal" : "জার্নাল",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

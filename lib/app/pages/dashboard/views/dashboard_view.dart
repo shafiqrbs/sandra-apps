@@ -569,7 +569,7 @@ class DashboardView extends BaseView<DashboardController> {
         color: Color(0xffF7EDE9),
       ),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 800),
         child: Row(
           children: [
             TbdTextButton(

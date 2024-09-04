@@ -273,7 +273,9 @@
   "newProduct" : "New Product",
   "create" : "Create",
   "product" : "Product",
-  "global" : "Global"
+  "global" : "Global",
+  "stocks" : "Stocks",
+  "journal" : "Journal"
 
 
 
