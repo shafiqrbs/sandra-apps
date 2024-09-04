@@ -326,6 +326,7 @@
   "pleaseEnterAmount" : "দয়া করে পরিমাণ লিখুন",
   "doNotAllowDiscountValueMoreThenSubtotalValue" : "সাবটোটাল মানের চেয়ে বেশি ডিসকাউন্ট মান অনুমোদিত নয়",
   "salesDetails" : "বিক্রয়ের বিবরণ",
+  "dueCustomerList" : "বাকি গ্রাহকের তালিকা",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

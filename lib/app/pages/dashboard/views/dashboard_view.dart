@@ -359,9 +359,7 @@ class DashboardView extends BaseView<DashboardController> {
                 title: appLocalization.due,
                 subTitle: '৳ 567',
                 icon: TablerIcons.cash,
-                onTap: () {
-                  //Get.to(PurchaseScreen());
-                },
+                onTap: controller.goToDueCustomerList,
                 bgColor: const Color(0xffFF6F61),
               ),
             ],

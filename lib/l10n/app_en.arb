@@ -267,7 +267,8 @@
   "flat" : "Flat",
   "dontYouHaveCustomer" : "Don’t you have customer?",
   "printPaperType" : "Print Paper Type",
-  "printEndNewLine" : "Print End New Line"
+  "printEndNewLine" : "Print End New Line",
+  "dueCustomerList" : "Due Customer List"
 
 
 

@@ -207,6 +207,12 @@ class DashboardController extends BaseController {
     );
   }
 
+  void goToDueCustomerList() {
+    Get.toNamed(
+      Routes.dueCustomerList,
+    );
+  }
+
   void gotoExpenseScreen() {}
 
   void gotoPurchaseScreen() {}
