@@ -93,15 +93,6 @@ class DashboardView extends BaseView<DashboardController> {
                 children: [
                   1.height,
                   _buildDashboard(),
-                  //_buildTabSelection(),
-                  /*Obx(
-                    () {
-                      final selectedTab = controller.selectedTab.value;
-                      return selectedTab == SelectedTab.dashboard
-                          ? _buildDashboard()
-                          : _buildReport();
-                    },
-                  ),*/
                 ],
               ),
             ),
@@ -178,20 +169,6 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
               ),
 
-              /*Obx(
-                () {
-                  return AdvancedSwitch(
-                    activeColor: Colors.white,
-                    inactiveColor: const Color(0xFFE9E9E9),
-                    borderRadius: BorderRadius.circular(
-                      containerBorderRadius,
-                    ),
-                    width: 30,
-                    height: 16,
-                    controller: controller.showOnlineController.value,
-                  );
-                },
-              ),*/
               12.width,
               InkWell(
                 onTap: () {},
@@ -361,9 +338,7 @@ class DashboardView extends BaseView<DashboardController> {
                 title: appLocalization.purchase,
                 subTitle: '৳ 567',
                 icon: TablerIcons.cash,
-                onTap: () {
-                  //Get.to(PurchaseScreen());
-                },
+                onTap: controller.goToPurchaseList,
                 bgColor: const Color(0xff004D40),
               ),
             ],
@@ -376,9 +351,7 @@ class DashboardView extends BaseView<DashboardController> {
                 title: appLocalization.expense,
                 subTitle: '৳ 567',
                 icon: TablerIcons.moneybag,
-                onTap: () {
-                  //Get.to(PurchaseScreen());
-                },
+                onTap: controller.goToExpenseList,
                 bgColor: const Color(0xff4CBB17),
               ),
               10.width,
@@ -512,7 +485,7 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildThreeCommonButtons(){
+  Widget _buildThreeCommonButtons() {
     return Row(
       children: [
         12.width,
@@ -540,7 +513,7 @@ class DashboardView extends BaseView<DashboardController> {
     required String title,
     required Color buttonColor,
     required Function()? onTap,
-}){
+  }) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
