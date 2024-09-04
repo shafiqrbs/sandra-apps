@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart' as pie_chart;
-import 'package:sandra/app/core/widget/custom_animation_widget.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_text.dart';
@@ -220,9 +218,8 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
-        16.height,
+        12.height,
         _buildThreeCommonButtons(),
-        16.height,
         _buildBalanceList(),
         16.height,
         _buildTitleSubTitleButtonList(),
@@ -238,8 +235,8 @@ class DashboardView extends BaseView<DashboardController> {
         vertical: 10,
         horizontal: 16,
       ),
-      decoration: BoxDecoration(
-        color: colors.primaryBaseColor.withOpacity(.5),
+      decoration: const BoxDecoration(
+        color: Color(0xffF7EDE9),
       ),
       child: Row(
         children: [
@@ -484,26 +481,40 @@ class DashboardView extends BaseView<DashboardController> {
   }
 
   Widget _buildThreeCommonButtons() {
-    return Row(
-      children: [
-        12.width,
-        _buildCommonButtonCard(
-          title: appLocalization.pos,
-          buttonColor: const Color(0xff1E90FF),
-          onTap: controller.goToSales,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 12,
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xffF7EDE9).withOpacity(0.7),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(4),
+          topRight: Radius.circular(4),
         ),
-        _buildCommonButtonCard(
-          title: appLocalization.receive,
-          buttonColor: const Color(0xff004D40),
-          onTap: controller.showCustomerReceiveModal,
-        ),
-        _buildCommonButtonCard(
-          title: appLocalization.payment,
-          buttonColor: const Color(0xff4CBB17),
-          onTap: controller.showVendorPaymentModal,
-        ),
-        12.width,
-      ],
+      ),
+      child: Row(
+        children: [
+          _buildCommonButtonCard(
+            title: appLocalization.pos,
+            buttonColor: const Color(0xff1E90FF),
+            onTap: controller.goToSales,
+          ),
+          _buildCommonButtonCard(
+            title: appLocalization.receive,
+            buttonColor: const Color(0xff5D6D7E),
+            onTap: controller.showCustomerReceiveModal,
+          ),
+          _buildCommonButtonCard(
+            title: appLocalization.payment,
+            buttonColor: const Color(0xffFF6F61),
+            onTap: controller.showVendorPaymentModal,
+          ),
+        ],
+      ),
     );
   }
 
@@ -526,7 +537,7 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           decoration: BoxDecoration(
             color: buttonColor,
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(12),
           ),
           alignment: Alignment.center,
           child: CommonText(
