@@ -16,6 +16,8 @@ import '/app/pages/domain/customer/customer_details/bindings/customer_details_bi
 import '/app/pages/domain/customer/customer_details/views/customer_details_view.dart';
 import '/app/pages/domain/customer/customer_list/bindings/customer_list_binding.dart';
 import '/app/pages/domain/customer/customer_list/views/customer_list_view.dart';
+import '/app/pages/domain/due_customer_list/bindings/due_customer_list_binding.dart';
+import '/app/pages/domain/due_customer_list/views/due_customer_list_view.dart';
 import '/app/pages/domain/vendor/vendor_details/bindings/vendor_details_binding.dart';
 import '/app/pages/domain/vendor/vendor_details/views/vendor_details_view.dart';
 import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
@@ -128,6 +130,11 @@ class AppPages {
       name: Routes.expenseList,
       page: ExpenseListView.new,
       binding: ExpenseListBinding(),
+    ),
+    GetPage(
+      name: Routes.dueCustomerList,
+      page: DueCustomerListView.new,
+      binding: DueCustomerListBinding(),
     ),
     GetPage(
       name: Routes.particular,

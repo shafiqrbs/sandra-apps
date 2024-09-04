@@ -21,6 +21,7 @@ abstract class Routes {
   static const vendorList = _Paths.vendorList;
   static const purchaseList = _Paths.purchaseList;
   static const expenseList = _Paths.expenseList;
+  static const  dueCustomerList = _Paths.dueCustomerList;
   static const expenseDetails = _Paths.expenseDetails;
   static const particular = _Paths.particular;
   static const createExpense = _Paths.createExpense;
@@ -47,6 +48,7 @@ abstract class _Paths {
   static const vendorList = '/vendor_list';
   static const purchaseList = '/purchase_list';
   static const expenseList = '/expense_list';
+  static const  dueCustomerList = '/due_customer_list';
   static const expenseDetails = '/expense_details';
   static const particular = '/particular';
   static const createExpense = '/create_expense';
