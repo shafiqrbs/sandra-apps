@@ -61,7 +61,7 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                           //example: 'sample_model'.tr,
                           hint: appLocalization.amount,
                           isRequired: true,
-                          errorMsg: '',
+                          errorMsg: appLocalization.requiredField,
                         ),
                       ),
                     ],

@@ -126,19 +126,19 @@ List<Widget> accountingButtonList = [
     onTap: () async {
       await Get.dialog(
         DialogPattern(
-          title: appLocalization.addExpense,
-          subTitle: '',
+          title: appLocalization.createExpense,
+          subTitle: appLocalization.createExpenseDetails,
           child: AddExpenseView(),
         ),
       );
     },
-    localeMethod: () => appLocalization.addExpense,
+    localeMethod: () => appLocalization.newExpense,
     bgColor: colorList[0],
   ),
   TbdRoundButton(
     icon: TablerIcons.indent_increase,
     onTap: () => navigatePage(Routes.expenseList),
-    localeMethod: () => appLocalization.expenseList,
+    localeMethod: () => appLocalization.expense,
     bgColor: colorList[1],
   ),
   TbdRoundButton(
@@ -148,15 +148,15 @@ List<Widget> accountingButtonList = [
     bgColor: colorList[2],
   ),
   TbdRoundButton(
-    icon: TablerIcons.users,
-    onTap: () => navigatePage(Routes.vendorList),
-    localeMethod: () => appLocalization.vendor,
-    bgColor: colorList[3],
-  ),
-  TbdRoundButton(
     icon: TablerIcons.butterfly,
     onTap: () => navigatePage(Routes.accountingSales),
     localeMethod: () => appLocalization.sales,
+    bgColor: colorList[3],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.users,
+    onTap: () => navigatePage(Routes.vendorList),
+    localeMethod: () => appLocalization.vendor,
     bgColor: colorList[4],
   ),
   TbdRoundButton(

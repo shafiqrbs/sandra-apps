@@ -275,7 +275,11 @@
   "product" : "Product",
   "global" : "Global",
   "stocks" : "Stocks",
-  "journal" : "Journal"
+  "journal" : "Journal",
+  "newExpense" : "New Expense",
+  "createExpense" : "Create Expense",
+  "createExpenseDetails" : "Create Expense Details",
+  "requiredField" : "Required Field"
 
 
 
