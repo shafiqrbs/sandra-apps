@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/expense_category.dart';
@@ -42,24 +43,20 @@ class AddExpenseController extends BaseController {
 
   Future<void> onSaveTap() async {
     if (userManager.asController.selectedValue == null) {
-      Get.snackbar('Error', 'Please select a user',
-        backgroundColor: Colors.white,
-        margin: EdgeInsets.all(10),
-        borderRadius: 4,
-      );
+      showSnackBar(message: appLocalization.userNameRequired);
       return;
     }
     if (expenseCategoryManager.asController.selectedValue == null) {
-      toast('Please select a category');
+      showSnackBar(message: appLocalization.categoryRequired);
       return;
     }
     if (transactionMethodsManager.selectedItem.value == null) {
-      toast('Please select a transaction method');
+      showSnackBar(message: appLocalization.transactionMethodRequired);
       return;
     }
 
     if (amountController.value.text.isEmpty) {
-      toast('Please enter amount');
+      showSnackBar(message: appLocalization.pleaseEnterAmount);
       return;
     }
     if (formKey.currentState!.validate()) {

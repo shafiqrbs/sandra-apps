@@ -490,7 +490,7 @@ class DashboardView extends BaseView<DashboardController> {
         horizontal: 16,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xffF7EDE9).withOpacity(0.7),
+        color: colors.primaryLiteColor.withOpacity(.7),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(4),
           topRight: Radius.circular(4),

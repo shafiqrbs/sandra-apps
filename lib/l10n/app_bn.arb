@@ -338,6 +338,7 @@
   "createExpense" : "খরচ তৈরি করুন",
   "createExpenseDetails" : "আপনার খরচ বিবরণ তৈরি করুন",
   "requiredField" : "প্রয়োজনীয় ক্ষেত্র",
+  "transactionMethodRequired" : "লেনদেন পদ্ধতি প্রয়োজন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",
