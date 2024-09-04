@@ -543,7 +543,7 @@ class DashboardView extends BaseView<DashboardController> {
           child: CommonText(
             text: title,
             fontSize: 12,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
             textColor: Colors.white,
           ),
         ),

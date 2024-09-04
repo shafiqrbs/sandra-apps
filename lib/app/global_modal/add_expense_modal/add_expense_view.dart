@@ -52,18 +52,7 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                           errorMsg: appLocalization.categoryRequired,
                         ),
                       ),
-                      10.width,
-                      Expanded(
-                        child: FBString(
-                          textController: controller.amountController.value,
-                          keyboardType: numberInputType,
-                          label: appLocalization.amount,
-                          //example: 'sample_model'.tr,
-                          hint: appLocalization.amount,
-                          isRequired: true,
-                          errorMsg: appLocalization.requiredField,
-                        ),
-                      ),
+
                     ],
                   ),
                   Obx(
@@ -115,10 +104,43 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                   ),
                   Row(
                     children: [
-                      RowButton(
-                        buttonName: appLocalization.reset,
-                        onTap: controller.onResetTap,
-                        leftIcon: TablerIcons.restore,
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 5.ph,
+                          child: TextFormField(
+                            controller: controller.amountController.value,
+                            inputFormatters: [regexDouble],
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.done,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                            ),
+                            cursorColor: colors.formCursorColor,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              hintText: appLocalization.amount,
+                              filled: true,
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                  color: colors.primaryBaseColor,
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                  color: colors.borderColor,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
                       ),
                       2.percentWidth,
                       RowButton(
@@ -134,6 +156,63 @@ class AddExpenseView extends BaseView<AddExpenseController> {
           ),
         );
       },
+    );
+  }
+
+  InputDecoration buildInputDecoration({
+    required String hintText,
+    required TextStyle hintStyle,
+    required Color fillColor,
+    required Color enabledBorderColor,
+    required Color focusedBorderColor,
+    required Color errorBorderColor,
+    EdgeInsetsGeometry? contentPadding,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+  }) {
+    return InputDecoration(
+      contentPadding: contentPadding ??
+          const EdgeInsets.symmetric(
+            vertical: 6,
+            horizontal: 8,
+          ),
+      hintText: hintText,
+      hintStyle: hintStyle,
+      filled: true,
+      fillColor: fillColor,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: enabledBorderColor,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(color: errorBorderColor),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          containerBorderRadius,
+        ),
+        borderSide: BorderSide(
+          color: focusedBorderColor,
+          width: 0,
+        ),
+      ),
     );
   }
 

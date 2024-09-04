@@ -41,11 +41,28 @@ class AddExpenseController extends BaseController {
   }
 
   Future<void> onSaveTap() async {
+    if (userManager.asController.selectedValue == null) {
+      Get.snackbar('Error', 'Please select a user',
+        backgroundColor: Colors.white,
+        margin: EdgeInsets.all(10),
+        borderRadius: 4,
+      );
+      return;
+    }
+    if (expenseCategoryManager.asController.selectedValue == null) {
+      toast('Please select a category');
+      return;
+    }
+    if (transactionMethodsManager.selectedItem.value == null) {
+      toast('Please select a transaction method');
+      return;
+    }
+
+    if (amountController.value.text.isEmpty) {
+      toast('Please enter amount');
+      return;
+    }
     if (formKey.currentState!.validate()) {
-      if (transactionMethodsManager.selectedItem.value == null) {
-        toast('Please select a transaction method');
-        return;
-      }
       bool? isSubmitted;
       await dataFetcher(
         future: () async {
@@ -60,9 +77,7 @@ class AddExpenseController extends BaseController {
           );
         },
       );
-      if(isSubmitted??false){
-
-      }
+      if (isSubmitted ?? false) {}
     }
   }
 }
