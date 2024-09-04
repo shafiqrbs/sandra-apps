@@ -592,6 +592,15 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               selectedBgColor: colors.primaryBaseColor,
+              text: appLocalization.create,
+              onPressed: () => controller.updateSelectedButtonGroup(
+                SelectedButtonGroup.create,
+              ),
+              isSelected: controller.selectedButtonGroup.value ==
+                  SelectedButtonGroup.create,
+            ),
+            TbdTextButton(
+              selectedBgColor: colors.primaryBaseColor,
               text: appLocalization.config,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.config,

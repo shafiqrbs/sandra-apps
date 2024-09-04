@@ -268,7 +268,12 @@
   "dontYouHaveCustomer" : "Don’t you have customer?",
   "printPaperType" : "Print Paper Type",
   "printEndNewLine" : "Print End New Line",
-  "dueCustomerList" : "Due Customer List"
+  "dueCustomerList" : "Due Customer List",
+  "newVendor" : "New Vendor",
+  "newProduct" : "New Product",
+  "create" : "Create",
+  "product" : "Product",
+  "global" : "Global"
 
 
 

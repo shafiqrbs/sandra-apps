@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
+import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
+import 'package:sandra/app/global_modal/sync_modal/sync_modal_view.dart';
 import 'package:sandra/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
 import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 
@@ -18,6 +22,7 @@ enum SelectedTab {
 }
 
 enum SelectedButtonGroup {
+  create,
   inventory,
   accounting,
   config,
@@ -33,23 +38,44 @@ List<Color> colorList = [
   const Color(0xff6D28D9),
 ];
 
+List<Widget> createButtonList = [
+  TbdRoundButton(
+    icon: TablerIcons.user_plus,
+    onTap: DashboardController().showAddCustomerModal,
+    localeMethod: () => appLocalization.customer,
+    bgColor: colorList[0],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.user_heart,
+    onTap: DashboardController().showAddVendorModal,
+    localeMethod: () => appLocalization.vendor,
+    bgColor: colorList[1],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.shopping_cart,
+    onTap: DashboardController().showAddStockModal,
+    localeMethod: () => appLocalization.product,
+    bgColor: colorList[2],
+  ),
+];
+
 List<Widget> inventoryButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.sort_ascending_letters,
-    onTap: () => navigatePage(Routes.createSales),
-    localeMethod: () => appLocalization.pos,
+    icon: TablerIcons.user,
+    onTap: () => navigatePage(Routes.customerList),
+    localeMethod: () => appLocalization.customer,
     bgColor: colorList[0],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.users,
+    onTap: () => navigatePage(Routes.vendorList),
+    localeMethod: () => appLocalization.vendor,
+    bgColor: colorList[1],
   ),
   TbdRoundButton(
     icon: TablerIcons.point_off,
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.invoice,
-    bgColor: colorList[1],
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
-    onTap: () => navigatePage(Routes.createPurchase),
-    localeMethod: () => appLocalization.createPurchase,
     bgColor: colorList[2],
   ),
   TbdRoundButton(
@@ -59,45 +85,51 @@ List<Widget> inventoryButtonList = [
     bgColor: colorList[3],
   ),
   TbdRoundButton(
-    icon: TablerIcons.list,
-    onTap: () => navigatePage(Routes.stockList),
-    localeMethod: () => appLocalization.stockList,
+    icon: TablerIcons.shopping_bag,
+    onTap: () => navigatePage(Routes.createPurchase),
+    localeMethod: () => appLocalization.createPurchase,
     bgColor: colorList[4],
   ),
   TbdRoundButton(
     icon: TablerIcons.list,
+    onTap: () => navigatePage(Routes.stockList),
+    localeMethod: () => appLocalization.stockList,
+    bgColor: colorList[5],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.receipt_refund,
     onTap: () {
       toast(
         appLocalization.upcomingFeature,
       );
     },
     localeMethod: () => appLocalization.salesReturn,
-    bgColor: colorList[5],
+    bgColor: colorList[6],
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
-    icon: TablerIcons.list,
+    icon: TablerIcons.credit_card_refund,
     onTap: () {
       toast(
         appLocalization.upcomingFeature,
       );
     },
     localeMethod: () => appLocalization.purchaseReturn,
-    bgColor: colorList[6],
+    bgColor: colorList[1],
   ),
 ];
 
 List<Widget> accountingButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.robot_face,
+    icon: TablerIcons.user,
     onTap: () => navigatePage(Routes.customerList),
-    localeMethod: () => appLocalization.customerList,
+    localeMethod: () => appLocalization.customer,
     bgColor: colorList[0],
   ),
   TbdRoundButton(
-    icon: TablerIcons.butterfly,
+    icon: TablerIcons.users,
     onTap: () => navigatePage(Routes.vendorList),
-    localeMethod: () => appLocalization.vendorList,
+    localeMethod: () => appLocalization.vendor,
     bgColor: colorList[1],
   ),
   TbdRoundButton(
@@ -116,9 +148,9 @@ List<Widget> accountingButtonList = [
 
 List<Widget> configButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.shopping_cart,
+    icon: TablerIcons.settings_2,
     onTap: () => navigatePage(Routes.settings),
-    localeMethod: () => appLocalization.settings,
+    localeMethod: () => appLocalization.global,
     bgColor: colorList[0],
   ),
   TbdRoundButton(
@@ -126,14 +158,28 @@ List<Widget> configButtonList = [
     onTap: () {
       Get.dialog(
         DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.inventory,
+          subTitle: '',
           child: PrefsSettingsModalView(),
         ),
       );
     },
-    localeMethod: () => appLocalization.settings,
+    localeMethod: () => appLocalization.inventory,
     bgColor: colorList[1],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.rotate_rectangle,
+    onTap: () {
+      Get.dialog(
+        DialogPattern(
+          title: appLocalization.sync,
+          subTitle: '',
+          child: SyncModalView(),
+        ),
+      );
+    },
+    localeMethod: () => appLocalization.sync,
+    bgColor: colorList[2],
   ),
 ];
 
@@ -172,7 +218,6 @@ class DashboardController extends BaseController {
         ),
       ),
     );
-
   }
 
   Future<void> showVendorPaymentModal() async {
@@ -180,12 +225,44 @@ class DashboardController extends BaseController {
       DialogPattern(
         title: 'title',
         subTitle: 'subTitle',
-        child: VendorPaymentModalView(vendor: null,
+        child: VendorPaymentModalView(
+          vendor: null,
         ),
       ),
     );
-    if (isNewReceived == true) {
+    if (isNewReceived == true) {}
+  }
 
+  void showAddCustomerModal() {
+    final result = Get.dialog(
+      DialogPattern(
+        title: appLocalization.newCustomer,
+        subTitle: '',
+        child: AddCustomerModalView(),
+      ),
+    );
+  }
+
+  void showAddVendorModal() {
+    final result = Get.dialog(
+      DialogPattern(
+        title: appLocalization.addVendor,
+        subTitle: '',
+        child: AddVendorModalView(),
+      ),
+    );
+  }
+
+  Future<void> showAddStockModal() async {
+    final result = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.addProduct,
+        subTitle: '',
+        child: AddProductModalView(),
+      ),
+    );
+    if (result != null) {
+      print(result);
     }
   }
 
@@ -239,11 +316,15 @@ class DashboardController extends BaseController {
 
   void updateSelectedButtonGroup(SelectedButtonGroup group) {
     selectedButtonGroup.value = group;
+
     if (group == SelectedButtonGroup.inventory) {
       dashboardButtonList = inventoryButtonList;
     }
     if (group == SelectedButtonGroup.accounting) {
       dashboardButtonList = accountingButtonList;
+    }
+    if (group == SelectedButtonGroup.create) {
+      dashboardButtonList = createButtonList;
     }
     if (group == SelectedButtonGroup.config) {
       dashboardButtonList = configButtonList;
@@ -262,5 +343,4 @@ class DashboardController extends BaseController {
       isSalesOnline: isOnline.value,
     );
   }
-
 }
