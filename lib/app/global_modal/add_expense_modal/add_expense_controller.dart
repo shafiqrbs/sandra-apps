@@ -74,7 +74,9 @@ class AddExpenseController extends BaseController {
           );
         },
       );
-      if (isSubmitted ?? false) {}
+      if (isSubmitted ?? false) {
+
+      }
     }
   }
 }

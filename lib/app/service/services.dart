@@ -604,13 +604,18 @@ class Services {
     }
   }
 
-  addExpense({
+  Future<bool?> addExpense({
     required amount,
     required String remark,
     required expenseCategoryId,
     required userId,
     required transactionMethodId,
   }) async {
+    print('amount: $amount');
+    print('remark: $remark');
+    print('expenseCategoryId: $expenseCategoryId');
+    print('userId: $userId');
+    print('transactionMethodId: $transactionMethodId');
     try {
       final response = await dio.post(
         APIType.public,
@@ -628,7 +633,6 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-      return response;
     } catch (e) {
       return null;
     }

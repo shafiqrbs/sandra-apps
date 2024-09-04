@@ -9,6 +9,7 @@ import 'package:sandra/app/core/widget/common_icon_text.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/delete_button.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
+import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:sandra/app/core/widget/retry_view.dart';
 
 import '/app/core/base/base_view.dart';
@@ -27,13 +28,8 @@ class ExpenseListView extends BaseView<ExpenseListController> {
     return AppBar(
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
-      title: Text(
-        appLocalization.expenseList,
-        style: TextStyle(
-          color: colors.backgroundColor,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
+      title: PageBackButton(
+        pageTitle: appLocalization.expenseList,
       ),
       automaticallyImplyLeading: false,
       actions: [

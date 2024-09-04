@@ -323,7 +323,7 @@ class RestClient {
     _dio.interceptors.clear();
 
     if (kDebugMode) {
-     // interceptorList.add(PrettyDioLogger());
+      interceptorList.add(PrettyDioLogger());
     }
     _dio.interceptors.addAll(interceptorList);
   }
