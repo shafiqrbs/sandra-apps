@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
+import 'package:sandra/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
 import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -158,6 +160,33 @@ class DashboardController extends BaseController {
     Get.toNamed(
       Routes.createSales,
     );
+  }
+
+  Future<void> showCustomerReceiveModal() async {
+    final isNewReceived = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.newReceive,
+        subTitle: '',
+        child: CustomerReceiveModalView(
+          customer: null,
+        ),
+      ),
+    );
+
+  }
+
+  Future<void> showVendorPaymentModal() async {
+    final isNewReceived = await Get.dialog(
+      DialogPattern(
+        title: 'title',
+        subTitle: 'subTitle',
+        child: VendorPaymentModalView(vendor: null,
+        ),
+      ),
+    );
+    if (isNewReceived == true) {
+
+    }
   }
 
   void goToSalesList() {

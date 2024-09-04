@@ -243,6 +243,9 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
+        16.height,
+        _buildThreeCommonButtons(),
+        16.height,
         _buildBalanceList(),
         16.height,
         _buildTitleSubTitleButtonList(),
@@ -505,6 +508,63 @@ class DashboardView extends BaseView<DashboardController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildThreeCommonButtons(){
+    return Row(
+      children: [
+        12.width,
+        _buildCommonButtonCard(
+          title: appLocalization.pos,
+          buttonColor: const Color(0xff1E90FF),
+          onTap: controller.goToSales,
+        ),
+        _buildCommonButtonCard(
+          title: appLocalization.receive,
+          buttonColor: const Color(0xff004D40),
+          onTap: controller.showCustomerReceiveModal,
+        ),
+        _buildCommonButtonCard(
+          title: appLocalization.payment,
+          buttonColor: const Color(0xff4CBB17),
+          onTap: controller.showVendorPaymentModal,
+        ),
+        12.width,
+      ],
+    );
+  }
+
+  Widget _buildCommonButtonCard({
+    required String title,
+    required Color buttonColor,
+    required Function()? onTap,
+}){
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.only(
+            right: 4,
+            left: 4,
+          ),
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 16,
+          ),
+          decoration: BoxDecoration(
+            color: buttonColor,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          alignment: Alignment.center,
+          child: CommonText(
+            text: title,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            textColor: Colors.white,
+          ),
+        ),
       ),
     );
   }
