@@ -333,7 +333,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           labelValue.copyWith(
                             label: 'due'.tr,
                             value: (
-                              (controller.purchase.value!.netTotal!) -
+                              (controller.purchase.value!.netTotal ?? 0) -
                                   (controller.purchase.value!.received ?? 0),
                             ).toString(),
                           ),

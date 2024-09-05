@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '/app/core/base/base_view.dart';
-import '/app/pages/privacy_config/controllers/privacy_config_controller.dart';
+import '/app/pages/content/privacy_config/controllers/privacy_config_controller.dart';
 
 //ignore: must_be_immutable
 class PrivacyConfigView extends BaseView<PrivacyConfigController> {

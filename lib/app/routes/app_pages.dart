@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '/app/pages/account_config/bindings/account_config_binding.dart';
-import '/app/pages/account_config/views/account_config_view.dart';
 import '/app/pages/accounting/accounting_purchase/bindings/accounting_purchase_binding.dart';
 import '/app/pages/accounting/accounting_purchase/views/accounting_purchase_view.dart';
 import '/app/pages/accounting/accounting_sales/bindings/accounting_sales_binding.dart';
@@ -12,6 +10,12 @@ import '/app/pages/accounting/expense/expense_list/bindings/expense_list_binding
 import '/app/pages/accounting/expense/expense_list/views/expense_list_view.dart';
 import '/app/pages/accounting/vendor_ledger/bindings/vendor_ledger_binding.dart';
 import '/app/pages/accounting/vendor_ledger/views/vendor_ledger_view.dart';
+import '/app/pages/content/account_config/bindings/account_config_binding.dart';
+import '/app/pages/content/account_config/views/account_config_view.dart';
+import '/app/pages/content/help_config/bindings/help_config_binding.dart';
+import '/app/pages/content/help_config/views/help_config_view.dart';
+import '/app/pages/content/privacy_config/bindings/privacy_config_binding.dart';
+import '/app/pages/content/privacy_config/views/privacy_config_view.dart';
 import '/app/pages/dashboard/bindings/dashboard_binding.dart';
 import '/app/pages/dashboard/views/dashboard_view.dart';
 import '/app/pages/domain/customer/customer_details/bindings/customer_details_binding.dart';
@@ -24,8 +28,6 @@ import '/app/pages/domain/vendor/vendor_details/bindings/vendor_details_binding.
 import '/app/pages/domain/vendor/vendor_details/views/vendor_details_view.dart';
 import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
 import '/app/pages/domain/vendor/vendor_list/views/vendor_list_view.dart';
-import '/app/pages/help_config/bindings/help_config_binding.dart';
-import '/app/pages/help_config/views/help_config_view.dart';
 import '/app/pages/intro/license/bindings/license_binding.dart';
 import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
@@ -44,8 +46,6 @@ import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
-import '/app/pages/privacy_config/bindings/privacy_config_binding.dart';
-import '/app/pages/privacy_config/views/privacy_config_view.dart';
 import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 

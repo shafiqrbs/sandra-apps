@@ -324,7 +324,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  data.sales.toString(),
+                                  data.total.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
@@ -334,7 +334,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  data.receive.toString(),
+                                  data.amount.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,

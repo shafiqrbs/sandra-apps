@@ -24,7 +24,7 @@ import '/app/pages/accounting/accounting_purchase/controllers/accounting_purchas
 //ignore: must_be_immutable
 class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
   AccountingPurchaseView({super.key});
-  final currency = SetUp().currency ?? '';
+  final currency = SetUp().symbol ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -176,8 +176,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color:
-                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                color: index.isEven ? colors.evenListColor : colors.oddListColor,
                 borderRadius: BorderRadius.circular(containerBorderRadius),
                 border: Border.all(
                   color: colors.tertiaryBaseColor,
@@ -208,7 +207,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                     children: [
                       Expanded(
                         child: CommonIconText(
-                          text: element.vendorName ?? '',
+                          text: element.name ?? '',
                           icon: TablerIcons.user,
                           textOverflow: TextOverflow.ellipsis,
                           fontSize: valueTFSize,
@@ -254,7 +253,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                           padding: const EdgeInsets.only(left: 4),
                           child: CommonText(
                             text:
-                                '${appLocalization.total} : $currency ${element.approvedBy ?? ''}',
+                                '${appLocalization.total} : $currency ${element.total ?? ''}',
                             fontSize: valueTFSize,
                             textColor: colors.primaryTextColor,
                             fontWeight: FontWeight.w500,
@@ -266,7 +265,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                           padding: const EdgeInsets.only(left: 4),
                           child: CommonText(
                             text:
-                                '${appLocalization.amount} : $currency ${element.approvedBy ?? ''}',
+                                '${appLocalization.amount} : $currency ${element.amount ?? ''}',
                             fontSize: valueTFSize,
                             textColor: colors.primaryTextColor,
                             fontWeight: FontWeight.w500,
@@ -278,7 +277,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                           padding: const EdgeInsets.only(left: 4),
                           child: CommonText(
                             text:
-                                "${appLocalization.due} :$currency ${element.balance ?? ""}",
+                                "${appLocalization.balance} :$currency ${element.balance ?? ""}",
                             fontSize: valueTFSize,
                             textColor: colors.primaryTextColor,
                             textAlign: TextAlign.start,

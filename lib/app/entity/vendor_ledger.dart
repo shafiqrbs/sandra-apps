@@ -12,49 +12,52 @@ class VendorLedgerManager extends EntityManager<VendorLedger> {
 class VendorLedger {
   final int? id;
   final String? method;
-  final int? sales;
-  final int? receive;
+  final String? name;
+  final String? createdBy;
+  final String? approvedBy;
+  final String? mobile;
+  final double? total;
+  final double? amount;
   final double? balance;
   final int? sourceInvoice;
+  final String? accountBank;
   final String? invoice;
   final String? created;
   final String? updated;
-  final String? vendorName;
-  final int? vendorId;
-  final String? mobile;
-  String? approvedBy;
 
   VendorLedger({
     this.id,
     this.method,
-    this.sales,
-    this.receive,
+    this.name,
+    this.createdBy,
+    this.approvedBy,
+    this.mobile,
+    this.total,
+    this.amount,
     this.balance,
     this.sourceInvoice,
+    this.accountBank,
     this.invoice,
     this.created,
     this.updated,
-    this.vendorName,
-    this.vendorId,
-    this.mobile,
-    this.approvedBy,
   });
 
   factory VendorLedger.fromJson(Map<String, dynamic> json) {
     return VendorLedger(
       id: json['id'],
       method: json['method'],
-      sales: json['sales'],
-      receive: json['receive'],
-      balance: _parseDouble(json['balance']),
+      name: json['name'],
+      createdBy: json['created_by'],
+      approvedBy: json['approved_by'],
+      mobile: json['mobile'],
+      total: _toDouble(json['total']),
+      amount: _toDouble(json['amount']),
+      balance: _toDouble(json['balance']),
       sourceInvoice: json['source_invoice'],
+      accountBank: json['account_bank'],
       invoice: json['invoice'],
       created: json['created'],
       updated: json['updated'],
-      vendorName: json['vendor_name'],
-      vendorId: json['vendor_id'],
-      mobile: json['mobile'],
-      approvedBy: json['approved_by'],
     );
   }
 
@@ -62,37 +65,30 @@ class VendorLedger {
     return {
       'id': id,
       'method': method,
-      'sales': sales,
-      'receive': receive,
+      'name': name,
+      'created_by': createdBy,
+      'approved_by': approvedBy,
+      'mobile': mobile,
+      'total': total,
+      'amount': amount,
       'balance': balance,
       'source_invoice': sourceInvoice,
+      'account_bank': accountBank,
       'invoice': invoice,
       'created': created,
       'updated': updated,
-      'vendor_name': vendorName,
-      'vendor_id': vendorId,
-      'mobile': mobile,
-      'approved_by': approvedBy,
     };
   }
 
-  static double _parseDouble(dynamic value) {
-    if (value is int) {
+  static double? _toDouble(dynamic value) {
+    if (value == null) {
+      return null;
+    } else if (value is int) {
       return value.toDouble();
     } else if (value is double) {
       return value;
     } else {
-      throw const FormatException('Invalid format for double');
-    }
-  }
-
-  static int _parseInt(dynamic value) {
-    if (value is double) {
-      return value.toInt();
-    } else if (value is double) {
-      return value.toInt();
-    } else {
-      throw const FormatException('Invalid format for double');
+      throw FormatException('Invalid format for double');
     }
   }
 }

@@ -137,7 +137,7 @@ class AccountingPurchaseController extends BaseController {
       await Get.dialog(
         DialogPattern(
           title: appLocalization.purchaseDetails,
-          subTitle: element.vendorName ?? '',
+          subTitle: element.name ?? '',
           child: PurchaseInformationView(
             purchase: invoice,
             purchaseMode: 'online',
