@@ -345,19 +345,19 @@ class DashboardView extends BaseView<DashboardController> {
             mainAxisAlignment: spaceBetweenMAA,
             children: [
               TitleSubtitleButton(
-                title: appLocalization.expense,
-                subTitle: '৳ 567',
-                icon: TablerIcons.moneybag,
-                onTap: controller.goToExpenseList,
-                bgColor: const Color(0xff4CBB17),
-              ),
-              10.width,
-              TitleSubtitleButton(
                 title: appLocalization.due,
                 subTitle: '৳ 567',
                 icon: TablerIcons.cash,
                 onTap: controller.goToDueCustomerList,
                 bgColor: const Color(0xffFF6F61),
+              ),
+              10.width,
+              TitleSubtitleButton(
+                title: appLocalization.expense,
+                subTitle: '৳ 567',
+                icon: TablerIcons.moneybag,
+                onTap: controller.goToExpenseList,
+                bgColor: const Color(0xff4CBB17),
               ),
             ],
           ),
