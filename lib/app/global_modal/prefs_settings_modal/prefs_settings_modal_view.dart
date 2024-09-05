@@ -156,19 +156,40 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                         child: Column(
                           children: [
                             RadioListTile<String>(
-                              title: Text(appLocalization.purchaseWithMrp),
+                              title: Text(
+                                appLocalization.purchaseWithMrp,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: colors.defaultFontColor,
+                                ),
+                              ),
                               value: 'purchase_with_mrp',
                               groupValue: controller.selectedPurchase.value,
                               onChanged: controller.changePurchase,
                             ),
                             RadioListTile<String>(
-                              title: Text(appLocalization.purchasePrice),
+                              title: Text(
+                                appLocalization.purchasePrice,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: colors.defaultFontColor,
+                                ),
+                              ),
                               value: 'purchase_price',
                               groupValue: controller.selectedPurchase.value,
                               onChanged: controller.changePurchase,
                             ),
                             RadioListTile<String>(
-                              title: Text(appLocalization.totalPrice),
+                              title: Text(
+                                appLocalization.totalPrice,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: colors.defaultFontColor,
+                                ),
+                              ),
                               value: 'total_price',
                               groupValue: controller.selectedPurchase.value,
                               onChanged: controller.changePurchase,
