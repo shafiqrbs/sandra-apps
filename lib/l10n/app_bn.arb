@@ -357,7 +357,8 @@
   "userRequired" : "User required",
   "remark" : "Remark",
   "remarkRequired" : "Remark required",
-  "addExpense" : "Add Expense"
+  "addExpense" : "Add Expense",
+  "purchaseDetails" : "Purchase Details"
 
 
 

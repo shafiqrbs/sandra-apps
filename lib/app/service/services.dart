@@ -576,6 +576,7 @@ class Services {
     required String? startDate,
     required String? endDate,
     required String? keyword,
+    required int page,
   }) async {
     try {
       final data = {
@@ -583,6 +584,7 @@ class Services {
         'start_date': startDate,
         'end_date': endDate,
         'keyword': keyword,
+        'page': page,
       }..removeWhere(
           (key, value) => value == null,
         );

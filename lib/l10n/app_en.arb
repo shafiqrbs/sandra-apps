@@ -280,7 +280,8 @@
   "createExpense" : "Create Expense",
   "createExpenseDetails" : "Create Expense Details",
   "requiredField" : "Required Field",
-  "transactionMethodRequired" : "Transaction method required"
+  "transactionMethodRequired" : "Transaction method required",
+  "purchaseDetails" : "Purchase Details"
 
 
 
