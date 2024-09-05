@@ -288,7 +288,8 @@
   "method" : "Method",
   "stockDetails" : "Stock Details",
   "synchronization" : "Synchronization",
-  "synchronizeYourDataWithImportAndExport" : "Synchronize your data with import and export"
+  "synchronizeYourDataWithImportAndExport" : "Synchronize your data with import and export",
+  "invoiceDataNotAvailable" : "This invoice details is not available"
 
 
 

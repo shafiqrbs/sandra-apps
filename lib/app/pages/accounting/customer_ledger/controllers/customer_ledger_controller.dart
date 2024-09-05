@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 
@@ -48,6 +49,10 @@ class CustomerLedgerController extends BaseController {
         ),
       );
 
+    }else{
+      showSnackBar(
+        message: appLocalization.invoiceDataNotAvailable,
+      );
     }
   }
 

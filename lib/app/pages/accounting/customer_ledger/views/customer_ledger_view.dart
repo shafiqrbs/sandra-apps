@@ -213,9 +213,9 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
           child: Row(
             children: [
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Text(
-                  'date'.tr,
+                  appLocalization.date,
                   textAlign: TextAlign.start,
                   style: headerTextStyle,
                 ),
@@ -223,7 +223,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
               Expanded(
                 flex: 3,
                 child: Text(
-                  'method'.tr,
+                  appLocalization.method,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -231,7 +231,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'sales'.tr,
+                  appLocalization.sales,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -239,7 +239,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'receive'.tr,
+                  appLocalization.receive,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -247,8 +247,8 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'balance'.tr,
-                  textAlign: TextAlign.center,
+                  appLocalization.balance,
+                  textAlign: TextAlign.right,
                   style: headerTextStyle,
                 ),
               ),
@@ -257,9 +257,8 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
         ),
         Obx(
           () {
-
-            if(controller.customerLedgerReport.value == null) {
-             ElevatedButton(
+            if (controller.customerLedgerReport.value == null) {
+              ElevatedButton(
                 onPressed: () async {
                   await controller.fetchLedgerReport();
                 },
@@ -304,7 +303,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: Text(
                                   "${index + 1}. ${DateFormat("dd-M-yy").format(
                                     DateTime.now(),
@@ -349,30 +348,13 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                                 flex: 2,
                                 child: Text(
                                   data.balance.toString(),
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 4,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            color: index.isEven
-                                ? colors.evenListColor
-                                : colors.oddListColor,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Icon(
-                            TablerIcons.eye,
-                            size: 18,
-                            color: colors.primaryTextColor,
                           ),
                         ),
                       ),
