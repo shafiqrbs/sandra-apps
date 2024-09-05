@@ -32,7 +32,7 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                       FBString(
                         textController: controller.userNameController.value,
                         preFixIcon: TablerIcons.user,
-                        label: appLocalization.name,
+                        label: appLocalization.companyName,
                         hint: appLocalization.enterNameHere,
                         errorMsg: appLocalization.nameRequired,
                         isRequired: true,

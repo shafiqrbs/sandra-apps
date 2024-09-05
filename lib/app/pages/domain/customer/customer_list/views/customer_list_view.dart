@@ -31,6 +31,7 @@ class CustomerListView extends BaseView<CustomerListController> {
             onFilterTap: () {},
             onClearTap: controller.onClearSearchText,
             showSearchView: controller.isSearchSelected.value,
+            isShowFilter: false,
           );
         },
       ),

@@ -283,7 +283,8 @@
   "transactionMethodRequired" : "Transaction method required",
   "purchaseDetails" : "Purchase Details",
   "help" : "Help",
-  "globalConfiguration" : "Global Configuration"
+  "globalConfiguration" : "Global Configuration",
+  "companyName" : "Company Name"
 
 
 

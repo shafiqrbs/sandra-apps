@@ -17,6 +17,7 @@ class AppBarSearchView extends BaseWidget {
   final Function()? onClearTap;
   final bool showSearchView;
   final List<Widget> suffixIcon;
+  final bool? isShowFilter;
   AppBarSearchView({
     required this.pageTitle,
     required this.controller,
@@ -27,6 +28,7 @@ class AppBarSearchView extends BaseWidget {
     super.key,
     this.showSearchView = false,
     this.suffixIcon = const [],
+    this.isShowFilter = true,
   });
 
   @override
@@ -208,13 +210,13 @@ class AppBarSearchView extends BaseWidget {
                         color: colors.primaryBaseColor,
                       ),
                     ),
-                    IconButton(
+                    isShowFilter! ?IconButton(
                       onPressed: onFilterTap,
                       icon: Icon(
                         TablerIcons.filter,
                         color: colors.primaryBaseColor,
                       ),
-                    ),
+                    ) : Container(),
                     IconButton(
                       onPressed: onClearTap,
                       icon: Icon(

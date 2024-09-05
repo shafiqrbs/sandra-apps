@@ -287,6 +287,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                       ),
                     ],
                   ),
+                  Text(element.sourceInvoice.toString() ?? ''),
                 ],
               ),
             ),
