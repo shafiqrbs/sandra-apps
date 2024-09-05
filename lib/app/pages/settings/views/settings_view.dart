@@ -69,14 +69,6 @@ class SettingsView extends BaseView<SettingsController> {
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
-                      // Get.to(SyncSettings());
-                    },
-                    leading: const Icon(TablerIcons.refresh),
-                    title: Text(appLocalization.sync),
-                    trailing: const Icon(TablerIcons.chevron_right),
-                  ),
-                  SettingsTile.navigation(
-                    onPressed: (BuildContext context) {
                       //Get.to(const AdditionalSettings());
                     },
                     leading: const Icon(TablerIcons.category),
@@ -89,6 +81,14 @@ class SettingsView extends BaseView<SettingsController> {
                     },
                     leading: const Icon(TablerIcons.lock),
                     title: Text(appLocalization.privacy),
+                    trailing: const Icon(TablerIcons.chevron_right),
+                  ),
+                  SettingsTile.navigation(
+                    onPressed: (BuildContext context) {
+                      // Get.to(PrivacySettings());
+                    },
+                    leading: const Icon(TablerIcons.help),
+                    title: Text(appLocalization.help),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                 ],

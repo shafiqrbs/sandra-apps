@@ -281,7 +281,8 @@
   "createExpenseDetails" : "Create Expense Details",
   "requiredField" : "Required Field",
   "transactionMethodRequired" : "Transaction method required",
-  "purchaseDetails" : "Purchase Details"
+  "purchaseDetails" : "Purchase Details",
+  "help" : "Help"
 
 
 
