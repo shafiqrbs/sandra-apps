@@ -52,9 +52,9 @@ class StockCardView extends BaseWidget {
       onTap: () {
         Get.dialog(
           DialogPattern(
-            title: 'stock_details'.tr,
+            title: appLocalization.stockDetails,
             subTitle: '',
-            child: StockDetailsModaL(
+            child: StockDetailsModal(
               element: element,
             ),
           ),

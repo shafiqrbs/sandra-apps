@@ -26,7 +26,7 @@ class SubTabItemView extends StatelessWidget {
 
     final color = isSelected
         ? Colors.white
-        : ColorSchema().primaryLiteColor;
+        : ColorSchema().primaryBaseColor;
     return InkWell(
       onTap: onTap,
       child: Container(

@@ -342,6 +342,8 @@
   "help" : "সাহায্য",
   "globalConfiguration" : "গ্লোবাল কনফিগারেশন",
   "companyName" : "কোম্পানির নাম",
+  "method" : "পদ্ধতি",
+  "stockDetails" : "স্টক বিবরণ",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

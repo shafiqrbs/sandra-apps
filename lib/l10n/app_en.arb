@@ -284,7 +284,9 @@
   "purchaseDetails" : "Purchase Details",
   "help" : "Help",
   "globalConfiguration" : "Global Configuration",
-  "companyName" : "Company Name"
+  "companyName" : "Company Name",
+  "method" : "Method",
+  "stockDetails" : "Stock Details"
 
 
 

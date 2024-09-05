@@ -27,7 +27,7 @@ import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.
 class SalesListView extends BaseView<SalesListController> {
   SalesListView({super.key});
 
-  final currency = SetUp().currency ?? '';
+  final currency = SetUp().symbol ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {

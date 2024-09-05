@@ -6,9 +6,9 @@ import 'package:nb_utils/nb_utils.dart';
 
 import 'stock_card_view.dart';
 
-class StockDetailsModaL extends BaseWidget {
+class StockDetailsModal extends BaseWidget {
   final Stock element;
-  StockDetailsModaL({
+  StockDetailsModal({
     required this.element,
     super.key,
   });
@@ -41,13 +41,13 @@ class StockDetailsModaL extends BaseWidget {
             children: [
               Expanded(
                 child: labelValue.copyWith(
-                  label: 'purchase'.tr,
+                  label: appLocalization.purchasePrice,
                   value: element.purchasePrice.toString(),
                 ),
               ),
               Expanded(
                 child: labelValue.copyWith(
-                  label: 'adj_qty'.tr,
+                  label: appLocalization.qty,
                   value: element.salesPrice.toString(),
                 ),
               ),

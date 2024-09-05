@@ -253,7 +253,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                         horizontal: 12,
                         vertical: 4,
                       ),
-                      hintText: appLocalization.searchCustomer,
+                      hintText: appLocalization.searchVendor,
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,

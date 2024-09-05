@@ -215,7 +215,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'date'.tr,
+                  appLocalization.date,
                   textAlign: TextAlign.start,
                   style: headerTextStyle,
                 ),
@@ -223,7 +223,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 3,
                 child: Text(
-                  'method'.tr,
+                  appLocalization.method,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -231,7 +231,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'sales'.tr,
+                  appLocalization.sales,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -239,7 +239,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'receive'.tr,
+                  appLocalization.receive,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -247,7 +247,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'balance'.tr,
+                  appLocalization.balance,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -366,7 +366,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: const Icon(
-                            TablerIcons.info_small,
+                            TablerIcons.eye,
                             size: 18,
                           ),
                         ),
