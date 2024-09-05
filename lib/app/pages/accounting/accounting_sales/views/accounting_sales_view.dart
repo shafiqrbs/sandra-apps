@@ -87,10 +87,10 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             () {
               final pageState = controller.pageState;
               if (pageState == PageState.loading) {
-                return const Expanded(
+                return  Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
-                      color: Colors.green,
+                      color: loaderColor,
                     ),
                   ),
                 );

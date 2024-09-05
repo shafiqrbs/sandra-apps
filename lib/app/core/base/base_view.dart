@@ -34,6 +34,8 @@ abstract class BaseView<Controller extends BaseController>
   final Logger logger = BuildConfig.instance.config.logger;
   final colors = ColorSchema();
 
+  final loaderColor = const Color(0xFF00AEEF);
+
   Widget body(BuildContext context);
 
   PreferredSizeWidget? appBar(BuildContext context);

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/dispose_devouncer.dart';
 import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/core_model/voice_recognition.dart';
 
@@ -45,6 +46,8 @@ abstract class BaseController extends GetxController {
   final isManager = LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
 
   final pageLimit = 25;
+
+  final debouncer = DisposeDebouncer();
 
   //Reload the page
   final _refreshController = false.obs;

@@ -201,7 +201,19 @@ class AccountingSalesController extends BaseController {
     }
   }
 
-  onSearch(String value) {}
+  Future<void> onSearch(String value) async {
+    debouncer.call(
+      () async {
+        searchQuery = value;
+        if (value.isNotEmpty) {
+          isSearchSelected.value = true;
+        } else {
+          isSearchSelected.value = false;
+        }
+        refreshData();
+      },
+    );
+  }
 
   Future<void> refreshData() async {
     updatePageState(PageState.loading);
