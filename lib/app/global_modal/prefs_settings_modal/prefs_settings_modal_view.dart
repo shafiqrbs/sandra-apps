@@ -138,6 +138,47 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   ],
                 ),
                 dividerWidget(),
+                Column(
+                  children: [
+                    _buildSettingButton(
+                      icon: TablerIcons.sun,
+                      text: appLocalization.purchaseConfig,
+                      trailingIcon: TablerIcons.chevron_right,
+                      isOpen: controller.buttons.value == Buttons.purchase,
+                      onTap: () {
+                        controller.changeButton(Buttons.purchase);
+                      },
+                    ),
+                    if (controller.buttons.value == Buttons.purchase)
+                      Container(
+                        color: Colors.white,
+                        width: Get.width,
+                        child: Column(
+                          children: [
+                            RadioListTile<String>(
+                              title: Text(appLocalization.purchaseWithMrp),
+                              value: 'purchase_with_mrp',
+                              groupValue: controller.selectedPurchase.value,
+                              onChanged: controller.changePurchase,
+                            ),
+                            RadioListTile<String>(
+                              title: Text(appLocalization.purchasePrice),
+                              value: 'purchase_price',
+                              groupValue: controller.selectedPurchase.value,
+                              onChanged: controller.changePurchase,
+                            ),
+                            RadioListTile<String>(
+                              title: Text(appLocalization.totalPrice),
+                              value: 'total_price',
+                              groupValue: controller.selectedPurchase.value,
+                              onChanged: controller.changePurchase,
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+                dividerWidget(),
                 Row(
                   mainAxisAlignment: spaceBetweenMAA,
                   children: [

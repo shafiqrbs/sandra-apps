@@ -5,6 +5,7 @@ import '/app/core/base/base_controller.dart';
 
 enum Buttons {
   printPaperType,
+  purchase,
 }
 
 class PrefsSettingsModalController extends BaseController {
@@ -13,6 +14,7 @@ class PrefsSettingsModalController extends BaseController {
   final isPurchaseOnline = ValueNotifier(false);
   final isZeroSalesAllowed = ValueNotifier(false);
   final printerType = ''.obs;
+  final selectedPurchase = ''.obs;
   final printerNewLine = 0.obs;
   final printNewLineController = TextEditingController();
   final printerTypeList = [
@@ -36,6 +38,7 @@ class PrefsSettingsModalController extends BaseController {
     printerType.value = await prefs.getPrintPaperType();
     printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
     printNewLineController.text = printerNewLine.value.toString();
+    selectedPurchase.value = await prefs.getPurchaseConfig();
   }
 
   Future<void> setSalesOnline(bool value) async {
@@ -45,7 +48,6 @@ class PrefsSettingsModalController extends BaseController {
     );
     final dashboardController = Get.find<DashboardController>();
     dashboardController.isOnline.value = value;
-
   }
 
   Future<void> setPurchaseOnline(bool value) async {
@@ -85,5 +87,12 @@ class PrefsSettingsModalController extends BaseController {
       return;
     }
     buttons.value = button;
+  }
+
+  Future<void> changePurchase(String? config) async {
+    if (config != null) {
+      selectedPurchase.value = config;
+      await prefs.setPurchaseConfig(config);
+    }
   }
 }

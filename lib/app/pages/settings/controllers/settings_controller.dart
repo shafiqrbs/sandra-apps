@@ -8,12 +8,9 @@ enum Buttons {
 class SettingsController extends BaseController {
   final buttons = Rx<Buttons?>(null);
 
-  final selectedPurchase = ''.obs;
-
   @override
   Future<void> onInit() async {
     super.onInit();
-    selectedPurchase.value = await prefs.getPurchaseConfig();
   }
 
   void changeButton(Buttons button) {
@@ -22,12 +19,5 @@ class SettingsController extends BaseController {
       return;
     }
     buttons.value = button;
-  }
-
-  Future<void> changePurchase(String? config) async {
-    if (config != null) {
-      selectedPurchase.value = config;
-      await prefs.setPurchaseConfig(config);
-    }
   }
 }
