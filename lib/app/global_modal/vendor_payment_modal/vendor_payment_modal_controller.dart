@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -14,6 +16,7 @@ class VendorPaymentModalController extends BaseController {
   final amountController = TextEditingController().obs;
   final addRemarkController = TextEditingController().obs;
   final selectedPaymentMode = 'cash'.obs;
+  final isShowClearIcon = false.obs;
 
   VendorPaymentModalController({
     Vendor? vendor,
@@ -87,5 +90,25 @@ class VendorPaymentModalController extends BaseController {
       return;
     }
     await vendorManager.searchItemsByName(value!);
+  }
+
+  Future<void> addVendor() async {
+    final result = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.addVendor,
+        subTitle: '',
+        child: AddVendorModalView(),
+      ),
+    ) as Vendor?;
+    print('result: $result');
+
+    if (result != null) {
+      vendorManager.selectedItem.value = result;
+      vendorManager.searchTextController.value.text = result.name!;
+      vendorManager.searchedItems.value = null;
+      update();
+      notifyChildrens();
+      refresh();
+    }
   }
 }

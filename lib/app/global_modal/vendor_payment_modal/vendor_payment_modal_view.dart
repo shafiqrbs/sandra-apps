@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
+import 'package:sandra/app/core/widget/common_text.dart';
 import '/app/entity/vendor.dart';
 import '/app/global_widget/vendor_card_view.dart';
 
@@ -36,37 +38,11 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
             ),
             child: Column(
               children: [
-                FBString(
-                  isRequired: false,
-                  textController:
-                      controller.vendorManager.searchTextController.value,
-                  onChange: controller.onSearchCustomer,
-                  hint: appLocalization.searchVendor,
-                  suffixIcon: TablerIcons.search,
-                ),
-                1.percentHeight,
+                _buildCustomerSearch(context),
                 Stack(
                   children: [
                     Column(
                       children: [
-                        Obx(
-                          () => controller.vendorManager.selectedItem.value !=
-                                  null
-                              ? Column(
-                                  children: [
-                                    VendorCardView(
-                                      data: controller
-                                          .vendorManager.selectedItem.value!,
-                                      index: 0,
-                                      onTap: () {},
-                                      onReceive: () {},
-                                      showReceiveButton: false,
-                                    ),
-                                    1.percentHeight,
-                                  ],
-                                )
-                              : Container(),
-                        ),
                         Obx(
                           () => Column(
                             children: [
@@ -106,10 +82,62 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                        1.percentHeight,
+                        FBString(
+                          textController: controller.addRemarkController.value,
+                          isRequired: false,
+                          lines: 2,
+                          hint: appLocalization.addRemark,
+                        ),
+                        1.percentHeight,
+                      ],
+                    ),
+                    Obx(
+                      () => controller.vendorManager.searchedItems.value
+                                  ?.isNotEmpty ??
+                              false
+                          ? Container(
+                              color: Colors.white,
+                              height: 35.ph,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.vendorManager
+                                        .searchedItems.value?.length ??
+                                    0,
+                                itemBuilder: (context, index) {
+                                  return VendorCardView(
+                                    data: controller.vendorManager.searchedItems
+                                        .value![index],
+                                    index: index,
+                                    onTap: () {
+                                      controller.updateCustomer(
+                                        controller.vendorManager.searchedItems
+                                            .value![index],
+                                      );
+                                      //close keyboard
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    onReceive: () {},
+                                    showReceiveButton: false,
+                                  );
+                                },
+                              ),
+                            )
+                          : Container(),
+                    ),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  //height: 100,
+                  width: Get.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
                           alignment: Alignment.center,
-                          height: 50,
+                          height: 5.ph,
                           child: TextFormField(
                             controller: controller.amountController.value,
                             inputFormatters: [regexDouble],
@@ -121,9 +149,10 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                             ),
                             cursorColor: colors.formCursorColor,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
                               hintText: appLocalization.amount,
                               filled: true,
-                              fillColor: colors.textFieldColor,
+                              fillColor: Colors.white,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
@@ -142,74 +171,160 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                             onChanged: (value) {},
                           ),
                         ),
-                        1.percentHeight,
-                        FBString(
-                          textController: controller.addRemarkController.value,
-                          isRequired: false,
-                          lines: 2,
-                          hint: appLocalization.addRemark,
-                        ),
-                        1.percentHeight,
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: colors.moduleFooterColor,
-                          ),
-                          //height: 100,
-                          width: Get.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RowButton(
-                                buttonName: appLocalization.reset,
-                                leftIcon: TablerIcons.restore,
-                                onTap: controller.resetField,
-                                isOutline: true,
-                              ),
-                              16.width,
-                              RowButton(
-                                buttonName: appLocalization.save,
-                                leftIcon: TablerIcons.device_floppy,
-                                onTap: controller.processReceive,
-                                isOutline: false,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Obx(
-                      () => ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller
-                                .vendorManager.searchedItems.value?.length ??
-                            0,
-                        itemBuilder: (context, index) {
-                          return VendorCardView(
-                            data: controller
-                                .vendorManager.searchedItems.value![index],
-                            index: index,
-                            onTap: () {
-                              controller.updateCustomer(
-                                controller
-                                    .vendorManager.searchedItems.value![index],
-                              );
-                              //close keyboard
-                              FocusScope.of(context).unfocus();
-                            },
-                            onReceive: () {},
-                            showReceiveButton: false,
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                      16.width,
+                      RowButton(
+                        buttonName: appLocalization.save,
+                        leftIcon: TablerIcons.device_floppy,
+                        onTap: controller.processReceive,
+                        isOutline: false,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildCustomerSearch(
+    BuildContext context,
+  ) {
+    return Container(
+      color: colors.backgroundColor,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: textFieldHeight,
+                  child: TextFormField(
+                    controller:
+                        controller.vendorManager.searchTextController.value,
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      prefixIcon: Icon(
+                        TablerIcons.search,
+                        size: 16,
+                        color: colors.formBaseHintTextColor,
+                      ),
+                      suffixIcon: Obx(
+                        () {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              controller.isShowClearIcon.value
+                                  ? InkWell(
+                                      onTap: () {
+                                        controller.vendorManager
+                                            .searchTextController.value
+                                            .clear();
+                                        controller.isShowClearIcon.value =
+                                            false;
+                                        controller.vendorManager.selectedItem
+                                            .value = null;
+                                        controller.vendorManager.searchedItems
+                                            .value = [];
+                                      },
+                                      child: Icon(
+                                        TablerIcons.x,
+                                        size: 12,
+                                        color: colors.formClearIconColor,
+                                      ),
+                                    )
+                                  : Container(),
+                              IconButton(
+                                onPressed: controller.addVendor,
+                                icon: const Icon(
+                                  TablerIcons.user_plus,
+                                  size: 20,
+                                  color: Color(0xFFC98A69),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      hintText: appLocalization.searchCustomer,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: mediumTFSize.sp,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.borderColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    textAlign: startTA,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: mediumTFSize.sp,
+                    ),
+                    onChanged: (value) async {
+                      if (value.isEmpty) {
+                        controller.isShowClearIcon.value = false;
+                        controller.vendorManager.searchedItems.value = [];
+                        controller.vendorManager.selectedItem.value = null;
+                        return;
+                      }
+                      controller.isShowClearIcon.value = true;
+                      await controller.vendorManager.searchItemsByName(value);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          4.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CommonText(
+                text: appLocalization.donNotHaveAnAccount,
+                fontSize: smallTFSize,
+                fontWeight: FontWeight.w400,
+                textColor: colors.textColorH6,
+              ),
+              InkWell(
+                onTap: controller.addVendor,
+                child: CommonText(
+                  text: appLocalization.addVendor,
+                  fontSize: mediumTFSize,
+                  fontWeight: FontWeight.w500,
+                  textColor: colors.primaryBaseColor,
+                  textDecoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+          Obx(
+            () => controller.vendorManager.selectedItem.value != null
+                ? Column(
+                    children: [
+                      1.percentHeight,
+                      VendorCardView(
+                        data: controller.vendorManager.selectedItem.value!,
+                        index: 0,
+                        onTap: () {},
+                        onReceive: () {},
+                        showReceiveButton: false,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ),
+          8.height,
+        ],
+      ),
     );
   }
 

@@ -277,7 +277,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                           padding: const EdgeInsets.only(left: 4),
                           child: CommonText(
                             text:
-                                "${appLocalization.balance} :$currency ${element.balance ?? ""}",
+                                "${appLocalization.due} :$currency ${element.balance ?? ""}",
                             fontSize: valueTFSize,
                             textColor: colors.primaryTextColor,
                             textAlign: TextAlign.start,

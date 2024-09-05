@@ -304,6 +304,63 @@ InputDecoration inputDecorationSearch({
   );
 }
 
+InputDecoration buildInputDecoration({
+  required String hintText,
+  required TextStyle hintStyle,
+  required Color fillColor,
+  required Color enabledBorderColor,
+  required Color focusedBorderColor,
+  required Color errorBorderColor,
+  EdgeInsetsGeometry? contentPadding,
+  Widget? prefixIcon,
+  Widget? suffixIcon,
+}) {
+  return InputDecoration(
+    contentPadding: contentPadding ??
+        const EdgeInsets.symmetric(
+          vertical: 6,
+          horizontal: 8,
+        ),
+    hintText: hintText,
+    hintStyle: hintStyle,
+    filled: true,
+    fillColor: fillColor,
+    prefixIcon: prefixIcon,
+    suffixIcon: suffixIcon,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        appDimension.containerBorderRadius,
+      ),
+      borderSide: BorderSide(
+        color: enabledBorderColor,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        appDimension.containerBorderRadius,
+      ),
+      borderSide: BorderSide(
+        color: focusedBorderColor,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        appDimension.containerBorderRadius,
+      ),
+      borderSide: BorderSide(color: errorBorderColor),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        appDimension.containerBorderRadius,
+      ),
+      borderSide: BorderSide(
+        color: focusedBorderColor,
+        width: 0,
+      ),
+    ),
+  );
+}
+
 BoxDecoration formBuilderBoxDecoration({
   required Color color,
 }) {

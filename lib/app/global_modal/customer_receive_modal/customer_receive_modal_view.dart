@@ -3,6 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 
 import '/app/core/base/base_view.dart';
@@ -208,62 +209,7 @@ class CustomerReceiveModalView
     );
   }
 
-  InputDecoration buildInputDecoration({
-    required String hintText,
-    required TextStyle hintStyle,
-    required Color fillColor,
-    required Color enabledBorderColor,
-    required Color focusedBorderColor,
-    required Color errorBorderColor,
-    EdgeInsetsGeometry? contentPadding,
-    Widget? prefixIcon,
-    Widget? suffixIcon,
-  }) {
-    return InputDecoration(
-      contentPadding: contentPadding ??
-          const EdgeInsets.symmetric(
-            vertical: 6,
-            horizontal: 8,
-          ),
-      hintText: hintText,
-      hintStyle: hintStyle,
-      filled: true,
-      fillColor: fillColor,
-      prefixIcon: prefixIcon,
-      suffixIcon: suffixIcon,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(
-          color: enabledBorderColor,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(
-          color: focusedBorderColor,
-        ),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(color: errorBorderColor),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(
-          color: focusedBorderColor,
-          width: 0,
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildCustomerSearch(
     BuildContext context,
