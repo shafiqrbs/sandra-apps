@@ -57,6 +57,9 @@ class Purchase {
   String? tokenNo;
   String? couponCode;
 
+  num? discountCalculation;
+  num? discount;
+
   List<PurchaseItem>? purchaseItem;
 
   int? isOnline;
@@ -96,6 +99,9 @@ class Purchase {
     this.couponCode,
     this.purchaseItem,
     this.isOnline,
+    this.discountCalculation,
+    this.discount,
+
   });
 
   factory Purchase.fromJson(Map<String, dynamic> json) {
@@ -127,29 +133,31 @@ class Purchase {
       approvedById: json['approved_by_id'],
       approvedBy: json['approved_by'],
       vendorId: json['vendor_id'],
-      vendorName: json['vendor_name'],
-      vendorMobile: json['vendor_mobile'],
-      vendorAddress: json['vendor_address'],
+      vendorName: json['name'],
+      vendorMobile: json['mobile'],
+      vendorAddress: json['address'],
       methodId: json['method_id'],
       methodName: json['method_name'],
       methodMode: json['method_mode'],
       comment: json['comment'],
       tokenNo: json['token_no'],
       couponCode: json['coupon_code'],
-      purchaseItem: json['purchase_item'] == null
+      purchaseItem: json['item'] == null
           ? []
-          : json['purchase_item'] is String
+          : json['item'] is String
               ? List<PurchaseItem>.from(
-                  jsonDecode(json['purchase_item']).map(
+                  jsonDecode(json['item']).map(
                     (x) => PurchaseItem.fromJson(x),
                   ),
                 )
               : List<PurchaseItem>.from(
-                  json['purchase_item']!.map(
+                  json['item']!.map(
                     (x) => PurchaseItem.fromJson(x),
                   ),
                 ),
       isOnline: json['is_online'],
+      discountCalculation: parseDouble(json['discount_calculation']),
+      discount: parseDouble(json['discount']),
     );
   }
 
@@ -178,19 +186,21 @@ class Purchase {
       'approved_by_id': approvedById,
       'approved_by': approvedBy,
       'vendor_id': vendorId,
-      'vendor_name': vendorName,
-      'vendor_mobile': vendorMobile,
-      'vendor_address': vendorAddress,
+      'name': vendorName,
+      'mobile': vendorMobile,
+      'address': vendorAddress,
       'method_id': methodId,
       'method_name': methodName,
       'method_mode': methodMode,
       'comment': comment,
       'token_no': tokenNo,
       'coupon_code': couponCode,
-      'purchase_item': purchaseItem == null || purchaseItem!.isEmpty
+      'item': purchaseItem == null || purchaseItem!.isEmpty
           ? null
           : jsonEncode(purchaseItem),
       'is_online': isOnline,
+      'discount_calculation': discountCalculation,
+      'discount': discount,
     };
   }
 

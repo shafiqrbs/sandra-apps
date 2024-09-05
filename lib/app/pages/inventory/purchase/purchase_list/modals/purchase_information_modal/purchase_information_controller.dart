@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/app/core/base/base_controller.dart';
@@ -35,6 +36,7 @@ class PurchaseInformationController extends BaseController {
           id: purchase.value!.purchaseId!,
         );
         if (data != null) {
+          purchase.value = data;
           purchase.value!.purchaseItem = data.purchaseItem;
           purchase.refresh();
           update();

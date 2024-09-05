@@ -141,7 +141,7 @@ class AccountingPurchaseController extends BaseController {
           child: PurchaseInformationView(
             purchase: invoice,
             purchaseMode: 'online',
-            // isShowFooter: false,
+            isShowFooter: false,
           ),
         ),
       );

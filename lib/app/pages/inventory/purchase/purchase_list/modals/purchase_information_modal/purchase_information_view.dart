@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '/app/entity/purchase.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -16,10 +17,12 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
   final String purchaseMode;
   final Purchase purchase;
   final Function()? onDeleted;
+  final bool? isShowFooter;
   PurchaseInformationView({
     required this.purchaseMode,
     required this.purchase,
     this.onDeleted,
+    this.isShowFooter = true,
     super.key,
   });
 
@@ -42,6 +45,12 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
         purchaseMode: purchaseMode,
       ),
       builder: (controller) {
+        final createdDate = controller.purchase.value!.createdAt != null
+            ? DateFormat('dd MMM yyyy').format(
+                DateFormat('MM-dd-yyyy hh:mm a')
+                    .parse(controller.purchase.value!.createdAt!),
+              )
+            : '';
         return DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(containerBorderRadius),
@@ -99,7 +108,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           Expanded(
                             child: CommonIconText(
                               icon: TablerIcons.wallet,
-                              text: '',
+                              text: controller.purchase.value!.methodName ?? '',
                               fontSize: mediumTFSize,
                             ),
                           ),
@@ -111,39 +120,20 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           Expanded(
                             child: CommonIconText(
                               icon: TablerIcons.calendar,
-                              text: controller.purchase.value!.createdAt ?? '',
+                              text: createdDate ?? '',
                               fontSize: mediumTFSize,
                             ),
                           ),
                           Expanded(
                             child: CommonIconText(
-                              icon: TablerIcons.info_square_rounded,
-                              text: controller.purchase.value!.process ?? '',
+                              icon: TablerIcons.user_heart,
+                              text: controller.purchase.value!.createdBy ?? '',
                               fontSize: mediumTFSize,
                             ),
                           ),
                         ],
                       ),
-                      4.height,
 
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CommonIconText(
-                              icon: TablerIcons.clock_hour_3,
-                              text: 'Time',
-                              fontSize: mediumTFSize,
-                            ),
-                          ),
-                          Expanded(
-                            child: CommonIconText(
-                              icon: TablerIcons.user,
-                              text: 'Not found',
-                              fontSize: mediumTFSize,
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -168,7 +158,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                     Expanded(
                       flex: 3,
                       child: CommonText(
-                        text: 'name'.tr,
+                        text: appLocalization.name,
                         fontSize: mediumTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w400,
@@ -177,7 +167,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                     ),
                     Expanded(
                       child: CommonText(
-                        text: 'price'.tr,
+                        text: appLocalization.price,
                         fontSize: mediumTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w400,
@@ -186,7 +176,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                     ),
                     Expanded(
                       child: CommonText(
-                        text: 'qty'.tr,
+                        text: appLocalization.qty,
                         fontSize: mediumTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w400,
@@ -195,7 +185,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                     ),
                     Expanded(
                       child: CommonText(
-                        text: 'total'.tr,
+                        text: appLocalization.total,
                         fontSize: mediumTFSize,
                         textColor: colors.primaryTextColor,
                         fontWeight: FontWeight.w400,
@@ -305,8 +295,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           ),
                           labelValue.copyWith(
                             label:
-                                "${"discount".tr} (${controller.purchase.value!.purchaseId})",
-                            value: '${controller.purchase.value!.vendorName}',
+                                "${appLocalization.discount} (${controller.purchase.value!.discountCalculation})",
+                            value: '${controller.purchase.value!.discount}',
                           ),
                           Container(
                             width: Get.width,
@@ -316,11 +306,11 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             ),
                           ),
                           labelValue.copyWith(
-                            label: 'total'.tr,
+                            label: appLocalization.total,
                             value: '${controller.purchase.value!.netTotal}',
                           ),
                           labelValue.copyWith(
-                            label: 'receive'.tr,
+                            label: appLocalization.received,
                             value: '${controller.purchase.value!.received}',
                           ),
                           Container(
@@ -331,7 +321,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             ),
                           ),
                           labelValue.copyWith(
-                            label: 'due'.tr,
+                            label: appLocalization.due,
                             value: (
                               (controller.purchase.value!.netTotal ?? 0) -
                                   (controller.purchase.value!.received ?? 0),
@@ -343,8 +333,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                   ],
                 ),
               ),
-              16.height,
-              Row(
+              isShowFooter! ? 16.height : 0.height,
+              isShowFooter! ? Row(
                 children: [
                   Expanded(
                     child: InkWell(
@@ -358,7 +348,6 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           },
                         ).then(
                           (value) {
-                            print('value: $value');
                             if (value) onDeleted?.call();
                           },
                         );
@@ -515,7 +504,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                   ),
                   4.width,
                 ],
-              ),
+              ) : Container(),
               1.percentHeight,
             ],
           ),
