@@ -26,7 +26,7 @@ class Services {
 
   final pref = SessionManager();
   final dio = RestClient(
-    baseUrl: 'https://poskeeper.com/flutter-api/',
+    baseUrl: 'http://www.terminalbd.com/flutter-api/',
     token: '',
   );
 
