@@ -282,7 +282,8 @@
   "requiredField" : "Required Field",
   "transactionMethodRequired" : "Transaction method required",
   "purchaseDetails" : "Purchase Details",
-  "help" : "Help"
+  "help" : "Help",
+  "globalConfiguration" : "Global Configuration"
 
 
 

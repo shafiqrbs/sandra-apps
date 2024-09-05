@@ -340,6 +340,7 @@
   "requiredField" : "প্রয়োজনীয় ক্ষেত্র",
   "transactionMethodRequired" : "লেনদেন পদ্ধতি প্রয়োজন",
   "help" : "সাহায্য",
+  "globalConfiguration" : "গ্লোবাল কনফিগারেশন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

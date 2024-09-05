@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '/app/core/base/base_view.dart';
@@ -17,11 +18,9 @@ class SettingsView extends BaseView<SettingsController> {
     return AppBar(
       backgroundColor: colors.primaryBaseColor,
       centerTitle: false,
-      title: Text(
-        appLocalization.configuration,
-        style: TextStyle(
-          fontSize: headerTFSize,
-        ),
+      automaticallyImplyLeading: false,
+      title: PageBackButton(
+        pageTitle: appLocalization.globalConfiguration,
       ),
     );
   }
