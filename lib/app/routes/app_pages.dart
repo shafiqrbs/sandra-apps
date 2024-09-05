@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/app/pages/account_config/bindings/account_config_binding.dart';
+import '/app/pages/account_config/views/account_config_view.dart';
 import '/app/pages/accounting/accounting_purchase/bindings/accounting_purchase_binding.dart';
 import '/app/pages/accounting/accounting_purchase/views/accounting_purchase_view.dart';
 import '/app/pages/accounting/accounting_sales/bindings/accounting_sales_binding.dart';
@@ -22,6 +24,8 @@ import '/app/pages/domain/vendor/vendor_details/bindings/vendor_details_binding.
 import '/app/pages/domain/vendor/vendor_details/views/vendor_details_view.dart';
 import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
 import '/app/pages/domain/vendor/vendor_list/views/vendor_list_view.dart';
+import '/app/pages/help_config/bindings/help_config_binding.dart';
+import '/app/pages/help_config/views/help_config_view.dart';
 import '/app/pages/intro/license/bindings/license_binding.dart';
 import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
@@ -40,6 +44,8 @@ import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
+import '/app/pages/privacy_config/bindings/privacy_config_binding.dart';
+import '/app/pages/privacy_config/views/privacy_config_view.dart';
 import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 
@@ -115,6 +121,21 @@ class AppPages {
       name: Routes.settings,
       page: SettingsView.new,
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: Routes.accountConfig,
+      page: AccountConfigView.new,
+      binding: AccountConfigBinding(),
+    ),
+    GetPage(
+      name: Routes.privacyConfig,
+      page: PrivacyConfigView.new,
+      binding: PrivacyConfigBinding(),
+    ),
+    GetPage(
+      name: Routes.helpConfig,
+      page: HelpConfigView.new,
+      binding: HelpConfigBinding(),
     ),
     GetPage(
       name: Routes.vendorList,
