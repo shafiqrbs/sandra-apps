@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/entity/expense.dart';
@@ -86,8 +85,12 @@ class Services {
         query: data,
         headers: _buildHeader(),
       );
-
-      return response.data == null ? null : Customer.fromJson(response.data);
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Customer.fromJson,
+      );
     } catch (e, s) {
       printError(e, s);
       return null;
@@ -126,11 +129,11 @@ class Services {
         },
         headers: _buildHeader(),
       );
-
-      return response.data;
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return responseData;
     } catch (e, s) {
       printError(e, s);
-
       return null;
     }
   }
@@ -154,7 +157,6 @@ class Services {
     }
 
     query['page'] = page;
-    query['limit'] = 10;
 
     try {
       final response = await dio.post(
