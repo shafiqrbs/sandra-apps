@@ -5,6 +5,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/row_button.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
 
 import '/app/core/base/base_view.dart';
@@ -87,7 +88,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             () {
               final pageState = controller.pageState;
               if (pageState == PageState.loading) {
-                return  Expanded(
+                return Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
                       color: loaderColor,
@@ -138,6 +139,11 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             element: item,
             index: index,
             context: context,
+          );
+        },
+        newPageErrorIndicatorBuilder: (context) {
+          return listViewRetryView(
+            onRetry: controller.pagingController.value.retryLastFailedRequest,
           );
         },
       ),

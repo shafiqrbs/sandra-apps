@@ -57,33 +57,38 @@ class AccountingSalesController extends BaseController {
   Future<void> fetchSalesList({
     required int pageKey,
   }) async {
+    List<CustomerLedger>? apiDataList;
+
     await dataFetcher(
       future: () async {
-        final value = await services.getAccountSalesList(
+        apiDataList = await services.getAccountSalesList(
           customerId: selectedCustomer?.customerId?.toString(),
           startDate: startDate,
           endDate: endDate,
           keyword: searchQuery,
           page: pageKey,
         );
-
-        if (value == null) return;
-
-        if ((value.length) < pageLimit) {
-          pagingController.value.appendLastPage(value);
-        } else {
-          pagingController.value.appendPage(
-            value,
-            pageKey + 1,
-          );
-        }
-
-        update();
-        refresh();
-        notifyChildrens();
       },
       shouldShowLoader: false,
     );
+
+    if (apiDataList == null) {
+      pagingController.value.error = true;
+      return;
+    }
+
+    if ((apiDataList?.length ?? 0) < pageLimit) {
+      pagingController.value.appendLastPage(apiDataList!);
+    } else {
+      pagingController.value.appendPage(
+        apiDataList!,
+        pageKey + 1,
+      );
+    }
+
+    update();
+    refresh();
+    notifyChildrens();
   }
 
   Future<void> onClearSearchText() async {
@@ -218,7 +223,7 @@ class AccountingSalesController extends BaseController {
   Future<void> refreshData() async {
     updatePageState(PageState.loading);
     try {
-      pagingController.value.itemList = [];
+      pagingController.value.refresh();
 
       await fetchSalesList(
         pageKey: 1,

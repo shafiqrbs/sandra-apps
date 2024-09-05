@@ -138,4 +138,32 @@ abstract class BaseView<Controller extends BaseController>
   Widget _showLoading() {
     return const Loading();
   }
+
+  Widget listViewRetryView({
+    onRetry,
+  }) {
+    return InkWell(
+      onTap: onRetry,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        width: Get.width,
+        decoration: BoxDecoration(
+          color: colors.primaryColor,
+          borderRadius: BorderRadius.circular(containerBorderRadius),
+          border: Border.all(
+            color: colors.tertiaryBaseColor,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          appLocalization.retry,
+          style: TextStyle(
+            color: colors.primaryTextColor,
+            fontSize: 18,
+          ),
+        ),
+      ),
+    );
+  }
 }
