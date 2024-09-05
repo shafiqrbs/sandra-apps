@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/bindings/initial_binding.dart';
 import '/app/core/widget/tbd_text_button.dart';
 import '/app/core/base/base_view.dart';
 import '/app/global_modal/sync_modal/sync_modal_controller.dart';

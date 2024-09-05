@@ -344,6 +344,8 @@
   "companyName" : "কোম্পানির নাম",
   "method" : "পদ্ধতি",
   "stockDetails" : "স্টক বিবরণ",
+  "synchronization" : "সিঙ্ক্রোনাইজেশন",
+  "synchronizeYourDataWithImportAndExport" : "আপনার ডেটা ইম্পোর্ট এবং এক্সপোর্ট করুন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

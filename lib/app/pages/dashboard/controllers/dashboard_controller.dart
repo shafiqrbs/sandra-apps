@@ -203,8 +203,8 @@ List<Widget> configButtonList = [
     onTap: () {
       Get.dialog(
         DialogPattern(
-          title: appLocalization.sync,
-          subTitle: '',
+          title: appLocalization.synchronization,
+          subTitle: appLocalization.synchronizeYourDataWithImportAndExport,
           child: SyncModalView(),
         ),
       );
