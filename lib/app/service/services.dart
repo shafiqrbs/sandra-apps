@@ -15,44 +15,7 @@ import '/app/entity/sales.dart';
 import '/app/entity/vendor_ledger.dart';
 import 'client/api_options.dart';
 import 'client/rest_client.dart';
-
-Future<List<T>?> parseList<T>({
-  required List<dynamic>? list,
-  required T Function(Map<String, dynamic>) fromJson,
-}) async {
-  if (list == null) {
-    return null;
-  }
-
-  try {
-    if (kDebugMode) {
-      print('\x1B[31m Parsing List $T ${list.length} \x1B[0m\n');
-    }
-    return await compute(
-      _parseListInIsolate,
-      _ParseListParams<T>(
-        list,
-        fromJson,
-      ),
-    );
-  } on Exception catch (e) {
-    if (kDebugMode) {
-      print('Error parsing list: $e');
-    }
-  }
-  return null;
-}
-
-class _ParseListParams<T> {
-  final List<dynamic> list;
-  final T Function(Map<String, dynamic>) fromJson;
-
-  _ParseListParams(this.list, this.fromJson);
-}
-
-List<T> _parseListInIsolate<T>(_ParseListParams<T> params) {
-  return params.list.map((e) => params.fromJson(e)).toList();
-}
+import 'parser.dart';
 
 class Services {
   factory Services() {
@@ -76,11 +39,10 @@ class Services {
     };
   }
 
-  Future<bool> validateResponse(Response<dynamic> response) async {
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      throw Exception('Failed to load data');
+  void printError(dynamic e, dynamic s) {
+    if (kDebugMode) {
+      print('Error: $e');
+      print('Error: $s');
     }
   }
 
@@ -126,7 +88,8 @@ class Services {
       );
 
       return response.data == null ? null : Customer.fromJson(response.data);
-    } catch (e) {
+    } catch (e, s) {
+      printError(e, s);
       return null;
     }
   }
@@ -165,7 +128,9 @@ class Services {
       );
 
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      printError(e, s);
+
       return null;
     }
   }
@@ -257,7 +222,8 @@ class Services {
         headers: _buildHeader(),
       );
       return Sales.fromJson(response.data);
-    } catch (e) {
+    } catch (e, s) {
+      printError(e, s);
       return null;
     }
   }
@@ -265,17 +231,22 @@ class Services {
   Future<Purchase?> getOnlinePurchaseDetails({
     required String id,
   }) async {
-    final response = await dio.get(
-      APIType.public,
-      'poskeeper-online-sales-details',
-      query: {
-        'id': id,
-      },
-      headers: _buildHeader(),
-    );
-    final responseData = response.data as Map<String, dynamic>?;
-    if (responseData == null) return null;
-    return Purchase.fromJson(response.data);
+    try {
+      final response = await dio.get(
+        APIType.public,
+        'poskeeper-online-sales-details',
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(object: responseData, fromJson: Purchase.fromJson);
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
   }
 
   Future<bool> postCustomerReceive({
@@ -303,7 +274,8 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null || responseData['status'] == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      printError(e, s);
       return false;
     }
   }
@@ -333,7 +305,8 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null || responseData['status'] == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      printError(e, s);
       return false;
     }
   }
@@ -359,10 +332,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -388,10 +358,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -415,10 +382,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -442,10 +406,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -469,10 +430,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -496,10 +454,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -525,10 +480,7 @@ class Services {
         fromJson: CustomerLedger.fromJson,
       );
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return null;
     }
   }
@@ -554,10 +506,7 @@ class Services {
         fromJson: VendorLedger.fromJson,
       );
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return null;
     }
   }
@@ -594,11 +543,8 @@ class Services {
         list: response.data,
         fromJson: CustomerLedger.fromJson,
       );
-    } catch (e, ee) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $ee');
-      }
+    } catch (e, s) {
+      printError(e, s);
       return null;
     }
   }
@@ -634,10 +580,7 @@ class Services {
         fromJson: VendorLedger.fromJson,
       );
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return null;
     }
   }
@@ -667,10 +610,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return null;
     }
   }
@@ -695,16 +635,12 @@ class Services {
       );
       final responseData = response.data as List?;
       if (responseData == null) return null;
-
       return parseList(
         list: responseData,
         fromJson: Expense.fromJson,
       );
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return null;
     }
   }
@@ -725,10 +661,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -750,10 +683,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -779,10 +709,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -808,10 +735,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -832,10 +756,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
@@ -856,10 +777,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      if (kDebugMode) {
-        print('Error: $e');
-        print('Error: $s');
-      }
+      printError(e, s);
       return false;
     }
   }
