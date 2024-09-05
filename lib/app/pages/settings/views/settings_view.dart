@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -60,12 +61,20 @@ class SettingsView extends BaseView<SettingsController> {
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
-                    onPressed: (BuildContext context) {
-                      // Get.to(const PrinterSettings());
-                    },
+                    onPressed: (BuildContext context) {},
                     leading: const Icon(TablerIcons.printer),
                     title: Text(appLocalization.printer),
-                    trailing: const Icon(TablerIcons.chevron_right),
+                    trailing: AdvancedSwitch(
+                      controller: controller.isPrinterAllowed,
+                      onChanged: (value) async {
+                        await controller.setIsPrinterAllowed(value);
+                      },
+                      borderRadius: BorderRadius.circular(4),
+                      height: 20,
+                      width: 40,
+                      activeColor: colors.primaryBaseColor,
+                      initialValue: controller.isPrinterAllowed.value,
+                    ),
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {

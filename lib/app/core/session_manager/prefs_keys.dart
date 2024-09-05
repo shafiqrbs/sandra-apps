@@ -7,6 +7,7 @@ const prefsPrinterPaperType = 'printPaperType';
 const prefsIsSalesOnline = 'isSalesOnline';
 const prefsIsPurchaseOnline = 'isPurchaseOnline';
 const prefsIsZeroAllowed = 'isZeroAllowed';
+const prefsIsPrinterAllowed = 'isPrinterAllowed';
 const prefsPurchaseConfig = 'purchaseConfig';
 const prefsLanguage = 'language';
 const prefsLicenseKey = 'licenseKey';

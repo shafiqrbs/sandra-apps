@@ -193,6 +193,21 @@ class SessionManager {
     );
   }
 
+  /// Get is printer allowed
+  Future<bool> getIsPrinterAllowed() async {
+    return prefs.getBool(prefsIsPrinterAllowed) ?? false;
+  }
+
+  /// set is printer allowed
+  Future<void> setIsPrinterAllowed({
+    required bool isPrinterAllowed,
+  }) async {
+    await prefs.setBool(
+      prefsIsPrinterAllowed,
+      isPrinterAllowed,
+    );
+  }
+
   /// get is zero allowed
   Future<bool> getIsZeroSalesAllowed() async {
     return prefs.getBool(prefsIsZeroAllowed) ?? true;
