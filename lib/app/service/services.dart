@@ -358,7 +358,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -383,7 +387,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -406,7 +414,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -429,7 +441,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -452,7 +468,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -475,7 +495,11 @@ class Services {
       if (responseData == null) return false;
 
       return responseData['message'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -500,7 +524,11 @@ class Services {
         list: response.data,
         fromJson: CustomerLedger.fromJson,
       );
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return null;
     }
   }
@@ -525,7 +553,11 @@ class Services {
         list: response.data,
         fromJson: VendorLedger.fromJson,
       );
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return null;
     }
   }
@@ -601,7 +633,11 @@ class Services {
         list: response.data,
         fromJson: VendorLedger.fromJson,
       );
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return null;
     }
   }
@@ -613,11 +649,6 @@ class Services {
     required userId,
     required transactionMethodId,
   }) async {
-    print('amount: $amount');
-    print('remark: $remark');
-    print('expenseCategoryId: $expenseCategoryId');
-    print('userId: $userId');
-    print('transactionMethodId: $transactionMethodId');
     try {
       final response = await dio.post(
         APIType.public,
@@ -635,17 +666,31 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return null;
     }
   }
 
-  Future<List<Expense>?> getExpenseList() async {
+  Future<List<Expense>?> getExpenseList({
+    required String? startDate,
+    required String? endDate,
+    required String? keyword,
+    required int page,
+  }) async {
+    final query = <String, dynamic>{};
+    if (startDate != null) query['start_date'] = startDate;
+    if (endDate != null) query['end_date'] = endDate;
+    if (keyword != null) query['keyword'] = keyword;
+    query['page'] = page;
     try {
       final response = await dio.post(
         APIType.public,
         'poskeeper-account-expense',
-        {},
+        query,
         headers: _buildHeader(),
       );
       final responseData = response.data as List?;
@@ -655,7 +700,11 @@ class Services {
         list: responseData,
         fromJson: Expense.fromJson,
       );
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return null;
     }
   }
@@ -675,7 +724,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -696,7 +749,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -721,7 +778,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -746,7 +807,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -766,7 +831,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }
@@ -786,7 +855,11 @@ class Services {
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return false;
       return responseData['status'] == 'success';
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
       return false;
     }
   }

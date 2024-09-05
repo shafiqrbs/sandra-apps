@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/core_model/logged_user.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/app_bar_search_view.dart';
 import 'package:sandra/app/core/widget/common_icon_text.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/delete_button.dart';
+import 'package:sandra/app/core/widget/filter_button.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:sandra/app/core/widget/retry_view.dart';
+import 'package:sandra/app/core/widget/search_button.dart';
+import 'package:sandra/app/entity/expense.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -28,49 +33,36 @@ class ExpenseListView extends BaseView<ExpenseListController> {
     return AppBar(
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
-      title: PageBackButton(
-        pageTitle: appLocalization.expenseList,
+      title: Obx(
+        () {
+          return AppBarSearchView(
+            pageTitle: appLocalization.accountSales,
+            controller: controller.searchTextController.value,
+            onSearch: controller.onSearch,
+            onMicTap: controller.isSearchSelected.toggle,
+            onFilterTap: () => controller.showFilterModal(),
+            onClearTap: controller.onClearSearchText,
+            showSearchView: controller.isSearchSelected.value,
+          );
+        },
       ),
       automaticallyImplyLeading: false,
       actions: [
-        AppBarButtonGroup(
-          children: [
-            AddButton(
-              onTap: controller.showAddExpenseModal,
-            ),
-            QuickNavigationButton(),
-          ],
-        ),
-      ],
-    );
-  }
-
-  @override
-  Widget body(BuildContext context) {
-    return Column(
-      children: [
         Obx(
           () {
-            final items = controller.expenseList.value;
-
-            Widget content;
-            if (items == null) {
-              content = RetryView(
-                onRetry: () => controller.getExpenseList(),
-              );
-            } else if (items.isEmpty) {
-              content = NoRecordFoundView();
-            } else {
-              content = _buildListView();
+            if (controller.isSearchSelected.value) {
+              return Container();
             }
-
-            return Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  await controller.getExpenseList();
-                },
-                child: content,
-              ),
+            return AppBarButtonGroup(
+              children: [
+                AddButton(
+                  onTap: controller.showAddExpenseModal,
+                ),
+                SearchButton(
+                  onTap: controller.isSearchSelected.toggle,
+                ),
+                QuickNavigationButton(),
+              ],
             );
           },
         ),
@@ -78,135 +70,270 @@ class ExpenseListView extends BaseView<ExpenseListController> {
     );
   }
 
+  @override
+  Widget body(BuildContext context) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: globalKey,
+      appBar: appBar(context),
+      body: Column(
+        children: [
+          Obx(
+            () {
+              final pageState = controller.pageState;
+              if (pageState == PageState.loading) {
+                return Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: loaderColor,
+                    ),
+                  ),
+                );
+              }
+
+              if (pageState == PageState.failed) {
+                return RetryView(
+                  onRetry: controller.refreshData,
+                );
+              }
+
+              if (pageState == PageState.success) {
+                final items = controller.pagingController.value.itemList;
+
+                final isEmpty = items?.isEmpty ?? true;
+                if (isEmpty) {
+                  return NoRecordFoundView(
+                    onTap: controller.refreshData,
+                  );
+                }
+
+                return Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: controller.refreshData,
+                    child: _buildListView(),
+                  ),
+                );
+              }
+
+              return Container();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildListView() {
-    const iconColor = Color(0xff989898);
+    return PagedListView<int, Expense>(
+      pagingController: controller.pagingController.value,
+      shrinkWrap: true,
+      builderDelegate: PagedChildBuilderDelegate<Expense>(
+        itemBuilder: (context, item, index) {
+          return _buildCardView(
+            element: item,
+            index: index,
+            context: context,
+          );
+        },
+        newPageErrorIndicatorBuilder: (context) {
+          return listViewRetryView(
+            onRetry: controller.pagingController.value.retryLastFailedRequest,
+          );
+        },
+      ),
+    );
+  }
 
-    return ListView.builder(
-      itemCount: controller.expenseList.value?.length ?? 0,
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        //check ranger is valid
-
-        final element = controller.expenseList.value![index];
-        final createdDate = element.created;
-        return Container(
-          margin: const EdgeInsets.all(4),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: index.isEven ? colors.evenListColor : colors.oddListColor,
-            borderRadius: BorderRadius.circular(containerBorderRadius),
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: CommonIconText(
-                      text: '${element.created}',
-                      icon: TablerIcons.calendar_due,
-                      iconColor: iconColor,
-                    ),
-                  ),
-                  Expanded(
-                    child: CommonIconText(
-                      text: '${element.invoice}',
-                      icon: TablerIcons.file_invoice,
-                      iconColor: iconColor,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                ],
+  Widget _buildCardView({
+    required Expense element,
+    required int index,
+    required BuildContext context,
+  }) {
+    final createdDate = element.created != null
+        ? DateFormat('dd MMM yyyy').format(
+            DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+          )
+        : '';
+    return InkWell(
+      onTap: () => controller.showExpenseInformationModal(
+        context,
+        element,
+      ),
+      child: Container(
+        margin: EdgeInsets.only(
+          left: 8,
+          right: 8,
+          bottom: 8,
+          top: index == 0 ? 8 : 0,
+        ),
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color:
+                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                borderRadius: BorderRadius.circular(containerBorderRadius),
+                border: Border.all(
+                  color: colors.tertiaryBaseColor,
+                ),
               ),
-              10.height,
-              Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: CommonIconText(
-                      text: element.createdBy ?? '',
-                      icon: TablerIcons.cash,
-                      iconColor: iconColor,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonIconText(
+                          text: createdDate,
+                          icon: TablerIcons.calendar_due,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                      Expanded(
+                        child: CommonIconText(
+                          text: '${element.invoice}',
+                          icon: TablerIcons.file_invoice,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: CommonIconText(
-                      text: element.amount ?? '',
-                      icon: TablerIcons.tag,
-                      iconColor: iconColor,
-                    ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.approvedBy ?? '',
+                          icon: TablerIcons.user,
+                          textOverflow: TextOverflow.ellipsis,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.approvedBy ?? 'N/A',
+                          icon: TablerIcons.paywall,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Container(),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.approvedBy ?? '',
+                          icon: TablerIcons.device_mobile,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                      Expanded(
+                        child: CommonIconText(
+                          text: element.approvedBy ?? '',
+                          icon: TablerIcons.user_heart,
+                          textOverflow: TextOverflow.ellipsis,
+                          fontSize: valueTFSize,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              10.height,
-              Row(
-                children: [
-                  Expanded(
-                    child: CommonIconText(
-                      text: element.remark ?? '',
-                      icon: TablerIcons.user_share,
-                      iconColor: iconColor,
-                    ),
+                  const Divider(
+                    thickness: 0.4,
                   ),
-                  Expanded(
-                    child: CommonIconText(
-                      text: element.accountHead ?? '',
-                      icon: TablerIcons.user,
-                      iconColor: iconColor,
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () => controller.approveExpense(
-                            expenseId: element.id!,
-                          ),
-                          child: Container(
-                            height: 40,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: colors.primaryBaseColor,
-                              borderRadius: BorderRadius.circular(
-                                containerBorderRadius,
-                              ),
-                              border: Border.all(
-                                color: colors.primaryBaseColor,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CommonText(
-                                  text: appLocalization.approve,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: mediumButtonTFSize,
-                                  textColor: colors.backgroundColor,
-                                ),
-                              ],
-                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                '${appLocalization.total} : $currency ${element.approvedBy ?? ''}',
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        if(controller.isManager)
-                          DeleteButton(
-                          onTap: () => controller.deleteExpense(
-                            expenseId: element.id!,
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                '${appLocalization.amount} : $currency ${element.approvedBy ?? ''}',
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: CommonText(
+                            text:
+                                "${appLocalization.due} :$currency ${element.approvedBy ?? ""}",
+                            fontSize: valueTFSize,
+                            textColor: colors.primaryTextColor,
+                            textAlign: TextAlign.start,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        );
-      },
+            ),
+            if (element.approvedBy == null)
+              if (controller.isManager)
+                Positioned(
+                  right: 0,
+                  top: 4,
+                  child: DeleteButton(
+                    onTap: () => controller.deleteExpense(
+                      expenseId: element.id!,
+                    ),
+                  ),
+                ),
+            if (element.approvedBy == null)
+              Positioned(
+                right: 0,
+                top: 34,
+                child: IconButton(
+                  onPressed: () => controller.approveExpense(
+                    expenseId: element.id!,
+                  ),
+                  icon: Icon(
+                    TablerIcons.check,
+                    color: colors.successfulBaseColor,
+                  ),
+                ),
+              ),
+            if (element.approvedBy != null)
+              Positioned(
+                right: 10,
+                bottom: 8,
+                child: GestureDetector(
+                  onTap: () => controller.showExpenseInformationModal(
+                    context,
+                    element,
+                  ),
+                  child: Icon(
+                    TablerIcons.eye,
+                    color: colors.primaryBaseColor,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

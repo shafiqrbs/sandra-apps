@@ -16,7 +16,7 @@ class FilterButton extends BaseWidget {
     return AppBarButton(
       buttonName: null,
       onTap: onTap ?? () {},
-      leftIcon: TablerIcons.library_plus,
+      leftIcon: TablerIcons.filter,
       buttonBGColor: colors.tertiaryBaseColor,
       iconColor: colors.primaryBaseColor,
     );

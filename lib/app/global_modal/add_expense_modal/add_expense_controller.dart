@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -59,6 +60,12 @@ class AddExpenseController extends BaseController {
       showSnackBar(message: appLocalization.pleaseEnterAmount);
       return;
     }
+
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) return;
+
     if (formKey.currentState!.validate()) {
       bool? isSubmitted;
       await dataFetcher(
@@ -75,8 +82,19 @@ class AddExpenseController extends BaseController {
         },
       );
       if (isSubmitted ?? false) {
-
+        await resetField();
+        Get.back(
+          result: true,
+        );
       }
     }
+  }
+
+  Future<void> resetField() async {
+    amountController.value.clear();
+    remarkController.clear();
+    expenseCategoryManager.asController.selectedValue = null;
+    userManager.asController.selectedValue = null;
+    transactionMethodsManager.selectedItem.value = null;
   }
 }
