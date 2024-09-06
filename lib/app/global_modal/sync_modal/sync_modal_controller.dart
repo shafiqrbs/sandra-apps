@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
@@ -217,28 +218,15 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> importStockItem() async {
+    final needExportData = await needExport();
+    if (!needExportData) {
+      return;
+    }
+
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (!confirmation) {
-      return;
-    }
-
-    final salesCount = await dbHelper.getItemCount(
-      tableName: dbTables.tableSale,
-    );
-
-    if (salesCount > 0) {
-      showSnackBar(message: appLocalization.exportYourSales);
-      return;
-    }
-
-    final purchaseCount = await dbHelper.getItemCount(
-      tableName: dbTables.tablePurchase,
-    );
-
-    if (purchaseCount > 0) {
-      showSnackBar(message: appLocalization.exportYourPurchase);
       return;
     }
 
@@ -255,5 +243,81 @@ class SyncModalController extends BaseController {
         }
       },
     );
+  }
+
+  Future<void> importMasterData() async {
+    final needExportData = await needExport();
+    if (!needExportData) {
+      return;
+    }
+
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    try {
+      await dataFetcher(
+        future: () async {
+          final masterData = await services.getMasterData();
+          if (masterData?.isNotEmpty ?? false) {
+            if (masterData!['setup'] != null &&
+                masterData['setup'].isNotEmpty) {
+              SetUp.fromJson(masterData['setup'][0]);
+            }
+            final keys = masterData.keys.toList();
+            await Future.forEach<String>(
+              keys,
+              (key) async {
+                final value = masterData[key];
+                if (value != null && value is List) {
+                  if (value.isEmpty) {
+                    await dbHelper.deleteAll(tbl: key);
+                    return;
+                  }
+                  await dbHelper.insertList(
+                    deleteBeforeInsert: true,
+                    tableName: key,
+                    dataList:
+                        value.map((e) => Map<String, dynamic>.from(e)).toList(),
+                  );
+                }
+              },
+            );
+            showSnackBar(message: appLocalization.success);
+          }
+        },
+      );
+    } catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+      showSnackBar(message: appLocalization.failed);
+    }
+  }
+
+  Future<bool> needExport() async {
+    final salesCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableSale,
+    );
+
+    if (salesCount > 0) {
+      showSnackBar(message: appLocalization.exportYourSales);
+      return false;
+    }
+
+    final purchaseCount = await dbHelper.getItemCount(
+      tableName: dbTables.tablePurchase,
+    );
+
+    if (purchaseCount > 0) {
+      showSnackBar(message: appLocalization.exportYourPurchase);
+      return false;
+    }
+
+    return true;
   }
 }

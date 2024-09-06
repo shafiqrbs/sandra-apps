@@ -80,7 +80,7 @@ class SyncModalView extends BaseView<SyncModalController> {
       children: [
         _buildButton(
           title: appLocalization.masterData,
-          onTap: () {},
+          onTap: controller.importMasterData,
         ),
         _buildButton(
           title: appLocalization.stockItem,

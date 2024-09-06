@@ -293,7 +293,8 @@
   "isHasPrinter" : "Is has printer",
   "masterData" : "Master Data",
   "exportYourSales": "Export Your Sales",
-  "exportYourPurchase": "Export Your Purchase"
+  "exportYourPurchase": "Export Your Purchase",
+  "failed": "Failed"
 
 
 

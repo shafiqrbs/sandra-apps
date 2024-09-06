@@ -65,6 +65,9 @@ class DbHelper {
   }) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if(kDebugMode) {
+        print('Inserting data to $tableName');
+      }
       final Batch batch = db.batch();
 
       if (deleteBeforeInsert) {

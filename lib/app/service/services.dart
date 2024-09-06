@@ -60,7 +60,33 @@ class Services {
         },
         headers: _buildHeader(),
       );
-      return response.data;
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return responseData;
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getMasterData() async {
+    try {
+      final license = await pref.getLicenseKey();
+      final activeKey = await pref.getActiveKey();
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-masterdata',
+        {
+          'mobile': license,
+          'uniqueCode': activeKey,
+          'deviceId': '',
+        },
+        headers: _buildHeader(),
+      );
+
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return responseData;
     } catch (e, s) {
       printError(e, s);
       return null;
