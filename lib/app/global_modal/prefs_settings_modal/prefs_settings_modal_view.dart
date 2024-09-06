@@ -94,6 +94,30 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   ],
                 ),
                 dividerWidget(),
+                Row(
+                  mainAxisAlignment: spaceBetweenMAA,
+                  children: [
+                    Text(
+                      appLocalization.isHasPrinter,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    AdvancedSwitch(
+                      controller: controller.isHasPrinter,
+                      onChanged: (value) async {
+                        await controller.setHasPrinter(value);
+                      },
+                      borderRadius: BorderRadius.circular(4),
+                      height: 20,
+                      width: 40,
+                      activeColor: colors.primaryBaseColor,
+                      initialValue: controller.isHasPrinter.value,
+                    ),
+                  ],
+                ),
+                dividerWidget(),
                 Column(
                   children: [
                     _buildSettingButton(

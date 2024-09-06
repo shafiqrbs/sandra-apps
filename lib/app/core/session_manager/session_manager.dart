@@ -242,4 +242,19 @@ class SessionManager {
   Future<int> getNumberOfPrinterNewLine() async {
     return prefs.getInt(prefsNumberOfPrinterNewLine) ?? 0;
   }
+
+  ///set has printer
+  Future<void> setHasPrinter({
+    required bool hasPrinter,
+  }) async {
+    await prefs.setBool(
+      prefsHasPrinter,
+      hasPrinter,
+    );
+  }
+
+  ///get has printer
+  Future<bool> getHasPrinter() async {
+    return prefs.getBool(prefsHasPrinter) ?? false;
+  }
 }

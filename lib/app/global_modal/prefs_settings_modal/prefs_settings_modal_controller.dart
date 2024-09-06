@@ -13,6 +13,7 @@ class PrefsSettingsModalController extends BaseController {
   final isSalesOnline = ValueNotifier(false);
   final isPurchaseOnline = ValueNotifier(false);
   final isZeroSalesAllowed = ValueNotifier(false);
+  final isHasPrinter = ValueNotifier(false);
   final printerType = ''.obs;
   final selectedPurchase = ''.obs;
   final printerNewLine = 0.obs;
@@ -35,6 +36,7 @@ class PrefsSettingsModalController extends BaseController {
     isSalesOnline.value = await prefs.getIsSalesOnline();
     isPurchaseOnline.value = await prefs.getIsPurchaseOnline();
     isZeroSalesAllowed.value = await prefs.getIsZeroSalesAllowed();
+    isHasPrinter.value = await prefs.getIsPrinterAllowed();
     printerType.value = await prefs.getPrintPaperType();
     printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
     printNewLineController.text = printerNewLine.value.toString();
@@ -61,6 +63,13 @@ class PrefsSettingsModalController extends BaseController {
     isZeroSalesAllowed.value = value;
     await prefs.setIsZeroSalesAllowed(
       isZeroAllowed: value,
+    );
+  }
+
+  Future<void> setHasPrinter(bool value) async {
+    isHasPrinter.value = value;
+    await prefs.setIsPrinterAllowed(
+      isPrinterAllowed: value,
     );
   }
 

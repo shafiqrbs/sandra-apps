@@ -366,7 +366,8 @@
   "remark" : "Remark",
   "remarkRequired" : "Remark required",
   "addExpense" : "Add Expense",
-  "purchaseDetails" : "Purchase Details"
+  "purchaseDetails" : "Purchase Details",
+  "isHasPrinter" : "Is Has Printer"
 
 
 

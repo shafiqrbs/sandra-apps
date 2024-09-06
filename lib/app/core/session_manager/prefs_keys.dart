@@ -13,3 +13,4 @@ const prefsLanguage = 'language';
 const prefsLicenseKey = 'licenseKey';
 const prefsActiveKey = 'activeKey';
 const prefsNumberOfPrinterNewLine = 'numberOfPrinterNewLine';
+const prefsHasPrinter = 'hasPrinter';

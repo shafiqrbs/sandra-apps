@@ -155,7 +155,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
   }) {
     final createdDate = element.created != null
         ? DateFormat('dd MMM yyyy').format(
-            DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+            DateFormat('MM-dd-yyyy').parse(element.created!),
           )
         : '';
     return InkWell(
