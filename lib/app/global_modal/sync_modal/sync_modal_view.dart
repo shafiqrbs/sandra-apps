@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/bindings/initial_binding.dart';
-import '/app/core/widget/tbd_text_button.dart';
+
 import '/app/core/base/base_view.dart';
+import '/app/core/widget/tbd_text_button.dart';
 import '/app/global_modal/sync_modal/sync_modal_controller.dart';
 
 class SyncModalView extends BaseView<SyncModalController> {
@@ -80,10 +79,12 @@ class SyncModalView extends BaseView<SyncModalController> {
     return Column(
       children: [
         _buildButton(
-          title: appLocalization.customer,
-          onTap: () {
-            controller.changeType(SyncType.import);
-          },
+          title: appLocalization.masterData,
+          onTap: () {},
+        ),
+        _buildButton(
+          title: appLocalization.stockItem,
+          onTap: controller.importStockItem,
         ),
         _buildButton(
           title: appLocalization.sync,

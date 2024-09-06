@@ -49,17 +49,39 @@ class Services {
     required String license,
     required String activeKey,
   }) async {
-    final response = await dio.post(
-      APIType.public,
-      'poskeeper-splash',
-      {
-        'mobile': license,
-        'uniqueCode': activeKey,
-        'deviceId': '',
-      },
-      headers: _buildHeader(),
-    );
-    return response.data;
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-splash',
+        {
+          'mobile': license,
+          'uniqueCode': activeKey,
+          'deviceId': '',
+        },
+        headers: _buildHeader(),
+      );
+      return response.data;
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>?> getStockItems() async {
+    try {
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-stock-item',
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List?;
+      if (responseData == null) return null;
+      return responseData.map((e) => e as Map<String, dynamic>).toList();
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
   }
 
   Future<Customer?> addCustomer({
@@ -151,11 +173,6 @@ class Services {
     if (customerId != null) query['customer_id'] = customerId;
     if (keyword != null) query['keyword'] = keyword;
 
-    if (query.isEmpty) {
-      query['start_date'] = '01-01-2023';
-      query['end_date'] = '02-01-2023';
-    }
-
     query['page'] = page;
 
     try {
@@ -191,11 +208,6 @@ class Services {
     if (endDate != null) query['end_date'] = endDate;
     if (vendorId != null) query['vendor_id'] = vendorId;
     if (keyword != null) query['keyword'] = keyword;
-
-    if (query.isEmpty) {
-      query['start_date'] = '01-01-2023';
-      query['end_date'] = '02-01-2023';
-    }
 
     final response = await dio.post(
       APIType.public,

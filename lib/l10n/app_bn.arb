@@ -367,7 +367,11 @@
   "remarkRequired" : "Remark required",
   "addExpense" : "Add Expense",
   "purchaseDetails" : "Purchase Details",
-  "isHasPrinter" : "Is Has Printer"
+  "isHasPrinter" : "Is Has Printer",
+  "masterData" : "Master Data",
+  "exportYourSales": "Export Your Sales",
+  "exportYourPurchase": "Export Your Purchase"
+
 
 
 

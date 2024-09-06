@@ -290,7 +290,10 @@
   "synchronization" : "Synchronization",
   "synchronizeYourDataWithImportAndExport" : "Synchronize your data with import and export",
   "invoiceDataNotAvailable" : "This invoice details is not available",
-  "isHasPrinter" : "Is has printer"
+  "isHasPrinter" : "Is has printer",
+  "masterData" : "Master Data",
+  "exportYourSales": "Export Your Sales",
+  "exportYourPurchase": "Export Your Purchase"
 
 
 

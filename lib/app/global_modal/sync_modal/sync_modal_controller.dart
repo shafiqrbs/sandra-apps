@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/entity/sales.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
@@ -213,5 +214,46 @@ class SyncModalController extends BaseController {
       deleteBeforeInsert: false,
     );
     await exportPurchase();
+  }
+
+  Future<void> importStockItem() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    final salesCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableSale,
+    );
+
+    if (salesCount > 0) {
+      showSnackBar(message: appLocalization.exportYourSales);
+      return;
+    }
+
+    final purchaseCount = await dbHelper.getItemCount(
+      tableName: dbTables.tablePurchase,
+    );
+
+    if (purchaseCount > 0) {
+      showSnackBar(message: appLocalization.exportYourPurchase);
+      return;
+    }
+
+    await dataFetcher(
+      future: () async {
+        final stockItemList = await services.getStockItems();
+        if (stockItemList?.isNotEmpty ?? false) {
+          await dbHelper.insertList(
+            tableName: dbTables.tableStocks,
+            dataList: stockItemList!,
+            deleteBeforeInsert: true,
+          );
+          showSnackBar(message: appLocalization.success);
+        }
+      },
+    );
   }
 }
