@@ -406,7 +406,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     inputFormatters: doubleInputFormatter,
                     textInputAction: doneInputAction,
                     onEditingComplete: () => controller.showConfirmationDialog(
-                      globalKey.currentContext!,
+                      Get.overlayContext!,
                     ),
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,

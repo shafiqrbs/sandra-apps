@@ -141,7 +141,7 @@ class Purchase {
       comment: json['comment'],
       tokenNo: json['token_no'],
       couponCode: json['coupon_code'],
-      purchaseItem: json['item'] == null
+      purchaseItem: json['items'] == null
           ? []
           : json['items'] is String
               ? List<PurchaseItem>.from(
