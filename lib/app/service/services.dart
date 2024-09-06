@@ -481,7 +481,7 @@ class Services {
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-purchase-delete',
+        'poskeeper-online-purchase-delete',
         query: {
           'id': id,
         },

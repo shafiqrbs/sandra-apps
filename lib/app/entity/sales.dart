@@ -151,16 +151,16 @@ class Sales {
       comment: json['comment'],
       tokenNo: json['token_no'],
       couponCode: json['coupon_code'],
-      salesItem: json['sales_item'] == null
+      salesItem: json['items'] == null
           ? []
-          : json['sales_item'] is String
+          : json['items'] is String
               ? List<SalesItem>.from(
-                  jsonDecode(json['sales_item']).map(
+                  jsonDecode(json['items']).map(
                     (x) => SalesItem.fromJson(x),
                   ),
                 )
               : List<SalesItem>.from(
-                  json['sales_item']!.map(
+                  json['items']!.map(
                     (x) => SalesItem.fromJson(x),
                   ),
                 ),
@@ -207,7 +207,7 @@ class Sales {
       'comment': comment,
       'token_no': tokenNo,
       'coupon_code': couponCode,
-      'sales_item': salesItem == null || salesItem!.isEmpty
+      'items': salesItem == null || salesItem!.isEmpty
           ? null
           : jsonEncode(salesItem),
       'is_online': isOnline,

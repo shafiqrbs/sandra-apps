@@ -101,7 +101,6 @@ class Purchase {
     this.isOnline,
     this.discountCalculation,
     this.discount,
-
   });
 
   factory Purchase.fromJson(Map<String, dynamic> json) {
@@ -144,14 +143,14 @@ class Purchase {
       couponCode: json['coupon_code'],
       purchaseItem: json['item'] == null
           ? []
-          : json['item'] is String
+          : json['items'] is String
               ? List<PurchaseItem>.from(
-                  jsonDecode(json['item']).map(
+                  jsonDecode(json['items']).map(
                     (x) => PurchaseItem.fromJson(x),
                   ),
                 )
               : List<PurchaseItem>.from(
-                  json['item']!.map(
+                  json['items']!.map(
                     (x) => PurchaseItem.fromJson(x),
                   ),
                 ),
@@ -195,9 +194,15 @@ class Purchase {
       'comment': comment,
       'token_no': tokenNo,
       'coupon_code': couponCode,
-      'item': purchaseItem == null || purchaseItem!.isEmpty
+      'items': purchaseItem == null
           ? null
-          : jsonEncode(purchaseItem),
+          : jsonEncode(
+              List<dynamic>.from(
+                purchaseItem!.map(
+                  (x) => x.toJson(),
+                ),
+              ),
+            ),
       'is_online': isOnline,
       'discount_calculation': discountCalculation,
       'discount': discount,
