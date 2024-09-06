@@ -327,10 +327,19 @@ class DashboardController extends BaseController {
 
   void goToStockList() {}
 
-  Future<void> goToClearLicense() async {
+  Future<void> clearLicense() async {
     await prefs.setIsLicenseValid(
       isLicenseValid: false,
     );
+    await prefs.setIsLogin(
+      isLogin: false,
+    );
+    Get.offAllNamed(
+      Routes.splash,
+    );
+  }
+
+  Future<void> logOut() async {
     await prefs.setIsLogin(
       isLogin: false,
     );

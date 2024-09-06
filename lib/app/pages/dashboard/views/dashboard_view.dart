@@ -1,9 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:pie_chart/pie_chart.dart' as pie_chart;
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_text.dart';
@@ -194,27 +193,6 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildTabSelection() {
-    return Obx(
-      () {
-        return Row(
-          children: [
-            TbdTextButton(
-              text: appLocalization.dashboard,
-              onPressed: () => controller.changeTab(SelectedTab.dashboard),
-              isSelected: controller.selectedTab.value == SelectedTab.dashboard,
-            ),
-            TbdTextButton(
-              text: appLocalization.report,
-              onPressed: () => controller.changeTab(SelectedTab.report),
-              isSelected: controller.selectedTab.value == SelectedTab.report,
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _buildDashboard() {
     return Column(
       children: [
@@ -361,119 +339,31 @@ class DashboardView extends BaseView<DashboardController> {
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildChart() {
-    return DecoratedBox(
-      //padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            offset: Offset(0, 1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          16.height,
+          10.height,
           Row(
+            mainAxisAlignment: spaceBetweenMAA,
             children: [
-              Expanded(
-                child: _buildTitleSubTitle(
-                  title: appLocalization.sales,
-                  subTitle: '567',
+              TitleSubtitleButton(
+                title: appLocalization.logout,
+                subTitle: '৳ 567',
+                icon: TablerIcons.moneybag,
+                onTap: controller.logOut,
+                bgColor: const Color(0xff4CBB17),
+              ),
+              10.width,
+              if (kDebugMode)
+                TitleSubtitleButton(
+                  title: 'Clear License',
+                  subTitle: '৳ 567',
+                  icon: TablerIcons.moneybag,
+                  onTap: controller.clearLicense,
+                  bgColor: const Color(0xff4CBB17),
                 ),
-              ),
-              Container(
-                height: 60,
-                width: 1,
-                color: const Color(0xffbababa),
-              ),
-              Expanded(
-                child: _buildTitleSubTitle(
-                  title: appLocalization.purchase,
-                  subTitle: '567',
+              if (kReleaseMode)
+                Expanded(
+                  child: Container(),
                 ),
-              ),
-              Container(
-                height: 60,
-                width: 1,
-                color: const Color(0xffbababa),
-              ),
-              Expanded(
-                child: _buildTitleSubTitle(
-                  title: appLocalization.due,
-                  subTitle: '567',
-                ),
-              ),
             ],
-          ),
-          16.height,
-          const Divider(
-            color: Color(0xffe9e9e9),
-          ),
-          16.height,
-          const pie_chart.PieChart(
-            dataMap: {
-              'Sales': 5,
-              'Purchase': 3,
-              'Due': 2,
-            },
-            animationDuration: Duration(milliseconds: 800),
-            chartLegendSpacing: 20,
-            chartRadius: 100,
-            colorList: [
-              Color(0xff989898),
-              Color(0xff4d4d4d),
-              Color(0xff202020),
-            ],
-            initialAngleInDegree: 0,
-            chartType: pie_chart.ChartType.ring,
-            ringStrokeWidth: 10,
-            centerText: '',
-            legendOptions: pie_chart.LegendOptions(
-              legendPosition: pie_chart.LegendPosition.bottom,
-              showLegendsInRow: true,
-            ),
-          ),
-          16.height,
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTitleSubTitle({
-    final String title = 'Title',
-    final String subTitle = 'Subtitle',
-  }) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: startMAA,
-        crossAxisAlignment: startCAA,
-        children: [
-          Text(
-            title.tr,
-            style: GoogleFonts.inter(
-              color: const Color(0xff4d4d4d),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          2.height,
-          Text(
-            subTitle,
-            style: GoogleFonts.roboto(
-              color: const Color(0xff202020),
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
           ),
         ],
       ),
