@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/unit.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/entity/category.dart';
 
@@ -8,7 +9,7 @@ class AddProductModalViewController extends BaseController {
 
   final categoryManager = CategoryManager();
   final brandManager = BrandManager();
-  final unitManager = CategoryManager();
+  final unitManager = UnitManager();
   final nameController = TextEditingController();
   final modelNumberController = TextEditingController();
   final purchasePriceController = TextEditingController();
