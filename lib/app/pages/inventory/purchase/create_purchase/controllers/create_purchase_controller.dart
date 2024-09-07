@@ -164,12 +164,16 @@ class CreatePurchaseController extends StockSelectionController {
       return;
     }
 
-    await Get.dialog(
+    final result = await Get.dialog(
       PurchaseProcessView(
         purchaseItemList: purchaseItemList.value,
         prePurchase: null,
       ),
     );
+    if (result != null) {
+      purchaseItemList.value = result;
+      calculateAllSubtotal();
+    }
   }
 
   Future<void> onItemRemove(

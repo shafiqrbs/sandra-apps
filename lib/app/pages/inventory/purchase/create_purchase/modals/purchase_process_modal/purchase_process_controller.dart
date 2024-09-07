@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 import '/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -254,23 +255,16 @@ class PurchaseProcessController extends BaseController {
   }
 
   Future<void> reset(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return CommonConfirmationModal(
-          title: 'are_you_sure'.tr,
-        );
-      },
-    ).then(
-      (value) {
-        if (value == true) {
-          purchaseItemList.value.clear();
-          Get.back(
-            result: purchaseItemList.value,
-          );
-        }
-      },
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
     );
+
+    if (confirmation) {
+      purchaseItemList.value = [];
+      Get.back(
+        result: purchaseItemList.value,
+      );
+    }
   }
 
   Future<void> hold(BuildContext context) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
 import '/app/core/base/base_view.dart';
@@ -85,46 +86,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
     );
   }
 
-  InputDecoration buildInputDecoration({
-    required String hintText,
-    required TextStyle hintStyle,
-    required Color fillColor,
-    required Color enabledBorderColor,
-    required Color focusedBorderColor,
-    required Color errorBorderColor,
-  }) {
-    return InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-      hintText: hintText,
-      hintStyle: hintStyle,
-      filled: true,
-      fillColor: fillColor,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(color: enabledBorderColor, width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(color: focusedBorderColor, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(color: errorBorderColor),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          containerBorderRadius,
-        ),
-        borderSide: BorderSide(color: focusedBorderColor, width: 0),
-      ),
-    );
-  }
+
 
   Widget _buildSalesItemListView(
     BuildContext context,
@@ -416,7 +378,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     ),
                     cursorColor: colors.formCursorColor,
                     decoration: buildInputDecoration(
-                      hintText: 'amount'.tr,
+                      hintText: appLocalization.amount,
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,
@@ -589,7 +551,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RowButton(
-            buttonName: 'reset'.tr,
+            buttonName: appLocalization.reset,
             onTap: () => controller.reset(context),
             leftIcon: TablerIcons.restore,
             buttonBGColor: colors.dangerLiteColor,
