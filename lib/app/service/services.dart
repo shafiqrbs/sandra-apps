@@ -30,6 +30,8 @@ class Services {
     token: '',
   );
 
+  static const endpointOrderProcess = 'poskeeper-order-process';
+
   Map<String, dynamic> _buildHeader() {
     return {
       'X-API-KEY': 'terminalbd',
@@ -358,10 +360,13 @@ class Services {
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-sales',
+        endpointOrderProcess,
         {
-          'sales': jsonEncode(salesList),
+          'content': jsonEncode(salesList),
           'mode': mode,
+          'is_approve': '1',
+          'approve_by': LoggedUser().userId,
+          'process': 'sales',
         },
         headers: _buildHeader(),
       );
@@ -384,10 +389,13 @@ class Services {
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-purchase',
+        endpointOrderProcess,
         {
-          'purchase': jsonEncode(purchaseList),
+          'content': jsonEncode(purchaseList),
           'mode': mode,
+          'is_approve': '1',
+          'approve_by': LoggedUser().userId,
+          'process': 'purchase',
         },
         headers: _buildHeader(),
       );
