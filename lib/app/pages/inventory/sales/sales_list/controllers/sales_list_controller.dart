@@ -7,6 +7,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/utils/static_utility_function.dart';
@@ -27,8 +29,10 @@ enum SalesListPageTabs {
 
 class SalesListController extends BaseController {
   final salesManager = SalesManager();
-  final PagingController<int, Sales> pagingController = PagingController(
-    firstPageKey: 0,
+  final pagingController = Rx<PagingController<int, Sales>>(
+    PagingController<int, Sales>(
+      firstPageKey: 1,
+    ),
   );
 
   final selectedIndex = 100.obs;
@@ -62,15 +66,14 @@ class SalesListController extends BaseController {
   String? startDate;
   String? endDate;
   String? searchQuery;
-  int page = 1;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    pagingController.addPageRequestListener(
+    pagingController.value.addPageRequestListener(
       (pageKey) {
         _fetchOnlineSalesData(
-          page: pageKey,
+          pageKey: pageKey,
         );
       },
     );
@@ -79,26 +82,41 @@ class SalesListController extends BaseController {
   }
 
   Future<void> changeIndex(int index) async {
-    selectedIndex.value = index;
-    salesManager.allItems.value = null;
-    pagingController.itemList = [];
-    salesManager.allItems.refresh();
-    page = 1;
-
-    switch (index) {
-      case 0:
-        await _loadSalesData('is_hold is null');
-      case 1:
-        await _fetchOnlineSalesData(
-          page: page,
-        );
-      case 2:
-        await _loadSalesData('is_hold == 1');
-
-      default:
-        break;
+    if (index == selectedIndex.value) {
+      showSnackBar(
+        message: appLocalization.pullForRefresh,
+        title: appLocalization.refresh,
+      );
+      return;
     }
 
+    updatePageState(PageState.loading);
+
+    try {
+      selectedIndex.value = index;
+      salesManager.allItems.value = null;
+
+      switch (index) {
+        case 0:
+          await _loadSalesData('is_hold is null');
+        case 1:
+          await _fetchOnlineSalesData(
+            pageKey: 1,
+          );
+        case 2:
+          await _loadSalesData('is_hold == 1');
+
+        default:
+          break;
+      }
+    } finally {
+      if (salesManager.allItems.value == null &&
+          pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
     update();
     notifyChildrens();
     refresh();
@@ -109,7 +127,6 @@ class SalesListController extends BaseController {
   }
 
   Future<void> _loadSalesData(String whereClause) async {
-    pagingController.itemList = [];
     final list = await dbHelper.getAllWhr(
       tbl: dbTables.tableSale,
       where: whereClause,
@@ -122,34 +139,40 @@ class SalesListController extends BaseController {
   }
 
   Future<void> _fetchOnlineSalesData({
-    required int page,
+    required int pageKey,
   }) async {
+    List<Sales>? apiDataList;
+
     await dataFetcher(
       future: () async {
-        final data = await services.getSalesList(
+        apiDataList = await services.getSalesList(
+          customerId: selectedCustomer?.customerId?.toString(),
           startDate: startDate,
           endDate: endDate,
-          customerId: selectedCustomer?.customerId?.toString(),
           keyword: searchQuery,
-          page: page,
+          page: pageKey,
         );
-        page++;
-        if (data?.isNotEmpty ?? false) {
-          salesManager.allItems.value = [
-            ...salesManager.allItems.value ?? [],
-            ...data!,
-          ];
-          salesManager.allItems.refresh();
-          pagingController.appendPage(data, page);
-        }
       },
-      shouldShowLoader: salesManager.allItems.value == null,
+      shouldShowLoader: false,
     );
 
-    if (kDebugMode) {
-      print('Sales data len ${salesManager.allItems.value?.length}');
-      print('Page $page');
+    if (apiDataList == null) {
+      pagingController.value.error = true;
+      return;
     }
+
+    if ((apiDataList?.length ?? 0) < pageLimit) {
+      pagingController.value.appendLastPage(apiDataList!);
+    } else {
+      pagingController.value.appendPage(
+        apiDataList!,
+        pageKey + 1,
+      );
+    }
+
+    update();
+    refresh();
+    notifyChildrens();
   }
 
   Future<void> showSalesInformationModal(
@@ -240,5 +263,11 @@ class SalesListController extends BaseController {
         await changeIndex(selectedIndex.value);
       }
     }
+  }
+
+  Future<void> refreshData() async {
+    final int index = selectedIndex.value;
+    selectedIndex.value = 100;
+    await changeIndex(index);
   }
 }

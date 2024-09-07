@@ -374,7 +374,9 @@
   "failed": "Failed",
   "vendorIsRequired": "Vendor is required",
   "submit": "Submit",
-  "searchKeyword": "Search Keyword"
+  "searchKeyword": "Search Keyword",
+  "pullForRefresh": "Pull for Refresh",
+  "refresh": "Refresh"
 
 
 

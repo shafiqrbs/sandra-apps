@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
 import 'package:sandra/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
-import '/app/core/utils/static_utility_function.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';

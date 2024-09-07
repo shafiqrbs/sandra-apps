@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/global_widget/animated_search_bar.dart';
 
@@ -76,94 +77,168 @@ class SalesListView extends BaseView<SalesListController> {
 
   @override
   Widget body(BuildContext context) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: globalKey,
+      appBar: appBar(context),
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(
+              () {
+                final index = controller.selectedIndex.value;
+                if (index == 1) {
+                  return _buildOnlineSalesListView();
+                }
+                return _buildOfflineSalesListView();
+              },
+            ),
+          ),
+          Row(
+            children: List.generate(
+              controller.tabPages.length,
+              (index) {
+                return Obx(
+                  () => Expanded(
+                    child: SubTabItemView(
+                      isSelected: controller.selectedIndex.value == index,
+                      item: controller.tabPages[index],
+                      onTap: () => controller.changeIndex(index),
+                      localeMethod: controller.tabPages[index].localeMethod,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOnlineSalesListView() {
     return Column(
       children: [
         Obx(
           () {
-            final items = controller.salesManager.allItems.value;
-
-            Widget content;
-            if (items == null) {
-              content = RetryView(
-                onRetry: () => controller.changeIndex(
-                  controller.selectedIndex.value,
-                ),
-              );
-            } else if (items.isEmpty) {
-              content = NoRecordFoundView(
-                buttonText: appLocalization.pos,
-                onTap: controller.goToCreateSales,
-              );
-            } else {
-              content = _buildListView();
-            }
-
-            return Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  await controller.changeIndex(controller.selectedIndex.value);
-                },
-                child: content,
-              ),
-            );
-          },
-        ),
-        Row(
-          children: List.generate(
-            controller.tabPages.length,
-            (index) {
-              return Obx(
-                () => Expanded(
-                  child: SubTabItemView(
-                    isSelected: controller.selectedIndex.value == index,
-                    item: controller.tabPages[index],
-                    onTap: () => controller.changeIndex(index),
-                    localeMethod: controller.tabPages[index].localeMethod,
+            final pageState = controller.pageState;
+            if (pageState == PageState.loading) {
+              return Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: loaderColor,
                   ),
                 ),
               );
-            },
-          ),
+            }
+
+            if (pageState == PageState.failed) {
+              return RetryView(
+                onRetry: controller.refreshData,
+              );
+            }
+
+            if (pageState == PageState.success) {
+              final items = controller.pagingController.value.itemList;
+
+              final isEmpty = items?.isEmpty ?? true;
+              if (isEmpty) {
+                return NoRecordFoundView(
+                  onTap: controller.refreshData,
+                );
+              }
+
+              return Expanded(
+                child: RefreshIndicator(
+                  onRefresh: controller.refreshData,
+                  child: PagedListView<int, Sales>(
+                    pagingController: controller.pagingController.value,
+                    builderDelegate: PagedChildBuilderDelegate<Sales>(
+                      itemBuilder: (context, element, index) {
+                        return _buildSalesCardView(
+                          element: element,
+                          index: index,
+                          context: context,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              );
+            }
+
+            return Container();
+          },
         ),
       ],
     );
   }
 
-  Widget _buildListView() {
-    if (controller.selectedIndex.value == 1) {
-      return _buildOnlineSalesListView();
-    }
+  Widget _buildOfflineSalesListView() {
+    return Column(
+      children: [
+        Obx(
+          () {
+            final pageState = controller.pageState;
+            if (pageState == PageState.loading) {
+              return Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: loaderColor,
+                  ),
+                ),
+              );
+            }
 
-    return ListView.builder(
-      itemCount: controller.salesManager.allItems.value?.length ?? 0,
-      controller: controller.salesManager.scrollController,
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        //check ranger is valid
+            if (pageState == PageState.failed) {
+              return RetryView(
+                onRetry: controller.refreshData,
+              );
+            }
 
-        final element = controller.salesManager.allItems.value![index];
-        return _buildSalesCardView(
-          element: element,
-          index: index,
-          context: context,
-        );
-      },
-    );
-  }
+            if (pageState == PageState.success) {
+              final items = controller.salesManager.allItems.value;
 
-  Widget _buildOnlineSalesListView() {
-    return PagedListView<int, Sales>(
-      pagingController: controller.pagingController,
-      shrinkWrap: true,
-      builderDelegate: PagedChildBuilderDelegate<Sales>(
-        itemBuilder: (context, item, index) {
-          return _buildSalesCardView(
-            element: item,
-            index: index,
-            context: context,
-          );
-        },
-      ),
+              final isEmpty = items?.isEmpty ?? true;
+              if (isEmpty) {
+                return NoRecordFoundView(
+                  onTap: controller.refreshData,
+                );
+              }
+
+              return Expanded(
+                child: RefreshIndicator(
+                  onRefresh: controller.refreshData,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        controller.salesManager.allItems.value?.length ?? 0,
+                    controller: controller.salesManager.scrollController,
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, index) {
+                      //check ranger is valid
+
+                      final element =
+                          controller.salesManager.allItems.value![index];
+                      return _buildSalesCardView(
+                        element: element,
+                        index: index,
+                        context: context,
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+
+            return Container();
+          },
+        ),
+      ],
     );
   }
 
