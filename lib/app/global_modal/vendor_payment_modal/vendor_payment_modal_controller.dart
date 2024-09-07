@@ -26,6 +26,7 @@ class VendorPaymentModalController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await transactionMethodsManager.getAll();
   }
 
   Future<void> resetField() async {
@@ -53,7 +54,6 @@ class VendorPaymentModalController extends BaseController {
     }
 
     bool? isSubmitted;
-
 
     await dataFetcher(
       future: () async {

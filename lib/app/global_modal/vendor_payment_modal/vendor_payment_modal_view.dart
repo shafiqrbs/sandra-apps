@@ -4,16 +4,14 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
-import '/app/entity/vendor.dart';
-import '/app/global_widget/vendor_card_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
-import '/app/entity/customer.dart';
-import '/app/global_widget/customer_card_view.dart';
+import '/app/entity/vendor.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
+import '/app/global_widget/vendor_card_view.dart';
 import 'vendor_payment_modal_controller.dart';
 
 class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
