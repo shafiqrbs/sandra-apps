@@ -179,7 +179,10 @@ class ExpenseListController extends BaseController {
       DialogPattern(
         title: 'title',
         subTitle: 'subTitle',
-        child: GlobalFilterModalView(),
+        child: GlobalFilterModalView(
+          showCustomer: false,
+          showVendor: false,
+        ),
       ),
     );
 

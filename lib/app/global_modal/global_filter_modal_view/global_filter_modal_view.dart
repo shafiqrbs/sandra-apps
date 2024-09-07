@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/entity/customer.dart';
+import 'package:sandra/app/entity/vendor.dart';
+import 'package:sandra/app/global_widget/vendor_card_view.dart';
+
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_date_picker.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
+import '/app/entity/customer.dart';
 import '/app/global_widget/customer_card_view.dart';
-
 import 'global_filter_modal_controller.dart';
 
 class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
-  GlobalFilterModalView({super.key});
+  final bool? showCustomer;
+  final bool? showVendor;
+  GlobalFilterModalView({
+    super.key,
+    this.showCustomer = true,
+    this.showVendor = false,
+  });
 
   final startDateController = TextEditingController().obs;
   final endDateController = TextEditingController().obs;
   final searchKeyword = TextEditingController().obs;
   final customerManager = CustomerManager();
+  final vendorManager = VendorManager();
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +38,22 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
         ),
         child: Column(
           children: [
-            FBString(
-              isRequired: false,
-              textController: customerManager.searchTextController.value,
-              onChange: onCustomerSearch,
-              hint: 'search_customer'.tr,
-              suffixIcon: TablerIcons.users,
-            ),
+            if (showVendor!)
+              FBString(
+                isRequired: false,
+                textController: vendorManager.searchTextController.value,
+                onChange: onVendorSearch,
+                hint: appLocalization.searchVendor,
+                suffixIcon: TablerIcons.users,
+              ),
+            if (showCustomer!)
+              FBString(
+                isRequired: false,
+                textController: customerManager.searchTextController.value,
+                onChange: onCustomerSearch,
+                hint: appLocalization.searchCustomer,
+                suffixIcon: TablerIcons.users,
+              ),
             Stack(
               children: [
                 Column(
@@ -60,7 +78,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                     FBString(
                       isRequired: false,
                       textController: searchKeyword.value,
-                      hint: 'enter_search_keyword'.tr,
+                      hint: appLocalization.searchKeyword,
                       suffixIcon: TablerIcons.search,
                     ),
                     1.percentHeight,
@@ -70,7 +88,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                           child: FBDatePicker(
                             isRequired: false,
                             textController: startDateController.value,
-                            hint: 'start_date'.tr,
+                            hint: appLocalization.startDate,
                             suffixIcon: TablerIcons.calendar,
                           ),
                         ),
@@ -79,7 +97,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                           child: FBDatePicker(
                             isRequired: false,
                             textController: endDateController.value,
-                            hint: 'end_date'.tr,
+                            hint: appLocalization.endDate,
                             suffixIcon: TablerIcons.calendar,
                           ),
                         ),
@@ -89,12 +107,12 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                     Row(
                       children: [
                         RowButton(
-                          buttonName: 'close'.tr,
+                          buttonName: appLocalization.close,
                           onTap: onClose,
                         ),
                         1.percentWidth,
                         RowButton(
-                          buttonName: 'submit'.tr,
+                          buttonName: appLocalization.submit,
                           onTap: onSubmit,
                         ),
                       ],
@@ -112,6 +130,27 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                         onTap: () {
                           updateCustomer(
                             customerManager.searchedItems.value![index],
+                          );
+                          //close keyboard
+                          FocusScope.of(context).unfocus();
+                        },
+                        onReceive: () {},
+                        showReceiveButton: false,
+                      );
+                    },
+                  ),
+                ),
+                Obx(
+                  () => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: vendorManager.searchedItems.value?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return VendorCardView(
+                        data: vendorManager.searchedItems.value![index],
+                        index: index,
+                        onTap: () {
+                          updateVendor(
+                            vendorManager.searchedItems.value![index],
                           );
                           //close keyboard
                           FocusScope.of(context).unfocus();
@@ -152,6 +191,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
         'start_date': startDateController.value.text,
         'end_date': endDateController.value.text,
         'customer': customerManager.selectedItem.value,
+        'vendor': vendorManager.selectedItem.value,
         'search_keyword': searchKeyword.value.text,
       },
     );
@@ -165,6 +205,14 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
     }
   }
 
+  Future<void> updateVendor(Vendor? vendor) async {
+    if (vendor != null) {
+      vendorManager.searchTextController.value.text = vendor.name!;
+      vendorManager.searchedItems.value = null;
+      vendorManager.selectedItem.value = vendor;
+    }
+  }
+
   Future<void> onCustomerSearch(String? value) async {
     if (value?.isEmpty ?? true) {
       customerManager.searchedItems.value = [];
@@ -172,5 +220,14 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
       return;
     }
     await customerManager.searchItemsByName(value!);
+  }
+
+  Future<void> onVendorSearch(String? value) async {
+    if (value?.isEmpty ?? true) {
+      vendorManager.searchedItems.value = [];
+      vendorManager.selectedItem.value = null;
+      return;
+    }
+    vendorManager.searchItemsByName(value!);
   }
 }
