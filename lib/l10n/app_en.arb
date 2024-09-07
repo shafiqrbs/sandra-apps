@@ -299,7 +299,9 @@
   "submit": "Submit",
   "searchKeyword": "Search Keyword",
   "pullForRefresh": "Pull for Refresh",
-  "refresh": "Refresh"
+  "refresh": "Refresh",
+  "isPurchaseAutoApproved": "Is Purchase Auto Approved",
+  "isSalesAutoApproved": "Is Sales Auto Approved"
 
 
 

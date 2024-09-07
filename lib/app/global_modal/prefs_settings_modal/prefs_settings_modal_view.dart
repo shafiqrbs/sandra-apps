@@ -118,6 +118,54 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   ],
                 ),
                 dividerWidget(),
+                Row(
+                  mainAxisAlignment: spaceBetweenMAA,
+                  children: [
+                    Text(
+                      appLocalization.isSalesAutoApproved,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    AdvancedSwitch(
+                      controller: controller.isSalesAutoApproved,
+                      onChanged: (value) async {
+                        await controller.setSalesAutoApproved(value);
+                      },
+                      borderRadius: BorderRadius.circular(4),
+                      height: 20,
+                      width: 40,
+                      activeColor: colors.primaryBaseColor,
+                      initialValue: controller.isSalesAutoApproved.value,
+                    ),
+                  ],
+                ),
+                dividerWidget(),
+                Row(
+                  mainAxisAlignment: spaceBetweenMAA,
+                  children: [
+                    Text(
+                      appLocalization.isPurchaseAutoApproved,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    AdvancedSwitch(
+                      controller: controller.isPurchaseAutoApproved,
+                      onChanged: (value) async {
+                        await controller.setPurchaseAutoApproved(value);
+                      },
+                      borderRadius: BorderRadius.circular(4),
+                      height: 20,
+                      width: 40,
+                      activeColor: colors.primaryBaseColor,
+                      initialValue: controller.isPurchaseAutoApproved.value,
+                    ),
+                  ],
+                ),
+                dividerWidget(),
                 Column(
                   children: [
                     _buildSettingButton(

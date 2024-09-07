@@ -358,14 +358,15 @@ class Services {
     required String mode,
   }) async {
     try {
+      final autoApprove = await pref.getIsSalesAutoApprove();
       final response = await dio.post(
         APIType.public,
         endpointOrderProcess,
         {
           'content': jsonEncode(salesList),
           'mode': mode,
-          'is_approve': '1',
-          'approved_by': LoggedUser().userId,
+          'is_approve': autoApprove ? '1' : '0',
+          'approved_by': autoApprove ? LoggedUser().userId : null,
           'process': 'sales',
         },
         headers: _buildHeader(),
@@ -387,14 +388,15 @@ class Services {
     required String mode,
   }) async {
     try {
+      final autoApprove = await pref.getIsPurchaseAutoApprove();
       final response = await dio.post(
         APIType.public,
         endpointOrderProcess,
         {
           'content': jsonEncode(purchaseList),
           'mode': mode,
-          'is_approve': '1',
-          'approved_by': LoggedUser().userId,
+          'is_approve': autoApprove ? '1' : '0',
+          'approved_by': autoApprove ? LoggedUser().userId : null,
           'process': 'purchase',
         },
         headers: _buildHeader(),

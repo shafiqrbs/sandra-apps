@@ -257,4 +257,34 @@ class SessionManager {
   Future<bool> getHasPrinter() async {
     return prefs.getBool(prefsHasPrinter) ?? false;
   }
+
+  /// is sales auto approve
+  Future<void> setIsSalesAutoApprove({
+    required bool isSalesAutoApprove,
+  }) async {
+    await prefs.setBool(
+      prefsIsSalesAutoApprove,
+      isSalesAutoApprove,
+    );
+  }
+
+  /// get is sales auto approve
+  Future<bool> getIsSalesAutoApprove() async {
+    return prefs.getBool(prefsIsSalesAutoApprove) ?? false;
+  }
+
+  /// is purchase auto approve
+  Future<void> setIsPurchaseAutoApprove({
+    required bool isPurchaseAutoApprove,
+  }) async {
+    await prefs.setBool(
+      prefsIsPurchaseAutoApprove,
+      isPurchaseAutoApprove,
+    );
+  }
+
+  /// get is purchase auto approve
+  Future<bool> getIsPurchaseAutoApprove() async {
+    return prefs.getBool(prefsIsPurchaseAutoApprove) ?? false;
+  }
 }

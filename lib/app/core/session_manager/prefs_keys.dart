@@ -14,3 +14,5 @@ const prefsLicenseKey = 'licenseKey';
 const prefsActiveKey = 'activeKey';
 const prefsNumberOfPrinterNewLine = 'numberOfPrinterNewLine';
 const prefsHasPrinter = 'hasPrinter';
+const prefsIsSalesAutoApprove = 'isSalesAutoApprove';
+const prefsIsPurchaseAutoApprove = 'isPurchaseAutoApprove';
