@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/stock.dart';
+import '/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
 class CreateSalesController extends BaseController {
@@ -44,7 +44,6 @@ class CreateSalesController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    print('I am in CreateSalesController');
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null && args.isNotEmpty && args['sales'] != null) {
       setData(args['sales'] as Sales);

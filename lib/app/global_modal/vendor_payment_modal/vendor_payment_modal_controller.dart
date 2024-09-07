@@ -27,10 +27,15 @@ class VendorPaymentModalController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     await transactionMethodsManager.getAll();
+    transactionMethodsManager.selectedItem.value = transactionMethodsManager
+        .allItems.value
+        ?.where((element) => element.isDefault == 1)
+        .first;
   }
 
   Future<void> resetField() async {
     transactionMethodsManager.asController.selectedValue = null;
+    transactionMethodsManager.allItems.value = null;
     amountController.value.clear();
     addRemarkController.value.clear();
     update();

@@ -82,6 +82,10 @@ class SalesProcessModalController extends PaymentGatewayController {
 
   Future<void> baseInit() async {
     await transactionMethodsManager.getAll();
+    transactionMethodsManager.selectedItem.value = transactionMethodsManager
+        .allItems.value
+        ?.where((element) => element.isDefault == 1)
+        .first;
     await userManager.value.fillAsController();
     userManager.value.asController.selectedValue =
         userManager.value.asController.items?.firstWhereOrNull(
