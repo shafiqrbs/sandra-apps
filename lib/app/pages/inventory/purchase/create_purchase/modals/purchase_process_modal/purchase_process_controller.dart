@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -214,19 +215,28 @@ class PurchaseProcessController extends BaseController {
       return;
     }
 
-    final isCustomerNotSelected = vendorManager.selectedItem.value == null;
-    final isCustomerSelected = vendorManager.selectedItem.value != null;
+    final isVendorNotSelected = vendorManager.selectedItem.value == null;
+    final isVendorSelected = vendorManager.selectedItem.value != null;
     final amountText = amountController.value.text;
     final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = double.tryParse(amountText) ?? 0;
     final isInvalidAmount = amount > 0 && amount < netTotal.value;
 
-    if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
+    if (isVendorNotSelected) {
+      showSnackBar(message: appLocalization.vendorIsRequired);
+      return;
+    }
+
+    if (isZeroSalesAllowed && isVendorNotSelected && isAmountEmpty) {
       purchase.received = netTotal.value;
-    } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
+    } else if (isZeroSalesAllowed && isVendorNotSelected && isInvalidAmount) {
       toast('this_amount_is_not_valid'.tr);
       return;
-    } else if (amount > netTotal.value && isCustomerSelected) {
+    } else if (amount > netTotal.value && isVendorSelected) {
+      purchase.received = netTotal.value;
+    }
+
+    if (amount > netTotal.value) {
       purchase.received = netTotal.value;
     }
 
@@ -293,7 +303,6 @@ class PurchaseProcessController extends BaseController {
         child: AddVendorModalView(),
       ),
     ) as Vendor?;
-    print('result: $result');
 
     if (result != null) {
       vendorManager.selectedItem.value = result;

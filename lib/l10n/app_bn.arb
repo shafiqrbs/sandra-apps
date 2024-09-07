@@ -371,7 +371,9 @@
   "masterData" : "Master Data",
   "exportYourSales": "Export Your Sales",
   "exportYourPurchase": "Export Your Purchase",
-  "failed": "Failed"
+  "failed": "Failed",
+  "vendorIsRequired": "Vendor is required"
+
 
 
 
