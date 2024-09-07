@@ -26,6 +26,10 @@ class AddExpenseController extends BaseController {
     await expenseCategoryManager.fillAsController();
     await userManager.fillAsController();
     await transactionMethodsManager.getAll();
+    transactionMethodsManager.selectedItem.value = transactionMethodsManager
+        .allItems.value
+        ?.where((element) => element.isDefault == 1)
+        .first;
   }
 
   void goToListPage() {
