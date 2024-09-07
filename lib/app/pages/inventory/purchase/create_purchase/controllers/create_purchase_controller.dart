@@ -65,11 +65,7 @@ class CreatePurchaseController extends StockSelectionController {
     final stockQty = double.tryParse(stockQtyController.value.text) ?? 0.0;
     final price = double.tryParse(priceController.value.text) ?? 0.0;
 
-    print('stockQty: $stockQty');
-    print('price : $price');
-    print('purchaseMode: $purchaseMode');
-
-    // Create a new SalesItem instance
+    // Create a new purchaseItem instance
     final purchaseItem = PurchaseItem(
       stockId: stock.itemId,
       stockName: stock.name ?? '',
@@ -85,19 +81,17 @@ class CreatePurchaseController extends StockSelectionController {
       return;
     }
 
-    // Update salesSubTotal value
+    // Update purchaseSubTotal value
     purchaseSubTotal
       ..value += purchaseItem.subTotal!
       ..value = purchaseSubTotal.value.toPrecision(2);
 
-    // Add salesItem to salesItemList
+    // Add stock to purchaseItemList
     purchaseItemList.value.add(purchaseItem);
 
     // Reset fields after item is added
     resetAfterItemAdd();
     purchaseItemList.refresh();
-
-    print('salesItem.subTotal: ${purchaseItem.subTotal}');
   }
 
   Future<void> onQtyChange(
@@ -166,14 +160,14 @@ class CreatePurchaseController extends StockSelectionController {
 
   Future<void> onSave() async {
     if (purchaseItemList.value.isEmpty) {
-      toast('please_select_item'.tr);
+      toast(appLocalization.pleaseSelectItem);
       return;
     }
 
-    Get.dialog(
+    await Get.dialog(
       PurchaseProcessView(
         purchaseItemList: purchaseItemList.value,
-        preSales: null,
+        prePurchase: null,
       ),
     );
   }

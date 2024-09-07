@@ -17,11 +17,11 @@ import '/app/global_widget/vendor_card_view.dart';
 import 'purchase_process_controller.dart';
 
 class PurchaseProcessView extends BaseView<PurchaseProcessController> {
-  final Purchase? preSales;
+  final Purchase? prePurchase;
   final List<PurchaseItem> purchaseItemList;
   PurchaseProcessView({
     required this.purchaseItemList,
-    required this.preSales,
+    required this.prePurchase,
     super.key,
   });
 
@@ -30,7 +30,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
     return GetX<PurchaseProcessController>(
       init: PurchaseProcessController(
         itemList: purchaseItemList,
-        prePurchase: preSales,
+        prePurchase: prePurchase,
       ),
       builder: (controller) {
         return Dialog(
