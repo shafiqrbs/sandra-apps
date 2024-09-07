@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sandra/app/entity/brand.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/entity/category.dart';
 
@@ -6,7 +7,7 @@ class AddProductModalViewController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final categoryManager = CategoryManager();
-  final brandManager = CategoryManager();
+  final brandManager = BrandManager();
   final unitManager = CategoryManager();
   final nameController = TextEditingController();
   final modelNumberController = TextEditingController();

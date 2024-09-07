@@ -2,10 +2,14 @@ import 'package:sandra/app/core/db_helper/db_tables.dart';
 
 import 'entity_manager.dart';
 
-class CategoryManager extends EntityManager<Brand> {
-  CategoryManager() : super(DbTables().tableBrands, Brand.fromJson,(e) => e.toJson(),);
+class BrandManager extends EntityManager<Brand> {
+  BrandManager()
+      : super(
+          DbTables().tableBrands,
+          Brand.fromJson,
+          (e) => e.toJson(),
+        );
 }
-
 
 class Brand {
   int? brandId;
@@ -19,14 +23,14 @@ class Brand {
   });
 
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
-    brandId: json['brand_id'],
-    name: json['name'],
-    slug: json['slug'],
-  );
+        brandId: json['brand_id'],
+        name: json['name'],
+        slug: json['slug'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'brand_id': brandId,
-    'name': name,
-    'slug': slug,
-  };
+        'brand_id': brandId,
+        'name': name,
+        'slug': slug,
+      };
 }

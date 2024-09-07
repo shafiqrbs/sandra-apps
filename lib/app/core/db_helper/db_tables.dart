@@ -7,6 +7,7 @@ class DbTables {
   final String tableMobileAccounts = 'mobile_accounts';
   final String tableCategories = 'categories';
   final String tableBrands = 'brands';
+  final String tableUnits = 'units';
   final String tableVendors = 'vendors';
   final String tableStocks = 'stocks';
   final String tableTransactionMethods = 'transaction_methods';

@@ -2,15 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
-import '/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/purchase_item.dart';
@@ -18,6 +16,7 @@ import '/app/entity/transaction_methods.dart';
 import '/app/entity/user.dart';
 import '/app/entity/vendor.dart';
 import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
+import '/app/pages/inventory/purchase/create_purchase/modals/purchase_confirm_modal/purchase_confirm_view.dart';
 
 class PurchaseProcessController extends BaseController {
   Purchase? prePurchase;
