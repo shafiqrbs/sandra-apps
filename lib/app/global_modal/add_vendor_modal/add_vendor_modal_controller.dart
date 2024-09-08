@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/vendor.dart';
 
 import '/app/core/base/base_controller.dart';
-import '/app/entity/customer.dart';
 
 class AddVendorModalController extends BaseController {
   final formKey = GlobalKey<FormState>();
@@ -19,13 +20,13 @@ class AddVendorModalController extends BaseController {
 
   final isUserNameFieldValid = true.obs;
 
-  Customer? createdCustomer;
+  Vendor? createdVendor;
 
   Future<void> addVendor() async {
     if (formKey.currentState!.validate()) {
       await dataFetcher(
         future: () async {
-          final response = await services.addCustomer(
+          final response = await services.addVendor(
             name: userNameController.value.text,
             mobile: mobileController.value.text,
             address: addressController.value.text,
@@ -35,18 +36,22 @@ class AddVendorModalController extends BaseController {
           if (response != null) {
             await dbHelper.insertList(
               deleteBeforeInsert: false,
-              tableName: dbTables.tableCustomers,
+              tableName: dbTables.tableVendors,
               dataList: [
                 response.toJson(),
               ],
             );
-            createdCustomer = response;
+            createdVendor = response;
           }
         },
       );
-      if (createdCustomer != null) {
+      if (createdVendor != null) {
         Get.back(
-          result: createdCustomer,
+          result: createdVendor,
+        );
+      } else {
+        showSnackBar(
+          message: appLocalization.error,
         );
       }
     }

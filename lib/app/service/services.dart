@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/entity/expense.dart';
+import 'package:sandra/app/entity/vendor.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
@@ -140,6 +141,41 @@ class Services {
       return parseObject(
         object: responseData,
         fromJson: Customer.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
+  }
+
+  Future<Vendor?> addVendor({
+    required String name,
+    required String mobile,
+    required String address,
+    required String email,
+    required String openingBalance,
+  }) async {
+    try {
+      final data = {
+        'name': name,
+        'mobile': mobile,
+        'address': address,
+        'email': email,
+        'openingBalance': openingBalance,
+      };
+
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-vendor-create',
+        data,
+        query: data,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Vendor.fromJson,
       );
     } catch (e, s) {
       printError(e, s);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/customer.dart';
@@ -47,6 +48,10 @@ class AddCustomerModalController extends BaseController {
       if (createdCustomer != null) {
         Get.back(
           result: createdCustomer,
+        );
+      } else {
+        showSnackBar(
+          message: appLocalization.error,
         );
       }
     }
