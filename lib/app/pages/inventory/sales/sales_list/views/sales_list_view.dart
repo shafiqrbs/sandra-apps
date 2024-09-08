@@ -1,4 +1,3 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
@@ -6,7 +5,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/entity/sales.dart';
-import 'package:sandra/app/global_widget/animated_search_bar.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/core_model/setup.dart';
@@ -24,11 +22,10 @@ import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
 
-//ignore: must_be_immutable
 class SalesListView extends BaseView<SalesListController> {
   SalesListView({super.key});
 
-  final currency = SetUp().symbol ?? '';
+  final String currency = SetUp().symbol ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -36,49 +33,41 @@ class SalesListView extends BaseView<SalesListController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Obx(
-        () {
-          return AppBarSearchView(
-            pageTitle: appLocalization.sales,
-            controller: controller.salesManager.searchTextController.value,
-            onSearch: controller.salesManager.searchItemsByNameOnAllItem,
-            onMicTap: controller.isSearchSelected.toggle,
-            onFilterTap: () => controller.showFilterModal(
-              context: globalKey.currentContext!,
-            ),
-            onClearTap: controller.onClearSearchText,
-            showSearchView: controller.isSearchSelected.value,
-          );
-        },
+        () => AppBarSearchView(
+          pageTitle: appLocalization.sales,
+          controller: controller.salesManager.searchTextController.value,
+          onSearch: controller.salesManager.searchItemsByNameOnAllItem,
+          onMicTap: controller.isSearchSelected.toggle,
+          onFilterTap: () => controller.showFilterModal(
+            context: globalKey.currentContext!,
+          ),
+          onClearTap: controller.onClearSearchText,
+          showSearchView: controller.isSearchSelected.value,
+        ),
       ),
       automaticallyImplyLeading: false,
       actions: [
         Obx(
-          () {
-            if (controller.isSearchSelected.value) {
-              return Container();
-            }
-
-            return AppBarButtonGroup(
-              children: [
-                AddButton(
-                  onTap: controller.goToCreateSales,
+          () => controller.isSearchSelected.value
+              ? Container()
+              : AppBarButtonGroup(
+                  children: [
+                    AddButton(
+                      onTap: controller.goToCreateSales,
+                    ),
+                    SearchButton(
+                      onTap: controller.isSearchSelected.toggle,
+                    ),
+                    QuickNavigationButton(),
+                  ],
                 ),
-                SearchButton(
-                  onTap: controller.isSearchSelected.toggle,
-                ),
-                QuickNavigationButton(),
-              ],
-            );
-          },
         ),
       ],
     );
   }
 
   @override
-  Widget body(BuildContext context) {
-    throw UnimplementedError();
-  }
+  Widget body(BuildContext context) => throw UnimplementedError();
 
   @override
   Widget build(BuildContext context) {
@@ -87,158 +76,110 @@ class SalesListView extends BaseView<SalesListController> {
       appBar: appBar(context),
       body: Column(
         children: [
-          Expanded(
-            child: Obx(
-              () {
-                final index = controller.selectedIndex.value;
-                if (index == 1) {
-                  return _buildOnlineSalesListView();
-                }
-                return _buildOfflineSalesListView();
-              },
-            ),
+          Obx(
+            () {
+              return controller.selectedIndex.value == 1
+                  ? _buildSalesListView(
+                      _buildOnlineSalesListView,
+                    )
+                  : _buildSalesListView(
+                      _buildOfflineSalesListView,
+                    );
+            },
           ),
-          Row(
-            children: List.generate(
-              controller.tabPages.length,
-              (index) {
-                return Obx(
-                  () => Expanded(
-                    child: SubTabItemView(
-                      isSelected: controller.selectedIndex.value == index,
-                      item: controller.tabPages[index],
-                      onTap: () => controller.changeIndex(index),
-                      localeMethod: controller.tabPages[index].localeMethod,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          _buildTabSelector(),
         ],
       ),
     );
   }
 
-  Widget _buildOnlineSalesListView() {
-    return Column(
-      children: [
-        Obx(
-          () {
-            final pageState = controller.pageState;
-            if (pageState == PageState.loading) {
-              return Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: loaderColor,
-                  ),
-                ),
-              );
-            }
-
-            if (pageState == PageState.failed) {
-              return RetryView(
+  Widget _buildSalesListView(
+    Widget Function() builder,
+  ) {
+    return Obx(
+      () {
+        final pageState = controller.pageState;
+        switch (pageState) {
+          case PageState.loading:
+            return _buildLoadingView();
+          case PageState.failed:
+            return Expanded(
+              child: RetryView(
                 onRetry: controller.refreshData,
-              );
-            }
-
-            if (pageState == PageState.success) {
-              final items = controller.pagingController.value.itemList;
-
-              final isEmpty = items?.isEmpty ?? true;
-              if (isEmpty) {
-                return NoRecordFoundView(
-                  onTap: controller.refreshData,
-                );
-              }
-
-              return Expanded(
-                child: RefreshIndicator(
-                  onRefresh: controller.refreshData,
-                  child: PagedListView<int, Sales>(
-                    pagingController: controller.pagingController.value,
-                    builderDelegate: PagedChildBuilderDelegate<Sales>(
-                      itemBuilder: (context, element, index) {
-                        return _buildSalesCardView(
-                          element: element,
-                          index: index,
-                          context: context,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              );
-            }
-
+              ),
+            );
+          case PageState.success:
+            return builder();
+          default:
             return Container();
-          },
+        }
+      },
+    );
+  }
+
+  Widget _buildLoadingView() {
+    return Expanded(
+      child: Center(
+        child: CircularProgressIndicator(
+          color: loaderColor,
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildOnlineSalesListView() {
+    return Expanded(
+      child: RefreshIndicator(
+        onRefresh: controller.refreshData,
+        child: PagedListView<int, Sales>(
+          pagingController: controller.pagingController.value,
+          builderDelegate: PagedChildBuilderDelegate<Sales>(
+            itemBuilder: (context, element, index) => _buildSalesCardView(
+              element: element,
+              index: index,
+              context: context,
+            ),
+            noItemsFoundIndicatorBuilder: (_) => NoRecordFoundView(
+              onTap: controller.refreshData,
+            ),
+            newPageErrorIndicatorBuilder: (context) {
+              return listViewRetryView(
+                onRetry:
+                    controller.pagingController.value.retryLastFailedRequest,
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildOfflineSalesListView() {
-    return Column(
-      children: [
-        Obx(
-          () {
-            final pageState = controller.pageState;
-            if (pageState == PageState.loading) {
-              return Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: loaderColor,
-                  ),
-                ),
-              );
-            }
-
-            if (pageState == PageState.failed) {
-              return RetryView(
-                onRetry: controller.refreshData,
-              );
-            }
-
-            if (pageState == PageState.success) {
-              final items = controller.salesManager.allItems.value;
-
-              final isEmpty = items?.isEmpty ?? true;
-              if (isEmpty) {
-                return NoRecordFoundView(
-                  onTap: controller.refreshData,
-                );
-              }
-
-              return Expanded(
-                child: RefreshIndicator(
-                  onRefresh: controller.refreshData,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount:
-                        controller.salesManager.allItems.value?.length ?? 0,
-                    controller: controller.salesManager.scrollController,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      //check ranger is valid
-
-                      final element =
-                          controller.salesManager.allItems.value![index];
-                      return _buildSalesCardView(
-                        element: element,
-                        index: index,
-                        context: context,
-                      );
-                    },
-                  ),
-                ),
-              );
-            }
-
-            return Container();
+    final items = controller.salesManager.allItems.value;
+    if (items == null || items.isEmpty) {
+      return Expanded(
+        child: NoRecordFoundView(
+          onTap: controller.refreshData,
+        ),
+      );
+    }
+    return Expanded(
+      child: RefreshIndicator(
+        onRefresh: controller.refreshData,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: items.length,
+          controller: controller.salesManager.scrollController,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return _buildSalesCardView(
+              element: items[index],
+              index: index,
+              context: context,
+            );
           },
         ),
-      ],
+      ),
     );
   }
 
@@ -371,6 +312,26 @@ class SalesListView extends BaseView<SalesListController> {
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTabSelector() {
+    return Row(
+      children: List.generate(
+        controller.tabPages.length,
+        (index) {
+          return Obx(
+            () => Expanded(
+              child: SubTabItemView(
+                isSelected: controller.selectedIndex.value == index,
+                item: controller.tabPages[index],
+                onTap: () => controller.changeTab(index),
+                localeMethod: controller.tabPages[index].localeMethod,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

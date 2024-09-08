@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -38,7 +35,7 @@ class SalesListController extends BaseController {
   final selectedIndex = 100.obs;
   final isSearchSelected = false.obs;
 
-  List<TabBarItem> tabPages = [
+  final tabPages = [
     TabBarItem(
       name: 'Local',
       slug: 'local',
@@ -70,18 +67,11 @@ class SalesListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    pagingController.value.addPageRequestListener(
-      (pageKey) {
-        _fetchOnlineSalesData(
-          pageKey: pageKey,
-        );
-      },
-    );
 
-    await changeIndex(0);
+    await changeTab(0);
   }
 
-  Future<void> changeIndex(int index) async {
+  Future<void> changeTab(int index) async {
     if (index == selectedIndex.value) {
       showSnackBar(
         message: appLocalization.pullForRefresh,
@@ -96,18 +86,31 @@ class SalesListController extends BaseController {
       selectedIndex.value = index;
       salesManager.allItems.value = null;
 
-      switch (index) {
-        case 0:
-          await _loadSalesData('is_hold is null');
-        case 1:
-          await _fetchOnlineSalesData(
-            pageKey: 1,
-          );
-        case 2:
-          await _loadSalesData('is_hold == 1');
+      if (selectedIndex.value == 1) {
+        //clear paging controller
+        pagingController.value = PagingController<int, Sales>(
+          firstPageKey: 1,
+        );
 
-        default:
-          break;
+        //add page request listener
+        pagingController.value.addPageRequestListener(
+          (pageKey) {
+            _fetchOnlineSalesData(
+              pageKey: pageKey,
+            );
+          },
+        );
+
+        await _fetchOnlineSalesData(
+          pageKey: 1,
+        );
+      }
+
+      if (selectedIndex.value == 0) {
+        await _loadSalesData('is_hold is null');
+      }
+      if (selectedIndex.value == 2) {
+        await _loadSalesData('is_hold = 1');
       }
     } finally {
       if (salesManager.allItems.value == null &&
@@ -189,7 +192,7 @@ class SalesListController extends BaseController {
           onDeleted: () async {
             Get.back();
             toast('Sales deleted successfully');
-            await changeIndex(selectedIndex.value);
+            await refreshData();
           },
         ),
       ),
@@ -212,7 +215,7 @@ class SalesListController extends BaseController {
       endDate = value['end_date'];
       selectedCustomer = value['customer'];
       searchQuery = value['search_keyword'];
-      await changeIndex(selectedIndex.value);
+      await refreshData();
     }
   }
 
@@ -224,10 +227,17 @@ class SalesListController extends BaseController {
 
   Future<void> onClearSearchText() async {
     salesManager.searchTextController.value.clear();
-    salesManager.allItems.value?.clear();
-    salesManager.allItems.refresh();
     isSearchSelected.toggle();
-    await changeIndex(selectedIndex.value);
+    if (searchQuery != null ||
+        selectedCustomer != null ||
+        startDate != null ||
+        endDate != null) {
+      searchQuery = null;
+      selectedCustomer = null;
+      startDate = null;
+      endDate = null;
+      await refreshData();
+    }
   }
 
   Future<void> deleteSales({
@@ -247,8 +257,7 @@ class SalesListController extends BaseController {
           },
         );
         if (isDeleted ?? false) {
-          selectedIndex.value = 100;
-          await changeIndex(1);
+          await refreshData();
         }
       } else {
         await dbHelper.deleteAllWhr(
@@ -256,11 +265,7 @@ class SalesListController extends BaseController {
           where: 'sales_id = ?',
           whereArgs: [salesId],
         );
-        salesManager.allItems.value?.removeWhere(
-          (element) => element.salesId == salesId,
-        );
-        salesManager.allItems.refresh();
-        await changeIndex(selectedIndex.value);
+        await refreshData();
       }
     }
   }
@@ -268,6 +273,6 @@ class SalesListController extends BaseController {
   Future<void> refreshData() async {
     final int index = selectedIndex.value;
     selectedIndex.value = 100;
-    await changeIndex(index);
+    await changeTab(index);
   }
 }

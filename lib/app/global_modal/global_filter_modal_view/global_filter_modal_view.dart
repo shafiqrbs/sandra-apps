@@ -169,15 +169,15 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
     );
   }
 
+  String? _getValue(String text) => text.isEmpty ? null : text;
+
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    // TODO(saiful): implement appBar
     throw UnimplementedError();
   }
 
   @override
   Widget body(BuildContext context) {
-    // TODO(saiful): implement body
     throw UnimplementedError();
   }
 
@@ -188,11 +188,11 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
   void onSubmit() {
     Get.back(
       result: {
-        'start_date': startDateController.value.text,
-        'end_date': endDateController.value.text,
+        'start_date': _getValue(startDateController.value.text),
+        'end_date': _getValue(endDateController.value.text),
         'customer': customerManager.selectedItem.value,
         'vendor': vendorManager.selectedItem.value,
-        'search_keyword': searchKeyword.value.text,
+        'search_keyword': _getValue(searchKeyword.value.text),
       },
     );
   }

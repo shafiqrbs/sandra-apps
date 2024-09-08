@@ -148,7 +148,7 @@ class SyncModalController extends BaseController {
         final selectedIndex = salesListController.selectedIndex.value;
         if (selectedIndex == 0) {
           salesListController.selectedIndex.value = 100;
-          await salesListController.changeIndex(selectedIndex);
+          await salesListController.changeTab(selectedIndex);
         }
       }
     }

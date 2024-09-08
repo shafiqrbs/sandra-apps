@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/common_confirmation_modal.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
@@ -89,23 +90,31 @@ class SalesInformationModalController extends PrinterController {
   Future<void> deleteSales({
     required Function? onDeleted,
   }) async {
-    final confirmation = await showDialog(
-      context: Get.overlayContext!,
-      builder: (context) {
-        return CommonConfirmationModal(
-          title: 'do_you_want_to_delete_this_sales?'.tr,
-        );
-      },
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
     );
 
     if (confirmation) {
-      print('delete sales');
-      await dbHelper.deleteAllWhr(
-        tbl: dbTables.tableSale,
-        where: 'sales_id = ?',
-        whereArgs: [sales.value!.salesId],
-      );
-      onDeleted!();
+      bool isDeleted = false;
+      if (salesMode == 'online') {
+        await dataFetcher(
+          future: () async {
+            isDeleted = await services.deleteSales(
+              id: sales.value!.salesId!,
+            );
+          },
+        );
+      } else {
+        await dbHelper.deleteAllWhr(
+          tbl: dbTables.tableSale,
+          where: 'sales_id = ?',
+          whereArgs: [sales.value!.salesId],
+        );
+        isDeleted = true;
+      }
+      if (isDeleted) {
+        onDeleted!();
+      }
     }
   }
 }
