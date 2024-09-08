@@ -255,7 +255,7 @@ class SessionManager {
 
   ///get has printer
   Future<bool> getHasPrinter() async {
-    return prefs.getBool(prefsHasPrinter) ?? false;
+    return prefs.getBool(prefsHasPrinter) ?? true;
   }
 
   /// is sales auto approve

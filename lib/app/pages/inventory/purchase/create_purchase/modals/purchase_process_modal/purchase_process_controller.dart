@@ -211,33 +211,22 @@ class PurchaseProcessController extends BaseController {
     }
     if (!formKey.currentState!.validate()) return;
 
-    final isZeroSalesAllowed = await prefs.getIsZeroSalesAllowed();
     final purchase = await generatePurchase();
 
     if (purchase == null) {
-      toast('failed_to_generate_sales'.tr);
+      showSnackBar(
+        message: appLocalization.error,
+      );
       return;
     }
 
     final isVendorNotSelected = vendorManager.selectedItem.value == null;
-    final isVendorSelected = vendorManager.selectedItem.value != null;
     final amountText = amountController.value.text;
-    final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = double.tryParse(amountText) ?? 0;
-    final isInvalidAmount = amount > 0 && amount < netTotal.value;
 
     if (isVendorNotSelected) {
       showSnackBar(message: appLocalization.vendorIsRequired);
       return;
-    }
-
-    if (isZeroSalesAllowed && isVendorNotSelected && isAmountEmpty) {
-      purchase.received = netTotal.value;
-    } else if (isZeroSalesAllowed && isVendorNotSelected && isInvalidAmount) {
-      toast('this_amount_is_not_valid'.tr);
-      return;
-    } else if (amount > netTotal.value && isVendorSelected) {
-      purchase.received = netTotal.value;
     }
 
     if (amount > netTotal.value) {
@@ -250,8 +239,8 @@ class PurchaseProcessController extends BaseController {
       context: context,
       builder: (context) {
         return DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.purchaseConfirmation,
+          subTitle: '',
           child: PurchaseConfirmView(
             purchase: purchase,
             isEdit: prePurchase != null,

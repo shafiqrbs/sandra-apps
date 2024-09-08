@@ -38,7 +38,7 @@ class PrefsSettingsModalController extends BaseController {
     isSalesOnline.value = await prefs.getIsSalesOnline();
     isPurchaseOnline.value = await prefs.getIsPurchaseOnline();
     isZeroSalesAllowed.value = await prefs.getIsZeroSalesAllowed();
-    isHasPrinter.value = await prefs.getIsPrinterAllowed();
+    isHasPrinter.value = await prefs.getHasPrinter();
     isSalesAutoApproved.value = await prefs.getIsSalesAutoApprove();
     isPurchaseAutoApproved.value = await prefs.getIsPurchaseAutoApprove();
     printerType.value = await prefs.getPrintPaperType();
@@ -72,9 +72,11 @@ class PrefsSettingsModalController extends BaseController {
 
   Future<void> setHasPrinter(bool value) async {
     isHasPrinter.value = value;
-    await prefs.setIsPrinterAllowed(
-      isPrinterAllowed: value,
+    await prefs.setHasPrinter(
+      hasPrinter: value,
     );
+
+    print(await prefs.getHasPrinter());
   }
 
   Future<void> setSalesAutoApproved(bool value) async {

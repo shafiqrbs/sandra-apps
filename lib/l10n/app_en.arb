@@ -303,7 +303,9 @@
   "isPurchaseAutoApproved": "Is Purchase Auto Approved",
   "isSalesAutoApproved": "Is Sales Auto Approved",
   "po": "PO",
-  "pay" : "Pay"
+  "pay" : "Pay",
+  "purchaseConfirmation": "Purchase Confirmation"
+
 
 
 

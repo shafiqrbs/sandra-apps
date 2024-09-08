@@ -42,7 +42,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                 children: [
                   Obx(
                     () {
-                      return controller.isLoader.value || controller.connected.value
+                      return controller.isLoader.value || controller.connected.value || !controller.hasPrinter.value
                           ? Container()
                           : Column(
                               children: [
@@ -61,7 +61,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                                 Row(
                                   children: [
                                     RowButton(
-                                      buttonName: 'scan'.tr,
+                                      buttonName: appLocalization.scan,
                                       onTap: controller.scanBluetooth,
                                     ),
                                   ],
@@ -72,7 +72,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                                     child: controller.isConnecting.value
                                         ? ShimmerListView(
                                             itemCount: 1,
-                                            msg: 'connecting'.tr,
+                                            msg: appLocalization.connectPrinter,
                                           )
                                         : ListView.builder(
                                             shrinkWrap: true,
@@ -156,13 +156,14 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if(controller.hasPrinter.value)
                         Obx(
                           () => controller.isLoader.value
                               ? const CircularProgressIndicator(
                                   color: Colors.red,
                                 )
                               : RowButton(
-                                  buttonName: 'print'.tr,
+                                  buttonName: appLocalization.print,
                                   onTap: controller.purchasePrint,
                                   leftIcon: TablerIcons.printer,
                                   buttonBGColor: controller.connected.value
@@ -172,7 +173,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                         ),
                         4.width,
                         RowButton(
-                          buttonName: 'save'.tr,
+                          buttonName: appLocalization.save,
                           onTap: controller.savePurchase,
                           leftIcon: TablerIcons.device_floppy,
                         ),
