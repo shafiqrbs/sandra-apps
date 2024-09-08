@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/test_functions.dart';
+import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
@@ -9,12 +11,12 @@ import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.d
 import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
 import 'package:sandra/app/global_modal/sync_modal/sync_modal_view.dart';
 import 'package:sandra/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
-import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_round_button.dart';
+import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
 enum SelectedTab {
@@ -29,7 +31,7 @@ enum SelectedButtonGroup {
   config,
 }
 
-List<Color> colorList = [
+final colorList = [
   const Color(0xff1E90FF),
   const Color(0xff004D40),
   const Color(0xffFF6F61),
@@ -381,6 +383,40 @@ class DashboardController extends BaseController {
     isOnline.value = !isOnline.value;
     await prefs.setIsSalesOnline(
       isSalesOnline: isOnline.value,
+    );
+  }
+
+  Future<void> generateDummySales({
+    int? isHold,
+  }) async {
+    final salesList = List.generate(
+      1000,
+      (index) => generateRandomSales(
+        isHold: isHold,
+      ),
+    );
+
+    await dbHelper.insertList(
+      deleteBeforeInsert: true,
+      tableName: dbTables.tableSale,
+      dataList: salesList.map((e) => e.toJson()).toList(),
+    );
+  }
+
+  void generateDummyPurchase({
+    int? isHold,
+  }) {
+    final purchaseList = List.generate(
+      1000,
+      (index) => generateRandomPurchase(
+        isHold: isHold,
+      ),
+    );
+
+    dbHelper.insertList(
+      deleteBeforeInsert: true,
+      tableName: dbTables.tablePurchase,
+      dataList: purchaseList.map((e) => e.toJson()).toList(),
     );
   }
 }

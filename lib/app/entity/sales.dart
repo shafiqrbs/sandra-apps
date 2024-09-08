@@ -26,16 +26,16 @@ class Sales {
   String? createdAt;
   String? updatedAt;
 
-  double? subTotal;
-  double? discount;
-  double? discountCalculation;
-  double? vat;
-  double? sd;
-  double? netTotal;
-  double? purchasePrice;
-  double? received;
-  double? due;
-  int? deliveryCharge;
+  num? subTotal;
+  num? discount;
+  num? discountCalculation;
+  num? vat;
+  num? sd;
+  num? netTotal;
+  num? purchasePrice;
+  num? received;
+  num? due;
+  num? deliveryCharge;
   String? paymentInWord;
   String? process;
   String? discountType;
@@ -129,7 +129,13 @@ class Sales {
       deliveryCharge: json['delivery_charge'],
       paymentInWord: json['payment_in_word'] == null
           ? null
-          : converter.convertInt(json['payment_in_word']),
+          : json['payment_in_word'] is String
+              ? json['payment_in_word']
+              : converter.convertDouble(
+                  parseDouble(
+                    json['payment_in_word'],
+                  ),
+                ),
       process: json['process'],
       discountType: json['discount_type'],
       revised: json['revised'],

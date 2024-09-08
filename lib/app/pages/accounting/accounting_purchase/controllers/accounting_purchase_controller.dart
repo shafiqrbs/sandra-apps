@@ -208,11 +208,6 @@ class AccountingPurchaseController extends BaseController {
     debouncer.call(
       () async {
         searchQuery = value;
-        if (value.isNotEmpty) {
-          isSearchSelected.value = true;
-        } else {
-          isSearchSelected.value = false;
-        }
         refreshData();
       },
     );

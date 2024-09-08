@@ -36,7 +36,7 @@ class SalesListView extends BaseView<SalesListController> {
         () => AppBarSearchView(
           pageTitle: appLocalization.sales,
           controller: controller.salesManager.searchTextController.value,
-          onSearch: controller.salesManager.searchItemsByNameOnAllItem,
+          onSearch: controller.onSearch,
           onMicTap: controller.isSearchSelected.toggle,
           onFilterTap: () => controller.showFilterModal(
             context: globalKey.currentContext!,
@@ -229,7 +229,7 @@ class SalesListView extends BaseView<SalesListController> {
                     ),
                     Expanded(
                       child: CommonIconText(
-                        text: '${element.salesId}',
+                        text: '${element.invoice}',
                         icon: TablerIcons.file_invoice,
                         fontSize: valueTFSize,
                       ),
@@ -270,6 +270,8 @@ class SalesListView extends BaseView<SalesListController> {
                               "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
                           fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
@@ -281,6 +283,8 @@ class SalesListView extends BaseView<SalesListController> {
                               "${appLocalization.receive} : $currency ${element.received ?? ''}",
                           fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
@@ -293,6 +297,8 @@ class SalesListView extends BaseView<SalesListController> {
                           fontSize: valueTFSize,
                           textColor: colors.primaryTextColor,
                           textAlign: TextAlign.start,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),

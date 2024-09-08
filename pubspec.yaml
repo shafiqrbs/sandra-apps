@@ -11,6 +11,7 @@ dependencies:
   dio: ^5.4.3+1
   equatable: ^2.0.5
   esc_pos_utils_plus: ^2.0.3
+  faker: ^2.2.0
   flutter:
     sdk: flutter
   flutter_advanced_switch: ^3.1.0

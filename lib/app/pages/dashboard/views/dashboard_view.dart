@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/utils/test_functions.dart';
+import 'package:sandra/app/core/widget/tbd_round_button.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_text.dart';
@@ -365,6 +367,7 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
             ],
           ),
+          if (kDebugMode) _buildTestData(),
         ],
       ),
     );
@@ -512,6 +515,66 @@ class DashboardView extends BaseView<DashboardController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTestData() {
+    return Column(
+      children: [
+        10.height,
+        Row(
+          children: [
+            TbdTextButton(
+              onPressed: () => controller.generateDummySales(),
+              text: 'Generate Sales',
+              isSelected: true,
+            ),
+            10.width,
+            TbdTextButton(
+              onPressed: () => controller.generateDummySales(
+                isHold: 1,
+              ),
+              text: 'Generate Hold  Sales',
+              isSelected: true,
+            ),
+          ],
+        ),
+        10.height,
+        Row(
+          children: [
+            TbdTextButton(
+              onPressed: () => controller.generateDummyPurchase(),
+              text: 'Generate Purchase',
+              isSelected: true,
+            ),
+            10.width,
+            TbdTextButton(
+              onPressed: () => controller.generateDummyPurchase(
+                isHold: 1,
+              ),
+              text: 'Generate Hold  Purcha',
+              isSelected: true,
+            ),
+          ],
+        ),
+        10.height,
+        Row(
+          children: [
+            const TbdTextButton(
+              onPressed: clearSalesTable,
+              text: 'Clear Sales',
+              isSelected: true,
+            ),
+            10.width,
+            const TbdTextButton(
+              onPressed: clearSPurchaseTable,
+              text: 'Clear Purchase',
+              isSelected: true,
+            ),
+          ],
+        ),
+        10.height,
+      ],
     );
   }
 }

@@ -67,7 +67,6 @@ class SalesListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-
     await changeTab(0);
   }
 
@@ -106,11 +105,34 @@ class SalesListController extends BaseController {
         );
       }
 
+      String condition = '';
+
+      if (selectedCustomer != null) {
+        condition += ' AND customer_id = ${selectedCustomer!.customerId!}';
+      }
+
+      if (startDate != null) {
+        // Assuming you want to include the whole day for startDate
+        final formattedStartDate = '$startDate 00:00:00';
+        condition += " AND created_at >= '$formattedStartDate'";
+      }
+
+      if (endDate != null) {
+        // Assuming you want to include the whole day for endDate
+        final formattedEndDate = '$endDate 23:59:59';
+        condition += " AND created_at <= '$formattedEndDate'";
+      }
+
+      if (searchQuery != null) {
+        condition +=
+            " AND (sales_id LIKE '%$searchQuery%' OR customer_name LIKE '%$searchQuery%' OR customer_mobile LIKE '%$searchQuery%')";
+      }
+
       if (selectedIndex.value == 0) {
-        await _loadSalesData('is_hold is null');
+        await _loadSalesData('is_hold IS NULL $condition');
       }
       if (selectedIndex.value == 2) {
-        await _loadSalesData('is_hold = 1');
+        await _loadSalesData('is_hold = 1 $condition');
       }
     } finally {
       if (salesManager.allItems.value == null &&
@@ -265,7 +287,14 @@ class SalesListController extends BaseController {
           where: 'sales_id = ?',
           whereArgs: [salesId],
         );
-        await refreshData();
+        //await refreshData();
+        final index = salesManager.allItems.value!.indexWhere(
+          (element) => element.salesId == salesId,
+        );
+        if (index != -1) {
+          salesManager.allItems.value!.removeAt(index);
+          salesManager.allItems.refresh();
+        }
       }
     }
   }
@@ -274,5 +303,14 @@ class SalesListController extends BaseController {
     final int index = selectedIndex.value;
     selectedIndex.value = 100;
     await changeTab(index);
+  }
+
+  Future<void> onSearch(String value) async {
+    debouncer.call(
+      () async {
+        searchQuery = value;
+        refreshData();
+      },
+    );
   }
 }
