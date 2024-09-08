@@ -31,7 +31,7 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 70.ph,
+                  height: 68.ph,
                   child: ListView(
                     children: [
                       8.height,
@@ -139,11 +139,11 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                             child: FBString(
                               textController: controller.minimumQtyController,
                               keyboardType: number,
-                              label: 'minimum_qty'.tr,
+                              label: appLocalization.minimumQty,
                               //example: '0'.tr,
-                              hint: 'qty'.tr,
-                              errorMsg: 'mini_quantity_required'.tr,
-                              isRequired: true,
+                              hint: appLocalization.qty,
+                              errorMsg: appLocalization.requiredField,
+                              isRequired: false,
                               padding: EdgeInsets.zero,
                             ),
                           ),
