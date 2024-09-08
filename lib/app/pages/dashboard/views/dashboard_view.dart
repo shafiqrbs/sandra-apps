@@ -308,7 +308,7 @@ class DashboardView extends BaseView<DashboardController> {
                 subTitle: '৳ 567',
                 icon: TablerIcons.report_analytics,
                 onTap: controller.goToSalesList,
-                bgColor: const Color(0xff1E90FF),
+                bgColor: colors.solidBlueColor,
               ),
               10.width,
               TitleSubtitleButton(
@@ -316,7 +316,7 @@ class DashboardView extends BaseView<DashboardController> {
                 subTitle: '৳ 567',
                 icon: TablerIcons.cash,
                 onTap: controller.goToPurchaseList,
-                bgColor: const Color(0xff004D40),
+                bgColor: colors.solidGreenColor,
               ),
             ],
           ),
@@ -329,7 +329,7 @@ class DashboardView extends BaseView<DashboardController> {
                 subTitle: '৳ 567',
                 icon: TablerIcons.cash,
                 onTap: controller.goToDueCustomerList,
-                bgColor: const Color(0xffFF6F61),
+                bgColor: colors.solidRedColor,
               ),
               10.width,
               TitleSubtitleButton(
@@ -337,7 +337,7 @@ class DashboardView extends BaseView<DashboardController> {
                 subTitle: '৳ 567',
                 icon: TablerIcons.moneybag,
                 onTap: controller.goToExpenseList,
-                bgColor: const Color(0xff4CBB17),
+                bgColor: colors.solidLiteGreenColor,
               ),
             ],
           ),
@@ -393,17 +393,22 @@ class DashboardView extends BaseView<DashboardController> {
         children: [
           _buildCommonButtonCard(
             title: appLocalization.pos,
-            buttonColor: const Color(0xff1E90FF),
+            buttonColor: colors.solidBlueColor,
             onTap: controller.goToSales,
           ),
           _buildCommonButtonCard(
+            title: appLocalization.po,
+            buttonColor: colors.solidGreenColor,
+            onTap: controller.goToPo,
+          ),
+          _buildCommonButtonCard(
             title: appLocalization.receive,
-            buttonColor: const Color(0xff5D6D7E),
+            buttonColor: colors.solidGreyColor,
             onTap: controller.showCustomerReceiveModal,
           ),
           _buildCommonButtonCard(
-            title: appLocalization.payment,
-            buttonColor: const Color(0xffFF6F61),
+            title: appLocalization.pay,
+            buttonColor: colors.solidRedColor,
             onTap: controller.showVendorPaymentModal,
           ),
         ],

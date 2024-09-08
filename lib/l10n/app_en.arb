@@ -301,7 +301,9 @@
   "pullForRefresh": "Pull for Refresh",
   "refresh": "Refresh",
   "isPurchaseAutoApproved": "Is Purchase Auto Approved",
-  "isSalesAutoApproved": "Is Sales Auto Approved"
+  "isSalesAutoApproved": "Is Sales Auto Approved",
+  "po": "PO",
+  "pay" : "Pay"
 
 
 

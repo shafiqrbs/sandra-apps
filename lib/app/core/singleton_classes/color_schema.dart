@@ -168,6 +168,13 @@ class ColorSchema {
 
   Color formSuccessIconColor = const Color(0xffffffff);
 
+  Color solidBlueColor = const Color(0xff1E90FF);
+  Color solidGreenColor = const Color(0xff004D40);
+  Color solidRedColor = const Color(0xff4CBB17);
+  Color solidLiteGreenColor = const Color(0xffFF6F61);
+  Color solidGreyColor = const Color(0xff5D6D7E);
+  Color solidPurpleColor = const Color(0xff6D28D9);
+
   // Factory constructor to return the singleton instance
   factory ColorSchema() => _instance;
 
@@ -628,6 +635,30 @@ class ColorSchema {
       ..buttonColor = parseColor(
         json['buttonColor'],
         const Color(0xFFC98A69),
+      )
+      ..solidBlueColor = parseColor(
+        json['solidBlueColor'],
+        const Color(0xff1E90FF),
+      )
+      ..solidGreenColor = parseColor(
+        json['solidGreenColor'],
+        const Color(0xff004D40),
+      )
+      ..solidRedColor = parseColor(
+        json['solidRedColor'],
+        const Color(0xff4CBB17),
+      )
+      ..solidLiteGreenColor = parseColor(
+        json['solidLiteGreenColor'],
+        const Color(0xffFF6F61),
+      )
+      ..solidGreyColor = parseColor(
+        json['solidGreyColor'],
+        const Color(0xff5D6D7E),
+      )
+      ..solidPurpleColor = parseColor(
+        json['solidPurpleColor'],
+        const Color(0xff6D28D9),
       );
   }
 
@@ -772,6 +803,12 @@ class ColorSchema {
       //'formSuffixIconColor' : formSuffixIconColor,
       //'formPrefixIconColor' : formPrefixIconColor,
       //'formClearIconColor' : formClearIconColor,
+      'solidBlueColor': solidBlueColor,
+      'solidGreenColor': solidGreenColor,
+      'solidRedColor': solidRedColor,
+      'solidLiteGreenColor': solidLiteGreenColor,
+      'solidGreyColor': solidGreyColor,
+      'solidPurpleColor': solidPurpleColor,
     };
   }
 }

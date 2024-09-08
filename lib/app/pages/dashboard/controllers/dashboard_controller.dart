@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/utils/test_functions.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
@@ -32,13 +33,13 @@ enum SelectedButtonGroup {
 }
 
 final colorList = [
-  const Color(0xff1E90FF),
-  const Color(0xff004D40),
-  const Color(0xffFF6F61),
-  const Color(0xff32CD32),
-  const Color(0xff4CBB17),
-  const Color(0xff5D6D7E),
-  const Color(0xff6D28D9),
+  ColorSchema().solidBlueColor,
+  ColorSchema().solidGreenColor,
+  ColorSchema().solidRedColor,
+  ColorSchema().solidLiteGreenColor,
+  ColorSchema().solidGreyColor,
+  ColorSchema().solidPurpleColor,
+  ColorSchema().solidGreenColor,
 ];
 
 List<Widget> createButtonList = [
@@ -64,40 +65,22 @@ List<Widget> createButtonList = [
 
 List<Widget> inventoryButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.user,
-    onTap: () => navigatePage(Routes.customerList),
-    localeMethod: () => appLocalization.customer,
+    icon: TablerIcons.list,
+    onTap: () => navigatePage(Routes.stockList),
+    localeMethod: () => appLocalization.stocks,
     bgColor: colorList[0],
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.users,
-    onTap: () => navigatePage(Routes.vendorList),
-    localeMethod: () => appLocalization.vendor,
-    bgColor: colorList[1],
   ),
   TbdRoundButton(
     icon: TablerIcons.file_description,
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.invoice,
-    bgColor: colorList[2],
+    bgColor: colorList[1],
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchase,
-    bgColor: colorList[3],
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
-    onTap: () => navigatePage(Routes.createPurchase),
-    localeMethod: () => appLocalization.order,
-    bgColor: colorList[4],
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.list,
-    onTap: () => navigatePage(Routes.stockList),
-    localeMethod: () => appLocalization.stocks,
-    bgColor: colorList[5],
+    bgColor: colorList[2],
   ),
   TbdRoundButton(
     icon: TablerIcons.receipt_refund,
@@ -107,7 +90,19 @@ List<Widget> inventoryButtonList = [
       );
     },
     localeMethod: () => appLocalization.salesReturn,
-    bgColor: colorList[6],
+    bgColor: colorList[3],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.user,
+    onTap: () => navigatePage(Routes.customerList),
+    localeMethod: () => appLocalization.customer,
+    bgColor: colorList[4],
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.users,
+    onTap: () => navigatePage(Routes.vendorList),
+    localeMethod: () => appLocalization.vendor,
+    bgColor: colorList[5],
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
@@ -118,7 +113,7 @@ List<Widget> inventoryButtonList = [
       );
     },
     localeMethod: () => appLocalization.purchaseReturn,
-    bgColor: colorList[1],
+    bgColor: colorList[6],
   ),
 ];
 
@@ -238,6 +233,12 @@ class DashboardController extends BaseController {
   void goToSales() {
     Get.toNamed(
       Routes.createSales,
+    );
+  }
+
+  void goToPo() {
+    Get.toNamed(
+      Routes.createPurchase,
     );
   }
 

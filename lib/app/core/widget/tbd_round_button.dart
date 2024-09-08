@@ -55,16 +55,16 @@ class TbdRoundButton extends StatelessWidget {
           ),
           4.height,
           SizedBox(
-            width: 70,
             height: 40,
             child: Text(
               localeMethod?.call() ?? text?.tr ?? '',
               style: GoogleFonts.inter(
                 color: const Color(0xff4d4d4d),
                 fontSize: 12,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
+              maxLines: 1,
             ),
           ),
         ],
