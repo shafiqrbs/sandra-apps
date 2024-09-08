@@ -28,6 +28,7 @@ class PurchaseProcessController extends BaseController {
 
   final showPurchaseItem = false.obs;
   final isHold = false.obs;
+  final isShowClearIcon = false.obs;
 
   Rx<Purchase?> createdPurchase = Rx<Purchase?>(null);
   final purchaseItemList = Rx<List<PurchaseItem>>([]);

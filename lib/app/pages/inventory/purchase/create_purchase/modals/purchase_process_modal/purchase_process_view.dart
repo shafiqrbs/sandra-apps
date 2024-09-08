@@ -57,14 +57,15 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                       _buildSalesItemListView(context),
                       1.percentHeight,
                       _buildCustomerSearch(context),
-                      1.percentHeight,
-                      _buildSelectedCustomerView(context),
+                      //1.percentHeight,
+                      //_buildSelectedCustomerView(context),
                       Stack(
                         children: [
                           Column(
                             children: [
-                              _buildInvoiceSummery(),
+
                               _buildTransactionMethod(context),
+                              _buildInvoiceSummery(),
                               1.percentHeight,
                               _buildUserSelectView(context),
                               1.percentHeight,
@@ -153,6 +154,147 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
   }
 
   Widget _buildCustomerSearch(
+      BuildContext context,
+      ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 4,
+      ),
+      color: colors.backgroundColor,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: textFieldHeight,
+                  child: TextFormField(
+                    controller:
+                    controller.vendorManager.searchTextController.value,
+                    cursorColor: colors.formCursorColor,
+                    decoration: buildInputDecoration(
+                      prefixIcon: Icon(
+                        TablerIcons.search,
+                        size: 16,
+                        color: colors.formBaseHintTextColor,
+                      ),
+                      suffixIcon: Obx(
+                            () {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              controller.isShowClearIcon.value
+                                  ? InkWell(
+                                onTap: () {
+                                  controller.vendorManager
+                                      .searchTextController.value
+                                      .clear();
+                                  controller.isShowClearIcon.value =
+                                  false;
+                                  controller.vendorManager.selectedItem
+                                      .value = null;
+                                  controller.vendorManager.searchedItems
+                                      .value = [];
+                                },
+                                child: Icon(
+                                  TablerIcons.x,
+                                  size: 12,
+                                  color: colors.formClearIconColor,
+                                ),
+                              )
+                                  : Container(),
+                              IconButton(
+                                onPressed: controller.addVendor,
+                                icon: const Icon(
+                                  TablerIcons.user_plus,
+                                  size: 20,
+                                  color: Color(0xFFC98A69),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      hintText: appLocalization.searchVendor,
+                      hintStyle: TextStyle(
+                        color: colors.formBaseHintTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: mediumTFSize.sp,
+                      ),
+                      fillColor: colors.textFieldColor,
+                      enabledBorderColor: colors.borderColor,
+                      focusedBorderColor: colors.borderColor,
+                      errorBorderColor: colors.borderColor,
+                    ),
+                    textAlign: startTA,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: mediumTFSize.sp,
+                    ),
+                    onChanged: (value) async {
+                      if (value.isEmpty) {
+                        controller.isShowClearIcon.value = false;
+                        controller.vendorManager.searchedItems.value = [];
+                        controller.vendorManager.selectedItem.value = null;
+                        return;
+                      }
+                      controller.isShowClearIcon.value = true;
+                      await controller.vendorManager.searchItemsByName(value);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          4.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CommonText(
+                text: appLocalization.donNotHaveAnAccount,
+                fontSize: smallTFSize,
+                fontWeight: FontWeight.w400,
+                textColor: colors.textColorH6,
+              ),
+              InkWell(
+                onTap: controller.addVendor,
+                child: CommonText(
+                  text: appLocalization.addVendor,
+                  fontSize: mediumTFSize,
+                  fontWeight: FontWeight.w500,
+                  textColor: colors.primaryBaseColor,
+                  textDecoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+          Obx(
+                () => controller.vendorManager.selectedItem.value != null
+                ? Column(
+              children: [
+                1.percentHeight,
+                VendorCardView(
+                  data: controller.vendorManager.selectedItem.value!,
+                  index: 0,
+                  onTap: () {},
+                  onReceive: () {},
+                  showReceiveButton: false,
+                ),
+              ],
+            )
+                : Container(),
+          ),
+          8.height,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomerSearch2(
     BuildContext context,
   ) {
     return Row(
@@ -307,7 +449,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   color: colors.dangerBaseColor,
                 ),
                 Text(
-                  'total'.tr,
+                  appLocalization.total,
                   style: TextStyle(
                     fontSize: smallTFSize,
                   ),
@@ -317,6 +459,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
           ),
         ),
         Expanded(
+          flex: 2,
           child: Row(
             children: [
               Expanded(
@@ -406,7 +549,6 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
     return Obx(
       () => Column(
         children: [
-          1.percentHeight,
           if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
               padding: const EdgeInsets.all(8),
@@ -534,7 +676,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
         isShowSearch: false,
         controller: controller.userManager.value.asController,
         itemToString: (data) => data?.fullName ?? '',
-        hint: 'select_user'.tr,
+        hint: appLocalization.selectUser,
       ),
     );
   }
@@ -558,14 +700,14 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
           ),
           4.width,
           RowButton(
-            buttonName: 'hold'.tr,
+            buttonName: appLocalization.hold,
             onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
             buttonBGColor: Colors.grey,
           ),
           4.width,
           RowButton(
-            buttonName: 'order'.tr,
+            buttonName: appLocalization.order,
             onTap: () => controller.showConfirmationDialog(context),
             leftIcon: TablerIcons.device_floppy,
           ),
