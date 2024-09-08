@@ -65,8 +65,8 @@ class AddProductModalViewController extends BaseController {
       future: () async {
         createdStock = await services.addStock(
           name: productName,
-          categoryId: category!.toString(),
-          brandId: brand!.toString(),
+          categoryId: category?.toString(),
+          brandId: brand?.toString(),
           modelNumber: modelNumber,
           unitId: unit!.toString(),
           purchasePrice: purchasePrice,

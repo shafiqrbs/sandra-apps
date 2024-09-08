@@ -50,15 +50,17 @@ class StockCardView extends BaseWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.dialog(
-          DialogPattern(
-            title: appLocalization.stockDetails,
-            subTitle: '',
-            child: StockDetailsModal(
-              element: element,
+        if (false) {
+          Get.dialog(
+            DialogPattern(
+              title: appLocalization.stockDetails,
+              subTitle: '',
+              child: StockDetailsModal(
+                element: element,
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
       child: Stack(
         children: [

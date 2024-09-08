@@ -186,8 +186,8 @@ class Services {
 
   Future<Stock?>? addStock({
     required String name,
-    required String categoryId,
-    required String brandId,
+    required String? categoryId,
+    required String? brandId,
     required String modelNumber,
     required String unitId,
     required String purchasePrice,
@@ -203,8 +203,8 @@ class Services {
         'poskeeper-stock-create',
         {
           'name': name,
-          'category_id': categoryId,
-          'brand_id': brandId,
+          'category_id': categoryId??'',
+          'brand_id': brandId??'',
           'model_no': modelNumber,
           'unit_id': unitId,
           'purchase_price': purchasePrice,

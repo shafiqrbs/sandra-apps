@@ -77,7 +77,7 @@ class Stock extends Parser {
       'name': name,
       'print_name': printName,
       'quantity': quantity,
-      'sale_price': salesPrice,
+      'sales_price': salesPrice,
       'purchase_price': purchasePrice,
       'print_hidden': printHidden,
       'image_path': imagePath,

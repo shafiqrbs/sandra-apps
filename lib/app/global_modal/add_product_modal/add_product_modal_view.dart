@@ -45,7 +45,7 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                       ),
                       0.height,
                       AdvanceSelect(
-                        isRequired: true,
+                        isRequired: false,
                         controller: controller.categoryManager.asController,
                         hint: appLocalization.selectCategory,
                         isShowSearch: false,
@@ -55,12 +55,12 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                       ),
                       0.height,
                       AdvanceSelect(
-                        isRequired: true,
+                        isRequired: false,
                         controller: controller.brandManager.asController,
                         hint: appLocalization.selectBrand,
                         isShowSearch: false,
                         itemToString: (data) => data?.name ?? '',
-                        label: 'brand'.tr,
+                        label: appLocalization.brand,
                         errorMsg: appLocalization.brandRequired,
                       ),
                       0.height,
