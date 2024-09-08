@@ -495,8 +495,8 @@ class AdvanceSelect<T> extends FormField<T> {
                                     ),
                                     if (controller.selectedValue == null)
                                       Positioned(
-                                        right: 10,
-                                        top: 10,
+                                        right: 0,
+                                        top: 8,
                                         child: Container(
                                           margin:
                                               const EdgeInsets.only(right: 5),
