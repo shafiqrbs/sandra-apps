@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/utils/test_functions.dart';
 import 'package:sandra/app/core/widget/tbd_round_button.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/common_text.dart';
@@ -178,12 +179,50 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
               ),
               12.width,
-              InkWell(
-                onTap: () {},
-                child: const Icon(
-                  TablerIcons.dots_vertical,
-                  color: Colors.white,
-                  size: 20,
+              Container(
+                margin: const EdgeInsets.only(right: 12),
+                child: SuperTooltip(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GestureDetector(
+                        onTap: controller.logOut,
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: colors.primaryTextColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      16.height,
+                      GestureDetector(
+                        onTap: controller.clearLicense,
+                        child: Text(
+                          'Reset',
+                          style: TextStyle(
+                            color: colors.primaryTextColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  arrowTipDistance: 10,
+                  arrowLength: 8,
+                  arrowBaseWidth: 8,
+                  //right: -16,
+                  hideTooltipOnTap: true,
+                  //elevation: 0,
+                  hasShadow: false,
+                  backgroundColor: Colors.white,
+                  borderRadius: 4,
+                  barrierColor: Colors.transparent,
+                  child: const Icon(
+                    TablerIcons.dots_vertical,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
               ),
 
@@ -342,7 +381,7 @@ class DashboardView extends BaseView<DashboardController> {
             ],
           ),
           10.height,
-          Row(
+          /*Row(
             mainAxisAlignment: spaceBetweenMAA,
             children: [
               TitleSubtitleButton(
@@ -367,7 +406,7 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
             ],
           ),
-          if (kDebugMode) _buildTestData(),
+          if (kDebugMode) _buildTestData(),*/
         ],
       ),
     );
