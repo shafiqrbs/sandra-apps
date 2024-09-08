@@ -41,7 +41,7 @@ class SalesItemListView extends BaseWidget {
 
         final mrpController = TextEditingController(
           text:
-              '${SetUp().currency ?? ''} ${element.mrpPrice?.toString() ?? '0.00'}',
+              '${SetUp().symbol ?? ''} ${element.mrpPrice?.toString() ?? '0.00'}',
         );
 
         final salesItemSalesPriceController = TextEditingController(
@@ -59,8 +59,8 @@ class SalesItemListView extends BaseWidget {
         ).obs;
         final salesItemSubTotalController = TextEditingController(
           text: element.subTotal == null
-              ? SetUp().currency ?? ''
-              : '${SetUp().currency ?? ''} ${element.subTotal}',
+              ? SetUp().symbol ?? ''
+              : '${SetUp().symbol ?? ''} ${element.subTotal}',
         ).obs;
 
         final canEditSalesItemPrice =
@@ -169,7 +169,7 @@ class SalesItemListView extends BaseWidget {
                                   color: Colors.transparent,
                                   child: CommonText(
                                     text:
-                                        '${SetUp().currency ?? ''} ${mrpController.value.text}',
+                                        '${mrpController.value.text}',
                                     fontSize: mediumTFSize,
                                     fontWeight: FontWeight.w500,
                                     textColor: colors.primaryTextColor,
