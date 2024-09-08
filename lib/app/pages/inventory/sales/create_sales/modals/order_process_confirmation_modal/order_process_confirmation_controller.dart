@@ -15,9 +15,15 @@ class OrderProcessConfirmationController extends PrinterController {
     required this.isEdit,
   });
 
+  final hasPrinter = false.obs;
+
   @override
   Future<void> onInit() async {
-    await getBluetoothList();
+    hasPrinter.value = await prefs.getHasPrinter();
+
+    if (hasPrinter.value) {
+      await getBluetoothList();
+    }
     return super.onInit();
   }
 

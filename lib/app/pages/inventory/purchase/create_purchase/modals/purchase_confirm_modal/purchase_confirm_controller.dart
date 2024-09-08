@@ -21,7 +21,6 @@ class PurchaseConfirmController extends PrinterController {
   @override
   Future<void> onInit() async {
     hasPrinter.value = await prefs.getHasPrinter();
-    print('hasPrinter: ${hasPrinter.value}');
     if (hasPrinter.value) {
       await getBluetoothList();
     }

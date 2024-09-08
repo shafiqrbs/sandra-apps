@@ -43,7 +43,8 @@ class OrderProcessConfirmationView
                 children: [
                   Obx(
                     () => controller.isLoader.value ||
-                            controller.connected.value
+                            controller.connected.value ||
+                            !controller.hasPrinter.value
                         ? Container()
                         : Column(
                             children: [
@@ -156,6 +157,7 @@ class OrderProcessConfirmationView
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if(controller.hasPrinter.value)
                         Obx(
                           () => controller.isLoader.value
                               ? const CircularProgressIndicator(
