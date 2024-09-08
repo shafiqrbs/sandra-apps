@@ -26,25 +26,25 @@ class AddVendorModalController extends BaseController {
     if (formKey.currentState!.validate()) {
       await dataFetcher(
         future: () async {
-          final response = await services.addVendor(
+          createdVendor = await services.addVendor(
             name: userNameController.value.text,
             mobile: mobileController.value.text,
             address: addressController.value.text,
             email: emailController.value.text,
             openingBalance: openingBalanceController.value.text,
           );
-          if (response != null) {
+          if (createdVendor != null) {
             await dbHelper.insertList(
               deleteBeforeInsert: false,
               tableName: dbTables.tableVendors,
               dataList: [
-                response.toJson(),
+                createdVendor!.toJson(),
               ],
             );
-            createdVendor = response;
           }
         },
       );
+
       if (createdVendor != null) {
         Get.back(
           result: createdVendor,

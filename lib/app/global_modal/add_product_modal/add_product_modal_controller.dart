@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/unit.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/entity/category.dart';
@@ -47,9 +49,9 @@ class AddProductModalViewController extends BaseController {
       return;
     }
     final productName = nameController.text;
-    final category = categoryManager.asController.selectedValue?.name;
-    final brand = brandManager.asController.selectedValue?.name;
-    final unit = unitManager.asController.selectedValue?.name;
+    final category = categoryManager.asController.selectedValue?.categoryId;
+    final brand = brandManager.asController.selectedValue?.brandId;
+    final unit = unitManager.asController.selectedValue?.unitId;
     final modelNumber = modelNumberController.text;
     final purchasePrice = purchasePriceController.text;
     final salesPrice = salePriceController.text;
@@ -58,27 +60,40 @@ class AddProductModalViewController extends BaseController {
     final openingQty = openingQtyController.text;
     final description = descriptionController.text;
 
+    Stock? createdStock;
     await dataFetcher(
       future: () async {
-        final value = await services.addStock(
-          productName: productName,
-          category: category!,
-          brand: brand!,
+        createdStock = await services.addStock(
+          name: productName,
+          categoryId: category!.toString(),
+          brandId: brand!.toString(),
           modelNumber: modelNumber,
-          unit: unit!,
+          unitId: unit!.toString(),
           purchasePrice: purchasePrice,
           salesPrice: salesPrice,
           discountPrice: discountPrice,
-          minimumQty: minimumQty,
+          minQty: minimumQty,
           openingQty: openingQty,
           description: description,
         );
 
-        if (value != null) {
-          onResetTap();
-          //Get.back();
+        if (createdStock != null) {
+          await dbHelper.insertList(
+            deleteBeforeInsert: false,
+            tableName: dbTables.tableStocks,
+            dataList: [
+              createdStock!.toJson(),
+            ],
+          );
         }
       },
     );
+    if (createdStock != null) {
+      onResetTap();
+    } else {
+      showSnackBar(
+        message: appLocalization.error,
+      );
+    }
   }
 }

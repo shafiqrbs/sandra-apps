@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/entity/expense.dart';
+import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/vendor.dart';
 
 import '/app/core/core_model/setup.dart';
@@ -183,41 +184,44 @@ class Services {
     }
   }
 
-  Future<Map<String, dynamic>?>? addStock({
-    required String productName,
-    required String category,
-    required String brand,
+  Future<Stock?>? addStock({
+    required String name,
+    required String categoryId,
+    required String brandId,
     required String modelNumber,
-    required String unit,
+    required String unitId,
     required String purchasePrice,
     required String salesPrice,
     required String discountPrice,
-    required String minimumQty,
+    required String minQty,
     required String openingQty,
     required String description,
   }) async {
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-add-stock',
+        'poskeeper-stock-create',
         {
-          'productName': productName,
-          'category': category,
-          'brand': brand,
-          'modelNumber': modelNumber,
-          'unit': unit,
-          'purchasePrice': purchasePrice,
-          'salesPrice': salesPrice,
-          'discountPrice': discountPrice,
-          'minimumQty': minimumQty,
-          'openingQty': openingQty,
+          'name': name,
+          'category_id': categoryId,
+          'brand_id': brandId,
+          'model_no': modelNumber,
+          'unit_id': unitId,
+          'purchase_price': purchasePrice,
+          'sales_price': salesPrice,
+          'discount_price': discountPrice,
+          'min_quantity': minQty,
+          'opening_quantity': openingQty,
           'description': description,
         },
         headers: _buildHeader(),
       );
       final responseData = response.data as Map<String, dynamic>?;
       if (responseData == null) return null;
-      return responseData;
+      return parseObject(
+        object: responseData,
+        fromJson: Stock.fromJson,
+      );
     } catch (e, s) {
       printError(e, s);
       return null;
