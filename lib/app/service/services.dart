@@ -203,8 +203,8 @@ class Services {
         'poskeeper-stock-create',
         {
           'name': name,
-          'category_id': categoryId??'',
-          'brand_id': brandId??'',
+          'category_id': categoryId ?? '',
+          'brand_id': brandId ?? '',
           'model_no': modelNumber,
           'unit_id': unitId,
           'purchase_price': purchasePrice,
@@ -248,10 +248,11 @@ class Services {
         APIType.public,
         'poskeeper-online-sales',
         query,
-        // query: query,
+        query: query,
         headers: _buildHeader(),
       );
-
+      final responseData = response.data as List?;
+      if (responseData == null) return null;
       return parseList(
         list: response.data,
         fromJson: Sales.fromJson,
@@ -270,25 +271,35 @@ class Services {
     required String? endDate,
     required String? vendorId,
     required String? keyword,
+    required int page,
   }) async {
-    final query = <String, dynamic>{};
-    if (startDate != null) query['start_date'] = startDate;
-    if (endDate != null) query['end_date'] = endDate;
-    if (vendorId != null) query['vendor_id'] = vendorId;
-    if (keyword != null) query['keyword'] = keyword;
+    try {
+      final query = <String, dynamic>{};
+      if (startDate != null) query['start_date'] = startDate;
+      if (endDate != null) query['end_date'] = endDate;
+      if (vendorId != null) query['vendor_id'] = vendorId;
+      if (keyword != null) query['keyword'] = keyword;
+      query['page'] = page;
 
-    final response = await dio.post(
-      APIType.public,
-      'poskeeper-online-purchase',
-      query,
-      query: query,
-      headers: _buildHeader(),
-    );
+      final response = await dio.post(
+        APIType.public,
+        'poskeeper-online-purchase',
+        query,
+        query: query,
+        headers: _buildHeader(),
+      );
 
-    return parseList(
-      list: response.data,
-      fromJson: Purchase.fromJson,
-    );
+      final responseData = response.data as List?;
+      if (responseData == null) return null;
+
+      return parseList(
+        list: response.data,
+        fromJson: Purchase.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s);
+      return null;
+    }
   }
 
   Future<Sales?> getOnlineSalesDetails({

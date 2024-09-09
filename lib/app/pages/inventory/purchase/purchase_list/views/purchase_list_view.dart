@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
-import '/app/core/core_model/logged_user.dart';
-import '/app/core/core_model/setup.dart';
-import '/app/core/widget/delete_button.dart';
-import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/retry_view.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/entity/purchase.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
+import '/app/core/widget/delete_button.dart';
+import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
 import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
@@ -22,8 +24,7 @@ import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_co
 //ignore: must_be_immutable
 class PurchaseListView extends BaseView<PurchaseListController> {
   PurchaseListView({super.key});
-
-  final currency = SetUp().currency ?? '';
+  final String currency = SetUp().symbol ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -31,231 +32,312 @@ class PurchaseListView extends BaseView<PurchaseListController> {
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
       title: Obx(
-        () {
-          return AppBarSearchView(
-            pageTitle: appLocalization.purchase,
-            controller: controller.purchaseManager.searchTextController.value,
-            onSearch: controller.purchaseManager.searchItemsByNameOnAllItem,
-            onMicTap: controller.isSearchSelected.toggle,
-            onFilterTap: () => controller.showFilterModal(
-              context: globalKey.currentContext!,
-            ),
-            onClearTap: controller.onClearSearchText,
-            showSearchView: controller.isSearchSelected.value,
-          );
-        },
+        () => AppBarSearchView(
+          pageTitle: appLocalization.purchase,
+          controller: controller.purchaseManager.searchTextController.value,
+          onSearch: controller.onSearch,
+          onMicTap: controller.isSearchSelected.toggle,
+          onFilterTap: () => controller.showFilterModal(
+            context: globalKey.currentContext!,
+          ),
+          onClearTap: controller.onClearSearchText,
+          showSearchView: controller.isSearchSelected.value,
+        ),
       ),
       automaticallyImplyLeading: false,
       actions: [
         Obx(
-          () {
-            if (controller.isSearchSelected.value) {
-              return Container();
-            }
-            return AppBarButtonGroup(
-              children: [
-                AddButton(
-                  onTap: controller.goToCreatePurchase,
+          () => controller.isSearchSelected.value
+              ? Container()
+              : AppBarButtonGroup(
+                  children: [
+                    AddButton(
+                      onTap: controller.goToCreatePurchase,
+                    ),
+                    SearchButton(
+                      onTap: controller.isSearchSelected.toggle,
+                    ),
+                    QuickNavigationButton(),
+                  ],
                 ),
-                SearchButton(
-                  onTap: controller.isSearchSelected.toggle,
-                ),
-                QuickNavigationButton(),
-              ],
-            );
-          },
         ),
       ],
     );
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Column(
-      children: [
-        Obx(
-          () {
-            final items = controller.purchaseManager.allItems.value;
+  Widget body(BuildContext context) => throw UnimplementedError();
 
-            Widget content;
-            if (items == null) {
-              content = RetryView(
-                onRetry: () => controller.changeIndex(
-                  controller.selectedIndex.value,
-                ),
-              );
-            } else if (items.isEmpty) {
-              content = NoRecordFoundView();
-            } else {
-              content = _buildListView();
-            }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: globalKey,
+      appBar: appBar(context),
+      body: Column(
+        children: [
+          Obx(
+            () {
+              return controller.selectedIndex.value == 1
+                  ? _buildPurchaseListView(
+                      _buildOnlinePurchaseListView,
+                    )
+                  : _buildPurchaseListView(
+                      _buildOfflinePurchaseListView,
+                    );
+            },
+          ),
+          _buildTabSelector(),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildPurchaseListView(
+    Widget Function() builder,
+  ) {
+    return Obx(
+      () {
+        final pageState = controller.pageState;
+        switch (pageState) {
+          case PageState.loading:
+            return _buildLoadingView();
+          case PageState.failed:
             return Expanded(
-              child: content,
+              child: RetryView(
+                onRetry: controller.refreshData,
+              ),
             );
-          },
+          case PageState.success:
+            return builder();
+          default:
+            return Container();
+        }
+      },
+    );
+  }
+
+  Widget _buildLoadingView() {
+    return Expanded(
+      child: Center(
+        child: CircularProgressIndicator(
+          color: loaderColor,
         ),
-        Row(
-          children: List.generate(
-            controller.tabPages.length,
-            (index) {
-              return Obx(
-                () => Expanded(
-                  child: SubTabItemView(
-                    isSelected: controller.selectedIndex.value == index,
-                    item: controller.tabPages[index],
-                    onTap: () => controller.changeIndex(index),
-                    localeMethod: controller.tabPages[index].localeMethod,
-                  ),
-                ),
+      ),
+    );
+  }
+
+  Widget _buildOnlinePurchaseListView() {
+    return Expanded(
+      child: RefreshIndicator(
+        onRefresh: controller.refreshData,
+        child: PagedListView<int, Purchase>(
+          pagingController: controller.pagingController.value,
+          builderDelegate: PagedChildBuilderDelegate<Purchase>(
+            itemBuilder: (context, element, index) => _buildPurchaseCardView(
+              element: element,
+              index: index,
+              context: context,
+            ),
+            noItemsFoundIndicatorBuilder: (_) => NoRecordFoundView(
+              onTap: controller.refreshData,
+            ),
+            newPageErrorIndicatorBuilder: (context) {
+              return listViewRetryView(
+                onRetry:
+                    controller.pagingController.value.retryLastFailedRequest,
               );
             },
           ),
         ),
-      ],
+      ),
     );
   }
 
-  Widget _buildListView() {
-    return ListView.builder(
-      itemCount: controller.purchaseManager.allItems.value?.length ?? 0,
-      controller: controller.selectedIndex.value == 2
-          ? null
-          : controller.purchaseManager.scrollController,
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        //check ranger is valid
+  Widget _buildOfflinePurchaseListView() {
+    final items = controller.purchaseManager.allItems.value;
+    if (items == null || items.isEmpty) {
+      return Expanded(
+        child: NoRecordFoundView(
+          onTap: controller.refreshData,
+        ),
+      );
+    }
+    return Expanded(
+      child: RefreshIndicator(
+        onRefresh: controller.refreshData,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: items.length,
+          controller: controller.purchaseManager.scrollController,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return _buildPurchaseCardView(
+              element: items[index],
+              index: index,
+              context: context,
+            );
+          },
+        ),
+      ),
+    );
+  }
 
-        final element = controller.purchaseManager.allItems.value![index];
-        final createdDate = element.createdAt != null
-            ? DateFormat('dd MMM yyyy').format(
-                DateFormat('MM-dd-yyyy hh:mm a').parse(element.createdAt!),
-              )
-            : '';
-
-        return InkWell(
-          onTap: () => controller.showPurchaseInformationModal(
-            context,
-            element,
-          ),
-          child: Stack(
-            alignment: Alignment.centerRight,
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  left: 8,
-                  right: 8,
-                  bottom: 8,
-                  top: index == 0 ? 8 : 0,
-                ),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color:
-                      index.isEven ? colors.evenListColor : colors.oddListColor,
-                  borderRadius: BorderRadius.circular(containerBorderRadius),
-                  border: Border.all(
-                    color: colors.tertiaryBaseColor,
-                  ),
-                ),
-                child: Column(
+  Widget _buildPurchaseCardView({
+    required Purchase element,
+    required int index,
+    required BuildContext context,
+  }) {
+    final createdDate = element.createdAt != null
+        ? DateFormat('dd MMM yyyy').format(
+            DateFormat('MM-dd-yyyy hh:mm a').parse(element.createdAt!),
+          )
+        : '';
+    return InkWell(
+      onTap: () => controller.showPurchaseInformationModal(
+        context,
+        element,
+      ),
+      child: Stack(
+        alignment: Alignment.centerRight,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              bottom: 8,
+              top: index == 0 ? 8 : 0,
+            ),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              borderRadius: BorderRadius.circular(containerBorderRadius),
+              border: Border.all(
+                color: colors.tertiaryBaseColor,
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonIconText(
-                            text: createdDate,
-                            icon: TablerIcons.calendar_due,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                        Expanded(
-                          child: CommonIconText(
-                            text: '${element.purchaseId}',
-                            icon: TablerIcons.file_invoice,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                      ],
+                    Expanded(
+                      child: CommonIconText(
+                        text: createdDate,
+                        icon: TablerIcons.calendar_due,
+                        fontSize: valueTFSize,
+                      ),
                     ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.vendorName ?? '',
-                            icon: TablerIcons.user,
-                            textOverflow: TextOverflow.ellipsis,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                        Expanded(
-                          child: CommonIconText(
-                            text: element.vendorMobile ?? '',
-                            icon: TablerIcons.device_mobile,
-                            fontSize: valueTFSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 0.4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                                  "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                                  "${appLocalization.receive} : $currency ${element.received ?? ''}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: CommonText(
-                              text:
-                                  "${appLocalization.due} :$currency ${element.due ?? ""}",
-                              fontSize: valueTFSize,
-                              textColor: colors.primaryTextColor,
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                        ),
-                      ],
+                    Expanded(
+                      child: CommonIconText(
+                        text: element.invoice ?? '',
+                        icon: TablerIcons.file_invoice,
+                        fontSize: valueTFSize,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              if (LoggedUser().roles?.contains('ROLE_MANAGER') ?? false)
-                Positioned(
-                  right: 10,
-                  top: 18,
-                  child: DeleteButton(
-                    onTap: () => controller.deletePurchase(
-                      purchaseId: element.purchaseId!,
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CommonIconText(
+                        text: element.vendorName ?? '',
+                        icon: TablerIcons.user,
+                        textOverflow: TextOverflow.ellipsis,
+                        fontSize: valueTFSize,
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: CommonIconText(
+                        text: element.vendorMobile ?? '',
+                        icon: TablerIcons.device_mobile,
+                        fontSize: valueTFSize,
+                      ),
+                    ),
+                  ],
                 ),
-            ],
+                const Divider(
+                  thickness: 0.4,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text:
+                              "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
+                          fontSize: valueTFSize,
+                          textColor: colors.primaryTextColor,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text:
+                              "${appLocalization.receive} : $currency ${element.received ?? ''}",
+                          fontSize: valueTFSize,
+                          textColor: colors.primaryTextColor,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: CommonText(
+                          text:
+                              "${appLocalization.due} :$currency ${element.due ?? ''}",
+                          fontSize: valueTFSize,
+                          textColor: colors.primaryTextColor,
+                          textAlign: TextAlign.start,
+                          maxLine: 1,
+                          textOverflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        );
-      },
+          if (controller.isManager)
+            Positioned(
+              right: 10,
+              top: 18,
+              child: DeleteButton(
+                onTap: () => controller.deletePurchase(
+                  purchaseId: element.purchaseId!,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabSelector() {
+    return Row(
+      children: List.generate(
+        controller.tabPages.length,
+        (index) {
+          return Obx(
+            () => Expanded(
+              child: SubTabItemView(
+                isSelected: controller.selectedIndex.value == index,
+                item: controller.tabPages[index],
+                onTap: () => controller.changeTab(index),
+                localeMethod: controller.tabPages[index].localeMethod,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

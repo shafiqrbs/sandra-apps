@@ -381,32 +381,7 @@ class DashboardView extends BaseView<DashboardController> {
             ],
           ),
           10.height,
-          /*Row(
-            mainAxisAlignment: spaceBetweenMAA,
-            children: [
-              TitleSubtitleButton(
-                title: appLocalization.logout,
-                subTitle: '৳ 567',
-                icon: TablerIcons.moneybag,
-                onTap: controller.logOut,
-                bgColor: const Color(0xff4CBB17),
-              ),
-              10.width,
-              if (kDebugMode)
-                TitleSubtitleButton(
-                  title: 'Clear License',
-                  subTitle: '৳ 567',
-                  icon: TablerIcons.moneybag,
-                  onTap: controller.clearLicense,
-                  bgColor: const Color(0xff4CBB17),
-                ),
-              if (kReleaseMode)
-                Expanded(
-                  child: Container(),
-                ),
-            ],
-          ),
-          if (kDebugMode) _buildTestData(),*/
+          if (kDebugMode) _buildTestData(),
         ],
       ),
     );

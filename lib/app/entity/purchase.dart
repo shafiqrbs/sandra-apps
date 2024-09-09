@@ -31,7 +31,7 @@ class Purchase {
   double? purchasePrice;
   double? received;
   double? due;
-  int? deliveryCharge;
+  num? deliveryCharge;
   String? paymentInWord;
   String? process;
   int? revised;
