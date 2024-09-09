@@ -308,4 +308,46 @@ class PurchaseListController extends BaseController {
       },
     );
   }
+
+  Future<void> syncPurchase() async {
+    final purchaseList = await dbHelper.getAllWhr(
+      tbl: dbTables.tablePurchase,
+      where: 'is_hold is null or is_hold == 0',
+      whereArgs: [],
+    );
+
+    if (purchaseList.isEmpty) {
+      showSnackBar(
+        message: appLocalization.noDataFound,
+        title: appLocalization.error,
+      );
+      return;
+    }
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    bool? isPurchaseSynced;
+
+    await dataFetcher(
+      future: () async {
+        isPurchaseSynced = await services.postPurchase(
+          purchaseList: purchaseList,
+          mode: 'offline',
+        );
+      },
+    );
+
+    if (isPurchaseSynced ?? false) {
+      await dbHelper.deleteAllWhr(
+        tbl: dbTables.tablePurchase,
+        where: 'is_hold is null or is_hold == 0',
+        whereArgs: [],
+      );
+      await refreshData();
+    }
+  }
 }

@@ -3,10 +3,9 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/entity/purchase.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
@@ -19,6 +18,7 @@ import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
+import '/app/entity/purchase.dart';
 import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
 
 //ignore: must_be_immutable
@@ -89,6 +89,8 @@ class PurchaseListView extends BaseView<PurchaseListController> {
           _buildTabSelector(),
         ],
       ),
+      floatingActionButton: floatingActionButton(),
+      floatingActionButtonLocation: floatingActionButtonLocation(),
     );
   }
 
@@ -338,6 +340,51 @@ class PurchaseListView extends BaseView<PurchaseListController> {
           );
         },
       ),
+    );
+  }
+
+  @override
+  FloatingActionButtonLocation? floatingActionButtonLocation() {
+    return FloatingActionButtonLocation.endFloat;
+  }
+
+  @override
+  Widget? floatingActionButton() {
+    return Obx(
+      () {
+        if (controller.selectedIndex.value == 0) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 40),
+            child: InkWell(
+              onTap: controller.syncPurchase,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: colors.primaryBaseColor.withOpacity(.6),
+                  borderRadius: BorderRadius.circular(containerBorderRadius),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      TablerIcons.refresh,
+                      color: colors.primaryTextColor,
+                      size: 18,
+                    ),
+                    CommonText(
+                      text: appLocalization.sync,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 }
