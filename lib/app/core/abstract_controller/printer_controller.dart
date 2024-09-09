@@ -305,24 +305,24 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: 'item_name'.tr,
+          text: 'Item Name',
           width: 7,
         ),
         PosColumn(
-          text: 'rate'.tr,
+          text: 'Rate',
           styles: const PosStyles(
             align: PosAlign.center,
           ),
         ),
         PosColumn(
-          text: 'qty'.tr,
+          text: 'Qty',
           width: 1,
           styles: const PosStyles(
             align: PosAlign.center,
           ),
         ),
         PosColumn(
-          text: 'total'.tr,
+          text: 'Total',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -412,7 +412,7 @@ class PrinterController extends BaseController {
     } else {
       bytes += generator.row([
         PosColumn(
-          text: 'discount'.tr,
+          text: 'Discount',
           width: 9,
           styles: const PosStyles(
             align: PosAlign.right,
@@ -587,24 +587,24 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: 'item_name'.tr,
+          text: 'Item Name',
           width: 7,
         ),
         PosColumn(
-          text: 'rate'.tr,
+          text: 'Rate',
           styles: const PosStyles(
             align: PosAlign.center,
           ),
         ),
         PosColumn(
-          text: 'qty'.tr,
+          text: 'Qty',
           width: 1,
           styles: const PosStyles(
             align: PosAlign.center,
           ),
         ),
         PosColumn(
-          text: 'total'.tr,
+          text: 'Total',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -671,7 +671,7 @@ class PrinterController extends BaseController {
     bytes += generator.text('------------------------------------------------');
     bytes += generator.row([
       PosColumn(
-        text: 'net_payable'.tr,
+        text: 'Net Payable',
         width: 9,
         styles: const PosStyles(align: PosAlign.right),
       ),

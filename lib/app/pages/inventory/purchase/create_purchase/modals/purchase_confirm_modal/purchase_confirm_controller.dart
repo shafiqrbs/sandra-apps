@@ -34,7 +34,7 @@ class PurchaseConfirmController extends PrinterController {
     }
 
     if (!connected.value) {
-      toast('please_connect_printer'.tr);
+      toast(appLocalization.connectPrinter);
       return;
     }
 
@@ -45,9 +45,9 @@ class PurchaseConfirmController extends PrinterController {
           final isPrinted = await printPurchase(purchase);
 
           if (isPrinted) {
-            toast('print_success'.tr);
+            toast(appLocalization.success);
           } else {
-            toast('print_failed'.tr);
+            toast(appLocalization.failed);
           }
         },
       );

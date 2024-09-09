@@ -62,7 +62,7 @@ class PrinterConnectModalView
                                     child: controller.isConnecting.value
                                         ? ShimmerListView(
                                             itemCount: 1,
-                                            msg: 'connecting'.tr,
+                                            msg: appLocalization.connecting,
                                           )
                                         : ListView.builder(
                                             shrinkWrap: true,

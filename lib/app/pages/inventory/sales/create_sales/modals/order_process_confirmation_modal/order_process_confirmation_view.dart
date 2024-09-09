@@ -7,8 +7,8 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
-import '/app/global_widget/shimmer_list_view.dart';
 import '/app/entity/sales.dart';
+import '/app/global_widget/shimmer_list_view.dart';
 import 'order_process_confirmation_controller.dart';
 
 class OrderProcessConfirmationView
@@ -74,7 +74,7 @@ class OrderProcessConfirmationView
                                   child: controller.isConnecting.value
                                       ? ShimmerListView(
                                           itemCount: 1,
-                                          msg: 'connecting'.tr,
+                                          msg: appLocalization.connecting,
                                         )
                                       : ListView.builder(
                                           shrinkWrap: true,
