@@ -26,7 +26,6 @@ class CreatePurchaseController extends StockSelectionController {
     purchaseMode = await prefs.getPurchaseConfig();
     selectedPurchase.value = await prefs.getPurchaseConfig();
     final args = Get.arguments as Map<String, dynamic>?;
-    print(args);
     if (args != null && args.isNotEmpty) {
       if (args['purchase'] != null && args['purchase'] is Purchase) {
         setData(args['purchase'] as Purchase);

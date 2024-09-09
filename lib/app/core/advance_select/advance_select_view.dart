@@ -450,7 +450,6 @@ class AdvanceSelect<T> extends FormField<T> {
                                             prefix: preFixIcon,
                                             suffix: suffixIcon,
                                             onTap: () {
-                                              print('onTap');
                                               controller.clear();
                                               state.didChange(null);
                                               textController?.clear();

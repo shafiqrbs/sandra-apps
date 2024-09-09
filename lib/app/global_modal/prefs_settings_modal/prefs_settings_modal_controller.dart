@@ -76,7 +76,6 @@ class PrefsSettingsModalController extends BaseController {
       hasPrinter: value,
     );
 
-    print(await prefs.getHasPrinter());
   }
 
   Future<void> setSalesAutoApproved(bool value) async {

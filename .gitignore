@@ -12,6 +12,7 @@
 .buildlog/
 .history
 .svn/
+*.apk
 
 # IntelliJ related
 *.iml

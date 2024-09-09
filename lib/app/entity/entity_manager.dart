@@ -67,7 +67,9 @@ class EntityManager<T> {
       );
 
       allItems.refresh();
-      print('Len of all items: ${allItems.value!.length}');
+      if (kDebugMode) {
+        print('Len of all items: ${allItems.value!.length}');
+      }
     } on Exception catch (e) {
       if (kDebugMode) {
         print('Error paginating: $e');

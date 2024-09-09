@@ -98,7 +98,6 @@ class CustomerReceiveModalController extends PaymentGatewayController {
         child: AddCustomerModalView(),
       ),
     ) as Customer?;
-    print('result: $result');
 
     if (result != null) {
       customerManager.selectedItem.value = result;

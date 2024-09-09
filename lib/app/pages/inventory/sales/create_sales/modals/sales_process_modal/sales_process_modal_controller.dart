@@ -238,12 +238,6 @@ class SalesProcessModalController extends PaymentGatewayController {
       );
     }
 
-    debugPrint(
-      jsonEncode(
-        sales.toJson(),
-      ),
-      wrapWidth: 1024,
-    );
     createdSales.value = sales;
 
     update();

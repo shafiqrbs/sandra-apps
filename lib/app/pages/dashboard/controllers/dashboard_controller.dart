@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
@@ -296,7 +297,9 @@ class DashboardController extends BaseController {
       ),
     );
     if (result != null) {
-      print(result);
+      if(kDebugMode) {
+        print('Product added');
+      }
     }
   }
 

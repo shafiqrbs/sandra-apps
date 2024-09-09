@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// ASController provides state management for a custom dropdown widget.
@@ -34,7 +35,9 @@ class ASController<T> extends ChangeNotifier {
     notifyListeners();
 
 
-    print('selectedValue: $value');
+    if (kDebugMode) {
+      print('selectedValue: $value');
+    }
   }
 
   void clear() {
@@ -66,7 +69,9 @@ class ASController<T> extends ChangeNotifier {
       }
       notifyListeners();
     } catch (e) {
-      print('Error during search: $e');
+      if (kDebugMode) {
+        print('Error during search: $e');
+      }
     }
   }
 }

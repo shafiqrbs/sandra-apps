@@ -52,9 +52,7 @@ class PurchaseConfirmController extends PrinterController {
         },
       );
     } catch (e) {
-      // Handle any errors that occur during the save operation
-      toast('save_failed'.tr);
-      print('Error saving purchase: $e');
+      toast(appLocalization.failed);
     }
   }
 

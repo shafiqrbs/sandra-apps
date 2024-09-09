@@ -105,7 +105,6 @@ class VendorPaymentModalController extends BaseController {
         child: AddVendorModalView(),
       ),
     ) as Vendor?;
-    print('result: $result');
 
     if (result != null) {
       vendorManager.selectedItem.value = result;
