@@ -45,8 +45,14 @@ class CreateSalesController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     final args = Get.arguments as Map<String, dynamic>?;
-    if (args != null && args.isNotEmpty && args['sales'] != null) {
-      setData(args['sales'] as Sales);
+    if (args != null && args.isNotEmpty) {
+      if (args['sales'] != null) {
+        setData(args['sales'] as Sales);
+      }
+      if (args['sales_item_list'] != null) {
+        salesItemList.value = args['sales_item_list'] as List<SalesItem>;
+        calculateAllSubtotal();
+      }
     }
   }
 

@@ -73,6 +73,15 @@ class SalesInformationModalController extends PrinterController {
         whereArgs: [sales.salesId],
       );
     }
+
+    Get
+      ..back()
+      ..offNamed(
+        Routes.createSales,
+        arguments: {
+          'sales_item_list': sales.salesItem,
+        },
+      );
   }
 
   void goToEditSales() {
