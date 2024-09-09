@@ -111,7 +111,7 @@ abstract class BaseView<Controller extends BaseController>
     toast(message);
   }
 
-  FloatingActionButtonLocation floatingActionButtonLocation() {
+  FloatingActionButtonLocation? floatingActionButtonLocation() {
     return FloatingActionButtonLocation.centerDocked;
   }
 
