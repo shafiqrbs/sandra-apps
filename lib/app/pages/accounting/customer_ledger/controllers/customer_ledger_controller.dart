@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/show_snackbar.dart';
-import '/app/entity/sales.dart';
-import '/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
+import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
+import '/app/entity/sales.dart';
 import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
+import '/app/global_modal/sales_information_modal/sales_information_modal_view.dart';
 
 class CustomerLedgerController extends BaseController {
   Customer? customer;

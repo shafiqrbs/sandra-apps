@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/page_state.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/tab_bar_items.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import '/app/pages/inventory/sales/sales_list/modals/sales_information_modal/sales_information_modal_view.dart';
+import '/app/global_modal/sales_information_modal/sales_information_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
 enum SalesListPageTabs {
