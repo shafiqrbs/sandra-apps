@@ -34,8 +34,6 @@ class SalesProcessModalController extends PaymentGatewayController {
     super.onInit();
     await baseInit();
     if (preSales != null) {
-      salesItemList.value = preSales!.salesItem!;
-
       if (preSales!.isHold == 1) {
         isHold.value = true;
       }
@@ -78,6 +76,7 @@ class SalesProcessModalController extends PaymentGatewayController {
       notifyChildrens();
       refresh();
     }
+    print('salesItemList: ${jsonEncode(salesItemList)}');
   }
 
   Future<void> baseInit() async {

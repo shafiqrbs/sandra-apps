@@ -112,7 +112,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
                         ),
                         1.percentWidth,
                         RowButton(
-                          buttonName: appLocalization.submit,
+                          buttonName: appLocalization.filter,
                           onTap: onSubmit,
                         ),
                       ],

@@ -52,8 +52,6 @@ class PurchaseProcessController extends BaseController {
     super.onInit();
     await baseInit();
     if (prePurchase != null) {
-      purchaseItemList.value = prePurchase!.purchaseItem!;
-
       if (prePurchase!.isHold == 1) {
         isHold.value = true;
       }

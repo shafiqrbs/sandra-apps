@@ -309,5 +309,6 @@
   "hint": "Hint",
   "thisAmountIsNotValid": "This amount is not valid",
   "enterAmount": "Enter Amount",
-  "selectVendor": "Select Vendor"
+  "selectVendor": "Select Vendor",
+  "purchaseOrder": "Purchase Order"
 }

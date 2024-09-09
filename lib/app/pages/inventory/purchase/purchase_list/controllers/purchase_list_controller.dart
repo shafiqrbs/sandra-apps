@@ -218,9 +218,12 @@ class PurchaseListController extends BaseController {
   }) async {
     final value = await Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: appLocalization.purchaseOrder,
         subTitle: 'subTitle',
-        child: GlobalFilterModalView(),
+        child: GlobalFilterModalView(
+          showCustomer: false,
+          showVendor: true,
+        ),
       ),
     );
 
