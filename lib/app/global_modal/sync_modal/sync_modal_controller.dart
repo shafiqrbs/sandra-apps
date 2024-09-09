@@ -143,8 +143,10 @@ class SyncModalController extends BaseController {
     );
 
     if (isSalesSynced ?? false) {
-      await dbHelper.deleteAll(
+      await dbHelper.deleteAllWhr(
         tbl: dbTables.tableSale,
+        where: 'is_hold is null or is_hold == 0',
+        whereArgs: [],
       );
       if (Get.isRegistered<SalesListController>()) {
         final salesListController = Get.find<SalesListController>();
@@ -192,9 +194,12 @@ class SyncModalController extends BaseController {
     );
 
     if (isPurchaseSynced ?? false) {
-      await dbHelper.deleteAll(
+      await dbHelper.deleteAllWhr(
         tbl: dbTables.tablePurchase,
+        where: 'is_hold is null or is_hold == 0',
+        whereArgs: [],
       );
+
       if (Get.isRegistered<PurchaseListController>()) {
         final purchaseListController = Get.find<PurchaseListController>();
 
@@ -205,7 +210,9 @@ class SyncModalController extends BaseController {
         }
       }
     } else {
-      toast(appLocalization.syncFailed);
+      toast(
+        appLocalization.syncFailed,
+      );
     }
   }
 

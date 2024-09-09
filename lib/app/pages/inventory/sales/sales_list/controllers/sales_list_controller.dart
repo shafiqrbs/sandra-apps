@@ -313,4 +313,46 @@ class SalesListController extends BaseController {
       },
     );
   }
+
+  Future<void> syncSales() async {
+    final salesList = await dbHelper.getAllWhr(
+      tbl: dbTables.tableSale,
+      where: 'is_hold is null or is_hold == 0',
+      whereArgs: [],
+    );
+
+    if (salesList.isEmpty) {
+      showSnackBar(
+        message: appLocalization.noDataFound,
+        title: appLocalization.error,
+      );
+      return;
+    }
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    bool? isSalesSynced;
+
+    await dataFetcher(
+      future: () async {
+        isSalesSynced = await services.postSales(
+          salesList: salesList,
+          mode: 'offline',
+        );
+      },
+    );
+
+    if (isSalesSynced ?? false) {
+      await dbHelper.deleteAllWhr(
+        tbl: dbTables.tableSale,
+        where: 'is_hold is null or is_hold == 0',
+        whereArgs: [],
+      );
+      await refreshData();
+    }
+  }
 }

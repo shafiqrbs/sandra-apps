@@ -351,36 +351,41 @@ class SalesListView extends BaseView<SalesListController> {
 
   @override
   Widget? floatingActionButton() {
-    if (controller.selectedIndex.value == 0) {
-      return Container(
-        margin: const EdgeInsets.only(bottom: 40),
-        child: InkWell(
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: colors.primaryBaseColor.withOpacity(.6),
-              borderRadius: BorderRadius.circular(containerBorderRadius),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  TablerIcons.refresh,
-                  color: colors.primaryTextColor,
-                  size: 18,
+    return Obx(
+      () {
+        if (controller.selectedIndex.value == 0) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 40),
+            child: InkWell(
+              onTap: controller.syncSales,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
                 ),
-                CommonText(
-                  text: appLocalization.sync,
+                decoration: BoxDecoration(
+                  color: colors.primaryBaseColor.withOpacity(.6),
+                  borderRadius: BorderRadius.circular(containerBorderRadius),
                 ),
-              ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      TablerIcons.refresh,
+                      color: colors.primaryTextColor,
+                      size: 18,
+                    ),
+                    CommonText(
+                      text: appLocalization.sync,
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-    }
-    return Container();
+          );
+        }
+        return Container();
+      },
+    );
   }
 }
