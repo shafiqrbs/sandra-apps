@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/pages/dashboard/controllers/dashboard_controller.dart';
+import '/app/pages/dashboard/controllers/dashboard_controller.dart';
 import '/app/core/base/base_controller.dart';
 
 enum Buttons {

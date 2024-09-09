@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/core_model/logged_user.dart';
-import 'package:sandra/app/entity/expense.dart';
-import 'package:sandra/app/entity/stock.dart';
-import 'package:sandra/app/entity/vendor.dart';
+import '/app/core/core_model/logged_user.dart';
+import '/app/entity/expense.dart';
+import '/app/entity/stock.dart';
+import '/app/entity/vendor.dart';
 
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';

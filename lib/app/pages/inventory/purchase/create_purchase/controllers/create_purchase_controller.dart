@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/entity/purchase.dart';
+import '/app/entity/purchase.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';
 import '/app/entity/purchase_item.dart';

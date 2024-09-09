@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/db_helper/db_helper.dart';
 import '/app/core/session_manager/session_manager.dart';

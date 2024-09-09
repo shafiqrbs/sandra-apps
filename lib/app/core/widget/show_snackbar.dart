@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/utils/style_function.dart';
-import 'package:sandra/app/core/widget/quick_navigation_button.dart';
+import '/app/core/utils/style_function.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 
 SnackbarController showSnackBar({
   required String message,

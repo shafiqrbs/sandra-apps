@@ -1,4 +1,4 @@
-import 'package:sandra/app/core/db_helper/db_tables.dart';
+import '/app/core/db_helper/db_tables.dart';
 
 import 'entity_manager.dart';
 

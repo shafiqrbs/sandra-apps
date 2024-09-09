@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
-import 'package:sandra/app/core/widget/dialog_pattern.dart';
-import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import '/app/core/utils/static_utility_function.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';

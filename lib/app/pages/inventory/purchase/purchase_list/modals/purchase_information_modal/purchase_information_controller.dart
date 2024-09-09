@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
+import '/app/core/abstract_controller/printer_controller.dart';
+import '/app/core/utils/static_utility_function.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/purchase.dart';
 import '/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
-class PurchaseInformationController extends BaseController {
+class PurchaseInformationController extends PrinterController {
   final String purchaseMode;
   final purchase = Rx<Purchase?>(null);
 
@@ -49,7 +49,7 @@ class PurchaseInformationController extends BaseController {
     final isPrinted = await printPurchase(
       purchase.value!,
     );
-    if (isPrinted ?? false) {
+    if (isPrinted) {
       return;
     }
 
@@ -96,8 +96,6 @@ class PurchaseInformationController extends BaseController {
       },
     );
   }
-
-  printPurchase(Purchase purchase) {}
 
   Future<void> deletePurchase({
     required Function? onDeleted,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:sandra/app/core/base/base_controller.dart';
+import '/app/core/base/base_controller.dart';
 
 abstract class BaseGenericController<T> extends BaseController {
   final searchTextController = TextEditingController().obs;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/page_back_button.dart';
-import 'package:sandra/app/pages/content/account_config/views/account_config_view.dart';
-import 'package:sandra/app/pages/content/help_config/views/help_config_view.dart';
-import 'package:sandra/app/pages/content/privacy_config/views/privacy_config_view.dart';
-import 'package:sandra/app/routes/app_pages.dart';
+import '/app/core/widget/page_back_button.dart';
+import '/app/pages/content/account_config/views/account_config_view.dart';
+import '/app/pages/content/help_config/views/help_config_view.dart';
+import '/app/pages/content/privacy_config/views/privacy_config_view.dart';
+import '/app/routes/app_pages.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '/app/core/base/base_view.dart';

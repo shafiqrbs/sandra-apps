@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sandra/app/core/widget/custom_animation_widget.dart';
+import '/app/core/widget/custom_animation_widget.dart';
 
 class TbdTextButton extends StatelessWidget {
   final String text;

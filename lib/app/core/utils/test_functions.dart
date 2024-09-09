@@ -1,9 +1,9 @@
 import 'package:faker/faker.dart' as fakers;
 import 'package:number_to_character/number_to_character.dart';
-import 'package:sandra/app/core/db_helper/db_helper.dart';
-import 'package:sandra/app/core/db_helper/db_tables.dart';
-import 'package:sandra/app/entity/purchase.dart';
-import 'package:sandra/app/entity/sales.dart';
+import '/app/core/db_helper/db_helper.dart';
+import '/app/core/db_helper/db_tables.dart';
+import '/app/entity/purchase.dart';
+import '/app/entity/sales.dart';
 
 final converter = NumberToCharacterConverter('en');
 DbHelper get dbHelper => DbHelper.instance;

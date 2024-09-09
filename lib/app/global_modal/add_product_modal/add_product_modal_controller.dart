@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
-import 'package:sandra/app/entity/brand.dart';
-import 'package:sandra/app/entity/stock.dart';
-import 'package:sandra/app/entity/unit.dart';
+import '/app/core/widget/show_snackbar.dart';
+import '/app/entity/brand.dart';
+import '/app/entity/stock.dart';
+import '/app/entity/unit.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/entity/category.dart';
 

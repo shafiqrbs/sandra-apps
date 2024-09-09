@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:sandra/app/core/db_helper/db_tables.dart';
-import 'package:sandra/app/core/widget/dialog_pattern.dart';
-import 'package:sandra/app/entity/customer.dart';
-import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import '/app/core/db_helper/db_tables.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/entity/customer.dart';
+import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/core/base/base_controller.dart';
 
 class DueCustomerListController extends BaseController {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
-import 'package:sandra/app/entity/vendor.dart';
+import '/app/core/widget/show_snackbar.dart';
+import '/app/entity/vendor.dart';
 
 import '/app/core/base/base_controller.dart';
 

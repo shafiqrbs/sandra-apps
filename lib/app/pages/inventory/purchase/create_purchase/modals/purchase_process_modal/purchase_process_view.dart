@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/style_function.dart';
+import '/app/core/utils/style_function.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
 import '/app/core/base/base_view.dart';

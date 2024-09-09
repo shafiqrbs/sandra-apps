@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
-import 'package:sandra/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
+import '/app/core/widget/show_snackbar.dart';
+import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/entity/sales.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
