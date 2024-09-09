@@ -12,6 +12,7 @@ class Expense {
   final String? createdBy;
   final String? approvedBy;
   final String? created;
+  final String? method;
 
   Expense({
     this.id,
@@ -27,6 +28,7 @@ class Expense {
     this.createdBy,
     this.approvedBy,
     this.created,
+    this.method,
   });
 
   factory Expense.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class Expense {
       createdBy: json['created_by'] as String?,
       approvedBy: json['approved_by'] as String?,
       created: json['created'] as String?,
+      method: json['method'] as String?,
     );
   }
 
@@ -62,6 +65,7 @@ class Expense {
       'created_by': createdBy,
       'approved_by': approvedBy,
       'created': created,
+      'method': method,
     };
   }
 }

@@ -3,30 +3,27 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
-import 'package:nb_utils/nb_utils.dart';
+
+import '/app/core/base/base_view.dart';
 import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
+import '/app/core/widget/add_button.dart';
+import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
 import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/delete_button.dart';
-import '/app/core/widget/filter_button.dart';
 import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/page_back_button.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/entity/expense.dart';
-
-import '/app/core/base/base_view.dart';
-import '/app/core/widget/add_button.dart';
-import '/app/core/widget/app_bar_button_group.dart';
-import '/app/core/widget/quick_navigation_button.dart';
 import '/app/pages/accounting/expense/expense_list/controllers/expense_list_controller.dart';
 
 //ignore: must_be_immutable
 class ExpenseListView extends BaseView<ExpenseListController> {
   ExpenseListView({super.key});
-  final currency = SetUp().currency ?? '';
+  final currency = SetUp().symbol ?? '';
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -36,7 +33,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
       title: Obx(
         () {
           return AppBarSearchView(
-            pageTitle: appLocalization.accountSales,
+            pageTitle: appLocalization.expense,
             controller: controller.searchTextController.value,
             onSearch: controller.onSearch,
             onMicTap: controller.isSearchSelected.toggle,
@@ -208,7 +205,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                     children: [
                       Expanded(
                         child: CommonIconText(
-                          text: element.approvedBy ?? '',
+                          text: element.touser ?? '',
                           icon: TablerIcons.user,
                           textOverflow: TextOverflow.ellipsis,
                           fontSize: valueTFSize,
@@ -216,8 +213,8 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                       ),
                       Expanded(
                         child: CommonIconText(
-                          text: element.approvedBy ?? 'N/A',
-                          icon: TablerIcons.paywall,
+                          text: element.category ?? 'N/A',
+                          icon: TablerIcons.category,
                           fontSize: valueTFSize,
                         ),
                       ),
@@ -229,14 +226,14 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                       Expanded(
                         child: CommonIconText(
                           text: element.approvedBy ?? '',
-                          icon: TablerIcons.device_mobile,
+                          icon: TablerIcons.user_circle,
                           fontSize: valueTFSize,
                         ),
                       ),
                       Expanded(
                         child: CommonIconText(
-                          text: element.approvedBy ?? '',
-                          icon: TablerIcons.user_heart,
+                          text: element.method ?? '',
+                          icon: TablerIcons.credit_card_pay,
                           textOverflow: TextOverflow.ellipsis,
                           fontSize: valueTFSize,
                         ),
@@ -254,34 +251,9 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                           padding: const EdgeInsets.only(left: 4),
                           child: CommonText(
                             text:
-                                '${appLocalization.total} : $currency ${element.approvedBy ?? ''}',
+                                '${appLocalization.total} : $currency ${element.amount ?? ''}',
                             fontSize: valueTFSize,
                             textColor: colors.primaryTextColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: CommonText(
-                            text:
-                                '${appLocalization.amount} : $currency ${element.approvedBy ?? ''}',
-                            fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: CommonText(
-                            text:
-                                "${appLocalization.due} :$currency ${element.approvedBy ?? ""}",
-                            fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
-                            textAlign: TextAlign.start,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -313,21 +285,6 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                   icon: Icon(
                     TablerIcons.check,
                     color: colors.successfulBaseColor,
-                  ),
-                ),
-              ),
-            if (element.approvedBy != null)
-              Positioned(
-                right: 10,
-                bottom: 8,
-                child: GestureDetector(
-                  onTap: () => controller.showExpenseInformationModal(
-                    context,
-                    element,
-                  ),
-                  child: Icon(
-                    TablerIcons.eye,
-                    color: colors.primaryBaseColor,
                   ),
                 ),
               ),
