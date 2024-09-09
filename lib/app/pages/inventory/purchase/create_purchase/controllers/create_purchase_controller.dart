@@ -26,8 +26,17 @@ class CreatePurchaseController extends StockSelectionController {
     purchaseMode = await prefs.getPurchaseConfig();
     selectedPurchase.value = await prefs.getPurchaseConfig();
     final args = Get.arguments as Map<String, dynamic>?;
-    if (args != null && args.isNotEmpty && args['purchase'] != null) {
-      setData(args['purchase'] as Purchase);
+    print(args);
+    if (args != null && args.isNotEmpty) {
+      if (args['purchase'] != null && args['purchase'] is Purchase) {
+        setData(args['purchase'] as Purchase);
+      }
+      if (args['purchase_item_list'] != null) {
+        if (args['purchase_item_list'] is List<PurchaseItem>) {
+          purchaseItemList.value = args['purchase_item_list'] as List<PurchaseItem>;
+          calculateAllSubtotal();
+        }
+      }
     }
   }
 

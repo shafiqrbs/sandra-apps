@@ -417,7 +417,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () => controller.copyPurchase(purchase),
+                            onTap: controller.copyPurchase,
                             child: Container(
                               height: 40,
                               decoration: BoxDecoration(

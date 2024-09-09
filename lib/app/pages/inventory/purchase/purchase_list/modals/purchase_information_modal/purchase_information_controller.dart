@@ -49,7 +49,7 @@ class PurchaseInformationController extends BaseController {
     final isPrinted = await printPurchase(
       purchase.value!,
     );
-    if (isPrinted??false) {
+    if (isPrinted ?? false) {
       return;
     }
 
@@ -67,16 +67,25 @@ class PurchaseInformationController extends BaseController {
     }
   }
 
-  Future<void> copyPurchase(Purchase purchase) async {
+  Future<void> copyPurchase() async {
     if (purchaseMode == 'hold') {
       await dbHelper.deleteAllWhr(
         tbl: dbTables.tablePurchase,
         where: 'purchase_id = ?',
         whereArgs: [
-          purchase.purchaseId,
+          purchase.value?.purchaseId,
         ],
       );
     }
+
+    Get
+      ..back()
+      ..offNamed(
+        Routes.createPurchase,
+        arguments: {
+          'purchase_item_list': purchase.value?.purchaseItem,
+        },
+      );
   }
 
   void goToEditPurchase() {
