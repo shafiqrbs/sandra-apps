@@ -54,11 +54,11 @@ class SyncModalView extends BaseView<SyncModalController> {
   Widget _exportButtonList() {
     return Column(
       children: [
-        if(kDebugMode)
-        _buildButton(
-          title: 'Generate sales',
-          onTap: controller.generateSales,
-        ),
+        if (kDebugMode)
+          _buildButton(
+            title: 'Generate sales',
+            onTap: controller.generateSales,
+          ),
         _buildButton(
           title: appLocalization.sales,
           onTap: controller.exportSales,
@@ -66,10 +66,6 @@ class SyncModalView extends BaseView<SyncModalController> {
         _buildButton(
           title: appLocalization.purchase,
           onTap: controller.exportPurchase,
-        ),
-        _buildButton(
-          title: appLocalization.expense,
-          onTap: controller.exportExpense,
         ),
       ],
     );

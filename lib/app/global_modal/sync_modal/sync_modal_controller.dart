@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/entity/sales.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
@@ -110,12 +111,6 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> exportSales() async {
-    final confirmation = await confirmationModal(
-      msg: appLocalization.areYouSure,
-    );
-    if (!confirmation) {
-      return;
-    }
     final salesList = await dbHelper.getAllWhr(
       tbl: dbTables.tableSale,
       where: 'is_hold is null or is_hold == 0',
@@ -123,7 +118,16 @@ class SyncModalController extends BaseController {
     );
 
     if (salesList.isEmpty) {
-      toast(appLocalization.noDataFound);
+      showSnackBar(
+        message: appLocalization.noDataFound,
+        title: appLocalization.error,
+      );
+      return;
+    }
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) {
       return;
     }
 
@@ -155,18 +159,24 @@ class SyncModalController extends BaseController {
   }
 
   Future<void> exportPurchase() async {
+    final purchaseList = await dbHelper.getAllWhr(
+      tbl: dbTables.tablePurchase,
+      where: 'is_hold is null or is_hold == 0',
+      whereArgs: [],
+    );
+
+    if (purchaseList.isEmpty) {
+      showSnackBar(
+        message: appLocalization.noDataFound,
+        title: appLocalization.error,
+      );
+      return;
+    }
+
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (!confirmation) {
-      return;
-    }
-    final purchaseList = await dbHelper.getAll(
-      tbl: dbTables.tablePurchase,
-    );
-
-    if (purchaseList.isEmpty) {
-      toast(appLocalization.noDataFound);
       return;
     }
 
@@ -185,7 +195,15 @@ class SyncModalController extends BaseController {
       await dbHelper.deleteAll(
         tbl: dbTables.tablePurchase,
       );
-      Get.offAllNamed(Routes.splash);
+      if (Get.isRegistered<PurchaseListController>()) {
+        final purchaseListController = Get.find<PurchaseListController>();
+
+        final selectedIndex = purchaseListController.selectedIndex.value;
+        if (selectedIndex == 1) {
+          purchaseListController.selectedIndex.value = 100;
+          await purchaseListController.changeTab(selectedIndex);
+        }
+      }
     } else {
       toast(appLocalization.syncFailed);
     }
