@@ -1,12 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/base/base_controller.dart';
-import '/app/entity/purchase.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 
-import '/app/core/abstract_controller/printer_controller.dart';
+import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
-import '/app/entity/sales.dart';
+import '/app/entity/purchase.dart';
 import '/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
@@ -25,11 +23,11 @@ class PurchaseInformationController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     if (purchaseMode == 'online') {
-      await getSalesItemList();
+      await getPurchaseItemList();
     }
   }
 
-  Future<void> getSalesItemList() async {
+  Future<void> getPurchaseItemList() async {
     await dataFetcher(
       future: () async {
         final data = await services.getOnlinePurchaseDetails(
@@ -47,9 +45,11 @@ class PurchaseInformationController extends BaseController {
     );
   }
 
-  Future<void> salesPrint(BuildContext context) async {
-    final isPrinted = await printSales(purchase.value!);
-    if (isPrinted) {
+  Future<void> purchasePrint(BuildContext context) async {
+    final isPrinted = await printPurchase(
+      purchase.value!,
+    );
+    if (isPrinted??false) {
       return;
     }
 
@@ -79,14 +79,45 @@ class PurchaseInformationController extends BaseController {
     }
   }
 
-  void goToEditSales() {
+  void goToEditPurchase() {
     Get.toNamed(
-      Routes.createSales,
+      Routes.createPurchase,
       arguments: {
-        'sales': purchase.value,
+        'purchase': purchase.value,
       },
     );
   }
 
-  printSales(Purchase purchase) {}
+  printPurchase(Purchase purchase) {}
+
+  Future<void> deletePurchase({
+    required Function? onDeleted,
+  }) async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+
+    if (!confirmation) return;
+
+    bool isDeleted = false;
+    if (purchaseMode == 'online') {
+      await dataFetcher(
+        future: () async {
+          isDeleted = await services.deletePurchase(
+            id: purchase.value!.purchaseId!,
+          );
+        },
+      );
+    } else {
+      await dbHelper.deleteAllWhr(
+        tbl: dbTables.tablePurchase,
+        where: 'purchase_id = ?',
+        whereArgs: [purchase.value!.purchaseId],
+      );
+      isDeleted = true;
+    }
+    if (isDeleted) {
+      onDeleted!();
+    }
+  }
 }

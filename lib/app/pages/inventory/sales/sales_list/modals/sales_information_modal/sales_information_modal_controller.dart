@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';

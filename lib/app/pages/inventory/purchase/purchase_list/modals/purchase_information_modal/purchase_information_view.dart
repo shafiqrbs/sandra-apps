@@ -133,7 +133,6 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
@@ -334,177 +333,169 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                 ),
               ),
               isShowFooter! ? 16.height : 0.height,
-              isShowFooter! ? Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () async {
-                        await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CommonConfirmationModal(
-                              title: 'do_you_want_to_delete_this_sales?'.tr,
-                            );
-                          },
-                        ).then(
-                          (value) {
-                            if (value) onDeleted?.call();
-                          },
-                        );
-                      },
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            containerBorderRadius,
-                          ),
-                          color: colors.removeButtonFillColor,
-                        ),
-                        margin: const EdgeInsets.only(
-                          left: 4,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            TablerIcons.trash,
-                            color: colors.removeButtonIconColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: controller.purchaseMode == 'online' ||
-                        controller.purchaseMode == 'local',
-                    child: Expanded(
-                      child: InkWell(
-                        onTap: () => controller.salesPrint(context),
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
+              isShowFooter!
+                  ? Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => controller.deletePurchase(
+                              onDeleted: onDeleted,
                             ),
-                            color: colors.iconBackgroundColor,
-                          ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              TablerIcons.printer,
-                              color: Colors.green,
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.removeButtonFillColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  TablerIcons.trash,
+                                  color: colors.removeButtonIconColor,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: controller.purchaseMode == 'online' ||
-                        controller.purchaseMode == 'local',
-                    child: Expanded(
-                      child: InkWell(
-                        onTap: controller.goToEditSales,
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
-                            ),
-                            color: colors.editButtonFillColor,
-                          ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              TablerIcons.pencil,
-                              color: colors.editButtonIconColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => controller.copyPurchase(purchase),
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            containerBorderRadius,
-                          ),
-                          color: colors.selectedColor,
-                        ),
-                        margin: const EdgeInsets.only(
-                          left: 4,
-                        ),
-                        child: const Center(child: Icon(TablerIcons.copy)),
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: controller.purchaseMode == 'online' ||
-                        controller.purchaseMode == 'local',
-                    child: Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          //shareContent();
-                          // Get.to(OnlineSalesInvoice(element: controller.sales,));
-                        },
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
-                            ),
-                            color: colors.infoButtonFillColor,
-                          ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              TablerIcons.share,
-                              color: colors.infoButtonIconColor,
+                        Visibility(
+                          visible: controller.purchaseMode == 'online' ||
+                              controller.purchaseMode == 'local',
+                          child: Expanded(
+                            child: InkWell(
+                              onTap: () => controller.purchasePrint(context),
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    containerBorderRadius,
+                                  ),
+                                  color: colors.iconBackgroundColor,
+                                ),
+                                margin: const EdgeInsets.only(
+                                  left: 4,
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    TablerIcons.printer,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: controller.purchaseMode == 'online',
-                    child: Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          toast('Sales return is under development');
-                        },
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              containerBorderRadius,
-                            ),
-                            color: colors.primaryLiteColor,
-                          ),
-                          margin: const EdgeInsets.only(
-                            left: 4,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              TablerIcons.receipt_refund,
-                              color: colors.editButtonIconColor,
+                        Visibility(
+                          visible: controller.purchaseMode == 'online' ||
+                              controller.purchaseMode == 'local',
+                          child: Expanded(
+                            child: InkWell(
+                              onTap: controller.goToEditPurchase,
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    containerBorderRadius,
+                                  ),
+                                  color: colors.editButtonFillColor,
+                                ),
+                                margin: const EdgeInsets.only(
+                                  left: 4,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    TablerIcons.pencil,
+                                    color: colors.editButtonIconColor,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  4.width,
-                ],
-              ) : Container(),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => controller.copyPurchase(purchase),
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.selectedColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              child:
+                                  const Center(child: Icon(TablerIcons.copy)),
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.purchaseMode == 'online' ||
+                              controller.purchaseMode == 'local',
+                          child: Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                //shareContent();
+                                // Get.to(OnlineSalesInvoice(element: controller.sales,));
+                              },
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    containerBorderRadius,
+                                  ),
+                                  color: colors.infoButtonFillColor,
+                                ),
+                                margin: const EdgeInsets.only(
+                                  left: 4,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    TablerIcons.share,
+                                    color: colors.infoButtonIconColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.purchaseMode == 'online',
+                          child: Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                toast('Sales return is under development');
+                              },
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    containerBorderRadius,
+                                  ),
+                                  color: colors.primaryLiteColor,
+                                ),
+                                margin: const EdgeInsets.only(
+                                  left: 4,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    TablerIcons.receipt_refund,
+                                    color: colors.editButtonIconColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        4.width,
+                      ],
+                    )
+                  : Container(),
               1.percentHeight,
             ],
           ),

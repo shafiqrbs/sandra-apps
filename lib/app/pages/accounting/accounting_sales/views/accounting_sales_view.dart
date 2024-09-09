@@ -25,7 +25,7 @@ import '/app/pages/accounting/accounting_sales/controllers/accounting_sales_cont
 class AccountingSalesView extends BaseView<AccountingSalesController> {
   AccountingSalesView({super.key});
 
-  final currency = SetUp().currency ?? '';
+  final currency = SetUp().symbol ?? '';
   static const iconColor = Color(0xff989898);
 
   @override
