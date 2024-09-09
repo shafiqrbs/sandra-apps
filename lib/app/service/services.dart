@@ -2,17 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import '/app/core/core_model/logged_user.dart';
-import '/app/entity/expense.dart';
-import '/app/entity/stock.dart';
-import '/app/entity/vendor.dart';
 
+import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/session_manager/session_manager.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
+import '/app/entity/expense.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/sales.dart';
+import '/app/entity/stock.dart';
+import '/app/entity/vendor.dart';
 import '/app/entity/vendor_ledger.dart';
 import 'client/api_options.dart';
 import 'client/rest_client.dart';
@@ -42,21 +42,32 @@ class Services {
     };
   }
 
-  void printError(dynamic e, dynamic s) {
+  void printError(
+    dynamic e,
+    dynamic s,
+    String endPoint,
+  ) {
     if (kDebugMode) {
       print('Error: $e');
       print('Error: $s');
     }
+
+    const endPoint = 'poskeeper-error-log';
+
+    try {
+    } catch (e) {}
   }
 
   Future<Map<String, dynamic>?> submitLicense({
     required String license,
     required String activeKey,
   }) async {
+    const endPoint = 'poskeeper-splash';
+
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-splash',
+        endPoint,
         {
           'mobile': license,
           'uniqueCode': activeKey,
@@ -68,18 +79,19 @@ class Services {
       if (responseData == null) return null;
       return responseData;
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> getMasterData() async {
+    const endPoint = 'poskeeper-masterdata';
     try {
       final license = await pref.getLicenseKey();
       final activeKey = await pref.getActiveKey();
       final response = await dio.post(
         APIType.public,
-        'poskeeper-masterdata',
+        endPoint,
         {
           'mobile': license,
           'uniqueCode': activeKey,
@@ -92,16 +104,17 @@ class Services {
       if (responseData == null) return null;
       return responseData;
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
 
   Future<List<Map<String, dynamic>>?> getStockItems() async {
+    const endPoint = 'poskeeper-stock-item';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-stock-item',
+        endPoint,
         {},
         headers: _buildHeader(),
       );
@@ -109,7 +122,7 @@ class Services {
       if (responseData == null) return null;
       return responseData.map((e) => e as Map<String, dynamic>).toList();
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -121,6 +134,7 @@ class Services {
     required String email,
     required String openingBalance,
   }) async {
+    const endPoint = 'poskeeper-customer-create';
     try {
       final data = {
         'name': name,
@@ -132,7 +146,7 @@ class Services {
 
       final response = await dio.post(
         APIType.public,
-        'poskeeper-customer-create',
+        endPoint,
         data,
         query: data,
         headers: _buildHeader(),
@@ -144,7 +158,7 @@ class Services {
         fromJson: Customer.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -156,6 +170,7 @@ class Services {
     required String email,
     required String openingBalance,
   }) async {
+    const endPoint = 'poskeeper-vendor-create';
     try {
       final data = {
         'name': name,
@@ -167,7 +182,7 @@ class Services {
 
       final response = await dio.post(
         APIType.public,
-        'poskeeper-vendor-create',
+        endPoint,
         data,
         query: data,
         headers: _buildHeader(),
@@ -179,7 +194,7 @@ class Services {
         fromJson: Vendor.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -197,10 +212,11 @@ class Services {
     required String openingQty,
     required String description,
   }) async {
+    const endPoint = 'poskeeper-stock-create';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-stock-create',
+        endPoint,
         {
           'name': name,
           'category_id': categoryId ?? '',
@@ -223,7 +239,7 @@ class Services {
         fromJson: Stock.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -235,18 +251,18 @@ class Services {
     required String? keyword,
     required int page,
   }) async {
-    final query = <String, dynamic>{};
-    if (startDate != null) query['start_date'] = startDate;
-    if (endDate != null) query['end_date'] = endDate;
-    if (customerId != null) query['customer_id'] = customerId;
-    if (keyword != null) query['keyword'] = keyword;
-
-    query['page'] = page;
-
+    const endPoint = 'poskeeper-online-sales';
     try {
+      final query = <String, dynamic>{};
+      if (startDate != null) query['start_date'] = startDate;
+      if (endDate != null) query['end_date'] = endDate;
+      if (customerId != null) query['customer_id'] = customerId;
+      if (keyword != null) query['keyword'] = keyword;
+
+      query['page'] = page;
       final response = await dio.post(
         APIType.public,
-        'poskeeper-online-sales',
+        endPoint,
         query,
         query: query,
         headers: _buildHeader(),
@@ -273,6 +289,7 @@ class Services {
     required String? keyword,
     required int page,
   }) async {
+    const endPoint = 'poskeeper-online-purchase';
     try {
       final query = <String, dynamic>{};
       if (startDate != null) query['start_date'] = startDate;
@@ -283,7 +300,7 @@ class Services {
 
       final response = await dio.post(
         APIType.public,
-        'poskeeper-online-purchase',
+        endPoint,
         query,
         query: query,
         headers: _buildHeader(),
@@ -297,7 +314,7 @@ class Services {
         fromJson: Purchase.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -305,10 +322,11 @@ class Services {
   Future<Sales?> getOnlineSalesDetails({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-online-sales-details';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-online-sales-details',
+        endPoint,
         query: {
           'id': id,
         },
@@ -316,7 +334,7 @@ class Services {
       );
       return Sales.fromJson(response.data);
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -324,10 +342,11 @@ class Services {
   Future<Purchase?> getOnlinePurchaseDetails({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-online-purchase-details';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-online-purchase-details',
+        endPoint,
         query: {
           'id': id,
         },
@@ -337,7 +356,7 @@ class Services {
       if (responseData == null) return null;
       return parseObject(object: responseData, fromJson: Purchase.fromJson);
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -350,10 +369,11 @@ class Services {
     required String userId,
     required String? remark,
   }) async {
+    const endPoint = 'poskeeper-account-receive';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-receive',
+        endPoint,
         {
           'customer_id': customer,
           'method_id': method,
@@ -368,7 +388,7 @@ class Services {
       if (responseData == null || responseData['status'] == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -381,10 +401,11 @@ class Services {
     required String userId,
     required String? remark,
   }) async {
+    const endPoint = 'poskeeper-account-payment';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-payment',
+        endPoint,
         {
           'vendor_id': vendor,
           'method_id': method,
@@ -399,7 +420,7 @@ class Services {
       if (responseData == null || responseData['status'] == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -429,7 +450,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endpointOrderProcess);
       return false;
     }
   }
@@ -459,7 +480,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endpointOrderProcess);
       return false;
     }
   }
@@ -467,10 +488,11 @@ class Services {
   Future<bool> updateSales({
     required List salesList,
   }) async {
+    const endPoint = 'poskeeper-sales-update';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-sales-update',
+        endPoint,
         {
           'sales': jsonEncode(salesList),
           'mode': 'online',
@@ -483,7 +505,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -491,10 +513,11 @@ class Services {
   Future<bool> updatePurchase({
     required List purchaseList,
   }) async {
+    const endPoint = 'poskeeper-purchase-update';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-purchase-update',
+        endPoint,
         {
           'sales': jsonEncode(purchaseList),
           'mode': 'online',
@@ -507,7 +530,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -515,10 +538,11 @@ class Services {
   Future<bool> deleteSales({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-sales-delete';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-sales-delete',
+        endPoint,
         query: {
           'id': id,
         },
@@ -531,7 +555,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -539,10 +563,11 @@ class Services {
   Future<bool> deletePurchase({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-online-purchase-delete';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-online-purchase-delete',
+        endPoint,
         query: {
           'id': id,
         },
@@ -555,7 +580,7 @@ class Services {
 
       return responseData['message'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -563,10 +588,11 @@ class Services {
   Future<List<CustomerLedger>?> getCustomerLedgerReport({
     required String? customerId,
   }) async {
+    const endPoint = 'poskeeper-customer-ledger';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-customer-ledger',
+        endPoint,
         {
           'customer_id': customerId,
         },
@@ -581,7 +607,7 @@ class Services {
         fromJson: CustomerLedger.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -589,10 +615,11 @@ class Services {
   Future<List<VendorLedger>?> getVendorLedgerReport({
     required String? vendorId,
   }) async {
+    const endPoint = 'poskeeper-vendor-ledger';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-vendor-ledger',
+        endPoint,
         {
           'vendor_id': vendorId,
         },
@@ -607,7 +634,7 @@ class Services {
         fromJson: VendorLedger.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -619,6 +646,7 @@ class Services {
     required String? keyword,
     required int page,
   }) async {
+    const endPoint = 'poskeeper-account-sales';
     try {
       final data = {
         'customer_id': customerId,
@@ -634,7 +662,7 @@ class Services {
 
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-sales',
+        endPoint,
         data,
         query: data,
         headers: _buildHeader(),
@@ -645,7 +673,7 @@ class Services {
         fromJson: CustomerLedger.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -657,6 +685,7 @@ class Services {
     required String? keyword,
     required int page,
   }) async {
+    const endPoint = 'poskeeper-account-purchase';
     try {
       final data = {
         'vendor_id': vendorId,
@@ -670,7 +699,7 @@ class Services {
 
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-purchase',
+        endPoint,
         data,
         query: data,
         headers: _buildHeader(),
@@ -681,7 +710,7 @@ class Services {
         fromJson: VendorLedger.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -693,17 +722,18 @@ class Services {
     required userId,
     required transactionMethodId,
   }) async {
+    const endPoint = 'poskeeper-expense-create';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-expense-create',
+        endPoint,
         {
           'amount': amount,
           'remark': remark,
           'category_id': expenseCategoryId,
           'to_user_id': userId,
           'method_id': transactionMethodId,
-          'created_by_id': LoggedUser().userId!,
+          'created_by_id': LoggedUser().userId,
         },
         headers: _buildHeader(),
       );
@@ -711,7 +741,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -722,15 +752,17 @@ class Services {
     required String? keyword,
     required int page,
   }) async {
-    final query = <String, dynamic>{};
-    if (startDate != null) query['start_date'] = startDate;
-    if (endDate != null) query['end_date'] = endDate;
-    if (keyword != null) query['keyword'] = keyword;
-    query['page'] = page;
+    const endPoint = 'poskeeper-account-expense';
+
     try {
+      final query = <String, dynamic>{};
+      if (startDate != null) query['start_date'] = startDate;
+      if (endDate != null) query['end_date'] = endDate;
+      if (keyword != null) query['keyword'] = keyword;
+      query['page'] = page;
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-expense',
+        endPoint,
         query,
         headers: _buildHeader(),
       );
@@ -741,7 +773,7 @@ class Services {
         fromJson: Expense.fromJson,
       );
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return null;
     }
   }
@@ -749,10 +781,11 @@ class Services {
   Future<bool> deleteExpense({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-expense-delete';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-expense-delete',
+        endPoint,
         query: {
           'id': id,
         },
@@ -762,7 +795,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -770,10 +803,11 @@ class Services {
   Future<bool> approveExpense({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-expense-approve';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-expense-approve',
+        endPoint,
         query: {
           'id': id,
           'user_id': LoggedUser().userId,
@@ -784,7 +818,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -792,10 +826,11 @@ class Services {
   Future<bool> approveAccountSale({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-account-sales-approve';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-sales-approve',
+        endPoint,
         {
           'id': id,
           'user_id': LoggedUser().userId,
@@ -810,7 +845,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -818,10 +853,11 @@ class Services {
   Future<bool> approveAccountPurchase({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-account-purchase-approve';
     try {
       final response = await dio.post(
         APIType.public,
-        'poskeeper-account-purchase-approve',
+        endPoint,
         {
           'id': id,
           'user_id': LoggedUser().userId,
@@ -836,7 +872,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -844,6 +880,7 @@ class Services {
   Future<bool> deleteAccountSale({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-account-sales-delete';
     try {
       final response = await dio.get(
         APIType.public,
@@ -857,7 +894,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
@@ -865,10 +902,11 @@ class Services {
   Future<bool> deleteAccountPurchase({
     required String id,
   }) async {
+    const endPoint = 'poskeeper-account-purchase-delete';
     try {
       final response = await dio.get(
         APIType.public,
-        'poskeeper-account-purchase-delete',
+        endPoint,
         query: {
           'id': id,
         },
@@ -878,7 +916,7 @@ class Services {
       if (responseData == null) return false;
       return responseData['status'] == 'success';
     } catch (e, s) {
-      printError(e, s);
+      printError(e, s, endPoint);
       return false;
     }
   }
