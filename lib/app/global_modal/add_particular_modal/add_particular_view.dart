@@ -46,10 +46,10 @@ class AddParticularView extends BaseView<AddParticularController> {
                           isRequired: true,
                           controller:
                               controller.expenseCategoryManager.asController,
-                          hint: 'select_category'.tr,
+                          hint: appLocalization.selectCategory,
                           isShowSearch: false,
                           itemToString: (data) => data?.name ?? '',
-                          label: 'category'.tr,
+                          label: appLocalization.category,
                           errorMsg: 'category_required'.tr,
                         ),
                       ),
@@ -59,7 +59,6 @@ class AddParticularView extends BaseView<AddParticularController> {
                           textController: controller.amountController.value,
                           keyboardType: numberInputType,
                           label: appLocalization.amount,
-                          //example: 'sample_model'.tr,
                           hint: appLocalization.amount,
                           isRequired: true,
                           errorMsg: '',
@@ -108,7 +107,6 @@ class AddParticularView extends BaseView<AddParticularController> {
                   FBString(
                     textController: controller.remarkController,
                     label: appLocalization.remark,
-                    //example: 'sample_model'.tr,
                     hint: appLocalization.remark,
                     isRequired: false,
                     errorMsg: '',

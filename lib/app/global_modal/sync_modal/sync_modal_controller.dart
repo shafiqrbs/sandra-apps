@@ -80,7 +80,7 @@ class SyncModalController extends BaseController {
         SetUp.fromJson(splashData['setup'][0]);
       } else {
         await prefs.setIsLicenseValid(isLicenseValid: false);
-        toast('please_try_again'.tr);
+        toast(appLocalization.pleaseTryAgain);
         return false;
       }
       final keys = splashData.keys.toList();
@@ -101,12 +101,12 @@ class SyncModalController extends BaseController {
       );
     } else {
       await prefs.setIsLicenseValid(isLicenseValid: false);
-      toast('please_try_again'.tr);
+      toast(appLocalization.pleaseTryAgain);
       return false;
     }
 
     await prefs.setIsLicenseValid(isLicenseValid: true);
-    toast('license_and_key_validated_successfully'.tr);
+    toast(appLocalization.licenseAndKeyValidatedSuccessfully);
     return true;
   }
 

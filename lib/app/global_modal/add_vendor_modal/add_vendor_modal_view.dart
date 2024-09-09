@@ -57,7 +57,6 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         preFixIcon: TablerIcons.cash,
                         label: appLocalization.openingBalance,
                         hint: appLocalization.enterOpeningBalance,
-                        errorMsg: ''.tr,
                         isRequired: false,
                         textFieldHeight: textFieldHeight,
                       ),
@@ -67,7 +66,6 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         isRequired: false,
                         label: appLocalization.email,
                         hint: appLocalization.enterEmail,
-                        errorMsg: ''.tr,
                         preFixIcon: TablerIcons.mail,
                         textFieldHeight: textFieldHeight,
                       ),
@@ -77,7 +75,6 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         isRequired: false,
                         label: appLocalization.address,
                         hint: appLocalization.enterAddressHere,
-                        errorMsg: ''.tr,
                         lines: 4,
                         textInputAction: TextInputAction.done,
 
