@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/entity/purchase.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';
 import '/app/entity/purchase_item.dart';
@@ -9,6 +10,7 @@ import '/app/pages/inventory/purchase/create_purchase/modals/purchase_process_mo
 import '/app/routes/app_pages.dart';
 
 class CreatePurchaseController extends StockSelectionController {
+  Purchase? prePurchase;
   String? purchaseMode;
   final purchaseItemList = Rx<List<PurchaseItem>>([]);
   final priceController = TextEditingController().obs;
@@ -23,6 +25,18 @@ class CreatePurchaseController extends StockSelectionController {
     super.onInit();
     purchaseMode = await prefs.getPurchaseConfig();
     selectedPurchase.value = await prefs.getPurchaseConfig();
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null && args.isNotEmpty && args['purchase'] != null) {
+      setData(args['purchase'] as Purchase);
+    }
+  }
+
+  void setData(
+    Purchase purchase,
+  ) {
+    prePurchase = purchase;
+    purchaseItemList.value = purchase.purchaseItem ?? [];
+    calculateAllSubtotal();
   }
 
   Future<void> changePurchase(String? config) async {
@@ -167,7 +181,7 @@ class CreatePurchaseController extends StockSelectionController {
     final result = await Get.dialog(
       PurchaseProcessView(
         purchaseItemList: purchaseItemList.value,
-        prePurchase: null,
+        prePurchase: prePurchase,
       ),
     );
     if (result != null) {
