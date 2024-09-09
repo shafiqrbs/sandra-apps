@@ -34,7 +34,7 @@ class OrderProcessConfirmationController extends PrinterController {
     }
 
     if (!connected.value) {
-      toast('please_connect_printer'.tr);
+      toast(appLocalization.connectPrinter);
       return;
     }
 

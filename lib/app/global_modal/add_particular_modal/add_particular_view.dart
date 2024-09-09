@@ -37,7 +37,7 @@ class AddParticularView extends BaseView<AddParticularController> {
                     isShowSearch: false,
                     itemToString: (data) => data?.username ?? '',
                     label: appLocalization.user,
-                    errorMsg: 'user_required'.tr,
+                    errorMsg: appLocalization.userRequired,
                   ),
                   Row(
                     children: [
@@ -50,7 +50,7 @@ class AddParticularView extends BaseView<AddParticularController> {
                           isShowSearch: false,
                           itemToString: (data) => data?.name ?? '',
                           label: appLocalization.category,
-                          errorMsg: 'category_required'.tr,
+                          errorMsg: appLocalization.categoryRequired,
                         ),
                       ),
                       10.width,

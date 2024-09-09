@@ -690,7 +690,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       child: Obx(
                         () {
                           return AdvancedSwitch(
-                            activeChild: Text('%'.tr),
+                            activeChild: const Text('%'),
                             inactiveChild: Text(appLocalization.flat),
                             activeColor: colors.successfulBaseColor,
                             inactiveColor: colors.primaryLiteColor,

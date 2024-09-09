@@ -135,7 +135,7 @@ class PurchaseItemListView extends BaseWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: getInputDecoration(
-                                      hint: 'qty'.tr,
+                                      hint: appLocalization.qty,
                                     ),
                                   ),
                                 ),
@@ -177,7 +177,7 @@ class PurchaseItemListView extends BaseWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: getInputDecoration(
-                                      hint: 'price'.tr,
+                                      hint: appLocalization.price,
                                     ),
                                     onChanged: (value) {
                                       onPriceChange(

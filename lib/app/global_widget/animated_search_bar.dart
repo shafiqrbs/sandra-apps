@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 
 class AnimatedSearchBar extends StatefulWidget {
   TextEditingController controller;
@@ -112,7 +113,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar>
                         horizontal: 12,
                         vertical: 10,
                       ),
-                      hintText: 'hint'.tr,
+                      hintText: appLocalization.hint,
                       hintStyle: TextStyle(
                         fontSize: 16,
                         color: Colors.grey.withOpacity(.5),

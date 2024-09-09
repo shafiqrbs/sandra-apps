@@ -312,7 +312,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
               }
               await controller.vendorManager.searchItemsByName(value!);
             },
-            hint: 'search_vendor'.tr,
+            hint: appLocalization.searchVendor,
             suffixIcon: TablerIcons.search,
           ),
         ),
@@ -645,7 +645,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     ),
                     cursorColor: colors.formCursorColor,
                     decoration: buildInputDecoration(
-                      hintText: 'amount'.tr,
+                      hintText: appLocalization.amount,
                       hintStyle: TextStyle(
                         color: colors.formBaseHintTextColor,
                         fontWeight: FontWeight.normal,

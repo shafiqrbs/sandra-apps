@@ -305,7 +305,7 @@ class SalesItemListView extends BaseWidget {
                                           ),
 
                                           decoration: getInputDecoration(
-                                            hint: 'price'.tr,
+                                            hint: appLocalization.price,
                                           ),
                                         ),
                                       );
@@ -367,7 +367,7 @@ class SalesItemListView extends BaseWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                           decoration: getInputDecoration(
-                                            hint: 'qty'.tr,
+                                            hint: appLocalization.qty,
                                           ),
                                         ),
                                       ),

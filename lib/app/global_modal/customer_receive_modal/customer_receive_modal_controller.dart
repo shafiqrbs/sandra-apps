@@ -93,7 +93,7 @@ class CustomerReceiveModalController extends PaymentGatewayController {
   Future<void> addCustomer() async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'add_customer'.tr,
+        title: appLocalization.addCustomer,
         subTitle: '',
         child: AddCustomerModalView(),
       ),

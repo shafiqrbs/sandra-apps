@@ -41,7 +41,7 @@ class DashboardView extends BaseView<DashboardController> {
                 children: [
                   Expanded(
                     child: CommonText(
-                      text: 'store_name'.tr,
+                      text: appLocalization.storeName,
                       fontSize: headerTFSize,
                       fontWeight: FontWeight.w500,
                       textColor: colors.backgroundColor,
@@ -49,7 +49,7 @@ class DashboardView extends BaseView<DashboardController> {
                   ),
                   Expanded(
                     child: CommonText(
-                      text: 'user_name'.tr,
+                      text: appLocalization.userName,
                       fontSize: regularTFSize,
                       fontWeight: FontWeight.normal,
                       textColor: colors.backgroundColor,

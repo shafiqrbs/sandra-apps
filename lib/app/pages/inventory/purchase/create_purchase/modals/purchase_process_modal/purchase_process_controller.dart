@@ -206,7 +206,7 @@ class PurchaseProcessController extends BaseController {
     BuildContext context,
   ) async {
     if (purchaseItemList.value.isEmpty) {
-      toast('you_removed_all_item'.tr);
+      toast(appLocalization.noDataFound);
       return;
     }
     if (!formKey.currentState!.validate()) return;
