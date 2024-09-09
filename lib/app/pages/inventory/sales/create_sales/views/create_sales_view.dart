@@ -233,7 +233,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             ),
                             cursorColor: colors.formCursorColor,
                             decoration: getInputDecoration(
-                              hint: 'mrp'.tr,
+                              hint: appLocalization.mrp,
                             ),
                           ),
                         ),
@@ -259,7 +259,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             ),
                             cursorColor: colors.formCursorColor,
                             decoration: getInputDecoration(
-                              hint: 'qty'.tr,
+                              hint: appLocalization.qty,
                             ),
                             keyboardType: numberInputType,
                             inputFormatters: doubleInputFormatter,

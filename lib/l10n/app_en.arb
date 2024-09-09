@@ -305,15 +305,6 @@
   "po": "PO",
   "pay" : "Pay",
   "purchaseConfirmation": "Purchase Confirmation",
-  "connecting": "Connecting"
-
-
-
-
-
-
-
-
-
-
+  "connecting": "Connecting",
+  "hint": "Hint"
 }

@@ -382,7 +382,8 @@
   "isPurchaseAutoApproved": "Is Purchase Auto Approved",
   "isSalesAutoApproved": "Is Sales Auto Approved",
   "purchaseConfirmation": "Purchase Confirmation",
-  "connecting": "Connecting"
+  "connecting": "Connecting",
+  "hint": "Hint"
 
 
 

@@ -19,7 +19,7 @@ Future<bool> insertSplashDataToDb({
       SetUp.fromJson(splashData['setup'][0]);
     } else {
       await prefs.setIsLicenseValid(isLicenseValid: false);
-      toast('please_try_again'.tr);
+      toast(appLocalization.pleaseTryAgain);
       return false;
     }
     final keys = splashData.keys.toList();
@@ -45,7 +45,7 @@ Future<bool> insertSplashDataToDb({
   }
 
   await prefs.setIsLicenseValid(isLicenseValid: true);
-  toast('license_and_key_validated_successfully'.tr);
+  toast(appLocalization.success);
   return true;
 }
 
@@ -57,7 +57,7 @@ Future<void> makeCall(
     context: context,
     builder: (context) {
       return CommonConfirmationModal(
-        title: 'do_you_want_to_make_a_call?'.tr,
+        title: appLocalization.areYouSure,
       );
     },
   );
@@ -77,7 +77,7 @@ Future<void> messageCustomer(
     context: context,
     builder: (context) {
       return CommonConfirmationModal(
-        title: 'do_you_want_to_send_a_message?'.tr,
+        title: appLocalization.areYouSure,
       );
     },
   );

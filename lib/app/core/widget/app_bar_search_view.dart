@@ -230,7 +230,7 @@ class AppBarSearchView extends BaseWidget {
                   horizontal: 12,
                   vertical: 10,
                 ),
-                hintText: 'hint'.tr,
+                hintText: appLocalization.hint,
                 hintStyle: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.withOpacity(.5),
