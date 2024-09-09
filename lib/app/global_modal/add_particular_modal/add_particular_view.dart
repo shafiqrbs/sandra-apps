@@ -33,10 +33,10 @@ class AddParticularView extends BaseView<AddParticularController> {
                   AdvanceSelect(
                     isRequired: true,
                     controller: controller.userManager.asController,
-                    hint: 'user'.tr,
+                    hint: appLocalization.user,
                     isShowSearch: false,
                     itemToString: (data) => data?.username ?? '',
-                    label: 'user'.tr,
+                    label: appLocalization.user,
                     errorMsg: 'user_required'.tr,
                   ),
                   Row(
@@ -44,7 +44,8 @@ class AddParticularView extends BaseView<AddParticularController> {
                       Expanded(
                         child: AdvanceSelect(
                           isRequired: true,
-                          controller: controller.expenseCategoryManager.asController,
+                          controller:
+                              controller.expenseCategoryManager.asController,
                           hint: 'select_category'.tr,
                           isShowSearch: false,
                           itemToString: (data) => data?.name ?? '',
@@ -57,9 +58,9 @@ class AddParticularView extends BaseView<AddParticularController> {
                         child: FBString(
                           textController: controller.amountController.value,
                           keyboardType: numberInputType,
-                          label: 'amount'.tr,
+                          label: appLocalization.amount,
                           //example: 'sample_model'.tr,
-                          hint: 'amount'.tr,
+                          hint: appLocalization.amount,
                           isRequired: true,
                           errorMsg: '',
                         ),
@@ -106,9 +107,9 @@ class AddParticularView extends BaseView<AddParticularController> {
                   ),
                   FBString(
                     textController: controller.remarkController,
-                    label: 'remark'.tr,
+                    label: appLocalization.remark,
                     //example: 'sample_model'.tr,
-                    hint: 'remark'.tr,
+                    hint: appLocalization.remark,
                     isRequired: false,
                     errorMsg: '',
                     lines: 4,
@@ -116,13 +117,13 @@ class AddParticularView extends BaseView<AddParticularController> {
                   Row(
                     children: [
                       RowButton(
-                        buttonName: 'reset'.tr,
+                        buttonName: appLocalization.reset,
                         onTap: controller.onResetTap,
                         leftIcon: TablerIcons.restore,
                       ),
                       2.percentWidth,
                       RowButton(
-                        buttonName: 'save'.tr,
+                        buttonName: appLocalization.save,
                         onTap: controller.onSaveTap,
                         leftIcon: TablerIcons.device_floppy,
                       ),
