@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/entity/purchase.dart';
-import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
-import '/app/pages/inventory/purchase/purchase_list/modals/purchase_information_modal/purchase_information_view.dart';
+import '/app/global_modal/purchase_information_modal/purchase_information_view.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/core_model/page_state.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
+import '/app/entity/purchase.dart';
 import '/app/entity/vendor.dart';
 import '/app/entity/vendor_ledger.dart';
+import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
 import '/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
 
 class AccountingPurchaseController extends BaseController {
