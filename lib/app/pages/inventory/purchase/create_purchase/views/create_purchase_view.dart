@@ -26,7 +26,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
     return AppBar(
       centerTitle: false,
       backgroundColor: colors.primaryBaseColor,
-      title:PageBackButton(
+      title: PageBackButton(
         pageTitle: appLocalization.createPurchase,
       ),
       automaticallyImplyLeading: false,
@@ -49,35 +49,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       children: [
         Column(
           children: [
-            if (false)
-              Obx(
-                () => Container(
-                  color: Colors.white,
-                  width: Get.width,
-                  child: Column(
-                    children: [
-                      RadioListTile<String>(
-                        title: Text('purchase_with_mrp'.tr),
-                        value: 'purchase_with_mrp',
-                        groupValue: controller.selectedPurchase.value,
-                        onChanged: controller.changePurchase,
-                      ),
-                      RadioListTile<String>(
-                        title: Text('purchase_price'.tr),
-                        value: 'purchase_price',
-                        groupValue: controller.selectedPurchase.value,
-                        onChanged: controller.changePurchase,
-                      ),
-                      RadioListTile<String>(
-                        title: Text('total_price'.tr),
-                        value: 'total_price',
-                        groupValue: controller.selectedPurchase.value,
-                        onChanged: controller.changePurchase,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             _buildProductSearchForm(),
             _buildStockAddForm(),
             _buildSelectedStockList(),
@@ -264,7 +235,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 ),
                                 cursorColor: colors.formCursorColor,
                                 decoration: getInputDecoration(
-                                  hint: 'qty'.tr,
+                                  hint: appLocalization.qty,
                                 ),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [
@@ -282,7 +253,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               ),
                             ),
                             Text(
-                              'qty'.tr,
+                              appLocalization.qty,
                               style: TextStyle(
                                 fontSize: smallTFSize,
                                 color: colors.primaryTextColor,
@@ -320,7 +291,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 ),
                                 cursorColor: colors.formCursorColor,
                                 decoration: getInputDecoration(
-                                  hint: 'price'.tr,
+                                  hint: appLocalization.price,
                                 ),
                                 onChanged: controller.onAddStockQtyChange,
                               ),
@@ -371,13 +342,13 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   ),
                                   cursorColor: colors.formCursorColor,
                                   decoration: getInputDecoration(
-                                    hint: 'total_price'.tr,
+                                    hint: appLocalization.totalPrice,
                                   ),
                                   onChanged: controller.onTotalPriceChange,
                                 ),
                               ),
                               Text(
-                                'total_price'.tr,
+                                appLocalization.totalPrice,
                                 style: TextStyle(
                                   fontSize: smallTFSize,
                                   color: colors.primaryTextColor,
@@ -416,7 +387,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               backgroundColor: colors.primaryBaseColor,
                             ),
                             child: CommonText(
-                              text: 'add'.tr,
+                              text: appLocalization.add,
                               textColor: colors.backgroundColor,
                               fontWeight: FontWeight.w500,
                             ),

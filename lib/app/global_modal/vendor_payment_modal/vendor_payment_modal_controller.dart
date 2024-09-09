@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
@@ -50,11 +51,11 @@ class VendorPaymentModalController extends BaseController {
     if (!confirmation) return;
 
     if (amountController.value.text.isEmpty) {
-      toast('please_enter_amount'.tr);
+      showSnackBar(message: appLocalization.enterAmount);
       return;
     }
     if (vendorManager.selectedItem.value == null) {
-      toast('please_select_customer'.tr);
+      showSnackBar(message: appLocalization.selectVendor);
       return;
     }
 

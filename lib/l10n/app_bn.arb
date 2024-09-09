@@ -383,7 +383,10 @@
   "isSalesAutoApproved": "Is Sales Auto Approved",
   "purchaseConfirmation": "Purchase Confirmation",
   "connecting": "Connecting",
-  "hint": "Hint"
+  "hint": "Hint",
+  "thisAmountIsNotValid": "This amount is not valid",
+  "enterAmount": "Enter Amount",
+  "selectVendor": "Select Vendor"
 
 
 

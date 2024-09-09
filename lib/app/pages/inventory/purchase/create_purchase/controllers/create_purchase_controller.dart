@@ -78,7 +78,7 @@ class CreatePurchaseController extends StockSelectionController {
     required String process,
   }) async {
     if (selectedStock.value == null) {
-      toast('select_stock'.tr);
+      toast(appLocalization.pleaseSelectItem);
       return;
     }
 
@@ -99,7 +99,7 @@ class CreatePurchaseController extends StockSelectionController {
 
     // Handle error if subTotal is null
     if (purchaseItem.subTotal == null) {
-      toast('sub_total_error'.tr);
+      toast(appLocalization.error);
       return;
     }
 

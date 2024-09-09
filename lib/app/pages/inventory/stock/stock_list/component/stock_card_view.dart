@@ -161,19 +161,19 @@ class StockCardView extends BaseWidget {
                     children: [
                       Expanded(
                         child: labelValue.copyWith(
-                          label: 'stock'.tr,
+                          label: appLocalization.stock,
                           value: element.quantity.toString(),
                         ),
                       ),
                       Expanded(
                         child: labelValue.copyWith(
-                          label: 'purchase'.tr,
+                          label: appLocalization.purchase,
                           value: element.purchasePrice.toString(),
                         ),
                       ),
                       Expanded(
                         child: labelValue.copyWith(
-                          label: 'mrp'.tr,
+                          label: appLocalization.mrp,
                           value: element.salesPrice.toString(),
                         ),
                       ),

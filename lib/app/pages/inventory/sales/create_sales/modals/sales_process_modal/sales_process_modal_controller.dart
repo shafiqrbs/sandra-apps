@@ -138,7 +138,7 @@ class SalesProcessModalController extends PaymentGatewayController {
 
   void handleDiscountChange(double discountValue, double? percentValue) {
     if (discountValue > salesSubTotal.value) {
-      toast('do_not_allow_discount_value_more_then_subtotal_value'.tr);
+      toast(appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue);
       paymentDiscountController.value.text = '0';
       salesDiscount.value = 0;
       netTotal.value = 0;
@@ -261,7 +261,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     BuildContext context,
   ) async {
     if (salesItemList.isEmpty) {
-      toast('you_removed_all_item'.tr);
+      toast(appLocalization.noDataFound);
       return;
     }
     if (!formKey.currentState!.validate()) return;
@@ -270,7 +270,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     final sales = await generateSales();
 
     if (sales == null) {
-      toast('failed_to_generate_sales'.tr);
+      toast(appLocalization.failed);
       return;
     }
 
@@ -280,7 +280,6 @@ class SalesProcessModalController extends PaymentGatewayController {
     final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = double.tryParse(amountText) ?? 0;
     final isInvalidAmount = amount > 0 && amount < netTotal.value;
-    print('Amount $amount');
 
     if (!isZeroSalesAllowed &&
         isCustomerNotSelected &&
@@ -292,7 +291,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
       sales.received = netTotal.value;
     } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
-      toast('this_amount_is_not_valid'.tr);
+      toast(appLocalization.thisAmountIsNotValid);
       return;
     }
 
@@ -347,7 +346,7 @@ class SalesProcessModalController extends PaymentGatewayController {
   Future<void> hold(BuildContext context) async {
     final sales = await generateSales();
     if (sales == null) {
-      toast('failed_to_generate_sales'.tr);
+      toast(appLocalization.failed);
       return;
     }
     sales.isHold = 1;
@@ -363,7 +362,7 @@ class SalesProcessModalController extends PaymentGatewayController {
   Future<void> addCustomer() async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'add_customer'.tr,
+        title: appLocalization.addCustomer,
         subTitle: '',
         child: AddCustomerModalView(),
       ),

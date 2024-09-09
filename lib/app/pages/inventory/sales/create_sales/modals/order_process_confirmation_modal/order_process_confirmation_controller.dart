@@ -45,9 +45,9 @@ class OrderProcessConfirmationController extends PrinterController {
           final isPrinted = await printSales(sales);
 
           if (isPrinted) {
-            toast('print_success'.tr);
+            toast(appLocalization.success);
           } else {
-            toast('print_failed'.tr);
+            toast(appLocalization.failed);
           }
         },
       );
