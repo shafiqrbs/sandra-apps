@@ -412,7 +412,7 @@ class SalesInformationModalView
                       ),
                       Expanded(
                         child: InkWell(
-                          onTap: () => controller.copySales(sales),
+                          onTap: controller.copySales,
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
