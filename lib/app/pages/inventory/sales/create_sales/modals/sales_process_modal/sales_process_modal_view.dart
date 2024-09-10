@@ -338,7 +338,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CommonText(
-                text: appLocalization.donNotHaveAnAccount,
+                text: appLocalization.dontYouHaveCustomer,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
                 textColor: colors.textColorH6,
