@@ -26,7 +26,7 @@ class PageBackButton extends StatelessWidget {
           Expanded(
             child: CommonText(
               text: pageTitle??'',
-              fontSize: 14,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               textColor: Colors.white,
             ),

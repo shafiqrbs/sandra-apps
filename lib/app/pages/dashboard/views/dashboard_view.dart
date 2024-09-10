@@ -457,6 +457,7 @@ class DashboardView extends BaseView<DashboardController> {
             fontSize: 12,
             fontWeight: FontWeight.w500,
             textColor: Colors.white,
+            maxLine: 1,
           ),
         ),
       ),
@@ -496,6 +497,7 @@ class DashboardView extends BaseView<DashboardController> {
         child: Row(
           children: [
             TbdTextButton(
+              flex: 4,
               selectedBgColor: colors.primaryBaseColor,
               text: appLocalization.inventory,
               onPressed: () => controller.updateSelectedButtonGroup(
@@ -505,6 +507,7 @@ class DashboardView extends BaseView<DashboardController> {
                   SelectedButtonGroup.inventory,
             ),
             TbdTextButton(
+              flex: 5,
               selectedBgColor: colors.primaryBaseColor,
               text: appLocalization.accounting,
               onPressed: () => controller.updateSelectedButtonGroup(
@@ -514,6 +517,7 @@ class DashboardView extends BaseView<DashboardController> {
                   SelectedButtonGroup.accounting,
             ),
             TbdTextButton(
+              flex: 4,
               selectedBgColor: colors.primaryBaseColor,
               text: appLocalization.create,
               onPressed: () => controller.updateSelectedButtonGroup(
@@ -523,6 +527,7 @@ class DashboardView extends BaseView<DashboardController> {
                   SelectedButtonGroup.create,
             ),
             TbdTextButton(
+              flex: 4,
               selectedBgColor: colors.primaryBaseColor,
               text: appLocalization.config,
               onPressed: () => controller.updateSelectedButtonGroup(

@@ -11,6 +11,7 @@ class TbdTextButton extends StatelessWidget {
   final Color unselectedBgColor;
   final Color unselectedTextColor;
   final bool isSelected;
+  final int flex;
 
   const TbdTextButton({
     required this.text,
@@ -20,12 +21,14 @@ class TbdTextButton extends StatelessWidget {
     this.unselectedBgColor = Colors.transparent,
     this.unselectedTextColor = const Color(0xff202020),
     this.isSelected = false,
+    this.flex = 1,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: flex,
       child: InkWell(
         onTap: onPressed,
         child: Container(
