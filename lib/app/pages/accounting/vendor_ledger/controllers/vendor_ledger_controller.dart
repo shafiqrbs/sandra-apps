@@ -86,8 +86,8 @@ class VendorLedgerController extends BaseController {
   void showReceiveModal() {
     Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.payment,
+        subTitle: '',
         child: VendorPaymentModalView(
           vendor: vendor,
         ),

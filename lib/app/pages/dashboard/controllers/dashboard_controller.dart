@@ -258,8 +258,8 @@ class DashboardController extends BaseController {
   Future<void> showVendorPaymentModal() async {
     final isNewReceived = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.payment,
+        subTitle: '',
         child: VendorPaymentModalView(
           vendor: null,
         ),

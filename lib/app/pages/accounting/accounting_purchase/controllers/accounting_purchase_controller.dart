@@ -151,7 +151,7 @@ class AccountingPurchaseController extends BaseController {
   Future<void> showVendorPaymentModal() async {
     final isNewReceived = await Get.dialog(
       DialogPattern(
-        title: appLocalization.newReceive,
+        title: appLocalization.payment,
         subTitle: '',
         child: VendorPaymentModalView(
           vendor: null,

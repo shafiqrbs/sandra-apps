@@ -287,7 +287,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CommonText(
-                text: appLocalization.donNotHaveAnAccount,
+                text: appLocalization.dontYouHaveVendor,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
                 textColor: colors.textColorH6,
