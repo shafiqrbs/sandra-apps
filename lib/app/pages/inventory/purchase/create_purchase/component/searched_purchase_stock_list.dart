@@ -75,7 +75,7 @@ class PurchaseItemView extends BaseWidget {
           () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: const Color(0xFFFAF4FB),
+              color: index.isEven ? colors.evenListColor : colors.oddListColor,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 color:
