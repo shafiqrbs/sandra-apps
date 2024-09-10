@@ -360,6 +360,7 @@
   "salesAllowedWithoutPayment" : "পেমেন্ট ছাড়া বিক্রয় অনুমোদিত",
   "autoSalesApproval" : "অটো বিক্রয় অনুমোদন",
   "autoPurchaseApproval" : "অটো ক্রয় অনুমোদন",
+  "importDataToEnsureEverythingIsUpToDate" : "সব কিছু আপডেট করা নিশ্চিত করতে ডেটা ইম্পোর্ট করুন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

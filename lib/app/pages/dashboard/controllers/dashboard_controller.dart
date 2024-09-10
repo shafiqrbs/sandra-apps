@@ -202,7 +202,7 @@ List<Widget> configButtonList = [
       Get.dialog(
         DialogPattern(
           title: appLocalization.synchronization,
-          subTitle: appLocalization.synchronizeYourDataWithImportAndExport,
+          subTitle: appLocalization.importDataToEnsureEverythingIsUpToDate,
           child: SyncModalView(),
         ),
       );

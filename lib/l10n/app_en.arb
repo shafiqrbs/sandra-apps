@@ -321,5 +321,6 @@
   "purchaseOnlineOffline" : "Purchase online/offline",
   "salesAllowedWithoutPayment" : "Sales allowed without payment",
   "autoSalesApproval" : "Auto sales approval",
-  "autoPurchaseApproval" : "Auto purchase approval"
+  "autoPurchaseApproval" : "Auto purchase approval",
+  "importDataToEnsureEverythingIsUpToDate" : "Import data to ensure everything is up-to-date"
 }

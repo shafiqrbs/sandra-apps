@@ -171,7 +171,7 @@ List<Widget> buttonList = [
       Get.dialog(
         DialogPattern(
           title: appLocalization.synchronization,
-          subTitle: appLocalization.synchronizeYourDataWithImportAndExport,
+          subTitle: appLocalization.importDataToEnsureEverythingIsUpToDate,
           child: SyncModalView(),
         ),
       );

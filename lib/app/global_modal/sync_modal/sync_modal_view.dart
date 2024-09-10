@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/tbd_text_button.dart';
@@ -20,34 +21,44 @@ class SyncModalView extends BaseView<SyncModalController> {
             padding: EdgeInsets.all(falsePadding.value),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    TbdTextButton(
-                      text: appLocalization.dataImport,
-                      onPressed: () => controller.changeType(
-                        SyncType.import,
-                      ),
-                      isSelected:
-                          controller.selectedSyncType.value == SyncType.import,
-                    ),
-                    TbdTextButton(
-                      text: appLocalization.dataExport,
-                      onPressed: () => controller.changeType(
-                        SyncType.export,
-                      ),
-                      isSelected:
-                          controller.selectedSyncType.value == SyncType.export,
-                    ),
-                  ],
-                ),
-                controller.selectedSyncType.value == SyncType.export
-                    ? _exportButtonList()
-                    : _importButtonList(),
+                8.height,
+                _importButtonList(),
+                8.height,
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildImportExport(){
+    return Column(
+      children: [
+        Row(
+          children: [
+            TbdTextButton(
+              text: appLocalization.dataImport,
+              onPressed: () => controller.changeType(
+                SyncType.import,
+              ),
+              isSelected:
+              controller.selectedSyncType.value == SyncType.import,
+            ),
+            TbdTextButton(
+              text: appLocalization.dataExport,
+              onPressed: () => controller.changeType(
+                SyncType.export,
+              ),
+              isSelected:
+              controller.selectedSyncType.value == SyncType.export,
+            ),
+          ],
+        ),
+        controller.selectedSyncType.value == SyncType.export
+            ? _exportButtonList()
+            : _importButtonList(),
+      ],
     );
   }
 
@@ -97,7 +108,10 @@ class SyncModalView extends BaseView<SyncModalController> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 16,
+        ),
         child: Row(
           mainAxisAlignment: spaceBetweenMAA,
           children: [
