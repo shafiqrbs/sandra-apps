@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/no_record_found_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -10,6 +8,7 @@ import '/app/core/utils/style_function.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/list_button.dart';
+import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/page_back_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
@@ -329,7 +328,8 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             child: CommonText(
                               text: appLocalization.add,
                               textColor: colors.backgroundColor,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
                             ),
                           ),
                         ),
