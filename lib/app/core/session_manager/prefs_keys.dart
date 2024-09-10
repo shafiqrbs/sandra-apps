@@ -16,3 +16,4 @@ const prefsNumberOfPrinterNewLine = 'numberOfPrinterNewLine';
 const prefsHasPrinter = 'hasPrinter';
 const prefsIsSalesAutoApprove = 'isSalesAutoApprove';
 const prefsIsPurchaseAutoApprove = 'isPurchaseAutoApprove';
+const prefsIsTotalPriceConfig = 'isTotalPriceConfig';

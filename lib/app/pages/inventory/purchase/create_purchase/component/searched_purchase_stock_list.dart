@@ -99,9 +99,10 @@ class PurchaseItemView extends BaseWidget {
                               color: Color(0xFF4D4D4D),
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
-                              height: 1,
+                              height: 1.5,
                             ),
                           ),
+                          2.height,
                           Text(
                             stock.brandName ?? '',
                             maxLines: 1,

@@ -22,74 +22,149 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: spaceBetweenMAA,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    dividerWidget(),
                     Text(
-                      appLocalization.isSalesOnline,
+                      appLocalization.sales,
                       style: GoogleFonts.roboto(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    AdvancedSwitch(
-                      controller: controller.isSalesOnline,
-                      onChanged: (value) async {
-                        await controller.setSalesOnline(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryBaseColor,
-                      initialValue: controller.isSalesOnline.value,
+                    dividerWidget(),
+                    Row(
+                      mainAxisAlignment: spaceBetweenMAA,
+                      children: [
+                        Text(
+                          appLocalization.isSalesOnline,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        AdvancedSwitch(
+                          controller: controller.isSalesOnline,
+                          onChanged: (value) async {
+                            await controller.setSalesOnline(value);
+                          },
+                          borderRadius: BorderRadius.circular(4),
+                          height: 20,
+                          width: 40,
+                          activeColor: colors.primaryBaseColor,
+                          initialValue: controller.isSalesOnline.value,
+                        ),
+                      ],
+                    ),
+                    16.height,
+                    Row(
+                      mainAxisAlignment: spaceBetweenMAA,
+                      children: [
+                        Text(
+                          appLocalization.isZeroSalesAllowed,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        AdvancedSwitch(
+                          controller: controller.isZeroSalesAllowed,
+                          onChanged: (value) async {
+                            await controller.setZeroSalesAllowed(value);
+                          },
+                          borderRadius: BorderRadius.circular(4),
+                          height: 20,
+                          width: 40,
+                          activeColor: colors.primaryBaseColor,
+                          initialValue: controller.isZeroSalesAllowed.value,
+                        ),
+                      ],
+                    ),
+                    16.height,
+                    Row(
+                      mainAxisAlignment: spaceBetweenMAA,
+                      children: [
+                        Text(
+                          appLocalization.isSalesAutoApproved,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        AdvancedSwitch(
+                          controller: controller.isSalesAutoApproved,
+                          onChanged: (value) async {
+                            await controller.setSalesAutoApproved(value);
+                          },
+                          borderRadius: BorderRadius.circular(4),
+                          height: 20,
+                          width: 40,
+                          activeColor: colors.primaryBaseColor,
+                          initialValue: controller.isSalesAutoApproved.value,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                dividerWidget(),
-                Row(
-                  mainAxisAlignment: spaceBetweenMAA,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    dividerWidget(),
                     Text(
-                      appLocalization.isPurchaseOnline,
+                      appLocalization.purchase,
                       style: GoogleFonts.roboto(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    AdvancedSwitch(
-                      controller: controller.isPurchaseOnline,
-                      onChanged: (value) async {
-                        await controller.setPurchaseOnline(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryBaseColor,
-                      initialValue: controller.isPurchaseOnline.value,
+                    dividerWidget(),
+                    Row(
+                      mainAxisAlignment: spaceBetweenMAA,
+                      children: [
+                        Text(
+                          appLocalization.isPurchaseOnline,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        AdvancedSwitch(
+                          controller: controller.isPurchaseOnline,
+                          onChanged: (value) async {
+                            await controller.setPurchaseOnline(value);
+                          },
+                          borderRadius: BorderRadius.circular(4),
+                          height: 20,
+                          width: 40,
+                          activeColor: colors.primaryBaseColor,
+                          initialValue: controller.isPurchaseOnline.value,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                dividerWidget(),
-                Row(
-                  mainAxisAlignment: spaceBetweenMAA,
-                  children: [
-                    Text(
-                      appLocalization.isZeroSalesAllowed,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    AdvancedSwitch(
-                      controller: controller.isZeroSalesAllowed,
-                      onChanged: (value) async {
-                        await controller.setZeroSalesAllowed(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryBaseColor,
-                      initialValue: controller.isZeroSalesAllowed.value,
+                    16.height,
+                    Row(
+                      mainAxisAlignment: spaceBetweenMAA,
+                      children: [
+                        Text(
+                          appLocalization.isPurchaseAutoApproved,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        AdvancedSwitch(
+                          controller: controller.isPurchaseAutoApproved,
+                          onChanged: (value) async {
+                            await controller.setPurchaseAutoApproved(value);
+                          },
+                          borderRadius: BorderRadius.circular(4),
+                          height: 20,
+                          width: 40,
+                          activeColor: colors.primaryBaseColor,
+                          initialValue: controller.isPurchaseAutoApproved.value,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -114,54 +189,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       width: 40,
                       activeColor: colors.primaryBaseColor,
                       initialValue: controller.isHasPrinter.value,
-                    ),
-                  ],
-                ),
-                dividerWidget(),
-                Row(
-                  mainAxisAlignment: spaceBetweenMAA,
-                  children: [
-                    Text(
-                      appLocalization.isSalesAutoApproved,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    AdvancedSwitch(
-                      controller: controller.isSalesAutoApproved,
-                      onChanged: (value) async {
-                        await controller.setSalesAutoApproved(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryBaseColor,
-                      initialValue: controller.isSalesAutoApproved.value,
-                    ),
-                  ],
-                ),
-                dividerWidget(),
-                Row(
-                  mainAxisAlignment: spaceBetweenMAA,
-                  children: [
-                    Text(
-                      appLocalization.isPurchaseAutoApproved,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    AdvancedSwitch(
-                      controller: controller.isPurchaseAutoApproved,
-                      onChanged: (value) async {
-                        await controller.setPurchaseAutoApproved(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryBaseColor,
-                      initialValue: controller.isPurchaseAutoApproved.value,
                     ),
                   ],
                 ),
@@ -225,46 +252,53 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       Container(
                         color: Colors.white,
                         width: Get.width,
+                        padding: const EdgeInsets.only(
+                          left: 24,
+                          top: 16,
+                        ),
                         child: Column(
                           children: [
-                            RadioListTile<String>(
-                              title: Text(
-                                appLocalization.purchaseWithMrp,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: colors.defaultFontColor,
-                                ),
-                              ),
-                              value: 'purchase_with_mrp',
-                              groupValue: controller.selectedPurchase.value,
-                              onChanged: controller.changePurchase,
+                            _buildCustomRadioButton(
+                              title: appLocalization.purchaseWithMrp,
+                              isSelected: controller.selectedPurchase.value ==
+                                  'purchase_with_mrp',
+                              onTap: () {
+                                controller.changePurchase('purchase_with_mrp');
+                              },
                             ),
-                            RadioListTile<String>(
-                              title: Text(
-                                appLocalization.purchasePrice,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: colors.defaultFontColor,
-                                ),
-                              ),
-                              value: 'purchase_price',
-                              groupValue: controller.selectedPurchase.value,
-                              onChanged: controller.changePurchase,
+                            16.height,
+                            _buildCustomRadioButton(
+                              title: appLocalization.purchasePrice,
+                              isSelected: controller.selectedPurchase.value ==
+                                  'purchase_price',
+                              onTap: () {
+                                controller.changePurchase('purchase_price');
+                              },
                             ),
-                            RadioListTile<String>(
-                              title: Text(
-                                appLocalization.totalPrice,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: colors.defaultFontColor,
+                            16.height,
+                            Row(
+                              mainAxisAlignment: spaceBetweenMAA,
+                              children: [
+                                Text(
+                                  appLocalization.totalPrice,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              value: 'total_price',
-                              groupValue: controller.selectedPurchase.value,
-                              onChanged: controller.changePurchase,
+                                AdvancedSwitch(
+                                  controller: controller.isTotalPurchase,
+                                  onChanged: (value) async {
+                                    await controller.setTotalPurchase(value);
+                                  },
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryBaseColor,
+                                  initialValue:
+                                      controller.isTotalPurchase.value,
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -352,6 +386,49 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildCustomRadioButton({
+    required String title,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Container(
+            height: 20,
+            width: 20,
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: colors.primaryBaseColor,
+              ),
+            ),
+            child: isSelected
+                ? Container(
+                    height: 12,
+                    width: 12,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: colors.primaryBaseColor,
+                    ),
+                  )
+                : Container(),
+          ),
+          16.width,
+          Text(
+            title,
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

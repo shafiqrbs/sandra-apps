@@ -16,6 +16,7 @@ class PrefsSettingsModalController extends BaseController {
   final isHasPrinter = ValueNotifier(false);
   final isSalesAutoApproved = ValueNotifier(false);
   final isPurchaseAutoApproved = ValueNotifier(false);
+  final isTotalPurchase = ValueNotifier(false);
   final printerType = ''.obs;
   final selectedPurchase = ''.obs;
   final printerNewLine = 0.obs;
@@ -45,6 +46,7 @@ class PrefsSettingsModalController extends BaseController {
     printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
     printNewLineController.text = printerNewLine.value.toString();
     selectedPurchase.value = await prefs.getPurchaseConfig();
+    isTotalPurchase.value = await prefs.getTotalPriceConfig();
   }
 
   Future<void> setSalesOnline(bool value) async {
@@ -122,5 +124,12 @@ class PrefsSettingsModalController extends BaseController {
       selectedPurchase.value = config;
       await prefs.setPurchaseConfig(config);
     }
+  }
+
+  Future<void> setTotalPurchase(bool value) async {
+    isTotalPurchase.value = value;
+    await prefs.setTotalPriceConfig(
+       isTotalPrice: value,
+    );
   }
 }

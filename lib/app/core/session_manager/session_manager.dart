@@ -228,6 +228,21 @@ class SessionManager {
     return prefs.getString(prefsPurchaseConfig) ?? 'purchase_price';
   }
 
+  /// Set the login status of the user.
+  Future<void> setTotalPriceConfig({
+    required bool isTotalPrice,
+  }) async {
+    await prefs.setBool(
+      prefsIsTotalPriceConfig,
+      isTotalPrice,
+    );
+  }
+
+  /// Get the login status of the user.
+  Future<bool> getTotalPriceConfig() async {
+    return prefs.getBool(prefsIsTotalPriceConfig) ?? false;
+  }
+
   /// set number of printer new line
   Future<void> setNumberOfPrinterNewLine(
     int newLine,
