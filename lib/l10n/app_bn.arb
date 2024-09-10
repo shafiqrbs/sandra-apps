@@ -361,6 +361,8 @@
   "autoSalesApproval" : "অটো বিক্রয় অনুমোদন",
   "autoPurchaseApproval" : "অটো ক্রয় অনুমোদন",
   "importDataToEnsureEverythingIsUpToDate" : "সব কিছু আপডেট করা নিশ্চিত করতে ডেটা ইম্পোর্ট করুন",
+  "purchaseHasBeenAdded" : "ক্রয় যোগ করা হয়েছে",
+  "onlinePurchaseFailedToSaveLocally" : "অনলাইন ক্রয় স্থানীয়ভাবে সংরক্ষণ করা ব্যর্থ",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

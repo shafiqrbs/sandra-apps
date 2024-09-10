@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/entity/purchase.dart';
 import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 
@@ -62,6 +63,10 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _insertPurchase();
     }
+    showSnackBar(
+      title: appLocalization.success,
+      message: appLocalization.purchaseHasBeenAdded,
+    );
   }
 
   Future<void> _updatePurchase() async {
@@ -72,6 +77,10 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localUpdate();
     }
+    showSnackBar(
+      title: appLocalization.success,
+      message: appLocalization.purchaseHasBeenAdded,
+    );
   }
 
   Future<void> _insertPurchase() async {
@@ -82,6 +91,10 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localInsert();
     }
+    showSnackBar(
+      title: appLocalization.success,
+      message: appLocalization.purchaseHasBeenAdded,
+    );
   }
 
   Future<void> _localInsert() async {
@@ -92,10 +105,9 @@ class PurchaseConfirmController extends PrinterController {
     );
     final isOnline = await prefs.getIsPurchaseOnline();
     if (isOnline) {
-      toast(
-        'Online Purchase Failed Save Locally',
-        bgColor: Colors.red,
-        textColor: Colors.white,
+      showSnackBar(
+        title: appLocalization.failed,
+        message: appLocalization.onlinePurchaseFailedToSaveLocally,
       );
     }
     _navigateToLanding();

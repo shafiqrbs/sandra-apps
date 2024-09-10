@@ -322,5 +322,7 @@
   "salesAllowedWithoutPayment" : "Sales allowed without payment",
   "autoSalesApproval" : "Auto sales approval",
   "autoPurchaseApproval" : "Auto purchase approval",
-  "importDataToEnsureEverythingIsUpToDate" : "Import data to ensure everything is up-to-date"
+  "importDataToEnsureEverythingIsUpToDate" : "Import data to ensure everything is up-to-date",
+  "purchaseHasBeenAdded" : "Purchase has been added",
+  "onlinePurchaseFailedToSaveLocally" : "Online purchase failed to save locally"
 }
