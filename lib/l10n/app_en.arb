@@ -314,5 +314,6 @@
   "selectVendor": "Select Vendor",
   "purchaseOrder": "Purchase Order",
   "bluetoothConnectionUnavailable": "Bluetooth connection unavailable",
-  "salesHaveBeenAdded" : "Sales have been added"
+  "salesHaveBeenAdded" : "Sales have been added",
+  "salesReceive" : "Sales Receive"
 }

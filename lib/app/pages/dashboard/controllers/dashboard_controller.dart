@@ -246,7 +246,7 @@ class DashboardController extends BaseController {
   Future<void> showCustomerReceiveModal() async {
     final isNewReceived = await Get.dialog(
       DialogPattern(
-        title: appLocalization.newReceive,
+        title: appLocalization.salesReceive,
         subTitle: '',
         child: CustomerReceiveModalView(
           customer: null,

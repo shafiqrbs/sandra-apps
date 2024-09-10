@@ -118,8 +118,8 @@ class CustomerLedgerController extends BaseController {
   void showReceiveModal() {
     Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.salesReceive,
+        subTitle: '',
         child: CustomerReceiveModalView(
           customer: customer,
         ),
