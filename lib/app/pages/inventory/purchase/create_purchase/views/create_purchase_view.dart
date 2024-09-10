@@ -366,13 +366,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                           child: ElevatedButton(
                             onPressed: () {
                               if (controller.selectedStock.value != null) {
-                                toast('selected');
-                              } else {
-                                toast(
-                                  'not selected',
-                                );
-                              }
-                              if (controller.selectedStock.value != null) {
                                 controller.addPurchaseItem(
                                   process: '',
                                 );
@@ -390,6 +383,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               text: appLocalization.add,
                               textColor: colors.backgroundColor,
                               fontWeight: FontWeight.w500,
+                              fontSize: 14,
                             ),
                           ),
                         ),
@@ -480,7 +474,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.evenListColor,
+                color: colors.backgroundColor,
               ),
               child: SearchedPurchaseStockList(
                 stocks: controller.stockList.value,

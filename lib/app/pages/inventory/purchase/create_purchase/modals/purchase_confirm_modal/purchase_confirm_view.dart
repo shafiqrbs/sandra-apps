@@ -58,6 +58,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                                     );
                                   },
                                 ),
+                                8.height,
                                 Row(
                                   children: [
                                     RowButton(
