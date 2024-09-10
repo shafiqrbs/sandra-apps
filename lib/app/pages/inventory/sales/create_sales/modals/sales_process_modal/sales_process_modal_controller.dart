@@ -304,8 +304,8 @@ class SalesProcessModalController extends PaymentGatewayController {
       context: context,
       builder: (context) {
         return DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.orderProcessing,
+          subTitle: '',
           child: OrderProcessConfirmationView(
             sales: sales,
             isEdit: preSales != null,

@@ -310,5 +310,7 @@
   "thisAmountIsNotValid": "This amount is not valid",
   "enterAmount": "Enter Amount",
   "selectVendor": "Select Vendor",
-  "purchaseOrder": "Purchase Order"
+  "purchaseOrder": "Purchase Order",
+  "bluetoothConnectionUnavailable": "Bluetooth connection unavailable",
+  "salesHaveBeenAdded" : "Sales have been added"
 }

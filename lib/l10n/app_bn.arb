@@ -349,6 +349,8 @@
   "invoiceDataNotAvailable" : "এই চালানের বিবরণ উপলব্ধ নেই",
   "po" : "পি.ও",
   "pay" : "পে",
+  "bluetoothConnectionUnavailable" : "ব্লুটুথ সংযোগ অনুপলব্ধ",
+  "salesHaveBeenAdded" : "বিক্রয় যোগ করা হয়েছে",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

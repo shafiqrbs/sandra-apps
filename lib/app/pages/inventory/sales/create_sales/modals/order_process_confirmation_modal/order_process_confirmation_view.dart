@@ -60,6 +60,7 @@ class OrderProcessConfirmationView
                                   );
                                 },
                               ),
+                              8.height,
                               Row(
                                 children: [
                                   RowButton(

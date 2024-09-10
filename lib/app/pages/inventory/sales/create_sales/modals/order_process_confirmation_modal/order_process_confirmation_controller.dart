@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/sales.dart';
@@ -62,6 +63,10 @@ class OrderProcessConfirmationController extends PrinterController {
     } else {
       await _insertSales();
     }
+    showSnackBar(
+      title: appLocalization.success,
+      message: appLocalization.salesHaveBeenAdded,
+    );
   }
 
   Future<void> _updateSales() async {

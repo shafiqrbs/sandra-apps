@@ -83,7 +83,7 @@ class PrinterController extends BaseController {
     if (result) {
       msg.value = 'Bluetooth enabled, please search and connect';
     } else {
-      msg.value = 'Bluetooth not enabled';
+      msg.value = appLocalization.bluetoothConnectionUnavailable;
     }
 
     info.value = '$platformVersion ($batteryPercent% battery)';
