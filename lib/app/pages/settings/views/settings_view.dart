@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/page_back_button.dart';
-import '/app/pages/content/account_config/views/account_config_view.dart';
-import '/app/pages/content/help_config/views/help_config_view.dart';
-import '/app/pages/content/privacy_config/views/privacy_config_view.dart';
-import '/app/routes/app_pages.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/language_change_dropdown.dart';
+import '/app/core/widget/page_back_button.dart';
 import '/app/pages/settings/controllers/settings_controller.dart';
 
 //ignore: must_be_immutable
@@ -51,6 +48,7 @@ class SettingsView extends BaseView<SettingsController> {
                     leading: const Icon(TablerIcons.world),
                     title: Text(
                       appLocalization.language,
+                      style: commonTextStyle(),
                     ),
                     value: Text(languageController.dropDownValue.value.tr),
                     trailing: const Icon(TablerIcons.chevron_right),
@@ -60,13 +58,19 @@ class SettingsView extends BaseView<SettingsController> {
                       //Get.toNamed(Routes.accountConfig);
                     },
                     leading: const Icon(TablerIcons.user_cog),
-                    title: Text(appLocalization.account),
+                    title: Text(
+                      appLocalization.account,
+                      style: commonTextStyle(),
+                    ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {},
                     leading: const Icon(TablerIcons.printer),
-                    title: Text(appLocalization.printer),
+                    title: Text(
+                      appLocalization.printer,
+                      style: commonTextStyle(),
+                    ),
                     trailing: AdvancedSwitch(
                       controller: controller.isPrinterAllowed,
                       onChanged: (value) async {
@@ -84,7 +88,10 @@ class SettingsView extends BaseView<SettingsController> {
                       //Get.to(const AdditionalSettings());
                     },
                     leading: const Icon(TablerIcons.category),
-                    title: Text(appLocalization.additional),
+                    title: Text(
+                      appLocalization.additional,
+                      style: commonTextStyle(),
+                    ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
@@ -92,7 +99,10 @@ class SettingsView extends BaseView<SettingsController> {
                       //Get.toNamed(Routes.privacyConfig);
                     },
                     leading: const Icon(TablerIcons.lock),
-                    title: Text(appLocalization.privacy),
+                    title: Text(
+                      appLocalization.privacy,
+                      style: commonTextStyle(),
+                    ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
@@ -100,7 +110,10 @@ class SettingsView extends BaseView<SettingsController> {
                       //Get.toNamed(Routes.helpConfig);
                     },
                     leading: const Icon(TablerIcons.help),
-                    title: Text(appLocalization.help),
+                    title: Text(
+                      appLocalization.help,
+                      style: commonTextStyle(),
+                    ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                 ],
@@ -109,6 +122,13 @@ class SettingsView extends BaseView<SettingsController> {
           ),
         ],
       ),
+    );
+  }
+
+  TextStyle commonTextStyle() {
+    return GoogleFonts.roboto(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
     );
   }
 }
