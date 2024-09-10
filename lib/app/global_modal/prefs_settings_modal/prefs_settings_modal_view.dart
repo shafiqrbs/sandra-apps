@@ -166,6 +166,85 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                         ),
                       ],
                     ),
+                    16.height,
+                    Column(
+                      children: [
+                        _buildSettingButton(
+                          text: appLocalization.purchaseConfig,
+                          trailingIcon: TablerIcons.chevron_right,
+                          isOpen: controller.buttons.value == Buttons.purchase,
+                          onTap: () {
+                            controller.changeButton(Buttons.purchase);
+                          },
+                        ),
+                        if (controller.buttons.value == Buttons.purchase)
+                          8.height,
+                        if (controller.buttons.value == Buttons.purchase)
+                          Container(
+                            color: Colors.white,
+                            width: Get.width,
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                              top: 16,
+                              bottom: 16,
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 0),
+                                  child: Row(
+                                    mainAxisAlignment: spaceBetweenMAA,
+                                    children: [
+                                      Text(
+                                        appLocalization.totalPrice,
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      AdvancedSwitch(
+                                        controller: controller.isTotalPurchase,
+                                        onChanged: (value) async {
+                                          await controller
+                                              .setTotalPurchase(value);
+                                        },
+                                        borderRadius: BorderRadius.circular(4),
+                                        height: 20,
+                                        width: 40,
+                                        activeColor: colors.primaryBaseColor,
+                                        initialValue:
+                                            controller.isTotalPurchase.value,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                16.height,
+                                _buildCustomRadioButton(
+                                  title: appLocalization.purchaseWithMrp,
+                                  isSelected:
+                                      controller.selectedPurchase.value ==
+                                          'purchase_with_mrp',
+                                  onTap: () {
+                                    controller
+                                        .changePurchase('purchase_with_mrp');
+                                  },
+                                ),
+                                16.height,
+                                _buildCustomRadioButton(
+                                  title: appLocalization.purchasePrice,
+                                  isSelected:
+                                      controller.selectedPurchase.value ==
+                                          'purchase_price',
+                                  onTap: () {
+                                    controller.changePurchase('purchase_price');
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
                   ],
                 ),
                 dividerWidget(),
@@ -207,6 +286,12 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     ),
                     if (controller.buttons.value == Buttons.printPaperType)
                       Container(
+                        margin: const EdgeInsets.only(
+                          top: 8,
+                        ),
+                        padding: const EdgeInsets.only(
+                          bottom: 16,
+                        ),
                         color: Colors.white,
                         width: Get.width,
                         child: ListView.builder(
@@ -217,7 +302,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
 
                             return Padding(
                               padding: const EdgeInsets.only(
-                                left: 24,
+                                left: 16,
                                 top: 16,
                               ),
                               child: Obx(
@@ -252,78 +337,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                               ),
                             );
                           },
-                        ),
-                      ),
-                  ],
-                ),
-                dividerWidget(),
-                Column(
-                  children: [
-                    _buildSettingButton(
-                      icon: TablerIcons.sun,
-                      text: appLocalization.purchaseConfig,
-                      trailingIcon: TablerIcons.chevron_right,
-                      isOpen: controller.buttons.value == Buttons.purchase,
-                      onTap: () {
-                        controller.changeButton(Buttons.purchase);
-                      },
-                    ),
-                    if (controller.buttons.value == Buttons.purchase)
-                      Container(
-                        color: Colors.white,
-                        width: Get.width,
-                        padding: const EdgeInsets.only(
-                          left: 24,
-                          top: 16,
-                        ),
-                        child: Column(
-                          children: [
-                            _buildCustomRadioButton(
-                              title: appLocalization.purchaseWithMrp,
-                              isSelected: controller.selectedPurchase.value ==
-                                  'purchase_with_mrp',
-                              onTap: () {
-                                controller.changePurchase('purchase_with_mrp');
-                              },
-                            ),
-                            16.height,
-                            _buildCustomRadioButton(
-                              title: appLocalization.purchasePrice,
-                              isSelected: controller.selectedPurchase.value ==
-                                  'purchase_price',
-                              onTap: () {
-                                controller.changePurchase('purchase_price');
-                              },
-                            ),
-                            16.height,
-                            Padding(
-                              padding: const EdgeInsets.only(left: 36),
-                              child: Row(
-                                mainAxisAlignment: spaceBetweenMAA,
-                                children: [
-                                  Text(
-                                    appLocalization.totalPrice,
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  AdvancedSwitch(
-                                    controller: controller.isTotalPurchase,
-                                    onChanged: (value) async {
-                                      await controller.setTotalPurchase(value);
-                                    },
-                                    borderRadius: BorderRadius.circular(4),
-                                    height: 20,
-                                    width: 40,
-                                    activeColor: colors.primaryBaseColor,
-                                    initialValue:
-                                        controller.isTotalPurchase.value,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                   ],
@@ -469,7 +482,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
   }
 
   Widget _buildSettingButton({
-    required IconData icon,
+    IconData? icon,
     required String text,
     required IconData trailingIcon,
     required bool isOpen,
@@ -479,12 +492,13 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: colors.defaultFontColor,
-            size: 24,
-          ),
-          8.width,
+          if (icon != null)
+            Icon(
+              icon,
+              color: colors.defaultFontColor,
+              size: 24,
+            ),
+          if (icon != null) 8.width,
           Text(
             text,
             style: GoogleFonts.roboto(
