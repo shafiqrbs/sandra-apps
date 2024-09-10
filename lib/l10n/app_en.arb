@@ -315,5 +315,11 @@
   "purchaseOrder": "Purchase Order",
   "bluetoothConnectionUnavailable": "Bluetooth connection unavailable",
   "salesHaveBeenAdded" : "Sales have been added",
-  "salesReceive" : "Sales Receive"
+  "salesReceive" : "Sales Receive",
+  "inventorySettings" : "Inventory Settings",
+  "salesOnlineOffline" : "Sales online/offline",
+  "purchaseOnlineOffline" : "Purchase online/offline",
+  "salesAllowedWithoutPayment" : "Sales allowed without payment",
+  "autoSalesApproval" : "Auto sales approval",
+  "autoPurchaseApproval" : "Auto purchase approval"
 }

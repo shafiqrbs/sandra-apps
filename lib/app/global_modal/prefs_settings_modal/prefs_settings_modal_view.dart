@@ -38,7 +38,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       mainAxisAlignment: spaceBetweenMAA,
                       children: [
                         Text(
-                          appLocalization.isSalesOnline,
+                          appLocalization.salesOnlineOffline,
                           style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -62,7 +62,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       mainAxisAlignment: spaceBetweenMAA,
                       children: [
                         Text(
-                          appLocalization.isZeroSalesAllowed,
+                          appLocalization.salesAllowedWithoutPayment,
                           style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -86,7 +86,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       mainAxisAlignment: spaceBetweenMAA,
                       children: [
                         Text(
-                          appLocalization.isSalesAutoApproved,
+                          appLocalization.autoSalesApproval,
                           style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -123,7 +123,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       mainAxisAlignment: spaceBetweenMAA,
                       children: [
                         Text(
-                          appLocalization.isPurchaseOnline,
+                          appLocalization.purchaseOnlineOffline,
                           style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -147,7 +147,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       mainAxisAlignment: spaceBetweenMAA,
                       children: [
                         Text(
-                          appLocalization.isPurchaseAutoApproved,
+                          appLocalization.autoPurchaseApproval,
                           style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -252,7 +252,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   mainAxisAlignment: spaceBetweenMAA,
                   children: [
                     Text(
-                      appLocalization.isHasPrinter,
+                      appLocalization.printer,
                       style: GoogleFonts.roboto(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

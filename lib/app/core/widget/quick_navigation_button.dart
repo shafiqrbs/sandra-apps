@@ -184,8 +184,8 @@ List<Widget> buttonList = [
     onTap: () {
       Get.dialog(
         DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.inventorySettings,
+          subTitle: '',
           child: PrefsSettingsModalView(),
         ),
       );

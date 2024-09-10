@@ -187,7 +187,7 @@ List<Widget> configButtonList = [
     onTap: () {
       Get.dialog(
         DialogPattern(
-          title: appLocalization.inventory,
+          title: appLocalization.inventorySettings,
           subTitle: '',
           child: PrefsSettingsModalView(),
         ),
