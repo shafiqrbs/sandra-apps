@@ -214,6 +214,26 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           itemCount: controller.printerTypeList.length,
                           itemBuilder: (context, index) {
                             final item = controller.printerTypeList[index];
+
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 24,
+                                top: 16,
+                              ),
+                              child: Obx(
+                                () {
+                                  return _buildCustomRadioButton(
+                                    title: item.value ?? '',
+                                    isSelected: controller.printerType.value ==
+                                        item.value,
+                                    onTap: () {
+                                      controller.setPrinterType(item.value);
+                                    },
+                                  );
+                                },
+                              ),
+                            );
+
                             return RadioListTile<String>(
                               title: Text(
                                 item.value ?? '',
@@ -276,29 +296,32 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                               },
                             ),
                             16.height,
-                            Row(
-                              mainAxisAlignment: spaceBetweenMAA,
-                              children: [
-                                Text(
-                                  appLocalization.totalPrice,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 36),
+                              child: Row(
+                                mainAxisAlignment: spaceBetweenMAA,
+                                children: [
+                                  Text(
+                                    appLocalization.totalPrice,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                                AdvancedSwitch(
-                                  controller: controller.isTotalPurchase,
-                                  onChanged: (value) async {
-                                    await controller.setTotalPurchase(value);
-                                  },
-                                  borderRadius: BorderRadius.circular(4),
-                                  height: 20,
-                                  width: 40,
-                                  activeColor: colors.primaryBaseColor,
-                                  initialValue:
-                                      controller.isTotalPurchase.value,
-                                ),
-                              ],
+                                  AdvancedSwitch(
+                                    controller: controller.isTotalPurchase,
+                                    onChanged: (value) async {
+                                      await controller.setTotalPurchase(value);
+                                    },
+                                    borderRadius: BorderRadius.circular(4),
+                                    height: 20,
+                                    width: 40,
+                                    activeColor: colors.primaryBaseColor,
+                                    initialValue:
+                                        controller.isTotalPurchase.value,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
