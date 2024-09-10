@@ -352,6 +352,7 @@
   "bluetoothConnectionUnavailable" : "ব্লুটুথ সংযোগ অনুপলব্ধ",
   "salesHaveBeenAdded" : "বিক্রয় যোগ করা হয়েছে",
   "dontYouHaveVendor" : "আপনার কোন বিক্রেতা নেই?",
+  "createVendor" : "বিক্রেতা তৈরি করুন",
   "onlineSalesFailed" : "Online Sales Failed",
   "areYouSure" : "Are You Sure?",
   "retry" : "Retry",

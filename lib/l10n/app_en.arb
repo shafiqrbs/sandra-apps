@@ -267,6 +267,7 @@
   "flat" : "Flat",
   "dontYouHaveCustomer" : "Don’t you have customer?",
   "dontYouHaveVendor" : "Don’t you have vendor?",
+  "createVendor" : "Create Vendor",
   "printPaperType" : "Print Paper Type",
   "printEndNewLine" : "Print End New Line",
   "dueCustomerList" : "Due Customer List",

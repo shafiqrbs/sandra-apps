@@ -289,7 +289,7 @@ class PurchaseProcessController extends BaseController {
   Future<void> addVendor() async {
     final result = await Get.dialog(
       DialogPattern(
-        title: appLocalization.addVendor,
+        title: appLocalization.createVendor,
         subTitle: '',
         child: AddVendorModalView(),
       ),
