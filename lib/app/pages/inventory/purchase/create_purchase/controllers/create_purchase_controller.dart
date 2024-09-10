@@ -32,7 +32,8 @@ class CreatePurchaseController extends StockSelectionController {
       }
       if (args['purchase_item_list'] != null) {
         if (args['purchase_item_list'] is List<PurchaseItem>) {
-          purchaseItemList.value = args['purchase_item_list'] as List<PurchaseItem>;
+          purchaseItemList.value =
+              args['purchase_item_list'] as List<PurchaseItem>;
           calculateAllSubtotal();
         }
       }
@@ -102,6 +103,10 @@ class CreatePurchaseController extends StockSelectionController {
       toast(appLocalization.error);
       return;
     }
+
+    purchaseItem.subTotal = double.tryParse(
+      purchaseItem.subTotal!.toStringAsFixed(2),
+    );
 
     // Update purchaseSubTotal value
     purchaseSubTotal

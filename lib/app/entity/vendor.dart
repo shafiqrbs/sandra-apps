@@ -51,7 +51,7 @@ class Vendor {
   Map<String, dynamic> toJson() {
     return {
       'global_id': globalId,
-      'customer_id': vendorId,
+      'vendor_id': vendorId,
       'name': name,
       'mobile': mobile,
       'address': address,
