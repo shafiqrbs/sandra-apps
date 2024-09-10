@@ -10,14 +10,19 @@ echo "Building Android..."
 # Build the APK in release mode
 flutter build apk --release -t lib/main_dev.dart
 
-# Get the current date and time in the desired format
-current_date=$(date "+%Y-%m-%d_%I:%M:%S_%p")
+#get month
+month=$(date "+%m")
 
-# Replace colons with hyphens to ensure it's a valid filename
-sanitized_date=$(echo $current_date | tr ':' '-')
+#get day
+day=$(date "+%d")
+
+BUILD_NUMBER=1;
 
 # Copy the built APK to a new file with a timestamped filename
-cp build/app/outputs/flutter-apk/app-release.apk "sandra_${sanitized_date}.apk"
+# cp build/app/outputs/flutter-apk/app-release.apk "sandra_v${month}.${day}.${BUILD_NUMBER}.apk"
+
+# copy the built APK to the Desktop
+cp build/app/outputs/flutter-apk/app-release.apk  ~/Desktop/sandra_v${month}.${day}.${BUILD_NUMBER}.apk
 
 # Output a message indicating that the build is complete
 echo "APK created successfully"
