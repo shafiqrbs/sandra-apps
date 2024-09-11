@@ -20,7 +20,7 @@ class CustomerListView extends BaseView<CustomerListController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: Obx(
         () {
           return AppBarSearchView(

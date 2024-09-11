@@ -182,7 +182,7 @@ class AppBarSearchView extends BaseWidget {
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   TablerIcons.search,
-                  color: colors.primaryBaseColor,
+                  color: colors.primaryColor500,
                   size: 18,
                 ),
                 suffixIcon: Row(
@@ -207,14 +207,14 @@ class AppBarSearchView extends BaseWidget {
                       },
                       icon: Icon(
                         TablerIcons.microphone,
-                        color: colors.primaryBaseColor,
+                        color: colors.primaryColor500,
                       ),
                     ),
                     isShowFilter! ?IconButton(
                       onPressed: onFilterTap,
                       icon: Icon(
                         TablerIcons.filter,
-                        color: colors.primaryBaseColor,
+                        color: colors.primaryColor500,
                       ),
                     ) : Container(),
                     IconButton(

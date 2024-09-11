@@ -24,8 +24,8 @@ class CustomerLedger {
   final String? mobile;
   String? approvedBy;
   final String? accountBank;
-  final int? total;
-  final int? amount;
+  final num? total;
+  final num? amount;
   final String? createdBy;
 
   CustomerLedger({

@@ -45,7 +45,7 @@ class DialogPattern extends BaseWidget {
                     children: [
                       DecoratedBox(
                         decoration: BoxDecoration(
-                          color: colors.secondaryColor50,
+                          color: colors.primaryColor50,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(
                               containerBorderRadius,
@@ -116,7 +116,7 @@ class DialogPattern extends BaseWidget {
                 height: 130,
                 width: 130,
                 decoration: BoxDecoration(
-                  color: colors.secondaryColor50,
+                  color: colors.primaryColor50,
                   borderRadius: BorderRadius.circular(
                     100,
                   ),

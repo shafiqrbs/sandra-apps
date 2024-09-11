@@ -447,7 +447,7 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           padding: const EdgeInsets.symmetric(
             vertical: 12,
-            horizontal: 16,
+            horizontal: 8,
           ),
           decoration: BoxDecoration(
             color: buttonColor,
