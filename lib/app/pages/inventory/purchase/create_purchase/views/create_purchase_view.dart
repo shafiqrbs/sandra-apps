@@ -25,7 +25,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: PageBackButton(
         pageTitle: appLocalization.createPurchase,
       ),
@@ -66,7 +66,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       child: Container(
         height: 7.ph,
         width: Get.width,
-        color: colors.primaryBaseColor,
+        color: colors.primaryColor400,
         alignment: Alignment.center,
         margin: const EdgeInsets.only(
           bottom: 7,
@@ -113,7 +113,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: colors.primaryLiteColor,
+                    color: colors.primaryColor200,
                   ),
                   child: Row(
                     mainAxisAlignment: centerMAA,

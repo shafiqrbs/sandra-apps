@@ -51,7 +51,7 @@ class PurchaseItemListView extends BaseWidget {
           children: [
             Container(
               //  height: 100,
-              color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              color: index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
               margin: const EdgeInsets.only(bottom: 4, left: 16, right: 2),
               padding: const EdgeInsets.only(left: 16, right: 8, bottom: 4),
               child: Stack(
@@ -324,8 +324,8 @@ class PurchaseItemListView extends BaseWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: index.isEven
-                        ? colors.evenListColor
-                        : colors.oddListColor,
+                        ? colors.secondaryColor50
+                        : colors.primaryColor50,
                   ),
                   child: Text(
                     (index + 1).toString(),

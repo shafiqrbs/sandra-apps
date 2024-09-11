@@ -104,7 +104,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
             right: 4,
           ),
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.primaryColor500,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(
                 containerBorderRadius,
@@ -205,10 +205,10 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                                   : Container(),
                               IconButton(
                                 onPressed: controller.addVendor,
-                                icon: const Icon(
+                                icon: Icon(
                                   TablerIcons.user_plus,
                                   size: 20,
-                                  color: Color(0xFFC98A69),
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ],
@@ -266,7 +266,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   text: appLocalization.addVendor,
                   fontSize: mediumTFSize,
                   fontWeight: FontWeight.w500,
-                  textColor: colors.primaryBaseColor,
+                  textColor: colors.primaryColor500,
                   textDecoration: TextDecoration.underline,
                 ),
               ),
@@ -425,7 +425,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: colors.selectedColor,
+              color: colors.primaryColor50,
             ),
             child: Column(
               mainAxisAlignment: centerMAA,
@@ -476,7 +476,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     borderRadius: BorderRadius.circular(
                       containerBorderRadius,
                     ),
-                    color: colors.dangerBaseColor.withOpacity(.3),
+                    color: colors.primaryColor50,
                   ),
                   child: Column(
                     mainAxisAlignment: centerMAA,
@@ -528,9 +528,9 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                         fontSize: regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.primaryBaseColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      enabledBorderColor: colors.primaryColor200,
+                      focusedBorderColor: colors.primaryColor500,
+                      errorBorderColor: colors.primaryColor200,
                     ),
                     onChanged: controller.onAmountChange,
                   ),
@@ -696,14 +696,17 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
             buttonName: appLocalization.reset,
             onTap: () => controller.reset(context),
             leftIcon: TablerIcons.restore,
-            buttonBGColor: colors.dangerLiteColor,
+            buttonBGColor: Colors.transparent,
+            isOutline: true,
           ),
           4.width,
           RowButton(
             buttonName: appLocalization.hold,
             onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
-            buttonBGColor: Colors.grey,
+            buttonBGColor: colors.primaryColor50,
+            buttonTextColor: colors.primaryColor500,
+            isOutline: false,
           ),
           4.width,
           RowButton(
