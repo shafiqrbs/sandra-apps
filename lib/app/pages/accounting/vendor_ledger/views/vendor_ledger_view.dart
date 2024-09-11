@@ -37,7 +37,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
   Widget _buildSearchBar() {
     return Container(
       padding: const EdgeInsets.only(top: 4, bottom: 4),
-      color: colors.selectedColor,
+      color: colors.primaryColor100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -106,7 +106,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: colors.selectedColor.withOpacity(.6),
+                      color: colors.primaryColor50,
                       borderRadius: BorderRadius.circular(
                         containerBorderRadius,
                       ),
@@ -131,7 +131,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: colors.selectedColor.withOpacity(.8),
+                      color: colors.primaryColor50,
                       borderRadius: BorderRadius.circular(
                         containerBorderRadius,
                       ),
@@ -156,7 +156,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: colors.selectedColor.withOpacity(.8),
+                      color: colors.primaryColor50,
                       borderRadius: BorderRadius.circular(
                         containerBorderRadius,
                       ),
@@ -207,7 +207,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
             right: 4,
           ),
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.primaryColor400,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
@@ -293,8 +293,8 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                           ),
                           decoration: BoxDecoration(
                             color: index.isEven
-                                ? colors.evenListColor
-                                : colors.oddListColor,
+                                ? colors.backgroundColor
+                                : colors.primaryColor50,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Row(
@@ -345,29 +345,13 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                                 flex: 2,
                                 child: Text(
                                   data.balance.toString(),
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 4,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            color: index.isEven
-                                ? colors.evenListColor
-                                : colors.oddListColor,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Icon(
-                            TablerIcons.eye,
-                            size: 18,
                           ),
                         ),
                       ),

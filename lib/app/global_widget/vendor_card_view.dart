@@ -36,11 +36,13 @@ class VendorCardView extends BaseWidget {
               containerBorderRadius,
             ),
             border: Border.all(
-              color: colors.borderColor,
+              color: index.isEven
+                  ? colors.secondaryColor100
+                  : colors.primaryColor100,
             ),
             color: index.isEven
-                ? colors.evenListColor
-                : colors.evenListColor.withOpacity(.4),
+                ? colors.secondaryColor50
+                : colors.primaryColor50,
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
