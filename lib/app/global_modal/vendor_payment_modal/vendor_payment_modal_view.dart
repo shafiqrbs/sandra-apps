@@ -154,15 +154,13 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.primaryBaseColor,
-                                  width: 2,
+                                  color: colors.primaryColor200,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.borderColor,
-                                  width: 2,
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ),
@@ -237,10 +235,10 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                                   : Container(),
                               IconButton(
                                 onPressed: controller.addVendor,
-                                icon: const Icon(
+                                icon: Icon(
                                   TablerIcons.user_plus,
                                   size: 20,
-                                  color: Color(0xFFC98A69),
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ],
@@ -298,7 +296,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                   text: appLocalization.addVendor,
                   fontSize: mediumTFSize,
                   fontWeight: FontWeight.w500,
-                  textColor: colors.primaryBaseColor,
+                  textColor: colors.primaryColor500,
                   textDecoration: TextDecoration.underline,
                 ),
               ),
