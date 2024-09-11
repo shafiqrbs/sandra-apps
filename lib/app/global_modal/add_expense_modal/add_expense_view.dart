@@ -126,15 +126,13 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.primaryBaseColor,
-                                  width: 2,
+                                  color: colors.primaryColor200,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.borderColor,
-                                  width: 2,
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ),
