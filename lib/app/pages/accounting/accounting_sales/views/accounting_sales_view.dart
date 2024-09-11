@@ -37,7 +37,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: Obx(
         () {
           return AppBarSearchView(
@@ -178,11 +178,14 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color:
-                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                color: index.isEven
+                    ? colors.secondaryColor50
+                    : colors.primaryColor50,
                 borderRadius: BorderRadius.circular(containerBorderRadius),
                 border: Border.all(
-                  color: colors.tertiaryBaseColor,
+                  color: index.isEven
+                      ? colors.secondaryColor100
+                      : colors.primaryColor100,
                 ),
               ),
               child: Column(

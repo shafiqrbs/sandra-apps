@@ -141,7 +141,7 @@ class SalesInformationModalView
                     right: 16,
                   ),
                   decoration: BoxDecoration(
-                    color: colors.primaryLiteColor.withOpacity(.5),
+                    color: colors.primaryColor50,
                   ),
                   margin: const EdgeInsets.only(
                     top: 4,
@@ -212,8 +212,8 @@ class SalesInformationModalView
                           margin: const EdgeInsets.only(bottom: 2),
                           decoration: BoxDecoration(
                             color: index.isEven
-                                ? colors.evenListColor
-                                : colors.oddListColor,
+                                ? colors.backgroundColor
+                                : colors.secondaryColor50,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
