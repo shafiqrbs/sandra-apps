@@ -26,13 +26,13 @@ class SubTabItemView extends StatelessWidget {
 
     final color = isSelected
         ? Colors.white
-        : ColorSchema().primaryBaseColor;
+        : ColorSchema().primaryColor500;
     return InkWell(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 15.v),
         decoration: BoxDecoration(
-          color: isSelected ? colors.primaryBaseColor : Colors.transparent,
+          color: isSelected ? colors.primaryColor500 : Colors.transparent,
           border: Border(
             top: BorderSide(
               color: color,

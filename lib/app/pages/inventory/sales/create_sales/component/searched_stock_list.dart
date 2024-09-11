@@ -81,12 +81,11 @@ class StockItem extends BaseWidget {
           () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6,),
             decoration: BoxDecoration(
-              color: const Color(0xFFFAF4FB),
+              color: colors.secondaryColor50,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 color:
                     isEditing.value ? colors.primaryColor : Colors.transparent,
-                width: 2,
               ),
             ),
             child: Column(

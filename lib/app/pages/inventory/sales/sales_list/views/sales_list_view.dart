@@ -31,7 +31,7 @@ class SalesListView extends BaseView<SalesListController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: Obx(
         () => AppBarSearchView(
           pageTitle: appLocalization.sales,
@@ -364,7 +364,7 @@ class SalesListView extends BaseView<SalesListController> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primaryBaseColor.withOpacity(.6),
+                  color: colors.primaryColor50,
                   borderRadius: BorderRadius.circular(containerBorderRadius),
                 ),
                 child: Row(

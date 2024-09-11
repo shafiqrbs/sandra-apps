@@ -57,7 +57,7 @@ class CommonHeaderText extends StatelessWidget with AppDimension {
           style: TextStyle(
             fontSize: fontSize ?? 10,
             fontWeight: FontWeight.w500,
-            color: textColor ?? colorSchema.primaryTextColor,
+            color: textColor ?? Colors.white,
           ),
         ),
       ),

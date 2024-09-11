@@ -111,7 +111,7 @@ class DashboardView extends BaseView<DashboardController> {
       height: AppBar().preferredSize.height,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: colors.primaryBaseColor,
+        color: colors.primaryColor500,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,8 +254,9 @@ class DashboardView extends BaseView<DashboardController> {
         vertical: 10,
         horizontal: 16,
       ),
-      decoration: const BoxDecoration(
-        color: Color(0xffF7EDE9),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+        //color: Color(0xffF7EDE9),
       ),
       child: Row(
         children: [
@@ -396,9 +397,10 @@ class DashboardView extends BaseView<DashboardController> {
       margin: const EdgeInsets.symmetric(
         horizontal: 16,
       ),
-      decoration: const BoxDecoration(
-        color: Color(0xffF7EDE9),
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+        //color: Color(0xffF7EDE9),
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(4),
           topRight: Radius.circular(4),
         ),
@@ -489,8 +491,9 @@ class DashboardView extends BaseView<DashboardController> {
         horizontal: 16,
         vertical: 4,
       ),
-      decoration: const BoxDecoration(
-        color: Color(0xffF7EDE9),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+        //color: Color(0xffF7EDE9),
       ),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 800),
@@ -498,7 +501,7 @@ class DashboardView extends BaseView<DashboardController> {
           children: [
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryBaseColor,
+              selectedBgColor: colors.primaryColor500,
               text: appLocalization.inventory,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.inventory,
@@ -508,7 +511,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 5,
-              selectedBgColor: colors.primaryBaseColor,
+              selectedBgColor: colors.primaryColor500,
               text: appLocalization.accounting,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.accounting,
@@ -518,7 +521,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryBaseColor,
+              selectedBgColor: colors.primaryColor500,
               text: appLocalization.create,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.create,
@@ -528,7 +531,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryBaseColor,
+              selectedBgColor: colors.primaryColor500,
               text: appLocalization.config,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.config,

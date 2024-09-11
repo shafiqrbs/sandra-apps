@@ -87,7 +87,7 @@ class SalesItemListView extends BaseWidget {
                   containerBorderRadius,
                 ),
                 color:
-                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                    index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
                 border: Border.all(
                   color: colors.tertiaryBaseColor,
                   width: 0,
@@ -491,8 +491,8 @@ class SalesItemListView extends BaseWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: index.isEven
-                        ? colors.evenListColor
-                        : colors.oddListColor,
+                        ? colors.secondaryColor50
+                        : colors.primaryColor50,
                   ),
                   child: Text(
                     (index + 1).toString(),

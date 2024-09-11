@@ -1,6 +1,36 @@
 import 'package:flutter/material.dart';
 
 class ColorSchema {
+
+  Color primaryColor = const Color(0xFF00994F);
+
+  Color primaryColor900 = const Color(0xFF004021);
+  Color primaryColor800 = const Color(0xFF00542B);
+  Color primaryColor700 = const Color(0xFF006D38);
+  Color primaryColor600 = const Color(0xFF008B48);
+  Color primaryColor500 = const Color(0xFF00994F);
+  Color primaryColor400 = const Color(0xFF33AD72);
+  Color primaryColor300 = const Color(0xFF54BB89);
+  Color primaryColor200 = const Color(0xFF8AD0AE);
+  Color primaryColor100 = const Color(0xFFB0DFC8);
+  Color primaryColor50 = const Color(0xFFE6F5ED);
+
+
+  Color secondaryColor = const Color(0xFF30444F);
+
+  Color secondaryColor900 = const Color(0xFF141D21);
+  Color secondaryColor800 = const Color(0xFF1A252B);
+  Color secondaryColor700 = const Color(0xFF223038);
+  Color secondaryColor600 = const Color(0xFF2C3E48);
+  Color secondaryColor500 = const Color(0xFF30444F);
+  Color secondaryColor400 = const Color(0xFF596972);
+  Color secondaryColor300 = const Color(0xFF748289);
+  Color secondaryColor200 = const Color(0xFFA0A9AE);
+  Color secondaryColor100 = const Color(0xFFBFC5C8);
+  Color secondaryColor50 = const Color(0xFFEAECED);
+
+
+
   Color primaryBackgroundColor = const Color(0xffffffff);
 
   Color colorOne = const Color(0xfffa383e);
@@ -59,7 +89,6 @@ class ColorSchema {
 
   //End
 
-  Color primaryColor = const Color(0xFFF7DFBB);
   Color primaryBorderColor = Colors.white;
   //Color primaryTextColor = Colors.blue.shade900;
   //Color secondaryTextColor = Colors.grey;
@@ -192,6 +221,88 @@ class ColorSchema {
     }
 
     return ColorSchema()
+
+
+      ..primaryColor900 = parseColor(
+        json['primaryColor900'],
+        const Color(0xFF004021),
+      )
+      ..primaryColor800 = parseColor(
+        json['primaryColor800'],
+        const Color(0xFF00542B),
+      )
+      ..primaryColor700 = parseColor(
+        json['primaryColor700'],
+        const Color(0xFF006D38),
+      )
+      ..primaryColor600 = parseColor(
+        json['primaryColor600'],
+        const Color(0xFF008B48),
+      )
+      ..primaryColor500 = parseColor(
+        json['primaryColor500'],
+        const Color(0xFF00994F),
+      )
+      ..primaryColor400 = parseColor(
+        json['primaryColor400'],
+        const Color(0xFF33AD72),
+      )
+      ..primaryColor300 = parseColor(
+        json['primaryColor300'],
+        const Color(0xFF54BB89),
+      )
+      ..primaryColor200 = parseColor(
+        json['primaryColor200'],
+        const Color(0xFF8AD0AE),
+      )
+      ..primaryColor100 = parseColor(
+        json['primaryColor100'],
+        const Color(0xFFB0DFC8),
+      )
+      ..primaryColor50 = parseColor(
+        json['primaryColor50'],
+        const Color(0xFFE6F5ED),
+      )
+      ..secondaryColor900 = parseColor(
+        json['secondaryColor900'],
+        const Color(0xFF141D21),
+      )
+      ..secondaryColor800 = parseColor(
+        json['secondaryColor800'],
+        const Color(0xFF1A252B),
+      )
+      ..secondaryColor700 = parseColor(
+        json['secondaryColor700'],
+        const Color(0xFF223038),
+      )
+      ..secondaryColor600 = parseColor(
+        json['secondaryColor600'],
+        const Color(0xFF2C3E48),
+      )
+      ..secondaryColor500 = parseColor(
+        json['secondaryColor500'],
+        const Color(0xFF30444F),
+      )
+      ..secondaryColor400 = parseColor(
+        json['secondaryColor400'],
+        const Color(0xFF596972),
+      )
+      ..secondaryColor300 = parseColor(
+        json['secondaryColor300'],
+        const Color(0xFF748289),
+      )
+      ..secondaryColor200 = parseColor(
+        json['secondaryColor200'],
+        const Color(0xFFA0A9AE),
+      )
+      ..secondaryColor100 = parseColor(
+        json['secondaryColor100'],
+        const Color(0xFFBFC5C8),
+      )
+      ..secondaryColor50 = parseColor(
+        json['secondaryColor50'],
+        const Color(0xFFEAECED),
+      )
 
       // poskeeper colorschema
       ..primaryBackgroundColor = parseColor(
@@ -378,7 +489,11 @@ class ColorSchema {
       //
       ..primaryColor = parseColor(
         json['primaryColor'],
-        Colors.blue.shade900,
+        const Color(0xFF004021),
+      )
+      ..secondaryColor = parseColor(
+        json['secondaryColor'],
+        const Color(0xFF141D21),
       )
       ..primaryBorderColor = parseColor(
         json['primaryBorderColor'],
@@ -665,6 +780,27 @@ class ColorSchema {
   // Serialize to JSON
   Map<String, dynamic> toJson() {
     return {
+
+      'primaryColor900': primaryColor900.value.toString(),
+      'primaryColor800': primaryColor800.value.toString(),
+      'primaryColor700': primaryColor700.value.toString(),
+      'primaryColor600': primaryColor600.value.toString(),
+      'primaryColor500': primaryColor500.value.toString(),
+      'primaryColor400': primaryColor400.value.toString(),
+      'primaryColor300': primaryColor300.value.toString(),
+      'primaryColor200': primaryColor200.value.toString(),
+      'primaryColor100': primaryColor100.value.toString(),
+      'primaryColor50': primaryColor50.value.toString(),
+      'secondaryColor900': secondaryColor900.value.toString(),
+      'secondaryColor800': secondaryColor800.value.toString(),
+      'secondaryColor700': secondaryColor700.value.toString(),
+      'secondaryColor600': secondaryColor600.value.toString(),
+      'secondaryColor500': secondaryColor500.value.toString(),
+      'secondaryColor400': secondaryColor400.value.toString(),
+      'secondaryColor300': secondaryColor300.value.toString(),
+      'secondaryColor200': secondaryColor200.value.toString(),
+      'secondaryColor100': secondaryColor100.value.toString(),
+      'secondaryColor50': secondaryColor50.value.toString(),
       // poskeeper
 
       'colorOne': colorOne,
@@ -722,6 +858,7 @@ class ColorSchema {
       //
 
       'primaryColor': primaryColor,
+      'secondaryColor': secondaryColor,
       'primaryBorderColor': primaryBorderColor,
       //'primaryTextColor': primaryTextColor,
       //'secondaryTextColor': secondaryTextColor,

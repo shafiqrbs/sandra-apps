@@ -25,7 +25,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: PageBackButton(
         pageTitle: appLocalization.createSales,
       ),
@@ -66,7 +66,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
       child: Container(
         height: 7.ph,
         width: Get.width,
-        color: colors.primaryBaseColor,
+        color: colors.primaryColor400,
         alignment: Alignment.center,
         margin: EdgeInsets.zero,
         child: Obx(
@@ -110,7 +110,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: colors.primaryLiteColor,
+                  color: colors.primaryColor200,
                 ),
                 child: Row(
                   mainAxisAlignment: centerMAA,

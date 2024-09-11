@@ -37,7 +37,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
           containerBorderRadius,
         ),
         border: Border.all(color: colors.borderColor),
-        color: colors.selectedColor,
+        color: colors.primaryColor50,
       ),
       padding: const EdgeInsets.only(
         bottom: 2,
@@ -102,7 +102,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: colors.selectedColor.withOpacity(.6),
+                              color: colors.primaryColor50,
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),
@@ -140,7 +140,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: colors.selectedColor.withOpacity(.8),
+                              color: colors.primaryColor50,
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),

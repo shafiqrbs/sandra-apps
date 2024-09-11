@@ -14,7 +14,7 @@ class SelectedStockListHeader extends BaseWidget {
     return Container(
       padding: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 8),
       decoration: BoxDecoration(
-        color: colorSchema.primaryLiteColor.withOpacity(.5),
+        color: colorSchema.primaryColor300,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
