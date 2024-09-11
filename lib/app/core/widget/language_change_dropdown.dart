@@ -28,7 +28,7 @@ class LanguageChangeDropDown extends StatelessWidget with AppDimension {
         ),
         margin: const EdgeInsets.only(top: 8, bottom: 8),
         decoration: BoxDecoration(
-          color: colorSchema.primaryLiteColor,
+          color: colorSchema.primaryColor50,
           borderRadius: BorderRadius.circular(
             containerBorderRadius,
           ),

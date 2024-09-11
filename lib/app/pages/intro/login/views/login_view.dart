@@ -21,7 +21,7 @@ class LoginView extends BaseView<LoginController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       actions: [
         Container(
           margin: const EdgeInsets.all(8),
@@ -71,7 +71,7 @@ class LoginView extends BaseView<LoginController> {
           height: 20.ph,
           width: Get.width,
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.primaryColor500,
             borderRadius: const BorderRadius.only(
               bottomRight: Radius.circular(8),
               bottomLeft: Radius.circular(8),
@@ -151,8 +151,8 @@ class LoginView extends BaseView<LoginController> {
                       width: Get.width * .35,
                       alignment: Alignment.center,
                       color: controller.isSignUp.value
-                          ? colors.selectedColor
-                          : colors.primaryBaseColor,
+                          ? colors.primaryColor50
+                          : colors.primaryColor500,
                       padding: const EdgeInsets.only(
                         left: 20,
                         right: 16,
@@ -181,8 +181,8 @@ class LoginView extends BaseView<LoginController> {
                       width: Get.width * .35,
                       alignment: Alignment.center,
                       color: controller.isSignUp.value
-                          ? colors.primaryBaseColor
-                          : colors.selectedColor,
+                          ? colors.primaryColor500
+                          : colors.primaryColor50,
                       padding: const EdgeInsets.only(
                         left: 16,
                         right: 20,

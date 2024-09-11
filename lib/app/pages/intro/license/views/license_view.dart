@@ -35,7 +35,7 @@ class LicenseView extends BaseView<LicenseController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colors.primaryBaseColor,
+        backgroundColor: colors.primaryColor500,
       ),
       body: body(context),
       bottomNavigationBar: bottomNavigationBar(),
@@ -68,7 +68,7 @@ class LicenseView extends BaseView<LicenseController> {
           height: 20.ph,
           width: Get.width,
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.primaryColor500,
             borderRadius: const BorderRadius.only(
               bottomRight: Radius.circular(8),
               bottomLeft: Radius.circular(8),
