@@ -146,7 +146,8 @@ class CustomerReceiveModalView
                               borderRadius: BorderRadius.circular(4),
                               height: 20,
                               width: 40,
-                              activeColor: colors.primaryBaseColor,
+                              activeColor: colors.primaryColor700,
+                              inactiveColor: colors.secondaryColor100,
                               initialValue: controller.isSms.value,
                             ),
                           ],
@@ -175,15 +176,13 @@ class CustomerReceiveModalView
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.primaryBaseColor,
-                                  width: 2,
+                                  color: colors.primaryColor200,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.borderColor,
-                                  width: 2,
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ),
@@ -260,10 +259,10 @@ class CustomerReceiveModalView
                                   : Container(),
                               IconButton(
                                 onPressed: controller.addCustomer,
-                                icon: const Icon(
+                                icon: Icon(
                                   TablerIcons.user_plus,
                                   size: 20,
-                                  color: Color(0xFFC98A69),
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ],
@@ -321,7 +320,7 @@ class CustomerReceiveModalView
                   text: appLocalization.addCustomer,
                   fontSize: mediumTFSize,
                   fontWeight: FontWeight.w500,
-                  textColor: colors.primaryBaseColor,
+                  textColor: colors.primaryColor500,
                   textDecoration: TextDecoration.underline,
                 ),
               ),
