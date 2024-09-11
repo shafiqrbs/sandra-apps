@@ -33,8 +33,8 @@ class TransactionMethodItemView extends BaseWidget {
                   100,
                 ),
                 color: isSelected
-                    ? colors.primaryBaseColor
-                    : colors.secondaryBaseColor,
+                    ? colors.secondaryColor400
+                    : colors.secondaryColor50,
               ),
               child: Container(
                 height: 56,

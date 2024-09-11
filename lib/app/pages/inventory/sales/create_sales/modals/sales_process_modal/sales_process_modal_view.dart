@@ -186,7 +186,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             right: 12,
           ),
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.primaryColor500,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(
                 containerBorderRadius,
@@ -288,10 +288,10 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                   : Container(),
                               IconButton(
                                 onPressed: controller.addCustomer,
-                                icon: const Icon(
+                                icon: Icon(
                                   TablerIcons.user_plus,
                                   size: 20,
-                                  color: Color(0xFFC98A69),
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ],
@@ -349,7 +349,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   text: appLocalization.addCustomer,
                   fontSize: mediumTFSize,
                   fontWeight: FontWeight.w500,
-                  textColor: colors.primaryBaseColor,
+                  textColor: colors.primaryColor500,
                   textDecoration: TextDecoration.underline,
                 ),
               ),
@@ -583,7 +583,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: colors.primaryBaseColor,
+                    color: colors.primaryColor400,
                   ),
                   child: Column(
                     mainAxisAlignment: centerMAA,
@@ -692,8 +692,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           return AdvancedSwitch(
                             activeChild: const Text('%'),
                             inactiveChild: Text(appLocalization.flat),
-                            activeColor: colors.successfulBaseColor,
-                            inactiveColor: colors.primaryLiteColor,
+                            activeColor: colors.primaryColor700,
+                            inactiveColor: colors.secondaryColor100,
                             borderRadius: BorderRadius.circular(
                               containerBorderRadius,
                             ),
@@ -723,9 +723,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                               fontSize: mediumTFSize,
                             ),
                             fillColor: colors.textFieldColor,
-                            enabledBorderColor: colors.primaryBaseColor,
-                            focusedBorderColor: colors.borderColor,
-                            errorBorderColor: colors.borderColor,
+                            enabledBorderColor: colors.primaryColor200,
+                            focusedBorderColor: colors.primaryColor500,
+                            errorBorderColor: colors.primaryColor200,
                           ),
                           inputFormatters: doubleInputFormatter,
                           keyboardType: numberInputType,
@@ -759,8 +759,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                             fontSize: smallTFSize,
                           ),
                         ),
-                        activeColor: colors.selectedColor,
-                        inactiveColor: colors.primaryBaseColor,
+                        activeColor: colors.primaryColor700,
+                        inactiveColor: colors.secondaryColor100,
                         borderRadius: BorderRadius.circular(4),
                         height: 24,
                         controller: controller.showProfit.value,
@@ -817,7 +817,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                       borderRadius: BorderRadius.circular(
                         containerBorderRadius,
                       ),
-                      color: const Color(0xFFEEDBD1),
+                      color: colors.primaryColor50,
                     ),
                     child: Column(
                       mainAxisAlignment: centerMAA,
@@ -883,9 +883,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         fontSize: regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.primaryBaseColor,
-                      focusedBorderColor: colors.primaryBaseColor,
-                      errorBorderColor: colors.primaryBaseColor,
+                      enabledBorderColor: colors.primaryColor200,
+                      focusedBorderColor: colors.primaryColor500,
+                      errorBorderColor: colors.primaryColor200,
                     ),
                     onChanged: controller.onAmountChange,
                   ),
@@ -1002,9 +1002,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             buttonName: appLocalization.hold,
             onTap: () => controller.hold(context),
             leftIcon: TablerIcons.progress,
-            buttonBGColor: const Color(0xFFFAF3F0),
-            buttonTextColor: const Color(0xFFC98A69),
-            isOutline: true,
+            buttonBGColor: colors.primaryColor50,
+            buttonTextColor: colors.primaryColor500,
+            isOutline: false,
           ),
           8.width,
           RowButton(
