@@ -346,18 +346,18 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.sales,
-                subTitle: '৳ 567',
+                subTitle: '৳ 567333',
                 icon: TablerIcons.report_analytics,
                 onTap: controller.goToSalesList,
-                bgColor: colors.solidBlueColor,
+                bgColor: colors.secondaryBlueColor,
               ),
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.purchase,
-                subTitle: '৳ 567',
+                subTitle: '৳ 567897',
                 icon: TablerIcons.cash,
                 onTap: controller.goToPurchaseList,
-                bgColor: colors.solidGreenColor,
+                bgColor: colors.secondaryOrangeColor,
               ),
             ],
           ),
@@ -367,18 +367,18 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.due,
-                subTitle: '৳ 567',
+                subTitle: '৳ 567345',
                 icon: TablerIcons.cash,
                 onTap: controller.goToDueCustomerList,
-                bgColor: colors.solidRedColor,
+                bgColor: colors.secondaryGreenColor,
               ),
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.expense,
-                subTitle: '৳ 567',
+                subTitle: '৳ 567000',
                 icon: TablerIcons.moneybag,
                 onTap: controller.goToExpenseList,
-                bgColor: colors.solidLiteGreenColor,
+                bgColor: colors.secondaryGreyColor,
               ),
             ],
           ),
@@ -414,18 +414,19 @@ class DashboardView extends BaseView<DashboardController> {
             onTap: controller.goToSales,
           ),
           _buildCommonButtonCard(
-            title: appLocalization.po,
-            buttonColor: colors.solidGreenColor,
-            onTap: controller.goToPo,
-          ),
-          _buildCommonButtonCard(
             title: appLocalization.receive,
-            buttonColor: colors.solidGreyColor,
+            buttonColor: colors.solidPurpleColor,
             onTap: controller.showCustomerReceiveModal,
           ),
           _buildCommonButtonCard(
+            title: appLocalization.po,
+            buttonColor: colors.solidOrangeColor,
+            onTap: controller.goToPo,
+          ),
+
+          _buildCommonButtonCard(
             title: appLocalization.pay,
-            buttonColor: colors.solidRedColor,
+            buttonColor: colors.solidOliveColor,
             onTap: controller.showVendorPaymentModal,
           ),
         ],
@@ -502,7 +503,7 @@ class DashboardView extends BaseView<DashboardController> {
           children: [
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryColor500,
+              selectedBgColor: colors.primaryColor300,
               text: appLocalization.inventory,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.inventory,
@@ -512,7 +513,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 5,
-              selectedBgColor: colors.primaryColor500,
+              selectedBgColor: colors.primaryColor300,
               text: appLocalization.accounting,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.accounting,
@@ -522,7 +523,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryColor500,
+              selectedBgColor: colors.primaryColor300,
               text: appLocalization.create,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.create,
@@ -532,7 +533,7 @@ class DashboardView extends BaseView<DashboardController> {
             ),
             TbdTextButton(
               flex: 4,
-              selectedBgColor: colors.primaryColor500,
+              selectedBgColor: colors.primaryColor300,
               text: appLocalization.config,
               onPressed: () => controller.updateSelectedButtonGroup(
                 SelectedButtonGroup.config,

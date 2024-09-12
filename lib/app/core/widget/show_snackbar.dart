@@ -29,18 +29,18 @@ SnackbarController showSnackBar({
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.black,
+        colorText: Colors.white,
         icon: Icon(
           TablerIcons.circle_check,
-          color: Colors.black,
+          color: Colors.white,
           size: 18,
         ),
-        backgroundColor: backgroundColor ?? colors.solidLiteGreenColor,
+        backgroundColor: backgroundColor ?? colors.solidBlueColor,
         margin: margin ?? const EdgeInsets.all(10),
         borderRadius: borderRadius ?? 4,
         padding: const EdgeInsets.all(4),
@@ -53,15 +53,15 @@ SnackbarController showSnackBar({
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.black,
+        colorText: Colors.white,
         icon: Icon(
           TablerIcons.exclamation_circle,
-          color: Colors.black,
+          color: Colors.white,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidRedColor,
@@ -76,15 +76,15 @@ SnackbarController showSnackBar({
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.black,
+        colorText: Colors.white,
         icon: Icon(
           TablerIcons.alert_triangle,
-          color: Colors.black,
+          color: Colors.white,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidYellowColor,
@@ -99,18 +99,18 @@ SnackbarController showSnackBar({
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.black,
+        colorText: Colors.white,
         icon: Icon(
           TablerIcons.info_circle,
-          color: Colors.black,
+          color: Colors.white,
           size: 18,
         ),
-        backgroundColor: backgroundColor ?? colors.solidSkyBlueColor,
+        backgroundColor: backgroundColor ?? colors.solidGreenColor,
         margin: margin ?? const EdgeInsets.all(10),
         borderRadius: borderRadius ?? 4,
         padding: const EdgeInsets.all(4),

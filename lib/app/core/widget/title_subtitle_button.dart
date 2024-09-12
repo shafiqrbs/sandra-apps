@@ -70,23 +70,23 @@ class TitleSubtitleButton extends StatelessWidget {
                         Text(
                           title!,
                           style: GoogleFonts.roboto(
-                            color: const Color(0xffFFFFFF),
+                            color: const Color(0xff000000).withOpacity(0.4),
                             fontSize: 12,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w800,
                           ),
                         ),
                         const Icon(
                           TablerIcons.chevron_right,
-                          color: Color(0xffFFFFFF),
+                          color: Color(0xff000000),
                           size: 14,
                         ),
                       ],
                     ),
-                    8.height,
+                    4.height,
                     Text(
                       subTitle!,
                       style: GoogleFonts.roboto(
-                        color: const Color(0xffFFFFFF),
+                        color: const Color(0xff000000).withOpacity(0.6),
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),

@@ -197,15 +197,48 @@ class ColorSchema {
 
   Color formSuccessIconColor = const Color(0xffffffff);
 
-  Color solidBlueColor = const Color(0xff1E90FF);
-  Color solidGreenColor = const Color(0xff004D40);
-  Color redColor =  const Color(0xffdc3444);
-  late Color solidRedColor = redColor.withOpacity(0.3);
-  late Color liteRedColor = redColor.withOpacity(0.4);
+  Color blueColor = const Color(0xff0d6efd);
+  late Color solidBlueColor = blueColor.withOpacity(0.8);
+  late Color primaryBlueColor = blueColor.withOpacity(0.4);
+  late Color secondaryBlueColor = blueColor.withOpacity(0.2);
+
+
+  Color redColor =  const Color(0xffdc3545);
+  late Color solidRedColor = redColor.withOpacity(0.8);
+  late Color primaryRedColor = redColor.withOpacity(0.4);
+  late Color secondaryRedColor = redColor.withOpacity(0.2);
+
+  Color greenColor = const Color(0xff198754);
+  late Color solidGreenColor = greenColor.withOpacity(0.8);
+  late Color primaryGreenColor = greenColor.withOpacity(0.4);
+  late Color secondaryGreenColor = greenColor.withOpacity(0.2);
+
+  Color yellowColor = const Color(0xffffc107);
+  late Color solidYellowColor = yellowColor.withOpacity(0.8);
+  late Color primaryYellowColor = yellowColor.withOpacity(0.4);
+  late Color secondaryYellowColor = yellowColor.withOpacity(0.2);
+
+  Color orangeColor = const Color(0xfffd7e14);
+  late Color solidOrangeColor = orangeColor.withOpacity(0.8);
+  late Color primaryOrangeColor = orangeColor.withOpacity(0.4);
+  late Color secondaryOrangeColor = orangeColor.withOpacity(0.2);
+
+  Color greyColor = const Color(0xff30444F);
+  late Color solidGreyColor = greyColor.withOpacity(0.8);
+  late Color primaryGreyColor = greyColor.withOpacity(0.4);
+  late Color secondaryGreyColor = greyColor.withOpacity(0.2);
+
+
   Color solidLiteGreenColor = const Color(0xffbfded2);
-  Color solidGreyColor = const Color(0xff5D6D7E);
-  Color solidPurpleColor = const Color(0xff6D28D9);
-  Color solidYellowColor = const Color(0xffffecb3);
+
+  Color solidPurpleColor = const Color(0xff6f42c1);
+  Color solidIndigoColor = const Color(0xff6610f2);
+  Color solidTealColor = const Color(0xff20c997);
+
+  Color solidMarunColor = const Color(0xff87194C);
+  Color solidNavyBlueColor = const Color(0xff1D1987);
+  Color solidOliveColor = const Color(0xff838719);
+
   Color solidSkyBlueColor = const Color(0xff17A2B8);
 
   // Factory constructor to return the singleton instance
@@ -786,11 +819,8 @@ class ColorSchema {
       ..solidSkyBlueColor = parseColor(
         json['solidSkyBlueColor'],
         const Color(0xff17A2B8),
-      )
-      ..liteRedColor = parseColor(
-        json['liteRedColor'],
-        const Color(0xffdc3444).withOpacity(.4),
       );
+
   }
 
   // Serialize to JSON
@@ -958,13 +988,16 @@ class ColorSchema {
       //'formClearIconColor' : formClearIconColor,
       'solidBlueColor': solidBlueColor,
       'solidGreenColor': solidGreenColor,
-      'solidRedColor': solidRedColor,
+
       'solidLiteGreenColor': solidLiteGreenColor,
       'solidGreyColor': solidGreyColor,
       'solidPurpleColor': solidPurpleColor,
       'solidYellowColor': solidYellowColor,
       'solidSkyBlueColor': solidSkyBlueColor,
-      'liteRedColor': liteRedColor,
+
+      'solidRedColor': solidRedColor,
+      'primaryRedColor': primaryRedColor,
+      'secondaryRedColor': secondaryRedColor,
     };
   }
 }
