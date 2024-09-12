@@ -75,7 +75,7 @@ List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.file_description,
     onTap: () => navigatePage(Routes.salesList),
-    localeMethod: () => appLocalization.invoice,
+    localeMethod: () => appLocalization.sales,
     bgColor: colorList[1],
   ),
   TbdRoundButton(

@@ -91,6 +91,10 @@ class VendorPaymentModalController extends BaseController {
       Get.back(
         result: true,
       );
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.paymentReceivedSuccessfully,
+      );
     }
   }
 

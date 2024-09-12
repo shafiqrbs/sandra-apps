@@ -84,6 +84,10 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       Get.back(
         result: true,
       );
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.receiveAddedSuccessfully,
+      );
     }
   }
 

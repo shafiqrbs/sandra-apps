@@ -381,6 +381,8 @@
   "somethingWentWrong" : "কিছু ভুল হয়েছে",
   "notice" : "নোটিশ",
   "info" : "তথ্য",
+  "receiveAddedSuccessfully" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
+  "paymentReceivedSuccessfully" : "পেমেন্ট সফলভাবে গ্রহণ করা হয়েছে",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",

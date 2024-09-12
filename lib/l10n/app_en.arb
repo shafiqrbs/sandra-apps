@@ -340,6 +340,8 @@
   "fetchSuccessfully" : "Fetch successfully",
   "somethingWentWrong" : "Something went wrong",
   "notice" : "Notice",
-  "info" : "Info"
+  "info" : "Info",
+  "receiveAddedSuccessfully" : "Receive added successfully",
+  "paymentReceivedSuccessfully" : "Payment received successfully"
 
 }

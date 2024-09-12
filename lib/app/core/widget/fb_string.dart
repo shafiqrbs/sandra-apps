@@ -69,6 +69,7 @@ class FBString extends StatelessWidget {
   final bool isRequired;
   final bool? isShowToolTip;
   final bool? isReadOnly;
+  final bool? isShowPassword;
 
   //decoration
   final InputDecoration? decoration;
@@ -127,6 +128,7 @@ class FBString extends StatelessWidget {
     this.keyboardType = text,
     this.textInputAction = next,
     this.decoration,
+    this.isShowPassword = false,
   });
 
   FBString copyWith({
@@ -313,6 +315,7 @@ class FBString extends StatelessWidget {
                           RegExp(r'^[a-zA-Z0-9]*$'),
                         ),*/
                         ],
+                        obscureText: isShowPassword ?? false,
                         keyboardType: keyboardType,
                         textInputAction: textInputAction,
                         autovalidateMode: AutovalidateMode.onUserInteraction,

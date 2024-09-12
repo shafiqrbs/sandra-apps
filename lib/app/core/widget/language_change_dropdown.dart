@@ -41,7 +41,7 @@ class LanguageChangeDropDown extends StatelessWidget with AppDimension {
               return DropdownMenuItem(
                 value: langItems,
                 child: Text(
-                  langItems.tr,
+                  langItems.capitalizeFirst!,
                   style: TextStyle(
                     fontSize: mediumTFSize,
                   ),
