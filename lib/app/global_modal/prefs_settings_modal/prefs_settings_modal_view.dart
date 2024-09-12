@@ -30,7 +30,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       children: [
                         Icon(
                           TablerIcons.report_money,
-                          color: colors.primaryBaseColor,
+                          color: colors.primaryColor700,
                           size: 24,
                         ),
                         8.width,
@@ -38,8 +38,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           appLocalization.sales.toUpperCase(),
                           style: GoogleFonts.roboto(
                             fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: colors.primaryBaseColor,
+                            fontWeight: FontWeight.w700,
+                            color: colors.primaryColor700,
                           ),
                         ),
                       ],
@@ -58,7 +58,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 appLocalization.salesOnlineOffline,
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               AdvancedSwitch(
@@ -69,7 +69,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 borderRadius: BorderRadius.circular(4),
                                 height: 20,
                                 width: 40,
-                                activeColor: colors.primaryBaseColor,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
                                 initialValue: controller.isSalesOnline.value,
                               ),
                             ],
@@ -82,7 +83,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 appLocalization.salesAllowedWithoutPayment,
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               AdvancedSwitch(
@@ -93,7 +94,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 borderRadius: BorderRadius.circular(4),
                                 height: 20,
                                 width: 40,
-                                activeColor: colors.primaryBaseColor,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
                                 initialValue:
                                     controller.isZeroSalesAllowed.value,
                               ),
@@ -107,7 +109,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 appLocalization.autoSalesApproval,
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               AdvancedSwitch(
@@ -118,7 +120,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 borderRadius: BorderRadius.circular(4),
                                 height: 20,
                                 width: 40,
-                                activeColor: colors.primaryBaseColor,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
                                 initialValue:
                                     controller.isSalesAutoApproved.value,
                               ),
@@ -137,7 +140,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       children: [
                         Icon(
                           TablerIcons.shopping_cart,
-                          color: colors.primaryBaseColor,
+                          color: colors.primaryColor700,
                           size: 24,
                         ),
                         8.width,
@@ -145,8 +148,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           appLocalization.purchase.toUpperCase(),
                           style: GoogleFonts.roboto(
                             fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: colors.primaryBaseColor,
+                            fontWeight: FontWeight.w700,
+                            color: colors.primaryColor700,
                           ),
                         ),
                       ],
@@ -165,7 +168,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 appLocalization.purchaseOnlineOffline,
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               AdvancedSwitch(
@@ -176,7 +179,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 borderRadius: BorderRadius.circular(4),
                                 height: 20,
                                 width: 40,
-                                activeColor: colors.primaryBaseColor,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
                                 initialValue: controller.isPurchaseOnline.value,
                               ),
                             ],
@@ -189,7 +193,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 appLocalization.autoPurchaseApproval,
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               AdvancedSwitch(
@@ -201,7 +205,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 borderRadius: BorderRadius.circular(4),
                                 height: 20,
                                 width: 40,
-                                activeColor: colors.primaryBaseColor,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
                                 initialValue:
                                     controller.isPurchaseAutoApproved.value,
                               ),
@@ -256,8 +261,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                                   BorderRadius.circular(4),
                                               height: 20,
                                               width: 40,
-                                              activeColor:
-                                                  colors.primaryBaseColor,
+                                              activeColor: colors.primaryColor700,
+                                              inactiveColor: colors.secondaryColor100,
                                               initialValue: controller
                                                   .isTotalPurchase.value,
                                             ),
@@ -301,7 +306,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   children: [
                     Icon(
                       TablerIcons.printer,
-                      color: colors.primaryBaseColor,
+                      color: colors.primaryColor700,
                       size: 24,
                     ),
                     8.width,
@@ -309,8 +314,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       appLocalization.printer.toUpperCase(),
                       style: GoogleFonts.roboto(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: colors.primaryBaseColor,
+                        fontWeight: FontWeight.w700,
+                        color: colors.primaryColor700,
                       ),
                     ),
                   ],
@@ -329,7 +334,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                             appLocalization.printer,
                             style: GoogleFonts.roboto(
                               fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           AdvancedSwitch(
@@ -340,7 +345,8 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                             borderRadius: BorderRadius.circular(4),
                             height: 20,
                             width: 40,
-                            activeColor: colors.primaryBaseColor,
+                            activeColor: colors.primaryColor700,
+                            inactiveColor: colors.secondaryColor100,
                             initialValue: controller.isHasPrinter.value,
                           ),
                         ],
@@ -429,7 +435,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                             appLocalization.printEndNewLine,
                             style: GoogleFonts.roboto(
                               fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           SizedBox(
@@ -524,7 +530,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: colors.primaryBaseColor,
+                color: isSelected ? colors.primaryColor700 : colors.secondaryColor200,
               ),
             ),
             child: isSelected
@@ -533,7 +539,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     width: 12,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: colors.primaryBaseColor,
+                      color: colors.primaryColor700,
                     ),
                   )
                 : Container(),
@@ -586,7 +592,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             text,
             style: GoogleFonts.roboto(
               fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const Spacer(),

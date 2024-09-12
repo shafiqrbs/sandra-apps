@@ -169,8 +169,9 @@ List<Widget> accountingButtonList = [
   TbdRoundButton(
     icon: TablerIcons.report,
     onTap: () {
-      toast(
-        appLocalization.upcomingFeature,
+      showSnackBar(
+        title: appLocalization.upcomingFeature,
+        message: appLocalization.comingSoon,
       );
     },
     localeMethod: () => appLocalization.journal,

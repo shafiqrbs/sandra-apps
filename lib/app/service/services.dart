@@ -54,8 +54,7 @@ class Services {
 
     const endPoint = 'poskeeper-error-log';
 
-    try {
-    } catch (e) {}
+    try {} catch (e) {}
   }
 
   Future<Map<String, dynamic>?> submitLicense({
