@@ -23,6 +23,7 @@ SnackbarController showSnackBar({
       return Get.snackbar(
         title ?? appLocalization.success,
         message,
+        icon: const Icon(Icons.check_circle, color: Colors.green),
         backgroundColor: backgroundColor ?? colors.primaryColor50,
         margin: margin ?? const EdgeInsets.all(10),
         borderRadius: borderRadius ?? 4,
@@ -31,6 +32,7 @@ SnackbarController showSnackBar({
       return Get.snackbar(
         title ?? appLocalization.error,
         message,
+        icon: const Icon(Icons.check_circle, color: Colors.green),
         backgroundColor: backgroundColor ?? colors.primaryColor50,
         margin: margin ?? const EdgeInsets.all(10),
         borderRadius: borderRadius ?? 4,

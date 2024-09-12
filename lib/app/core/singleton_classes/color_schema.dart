@@ -199,10 +199,11 @@ class ColorSchema {
 
   Color solidBlueColor = const Color(0xff1E90FF);
   Color solidGreenColor = const Color(0xff004D40);
-  Color solidRedColor = const Color(0xff4CBB17);
-  Color solidLiteGreenColor = const Color(0xffFF6F61);
+  Color solidRedColor = const Color(0xffDC3545);
+  Color solidLiteGreenColor = const Color(0xff28A745);
   Color solidGreyColor = const Color(0xff5D6D7E);
   Color solidPurpleColor = const Color(0xff6D28D9);
+  Color solidYellowColor = const Color(0xffFFC107);
 
   // Factory constructor to return the singleton instance
   factory ColorSchema() => _instance;
@@ -761,11 +762,11 @@ class ColorSchema {
       )
       ..solidRedColor = parseColor(
         json['solidRedColor'],
-        const Color(0xff4CBB17),
+        const Color(0xffDC3545),
       )
       ..solidLiteGreenColor = parseColor(
         json['solidLiteGreenColor'],
-        const Color(0xffFF6F61),
+        const Color(0xff28A745),
       )
       ..solidGreyColor = parseColor(
         json['solidGreyColor'],
@@ -774,6 +775,10 @@ class ColorSchema {
       ..solidPurpleColor = parseColor(
         json['solidPurpleColor'],
         const Color(0xff6D28D9),
+      )
+      ..solidYellowColor = parseColor(
+        json['solidYellowColor'],
+        const Color(0xffFFC107),
       );
   }
 
@@ -946,6 +951,7 @@ class ColorSchema {
       'solidLiteGreenColor': solidLiteGreenColor,
       'solidGreyColor': solidGreyColor,
       'solidPurpleColor': solidPurpleColor,
+      'solidYellowColor': solidYellowColor,
     };
   }
 }
