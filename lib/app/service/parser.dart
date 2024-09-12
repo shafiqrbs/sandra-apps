@@ -19,7 +19,7 @@ Future<List<T>?> parseList<T>({
         fromJson,
       ),
     );
-  } on Exception catch (e) {
+  } catch (e) {
     if (kDebugMode) {
       print('Error parsing list: $e');
     }
@@ -58,7 +58,7 @@ Future<T?> parseObject<T>({
         fromJson,
       ),
     );
-  } on Exception catch (e) {
+  } catch (e) {
     if (kDebugMode) {
       print('Error parsing object: $e');
     }

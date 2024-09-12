@@ -13,7 +13,7 @@ SnackbarController showSnackBar({
   return Get.snackbar(
     title ?? appLocalization.requiredField,
     message,
-    backgroundColor: backgroundColor ?? colors.primaryLiteColor,
+    backgroundColor: backgroundColor ?? colors.primaryColor50,
     margin: margin ?? const EdgeInsets.all(10),
     borderRadius: borderRadius ?? 4,
   );

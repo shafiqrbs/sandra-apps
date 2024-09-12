@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/entity/sales.dart';
@@ -86,8 +87,9 @@ List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.receipt_refund,
     onTap: () {
-      toast(
-        appLocalization.upcomingFeature,
+      showSnackBar(
+        title: appLocalization.upcomingFeature,
+        message: appLocalization.comingSoon,
       );
     },
     localeMethod: () => appLocalization.salesReturn,
@@ -109,8 +111,9 @@ List<Widget> inventoryButtonList = [
     text: appLocalization.stockList,
     icon: TablerIcons.credit_card_refund,
     onTap: () {
-      toast(
-        appLocalization.upcomingFeature,
+      showSnackBar(
+        title: appLocalization.upcomingFeature,
+        message: appLocalization.comingSoon,
       );
     },
     localeMethod: () => appLocalization.purchaseReturn,
@@ -297,7 +300,7 @@ class DashboardController extends BaseController {
       ),
     );
     if (result != null) {
-      if(kDebugMode) {
+      if (kDebugMode) {
         print('Product added');
       }
     }
