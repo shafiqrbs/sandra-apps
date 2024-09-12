@@ -17,7 +17,7 @@ class SettingsView extends BaseView<SettingsController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       centerTitle: false,
       automaticallyImplyLeading: false,
       title: PageBackButton(
@@ -79,7 +79,8 @@ class SettingsView extends BaseView<SettingsController> {
                       borderRadius: BorderRadius.circular(4),
                       height: 20,
                       width: 40,
-                      activeColor: colors.primaryBaseColor,
+                      activeColor: colors.primaryColor700,
+                      inactiveColor: colors.secondaryColor100,
                       initialValue: controller.isPrinterAllowed.value,
                     ),
                   ),
