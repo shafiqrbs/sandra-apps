@@ -79,7 +79,7 @@ class StockCardView extends BaseWidget {
               right: 6,
             ),
             decoration: BoxDecoration(
-              color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              color: index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
               borderRadius: BorderRadius.circular(
                 containerBorderRadius,
               ),
@@ -104,7 +104,7 @@ class StockCardView extends BaseWidget {
               ),
               decoration: BoxDecoration(
                 color:
-                    index.isEven ? colors.evenListColor : colors.oddListColor,
+                    index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
