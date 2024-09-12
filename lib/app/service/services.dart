@@ -367,6 +367,7 @@ class Services {
     required String amount,
     required String userId,
     required String? remark,
+    String? isSms,
   }) async {
     const endPoint = 'poskeeper-account-receive';
     try {
@@ -380,6 +381,7 @@ class Services {
           'amount': amount,
           'user_id': userId,
           'remark': remark,
+          'is_sms': isSms,
         },
         headers: _buildHeader(),
       );

@@ -76,6 +76,7 @@ class CustomerReceiveModalController extends PaymentGatewayController {
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
+          isSms: isSms.value == true ? '1' : '0',
         );
       },
     );
