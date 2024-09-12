@@ -89,7 +89,7 @@ class CustomerCardView extends BaseWidget {
                           _buildIconButton(
                             onTap: onReceive,
                             icon: TablerIcons.coin_bitcoin,
-                            color: colors.primaryBaseColor,
+                            color: colors.solidRedColor,
                           ),
                       ],
                     ),

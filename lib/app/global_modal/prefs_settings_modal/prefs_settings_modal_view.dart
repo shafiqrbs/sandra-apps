@@ -418,7 +418,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                     value: item.value ?? '',
                                     groupValue: controller.printerType.value,
                                     onChanged: controller.setPrinterType,
-                                    activeColor: colors.primaryBaseColor,
+                                    activeColor: colors.solidRedColor,
                                     contentPadding: const EdgeInsets.only(
                                       left: 24,
                                     ),

@@ -14,7 +14,7 @@ class ParticularView extends BaseView<ParticularController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: colors.primaryBaseColor,
+      backgroundColor: colors.primaryColor500,
       title: Text(
         'particular'.tr,
         style: TextStyle(

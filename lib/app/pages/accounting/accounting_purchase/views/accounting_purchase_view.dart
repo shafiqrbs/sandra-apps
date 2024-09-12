@@ -331,7 +331,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                   ),
                   child: Icon(
                     TablerIcons.eye,
-                    color: colors.primaryBaseColor,
+                    color: colors.solidRedColor,
                   ),
                 ),
               ),

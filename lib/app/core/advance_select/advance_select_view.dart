@@ -269,7 +269,7 @@ class AdvanceSelect<T> extends FormField<T> {
                                                           IconButton(
                                                             icon:  Icon(
                                                               Icons.close,
-                                                              color: colors.primaryBaseColor,
+                                                              color: colors.solidRedColor,
                                                               size: 16,
                                                             ),
                                                             onPressed: () {

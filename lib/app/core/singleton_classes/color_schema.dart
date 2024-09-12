@@ -199,11 +199,13 @@ class ColorSchema {
 
   Color solidBlueColor = const Color(0xff1E90FF);
   Color solidGreenColor = const Color(0xff004D40);
-  Color solidRedColor = const Color(0xffDC3545);
-  Color solidLiteGreenColor = const Color(0xff28A745);
+  Color redColor =  const Color(0xffdc3444);
+  late Color solidRedColor = redColor.withOpacity(0.3);
+  late Color liteRedColor = redColor.withOpacity(0.4);
+  Color solidLiteGreenColor = const Color(0xffbfded2);
   Color solidGreyColor = const Color(0xff5D6D7E);
   Color solidPurpleColor = const Color(0xff6D28D9);
-  Color solidYellowColor = const Color(0xffFFC107);
+  Color solidYellowColor = const Color(0xffffecb3);
   Color solidSkyBlueColor = const Color(0xff17A2B8);
 
   // Factory constructor to return the singleton instance
@@ -784,6 +786,10 @@ class ColorSchema {
       ..solidSkyBlueColor = parseColor(
         json['solidSkyBlueColor'],
         const Color(0xff17A2B8),
+      )
+      ..liteRedColor = parseColor(
+        json['liteRedColor'],
+        const Color(0xffdc3444).withOpacity(.4),
       );
   }
 
@@ -958,6 +964,7 @@ class ColorSchema {
       'solidPurpleColor': solidPurpleColor,
       'solidYellowColor': solidYellowColor,
       'solidSkyBlueColor': solidSkyBlueColor,
+      'liteRedColor': liteRedColor,
     };
   }
 }

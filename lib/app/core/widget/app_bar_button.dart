@@ -39,7 +39,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
           color: buttonBGColor ??
               ((isOutline ?? false)
                   ? colors.backgroundColor
-                  : colors.primaryBaseColor),
+                  : colors.solidRedColor),
           borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsets.only(
@@ -58,7 +58,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                 icon: leftIcon!,
                 color: iconColor ??
                     (isOutline ?? false
-                        ? colors.primaryBaseColor
+                        ? colors.solidRedColor
                         : colors.backgroundColor),
               ),
             if (buttonName != null)
@@ -70,7 +70,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                   fontSize: mediumButtonTFSize,
                   textColor: buttonTextColor ??
                       (isOutline ?? false
-                          ? colors.primaryBaseColor
+                          ? colors.solidRedColor
                           : colors.backgroundColor),
                 ),
               ),
@@ -79,7 +79,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                 icon: rightIcon!,
                 color: iconColor ??
                     (isOutline ?? false
-                        ? colors.primaryBaseColor
+                        ? colors.solidRedColor
                         : colors.backgroundColor),
               ),
           ],

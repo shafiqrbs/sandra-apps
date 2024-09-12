@@ -333,7 +333,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                   ),
                   child: Icon(
                     TablerIcons.eye,
-                    color: colors.primaryBaseColor,
+                    color: colors.solidRedColor,
                   ),
                 ),
               ),

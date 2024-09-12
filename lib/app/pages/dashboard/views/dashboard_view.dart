@@ -34,7 +34,7 @@ class DashboardView extends BaseView<DashboardController> {
             height: AppBar().preferredSize.height + Get.height * .071,
             child: DrawerHeader(
               decoration: BoxDecoration(
-                color: colors.primaryBaseColor,
+                color: colors.solidRedColor,
               ),
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Column(

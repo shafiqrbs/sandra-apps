@@ -25,12 +25,12 @@ class RetryView extends BaseWidget {
             top: 200,
           ),
           decoration: BoxDecoration(
-            color: colors.primaryBaseColor,
+            color: colors.solidRedColor,
             borderRadius: BorderRadius.circular(
               containerBorderRadius,
             ),
             border: Border.all(
-              color: colors.primaryBaseColor,
+              color: colors.solidRedColor,
             ),
           ),
           child: Row(
