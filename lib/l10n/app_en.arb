@@ -232,7 +232,7 @@
   "scan" : "Scan",
   "isZeroSalesAllowed" : "Is zero sales allowed",
   "isSalesOnline" : "Is sales online",
-  "areYouSure" : "Are You Sure?",
+  "areYouSure" : "Confirmation Required",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",
@@ -325,5 +325,7 @@
   "importDataToEnsureEverythingIsUpToDate" : "Import data to ensure everything is up-to-date",
   "purchaseHasBeenAdded" : "Purchase has been added",
   "onlinePurchaseFailedToSaveLocally" : "Online purchase failed to save locally",
-  "comingSoon" : "Coming soon"
+  "comingSoon" : "Coming soon",
+  "confirmationSubTitle" : "Make sure you're ready to take this step",
+  "confirmationRequired" : "Confirmation Required"
 }

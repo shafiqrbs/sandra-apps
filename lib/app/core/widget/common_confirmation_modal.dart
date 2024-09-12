@@ -9,9 +9,11 @@ import '/app/core/utils/responsive.dart';
 
 class CommonConfirmationModal extends BaseWidget {
   final String title;
+  String? subTitle;
 
   CommonConfirmationModal({
     required this.title,
+    this.subTitle,
     super.key,
   });
 
@@ -52,6 +54,14 @@ class CommonConfirmationModal extends BaseWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  8.height,
+                  Text(
+                    subTitle ?? appLocalization.confirmationSubTitle,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                   15.height,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -75,13 +85,13 @@ class CommonConfirmationModal extends BaseWidget {
                             ),
                             color: colorSchema.backgroundColor,
                             border: Border.all(
-                              color: colorSchema.primaryBaseColor,
+                              color: colorSchema.primaryColor500,
                             ),
                           ),
                           child: Text(
                             'No',
                             style: TextStyle(
-                              color: colorSchema.primaryBaseColor,
+                              color: colorSchema.primaryColor500,
                             ),
                           ),
                         ),
@@ -104,7 +114,7 @@ class CommonConfirmationModal extends BaseWidget {
                             borderRadius: BorderRadius.circular(
                              containerBorderRadius,
                             ),
-                            color: colorSchema.primaryBaseColor,
+                            color: colorSchema.primaryColor500,
                           ),
                           child: const Text(
                             'Yes',

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/base/base_view.dart';
@@ -117,8 +118,9 @@ class SyncModalView extends BaseView<SyncModalController> {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const Icon(
