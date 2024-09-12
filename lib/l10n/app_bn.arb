@@ -383,6 +383,7 @@
   "info" : "তথ্য",
   "receiveAddedSuccessfully" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
   "paymentReceivedSuccessfully" : "পেমেন্ট সফলভাবে গ্রহণ করা হয়েছে",
+  "yourDataHasBeenSynced" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",

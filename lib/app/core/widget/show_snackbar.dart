@@ -24,19 +24,20 @@ SnackbarController showSnackBar({
     case SnackBarType.success:
       return Get.snackbar(
         title ?? appLocalization.success,
+        //duration: const Duration(seconds: 120),
         message,
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.white,
+        colorText: Colors.black,
         icon: Icon(
           TablerIcons.circle_check,
-          color: colors.backgroundColor,
+          color: Colors.black,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidLiteGreenColor,
@@ -48,18 +49,19 @@ SnackbarController showSnackBar({
       return Get.snackbar(
         title ?? appLocalization.error,
         message,
+        //duration: const Duration(seconds: 120),
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.white,
+        colorText: Colors.black,
         icon: Icon(
           TablerIcons.exclamation_circle,
-          color: colors.backgroundColor,
+          color: Colors.black,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidRedColor,
@@ -82,7 +84,7 @@ SnackbarController showSnackBar({
         colorText: Colors.black,
         icon: Icon(
           TablerIcons.alert_triangle,
-          color: colors.backgroundColor,
+          color: Colors.black,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidYellowColor,
@@ -97,15 +99,15 @@ SnackbarController showSnackBar({
         messageText: Text(
           message,
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
-        colorText: Colors.white,
+        colorText: Colors.black,
         icon: Icon(
           TablerIcons.info_circle,
-          color: colors.backgroundColor,
+          color: Colors.black,
           size: 18,
         ),
         backgroundColor: backgroundColor ?? colors.solidSkyBlueColor,

@@ -355,6 +355,10 @@ class SalesListController extends BaseController {
         whereArgs: [],
       );
       await refreshData();
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.yourDataHasBeenSynced,
+      );
     }
   }
 }

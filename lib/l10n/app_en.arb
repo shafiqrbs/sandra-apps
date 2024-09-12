@@ -109,7 +109,7 @@
   "store" : "Store",
   "sampleUsername" : "Sample username",
   "add" : "Add",
-  "orderProcessing" : "Order processing",
+  "orderProcessing" : "Order Processing",
   "printWithoutDiscount" : "Print without discount",
   "mrp" : "MRP",
   "purchaseQty" : "Purchase QTY",
@@ -342,6 +342,7 @@
   "notice" : "Notice",
   "info" : "Info",
   "receiveAddedSuccessfully" : "Receive added successfully",
-  "paymentReceivedSuccessfully" : "Payment received successfully"
+  "paymentReceivedSuccessfully" : "Payment received successfully",
+  "yourDataHasBeenSynced" : "Your data has been synced"
 
 }
