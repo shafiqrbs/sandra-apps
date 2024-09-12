@@ -204,6 +204,7 @@ class ColorSchema {
   Color solidGreyColor = const Color(0xff5D6D7E);
   Color solidPurpleColor = const Color(0xff6D28D9);
   Color solidYellowColor = const Color(0xffFFC107);
+  Color solidSkyBlueColor = const Color(0xff17A2B8);
 
   // Factory constructor to return the singleton instance
   factory ColorSchema() => _instance;
@@ -779,6 +780,10 @@ class ColorSchema {
       ..solidYellowColor = parseColor(
         json['solidYellowColor'],
         const Color(0xffFFC107),
+      )
+      ..solidSkyBlueColor = parseColor(
+        json['solidSkyBlueColor'],
+        const Color(0xff17A2B8),
       );
   }
 
@@ -952,6 +957,7 @@ class ColorSchema {
       'solidGreyColor': solidGreyColor,
       'solidPurpleColor': solidPurpleColor,
       'solidYellowColor': solidYellowColor,
+      'solidSkyBlueColor': solidSkyBlueColor,
     };
   }
 }

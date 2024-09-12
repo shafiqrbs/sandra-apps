@@ -338,6 +338,8 @@
   "failedToCreateSales" : "Failed to create sales",
   "failedToSave" : "Failed to save",
   "fetchSuccessfully" : "Fetch successfully",
-  "somethingWentWrong" : "Something went wrong"
+  "somethingWentWrong" : "Something went wrong",
+  "notice" : "Notice",
+  "info" : "Info"
 
 }

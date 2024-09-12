@@ -379,6 +379,8 @@
   "failedToSave" : "সংরক্ষণ করা ব্যর্থ",
   "fetchSuccessfully" : "সফলভাবে পেয়েছি",
   "somethingWentWrong" : "কিছু ভুল হয়েছে",
+  "notice" : "নোটিশ",
+  "info" : "তথ্য",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",
