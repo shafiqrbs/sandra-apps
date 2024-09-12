@@ -49,6 +49,10 @@ class AddVendorModalController extends BaseController {
         Get.back(
           result: createdVendor,
         );
+        showSnackBar(
+          type: SnackBarType.success,
+          message: appLocalization.save,
+        );
       } else {
         showSnackBar(
           type: SnackBarType.error,

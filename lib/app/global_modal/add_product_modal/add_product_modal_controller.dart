@@ -91,6 +91,10 @@ class AddProductModalViewController extends BaseController {
     );
     if (createdStock != null) {
       onResetTap();
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.save,
+      );
     } else {
       showSnackBar(
         type: SnackBarType.error,

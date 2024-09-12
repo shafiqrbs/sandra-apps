@@ -323,7 +323,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                                   containerBorderRadius,
                                 ),
                               ),
-                              backgroundColor: colors.primaryBaseColor,
+                              backgroundColor: colors.primaryColor500,
                             ),
                             child: CommonText(
                               text: appLocalization.add,

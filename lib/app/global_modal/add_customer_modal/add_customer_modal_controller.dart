@@ -49,6 +49,10 @@ class AddCustomerModalController extends BaseController {
         Get.back(
           result: createdCustomer,
         );
+        showSnackBar(
+          type: SnackBarType.success,
+          message: appLocalization.save,
+        );
       } else {
         showSnackBar(
           type: SnackBarType.error,

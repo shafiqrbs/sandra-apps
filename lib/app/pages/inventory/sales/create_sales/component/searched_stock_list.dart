@@ -79,7 +79,10 @@ class StockItem extends BaseWidget {
         ),
         child: Obx(
           () => Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 6,
+            ),
             decoration: BoxDecoration(
               color: colors.secondaryColor50,
               borderRadius: BorderRadius.circular(4),
@@ -153,25 +156,26 @@ class StockItem extends BaseWidget {
                           fontWeight: FontWeight.w400,
                           height: 1,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           fillColor: Colors.white,
                           filled: true,
                           hintText: 'Qty',
-                          constraints: BoxConstraints(maxHeight: 28),
-                          hintStyle: TextStyle(
+                          constraints: const BoxConstraints(maxHeight: 28),
+                          hintStyle: const TextStyle(
                             color: Color(0xFF989898),
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             height: 1,
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFDFB9A5)),
+                            borderSide:
+                                BorderSide(color: colors.primaryColor500),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                           ),
                         ),
@@ -180,7 +184,9 @@ class StockItem extends BaseWidget {
                   ],
                 ),
                 4.height,
-                Divider(color: Color(0xFFBABABA)),
+                const Divider(
+                  color: Color(0xFFBABABA),
+                ),
                 4.height,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

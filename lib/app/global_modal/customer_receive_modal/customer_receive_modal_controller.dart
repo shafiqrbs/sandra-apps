@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
@@ -30,18 +31,31 @@ class CustomerReceiveModalController extends PaymentGatewayController {
   }
 
   Future<void> processReceive() async {
+    final List<String> errors = [];
+
     if (customerManager.selectedItem.value == null) {
-      toast(appLocalization.pleaseSelectCustomer);
-      return;
+      errors.add(appLocalization.pleaseSelectCustomer);
     }
 
     if (transactionMethodsManager.selectedItem.value == null) {
-      toast(appLocalization.pleaseSelectPaymentMethod);
-      return;
+      errors.add(appLocalization.pleaseSelectPaymentMethod);
     }
 
     if (amountController.value.text.isEmpty) {
-      toast(appLocalization.pleaseEnterAmount);
+      errors.add(appLocalization.pleaseEnterAmount);
+    }
+
+    if (errors.isNotEmpty) {
+      final String numberedErrors = errors
+          .asMap()
+          .entries
+          .map((entry) => "${entry.key + 1}. ${entry.value}")
+          .join('\n');
+
+      showSnackBar(
+        type: SnackBarType.error,
+        message: numberedErrors,
+      );
       return;
     }
 
