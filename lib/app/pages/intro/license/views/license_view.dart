@@ -22,12 +22,14 @@ class LicenseView extends BaseView<LicenseController> {
 
   @override
   Widget body(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildHeader(),
-        _buildForm(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(),
+          _buildForm(),
+        ],
+      ),
     );
   }
 
