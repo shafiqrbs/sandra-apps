@@ -88,6 +88,7 @@ List<Widget> inventoryButtonList = [
     icon: TablerIcons.receipt_refund,
     onTap: () {
       showSnackBar(
+        type: SnackBarType.warning,
         title: appLocalization.upcomingFeature,
         message: appLocalization.comingSoon,
       );
@@ -112,6 +113,7 @@ List<Widget> inventoryButtonList = [
     icon: TablerIcons.credit_card_refund,
     onTap: () {
       showSnackBar(
+        type: SnackBarType.warning,
         title: appLocalization.upcomingFeature,
         message: appLocalization.comingSoon,
       );
@@ -170,6 +172,7 @@ List<Widget> accountingButtonList = [
     icon: TablerIcons.report,
     onTap: () {
       showSnackBar(
+        type: SnackBarType.warning,
         title: appLocalization.upcomingFeature,
         message: appLocalization.comingSoon,
       );

@@ -73,6 +73,7 @@ class SalesListController extends BaseController {
   Future<void> changeTab(int index) async {
     if (index == selectedIndex.value) {
       showSnackBar(
+        type: SnackBarType.warning,
         message: appLocalization.pullForRefresh,
         title: appLocalization.refresh,
       );
@@ -323,6 +324,7 @@ class SalesListController extends BaseController {
 
     if (salesList.isEmpty) {
       showSnackBar(
+        type: SnackBarType.error,
         message: appLocalization.noDataFound,
         title: appLocalization.error,
       );

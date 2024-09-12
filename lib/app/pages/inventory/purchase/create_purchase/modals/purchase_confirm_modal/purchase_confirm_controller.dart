@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
-import '/app/entity/purchase.dart';
-import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/purchase.dart';
+import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 
 class PurchaseConfirmController extends PrinterController {
   final Purchase purchase;
@@ -64,6 +62,7 @@ class PurchaseConfirmController extends PrinterController {
       await _insertPurchase();
     }
     showSnackBar(
+      type: SnackBarType.success,
       title: appLocalization.success,
       message: appLocalization.purchaseHasBeenAdded,
     );
@@ -78,6 +77,7 @@ class PurchaseConfirmController extends PrinterController {
       await _localUpdate();
     }
     showSnackBar(
+      type: SnackBarType.success,
       title: appLocalization.success,
       message: appLocalization.purchaseHasBeenAdded,
     );
@@ -92,6 +92,7 @@ class PurchaseConfirmController extends PrinterController {
       await _localInsert();
     }
     showSnackBar(
+      type: SnackBarType.success,
       title: appLocalization.success,
       message: appLocalization.purchaseHasBeenAdded,
     );
@@ -106,6 +107,7 @@ class PurchaseConfirmController extends PrinterController {
     final isOnline = await prefs.getIsPurchaseOnline();
     if (isOnline) {
       showSnackBar(
+        type: SnackBarType.error,
         title: appLocalization.failed,
         message: appLocalization.onlinePurchaseFailedToSaveLocally,
       );

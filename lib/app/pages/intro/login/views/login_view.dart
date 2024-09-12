@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/core_model/setup.dart';
@@ -267,6 +268,10 @@ class LoginView extends BaseView<LoginController> {
                     children: [
                       InkWell(
                         onTap: () {
+                          showSnackBar(
+                            type: SnackBarType.error,
+                            message: appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue,
+                          );
                           toast(appLocalization.underDevelopment);
                         },
                         child: Container(

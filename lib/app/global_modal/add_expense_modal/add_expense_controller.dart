@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/utils/static_utility_function.dart';
+import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/expense_category.dart';
 import '/app/entity/transaction_methods.dart';
 import '/app/entity/user.dart';
@@ -47,21 +46,32 @@ class AddExpenseController extends BaseController {
   }
 
   Future<void> onSaveTap() async {
+    final List<String> errors = [];
+
     if (userManager.asController.selectedValue == null) {
-      showSnackBar(message: appLocalization.userNameRequired);
-      return;
+      errors.add(appLocalization.userNameRequired);
     }
     if (expenseCategoryManager.asController.selectedValue == null) {
-      showSnackBar(message: appLocalization.categoryRequired);
-      return;
+      errors.add(appLocalization.categoryRequired);
     }
     if (transactionMethodsManager.selectedItem.value == null) {
-      showSnackBar(message: appLocalization.transactionMethodRequired);
-      return;
+      errors.add(appLocalization.transactionMethodRequired);
+    }
+    if (amountController.value.text.isEmpty) {
+      errors.add(appLocalization.pleaseEnterAmount);
     }
 
-    if (amountController.value.text.isEmpty) {
-      showSnackBar(message: appLocalization.pleaseEnterAmount);
+    if (errors.isNotEmpty) {
+      final String numberedErrors = errors
+          .asMap()
+          .entries
+          .map((entry) => "${entry.key + 1}. ${entry.value}")
+          .join('\n');
+
+      showSnackBar(
+        type: SnackBarType.error,
+        message: numberedErrors,
+      );
       return;
     }
 

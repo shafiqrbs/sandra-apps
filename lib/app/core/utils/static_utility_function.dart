@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/db_helper/db_helper.dart';
@@ -19,7 +20,10 @@ Future<bool> insertSplashDataToDb({
       SetUp.fromJson(splashData['setup'][0]);
     } else {
       await prefs.setIsLicenseValid(isLicenseValid: false);
-      toast(appLocalization.pleaseTryAgain);
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.pleaseTryAgain,
+      );
       return false;
     }
     final keys = splashData.keys.toList();
@@ -40,12 +44,18 @@ Future<bool> insertSplashDataToDb({
     );
   } else {
     await prefs.setIsLicenseValid(isLicenseValid: false);
-    toast(appLocalization.pleaseTryAgain);
+    showSnackBar(
+      type: SnackBarType.error,
+      message: appLocalization.pleaseTryAgain,
+    );
     return false;
   }
 
   await prefs.setIsLicenseValid(isLicenseValid: true);
-  toast(appLocalization.success);
+  showSnackBar(
+    type: SnackBarType.success,
+    message: appLocalization.licenseAndKeyValidatedSuccessfully,
+  );
   return true;
 }
 

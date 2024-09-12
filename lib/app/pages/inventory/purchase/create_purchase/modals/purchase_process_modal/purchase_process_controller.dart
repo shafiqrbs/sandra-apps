@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
+import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
+import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/purchase_item.dart';
 import '/app/entity/transaction_methods.dart';
@@ -213,7 +213,8 @@ class PurchaseProcessController extends BaseController {
 
     if (purchase == null) {
       showSnackBar(
-        message: appLocalization.error,
+        type: SnackBarType.error,
+        message: appLocalization.somethingWentWrong,
       );
       return;
     }
@@ -223,7 +224,10 @@ class PurchaseProcessController extends BaseController {
     final amount = double.tryParse(amountText) ?? 0;
 
     if (isVendorNotSelected) {
-      showSnackBar(message: appLocalization.vendorIsRequired);
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.vendorIsRequired,
+      );
       return;
     }
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/show_snackbar.dart';
-import '/app/entity/vendor.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/widget/show_snackbar.dart';
+import '/app/entity/vendor.dart';
 
 class AddVendorModalController extends BaseController {
   final formKey = GlobalKey<FormState>();
@@ -51,7 +51,8 @@ class AddVendorModalController extends BaseController {
         );
       } else {
         showSnackBar(
-          message: appLocalization.error,
+          type: SnackBarType.error,
+          message: appLocalization.failedToCreateVendor,
         );
       }
     }

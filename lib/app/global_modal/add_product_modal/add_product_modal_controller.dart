@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
+import '/app/core/base/base_controller.dart';
 import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/brand.dart';
+import '/app/entity/category.dart';
 import '/app/entity/stock.dart';
 import '/app/entity/unit.dart';
-import '/app/core/base/base_controller.dart';
-import '/app/entity/category.dart';
 
 class AddProductModalViewController extends BaseController {
   final formKey = GlobalKey<FormState>();
@@ -92,7 +93,8 @@ class AddProductModalViewController extends BaseController {
       onResetTap();
     } else {
       showSnackBar(
-        message: appLocalization.error,
+        type: SnackBarType.error,
+        message: appLocalization.failedToCreateProduct,
       );
     }
   }

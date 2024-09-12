@@ -8,6 +8,7 @@ import 'package:image/image.dart' as img;
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
@@ -161,7 +162,10 @@ class PrinterController extends BaseController {
       progressMsg.value = 'Connected';
     } else {
       progressMsg.value = 'Failed to connect';
-      toast('Failed to connect');
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.connectionFailed,
+      );
     }
 
     isConnecting.value = false;
@@ -177,7 +181,10 @@ class PrinterController extends BaseController {
       final data = await templateOne(sales: sales);
       return PrintBluetoothThermal.writeBytes(data); // init
     } else {
-      toast(appLocalization.connectPrinter);
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.connectPrinter,
+      );
       return false;
     }
   }
@@ -192,7 +199,10 @@ class PrinterController extends BaseController {
       );
       return PrintBluetoothThermal.writeBytes(data); // init
     } else {
-      toast(appLocalization.connectPrinter);
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.connectPrinter,
+      );
       return false;
     }
   }

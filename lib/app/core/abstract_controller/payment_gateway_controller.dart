@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/entity/customer.dart';
@@ -104,7 +105,10 @@ abstract class PaymentGatewayController extends BaseController {
 
   void handleDiscountChange(double discountValue, double? percentValue) {
     if (discountValue > salesSubTotal.value) {
-      toast(appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue);
+      showSnackBar(
+        type: SnackBarType.warning,
+        message: appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue,
+      );
       paymentDiscountController.value.text = '0';
       salesDiscount.value = 0;
       netTotal.value = 0;

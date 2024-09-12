@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
-import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/dialog_pattern.dart';
-import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
+import '/app/core/utils/static_utility_function.dart';
+import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/transaction_methods.dart';
 import '/app/entity/vendor.dart';
+import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 
 class VendorPaymentModalController extends BaseController {
   final vendorManager = VendorManager();
@@ -45,19 +44,33 @@ class VendorPaymentModalController extends BaseController {
   }
 
   Future<void> processReceive() async {
+    final List<String> errors = [];
+
+    if (amountController.value.text.isEmpty) {
+      errors.add(appLocalization.enterAmount);
+    }
+    if (vendorManager.selectedItem.value == null) {
+      errors.add(appLocalization.selectVendor);
+    }
+
+    if (errors.isNotEmpty) {
+      final String numberedErrors = errors
+          .asMap()
+          .entries
+          .map((entry) => "${entry.key + 1}. ${entry.value}")
+          .join('\n');
+
+      showSnackBar(
+        type: SnackBarType.error,
+        message: numberedErrors,
+      );
+      return;
+    }
+
     final confirmation = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (!confirmation) return;
-
-    if (amountController.value.text.isEmpty) {
-      showSnackBar(message: appLocalization.enterAmount);
-      return;
-    }
-    if (vendorManager.selectedItem.value == null) {
-      showSnackBar(message: appLocalization.selectVendor);
-      return;
-    }
 
     bool? isSubmitted;
 

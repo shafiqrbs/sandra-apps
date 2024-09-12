@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/show_snackbar.dart';
 
 import '/app/core/base/base_controller.dart';
+import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 
 class AddCustomerModalController extends BaseController {
@@ -51,7 +51,8 @@ class AddCustomerModalController extends BaseController {
         );
       } else {
         showSnackBar(
-          message: appLocalization.error,
+          type: SnackBarType.error,
+          message: appLocalization.failedToCreateCustomer,
         );
       }
     }

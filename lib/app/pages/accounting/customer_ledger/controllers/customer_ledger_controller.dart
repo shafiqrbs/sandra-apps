@@ -51,6 +51,7 @@ class CustomerLedgerController extends BaseController {
 
     }else{
       showSnackBar(
+        type: SnackBarType.error,
         message: appLocalization.invoiceDataNotAvailable,
       );
     }

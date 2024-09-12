@@ -327,5 +327,17 @@
   "onlinePurchaseFailedToSaveLocally" : "Online purchase failed to save locally",
   "comingSoon" : "Coming soon",
   "confirmationSubTitle" : "Make sure you're ready to take this step",
-  "confirmationRequired" : "Confirmation Required"
+  "confirmationRequired" : "Confirmation Required",
+  "alert" : "Alert",
+  "connectionFailed" : "Connection failed",
+  "failedToCreateCustomer" : "Failed to create customer",
+  "failedToCreateVendor" : "Failed to create vendor",
+  "failedToCreateProduct" : "Failed to create product",
+  "failedToCreateExpense" : "Failed to create expense",
+  "failedToCreatePurchase" : "Failed to create purchase",
+  "failedToCreateSales" : "Failed to create sales",
+  "failedToSave" : "Failed to save",
+  "fetchSuccessfully" : "Fetch successfully",
+  "somethingWentWrong" : "Something went wrong"
+
 }

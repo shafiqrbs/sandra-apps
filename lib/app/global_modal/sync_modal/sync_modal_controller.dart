@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/show_snackbar.dart';
-import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
-import '/app/core/utils/static_utility_function.dart';
-import '/app/entity/sales.dart';
-import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
-import '/app/routes/app_pages.dart';
+
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
+import '/app/core/utils/static_utility_function.dart';
+import '/app/core/widget/show_snackbar.dart';
+import '/app/entity/sales.dart';
+import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
+import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
 
 enum SyncType {
   export,
@@ -119,8 +119,8 @@ class SyncModalController extends BaseController {
 
     if (salesList.isEmpty) {
       showSnackBar(
+        type: SnackBarType.error,
         message: appLocalization.noDataFound,
-        title: appLocalization.error,
       );
       return;
     }
@@ -169,8 +169,8 @@ class SyncModalController extends BaseController {
 
     if (purchaseList.isEmpty) {
       showSnackBar(
+        type: SnackBarType.error,
         message: appLocalization.noDataFound,
-        title: appLocalization.error,
       );
       return;
     }
@@ -264,7 +264,10 @@ class SyncModalController extends BaseController {
             dataList: stockItemList!,
             deleteBeforeInsert: true,
           );
-          showSnackBar(message: appLocalization.success);
+          showSnackBar(
+            type: SnackBarType.success,
+            message: appLocalization.fetchSuccessfully,
+          );
         }
       },
     );
@@ -311,7 +314,10 @@ class SyncModalController extends BaseController {
                 }
               },
             );
-            showSnackBar(message: appLocalization.success);
+            showSnackBar(
+              message: appLocalization.fetchSuccessfully,
+              type: SnackBarType.success,
+            );
           }
         },
       );
@@ -320,7 +326,10 @@ class SyncModalController extends BaseController {
         print(e);
         print(s);
       }
-      showSnackBar(message: appLocalization.failed);
+      showSnackBar(
+        message: appLocalization.somethingWentWrong,
+        type: SnackBarType.error,
+      );
     }
   }
 
@@ -330,7 +339,10 @@ class SyncModalController extends BaseController {
     );
 
     if (salesCount > 0) {
-      showSnackBar(message: appLocalization.exportYourSales);
+      showSnackBar(
+        message: appLocalization.exportYourSales,
+        type: SnackBarType.warning,
+      );
       return false;
     }
 
@@ -339,7 +351,10 @@ class SyncModalController extends BaseController {
     );
 
     if (purchaseCount > 0) {
-      showSnackBar(message: appLocalization.exportYourPurchase);
+      showSnackBar(
+        message: appLocalization.exportYourPurchase,
+        type: SnackBarType.warning,
+      );
       return false;
     }
 

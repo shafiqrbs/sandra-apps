@@ -64,6 +64,7 @@ class OrderProcessConfirmationController extends PrinterController {
       await _insertSales();
     }
     showSnackBar(
+      type: SnackBarType.success,
       title: appLocalization.success,
       message: appLocalization.salesHaveBeenAdded,
     );
