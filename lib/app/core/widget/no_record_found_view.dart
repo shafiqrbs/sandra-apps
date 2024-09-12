@@ -43,7 +43,7 @@ class NoRecordFoundView extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: colors.primaryBaseColor,
+                  color: colors.primaryColor500,
                 ),
                 child: Text(
                   buttonText ?? 'Try Again',

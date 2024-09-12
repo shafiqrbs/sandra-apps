@@ -17,7 +17,7 @@ class CustomerListController extends BaseController {
   void showAddCustomerModal() {
     final result = Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: appLocalization.newCustomer,
         subTitle: '',
         child: AddCustomerModalView(),
       ),
