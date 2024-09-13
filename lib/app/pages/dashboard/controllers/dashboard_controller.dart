@@ -60,14 +60,14 @@ List<Widget> inventoryButtonList = [
   ),
 
   TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
+    icon: TablerIcons.truck_delivery,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchase,
     bgColor: colorList.value['orange'],
   ),
 
   TbdRoundButton(
-    icon: TablerIcons.book_2,
+    icon: TablerIcons.packages,
     onTap: () => navigatePage(Routes.stockList),
     localeMethod: () => appLocalization.stocks,
     bgColor: colorList.value['green'],
@@ -75,7 +75,7 @@ List<Widget> inventoryButtonList = [
 
 
   TbdRoundButton(
-    icon: TablerIcons.receipt_refund,
+    icon: TablerIcons.credit_card_refund,
     onTap: () {
       showSnackBar(
         type: SnackBarType.warning,
@@ -88,20 +88,20 @@ List<Widget> inventoryButtonList = [
   ),
 
   TbdRoundButton(
-    icon: TablerIcons.user,
+    icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.users,
+    icon: TablerIcons.building_store,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
-    icon: TablerIcons.credit_card_refund,
+    icon: TablerIcons.receipt_refund,
     onTap: () {
       showSnackBar(
         type: SnackBarType.warning,
@@ -116,7 +116,7 @@ List<Widget> inventoryButtonList = [
 
 List<Widget> accountingButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.moneybag,
+    icon: TablerIcons.wallet,
     onTap: () async {
       await Get.dialog(
         DialogPattern(
@@ -143,19 +143,19 @@ List<Widget> accountingButtonList = [
     bgColor: colorList.value['blue'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.user,
+    icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
+    icon: TablerIcons.truck_delivery,
     onTap: () => navigatePage(Routes.accountingPurchase),
     localeMethod: () => appLocalization.purchase,
     bgColor: colorList.value['orange'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.users,
+    icon: TablerIcons.building_store,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
@@ -177,19 +177,19 @@ List<Widget> accountingButtonList = [
 
 List<Widget> createButtonList = [
   TbdRoundButton(
-    icon: TablerIcons.user_plus,
+    icon: TablerIcons.users_plus,
     onTap: DashboardController().showAddCustomerModal,
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
+    icon: TablerIcons.building_store,
     onTap: DashboardController().showAddVendorModal,
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
   ),
   TbdRoundButton(
-    icon: TablerIcons.book_2,
+    icon: TablerIcons.box,
     onTap: DashboardController().showAddStockModal,
     localeMethod: () => appLocalization.product,
     bgColor: colorList.value['green'],

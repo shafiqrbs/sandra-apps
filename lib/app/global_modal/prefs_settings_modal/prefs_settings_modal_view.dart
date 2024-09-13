@@ -29,7 +29,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     Row(
                       children: [
                         Icon(
-                          TablerIcons.report_money,
+                          TablerIcons.shopping_cart,
                           color: colors.primaryColor700,
                           size: 24,
                         ),
@@ -54,11 +54,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           Row(
                             mainAxisAlignment: spaceBetweenMAA,
                             children: [
-                              Text(
-                                appLocalization.salesOnlineOffline,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.salesOnlineOffline,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                               AdvancedSwitch(
@@ -79,11 +84,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           Row(
                             mainAxisAlignment: spaceBetweenMAA,
                             children: [
-                              Text(
-                                appLocalization.salesAllowedWithoutPayment,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.salesAllowedWithoutPayment,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                               AdvancedSwitch(
@@ -105,11 +115,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           Row(
                             mainAxisAlignment: spaceBetweenMAA,
                             children: [
-                              Text(
-                                appLocalization.autoSalesApproval,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.autoSalesApproval,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                               AdvancedSwitch(
@@ -139,7 +154,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     Row(
                       children: [
                         Icon(
-                          TablerIcons.shopping_cart,
+                          TablerIcons.truck_delivery,
                           color: colors.primaryColor700,
                           size: 24,
                         ),
@@ -164,11 +179,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           Row(
                             mainAxisAlignment: spaceBetweenMAA,
                             children: [
-                              Text(
-                                appLocalization.purchaseOnlineOffline,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.purchaseOnlineOffline,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                               AdvancedSwitch(
@@ -189,11 +209,16 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                           Row(
                             mainAxisAlignment: spaceBetweenMAA,
                             children: [
-                              Text(
-                                appLocalization.autoPurchaseApproval,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.autoPurchaseApproval,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                               AdvancedSwitch(
@@ -232,7 +257,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                   width: Get.width,
                                   padding: const EdgeInsets.only(
                                     left: 16,
-                                    right: 16,
+                                    right: 0,
                                     top: 16,
                                     bottom: 16,
                                   ),
@@ -330,13 +355,19 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       Row(
                         mainAxisAlignment: spaceBetweenMAA,
                         children: [
-                          Text(
-                            appLocalization.printer,
-                            style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 8,
+                            ),
+                            child: Text(
+                              appLocalization.printer,
+                              style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
+
                           AdvancedSwitch(
                             controller: controller.isHasPrinter,
                             onChanged: (value) async {
@@ -431,13 +462,19 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       Row(
                         mainAxisAlignment: spaceBetweenMAA,
                         children: [
-                          Text(
-                            appLocalization.printEndNewLine,
-                            style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 8,
+                            ),
+                            child: Text(
+                              appLocalization.printEndNewLine,
+                              style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
+
                           SizedBox(
                             width: 80,
                             height: textFieldHeight,
@@ -560,12 +597,12 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
   Widget dividerWidget() {
     return Column(
       children: [
-        12.height,
+        8.height,
         Container(
           height: 1,
           color: colors.borderColor,
         ),
-        12.height,
+        8.height,
       ],
     );
   }
@@ -588,13 +625,18 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
               size: 24,
             ),
           if (icon != null) 8.width,
+          Container(
+            padding: const EdgeInsets.only(
+              left: 8,
+            ),
+            child:
           Text(
             text,
             style: GoogleFonts.roboto(
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
-          ),
+          ),),
           const Spacer(),
           Icon(
             isOpen ? TablerIcons.chevron_down : trailingIcon,
