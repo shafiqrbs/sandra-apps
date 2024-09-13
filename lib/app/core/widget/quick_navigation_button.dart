@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import '/app/core/widget/asset_image_view.dart';
 
 import '/app/core/base/base_widget.dart';
@@ -106,6 +107,7 @@ class QuickNavigationButton extends BaseWidget {
 }
 
 AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
+final colors = ColorSchema();
 
 List<Widget> buttonList = [
   TbdRoundButton(
