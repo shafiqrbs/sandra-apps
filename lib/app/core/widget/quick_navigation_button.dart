@@ -17,6 +17,94 @@ import 'tbd_round_button.dart';
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
 
+  List<Widget> buttonList = [
+    TbdRoundButton(
+      text: appLocalization.createSales,
+      icon: TablerIcons.sort_ascending_letters,
+      onTap: () => navigatePage(Routes.createSales),
+      localeMethod: () => appLocalization.createSales,
+      bgColor: ColorSchema().primaryBaseColor,
+    ),
+    TbdRoundButton(
+      text: appLocalization.salesList,
+      icon: TablerIcons.point_off,
+      onTap: () => navigatePage(Routes.salesList),
+      localeMethod: () => appLocalization.salesList,
+      bgColor: const Color(0xff004D40),
+    ),
+    TbdRoundButton(
+      text: appLocalization.stockList,
+      icon: TablerIcons.list,
+      onTap: () => navigatePage(Routes.stockList),
+      localeMethod: () => appLocalization.stockList,
+      bgColor: const Color(0xffFF6F61),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.robot_face,
+      onTap: () => navigatePage(Routes.customerList),
+      localeMethod: () => appLocalization.customerList,
+      bgColor: const Color(0xff32CD32),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.shopping_bag,
+      onTap: () => navigatePage(Routes.createPurchase),
+      localeMethod: () => appLocalization.createPurchase,
+      bgColor: const Color(0xff4CBB17),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.butterfly,
+      onTap: () => navigatePage(Routes.vendorList),
+      localeMethod: () => appLocalization.vendorList,
+      bgColor: const Color(0xff5D6D7E),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.shopping_cart,
+      onTap: () => navigatePage(Routes.purchaseList),
+      localeMethod: () => appLocalization.purchaseList,
+      bgColor: const Color(0xff6D28D9),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.list,
+      onTap: () => navigatePage(Routes.expenseList),
+      localeMethod: () => appLocalization.expenseList,
+      bgColor: const Color(0xff1E90FF),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.credit_card,
+      onTap: () => navigatePage(Routes.particular),
+      localeMethod: () => appLocalization.particular,
+      bgColor: const Color(0xff004D40),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.loader,
+      onTap: () {
+        Get.dialog(
+          DialogPattern(
+            title: appLocalization.synchronization,
+            subTitle: appLocalization.importDataToEnsureEverythingIsUpToDate,
+            child: SyncModalView(),
+          ),
+        );
+      },
+      localeMethod: () => appLocalization.sync,
+      bgColor: const Color(0xffFF6F61),
+    ),
+    TbdRoundButton(
+      icon: TablerIcons.shopping_cart,
+      onTap: () {
+        Get.dialog(
+          DialogPattern(
+            title: appLocalization.inventorySettings,
+            subTitle: '',
+            child: PrefsSettingsModalView(),
+          ),
+        );
+      },
+      localeMethod: () => appLocalization.settings,
+      bgColor: const Color(0xff32CD32),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -107,95 +195,7 @@ class QuickNavigationButton extends BaseWidget {
 }
 
 AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
-final colors = ColorSchema();
 
-List<Widget> buttonList = [
-  TbdRoundButton(
-    text: appLocalization.createSales,
-    icon: TablerIcons.sort_ascending_letters,
-    onTap: () => navigatePage(Routes.createSales),
-    localeMethod: () => appLocalization.createSales,
-    bgColor: const Color(0xff1E90FF),
-  ),
-  TbdRoundButton(
-    text: appLocalization.salesList,
-    icon: TablerIcons.point_off,
-    onTap: () => navigatePage(Routes.salesList),
-    localeMethod: () => appLocalization.salesList,
-    bgColor: const Color(0xff004D40),
-  ),
-  TbdRoundButton(
-    text: appLocalization.stockList,
-    icon: TablerIcons.list,
-    onTap: () => navigatePage(Routes.stockList),
-    localeMethod: () => appLocalization.stockList,
-    bgColor: const Color(0xffFF6F61),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.robot_face,
-    onTap: () => navigatePage(Routes.customerList),
-    localeMethod: () => appLocalization.customerList,
-    bgColor: const Color(0xff32CD32),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.shopping_bag,
-    onTap: () => navigatePage(Routes.createPurchase),
-    localeMethod: () => appLocalization.createPurchase,
-    bgColor: const Color(0xff4CBB17),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.butterfly,
-    onTap: () => navigatePage(Routes.vendorList),
-    localeMethod: () => appLocalization.vendorList,
-    bgColor: const Color(0xff5D6D7E),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.shopping_cart,
-    onTap: () => navigatePage(Routes.purchaseList),
-    localeMethod: () => appLocalization.purchaseList,
-    bgColor: const Color(0xff6D28D9),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.list,
-    onTap: () => navigatePage(Routes.expenseList),
-    localeMethod: () => appLocalization.expenseList,
-    bgColor: const Color(0xff1E90FF),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.credit_card,
-    onTap: () => navigatePage(Routes.particular),
-    localeMethod: () => appLocalization.particular,
-    bgColor: const Color(0xff004D40),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.loader,
-    onTap: () {
-      Get.dialog(
-        DialogPattern(
-          title: appLocalization.synchronization,
-          subTitle: appLocalization.importDataToEnsureEverythingIsUpToDate,
-          child: SyncModalView(),
-        ),
-      );
-    },
-    localeMethod: () => appLocalization.sync,
-    bgColor: const Color(0xffFF6F61),
-  ),
-  TbdRoundButton(
-    icon: TablerIcons.shopping_cart,
-    onTap: () {
-      Get.dialog(
-        DialogPattern(
-          title: appLocalization.inventorySettings,
-          subTitle: '',
-          child: PrefsSettingsModalView(),
-        ),
-      );
-    },
-    localeMethod: () => appLocalization.settings,
-    bgColor: const Color(0xff32CD32),
-  ),
-];
 void navigatePage(String routeName) {
   final currentRoute = Get.currentRoute;
 
