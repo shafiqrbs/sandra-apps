@@ -202,13 +202,9 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
         ),
         Container(
           padding: const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 8),
-          margin: const EdgeInsets.only(
-            left: 4,
-            right: 4,
-          ),
           decoration: BoxDecoration(
             color: colors.primaryColor400,
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(0),
           ),
           child: Row(
             children: [
