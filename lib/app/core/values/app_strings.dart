@@ -1,2 +1,2 @@
-const dateFormat = 'dd/MM/yyyy';
+const dateFormat = 'dd MMM yyyy';
 const apiDateFormat = 'dd-MM-yyyy hh:mm a';
