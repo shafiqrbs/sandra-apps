@@ -59,7 +59,12 @@ class PurchaseListController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await changeTab(0);
+    final isOnline = await prefs.getIsSalesOnline();
+    if (isOnline) {
+      await changeTab(1);
+    } else {
+      await changeTab(0);
+    }
   }
 
   Future<void> changeTab(int index) async {
