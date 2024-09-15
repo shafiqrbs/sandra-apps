@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/entity/vendor_ledger.dart';
@@ -154,8 +155,8 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
     required BuildContext context,
   }) {
     final createdDate = element.created != null
-        ? DateFormat('dd MMM yyyy').format(
-            DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+        ? DateFormat(dateFormat).format(
+            DateFormat(apiDateFormat).parse(element.created!),
           )
         : '';
     return InkWell(

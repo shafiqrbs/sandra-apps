@@ -213,7 +213,9 @@ class SalesListView extends BaseView<SalesListController> {
             ),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
+              color: index.isEven
+                  ? colors.secondaryColor50
+                  : colors.primaryColor50,
               borderRadius: BorderRadius.circular(containerBorderRadius),
               border: Border.all(
                 color: colors.tertiaryBaseColor,
@@ -310,16 +312,17 @@ class SalesListView extends BaseView<SalesListController> {
               ],
             ),
           ),
-          if (controller.isManager)
-            Positioned(
-              right: 10,
-              top: 18,
-              child: DeleteButton(
-                onTap: () => controller.deleteSales(
-                  salesId: element.salesId!,
+          if (element.approvedBy == null)
+            if (controller.isManager)
+              Positioned(
+                right: 0,
+                top: 4,
+                child: DeleteButton(
+                  onTap: () => controller.deleteSales(
+                    salesId: element.salesId!,
+                  ),
                 ),
               ),
-            ),
         ],
       ),
     );

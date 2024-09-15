@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/core_model/page_state.dart';
@@ -190,8 +191,8 @@ class PurchaseListView extends BaseView<PurchaseListController> {
     required BuildContext context,
   }) {
     final createdDate = element.createdAt != null
-        ? DateFormat('dd MMM yyyy').format(
-            DateFormat('MM-dd-yyyy hh:mm a').parse(element.createdAt!),
+        ? DateFormat(dateFormat).format(
+            DateFormat(apiDateFormat).parse(element.createdAt!),
           )
         : '';
     return InkWell(
@@ -308,16 +309,17 @@ class PurchaseListView extends BaseView<PurchaseListController> {
               ],
             ),
           ),
-          if (controller.isManager)
-            Positioned(
-              right: 10,
-              top: 18,
-              child: DeleteButton(
-                onTap: () => controller.deletePurchase(
-                  purchaseId: element.purchaseId!,
+          if (element.approvedBy == null)
+            if (controller.isManager)
+              Positioned(
+                right: 10,
+                top: 18,
+                child: DeleteButton(
+                  onTap: () => controller.deletePurchase(
+                    purchaseId: element.purchaseId!,
+                  ),
                 ),
               ),
-            ),
         ],
       ),
     );

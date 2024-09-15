@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/widget/row_button.dart';
@@ -156,8 +157,8 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
     required BuildContext context,
   }) {
     final createdDate = element.created != null
-        ? DateFormat('dd MMM yyyy').format(
-            DateFormat('MM-dd-yyyy hh:mm a').parse(element.created!),
+        ? DateFormat(dateFormat).format(
+            DateFormat(apiDateFormat).parse(element.created!),
           )
         : '';
     return InkWell(
