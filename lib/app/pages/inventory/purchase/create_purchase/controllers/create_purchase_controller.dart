@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/entity/purchase.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';
+import '/app/entity/purchase.dart';
 import '/app/entity/purchase_item.dart';
 import '/app/entity/stock.dart';
 import '/app/pages/inventory/purchase/create_purchase/modals/purchase_process_modal/purchase_process_view.dart';
@@ -171,12 +171,27 @@ class CreatePurchaseController extends StockSelectionController {
     num value,
     int index,
   ) async {
-    stockQtyController.value.text = value.toString();
-    onStockSelection(stockList.value[index]);
+    // get all index number of qtyControllerList which is not empty
+    final indexList = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .map((e) => e.key)
+        .toList();
 
-    addPurchaseItem(
-      process: 'inline',
-    );
+    final tempStockList = stockList.value;
+
+    for (final i in indexList) {
+      final stock = stockList.value[i];
+      final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
+      stockQtyController.value.text = qty.toStringAsFixed(2);
+      onStockSelection(stock);
+      addPurchaseItem(
+        process: 'inline',
+      );
+      stockList.value = tempStockList;
+    }
+    stockList.value = [];
   }
 
   void goToListPage() {

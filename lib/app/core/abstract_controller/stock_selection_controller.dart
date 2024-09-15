@@ -16,6 +16,7 @@ abstract class StockSelectionController extends BaseController {
   final stockDiscountPercentController = TextEditingController().obs;
   final searchController = TextEditingController().obs;
 
+  final qtyControllerList = <TextEditingController>[].obs;
 
   Future<void> getStocks(
     String? pattern,
@@ -38,6 +39,10 @@ abstract class StockSelectionController extends BaseController {
     stockList
       ..value = stocks.map(Stock.fromJson).toList()
       ..refresh();
+    qtyControllerList.value = List.generate(
+      stockList.value.length,
+      (index) => TextEditingController(),
+    ).obs;
   }
 
   void resetAfterItemAdd() {

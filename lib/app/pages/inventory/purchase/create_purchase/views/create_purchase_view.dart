@@ -481,6 +481,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                 onItemTap: controller.onStockSelection,
                 onQtyChange: controller.onSearchedStockQtyChange,
                 onQtyEditComplete: controller.onSearchedStockQtyEditComplete,
+                qtyControllerList: controller.qtyControllerList,
               ),
             ),
           ),

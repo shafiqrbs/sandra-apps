@@ -10,12 +10,14 @@ class SearchedPurchaseStockList extends StatelessWidget {
   final Function(Stock value) onItemTap;
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
+  final List<TextEditingController> qtyControllerList;
 
   const SearchedPurchaseStockList({
     required this.stocks,
     required this.onItemTap,
     required this.onQtyChange,
     required this.onQtyEditComplete,
+    required this.qtyControllerList,
     super.key,
   });
 
@@ -30,6 +32,7 @@ class SearchedPurchaseStockList extends StatelessWidget {
           onQtyChange: onQtyChange,
           onQtyEditComplete: onQtyEditComplete,
           index: index,
+          qtyController: qtyControllerList[index],
         );
       },
     );
@@ -41,6 +44,8 @@ class PurchaseItemView extends BaseWidget {
   final Function(Stock value) onItemTap;
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
+  final TextEditingController qtyController;
+
   final int index;
 
   PurchaseItemView({
@@ -49,12 +54,12 @@ class PurchaseItemView extends BaseWidget {
     required this.onQtyChange,
     required this.onQtyEditComplete,
     required this.index,
+    required this.qtyController,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final qtyController = TextEditingController();
     final isEditing = false.obs;
     final total = '0.00'.obs;
 
