@@ -32,7 +32,7 @@ abstract class BaseView<Controller extends BaseController>
   AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
   final Logger logger = BuildConfig.instance.config.logger;
-  final colors = ColorSchema();
+  ColorSchema colors = ColorSchema();
 
   final loaderColor = const Color(0xFF00AEEF);
 
@@ -42,6 +42,8 @@ abstract class BaseView<Controller extends BaseController>
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;  // Get current brightness
+    colors = ColorSchema(brightness: brightness);
     return GestureDetector(
       child: Stack(
         children: [

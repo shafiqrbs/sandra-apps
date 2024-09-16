@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/pages/settings/controllers/settings_controller.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/core/widget/tbd_round_button.dart';
 import 'package:super_tooltip/super_tooltip.dart';
@@ -172,8 +173,16 @@ class DashboardView extends BaseView<DashboardController> {
 
               12.width,
               InkWell(
-                onTap: () {},
-                child: const Icon(
+                onTap: () {
+                  Get.changeTheme(
+                    Get.isDarkMode
+                        ? ThemeData.light()
+                        : ThemeData.dark(),
+                  );
+                  //Get.find<SettingsController>().changeTheme();
+                },
+                child: Icon(
+                  //Get.find<SettingsController>().isDarkMode.value ? TablerIcons.sun : TablerIcons.moon,
                   TablerIcons.clipboard_text,
                   color: Colors.white,
                   size: 20,

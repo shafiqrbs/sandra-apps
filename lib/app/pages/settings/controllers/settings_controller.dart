@@ -9,6 +9,7 @@ enum Buttons {
 class SettingsController extends BaseController {
   final buttons = Rx<Buttons?>(null);
   final isPrinterAllowed = ValueNotifier(false);
+  var isDarkMode = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -29,5 +30,9 @@ class SettingsController extends BaseController {
       return;
     }
     buttons.value = button;
+  }
+
+  void changeTheme() {
+    isDarkMode.value = !isDarkMode.value;
   }
 }

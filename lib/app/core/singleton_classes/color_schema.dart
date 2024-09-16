@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ColorSchema {
+  Brightness? brightness;
 
   Color primaryColor = const Color(0xFF00994F);
+
+  Color get primaryColor500 =>
+      brightness == Brightness.dark ? Colors.black : const Color(0xFF00994F);
 
   Color primaryColor900 = const Color(0xFF004021);
   Color primaryColor800 = const Color(0xFF00542B);
   Color primaryColor700 = const Color(0xFF006D38);
   Color primaryColor600 = const Color(0xFF008B48);
-  Color primaryColor500 = const Color(0xFF00994F);
+  //Color primaryColor500 = const Color(0xFF00994F);
   Color primaryColor400 = const Color(0xFF33AD72);
   Color primaryColor300 = const Color(0xFF54BB89);
   Color primaryColor200 = const Color(0xFF8AD0AE);
   Color primaryColor100 = const Color(0xFFB0DFC8);
   Color primaryColor50 = const Color(0xFFE6F5ED);
-
 
   Color secondaryColor = const Color(0xFF30444F);
 
@@ -29,25 +32,13 @@ class ColorSchema {
   Color secondaryColor100 = const Color(0xFFBFC5C8);
   Color secondaryColor50 = const Color(0xFFEAECED);
 
-
-
   Color primaryBackgroundColor = const Color(0xffffffff);
 
-  Color colorOne = const Color(0xfffa383e);
   Color colorTwo = const Color(0xff2abba7);
-  Color colorThree = const Color(0xffe6c53b);
-  Color colorFour = const Color(0xff00A400);
-  Color colorFive = const Color(0xffff8c00);
-  Color colorSix = const Color(0xff1877f2);
 
   Color tertiaryBaseColor = const Color(0xFFF7DFBB);
-  Color tertiaryLiteColor = const Color(0xFFFCECD8);
-  Color secondaryBaseColor = const Color(0xFFEEDBD1);
-  Color secondaryLiteColor = const Color(0xffadc9f8);
   Color primaryBaseColor = const Color(0xFFC98A69);
   Color primaryLiteColor = const Color(0xffe0b6a5);
-  Color ordinaryBaseColor = const Color(0xFFafbec6);
-  Color ordinaryLiteColor = const Color(0xFFe1e5e8);
 
   Color iconColor = const Color(0xFFd8c8c3);
   Color iconBackgroundColor = const Color(0xfff0e5e2);
@@ -202,8 +193,7 @@ class ColorSchema {
   late Color primaryBlueColor = blueColor.withOpacity(0.4);
   late Color secondaryBlueColor = blueColor.withOpacity(0.2);
 
-
-  Color redColor =  const Color(0xffdc3545);
+  Color redColor = const Color(0xffdc3545);
   late Color solidRedColor = redColor.withOpacity(0.8);
   late Color primaryRedColor = redColor.withOpacity(0.4);
   late Color secondaryRedColor = redColor.withOpacity(0.2);
@@ -228,7 +218,6 @@ class ColorSchema {
   late Color primaryGreyColor = greyColor.withOpacity(0.4);
   late Color secondaryGreyColor = greyColor.withOpacity(0.2);
 
-
   Color solidLiteGreenColor = const Color(0xffbfded2);
 
   Color solidPurpleColor = const Color(0xff6f42c1);
@@ -242,7 +231,11 @@ class ColorSchema {
   Color solidSkyBlueColor = const Color(0xff17A2B8);
 
   // Factory constructor to return the singleton instance
-  factory ColorSchema() => _instance;
+  //factory ColorSchema() => _instance;
+  factory ColorSchema({Brightness? brightness}) {
+    _instance.brightness = brightness;
+    return _instance;
+  }
 
   // Private constructor
   ColorSchema._();
@@ -258,8 +251,6 @@ class ColorSchema {
     }
 
     return ColorSchema()
-
-
       ..primaryColor900 = parseColor(
         json['primaryColor900'],
         const Color(0xFF004021),
@@ -276,10 +267,10 @@ class ColorSchema {
         json['primaryColor600'],
         const Color(0xFF008B48),
       )
-      ..primaryColor500 = parseColor(
+      /*..primaryColor500 = parseColor(
         json['primaryColor500'],
         const Color(0xFF00994F),
-      )
+      )*/
       ..primaryColor400 = parseColor(
         json['primaryColor400'],
         const Color(0xFF33AD72),
@@ -346,30 +337,12 @@ class ColorSchema {
         json['primaryBackgroundColor'],
         const Color(0xFFffffff),
       )
-      ..colorOne = parseColor(
-        json['colorOne'],
-        const Color(0xfffa383e),
-      )
+
       ..colorTwo = parseColor(
         json['colorTwo'],
         const Color(0xff2abba7),
       )
-      ..colorThree = parseColor(
-        json['colorThree'],
-        const Color(0xffe6c53b),
-      )
-      ..colorFour = parseColor(
-        json['colorFour'],
-        const Color(0xff00A400),
-      )
-      ..colorFive = parseColor(
-        json['colorFive'],
-        const Color(0xffff8c00),
-      )
-      ..colorSix = parseColor(
-        json['colorSix'],
-        const Color(0xff1877f2),
-      )
+
       ..primaryBaseColor = parseColor(
         json['primaryBaseColor'],
         const Color(0xFFfbbd05),
@@ -378,30 +351,12 @@ class ColorSchema {
         json['primaryLiteColor'],
         const Color(0xfffacf61),
       )
-      ..secondaryBaseColor = parseColor(
-        json['secondaryBaseColor'],
-        const Color(0xFF4285f4),
-      )
-      ..secondaryLiteColor = parseColor(
-        json['secondaryLiteColor'],
-        const Color(0xffadc9f8),
-      )
+
       ..tertiaryBaseColor = parseColor(
         json['tertiaryBaseColor'],
         const Color(0xFF34a853),
       )
-      ..tertiaryLiteColor = parseColor(
-        json['tertiaryLiteColor'],
-        const Color(0xFF71b784),
-      )
-      ..ordinaryBaseColor = parseColor(
-        json['ordinaryBaseColor'],
-        const Color(0xFFafbec6),
-      )
-      ..ordinaryLiteColor = parseColor(
-        json['ordinaryLiteColor'],
-        const Color(0xFFe1e5e8),
-      )
+
       ..dangerBaseColor = parseColor(
         json['dangerBaseColor'],
         Colors.red,
@@ -820,13 +775,11 @@ class ColorSchema {
         json['solidSkyBlueColor'],
         const Color(0xff17A2B8),
       );
-
   }
 
   // Serialize to JSON
   Map<String, dynamic> toJson() {
     return {
-
       'primaryColor900': primaryColor900.value.toString(),
       'primaryColor800': primaryColor800.value.toString(),
       'primaryColor700': primaryColor700.value.toString(),
@@ -849,23 +802,16 @@ class ColorSchema {
       'secondaryColor50': secondaryColor50.value.toString(),
       // poskeeper
 
-      'colorOne': colorOne,
       'colorTwo': colorTwo,
-      'colorThree': colorThree,
-      'colorFour': colorFour,
-      'colorFive': colorFive,
-      'colorSix': colorSix,
+
 
       'backgroundColor': backgroundColor,
       'primaryBackgroundColor': primaryBackgroundColor,
       'primaryBaseColor': primaryBaseColor,
       'primaryLiteColor': primaryLiteColor,
-      'secondaryBaseColor': secondaryBaseColor,
-      'secondaryLiteColor': secondaryLiteColor,
+
       'tertiaryBaseColor': tertiaryBaseColor,
-      'tertiaryLiteColor': tertiaryLiteColor,
-      'ordinaryBaseColor': ordinaryBaseColor,
-      'ordinaryLiteColor': ordinaryLiteColor,
+
 
       'successfulBaseColor': successfulBaseColor,
       'successfulLiteColor': successfulLiteColor,
