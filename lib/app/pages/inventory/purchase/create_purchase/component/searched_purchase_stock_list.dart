@@ -137,6 +137,7 @@ class PurchaseItemView extends BaseWidget {
                               (salesPrice * quantity).toPrecision(2);
 
                           total.value = subtotal.toStringAsFixed(2);
+                          onQtyChange(quantity, index);
                         },
                         onEditingComplete: () {
                           onQtyEditComplete(

@@ -165,7 +165,13 @@ class CreatePurchaseController extends StockSelectionController {
   Future<void> onSearchedStockQtyChange(
     num value,
     int index,
-  ) async {}
+  ) async {
+    isShowAddStockButton.value = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .isNotEmpty;
+  }
 
   Future<void> onSearchedStockQtyEditComplete(
     num value,
@@ -192,6 +198,7 @@ class CreatePurchaseController extends StockSelectionController {
       stockList.value = tempStockList;
     }
     stockList.value = [];
+    isShowAddStockButton.value = false;
   }
 
   void goToListPage() {
@@ -245,5 +252,30 @@ class CreatePurchaseController extends StockSelectionController {
     purchaseItemList.value[index].price = price;
     purchaseItemList.value[index].subTotal =
         purchaseItemList.value[index].quantity! * price;
+  }
+
+  void addStockFromSearchList() {
+    // get all index number of qtyControllerList which is not empty
+    final indexList = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .map((e) => e.key)
+        .toList();
+
+    final tempStockList = stockList.value;
+
+    for (final i in indexList) {
+      final stock = stockList.value[i];
+      final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
+      stockQtyController.value.text = qty.toStringAsFixed(2);
+      onStockSelection(stock);
+      addPurchaseItem(
+        process: 'inline',
+      );
+      stockList.value = tempStockList;
+    }
+    stockList.value = [];
+    isShowAddStockButton.value = false;
   }
 }

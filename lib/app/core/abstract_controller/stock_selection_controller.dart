@@ -18,6 +18,8 @@ abstract class StockSelectionController extends BaseController {
 
   final qtyControllerList = <TextEditingController>[].obs;
 
+  final isShowAddStockButton = false.obs;
+
   Future<void> getStocks(
     String? pattern,
   ) async {
@@ -43,6 +45,9 @@ abstract class StockSelectionController extends BaseController {
       stockList.value.length,
       (index) => TextEditingController(),
     ).obs;
+    update();
+    notifyChildrens();
+    refresh();
   }
 
   void resetAfterItemAdd() {

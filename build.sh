@@ -19,10 +19,10 @@ day=$(date "+%d")
 BUILD_NUMBER=1;
 
 # Copy the built APK to a new file with a timestamped filename
- cp build/app/outputs/flutter-apk/app-release.apk "sandra_v${month}.${day}.${BUILD_NUMBER}.apk"
+# cp build/app/outputs/flutter-apk/app-release.apk "sandra_v${month}.${day}.${BUILD_NUMBER}.apk"
 
 # copy the built APK to the Desktop
-#cp build/app/outputs/flutter-apk/app-release.apk  ~/Desktop/sandra_v${month}.${day}.${BUILD_NUMBER}.apk
+cp build/app/outputs/flutter-apk/app-release.apk  ~/Desktop/sandra_v${month}.${day}.${BUILD_NUMBER}.apk
 
 # Output a message indicating that the build is complete
 echo "APK created successfully"
