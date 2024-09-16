@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/abstract_controller/stock_selection_controller.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/entity/sales.dart';
@@ -10,19 +11,9 @@ import '/app/entity/stock.dart';
 import '/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales_process_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
-class CreateSalesController extends BaseController {
+class CreateSalesController extends StockSelectionController {
   Sales? preSales;
   final salesItemList = Rx<List<SalesItem>>([]);
-  final stockList = Rx<List<Stock>>([]);
-  final selectedStock = Rx<Stock?>(null);
-  final qtyFocusNode = FocusNode().obs;
-
-  final stockMrpController = TextEditingController().obs;
-  final stockQtyController = TextEditingController().obs;
-  final stockDiscountController = TextEditingController().obs;
-  final stockTotalController = TextEditingController().obs;
-  final stockDiscountPercentController = TextEditingController().obs;
-  final searchController = TextEditingController().obs;
 
   final isSalesItemModalOpen = false.obs;
   final showSalesItem = false.obs;
@@ -95,29 +86,6 @@ class CreateSalesController extends BaseController {
     searchController.refresh();
     stockList
       ..value = []
-      ..refresh();
-  }
-
-  Future<void> getStocks(
-    String? pattern,
-  ) async {
-    searchController.refresh();
-    selectedStock.value = null;
-
-    if (pattern == null || pattern.isEmpty) {
-      stockList.value = [];
-      return;
-    }
-
-    final stocks = await dbHelper.getAllWhr(
-      tbl: dbTables.tableStocks,
-      where: "name LIKE '$pattern%'",
-      whereArgs: [],
-      limit: 100,
-    );
-
-    stockList
-      ..value = stocks.map(Stock.fromJson).toList()
       ..refresh();
   }
 
@@ -244,19 +212,39 @@ class CreateSalesController extends BaseController {
   Future<void> onSearchedStockQtyChange(
     num value,
     int index,
-  ) async {}
+  ) async {
+    isShowAddStockButton.value = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .isNotEmpty;
+  }
 
   Future<void> onSearchedStockQtyEditComplete(
     num value,
     int index,
   ) async {
-    stockQtyController.value.text = value.toString();
-    selectedStock
-      ..value = stockList.value[index]
-      ..refresh();
-    addSaleItem(
-      process: 'inline',
-    );
+    final indexList = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .map((e) => e.key)
+        .toList();
+
+    final tempStockList = stockList.value;
+
+    for (final i in indexList) {
+      final stock = stockList.value[i];
+      final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
+      stockQtyController.value.text = qty.toStringAsFixed(2);
+      onStockSelection(stock);
+      addSaleItem(
+        process: 'inline',
+      );
+      stockList.value = tempStockList;
+    }
+    stockList.value = [];
+    isShowAddStockButton.value = false;
   }
 
   Future<void> onDiscountChange(
@@ -330,5 +318,30 @@ class CreateSalesController extends BaseController {
       salesItemList.value = result;
       calculateAllSubtotal();
     }
+  }
+
+  void addStockFromSearchList() {
+    // get all index number of qtyControllerList which is not empty
+    final indexList = qtyControllerList
+        .asMap()
+        .entries
+        .where((element) => element.value.text.isNotEmpty)
+        .map((e) => e.key)
+        .toList();
+
+    final tempStockList = stockList.value;
+
+    for (final i in indexList) {
+      final stock = stockList.value[i];
+      final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
+      stockQtyController.value.text = qty.toStringAsFixed(2);
+      onStockSelection(stock);
+      addSaleItem(
+        process: 'inline',
+      );
+      stockList.value = tempStockList;
+    }
+    stockList.value = [];
+    isShowAddStockButton.value = false;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/singleton_classes/fb_init.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/entity/stock.dart';
@@ -11,12 +10,14 @@ class SearchedStockList extends StatelessWidget {
   final Function(Stock value) onItemTap;
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
+  final List<TextEditingController> qtyControllerList;
 
   const SearchedStockList({
     required this.stocks,
     required this.onItemTap,
     required this.onQtyChange,
     required this.onQtyEditComplete,
+    required this.qtyControllerList,
     super.key,
   });
 
@@ -31,6 +32,7 @@ class SearchedStockList extends StatelessWidget {
           onQtyChange: onQtyChange,
           onQtyEditComplete: onQtyEditComplete,
           index: index,
+          qtyController: qtyControllerList[index],
         );
       },
     );
@@ -42,6 +44,7 @@ class StockItem extends BaseWidget {
   final Function(Stock value) onItemTap;
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
+  final TextEditingController qtyController;
   final int index;
 
   StockItem({
@@ -49,13 +52,13 @@ class StockItem extends BaseWidget {
     required this.onItemTap,
     required this.onQtyChange,
     required this.onQtyEditComplete,
+    required this.qtyController,
     required this.index,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final qtyController = TextEditingController();
     final isEditing = false.obs;
     final total = '0.00'.obs;
 
@@ -141,6 +144,7 @@ class StockItem extends BaseWidget {
                               (salesPrice * quantity).toPrecision(2);
 
                           total.value = subtotal.toStringAsFixed(2);
+                          onQtyChange(quantity, index);
                         },
                         onEditingComplete: () {
                           onQtyEditComplete(
