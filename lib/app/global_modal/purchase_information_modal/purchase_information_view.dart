@@ -54,13 +54,13 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
         return DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(containerBorderRadius),
-            color: colors.moduleBodyColor,
+            color: colors.secondaryColor50,
           ),
           child: Column(
             children: [
               DecoratedBox(
                 decoration: BoxDecoration(
-                  color: colors.moduleBodyColor,
+                  color: colors.secondaryColor50,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(containerBorderRadius),
                     topRight: Radius.circular(
@@ -159,7 +159,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                       child: CommonText(
                         text: appLocalization.name,
                         fontSize: mediumTFSize,
-                        textColor: colors.primaryTextColor,
+                        textColor: colors.solidBlackColor,
                         fontWeight: FontWeight.w400,
                         textAlign: TextAlign.left,
                       ),
@@ -168,7 +168,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                       child: CommonText(
                         text: appLocalization.price,
                         fontSize: mediumTFSize,
-                        textColor: colors.primaryTextColor,
+                        textColor: colors.solidBlackColor,
                         fontWeight: FontWeight.w400,
                         textAlign: TextAlign.center,
                       ),
@@ -177,7 +177,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                       child: CommonText(
                         text: appLocalization.qty,
                         fontSize: mediumTFSize,
-                        textColor: colors.primaryTextColor,
+                        textColor: colors.solidBlackColor,
                         fontWeight: FontWeight.w400,
                         textAlign: TextAlign.center,
                       ),
@@ -186,7 +186,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                       child: CommonText(
                         text: appLocalization.total,
                         fontSize: mediumTFSize,
-                        textColor: colors.primaryTextColor,
+                        textColor: colors.solidBlackColor,
                         fontWeight: FontWeight.w400,
                         textAlign: TextAlign.right,
                       ),
@@ -229,7 +229,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 text:
                                     '${index + 1}. ${elementItem.stockName ?? ''}',
                                 fontSize: mediumTFSize,
-                                textColor: colors.primaryTextColor,
+                                textColor: colors.solidBlackColor,
                                 fontWeight: FontWeight.w400,
                                 textAlign: TextAlign.left,
                               ),
@@ -238,7 +238,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                               child: CommonText(
                                 text: elementItem.price?.toString() ?? '',
                                 fontSize: mediumTFSize,
-                                textColor: colors.primaryTextColor,
+                                textColor: colors.solidBlackColor,
                                 fontWeight: FontWeight.w400,
                                 textAlign: TextAlign.center,
                               ),
@@ -247,7 +247,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                               child: CommonText(
                                 text: elementItem.quantity?.toString() ?? '',
                                 fontSize: mediumTFSize,
-                                textColor: colors.primaryTextColor,
+                                textColor: colors.solidBlackColor,
                                 fontWeight: FontWeight.w400,
                                 textAlign: TextAlign.center,
                               ),
@@ -256,7 +256,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                               child: CommonText(
                                 text: elementItem.subTotal?.toString() ?? '',
                                 fontSize: mediumTFSize,
-                                textColor: colors.primaryTextColor,
+                                textColor: colors.solidBlackColor,
                                 fontWeight: FontWeight.w400,
                                 textAlign: TextAlign.right,
                               ),
@@ -347,7 +347,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.removeButtonFillColor,
+                                color: colors.solidRedColor,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
@@ -355,7 +355,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                               child: Center(
                                 child: Icon(
                                   TablerIcons.trash,
-                                  color: colors.removeButtonIconColor,
+                                  color: colors.whiteColor,
                                 ),
                               ),
                             ),
@@ -373,7 +373,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.iconBackgroundColor,
+                                  color: colors.primaryColor50,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
@@ -400,7 +400,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.editButtonFillColor,
+                                  color: colors.solidBlueColor,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
@@ -408,7 +408,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 child: Center(
                                   child: Icon(
                                     TablerIcons.pencil,
-                                    color: colors.editButtonIconColor,
+                                    color: colors.whiteColor,
                                   ),
                                 ),
                               ),
@@ -449,7 +449,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.infoButtonFillColor,
+                                  color: colors.solidBlueColor,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
@@ -457,7 +457,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 child: Center(
                                   child: Icon(
                                     TablerIcons.share,
-                                    color: colors.infoButtonIconColor,
+                                    color: colors.blackColor,
                                   ),
                                 ),
                               ),
@@ -485,7 +485,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 child: Center(
                                   child: Icon(
                                     TablerIcons.receipt_refund,
-                                    color: colors.editButtonIconColor,
+                                    color: colors.whiteColor,
                                   ),
                                 ),
                               ),

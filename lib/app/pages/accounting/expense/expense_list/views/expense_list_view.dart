@@ -256,7 +256,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                             text:
                                 '${appLocalization.total} : $currency ${element.amount ?? ''}',
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

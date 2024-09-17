@@ -119,7 +119,7 @@ class StockCardView extends BaseWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
                   ),
                   3.height,
@@ -130,7 +130,7 @@ class StockCardView extends BaseWidget {
                         child: CommonIconText(
                           icon: TablerIcons.tag,
                           iconSize: 16,
-                          iconColor: colors.primaryTextColor,
+                          iconColor: colors.solidBlackColor,
                           text: element.brandName ?? 'No Brand',
                         ),
                       ),
@@ -138,7 +138,7 @@ class StockCardView extends BaseWidget {
                         child: CommonIconText(
                           icon: TablerIcons.category,
                           iconSize: 16,
-                          iconColor: colors.primaryTextColor,
+                          iconColor: colors.solidBlackColor,
                           text: element.categoryName ?? 'No Category',
                         ),
                       ),
@@ -152,7 +152,7 @@ class StockCardView extends BaseWidget {
                       right: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: colors.borderColor,
+                      color: colors.secondaryColor100,
                     ),
                   ),
                   9.height,

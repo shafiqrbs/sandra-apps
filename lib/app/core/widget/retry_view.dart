@@ -40,7 +40,7 @@ class RetryView extends BaseWidget {
                 text: appLocalization.retry,
                 fontWeight: FontWeight.w500,
                 fontSize: mediumButtonTFSize,
-                textColor: colors.backgroundColor,
+                textColor: colors.whiteColor,
               ),
             ],
           ),

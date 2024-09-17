@@ -37,7 +37,7 @@ class OrderProcessConfirmationView
                 falsePadding.value,
               ),
               decoration: BoxDecoration(
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: Column(
                 children: [

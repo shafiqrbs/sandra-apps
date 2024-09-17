@@ -56,7 +56,7 @@ class LoginView extends BaseView<LoginController> {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            color: colors.moduleBodyColor,
+            color: colors.secondaryColor50,
           ),
           child: Padding(
             padding: EdgeInsets.only(top: 16.ph),
@@ -94,7 +94,7 @@ class LoginView extends BaseView<LoginController> {
             height: 130,
             width: 130,
             decoration: BoxDecoration(
-              color: colors.iconBackgroundColor,
+              color: colors.primaryColor50,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Padding(
@@ -139,7 +139,7 @@ class LoginView extends BaseView<LoginController> {
               CommonText(
                 text: SetUp().name ?? '',
                 fontSize: subHeaderTFSize,
-                textColor: colors.secondaryTextColor,
+                textColor: colors.primaryBlackColor,
                 textAlign: TextAlign.left,
                 fontWeight: FontWeight.w600,
               ),
@@ -165,7 +165,7 @@ class LoginView extends BaseView<LoginController> {
                         style: boldTextStyle(
                           color: !controller.isSignUp.value
                               ? white
-                              : colors.primaryTextColor,
+                              : colors.solidBlackColor,
                         ),
                       ),
                     )
@@ -195,7 +195,7 @@ class LoginView extends BaseView<LoginController> {
                         style: boldTextStyle(
                           color: controller.isSignUp.value
                               ? white
-                              : colors.primaryTextColor,
+                              : colors.solidBlackColor,
                         ),
                       ),
                     )
@@ -238,7 +238,7 @@ class LoginView extends BaseView<LoginController> {
                     isRequired: true,
                     isShowToolTip: false,
                     toolTipIcon: TablerIcons.info_square_rounded,
-                    toolTipIconColor: colors.dangerLiteColor,
+                    toolTipIconColor: colors.primaryRedColor,
                     toolTipContent: '8 characters required',
                   ).visible(!controller.isSignUp.value),
                   //16.height,
@@ -279,7 +279,7 @@ class LoginView extends BaseView<LoginController> {
                           child: CommonText(
                             text: appLocalization.forgotPassword,
                             fontSize: regularTFSize,
-                            textColor: colors.dangerLiteColor,
+                            textColor: colors.primaryRedColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -294,13 +294,13 @@ class LoginView extends BaseView<LoginController> {
                       CommonText(
                         text: appLocalization.donNotHaveAnAccount,
                         fontSize: subHeaderTFSize,
-                        textColor: colors.secondaryTextColor,
+                        textColor: colors.primaryBlackColor,
                       ),
                       4.width,
                       CommonText(
                         text: appLocalization.createAccount,
                         fontSize: subHeaderTFSize,
-                        textColor: colors.primaryTextColor,
+                        textColor: colors.solidBlackColor,
                         fontWeight: FontWeight.w600,
                         textDecoration: TextDecoration.underline,
                       ).onTap(

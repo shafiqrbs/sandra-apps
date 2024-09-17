@@ -36,7 +36,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
         borderRadius: BorderRadius.circular(
           containerBorderRadius,
         ),
-        border: Border.all(color: colors.borderColor),
+        border: Border.all(color: colors.secondaryColor100),
         color: colors.primaryColor50,
       ),
       padding: const EdgeInsets.only(
@@ -58,7 +58,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                   height: textFieldHeight,
                   width: Get.width,
                   decoration: BoxDecoration(
-                    color: colors.backgroundColor,
+                    color: colors.whiteColor,
                     borderRadius: BorderRadius.circular(
                       containerBorderRadius,
                     ),
@@ -70,9 +70,9 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                     style: TextStyle(
                       fontSize: selectedStock != null ? 14 : 16,
                       fontWeight: FontWeight.normal,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     onChanged: onSearch,
                     decoration: inputDecorationSearch(
                       hint: appLocalization.searchProduct,
@@ -130,7 +130,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                               },
                               child: Icon(
                                 TablerIcons.microphone,
-                                color: colors.primaryTextColor,
+                                color: colors.solidBlackColor,
                               ),
                             ),
                           ),
@@ -155,7 +155,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                               onTap: () async {},
                               child: Icon(
                                 TablerIcons.barcode,
-                                color: colors.primaryTextColor,
+                                color: colors.solidBlackColor,
                               ),
                             ),
                           ),
@@ -163,7 +163,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                       ],
                     )
                   : Container(
-                      color: colors.backgroundColor,
+                      color: colors.whiteColor,
                       alignment: Alignment.bottomLeft,
                       padding: const EdgeInsets.only(left: 4),
                       child: Column(
@@ -173,7 +173,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                             "MRP ${selectedStock?.salesPrice ?? ''} TK",
                             style: TextStyle(
                               fontSize: smallTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                             ),
                             textAlign: TextAlign.left,
                           ),
@@ -181,7 +181,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                             "Stock in ${selectedStock?.quantity ?? ''} pc",
                             style: TextStyle(
                               fontSize: smallTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                             ),
                             textAlign: TextAlign.left,
                           ),
@@ -189,7 +189,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                             "P.P. ${selectedStock?.purchasePrice ?? ''} pc",
                             style: TextStyle(
                               fontSize: smallTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                             ),
                             textAlign: TextAlign.left,
                           ),

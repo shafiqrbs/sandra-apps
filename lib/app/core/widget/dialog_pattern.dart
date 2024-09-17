@@ -34,7 +34,7 @@ class DialogPattern extends BaseWidget {
                 borderRadius: BorderRadius.circular(
                  containerBorderRadius,
                 ),
-                color: colors.moduleBodyColor,
+                color: colors.secondaryColor50,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -71,7 +71,7 @@ class DialogPattern extends BaseWidget {
                                   title,
                                   style: TextStyle(
                                     fontSize: headerTFSize,
-                                    color: colors.primaryTextColor,
+                                    color: colors.solidBlackColor,
                                   ),
                                 ),
                               ),
@@ -82,7 +82,7 @@ class DialogPattern extends BaseWidget {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: subHeaderTFSize,
-                                    color: colors.secondaryTextColor,
+                                    color: colors.primaryBlackColor,
                                   ),
                                 ),
                               ),
@@ -99,7 +99,7 @@ class DialogPattern extends BaseWidget {
                           },
                           child: Icon(
                             TablerIcons.x,
-                            color: colors.dangerLiteColor,
+                            color: colors.primaryRedColor,
                             size: closeIconSize,
                           ),
                         ),
@@ -137,7 +137,7 @@ class DialogPattern extends BaseWidget {
                         size: 60,
                       ),
                       Text("add".tr, style: TextStyle(
-                          color: colors.primaryTextColor,
+                          color: colors.solidBlackColor,
                           fontSize: headerTFSize
                       ),)
                     ],

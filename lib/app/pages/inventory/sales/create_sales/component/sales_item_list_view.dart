@@ -153,7 +153,7 @@ class SalesItemListView extends BaseWidget {
                       8.height,
                       Container(
                         height: 1,
-                        color: colors.borderColor,
+                        color: colors.secondaryColor100,
                       ),
                       8.height,
                       Row(
@@ -174,7 +174,7 @@ class SalesItemListView extends BaseWidget {
                                     text: '${mrpController.value.text}',
                                     fontSize: mediumTFSize,
                                     fontWeight: FontWeight.w500,
-                                    textColor: colors.primaryTextColor,
+                                    textColor: colors.solidBlackColor,
                                   ),
                                 ),
                               ],
@@ -193,7 +193,7 @@ class SalesItemListView extends BaseWidget {
                                   padding: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
                                   //width: Get.width * 0.7,
-                                  color: colors.textFieldColor,
+                                  color: colors.primaryColor50,
                                   child: TextFormField(
                                     controller:
                                         salesItemDiscountPercentController
@@ -230,10 +230,10 @@ class SalesItemListView extends BaseWidget {
                                     },
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
-                                      color: colors.primaryTextColor,
+                                      color: colors.solidBlackColor,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                    cursorColor: colors.formCursorColor,
+                                    cursorColor: colors.solidBlackColor,
                                     decoration: getInputDecoration(
                                       hint: '%',
                                     ),
@@ -258,7 +258,7 @@ class SalesItemListView extends BaseWidget {
                                         padding: EdgeInsets.zero,
                                         height: mediumTextFieldHeight,
                                         //width: Get.width * 0.7,
-                                        color: colors.textFieldColor,
+                                        color: colors.primaryColor50,
                                         child: TextFormField(
                                           controller:
                                               salesItemSalesPriceController
@@ -302,7 +302,7 @@ class SalesItemListView extends BaseWidget {
 
                                           style: TextStyle(
                                             fontSize: mediumTFSize,
-                                            color: colors.primaryTextColor,
+                                            color: colors.solidBlackColor,
                                             fontWeight: FontWeight.w500,
                                           ),
 
@@ -325,7 +325,7 @@ class SalesItemListView extends BaseWidget {
                                         padding: EdgeInsets.zero,
                                         height: mediumTextFieldHeight,
                                         //width: Get.width * 0.7,
-                                        color: colors.textFieldColor,
+                                        color: colors.primaryColor50,
                                         child: TextFormField(
                                           controller:
                                               salesItemQtyController.value,
@@ -365,7 +365,7 @@ class SalesItemListView extends BaseWidget {
                                           },
                                           style: TextStyle(
                                             fontSize: mediumTFSize,
-                                            color: colors.primaryTextColor,
+                                            color: colors.solidBlackColor,
                                             fontWeight: FontWeight.w500,
                                           ),
                                           decoration: getInputDecoration(
@@ -408,7 +408,7 @@ class SalesItemListView extends BaseWidget {
                                     onEditingComplete: () {},
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
-                                      color: colors.primaryTextColor,
+                                      color: colors.solidBlackColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: InputDecoration(
@@ -466,12 +466,12 @@ class SalesItemListView extends BaseWidget {
                           borderRadius: BorderRadius.circular(
                             containerBorderRadius,
                           ),
-                          color: colors.dangerLiteColor,
+                          color: colors.primaryRedColor,
                         ),
                         child: Icon(
                           TablerIcons.x,
                           size: 18,
-                          color: colors.backgroundColor,
+                          color: colors.whiteColor,
                         ),
                       ),
                     ),
@@ -501,7 +501,7 @@ class SalesItemListView extends BaseWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
                   ),
                 ),

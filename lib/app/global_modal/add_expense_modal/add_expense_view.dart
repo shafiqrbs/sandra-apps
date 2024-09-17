@@ -117,7 +117,7 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: appLocalization.amount,

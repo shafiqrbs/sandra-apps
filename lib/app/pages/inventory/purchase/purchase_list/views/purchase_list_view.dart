@@ -275,7 +275,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                           text:
                               "${appLocalization.total} : $currency ${element.netTotal ?? ''}",
                           fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
+                          textColor: colors.solidBlackColor,
                           maxLine: 1,
                           textOverflow: TextOverflow.ellipsis,
                         ),
@@ -288,7 +288,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                           text:
                               "${appLocalization.receive} : $currency ${element.received ?? ''}",
                           fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
+                          textColor: colors.solidBlackColor,
                           maxLine: 1,
                           textOverflow: TextOverflow.ellipsis,
                         ),
@@ -301,7 +301,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                           text:
                               "${appLocalization.due} :$currency ${element.due ?? ''}",
                           fontSize: valueTFSize,
-                          textColor: colors.primaryTextColor,
+                          textColor: colors.solidBlackColor,
                           textAlign: TextAlign.start,
                           maxLine: 1,
                           textOverflow: TextOverflow.ellipsis,
@@ -377,7 +377,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                   children: [
                     Icon(
                       TablerIcons.refresh,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                       size: 18,
                     ),
                     CommonText(

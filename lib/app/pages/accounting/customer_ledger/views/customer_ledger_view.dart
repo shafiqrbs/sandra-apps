@@ -52,7 +52,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                 padding: EdgeInsets.zero,
                 height: textFieldHeight,
                 decoration: BoxDecoration(
-                  color: colors.textFieldColor,
+                  color: colors.primaryColor50,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(
                       4,
@@ -67,9 +67,9 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       style: TextStyle(
                         fontSize: regularTFSize,
                         fontWeight: FontWeight.w400,
-                        color: colors.primaryTextColor,
+                        color: colors.solidBlackColor,
                       ),
-                      cursorColor: colors.formCursorColor,
+                      cursorColor: colors.solidBlackColor,
                       onChanged: controller.searchCustomer,
                       decoration: inputDecorationAppbarSearch(
                         hint: appLocalization.searchCustomer,
@@ -82,7 +82,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                           child: Icon(
                             TablerIcons.x,
                             size: 18,
-                            color: colors.formClearIconColor,
+                            color: colors.solidRedColor,
                           ),
                         ),
                         onTap: () {},
@@ -121,7 +121,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       onTap: controller.startVoiceSearch,
                       child: Icon(
                         TablerIcons.microphone,
-                        color: colors.primaryTextColor,
+                        color: colors.solidBlackColor,
                       ),
                     ),
                   ),
@@ -146,7 +146,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       onTap: () async {},
                       child: Icon(
                         TablerIcons.file_text,
-                        color: colors.primaryTextColor,
+                        color: colors.solidBlackColor,
                       ),
                     ),
                   ),
@@ -171,7 +171,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       onTap: () async {},
                       child: Icon(
                         TablerIcons.share_3,
-                        color: colors.primaryTextColor,
+                        color: colors.solidBlackColor,
                       ),
                     ),
                   ),
@@ -292,7 +292,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                           ),
                           decoration: BoxDecoration(
                             color: index.isEven
-                                ? colors.backgroundColor
+                                ? colors.whiteColor
                                 : colors.primaryColor50,
                             borderRadius: BorderRadius.circular(4),
                           ),

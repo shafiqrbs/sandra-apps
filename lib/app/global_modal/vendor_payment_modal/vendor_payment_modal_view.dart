@@ -32,7 +32,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
             ),
             child: Column(
               children: [
@@ -145,7 +145,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: appLocalization.amount,
@@ -190,7 +190,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
     BuildContext context,
   ) {
     return Container(
-      color: colors.backgroundColor,
+      color: colors.whiteColor,
       child: Column(
         children: [
           Row(
@@ -201,12 +201,12 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                   child: TextFormField(
                     controller:
                         controller.vendorManager.searchTextController.value,
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       prefixIcon: Icon(
                         TablerIcons.search,
                         size: 16,
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                       ),
                       suffixIcon: Obx(
                         () {
@@ -229,7 +229,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                                       child: Icon(
                                         TablerIcons.x,
                                         size: 12,
-                                        color: colors.formClearIconColor,
+                                        color: colors.solidRedColor,
                                       ),
                                     )
                                   : Container(),
@@ -251,14 +251,14 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                       ),
                       hintText: appLocalization.searchVendor,
                       hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                         fontWeight: FontWeight.normal,
                         fontSize: mediumTFSize.sp,
                       ),
-                      fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.borderColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      fillColor: colors.primaryColor50,
+                      enabledBorderColor: colors.secondaryColor100,
+                      focusedBorderColor: colors.secondaryColor100,
+                      errorBorderColor: colors.secondaryColor100,
                     ),
                     textAlign: startTA,
                     style: TextStyle(
@@ -288,7 +288,7 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                 text: appLocalization.dontYouHaveVendor,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
-                textColor: colors.textColorH6,
+                textColor: colors.solidBlackColor,
               ),
               InkWell(
                 onTap: controller.addVendor,

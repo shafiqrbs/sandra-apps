@@ -23,10 +23,10 @@ InputDecoration getInputDecoration({
     contentPadding: const EdgeInsets.fromLTRB(7, 7, 7, 0),
     hintText: hint,
     hintStyle: TextStyle(
-      color: colorSchema.formBaseHintTextColor,
+      color: colorSchema.primaryBlackColor,
     ),
     labelStyle: TextStyle(
-      color: colorSchema.primaryTextColor,
+      color: colorSchema.solidBlackColor,
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
@@ -34,25 +34,25 @@ InputDecoration getInputDecoration({
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: BorderSide(
-        color: colorSchema.formBaseBorderColor,
+        color: colorSchema.secondaryColor100,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: BorderSide(
-        color: colorSchema.formBaseBorderColor,
+        color: colorSchema.secondaryColor100,
       ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: BorderSide(
-        color: colorSchema.formBaseBorderColor,
+        color: colorSchema.secondaryColor100,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: BorderSide(
-        color: colorSchema.formBaseBorderColor,
+        color: colorSchema.secondaryColor100,
       ),
     ),
   );
@@ -92,14 +92,14 @@ InputDecoration inputDecorationAppbarSearch({
     hintText: hint.tr,
     hintStyle: TextStyle(
       fontSize: appDimension.regularTFSize,
-      color: colors.formBaseHintTextColor,
+      color: colors.primaryBlackColor,
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         appDimension.containerBorderRadius,
       ),
       borderSide: BorderSide(
-        color: colors.borderColor,
+        color: colors.secondaryColor100,
       ),
     ),
     enabledBorder: OutlineInputBorder(
@@ -107,7 +107,7 @@ InputDecoration inputDecorationAppbarSearch({
         appDimension.containerBorderRadius,
       ),
       borderSide: BorderSide(
-        color: colors.borderColor,
+        color: colors.secondaryColor100,
       ),
     ),
     focusedBorder: OutlineInputBorder(
@@ -115,7 +115,7 @@ InputDecoration inputDecorationAppbarSearch({
         appDimension.containerBorderRadius,
       ),
       borderSide: BorderSide(
-        color: colors.borderColor,
+        color: colors.secondaryColor100,
       ),
     ),
   );

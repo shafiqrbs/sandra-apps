@@ -60,9 +60,9 @@ class AppBarSearchView extends BaseWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
-                  color: colors.primaryTextColor,
+                  color: colors.solidBlackColor,
                 ),
-                cursorColor: colors.formCursorColor,
+                cursorColor: colors.solidBlackColor,
                 onChanged: onSearch,
                 decoration: InputDecoration(
                   filled: true,
@@ -155,7 +155,7 @@ class AppBarSearchView extends BaseWidget {
             height: textFieldHeight,
             // width: Get.width,
             decoration: BoxDecoration(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
               borderRadius: BorderRadius.circular(
                 containerBorderRadius,
               ),
@@ -175,9 +175,9 @@ class AppBarSearchView extends BaseWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
-                color: colors.primaryTextColor,
+                color: colors.solidBlackColor,
               ),
-              cursorColor: colors.formCursorColor,
+              cursorColor: colors.solidBlackColor,
               onChanged: onSearch,
               decoration: InputDecoration(
                 prefixIcon: Icon(

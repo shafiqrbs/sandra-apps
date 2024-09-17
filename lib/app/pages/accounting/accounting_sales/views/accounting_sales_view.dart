@@ -262,7 +262,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                             text:
                                 '${appLocalization.total} : $currency ${element.total ?? ''}',
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -274,7 +274,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                             text:
                                 '${appLocalization.amount} : $currency ${element.amount ?? ''}',
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -286,7 +286,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                             text:
                                 "${appLocalization.due} :$currency ${element.balance ?? ""}",
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.w500,
                           ),

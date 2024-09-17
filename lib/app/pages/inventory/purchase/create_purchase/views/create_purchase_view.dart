@@ -96,7 +96,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                             Text(
                               appLocalization.placeOrder,
                               style: TextStyle(
-                                color: colors.backgroundColor,
+                                color: colors.whiteColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -173,7 +173,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               child: Text(
                 appLocalization.add,
                 style: TextStyle(
-                  color: colors.backgroundColor,
+                  color: colors.whiteColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
@@ -234,7 +234,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                     style: TextStyle(
                       fontSize: paragraphTFSize,
                       fontWeight: FontWeight.w600,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
                   ),
                 ),
@@ -255,7 +255,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               padding: EdgeInsets.zero,
                               height: mediumTextFieldHeight,
                               //width: Get.width * 0.6,
-                              color: colors.textFieldColor,
+                              color: colors.primaryColor50,
                               child: TextFormField(
                                 autofocus: true,
                                 textAlign: TextAlign.center,
@@ -263,10 +263,10 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 controller: controller.stockQtyController.value,
                                 style: TextStyle(
                                   fontSize: mediumTFSize,
-                                  color: colors.primaryTextColor,
+                                  color: colors.solidBlackColor,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                cursorColor: colors.formCursorColor,
+                                cursorColor: colors.solidBlackColor,
                                 decoration: getInputDecoration(
                                   hint: appLocalization.qty,
                                 ),
@@ -289,7 +289,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               appLocalization.qty,
                               style: TextStyle(
                                 fontSize: smallTFSize,
-                                color: colors.primaryTextColor,
+                                color: colors.solidBlackColor,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -306,7 +306,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               padding: EdgeInsets.zero,
                               height: mediumTextFieldHeight,
                               //width: Get.width * 0.6,
-                              color: colors.textFieldColor,
+                              color: colors.primaryColor50,
                               child: TextFormField(
                                 controller: controller.priceController.value,
                                 readOnly:
@@ -319,10 +319,10 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 textInputAction: TextInputAction.next,
                                 style: TextStyle(
                                   fontSize: mediumTFSize,
-                                  color: colors.primaryTextColor,
+                                  color: colors.solidBlackColor,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                cursorColor: colors.formCursorColor,
+                                cursorColor: colors.solidBlackColor,
                                 decoration: getInputDecoration(
                                   hint: appLocalization.price,
                                 ),
@@ -333,7 +333,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                               controller.purchaseMode ?? '',
                               style: TextStyle(
                                 fontSize: smallTFSize,
-                                color: colors.primaryTextColor,
+                                color: colors.solidBlackColor,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -350,7 +350,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 padding: EdgeInsets.zero,
                                 height: mediumTextFieldHeight,
                                 //width: Get.width * 0.6,
-                                color: colors.textFieldColor,
+                                color: colors.primaryColor50,
                                 child: TextFormField(
                                   controller:
                                       controller.totalPriceController.value,
@@ -370,10 +370,10 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   },
                                   style: TextStyle(
                                     fontSize: mediumTFSize,
-                                    color: colors.primaryTextColor,
+                                    color: colors.solidBlackColor,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                  cursorColor: colors.formCursorColor,
+                                  cursorColor: colors.solidBlackColor,
                                   decoration: getInputDecoration(
                                     hint: appLocalization.totalPrice,
                                   ),
@@ -384,7 +384,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 appLocalization.totalPrice,
                                 style: TextStyle(
                                   fontSize: smallTFSize,
-                                  color: colors.primaryTextColor,
+                                  color: colors.solidBlackColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -414,7 +414,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                             ),
                             child: CommonText(
                               text: appLocalization.add,
-                              textColor: colors.backgroundColor,
+                              textColor: colors.whiteColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                             ),
@@ -463,7 +463,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               },
             ),
             Container(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
               height: 90.ph,
               child: Column(
                 children: [
@@ -507,7 +507,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: SearchedPurchaseStockList(
                 stocks: controller.stockList.value,

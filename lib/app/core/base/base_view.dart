@@ -42,8 +42,6 @@ abstract class BaseView<Controller extends BaseController>
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;  // Get current brightness
-    colors = ColorSchema();
     return GestureDetector(
       child: Stack(
         children: [
@@ -161,7 +159,7 @@ abstract class BaseView<Controller extends BaseController>
         child: Text(
           appLocalization.retry,
           style: TextStyle(
-            color: colors.primaryTextColor,
+            color: colors.solidBlackColor,
             fontSize: 18,
           ),
         ),

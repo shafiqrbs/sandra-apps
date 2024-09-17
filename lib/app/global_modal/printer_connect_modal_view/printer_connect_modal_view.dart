@@ -25,7 +25,7 @@ class PrinterConnectModalView
             child: Container(
               padding:  EdgeInsets.all(falsePadding.value),
               decoration: BoxDecoration(
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: Column(
                 children: [

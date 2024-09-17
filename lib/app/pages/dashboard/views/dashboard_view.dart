@@ -4,15 +4,16 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/singleton_classes/color_schema_2.dart';
 import 'package:sandra/app/pages/settings/controllers/settings_controller.dart';
-import '/app/core/utils/test_functions.dart';
-import '/app/core/widget/tbd_round_button.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/utils/test_functions.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/tbd_round_button.dart';
 import '/app/core/widget/tbd_text_button.dart';
 import '/app/core/widget/title_subtitle_button.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
@@ -47,7 +48,7 @@ class DashboardView extends BaseView<DashboardController> {
                       text: appLocalization.storeName,
                       fontSize: headerTFSize,
                       fontWeight: FontWeight.w500,
-                      textColor: colors.backgroundColor,
+                      textColor: colors.whiteColor,
                     ),
                   ),
                   Expanded(
@@ -55,7 +56,7 @@ class DashboardView extends BaseView<DashboardController> {
                       text: appLocalization.userName,
                       fontSize: regularTFSize,
                       fontWeight: FontWeight.normal,
-                      textColor: colors.backgroundColor,
+                      textColor: colors.whiteColor,
                     ),
                   ),
                 ],
@@ -80,6 +81,8 @@ class DashboardView extends BaseView<DashboardController> {
       ),
     );
   }
+
+
 
   @override
   Widget body(BuildContext context) {
@@ -122,7 +125,7 @@ class DashboardView extends BaseView<DashboardController> {
           Text(
             SetUp().name ?? '',
             style: TextStyle(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
               fontSize: regularTFSize,
               fontWeight: FontWeight.w600,
             ),
@@ -162,7 +165,7 @@ class DashboardView extends BaseView<DashboardController> {
                           decoration: BoxDecoration(
                             color: controller.isOnline.value
                                 ? colors.primaryColor800
-                                : colors.dangerBaseColor,
+                                : colors.solidRedColor,
                             borderRadius: BorderRadius.circular(100),
                           ),
                         ),
@@ -175,14 +178,19 @@ class DashboardView extends BaseView<DashboardController> {
               12.width,
               InkWell(
                 onTap: () {
+
                   Get.changeTheme(
                     Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
                   );
-                  //Get.find<SettingsController>().changeTheme();
+                  colors = ColorSchema.fromJson(
+                    Get.isDarkMode ? darkColor : lightColor,
+                  );
+                  print('Get.isDarkMode: ${Get.isDarkMode}');
+                  print('colors.primaryColor900: ${colors.primaryColor900}');
                 },
                 child: Icon(
-                  //Get.find<SettingsController>().isDarkMode.value ? TablerIcons.sun : TablerIcons.moon,
-                  TablerIcons.clipboard_text,
+                  Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
+                  //TablerIcons.clipboard_text,
                   color: Colors.white,
                   size: 20,
                 ),
@@ -199,7 +207,7 @@ class DashboardView extends BaseView<DashboardController> {
                         child: Text(
                           'Logout',
                           style: TextStyle(
-                            color: colors.primaryTextColor,
+                            color: colors.solidBlackColor,
                             fontSize: 16,
                           ),
                         ),
@@ -210,7 +218,7 @@ class DashboardView extends BaseView<DashboardController> {
                         child: Text(
                           'Reset',
                           style: TextStyle(
-                            color: colors.primaryTextColor,
+                            color: colors.solidBlackColor,
                             fontSize: 16,
                           ),
                         ),
@@ -258,18 +266,22 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildTestColor() {
+  Widget _buildTestColor(){
     return InkWell(
-      onTap: () {
-        ColorSchema2.fromJson(Get.isDarkMode ? darkColor : lightColor);
+      onTap: (){
         Get.changeTheme(
           Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
         );
+        ColorSchema2.fromJson(
+          Get.isDarkMode ? darkColor : lightColor,
+        );
+        print('Get.isDarkMode: ${Get.isDarkMode}');
+        print('colors.primaryColor900: ${colors.primaryColor900}');
       },
       child: Container(
-        height: 20,
-        width: 20,
-        color: ColorSchema2().primaryColor500,
+        height: 100,
+        width: 100,
+        color: colors.primaryColor500,
       ),
     );
   }
@@ -335,7 +347,7 @@ class DashboardView extends BaseView<DashboardController> {
                     text: title,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    textColor: colors.primaryTextColor,
+                    textColor: colors.solidBlackColor,
                   ),
                   6.width,
                   const Icon(

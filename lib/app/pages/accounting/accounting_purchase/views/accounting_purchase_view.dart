@@ -260,7 +260,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                             text:
                                 '${appLocalization.total} : $currency ${element.total ?? ''}',
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -272,7 +272,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                             text:
                                 '${appLocalization.amount} : $currency ${element.amount ?? ''}',
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -284,7 +284,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                             text:
                                 "${appLocalization.due} :$currency ${element.balance ?? ""}",
                             fontSize: valueTFSize,
-                            textColor: colors.primaryTextColor,
+                            textColor: colors.solidBlackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.w500,
                           ),

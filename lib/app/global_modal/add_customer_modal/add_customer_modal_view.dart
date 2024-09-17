@@ -20,7 +20,7 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
             ),
             child: Column(
               children: [
@@ -89,7 +89,7 @@ class AddCustomerModalView extends BaseView<AddCustomerModalController> {
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: colors.moduleFooterColor,
+                    color: colors.primaryColor50,
                   ),
                   //height: 100,
                   width: Get.width,

@@ -30,7 +30,7 @@ class PaymentOption extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               color: isSelected
-                  ? colorSchema.borderColor
+                  ? colorSchema.secondaryColor100
                   : colorSchema.primaryColor50,
             ),
             borderRadius: BorderRadius.circular(4),
@@ -45,8 +45,8 @@ class PaymentOption extends StatelessWidget {
                 icon,
                 size: 28,
                 color: isSelected
-                    ? colorSchema.primaryTextColor
-                    : colorSchema.secondaryTextColor,
+                    ? colorSchema.solidBlackColor
+                    : colorSchema.primaryBlackColor,
               ),
               const SizedBox(height: 2),
               Text(
@@ -54,8 +54,8 @@ class PaymentOption extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   color: isSelected
-                      ? colorSchema.primaryTextColor
-                      : colorSchema.secondaryTextColor,
+                      ? colorSchema.solidBlackColor
+                      : colorSchema.primaryBlackColor,
                 ),
               ),
             ],

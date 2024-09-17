@@ -443,7 +443,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
-                                        color: colors.defaultFontColor,
+                                        color: colors.solidBlackColor,
                                       ),
                                     ),
                                     value: item.value ?? '',
@@ -498,30 +498,30 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                 hintStyle: GoogleFonts.roboto(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: colors.secondaryTextColor,
+                                  color: colors.primaryBlackColor,
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 8,
                                   vertical: 4,
                                 ),
                                 filled: true,
-                                fillColor: colors.textFieldColor,
+                                fillColor: colors.primaryColor50,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),
                                   borderSide: BorderSide(
-                                    color: colors.borderColor,
+                                    color: colors.secondaryColor100,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),
                                   borderSide: BorderSide(
-                                    color: colors.borderColor,
+                                    color: colors.secondaryColor100,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),
                                   borderSide: BorderSide(
-                                    color: colors.borderColor,
+                                    color: colors.secondaryColor100,
                                   ),
                                 ),
                               ),
@@ -600,7 +600,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
         8.height,
         Container(
           height: 1,
-          color: colors.borderColor,
+          color: colors.secondaryColor100,
         ),
         8.height,
       ],
@@ -621,7 +621,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
           if (icon != null)
             Icon(
               icon,
-              color: colors.defaultFontColor,
+              color: colors.solidBlackColor,
               size: 24,
             ),
           if (icon != null) 8.width,
@@ -640,7 +640,7 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
           const Spacer(),
           Icon(
             isOpen ? TablerIcons.chevron_down : trailingIcon,
-            color: colors.defaultFontColor,
+            color: colors.solidBlackColor,
           ),
         ],
       ),

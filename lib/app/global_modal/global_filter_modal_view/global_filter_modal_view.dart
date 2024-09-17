@@ -34,7 +34,7 @@ class GlobalFilterModalView extends BaseView<GlobalFilterModalController> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: colors.backgroundColor,
+          color: colors.whiteColor,
         ),
         child: Column(
           children: [

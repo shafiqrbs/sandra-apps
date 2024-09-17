@@ -36,7 +36,7 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                 falsePadding.value,
               ),
               decoration: BoxDecoration(
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: Column(
                 children: [

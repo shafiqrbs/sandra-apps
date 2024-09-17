@@ -34,7 +34,7 @@ class CustomerReceiveModalView
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
             ),
             child: Column(
               children: [
@@ -169,7 +169,7 @@ class CustomerReceiveModalView
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
                               hintText: appLocalization.amount,
@@ -216,7 +216,7 @@ class CustomerReceiveModalView
     BuildContext context,
   ) {
     return Container(
-      color: colors.backgroundColor,
+      color: colors.whiteColor,
       child: Column(
         children: [
           Row(
@@ -227,12 +227,12 @@ class CustomerReceiveModalView
                   child: TextFormField(
                     controller:
                         controller.customerManager.searchTextController.value,
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       prefixIcon: Icon(
                         TablerIcons.search,
                         size: 16,
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                       ),
                       suffixIcon: Obx(
                         () {
@@ -255,7 +255,7 @@ class CustomerReceiveModalView
                                       child: Icon(
                                         TablerIcons.x,
                                         size: 12,
-                                        color: colors.formClearIconColor,
+                                        color: colors.solidRedColor,
                                       ),
                                     )
                                   : Container(),
@@ -277,14 +277,14 @@ class CustomerReceiveModalView
                       ),
                       hintText: appLocalization.searchCustomer,
                       hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                         fontWeight: FontWeight.normal,
                         fontSize: mediumTFSize.sp,
                       ),
-                      fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.borderColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      fillColor: colors.primaryColor50,
+                      enabledBorderColor: colors.secondaryColor100,
+                      focusedBorderColor: colors.secondaryColor100,
+                      errorBorderColor: colors.secondaryColor100,
                     ),
                     textAlign: startTA,
                     style: TextStyle(
@@ -314,7 +314,7 @@ class CustomerReceiveModalView
                 text: appLocalization.donNotHaveAnAccount,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
-                textColor: colors.textColorH6,
+                textColor: colors.solidBlackColor,
               ),
               InkWell(
                 onTap: controller.addCustomer,

@@ -39,7 +39,7 @@ class RowButton extends StatelessWidget with AppDimension {
           decoration: BoxDecoration(
             color: buttonBGColor ??
                 ((isOutline ?? false)
-                    ? colors.backgroundColor
+                    ? colors.whiteColor
                     : colors.primaryColor500),
             borderRadius: BorderRadius.circular(
               containerBorderRadius,
@@ -59,7 +59,7 @@ class RowButton extends StatelessWidget with AppDimension {
                   color: buttonTextColor ??
                       ((isOutline ?? false)
                           ? colors.primaryColor500
-                          : colors.backgroundColor),
+                          : colors.whiteColor),
                   size: 20,
                 ),
               if (buttonName != null)
@@ -72,7 +72,7 @@ class RowButton extends StatelessWidget with AppDimension {
                     textColor: buttonTextColor ??
                         ((isOutline ?? false)
                             ? colors.primaryColor500
-                            : colors.backgroundColor),
+                            : colors.whiteColor),
                   ),
                 ),
               if (rightIcon != null)
@@ -80,7 +80,7 @@ class RowButton extends StatelessWidget with AppDimension {
                   icon: rightIcon!,
                   color: (isOutline ?? false)
                       ? colors.primaryColor500
-                      : colors.backgroundColor,
+                      : colors.whiteColor,
                 ),
             ],
           ),

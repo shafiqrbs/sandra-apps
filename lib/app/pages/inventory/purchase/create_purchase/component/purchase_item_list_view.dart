@@ -107,7 +107,7 @@ class PurchaseItemListView extends BaseWidget {
                                   margin: EdgeInsets.zero,
                                   padding: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
-                                  color: colors.textFieldColor,
+                                  color: colors.primaryColor50,
                                   child: TextFormField(
                                     controller: qtyController,
                                     textAlign: TextAlign.center,
@@ -131,7 +131,7 @@ class PurchaseItemListView extends BaseWidget {
                                     onTap: qtyController.clear,
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
-                                      color: colors.primaryTextColor,
+                                      color: colors.solidBlackColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: getInputDecoration(
@@ -143,7 +143,7 @@ class PurchaseItemListView extends BaseWidget {
                                   'Qty',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: colors.primaryTextColor,
+                                    color: colors.solidBlackColor,
                                   ),
                                 ),
                               ],
@@ -160,7 +160,7 @@ class PurchaseItemListView extends BaseWidget {
                                   margin: EdgeInsets.zero,
                                   padding: EdgeInsets.zero,
                                   height: mediumTextFieldHeight,
-                                  color: colors.textFieldColor,
+                                  color: colors.primaryColor50,
                                   child: TextFormField(
                                     controller: priceController,
                                     textAlign: TextAlign.center,
@@ -173,7 +173,7 @@ class PurchaseItemListView extends BaseWidget {
                                     },
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
-                                      color: colors.primaryTextColor,
+                                      color: colors.solidBlackColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: getInputDecoration(
@@ -197,7 +197,7 @@ class PurchaseItemListView extends BaseWidget {
                                   'Price',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: colors.primaryTextColor,
+                                    color: colors.solidBlackColor,
                                   ),
                                 ),
                               ],
@@ -231,7 +231,7 @@ class PurchaseItemListView extends BaseWidget {
                                     onEditingComplete: () {},
                                     style: TextStyle(
                                       fontSize: mediumTFSize,
-                                      color: colors.primaryTextColor,
+                                      color: colors.solidBlackColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     decoration: InputDecoration(
@@ -271,7 +271,7 @@ class PurchaseItemListView extends BaseWidget {
                                   'Sub Total',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: colors.primaryTextColor,
+                                    color: colors.solidBlackColor,
                                   ),
                                 ),
                               ],
@@ -295,12 +295,12 @@ class PurchaseItemListView extends BaseWidget {
                           borderRadius: BorderRadius.circular(
                             containerBorderRadius,
                           ),
-                          color: colors.dangerLiteColor,
+                          color: colors.primaryRedColor,
                         ),
                         child: Icon(
                           TablerIcons.x,
                           size: 18,
-                          color: colors.backgroundColor,
+                          color: colors.whiteColor,
                         ),
                       ),
                     ),
@@ -330,7 +330,7 @@ class PurchaseItemListView extends BaseWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
                   ),
                 ),

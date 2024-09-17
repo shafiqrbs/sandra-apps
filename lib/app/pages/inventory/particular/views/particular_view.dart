@@ -18,7 +18,7 @@ class ParticularView extends BaseView<ParticularController> {
       title: Text(
         'particular'.tr,
         style: TextStyle(
-          color: colors.backgroundColor,
+          color: colors.whiteColor,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),

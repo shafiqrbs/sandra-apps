@@ -46,7 +46,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: Form(
                 key: controller.formKey,
@@ -122,7 +122,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   text: appLocalization.placeOrder,
                   fontSize: subHeaderTFSize,
                   fontWeight: FontWeight.bold,
-                  textColor: colors.backgroundColor,
+                  textColor: colors.whiteColor,
                 ),
               ),
               4.width,
@@ -139,7 +139,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                         child: Icon(
                           TablerIcons.x,
                           size: closeIconSize,
-                          color: colors.backgroundColor,
+                          color: colors.whiteColor,
                         ),
                       ),
                     ),
@@ -160,7 +160,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
       padding: const EdgeInsets.symmetric(
         horizontal: 4,
       ),
-      color: colors.backgroundColor,
+      color: colors.whiteColor,
       child: Column(
         children: [
           Row(
@@ -171,12 +171,12 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   child: TextFormField(
                     controller:
                     controller.vendorManager.searchTextController.value,
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       prefixIcon: Icon(
                         TablerIcons.search,
                         size: 16,
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                       ),
                       suffixIcon: Obx(
                             () {
@@ -199,7 +199,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                                 child: Icon(
                                   TablerIcons.x,
                                   size: 12,
-                                  color: colors.formClearIconColor,
+                                  color: colors.solidRedColor,
                                 ),
                               )
                                   : Container(),
@@ -221,14 +221,14 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                       ),
                       hintText: appLocalization.searchVendor,
                       hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                         fontWeight: FontWeight.normal,
                         fontSize: mediumTFSize.sp,
                       ),
-                      fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.borderColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      fillColor: colors.primaryColor50,
+                      enabledBorderColor: colors.secondaryColor100,
+                      focusedBorderColor: colors.secondaryColor100,
+                      errorBorderColor: colors.secondaryColor100,
                     ),
                     textAlign: startTA,
                     style: TextStyle(
@@ -258,7 +258,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                 text: appLocalization.dontYouHaveVendor,
                 fontSize: smallTFSize,
                 fontWeight: FontWeight.w400,
-                textColor: colors.textColorH6,
+                textColor: colors.solidBlackColor,
               ),
               InkWell(
                 onTap: controller.addVendor,
@@ -335,14 +335,14 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   Icon(
                     TablerIcons.user_plus,
                     size: 28,
-                    color: colors.secondaryTextColor,
+                    color: colors.primaryBlackColor,
                   ),
                   const SizedBox(height: 2),
                   Text(
                     'vendor',
                     style: TextStyle(
                       fontSize: 12,
-                      color: colors.secondaryTextColor,
+                      color: colors.primaryBlackColor,
                     ),
                   ),
                 ],
@@ -446,7 +446,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     bottom: 1,
                   ),
                   width: Get.width * 0.1,
-                  color: colors.dangerBaseColor,
+                  color: colors.solidRedColor,
                 ),
                 Text(
                   appLocalization.total,
@@ -519,15 +519,15 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                       fontWeight: FontWeight.w400,
                       fontSize: regularTFSize,
                     ),
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       hintText: appLocalization.amount,
                       hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                         fontWeight: FontWeight.normal,
                         fontSize: regularTFSize,
                       ),
-                      fillColor: colors.textFieldColor,
+                      fillColor: colors.primaryColor50,
                       enabledBorderColor: colors.primaryColor200,
                       focusedBorderColor: colors.primaryColor500,
                       errorBorderColor: colors.primaryColor200,
@@ -601,7 +601,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     borderRadius: BorderRadius.circular(
                       containerBorderRadius,
                     ),
-                    color: colors.dangerBaseColor.withOpacity(.3),
+                    color: colors.solidRedColor.withOpacity(.3),
                   ),
                   child: Column(
                     mainAxisAlignment: centerMAA,
@@ -643,15 +643,15 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                       fontWeight: FontWeight.w400,
                       fontSize: regularTFSize,
                     ),
-                    cursorColor: colors.formCursorColor,
+                    cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       hintText: appLocalization.amount,
                       hintStyle: TextStyle(
-                        color: colors.formBaseHintTextColor,
+                        color: colors.primaryBlackColor,
                         fontWeight: FontWeight.normal,
                         fontSize: regularTFSize,
                       ),
-                      fillColor: colors.textFieldColor,
+                      fillColor: colors.primaryColor50,
                       enabledBorderColor: colors.primaryColor200,
                       focusedBorderColor: colors.primaryColor500,
                       errorBorderColor: colors.primaryColor200,

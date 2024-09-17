@@ -54,7 +54,7 @@ class LicenseView extends BaseView<LicenseController> {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            color: colors.moduleBodyColor,
+            color: colors.secondaryColor50,
           ),
           child: Padding(
             padding: EdgeInsets.only(top: 16.ph),
@@ -103,7 +103,7 @@ class LicenseView extends BaseView<LicenseController> {
               CommonText(
                 text: appLocalization.pleaseFillAllTheInformationCorrectly,
                 fontSize: subHeaderTFSize,
-                textColor: colors.secondaryTextColor,
+                textColor: colors.primaryBlackColor,
                 textAlign: TextAlign.left,
               ),
             ],
@@ -123,7 +123,7 @@ class LicenseView extends BaseView<LicenseController> {
             height: 130,
             width: 130,
             decoration: BoxDecoration(
-              color: colors.iconBackgroundColor,
+              color: colors.primaryColor50,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Padding(

@@ -83,7 +83,7 @@ class CommonConfirmationModal extends BaseWidget {
                             borderRadius: BorderRadius.circular(
                              containerBorderRadius,
                             ),
-                            color: colorSchema.backgroundColor,
+                            color: colorSchema.whiteColor,
                             border: Border.all(
                               color: colorSchema.primaryColor500,
                             ),
@@ -133,13 +133,13 @@ class CommonConfirmationModal extends BaseWidget {
                 height: 130,
                 width: 130,
                 decoration: BoxDecoration(
-                  color: colorSchema.iconBackgroundColor,
+                  color: colorSchema.primaryColor50,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: CircleAvatar(
-                    backgroundColor: colorSchema.moduleBodyColor,
+                    backgroundColor: colorSchema.secondaryColor50,
                     child: ClipOval(
                       child: Image.asset('assets/images/app_logo.png'),
                     ),
@@ -154,7 +154,7 @@ class CommonConfirmationModal extends BaseWidget {
                 onTap: Get.back,
                 child: Icon(
                   TablerIcons.x,
-                  color: colorSchema.formClearIconColor,
+                  color: colorSchema.solidRedColor,
                   size:closeIconSize,
                 ),
               ),

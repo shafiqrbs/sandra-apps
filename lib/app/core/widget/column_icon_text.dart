@@ -30,7 +30,7 @@ class ColumnIconText extends BaseWidget {
           ),
           border: Border.all(
             color:
-                isSelected ? colorSchema.borderColor : colorSchema.borderColor,
+                isSelected ? colorSchema.secondaryColor100 : colorSchema.secondaryColor100,
           ),
           color: isSelected ? colorSchema.primaryColor400 : Colors.transparent,
         ),
@@ -46,7 +46,7 @@ class ColumnIconText extends BaseWidget {
               text,
               style: TextStyle(
                 fontSize:mediumTFSize,
-                color: isSelected ? Colors.black : colorSchema.primaryTextColor,
+                color: isSelected ? Colors.black : colorSchema.solidBlackColor,
               ),
             ),
           ],

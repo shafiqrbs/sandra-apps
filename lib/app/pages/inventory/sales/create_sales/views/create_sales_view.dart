@@ -96,7 +96,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             Text(
                               appLocalization.placeOrder,
                               style: TextStyle(
-                                color: colors.backgroundColor,
+                                color: colors.whiteColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -173,7 +173,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
               child: Text(
                 appLocalization.add,
                 style: TextStyle(
-                  color: colors.backgroundColor,
+                  color: colors.whiteColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
@@ -234,7 +234,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                     style: TextStyle(
                       fontSize: paragraphTFSize,
                       fontWeight: FontWeight.w600,
-                      color: colors.primaryTextColor,
+                      color: colors.solidBlackColor,
                     ),
                   ),
                 ),
@@ -253,7 +253,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                           padding: zero,
                           height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
+                          color: colors.primaryColor50,
                           child: TextFormField(
                             controller: controller.stockMrpController.value,
                             textAlign: TextAlign.center,
@@ -264,10 +264,10 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             textInputAction: nextInputAction,
                             style: TextStyle(
                               fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                               fontWeight: FontWeight.w500,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: getInputDecoration(
                               hint: appLocalization.mrp,
                             ),
@@ -282,7 +282,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                           padding: zero,
                           height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
+                          color: colors.primaryColor50,
                           child: TextFormField(
                             autofocus: true,
                             textAlign: TextAlign.center,
@@ -290,10 +290,10 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             controller: controller.stockQtyController.value,
                             style: TextStyle(
                               fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                               fontWeight: FontWeight.w500,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: getInputDecoration(
                               hint: appLocalization.qty,
                             ),
@@ -311,7 +311,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                           padding: zero,
                           height: mediumTextFieldHeight,
                           //width: Get.width * 0.6,
-                          color: colors.textFieldColor,
+                          color: colors.primaryColor50,
                           child: TextFormField(
                             controller:
                                 controller.stockDiscountPercentController.value,
@@ -330,10 +330,10 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             },
                             style: TextStyle(
                               fontSize: mediumTFSize,
-                              color: colors.primaryTextColor,
+                              color: colors.solidBlackColor,
                               fontWeight: FontWeight.w500,
                             ),
-                            cursorColor: colors.formCursorColor,
+                            cursorColor: colors.solidBlackColor,
                             decoration: getInputDecoration(
                               hint: '%',
                             ),
@@ -364,7 +364,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                             ),
                             child: CommonText(
                               text: appLocalization.add,
-                              textColor: colors.backgroundColor,
+                              textColor: colors.whiteColor,
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                             ),
@@ -413,7 +413,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
               },
             ),
             Container(
-              color: colors.backgroundColor,
+              color: colors.whiteColor,
               height: 80.ph,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -453,7 +453,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.backgroundColor,
+                color: colors.whiteColor,
               ),
               child: SearchedStockList(
                 stocks: controller.stockList.value,

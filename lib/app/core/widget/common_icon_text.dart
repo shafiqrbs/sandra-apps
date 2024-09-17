@@ -48,7 +48,7 @@ class CommonIconText extends BaseWidget {
             textAlign: textAlign,
             maxLines: maxLine,
             style: TextStyle(
-              color: textColor ?? colors.primaryTextColor,
+              color: textColor ?? colors.solidBlackColor,
               fontSize: fontSize ??regularTFSize,
               fontWeight: fontWeight,
               overflow: textOverflow ?? TextOverflow.ellipsis,

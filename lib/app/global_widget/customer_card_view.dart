@@ -56,7 +56,7 @@ class CustomerCardView extends BaseWidget {
                           data.name ?? '',
                           style: TextStyle(
                             fontSize: mediumTFSize,
-                            color: colors.defaultFontColor,
+                            color: colors.solidBlackColor,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -113,14 +113,14 @@ class CustomerCardView extends BaseWidget {
                       children: [
                         CommonText(
                           text: appLocalization.due,
-                          textColor: colors.secondaryTextColor.withOpacity(.5),
+                          textColor: colors.primaryBlackColor.withOpacity(.5),
                           fontWeight: FontWeight.w400,
                           fontSize: mediumTFSize,
                         ),
                         2.width,
                         CommonText(
                           text: '৳  ${data.balance?.toString() ?? '0'}',
-                          textColor: colors.secondaryTextColor,
+                          textColor: colors.primaryBlackColor,
                           fontWeight: FontWeight.w400,
                           fontSize: mediumTFSize,
                         ),
@@ -129,7 +129,7 @@ class CustomerCardView extends BaseWidget {
                     /*Expanded(
                       child: CommonIconText(
                         text: data.balance?.toString() ?? '0',
-                        textColor: colors.dangerBaseColor,
+                        textColor: colors.solidRedColor,
                         fontWeight: FontWeight.w600,
                         fontSize:paragraphTFSize,
                         icon: TablerIcons.cash,

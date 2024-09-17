@@ -38,7 +38,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
         decoration: BoxDecoration(
           color: buttonBGColor ??
               ((isOutline ?? false)
-                  ? colors.backgroundColor
+                  ? colors.whiteColor
                   : colors.solidRedColor),
           borderRadius: BorderRadius.circular(4),
         ),
@@ -59,7 +59,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                 color: iconColor ??
                     (isOutline ?? false
                         ? colors.solidRedColor
-                        : colors.backgroundColor),
+                        : colors.whiteColor),
               ),
             if (buttonName != null)
               Container(
@@ -71,7 +71,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                   textColor: buttonTextColor ??
                       (isOutline ?? false
                           ? colors.solidRedColor
-                          : colors.backgroundColor),
+                          : colors.whiteColor),
                 ),
               ),
             if (rightIcon != null)
@@ -80,7 +80,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
                 color: iconColor ??
                     (isOutline ?? false
                         ? colors.solidRedColor
-                        : colors.backgroundColor),
+                        : colors.whiteColor),
               ),
           ],
         ),
