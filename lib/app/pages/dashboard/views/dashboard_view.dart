@@ -82,8 +82,6 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-
-
   @override
   Widget body(BuildContext context) {
     return Column(
@@ -178,19 +176,18 @@ class DashboardView extends BaseView<DashboardController> {
               12.width,
               InkWell(
                 onTap: () {
-
-                  Get.changeTheme(
+                  /* Get.changeTheme(
                     Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
                   );
                   colors = ColorSchema.fromJson(
                     Get.isDarkMode ? darkColor : lightColor,
                   );
                   print('Get.isDarkMode: ${Get.isDarkMode}');
-                  print('colors.primaryColor900: ${colors.primaryColor900}');
+                  print('colors.primaryColor900: ${colors.primaryColor900}');*/
                 },
-                child: Icon(
-                  Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
-                  //TablerIcons.clipboard_text,
+                child: const Icon(
+                  //Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
+                  TablerIcons.clipboard_text,
                   color: Colors.white,
                   size: 20,
                 ),
@@ -266,9 +263,9 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildTestColor(){
+  Widget _buildTestColor() {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Get.changeTheme(
           Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
         );

@@ -8,6 +8,7 @@ const prefsIsSalesOnline = 'isSalesOnline';
 const prefsIsPurchaseOnline = 'isPurchaseOnline';
 const prefsIsZeroAllowed = 'isZeroAllowed';
 const prefsIsPrinterAllowed = 'isPrinterAllowed';
+const prefsIsEnableDarkMode = 'isEnableDarkMode';
 const prefsPurchaseConfig = 'purchaseConfig';
 const prefsLanguage = 'language';
 const prefsLicenseKey = 'licenseKey';

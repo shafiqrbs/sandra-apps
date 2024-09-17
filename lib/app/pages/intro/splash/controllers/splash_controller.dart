@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -11,6 +13,20 @@ class SplashController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     await navigatePage();
+    await getThemeColor();
+  }
+
+  Future<void> getThemeColor() async {
+    final isDarkMode = await prefs.getIsEnableDarkMode();
+    if (isDarkMode) {
+      Get.changeThemeMode(ThemeMode.dark);
+    } else {
+      Get.changeThemeMode(ThemeMode.light);
+    }
+
+    ColorSchema.fromJson(
+      Get.isDarkMode ? darkColor : lightColor,
+    );
   }
 
   Future<void> navigatePage() async {

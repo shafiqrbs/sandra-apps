@@ -343,6 +343,7 @@
   "info" : "Info",
   "receiveAddedSuccessfully" : "Receive added successfully",
   "paymentReceivedSuccessfully" : "Payment received successfully",
-  "yourDataHasBeenSynced" : "Your data has been synced"
+  "yourDataHasBeenSynced" : "Your data has been synced",
+  "enableDarkMode" : "Enable dark mode"
 
 }

@@ -208,6 +208,21 @@ class SessionManager {
     );
   }
 
+  /// Get is printer allowed
+  Future<bool> getIsEnableDarkMode() async {
+    return prefs.getBool(prefsIsEnableDarkMode) ?? false;
+  }
+
+  /// set is printer allowed
+  Future<void> setIsEnableDarkMode({
+    required bool isEnableDarkMode,
+  }) async {
+    await prefs.setBool(
+      prefsIsEnableDarkMode,
+      isEnableDarkMode,
+    );
+  }
+
   /// get is zero allowed
   Future<bool> getIsZeroSalesAllowed() async {
     return prefs.getBool(prefsIsZeroAllowed) ?? true;

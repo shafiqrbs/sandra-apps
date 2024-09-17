@@ -384,6 +384,7 @@
   "receiveAddedSuccessfully" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
   "paymentReceivedSuccessfully" : "পেমেন্ট সফলভাবে গ্রহণ করা হয়েছে",
   "yourDataHasBeenSynced" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
+  "enableDarkMode" : "ডার্ক মোড সক্রিয় করুন",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",

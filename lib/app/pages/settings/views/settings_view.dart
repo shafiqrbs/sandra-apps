@@ -54,6 +54,26 @@ class SettingsView extends BaseView<SettingsController> {
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
+                    onPressed: (BuildContext context) {},
+                    leading: const Icon(TablerIcons.moon),
+                    title: Text(
+                      appLocalization.enableDarkMode,
+                      style: commonTextStyle(),
+                    ),
+                    trailing: AdvancedSwitch(
+                      controller: controller.isEnableDarkMode,
+                      onChanged: (value) async {
+                        await controller.setIsEnableDarkMode(value);
+                      },
+                      borderRadius: BorderRadius.circular(4),
+                      height: 20,
+                      width: 40,
+                      activeColor: colors.primaryColor700,
+                      inactiveColor: colors.secondaryColor100,
+                      initialValue: controller.isEnableDarkMode.value,
+                    ),
+                  ),
+                  SettingsTile.navigation(
                     onPressed: (BuildContext context) {
                       //Get.toNamed(Routes.accountConfig);
                     },

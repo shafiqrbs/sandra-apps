@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import '/app/core/base/base_controller.dart';
 
 enum Buttons {
@@ -9,12 +10,13 @@ enum Buttons {
 class SettingsController extends BaseController {
   final buttons = Rx<Buttons?>(null);
   final isPrinterAllowed = ValueNotifier(false);
-  var isDarkMode = false.obs;
+  final isEnableDarkMode = ValueNotifier(false);
 
   @override
   Future<void> onInit() async {
     super.onInit();
     isPrinterAllowed.value = await prefs.getIsPrinterAllowed();
+    isEnableDarkMode.value = await prefs.getIsEnableDarkMode();
   }
 
   Future<void> setIsPrinterAllowed(bool value) async {
@@ -24,15 +26,25 @@ class SettingsController extends BaseController {
     );
   }
 
+  Future<void> setIsEnableDarkMode(bool value) async {
+    isEnableDarkMode.value = value;
+    await prefs.setIsEnableDarkMode(
+      isEnableDarkMode: value,
+    );
+
+    Get.changeTheme(
+      Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+    );
+    ColorSchema.fromJson(
+      Get.isDarkMode ? lightColor : darkColor,
+    );
+  }
+
   void changeButton(Buttons button) {
     if (buttons.value == button) {
       buttons.value = null;
       return;
     }
     buttons.value = button;
-  }
-
-  void changeTheme() {
-    isDarkMode.value = !isDarkMode.value;
   }
 }
