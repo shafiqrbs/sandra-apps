@@ -57,136 +57,33 @@ class ColorSchema {
   Color formErrorMsgColor = const Color(0xfffc1919).withOpacity(.5);
   Color formBaseHintTextColor = Colors.grey.withOpacity(.5);
 
-  Color formPrefixIconColor = const Color(0xFFd8c8c3);
-  Color formSuffixIconColor = const Color(0xFFd8c8c3);
   Color formClearIconColor = const Color(0xFFB3261E);
   Color formCursorColor = const Color(0xff000000);
 
-  Color formBaseFillColor = const Color(0xFFfffbff);
   Color formBaseBorderColor = const Color(0xFFece2d9);
-  Color formBaseFontTextColor = const Color(0xff000000);
-
-  Color formFocusFillColor = const Color(0xFFb2d4ff);
-  Color formFocusBorderColor = const Color(0xFFf5edeb);
-  Color formFocusFontTextColor = const Color(0xFFe5f0ff);
 
   Color evenListColor = const Color(0xffFAF4FB);
   Color oddListColor = const Color(0xFFffffff);
 
   Color successfulBaseColor = Colors.green;
-  Color successfulLiteColor = Colors.green.withOpacity(.4);
   Color dangerBaseColor = Colors.red;
   Color dangerLiteColor = Colors.red.withOpacity(.4);
 
-  //End
-
-  Color primaryBorderColor = Colors.white;
-  //Color primaryTextColor = Colors.blue.shade900;
-  //Color secondaryTextColor = Colors.grey;
   Color backgroundColor = Colors.white;
   Color defaultFontColor = const Color(0xFF202020);
 
-  Color textColorH1 = Colors.black;
-  Color textColorH2 = Colors.black;
-  Color textColorH3 = Colors.black;
-  Color textColorH4 = Colors.black;
-  Color textColorH5 = Colors.black;
   Color textColorH6 = Colors.black;
 
-  //#716d64
-  // #5a5750
-  // #44413c
-  // #2d2b28
-
-  //Color formLabelColor= Color(0xFF4d4538);
-  //Color formExampleColor= Color(0xFF5f5b58);
-  //Color formErrorMsgColor= Color(0xfffc1919).withOpacity(.5);
-  Color formSuccessMsgColor = const Color(0xFF99c5ff);
-  //Color formBaseHintTextColor= Colors.grey.withOpacity(.5);
-
-  //Color formPrefixIconColor = Color(0xFFd8c8c3);
-  //Color formSuffixIconColor = Color(0xFFd8c8c3);
-  //Color formClearIconColor = Color(0xfffc1919).withOpacity(.5);
-  //Color formCursorColor = Color(0xff000000);
-
-  Color formDisableErrorBorderColor = const Color(0xFFb2d4ff);
-
-  //Color formBaseFillColor= Color(0xFFfffbff);
-  //Color formBaseBorderColor= const Color(0xFFece2d9);
-  //Color formBaseFontTextColor= Color(0xff000000);
-
-  //Color formFocusFillColor= Color(0xFFb2d4ff);
-  //Color formFocusBorderColor= Color(0xFFf5edeb);
-  //Color formFocusFontTextColor= Color(0xFFe5f0ff);
-
-  Color formValidFillColor = const Color(0xffe56666);
-  Color formValidBorderColor = const Color(0xffef2636).withOpacity(.5);
-  Color formValidFontTextColor = const Color(0xfffc1919).withOpacity(.5);
-
-  Color formSuccessFillColor = const Color(0xFFe7d4f9);
-  Color formSuccessBorderColor = const Color(0xFFdbbff6);
-  Color formSuccessFontTextColor = const Color(0xFFd0aaf3);
-
-  Color formBaseCheckButtonColor = const Color(0xFFF5F5F5);
-  Color formSuccessCheckButtonColor = const Color(0xff0b64ce);
-
-  // Button color scheme
-  Color primaryButtonFillColor = const Color(0xff0D6EFD).withOpacity(.6);
-  Color primaryButtonBorderColor = const Color(0xff005ed9);
-  Color primaryButtonTextColor = const Color(0xffffffff);
-  Color primaryButtonIconColor = const Color(0xffffffff);
-
-  Color secondaryButtonFillColor = const Color(0xff5C636A).withOpacity(.6);
-  Color secondaryButtonBorderColor = const Color(0xff5C636A);
-  Color secondaryButtonTextColor = const Color(0xffffffff);
-  Color secondaryButtonIconColor = const Color(0xffffffff);
-
-  Color successButtonFillColor = const Color(0xff157347).withOpacity(.6);
   Color successButtonBorderColor = const Color(0xff157347);
-  Color successButtonTextColor = const Color(0xffffffff);
-  Color successButtonIconColor = const Color(0xffffffff);
-
-  Color dangerButtonFillColor = const Color(0xffBB2D3B).withOpacity(.6);
-  Color dangerButtonBorderColor = const Color(0xffBB2D3B);
-  Color dangerButtonTextColor = const Color(0xffffffff);
-  Color dangerButtonIconColor = const Color(0xffffffff);
-
-  Color warningButtonFillColor = const Color(0xffFFCA2C).withOpacity(.6);
-  Color warningButtonBorderColor = const Color(0xffFFCA2C);
-  Color warningButtonTextColor = const Color(0xff000000);
-  Color warningButtonIconColor = const Color(0xff000000);
 
   Color infoButtonFillColor = const Color(0xff31D2F2).withOpacity(.6);
-  Color infoButtonBorderColor = const Color(0xff31D2F2);
-  Color infoButtonTextColor = const Color(0xff000000);
   Color infoButtonIconColor = const Color(0xff000000);
 
-  Color notificationButtonFillColor = const Color(0xffD3D4D5).withOpacity(.6);
-  Color notificationButtonBorderColor = const Color(0xffD3D4D5);
-  Color notificationButtonTextColor = const Color(0xff000000);
-  Color notificationButtonIconColor = const Color(0xff000000);
-
   Color removeButtonFillColor = const Color(0xffBB2D3B).withOpacity(.6);
-  Color removeButtonBorderColor = const Color(0xffBB2D3B);
-  Color removeButtonTextColor = const Color(0xffffffff);
   Color removeButtonIconColor = const Color(0xffffffff);
 
-  Color processButtonFillColor = const Color(0xff0D6EFD).withOpacity(.6);
-  Color processButtonBorderColor = const Color(0xff0D6EFD);
-  Color processButtonTextColor = const Color(0xffffffff);
-  Color processButtonIconColor = const Color(0xffffffff);
-
-  Color statusButtonFillColor = const Color(0xFFd0aaf3).withOpacity(.6);
-  Color statusButtonBorderColor = const Color(0xFFd0aaf3);
-  Color statusButtonTextColor = const Color(0xff000000);
-  Color statusButtonIconColor = const Color(0xff000000);
-
   Color editButtonFillColor = const Color(0xff0b64ce).withOpacity(.6);
-  Color editButtonBorderColor = const Color(0xff0b64ce);
-  Color editButtonTextColor = const Color(0xffffffff);
   Color editButtonIconColor = const Color(0xffffffff);
-
-  Color formSuccessIconColor = const Color(0xffffffff);
 
   Color blueColor = const Color(0xff0d6efd);
   late Color solidBlueColor = blueColor.withOpacity(0.8);
@@ -218,17 +115,11 @@ class ColorSchema {
   late Color primaryGreyColor = greyColor.withOpacity(0.4);
   late Color secondaryGreyColor = greyColor.withOpacity(0.2);
 
-  Color solidLiteGreenColor = const Color(0xffbfded2);
-
   Color solidPurpleColor = const Color(0xff6f42c1);
-  Color solidIndigoColor = const Color(0xff6610f2);
-  Color solidTealColor = const Color(0xff20c997);
 
   Color solidMarunColor = const Color(0xff87194C);
   Color solidNavyBlueColor = const Color(0xff1D1987);
   Color solidOliveColor = const Color(0xff838719);
-
-  Color solidSkyBlueColor = const Color(0xff17A2B8);
 
   // Factory constructor to return the singleton instance
   //factory ColorSchema() => _instance;
@@ -337,12 +228,10 @@ class ColorSchema {
         json['primaryBackgroundColor'],
         const Color(0xFFffffff),
       )
-
       ..colorTwo = parseColor(
         json['colorTwo'],
         const Color(0xff2abba7),
       )
-
       ..primaryBaseColor = parseColor(
         json['primaryBaseColor'],
         const Color(0xFFfbbd05),
@@ -351,12 +240,10 @@ class ColorSchema {
         json['primaryLiteColor'],
         const Color(0xfffacf61),
       )
-
       ..tertiaryBaseColor = parseColor(
         json['tertiaryBaseColor'],
         const Color(0xFF34a853),
       )
-
       ..dangerBaseColor = parseColor(
         json['dangerBaseColor'],
         Colors.red,
@@ -368,18 +255,6 @@ class ColorSchema {
       ..successfulBaseColor = parseColor(
         json['successfulBaseColor'],
         Colors.green,
-      )
-      ..successfulLiteColor = parseColor(
-        json['successfulLiteColor'],
-        Colors.green.withOpacity(.4),
-      )
-      ..formPrefixIconColor = parseColor(
-        json['formPrefixIconColor'],
-        const Color(0xff7c7c80),
-      )
-      ..formSuffixIconColor = parseColor(
-        json['formSuffixIconColor'],
-        const Color(0xff7c7c80),
       )
       ..formClearIconColor = parseColor(
         json['formClearIconColor'],
@@ -401,29 +276,9 @@ class ColorSchema {
         json['formBaseHintTextColor'],
         const Color(0xFF66A9FF),
       )
-      ..formBaseFillColor = parseColor(
-        json['formBaseFillColor'],
-        const Color(0xFFFFFFFF),
-      )
       ..formBaseBorderColor = parseColor(
         json['formBaseBorderColor'],
         const Color(0xFF7FB7FF),
-      )
-      ..formBaseFontTextColor = parseColor(
-        json['formBaseFontTextColor'],
-        const Color(0xFF000000),
-      )
-      ..formFocusFillColor = parseColor(
-        json['formFocusFillColor'],
-        const Color(0xFFB2D4FF),
-      )
-      ..formFocusBorderColor = parseColor(
-        json['formFocusBorderColor'],
-        const Color(0xFFCCE2FF),
-      )
-      ..formFocusFontTextColor = parseColor(
-        json['formFocusFontTextColor'],
-        const Color(0xFFE5F0FF),
       )
       ..formCursorColor = parseColor(
         json['formCursorColor'],
@@ -487,10 +342,6 @@ class ColorSchema {
         json['secondaryColor'],
         const Color(0xFF141D21),
       )
-      ..primaryBorderColor = parseColor(
-        json['primaryBorderColor'],
-        Colors.white,
-      )
       ..primaryTextColor = parseColor(
         json['primaryTextColor'],
         Colors.blue.shade900,
@@ -503,223 +354,27 @@ class ColorSchema {
         json['backgroundColor'],
         Colors.white,
       )
-      ..textColorH1 = parseColor(
-        json['textColorH1'],
-        Colors.black,
-      )
-      ..textColorH2 = parseColor(
-        json['textColorH2'],
-        Colors.black,
-      )
-      ..textColorH3 = parseColor(
-        json['textColorH3'],
-        Colors.black,
-      )
-      ..textColorH4 = parseColor(
-        json['textColorH4'],
-        Colors.black,
-      )
-      ..textColorH5 = parseColor(
-        json['textColorH5'],
-        Colors.black,
-      )
       ..textColorH6 = parseColor(
         json['textColorH6'],
         Colors.black,
-      )
-      ..formSuccessMsgColor = parseColor(
-        json['formSuccessMsgColor'],
-        const Color(0xFF99C5FF),
-      )
-      ..formValidFillColor = parseColor(
-        json['formValidFillColor'],
-        const Color(0xFFE56666),
-      )
-      ..formValidBorderColor = parseColor(
-        json['formValidBorderColor'],
-        const Color(0xFFEF2636),
-      )
-      ..formValidFontTextColor = parseColor(
-        json['formValidFontTextColor'],
-        const Color(0xFFFC1919),
-      )
-      ..formSuccessFillColor = parseColor(
-        json['formSuccessFillColor'],
-        const Color(0xFFE7D4F9),
-      )
-      ..formSuccessBorderColor = parseColor(
-        json['formSuccessBorderColor'],
-        const Color(0xFFDBBFF6),
-      )
-      ..formDisableErrorBorderColor = parseColor(
-        json['formDisableErrorBorderColor'],
-        const Color(0xFFB2D4FF),
-      )
-      ..formBaseCheckButtonColor = parseColor(
-        json['formBaseCheckButtonColor'],
-        const Color(0xFFF5F5F5),
-      )
-      ..formSuccessCheckButtonColor = parseColor(
-        json['formSuccessCheckButtonColor'],
-        const Color(0xFF0B64CE),
-      )
-      ..primaryButtonFillColor = parseColor(
-        json['primaryButtonBorderColor'],
-        const Color(0xff0D6EFD).withOpacity(.6),
-      )
-      ..primaryButtonBorderColor = parseColor(
-        json['primaryButtonBorderColor'],
-        const Color(0xff0D6EFD),
-      )
-      ..primaryButtonTextColor = parseColor(
-        json['primaryButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..secondaryButtonFillColor = parseColor(
-        json['secondaryButtonFillColor'],
-        const Color(0xff5C636A).withOpacity(.6),
-      )
-      ..secondaryButtonBorderColor = parseColor(
-        json['secondaryButtonBorderColor'],
-        const Color(0xff5C636A),
-      )
-      ..secondaryButtonTextColor = parseColor(
-        json['secondaryButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..successButtonFillColor = parseColor(
-        json['successButtonFillColor'],
-        const Color(0xff157347).withOpacity(.6),
       )
       ..successButtonBorderColor = parseColor(
         json['successButtonBorderColor'],
         const Color(0xff157347),
       )
-      ..successButtonTextColor = parseColor(
-        json['successButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..dangerButtonFillColor = parseColor(
-        json['dangerButtonFillColor'],
-        const Color(0xffBB2D3B).withOpacity(.6),
-      )
-      ..dangerButtonBorderColor = parseColor(
-        json['dangerButtonBorderColor'],
-        const Color(0xffBB2D3B),
-      )
-      ..dangerButtonTextColor = parseColor(
-        json['dangerButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..warningButtonFillColor = parseColor(
-        json['warningButtonFillColor'],
-        const Color(0xffFFCA2C).withOpacity(.6),
-      )
-      ..warningButtonBorderColor = parseColor(
-        json['warningButtonBorderColor'],
-        const Color(0xffFFCA2C),
-      )
-      ..warningButtonTextColor = parseColor(
-        json['warningButtonTextColor'],
-        const Color(0xff000000),
-      )
       ..infoButtonFillColor = parseColor(
         json['infoButtonFillColor'],
         const Color(0xff31D2F2).withOpacity(.6),
-      )
-      ..infoButtonBorderColor = parseColor(
-        json['infoButtonBorderColor'],
-        const Color(0xff31D2F2),
-      )
-      ..infoButtonTextColor = parseColor(
-        json['infoButtonTextColor'],
-        const Color(0xff000000),
-      )
-      ..notificationButtonFillColor = parseColor(
-        json['notificationButtonFillColor'],
-        const Color(0xffD3D4D5).withOpacity(.6),
-      )
-      ..notificationButtonBorderColor = parseColor(
-        json['notificationButtonBorderColor'],
-        const Color(0xffD3D4D5),
-      )
-      ..notificationButtonTextColor = parseColor(
-        json['notificationButtonTextColor'],
-        const Color(0xff000000),
       )
       ..removeButtonFillColor = parseColor(
         json['removeButtonFillColor'],
         const Color(0xffBB2D3B).withOpacity(.6),
       )
-      ..removeButtonBorderColor = parseColor(
-        json['removeButtonBorderColor'],
-        const Color(0xffBB2D3B),
-      )
-      ..removeButtonTextColor = parseColor(
-        json['removeButtonBorderColor'],
-        const Color(0xffffffff),
-      )
-      ..processButtonFillColor = parseColor(
-        json['processButtonFillColor'],
-        const Color(0xff0D6EFD).withOpacity(.6),
-      )
-      ..processButtonBorderColor = parseColor(
-        json['processButtonBorderColor'],
-        const Color(0xff0D6EFD),
-      )
-      ..processButtonTextColor = parseColor(
-        json['processButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..statusButtonFillColor = parseColor(
-        json['statusButtonFillColor'],
-        const Color(0xFFd0aaf3).withOpacity(.6),
-      )
-      ..statusButtonBorderColor = parseColor(
-        json['statusButtonBorderColor'],
-        const Color(0xFFd0aaf3),
-      )
-      ..statusButtonTextColor = parseColor(
-        json['statusButtonTextColor'],
-        const Color(0xff000000),
-      )
       ..editButtonFillColor = parseColor(
         json['editButtonFillColor'],
         const Color(0xff0b64ce).withOpacity(.6),
       )
-      ..editButtonBorderColor = parseColor(
-        json['editButtonBorderColor'],
-        const Color(0xff0b64ce),
-      )
-      ..editButtonTextColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..primaryButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..secondaryButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..successButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..warningButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..dangerButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xff000000),
-      )
       ..infoButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xff000000),
-      )
-      ..notificationButtonIconColor = parseColor(
         json['editButtonTextColor'],
         const Color(0xff000000),
       )
@@ -727,15 +382,7 @@ class ColorSchema {
         json['editButtonTextColor'],
         const Color(0xffffffff),
       )
-      ..statusButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xff000000),
-      )
       ..editButtonIconColor = parseColor(
-        json['editButtonTextColor'],
-        const Color(0xffffffff),
-      )
-      ..processButtonIconColor = parseColor(
         json['editButtonTextColor'],
         const Color(0xffffffff),
       )
@@ -755,10 +402,6 @@ class ColorSchema {
         json['solidRedColor'],
         const Color(0xffDC3545),
       )
-      ..solidLiteGreenColor = parseColor(
-        json['solidLiteGreenColor'],
-        const Color(0xff28A745),
-      )
       ..solidGreyColor = parseColor(
         json['solidGreyColor'],
         const Color(0xff5D6D7E),
@@ -770,10 +413,6 @@ class ColorSchema {
       ..solidYellowColor = parseColor(
         json['solidYellowColor'],
         const Color(0xffFFC107),
-      )
-      ..solidSkyBlueColor = parseColor(
-        json['solidSkyBlueColor'],
-        const Color(0xff17A2B8),
       );
   }
 
@@ -804,7 +443,6 @@ class ColorSchema {
 
       'colorTwo': colorTwo,
 
-
       'backgroundColor': backgroundColor,
       'primaryBackgroundColor': primaryBackgroundColor,
       'primaryBaseColor': primaryBaseColor,
@@ -812,9 +450,7 @@ class ColorSchema {
 
       'tertiaryBaseColor': tertiaryBaseColor,
 
-
       'successfulBaseColor': successfulBaseColor,
-      'successfulLiteColor': successfulLiteColor,
       'dangerBaseColor': dangerBaseColor,
       'dangerLiteColor': dangerLiteColor,
 
@@ -833,113 +469,41 @@ class ColorSchema {
       'formExampleColor': formExampleColor,
       'formErrorMsgColor': formErrorMsgColor,
       'formBaseHintTextColor': formBaseHintTextColor,
-      'formBaseFillColor': formBaseFillColor,
       'formBaseBorderColor': formBaseBorderColor,
-      'formBaseFontTextColor': formBaseFontTextColor,
-      'formFocusFillColor': formFocusFillColor,
-      'formFocusBorderColor': formFocusBorderColor,
-      'formFocusFontTextColor': formFocusFontTextColor,
+
       'formCursorColor': formCursorColor,
-      'formSuffixIconColor': formSuffixIconColor,
-      'formPrefixIconColor': formPrefixIconColor,
+
       'formClearIconColor': formClearIconColor,
 
       'evenListColor': evenListColor,
       'oddListColor': oddListColor,
 
-      //
-
       'primaryColor': primaryColor,
       'secondaryColor': secondaryColor,
-      'primaryBorderColor': primaryBorderColor,
-      //'primaryTextColor': primaryTextColor,
-      //'secondaryTextColor': secondaryTextColor,
-      //'backgroundColor': backgroundColor,
 
-      'textColorH1': textColorH1,
-      'textColorH2': textColorH2,
-      'textColorH3': textColorH3,
-      'textColorH4': textColorH4,
-      'textColorH5': textColorH5,
       'textColorH6': textColorH6,
 
-      //'formLabelColor' : formLabelColor,
-      //'formExampleColor' : formExampleColor,
-      //'formErrorMsgColor' : formErrorMsgColor,
-      'formSuccessMsgColor': formSuccessMsgColor,
-      //'formBaseHintTextColor' : formBaseHintTextColor,
-      //'formBaseFillColor' : formBaseFillColor,
-      //'formBaseBorderColor' : formBaseBorderColor,
-      //'formBaseFontTextColor' : formBaseFontTextColor,
-      //'formFocusFillColor' : formFocusFillColor,
-      //'formFocusBorderColor' : formFocusBorderColor,
-      //'formFocusFontTextColor' : formFocusFontTextColor,
-      'formValidFillColor': formValidFillColor,
-      'formValidBorderColor': formValidBorderColor,
-      'formValidFontTextColor': formValidFontTextColor,
-      'formSuccessFillColor': formSuccessFillColor,
-      'formSuccessBorderColor': formSuccessBorderColor,
-      'formSuccessFontTextColor': formSuccessFontTextColor,
-      'formDisableErrorBorderColor': formDisableErrorBorderColor,
-      //'formCursorColor' : formCursorColor,
-      'formBaseCheckButtonColor': formBaseCheckButtonColor,
-      'formSuccessCheckButtonColor': formSuccessCheckButtonColor,
-      'primaryButtonFillColor': primaryButtonFillColor,
-      'primaryButtonBorderColor': primaryButtonBorderColor,
-      'primaryButtonTextColor': primaryButtonTextColor,
-      'secondaryButtonFillColor': secondaryButtonFillColor,
-      'secondaryButtonBorderColor': secondaryButtonBorderColor,
-      'secondaryButtonTextColor': secondaryButtonTextColor,
-      'successButtonFillColor': successButtonFillColor,
       'successButtonBorderColor': successButtonBorderColor,
-      'successButtonTextColor': successButtonTextColor,
-      'dangerButtonFillColor': dangerButtonFillColor,
-      'dangerButtonBorderColor': dangerButtonBorderColor,
-      'dangerButtonTextColor': dangerButtonTextColor,
-      'warningButtonFillColor': warningButtonFillColor,
-      'warningButtonBorderColor': warningButtonBorderColor,
-      'warningButtonTextColor': warningButtonTextColor,
+
       'infoButtonFillColor': infoButtonFillColor,
-      'infoButtonBorderColor': infoButtonBorderColor,
-      'infoButtonTextColor': infoButtonTextColor,
-      'notificationButtonFillColor': notificationButtonFillColor,
-      'notificationButtonBorderColor': notificationButtonBorderColor,
-      'notificationButtonTextColor': notificationButtonTextColor,
+
       'removeButtonFillColor': removeButtonFillColor,
-      'removeButtonBorderColor': removeButtonBorderColor,
-      'removeButtonTextColor': removeButtonTextColor,
-      'processButtonFillColor': processButtonFillColor,
-      'processButtonBorderColor': processButtonBorderColor,
-      'processButtonTextColor': processButtonTextColor,
-      'statusButtonFillColor': statusButtonFillColor,
-      'statusButtonBorderColor': statusButtonBorderColor,
-      'statusButtonTextColor': statusButtonTextColor,
+
       'editButtonFillColor': editButtonFillColor,
-      'editButtonBorderColor': editButtonBorderColor,
-      'editButtonTextColor': editButtonTextColor,
+
       'editButtonIconColor': editButtonIconColor,
-      'primaryButtonIconColor': primaryButtonIconColor,
-      'secondaryButtonIconColor': secondaryButtonIconColor,
-      'successButtonIconColor': successButtonIconColor,
-      'notificationButtonIconColor': notificationButtonIconColor,
-      'statusButtonIconColor': statusButtonIconColor,
-      'dangerButtonIconColor': dangerButtonIconColor,
+
       'infoButtonIconColor': infoButtonIconColor,
       'removeButtonIconColor': removeButtonIconColor,
-      'processButtonIconColor': processButtonIconColor,
-      'warningButtonIconColor': warningButtonIconColor,
+
       'buttonColor': buttonColor,
-      //'formSuffixIconColor' : formSuffixIconColor,
-      //'formPrefixIconColor' : formPrefixIconColor,
-      //'formClearIconColor' : formClearIconColor,
+
       'solidBlueColor': solidBlueColor,
       'solidGreenColor': solidGreenColor,
 
-      'solidLiteGreenColor': solidLiteGreenColor,
       'solidGreyColor': solidGreyColor,
       'solidPurpleColor': solidPurpleColor,
       'solidYellowColor': solidYellowColor,
-      'solidSkyBlueColor': solidSkyBlueColor,
 
       'solidRedColor': solidRedColor,
       'primaryRedColor': primaryRedColor,

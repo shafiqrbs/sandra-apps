@@ -39,9 +39,8 @@ class CustomerCardView extends BaseWidget {
                   ? colors.secondaryColor100
                   : colors.primaryColor100,
             ),
-            color: index.isEven
-                ? colors.secondaryColor50
-                : colors.primaryColor50,
+            color:
+                index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
@@ -81,9 +80,10 @@ class CustomerCardView extends BaseWidget {
                         ),
                         18.width,
                         _buildIconButton(
-                            onTap: () {},
-                            icon: TablerIcons.eye,
-                            color: const Color(0xFF989898),),
+                          onTap: () {},
+                          icon: TablerIcons.eye,
+                          color: const Color(0xFF989898),
+                        ),
                         if (showReceiveButton) 18.width,
                         if (showReceiveButton)
                           _buildIconButton(
