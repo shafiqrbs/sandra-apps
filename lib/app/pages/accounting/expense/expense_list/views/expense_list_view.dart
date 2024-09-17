@@ -287,7 +287,7 @@ class ExpenseListView extends BaseView<ExpenseListController> {
                   ),
                   icon: Icon(
                     TablerIcons.check,
-                    color: colors.successfulBaseColor,
+                    color: colors.primaryColor500,
                   ),
                 ),
               ),

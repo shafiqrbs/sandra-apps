@@ -145,7 +145,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                   right: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primaryLiteColor.withOpacity(.5),
+                  color: colors.primaryColor50,
                 ),
                 margin: const EdgeInsets.only(
                   top: 4,
@@ -217,8 +217,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                         margin: const EdgeInsets.only(bottom: 2),
                         decoration: BoxDecoration(
                           color: index.isEven
-                              ? colors.evenListColor
-                              : colors.oddListColor,
+                              ? colors.secondaryColor50
+                              : colors.primaryColor50,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -272,7 +272,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                 width: Get.width,
                 height: 2,
                 decoration: BoxDecoration(
-                  color: colors.moduleHeaderColor,
+                  color: colors.primaryColor50,
                 ),
               ),
               Container(
@@ -301,7 +301,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             width: Get.width,
                             height: 2,
                             decoration: BoxDecoration(
-                              color: colors.moduleHeaderColor,
+                              color: colors.primaryColor50,
                             ),
                           ),
                           labelValue.copyWith(
@@ -316,7 +316,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             width: Get.width,
                             height: 2,
                             decoration: BoxDecoration(
-                              color: colors.moduleHeaderColor,
+                              color: colors.primaryColor50,
                             ),
                           ),
                           labelValue.copyWith(
@@ -424,7 +424,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.selectedColor,
+                                color: colors.primaryColor400,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
@@ -477,7 +477,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.primaryLiteColor,
+                                  color: colors.primaryColor500,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,

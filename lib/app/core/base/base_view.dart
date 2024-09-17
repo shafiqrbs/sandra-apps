@@ -43,7 +43,7 @@ abstract class BaseView<Controller extends BaseController>
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;  // Get current brightness
-    colors = ColorSchema(brightness: brightness);
+    colors = ColorSchema();
     return GestureDetector(
       child: Stack(
         children: [
@@ -151,10 +151,10 @@ abstract class BaseView<Controller extends BaseController>
         margin: const EdgeInsets.all(10),
         width: Get.width,
         decoration: BoxDecoration(
-          color: colors.primaryColor,
+          color: colors.primaryColor500,
           borderRadius: BorderRadius.circular(containerBorderRadius),
           border: Border.all(
-            color: colors.tertiaryBaseColor,
+            color: colors.primaryColor700,
           ),
         ),
         alignment: Alignment.center,

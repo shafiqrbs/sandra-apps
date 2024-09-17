@@ -31,12 +31,12 @@ class PaymentOption extends StatelessWidget {
             border: Border.all(
               color: isSelected
                   ? colorSchema.borderColor
-                  : colorSchema.moduleHeaderColor,
+                  : colorSchema.primaryColor50,
             ),
             borderRadius: BorderRadius.circular(4),
             color: isSelected
-                ? colorSchema.selectedColor
-                : colorSchema.moduleHeaderColor,
+                ? colorSchema.primaryColor400
+                : colorSchema.primaryColor50,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

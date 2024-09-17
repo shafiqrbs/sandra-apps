@@ -218,7 +218,9 @@ class SalesListView extends BaseView<SalesListController> {
                   : colors.primaryColor50,
               borderRadius: BorderRadius.circular(containerBorderRadius),
               border: Border.all(
-                color: colors.tertiaryBaseColor,
+                color: index.isEven
+                    ? colors.secondaryColor100
+                    : colors.primaryColor100,
               ),
             ),
             child: Column(

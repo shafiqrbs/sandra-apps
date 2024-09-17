@@ -324,10 +324,10 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
               margin: const EdgeInsets.symmetric(horizontal: 2),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: colors.moduleHeaderColor,
+                  color: colors.primaryColor50,
                 ),
                 borderRadius: BorderRadius.circular(4),
-                color: colors.moduleHeaderColor,
+                color: colors.primaryColor50,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -652,9 +652,9 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                         fontSize: regularTFSize,
                       ),
                       fillColor: colors.textFieldColor,
-                      enabledBorderColor: colors.primaryBaseColor,
-                      focusedBorderColor: colors.borderColor,
-                      errorBorderColor: colors.borderColor,
+                      enabledBorderColor: colors.primaryColor200,
+                      focusedBorderColor: colors.primaryColor500,
+                      errorBorderColor: colors.primaryColor200,
                     ),
                     onChanged: controller.onAmountChange,
                   ),

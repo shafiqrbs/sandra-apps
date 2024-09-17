@@ -34,14 +34,14 @@ class _ErrorScreenState extends State<ErrorScreen> {
           width: double.infinity,
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: colors.tertiaryBaseColor,
+            color: colors.primaryColor500,
             borderRadius: const BorderRadius.all(
               Radius.circular(
                 10,
               ),
             ),
             border: Border.all(
-              color: colors.tertiaryBaseColor,
+              color: colors.primaryColor500,
               width: 2,
             ),
           ),
@@ -73,10 +73,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: colors.tertiaryBaseColor,
+                      color: colors.primaryColor500,
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    color: colors.primaryBaseColor,
+                    color: colors.primaryColor500,
                   ),
                   //height: 60,
                   padding: const EdgeInsets.all(8),

@@ -211,7 +211,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
               borderRadius: BorderRadius.circular(
                 containerBorderRadius,
               ),
-              color: colors.evenListColor,
+              color: colors.secondaryColor50,
             ),
             margin: zero,
             padding: const EdgeInsets.only(

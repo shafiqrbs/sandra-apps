@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
+Map<String, String> lightColor = {
+  'primary_color_500' : '0xFF00994F',
+  'primary_color_900' : '0xFF004021',
+};
+
 class ColorSchema {
-  Brightness? brightness;
+
 
   Color primaryColor = const Color(0xFF00994F);
 
-  Color get primaryColor500 =>
-      brightness == Brightness.dark ? Colors.black : const Color(0xFF00994F);
+  //Color get primaryColor500 => brightness == Brightness.dark ? Colors.black : const Color(0xFF00994F);
 
   Color primaryColor900 = const Color(0xFF004021);
   Color primaryColor800 = const Color(0xFF00542B);
   Color primaryColor700 = const Color(0xFF006D38);
   Color primaryColor600 = const Color(0xFF008B48);
-  //Color primaryColor500 = const Color(0xFF00994F);
+  Color primaryColor500 = const Color(0xFF00994F);
   Color primaryColor400 = const Color(0xFF33AD72);
   Color primaryColor300 = const Color(0xFF54BB89);
   Color primaryColor200 = const Color(0xFF8AD0AE);
@@ -34,27 +38,14 @@ class ColorSchema {
 
   Color primaryBackgroundColor = const Color(0xffffffff);
 
-  Color colorTwo = const Color(0xff2abba7);
-
-  Color tertiaryBaseColor = const Color(0xFFF7DFBB);
-  Color primaryBaseColor = const Color(0xFFC98A69);
-  Color primaryLiteColor = const Color(0xffe0b6a5);
-
-  Color iconColor = const Color(0xFFd8c8c3);
   Color iconBackgroundColor = const Color(0xfff0e5e2);
-  Color moduleHeaderColor = const Color(0xFFf5edeb);
   Color moduleBodyColor = const Color(0xFFfffbff);
   Color moduleFooterColor = const Color(0xfff6f1f6);
   Color borderColor = const Color(0xFFE3E0E0);
   Color primaryTextColor = const Color(0xFF4d4538);
   Color secondaryTextColor = const Color(0xFF5f5b58);
   Color textFieldColor = const Color(0xFFF3F3F3);
-  Color selectedColor = const Color(0xFFF7DFBB);
-  Color buttonColor = const Color(0xFFC98A69);
 
-  Color formLabelColor = const Color(0xFF4d4538);
-  Color formExampleColor = const Color(0xFF5f5b58);
-  Color formErrorMsgColor = const Color(0xfffc1919).withOpacity(.5);
   Color formBaseHintTextColor = Colors.grey.withOpacity(.5);
 
   Color formClearIconColor = const Color(0xFFB3261E);
@@ -62,10 +53,6 @@ class ColorSchema {
 
   Color formBaseBorderColor = const Color(0xFFece2d9);
 
-  Color evenListColor = const Color(0xffFAF4FB);
-  Color oddListColor = const Color(0xFFffffff);
-
-  Color successfulBaseColor = Colors.green;
   Color dangerBaseColor = Colors.red;
   Color dangerLiteColor = Colors.red.withOpacity(.4);
 
@@ -73,8 +60,6 @@ class ColorSchema {
   Color defaultFontColor = const Color(0xFF202020);
 
   Color textColorH6 = Colors.black;
-
-  Color successButtonBorderColor = const Color(0xff157347);
 
   Color infoButtonFillColor = const Color(0xff31D2F2).withOpacity(.6);
   Color infoButtonIconColor = const Color(0xff000000);
@@ -122,11 +107,8 @@ class ColorSchema {
   Color solidOliveColor = const Color(0xff838719);
 
   // Factory constructor to return the singleton instance
-  //factory ColorSchema() => _instance;
-  factory ColorSchema({Brightness? brightness}) {
-    _instance.brightness = brightness;
-    return _instance;
-  }
+  factory ColorSchema() => _instance;
+
 
   // Private constructor
   ColorSchema._();
@@ -228,22 +210,6 @@ class ColorSchema {
         json['primaryBackgroundColor'],
         const Color(0xFFffffff),
       )
-      ..colorTwo = parseColor(
-        json['colorTwo'],
-        const Color(0xff2abba7),
-      )
-      ..primaryBaseColor = parseColor(
-        json['primaryBaseColor'],
-        const Color(0xFFfbbd05),
-      )
-      ..primaryLiteColor = parseColor(
-        json['primaryLiteColor'],
-        const Color(0xfffacf61),
-      )
-      ..tertiaryBaseColor = parseColor(
-        json['tertiaryBaseColor'],
-        const Color(0xFF34a853),
-      )
       ..dangerBaseColor = parseColor(
         json['dangerBaseColor'],
         Colors.red,
@@ -252,25 +218,9 @@ class ColorSchema {
         json['dangerLiteColor'],
         Colors.red.withOpacity(.4),
       )
-      ..successfulBaseColor = parseColor(
-        json['successfulBaseColor'],
-        Colors.green,
-      )
       ..formClearIconColor = parseColor(
         json['formClearIconColor'],
         const Color(0xfffc1919),
-      )
-      ..formLabelColor = parseColor(
-        json['formLabelColor'],
-        const Color(0xFF716D64),
-      )
-      ..formExampleColor = parseColor(
-        json['formExampleColor'],
-        const Color(0xFF5A5750),
-      )
-      ..formErrorMsgColor = parseColor(
-        json['formErrorMsgColor'],
-        const Color(0xFFB2D4FF),
       )
       ..formBaseHintTextColor = parseColor(
         json['formBaseHintTextColor'],
@@ -284,25 +234,9 @@ class ColorSchema {
         json['formCursorColor'],
         const Color(0xff000000),
       )
-      ..evenListColor = parseColor(
-        json['evenListColor'],
-        Colors.white,
-      )
-      ..oddListColor = parseColor(
-        json['oddListColor'],
-        const Color(0xFFeeeeee),
-      )
-      ..iconColor = parseColor(
-        json['iconColor'],
-        const Color(0xFFd8c8c3),
-      )
       ..iconBackgroundColor = parseColor(
         json['iconBackgroundColor'],
         const Color(0xfff0e5e2),
-      )
-      ..moduleHeaderColor = parseColor(
-        json['moduleHeaderColor'],
-        const Color(0xFFf5edeb),
       )
       ..moduleBodyColor = parseColor(
         json['moduleBodyColor'],
@@ -328,12 +262,6 @@ class ColorSchema {
         json['textFieldColor'],
         const Color(0xFFfffbff),
       )
-      ..selectedColor = parseColor(
-        json['selectedColor'],
-        const Color(0xFFF7DFBB),
-      )
-
-      //
       ..primaryColor = parseColor(
         json['primaryColor'],
         const Color(0xFF004021),
@@ -358,10 +286,6 @@ class ColorSchema {
         json['textColorH6'],
         Colors.black,
       )
-      ..successButtonBorderColor = parseColor(
-        json['successButtonBorderColor'],
-        const Color(0xff157347),
-      )
       ..infoButtonFillColor = parseColor(
         json['infoButtonFillColor'],
         const Color(0xff31D2F2).withOpacity(.6),
@@ -385,10 +309,6 @@ class ColorSchema {
       ..editButtonIconColor = parseColor(
         json['editButtonTextColor'],
         const Color(0xffffffff),
-      )
-      ..buttonColor = parseColor(
-        json['buttonColor'],
-        const Color(0xFFC98A69),
       )
       ..solidBlueColor = parseColor(
         json['solidBlueColor'],
@@ -441,33 +361,20 @@ class ColorSchema {
       'secondaryColor50': secondaryColor50.value.toString(),
       // poskeeper
 
-      'colorTwo': colorTwo,
-
       'backgroundColor': backgroundColor,
       'primaryBackgroundColor': primaryBackgroundColor,
-      'primaryBaseColor': primaryBaseColor,
-      'primaryLiteColor': primaryLiteColor,
 
-      'tertiaryBaseColor': tertiaryBaseColor,
-
-      'successfulBaseColor': successfulBaseColor,
       'dangerBaseColor': dangerBaseColor,
       'dangerLiteColor': dangerLiteColor,
 
-      'iconColor': iconColor,
       'iconBackgroundColor': iconBackgroundColor,
-      'moduleHeaderColor': moduleHeaderColor,
       'moduleBodyColor': moduleBodyColor,
       'moduleFooterColor': moduleFooterColor,
       'borderColor': borderColor,
       'primaryTextColor': primaryTextColor,
       'secondaryTextColor': secondaryTextColor,
       'textFieldColor': textFieldColor,
-      'selectedColor': selectedColor,
 
-      'formLabelColor': formLabelColor,
-      'formExampleColor': formExampleColor,
-      'formErrorMsgColor': formErrorMsgColor,
       'formBaseHintTextColor': formBaseHintTextColor,
       'formBaseBorderColor': formBaseBorderColor,
 
@@ -475,15 +382,10 @@ class ColorSchema {
 
       'formClearIconColor': formClearIconColor,
 
-      'evenListColor': evenListColor,
-      'oddListColor': oddListColor,
-
       'primaryColor': primaryColor,
       'secondaryColor': secondaryColor,
 
       'textColorH6': textColorH6,
-
-      'successButtonBorderColor': successButtonBorderColor,
 
       'infoButtonFillColor': infoButtonFillColor,
 
@@ -495,8 +397,6 @@ class ColorSchema {
 
       'infoButtonIconColor': infoButtonIconColor,
       'removeButtonIconColor': removeButtonIconColor,
-
-      'buttonColor': buttonColor,
 
       'solidBlueColor': solidBlueColor,
       'solidGreenColor': solidGreenColor,

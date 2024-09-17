@@ -17,8 +17,8 @@ class FilterButton extends BaseWidget {
       buttonName: null,
       onTap: onTap ?? () {},
       leftIcon: TablerIcons.filter,
-      buttonBGColor: colors.tertiaryBaseColor,
-      iconColor: colors.solidRedColor,
+      buttonBGColor: colors.primaryColor50,
+      iconColor: colors.primaryColor50,
     );
   }
 }

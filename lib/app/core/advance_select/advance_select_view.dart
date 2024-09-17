@@ -343,8 +343,8 @@ class AdvanceSelect<T> extends FormField<T> {
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color: index.isEven
-                                                                              ? ColorSchema().evenListColor
-                                                                              : ColorSchema().evenListColor.withOpacity(0.6),
+                                                                              ? ColorSchema().secondaryColor50
+                                                                              : ColorSchema().secondaryColor50.withOpacity(0.6),
                                                                           //color: index.isEven ? Colors.blue : Colors.red,
                                                                           borderRadius:
                                                                               BorderRadius.circular(4),

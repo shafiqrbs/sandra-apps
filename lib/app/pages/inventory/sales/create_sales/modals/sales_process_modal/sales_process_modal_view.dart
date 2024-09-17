@@ -941,8 +941,8 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   fontSize: smallTFSize,
                 ),
               ),
-              activeColor: colors.selectedColor,
-              inactiveColor: colors.moduleHeaderColor,
+              activeColor: colors.primaryColor400,
+              inactiveColor: colors.primaryColor50,
               borderRadius: BorderRadius.circular(4),
               width: 64,
               height: 24,
@@ -953,7 +953,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             height: 3.ph,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: colors.evenListColor,
+              color: colors.secondaryColor50,
               borderRadius: BorderRadius.circular(
                 containerBorderRadius,
               ),
@@ -970,7 +970,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     : '',
                 fontWeight: FontWeight.w500,
                 fontSize: smallTFSize,
-                textColor: colors.primaryBaseColor,
+                textColor: colors.primaryColor500,
               ),
             ),
           ),

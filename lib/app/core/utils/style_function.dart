@@ -26,7 +26,7 @@ InputDecoration getInputDecoration({
       color: colorSchema.formBaseHintTextColor,
     ),
     labelStyle: TextStyle(
-      color: colorSchema.formLabelColor,
+      color: colorSchema.primaryTextColor,
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),

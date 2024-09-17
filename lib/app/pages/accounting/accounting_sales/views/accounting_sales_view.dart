@@ -319,7 +319,7 @@ class AccountingSalesView extends BaseView<AccountingSalesController> {
                   ),
                   icon: Icon(
                     TablerIcons.check,
-                    color: colors.successfulBaseColor,
+                    color: colors.primaryColor500,
                   ),
                 ),
               ),

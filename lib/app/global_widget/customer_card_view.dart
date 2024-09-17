@@ -69,14 +69,14 @@ class CustomerCardView extends BaseWidget {
                         _buildIconButton(
                           onTap: () => makeCall(data.mobile ?? '', context),
                           icon: TablerIcons.phone_outgoing,
-                          color: colors.colorTwo,
+                          color: colors.primaryColor500,
                         ),
                         18.width,
                         _buildIconButton(
                           onTap: () =>
                               messageCustomer(data.mobile ?? '', context),
                           icon: TablerIcons.message_circle,
-                          color: colors.buttonColor,
+                          color: colors.primaryColor500,
                         ),
                         18.width,
                         _buildIconButton(

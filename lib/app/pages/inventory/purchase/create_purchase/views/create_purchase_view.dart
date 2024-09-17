@@ -210,7 +210,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               borderRadius: BorderRadius.circular(
                 containerBorderRadius,
               ),
-              color: colors.evenListColor,
+              color: colors.secondaryColor50,
             ),
             margin: EdgeInsets.zero,
             padding: const EdgeInsets.only(
@@ -410,7 +410,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   containerBorderRadius,
                                 ),
                               ),
-                              backgroundColor: colors.primaryBaseColor,
+                              backgroundColor: colors.primaryColor500,
                             ),
                             child: CommonText(
                               text: appLocalization.add,

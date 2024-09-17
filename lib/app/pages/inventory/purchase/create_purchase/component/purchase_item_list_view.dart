@@ -244,8 +244,8 @@ class PurchaseItemListView extends BaseWidget {
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
+                                              ? colors.secondaryColor50
+                                              : colors.primaryColor50,
                                           width: 0,
                                         ),
                                       ),
@@ -255,16 +255,14 @@ class PurchaseItemListView extends BaseWidget {
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
+                                              ? colors.secondaryColor50
+                                              : colors.primaryColor50,
                                           width: 0,
                                         ),
                                       ),
                                       fillColor: index.isEven
-                                          ? colors.primaryLiteColor
-                                              .withOpacity(.2)
-                                          : colors.primaryLiteColor
-                                              .withOpacity(.2),
+                                          ? colors.primaryColor50
+                                          : colors.primaryColor100,
                                       filled: true,
                                     ),
                                   ),

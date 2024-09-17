@@ -317,7 +317,7 @@ class AccountingPurchaseView extends BaseView<AccountingPurchaseController> {
                   ),
                   icon: Icon(
                     TablerIcons.check,
-                    color: colors.successfulBaseColor,
+                    color: colors.primaryColor500,
                   ),
                 ),
               ),

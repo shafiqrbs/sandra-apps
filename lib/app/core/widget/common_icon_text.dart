@@ -38,7 +38,7 @@ class CommonIconText extends BaseWidget {
         Icon(
           icon,
           size: iconSize ?? 18,
-          color: iconColor ?? colors.iconColor,
+          color: iconColor ?? colors.primaryColor500,
         ),
         4.width,
         Expanded(

@@ -32,14 +32,14 @@ class ColumnIconText extends BaseWidget {
             color:
                 isSelected ? colorSchema.borderColor : colorSchema.borderColor,
           ),
-          color: isSelected ? colorSchema.selectedColor : Colors.transparent,
+          color: isSelected ? colorSchema.primaryColor400 : Colors.transparent,
         ),
         child: Column(
           children: [
             if (icon != null)
               Icon(
                 icon,
-                color: isSelected ? Colors.black : colorSchema.iconColor,
+                color: isSelected ? Colors.black : colorSchema.primaryColor100,
                 size: 24,
               ),
             Text(

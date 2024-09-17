@@ -378,7 +378,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color: colors.evenListColor,
+                color: colors.secondaryColor50,
               ),
               child: ListView.builder(
                 itemCount:

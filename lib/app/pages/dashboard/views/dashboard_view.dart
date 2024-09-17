@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema_2.dart';
 import 'package:sandra/app/pages/settings/controllers/settings_controller.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/core/widget/tbd_round_button.dart';
@@ -160,7 +161,7 @@ class DashboardView extends BaseView<DashboardController> {
                           width: 16,
                           decoration: BoxDecoration(
                             color: controller.isOnline.value
-                                ? colors.successButtonBorderColor
+                                ? colors.primaryColor800
                                 : colors.dangerBaseColor,
                             borderRadius: BorderRadius.circular(100),
                           ),
@@ -175,9 +176,7 @@ class DashboardView extends BaseView<DashboardController> {
               InkWell(
                 onTap: () {
                   Get.changeTheme(
-                    Get.isDarkMode
-                        ? ThemeData.light()
-                        : ThemeData.dark(),
+                    Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
                   );
                   //Get.find<SettingsController>().changeTheme();
                 },
@@ -247,6 +246,7 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
+        //_buildTestColor(),
         12.height,
         _buildThreeCommonButtons(),
         _buildBalanceList(),
@@ -255,6 +255,22 @@ class DashboardView extends BaseView<DashboardController> {
         14.height,
         _buildButtons(),
       ],
+    );
+  }
+
+  Widget _buildTestColor() {
+    return InkWell(
+      onTap: () {
+        ColorSchema2.fromJson(Get.isDarkMode ? darkColor : lightColor);
+        Get.changeTheme(
+          Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+        );
+      },
+      child: Container(
+        height: 20,
+        width: 20,
+        color: ColorSchema2().primaryColor500,
+      ),
     );
   }
 
@@ -432,7 +448,6 @@ class DashboardView extends BaseView<DashboardController> {
             buttonColor: colors.solidOrangeColor,
             onTap: controller.goToPo,
           ),
-
           _buildCommonButtonCard(
             title: appLocalization.pay,
             buttonColor: colors.solidOliveColor,

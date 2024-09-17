@@ -267,7 +267,7 @@ class SalesInformationModalView
                   width: Get.width,
                   height: 2,
                   decoration: BoxDecoration(
-                    color: colors.moduleHeaderColor,
+                    color: colors.primaryColor50,
                   ),
                 ),
                 Container(
@@ -296,7 +296,7 @@ class SalesInformationModalView
                               width: Get.width,
                               height: 2,
                               decoration: BoxDecoration(
-                                color: colors.moduleHeaderColor,
+                                color: colors.primaryColor50,
                               ),
                             ),
                             labelValue.copyWith(
@@ -311,7 +311,7 @@ class SalesInformationModalView
                               width: Get.width,
                               height: 2,
                               decoration: BoxDecoration(
-                                color: colors.moduleHeaderColor,
+                                color: colors.primaryColor50,
                               ),
                             ),
                             labelValue.copyWith(
@@ -419,7 +419,7 @@ class SalesInformationModalView
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),
-                              color: colors.selectedColor,
+                              color: colors.primaryColor400,
                             ),
                             margin: const EdgeInsets.only(
                               left: 4,
@@ -471,7 +471,7 @@ class SalesInformationModalView
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.primaryLiteColor,
+                                color: colors.primaryColor500,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,

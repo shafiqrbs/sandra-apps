@@ -79,17 +79,20 @@ class SalesItemListView extends BaseWidget {
           children: [
             Container(
               //  height: 100,
-              // color: index.isEven ? colors.evenListColor : colors.oddListColor,
+              // color: index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
               margin: const EdgeInsets.only(bottom: 4, left: 16, right: 2),
               padding: const EdgeInsets.only(left: 16, right: 8, bottom: 4),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
-                color:
-                    index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
+                color: index.isEven
+                    ? colors.secondaryColor50
+                    : colors.primaryColor50,
                 border: Border.all(
-                  color: colors.tertiaryBaseColor,
+                  color: index.isEven
+                      ? colors.secondaryColor100
+                      : colors.primaryColor100,
                   width: 0,
                 ),
               ),
@@ -168,8 +171,7 @@ class SalesItemListView extends BaseWidget {
                                   //width: Get.width * 0.7,
                                   color: Colors.transparent,
                                   child: CommonText(
-                                    text:
-                                        '${mrpController.value.text}',
+                                    text: '${mrpController.value.text}',
                                     fontSize: mediumTFSize,
                                     fontWeight: FontWeight.w500,
                                     textColor: colors.primaryTextColor,
@@ -420,8 +422,8 @@ class SalesItemListView extends BaseWidget {
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
+                                              ? colors.secondaryColor50
+                                              : colors.primaryColor50,
                                           width: 0,
                                         ),
                                       ),
@@ -431,8 +433,8 @@ class SalesItemListView extends BaseWidget {
                                         ),
                                         borderSide: BorderSide(
                                           color: index.isEven
-                                              ? colors.evenListColor
-                                              : colors.oddListColor,
+                                              ? colors.secondaryColor50
+                                              : colors.primaryColor50,
                                           width: 0,
                                         ),
                                       ),
