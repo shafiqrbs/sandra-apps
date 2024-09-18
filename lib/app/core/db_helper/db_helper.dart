@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DbHelper {
-  static const String _dbName = 'sandra.db';
+  static const String _dbName = 'terminalbd.db';
   static const _dbVersion = 1;
   static var status = '';
 

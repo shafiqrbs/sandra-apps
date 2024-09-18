@@ -64,6 +64,8 @@ class Purchase {
 
   int? isOnline;
 
+  String? purchaseMode;
+
   Purchase({
     this.purchaseId,
     this.deviceSalesId,
@@ -101,6 +103,7 @@ class Purchase {
     this.isOnline,
     this.discountCalculation,
     this.discount,
+    this.purchaseMode,
   });
 
   factory Purchase.fromJson(Map<String, dynamic> json) {
@@ -157,6 +160,7 @@ class Purchase {
       isOnline: json['is_online'],
       discountCalculation: parseDouble(json['discount_calculation']),
       discount: parseDouble(json['discount']),
+      purchaseMode: json['purchase_mode'],
     );
   }
 
@@ -206,6 +210,7 @@ class Purchase {
       'is_online': isOnline,
       'discount_calculation': discountCalculation,
       'discount': discount,
+      'purchase_mode': purchaseMode,
     };
   }
 
