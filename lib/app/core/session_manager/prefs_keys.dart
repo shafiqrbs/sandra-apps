@@ -18,3 +18,5 @@ const prefsHasPrinter = 'hasPrinter';
 const prefsIsSalesAutoApprove = 'isSalesAutoApprove';
 const prefsIsPurchaseAutoApprove = 'isPurchaseAutoApprove';
 const prefsIsTotalPriceConfig = 'isTotalPriceConfig';
+const prefIsShowBrandOnPurchase = 'isShowBrandOnPurchase';
+const prefIsShowBrandOnSales = 'isShowBrandOnSales';

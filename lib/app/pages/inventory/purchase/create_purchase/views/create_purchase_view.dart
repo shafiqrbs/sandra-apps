@@ -49,6 +49,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       children: [
         Column(
           children: [
+            _buildBrandDropDown(),
             _buildProductSearchForm(),
             _buildStockAddForm(),
             _buildSelectedStockList(),
@@ -185,6 +186,10 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
         return Container();
       },
     );
+  }
+
+  Widget _buildBrandDropDown(){
+    return Container();
   }
 
   Widget _buildProductSearchForm() {

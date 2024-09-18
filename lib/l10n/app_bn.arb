@@ -421,7 +421,9 @@
   "thisAmountIsNotValid": "This amount is not valid",
   "enterAmount": "Enter Amount",
   "selectVendor": "Select Vendor",
-  "purchaseOrder": "Purchase Order"
+  "purchaseOrder": "Purchase Order",
+  "isShowBrandOnSales" : "Is show brand on sales",
+  "isShowBrandOnPurchase" : "Is show brand on purchase"
 
 
 

@@ -142,6 +142,37 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                               ),
                             ],
                           ),
+                          16.height,
+                          Row(
+                            mainAxisAlignment: spaceBetweenMAA,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.isShowBrandOnSales,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              AdvancedSwitch(
+                                controller: controller.isShowBrandOnSales,
+                                onChanged: (value) async {
+                                  await controller.setShowBrandOnSales(value);
+                                },
+                                borderRadius: BorderRadius.circular(4),
+                                height: 20,
+                                width: 40,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
+                                initialValue:
+                                    controller.isShowBrandOnSales.value,
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -238,6 +269,38 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                             ],
                           ),
                           16.height,
+                          Row(
+                            mainAxisAlignment: spaceBetweenMAA,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                ),
+                                child: Text(
+                                  appLocalization.isShowBrandOnPurchase,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              AdvancedSwitch(
+                                controller: controller.isShowBrandOnPurchase,
+                                onChanged: (value) async {
+                                  await controller
+                                      .setShowBrandOnPurchase(value);
+                                },
+                                borderRadius: BorderRadius.circular(4),
+                                height: 20,
+                                width: 40,
+                                activeColor: colors.primaryColor700,
+                                inactiveColor: colors.secondaryColor100,
+                                initialValue:
+                                    controller.isShowBrandOnPurchase.value,
+                              ),
+                            ],
+                          ),
+                          16.height,
                           Column(
                             children: [
                               _buildSettingButton(
@@ -286,8 +349,10 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                                                   BorderRadius.circular(4),
                                               height: 20,
                                               width: 40,
-                                              activeColor: colors.primaryColor700,
-                                              inactiveColor: colors.secondaryColor100,
+                                              activeColor:
+                                                  colors.primaryColor700,
+                                              inactiveColor:
+                                                  colors.secondaryColor100,
                                               initialValue: controller
                                                   .isTotalPurchase.value,
                                             ),
@@ -367,7 +432,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                               ),
                             ),
                           ),
-
                           AdvancedSwitch(
                             controller: controller.isHasPrinter,
                             onChanged: (value) async {
@@ -474,7 +538,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                               ),
                             ),
                           ),
-
                           SizedBox(
                             width: 80,
                             height: textFieldHeight,
@@ -567,7 +630,9 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: isSelected ? colors.primaryColor700 : colors.secondaryColor200,
+                color: isSelected
+                    ? colors.primaryColor700
+                    : colors.secondaryColor200,
               ),
             ),
             child: isSelected
@@ -629,14 +694,14 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             padding: const EdgeInsets.only(
               left: 8,
             ),
-            child:
-          Text(
-            text,
-            style: GoogleFonts.roboto(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+            child: Text(
+              text,
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),),
+          ),
           const Spacer(),
           Icon(
             isOpen ? TablerIcons.chevron_down : trailingIcon,

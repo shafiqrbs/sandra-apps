@@ -317,4 +317,34 @@ class SessionManager {
   Future<bool> getIsPurchaseAutoApprove() async {
     return prefs.getBool(prefsIsPurchaseAutoApprove) ?? false;
   }
+
+  /// set is show brand on purchase
+  Future<void> setIsShowBrandOnPurchase({
+    required bool isShowBrandOnPurchase,
+  }) async {
+    await prefs.setBool(
+      prefIsShowBrandOnPurchase,
+      isShowBrandOnPurchase,
+    );
+  }
+
+  /// get is show brand on purchase
+  Future<bool> getIsShowBrandOnPurchase() async {
+    return prefs.getBool(prefIsShowBrandOnPurchase) ?? false;
+  }
+
+  /// set is show brand on sales
+  Future<void> setIsShowBrandOnSales({
+    required bool isShowBrandOnSales,
+  }) async {
+    await prefs.setBool(
+      prefIsShowBrandOnSales,
+      isShowBrandOnSales,
+    );
+  }
+
+  /// get is show brand on sales
+  Future<bool> getIsShowBrandOnSales() async {
+    return prefs.getBool(prefIsShowBrandOnSales) ?? false;
+  }
 }
