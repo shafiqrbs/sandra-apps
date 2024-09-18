@@ -162,6 +162,9 @@ class PurchaseProcessController extends BaseController {
       salesBy: userManager.value.asController.selectedValue?.fullName,
       salesById: userManager.value.asController.selectedValue?.userId,
       isOnline: prePurchase == null ? 0 : prePurchase!.isOnline,
+      purchaseMode: prePurchase == null
+          ? await prefs.getPurchaseConfig()
+          : prePurchase!.purchaseMode,
     );
 
     if (vendorManager.selectedItem.value != null) {
