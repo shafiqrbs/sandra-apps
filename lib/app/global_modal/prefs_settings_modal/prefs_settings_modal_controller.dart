@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
 import '/app/core/base/base_controller.dart';
 
@@ -77,7 +79,6 @@ class PrefsSettingsModalController extends BaseController {
     await prefs.setHasPrinter(
       hasPrinter: value,
     );
-
   }
 
   Future<void> setSalesAutoApproved(bool value) async {
@@ -120,7 +121,25 @@ class PrefsSettingsModalController extends BaseController {
   }
 
   Future<void> changePurchase(String? config) async {
-    if (config != null) {
+    if (config != null &&
+        config.isNotEmpty &&
+        config != selectedPurchase.value) {
+      final purchaseController = Get.find<CreatePurchaseController>();
+      if (purchaseController.purchaseItemList.value.isNotEmpty) {
+        final isConfirm = await confirmationModal(
+          msg: appLocalization.areYouSure,
+        );
+        if (isConfirm) {
+          purchaseController.purchaseItemList.value = [];
+          purchaseController.calculateAllSubtotal();
+          if (purchaseController.prePurchase != null) {
+            purchaseController.prePurchase = null;
+          }
+        } else {
+          return;
+        }
+      }
+
       selectedPurchase.value = config;
       await prefs.setPurchaseConfig(config);
     }
@@ -129,7 +148,7 @@ class PrefsSettingsModalController extends BaseController {
   Future<void> setTotalPurchase(bool value) async {
     isTotalPurchase.value = value;
     await prefs.setTotalPriceConfig(
-       isTotalPrice: value,
+      isTotalPrice: value,
     );
   }
 }

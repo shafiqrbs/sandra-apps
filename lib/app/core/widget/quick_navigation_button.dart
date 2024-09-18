@@ -33,7 +33,6 @@ ValueNotifier<Map<String, Color>> colorList = ValueNotifier({
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
 
-
   List<Widget> inventoryButtonList = [
     TbdRoundButton(
       icon: TablerIcons.shopping_cart,
@@ -197,15 +196,6 @@ class QuickNavigationButton extends BaseWidget {
         height: 32,
         fileName: 'ic_menu.svg',
       ),
-    );
-    return AppBarButton(
-      buttonName: null,
-      onTap: () => showQuickNavigateBottomSheet(
-        context: context,
-      ),
-      leftIcon: TablerIcons.grid_dots,
-      buttonBGColor: Colors.transparent,
-      iconColor: Colors.white,
     );
   }
 
