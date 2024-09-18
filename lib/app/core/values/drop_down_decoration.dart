@@ -2,7 +2,7 @@ import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 
 final dropDownDecoration = CustomDropdownDecoration(
-  closedFillColor: Colors.white,
+  closedFillColor: const Color(0xFFF3F3F3),
   expandedFillColor: Colors.white,
   closedSuffixIcon: const Icon(
     Icons.keyboard_arrow_down,
@@ -13,10 +13,10 @@ final dropDownDecoration = CustomDropdownDecoration(
     color: Colors.grey,
   ),
   searchFieldDecoration: SearchFieldDecoration(
-    fillColor: Colors.white,
+    fillColor: const Color(0xFFF3F3F3),
     prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
     hintStyle: TextStyle(color: Colors.grey[400]),
-    textStyle: const TextStyle(color: Colors.white),
+    textStyle: const TextStyle(color: Colors.black),
     border: const OutlineInputBorder(
       borderRadius: const BorderRadius.all(
         Radius.circular(4),
