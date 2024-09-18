@@ -1,3 +1,4 @@
+import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -33,6 +34,8 @@ class EntityManager<T> {
 
   /// Scroll controller for the entity
   final scrollController = ScrollController();
+
+  final ddController = SingleSelectController<T>(null);
 
   /// Constructor
   EntityManager(this.tableName, this.fromJson, this.toJson) {
