@@ -35,6 +35,11 @@ class CreateSalesController extends StockSelectionController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    isShowBrand.value = await prefs.getIsShowBrandOnSales();
+    if (isShowBrand.value) {
+      await brandManager.getAll();
+    }
+
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null && args.isNotEmpty) {
       if (args['sales'] != null) {

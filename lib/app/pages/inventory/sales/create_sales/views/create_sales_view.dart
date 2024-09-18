@@ -1,6 +1,10 @@
+import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/values/drop_down_decoration.dart';
+import 'package:sandra/app/entity/brand.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -62,7 +66,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
   @override
   Widget floatingActionButton() {
     return Obx(
-          () {
+      () {
         final showPlaceOrderButton = controller.stockList.value.isEmpty;
         final showAddStockButton = controller.isShowAddStockButton.value;
 
@@ -78,7 +82,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 bottom: 7,
               ),
               child: Obx(
-                    () {
+                () {
                   return Row(
                     mainAxisAlignment: spaceBetweenMAA,
                     children: [
@@ -189,13 +193,76 @@ class CreateSalesView extends BaseView<CreateSalesController> {
 
   Widget _buildProductSearchForm() {
     return Obx(
-      () => ProductSearchForm(
-        searchController: controller.searchController.value,
-        onSearch: controller.getStocks,
-        autoFocus: controller.selectedStock.value == null,
-        isShowSuffixIcon: controller.searchController.value.text.isNotEmpty,
-        onClear: controller.onClearSearchField,
-        selectedStock: controller.selectedStock.value,
+      () => Column(
+        children: [
+          Visibility(
+            visible: controller.isShowBrand.value,
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 8,
+                bottom: 8,
+                left: 4,
+                right: 4,
+              ),
+              child: Stack(
+                children: [
+                  DropdownFlutter<Brand>.search(
+                    controller: controller.brandManager.ddController,
+                    hintText: appLocalization.brand,
+                    items: controller.brandManager.allItems.value,
+                    onChanged: controller.onBrandSelection,
+                    overlayHeight: 500,
+                    listItemBuilder: (context, value, ___, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    headerBuilder: (context, value, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    decoration: dropDownDecoration,
+                    itemsListPadding: EdgeInsets.zero,
+                    closedHeaderPadding: const EdgeInsets.all(8),
+                  ),
+                  if (controller.isShowBrandClearIcon.value)
+                    Positioned(
+                      right: 30,
+                      top: 0,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              TablerIcons.x,
+                              color: colors.solidBlackColor,
+                            ),
+                            onPressed: () => controller.onBrandSelection(null),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          ProductSearchForm(
+            searchController: controller.searchController.value,
+            onSearch: controller.getStocks,
+            autoFocus: controller.selectedStock.value == null,
+            isShowSuffixIcon: controller.searchController.value.text.isNotEmpty,
+            onClear: controller.onClearSearchField,
+            selectedStock: controller.selectedStock.value,
+          ),
+        ],
       ),
     );
   }
