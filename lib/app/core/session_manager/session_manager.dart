@@ -330,7 +330,7 @@ class SessionManager {
 
   /// get is show brand on purchase
   Future<bool> getIsShowBrandOnPurchase() async {
-    return prefs.getBool(prefIsShowBrandOnPurchase) ?? false;
+    return prefs.getBool(prefIsShowBrandOnPurchase) ?? true;
   }
 
   /// set is show brand on sales

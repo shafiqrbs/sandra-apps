@@ -9,6 +9,7 @@ dependencies:
   anim_search_bar: ^2.0.3
   cached_network_image: ^3.3.1
   dio: ^5.4.3+1
+  dropdown_flutter: ^1.0.1
   equatable: ^2.0.5
   esc_pos_utils_plus: ^2.0.3
   faker: ^2.2.0

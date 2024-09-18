@@ -25,6 +25,12 @@ class CreatePurchaseController extends StockSelectionController {
     super.onInit();
     purchaseMode = await prefs.getPurchaseConfig();
     selectedPurchase.value = await prefs.getPurchaseConfig();
+    isShowBrand.value = await prefs.getIsShowBrandOnPurchase();
+
+    if (isShowBrand.value) {
+      await brandManager.getAll();
+    }
+
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null && args.isNotEmpty) {
       if (args['purchase'] != null && args['purchase'] is Purchase) {

@@ -1,3 +1,5 @@
+import 'package:dropdown_flutter/custom_dropdown.dart';
+
 import '/app/core/db_helper/db_tables.dart';
 
 import 'entity_manager.dart';
@@ -11,7 +13,7 @@ class BrandManager extends EntityManager<Brand> {
         );
 }
 
-class Brand {
+class Brand with CustomDropdownListFilter {
   int? brandId;
   String? name;
   String? slug;
@@ -33,4 +35,9 @@ class Brand {
         'name': name,
         'slug': slug,
       };
+
+  @override
+  bool filter(String query) {
+    return name!.toLowerCase().contains(query.toLowerCase());
+  }
 }
