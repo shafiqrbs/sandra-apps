@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/values/drop_down_decoration.dart';
 import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/global_widget/place_order_view.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -71,6 +72,13 @@ class CreateSalesView extends BaseView<CreateSalesController> {
         final showAddStockButton = controller.isShowAddStockButton.value;
 
         if (showPlaceOrderButton) {
+
+          return PlaceOrderView(
+            onTap: controller.showOrderProcessModal,
+            count: controller.salesItemList.value.length.toString(),
+            total: controller.salesSubTotal.toString(),
+          );
+
           return InkWell(
             onTap: controller.showOrderProcessModal,
             child: Container(
