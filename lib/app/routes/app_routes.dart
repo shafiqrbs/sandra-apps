@@ -31,6 +31,8 @@ abstract class Routes {
   static const vendorDetails = _Paths.vendorDetails;
   static const accountingSales = _Paths.accountingSales;
   static const accountingPurchase = _Paths.accountingPurchase;
+  static const  themeTestPage = _Paths.themeTestPage;
+
 }
 
 abstract class _Paths {
@@ -61,4 +63,6 @@ abstract class _Paths {
   static const vendorDetails = '/vendor_details';
   static const accountingSales = '/accounting_sales';
   static const accountingPurchase = '/accounting_purchase';
+  static const  themeTestPage = '/theme_test_page';
+
 }

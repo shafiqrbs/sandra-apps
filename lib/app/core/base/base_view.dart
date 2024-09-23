@@ -115,8 +115,8 @@ abstract class BaseView<Controller extends BaseController>
     return FloatingActionButtonLocation.centerDocked;
   }
 
-  Color pageBackgroundColor() {
-    return AppColors.pageBackground;
+  Color?pageBackgroundColor() {
+    return null;
   }
 
   Color statusBarColor() {

@@ -44,26 +44,8 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: _getSupportedLocal(),
       locale: Locale(widget.lang),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        colorSchemeSeed: const Color.fromRGBO(86, 80, 14, 171),
-      ),
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: AppColors.colorPrimarySwatch,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        brightness: Brightness.light,
-        primaryColor: AppColors.colorPrimary,
-        textTheme: const TextTheme(
-          labelLarge: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        fontFamily: 'Roboto',
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     );
   }

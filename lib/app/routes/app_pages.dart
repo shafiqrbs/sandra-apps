@@ -48,6 +48,8 @@ import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
 import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
+import '/app/pages/theme_test_page/bindings/theme_test_page_binding.dart';
+import '/app/pages/theme_test_page/views/theme_test_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -176,6 +178,11 @@ class AppPages {
       name: Routes.accountingPurchase,
       page: AccountingPurchaseView.new,
       binding: AccountingPurchaseBinding(),
+    ),
+    GetPage(
+      name: Routes.themeTestPage,
+      page: ThemeTestPageView.new,
+      binding: ThemeTestPageBinding(),
     ),
   ];
 }

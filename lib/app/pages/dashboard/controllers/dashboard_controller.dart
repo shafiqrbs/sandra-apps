@@ -34,8 +34,6 @@ enum SelectedButtonGroup {
   config,
 }
 
-
-
 ValueNotifier<Map<String, Color>> colorList = ValueNotifier({
   'blue': ColorSchema().solidBlueColor,
   'green': ColorSchema().solidGreenColor,
@@ -49,8 +47,6 @@ ValueNotifier<Map<String, Color>> colorList = ValueNotifier({
   'navyBlue': ColorSchema().solidNavyBlueColor,
 });
 
-
-
 List<Widget> inventoryButtonList = [
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
@@ -58,22 +54,18 @@ List<Widget> inventoryButtonList = [
     localeMethod: () => appLocalization.sales,
     bgColor: colorList.value['blue'],
   ),
-
   TbdRoundButton(
     icon: TablerIcons.truck_delivery,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchase,
     bgColor: colorList.value['orange'],
   ),
-
   TbdRoundButton(
     icon: TablerIcons.packages,
     onTap: () => navigatePage(Routes.stockList),
     localeMethod: () => appLocalization.stocks,
     bgColor: colorList.value['green'],
   ),
-
-
   TbdRoundButton(
     icon: TablerIcons.credit_card_refund,
     onTap: () {
@@ -86,7 +78,6 @@ List<Widget> inventoryButtonList = [
     localeMethod: () => appLocalization.salesReturn,
     bgColor: colorList.value['navyBlue'],
   ),
-
   TbdRoundButton(
     icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.customerList),
@@ -135,7 +126,6 @@ List<Widget> accountingButtonList = [
     localeMethod: () => appLocalization.expense,
     bgColor: colorList.value['grey'],
   ),
-
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.accountingSales),
@@ -160,7 +150,6 @@ List<Widget> accountingButtonList = [
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
   ),
-
   TbdRoundButton(
     icon: TablerIcons.report,
     onTap: () {
@@ -443,5 +432,17 @@ class DashboardController extends BaseController {
       tableName: dbTables.tablePurchase,
       dataList: purchaseList.map((e) => e.toJson()).toList(),
     );
+  }
+
+  Future<void> changeTheme() async {
+    // Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+    ColorSchema.fromJson(
+      Get.isDarkMode ? darkColor : lightColor,
+    );
+    Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+    await Get.forceAppUpdate();
+
+    print('Current Theme: ${Get.isDarkMode ? 'Dark' : 'Light'}');
+    print('Primary Color: ${ColorSchema().primaryColor900}');
   }
 }

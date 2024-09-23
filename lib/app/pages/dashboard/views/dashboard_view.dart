@@ -175,20 +175,10 @@ class DashboardView extends BaseView<DashboardController> {
 
               12.width,
               InkWell(
-                onTap: () {
-                  /* Get.changeTheme(
-                    Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
-                  );
-                  colors = ColorSchema.fromJson(
-                    Get.isDarkMode ? darkColor : lightColor,
-                  );
-                  print('Get.isDarkMode: ${Get.isDarkMode}');
-                  print('colors.primaryColor900: ${colors.primaryColor900}');*/
-                },
-                child: const Icon(
-                  //Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
-                  TablerIcons.clipboard_text,
-                  color: Colors.white,
+                onTap: controller.changeTheme,
+                child: Icon(
+                  Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
+                  color: colors.whiteColor,
                   size: 20,
                 ),
               ),
