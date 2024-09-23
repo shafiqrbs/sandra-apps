@@ -38,7 +38,7 @@ abstract class StockSelectionController extends BaseController {
     String query = "name LIKE '$pattern%' ";
     if (isShowBrand.value && brandManager.ddController.value != null) {
       query =
-          "${query}AND brand_name = '${brandManager.asController.selectedValue?.name}'";
+          "${query}AND brand_name = '${brandManager.ddController.value?.name}'";
     }
 
     final stocks = await dbHelper.getAllWhr(
