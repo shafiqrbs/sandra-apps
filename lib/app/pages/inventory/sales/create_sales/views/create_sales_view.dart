@@ -510,25 +510,23 @@ class CreateSalesView extends BaseView<CreateSalesController> {
       () => Visibility(
         visible: controller.stockList.value.isNotEmpty,
         child: Positioned(
-          top: 50,
+          top: controller.isShowBrand.value ? 100 : 50,
           left: 0,
           right: 0,
-          bottom: 60,
-          child: Obx(
-            () => DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  containerBorderRadius,
-                ),
-                color: colors.whiteColor,
+          bottom: 0,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                containerBorderRadius,
               ),
-              child: SearchedStockList(
-                stocks: controller.stockList.value,
-                onItemTap: controller.onStockSelection,
-                onQtyChange: controller.onSearchedStockQtyChange,
-                onQtyEditComplete: controller.onSearchedStockQtyEditComplete,
-                qtyControllerList: controller.qtyControllerList,
-              ),
+              color: colors.whiteColor,
+            ),
+            child: SearchedStockList(
+              stocks: controller.stockList.value,
+              onItemTap: controller.onStockSelection,
+              onQtyChange: controller.onSearchedStockQtyChange,
+              onQtyEditComplete: controller.onSearchedStockQtyEditComplete,
+              qtyControllerList: controller.qtyControllerList,
             ),
           ),
         ),

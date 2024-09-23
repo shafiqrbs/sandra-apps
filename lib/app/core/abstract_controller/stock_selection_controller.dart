@@ -7,7 +7,6 @@ import '/app/entity/stock.dart';
 abstract class StockSelectionController extends BaseController {
   final stockList = Rx<List<Stock>>([]);
   final selectedStock = Rx<Stock?>(null);
-  final stockSearchController = TextEditingController().obs;
   final qtyFocusNode = FocusNode().obs;
 
   final stockMrpController = TextEditingController().obs;
@@ -27,7 +26,6 @@ abstract class StockSelectionController extends BaseController {
   Future<void> getStocks(
     String? pattern,
   ) async {
-    stockSearchController.refresh();
     selectedStock.value = null;
 
     if (pattern == null || pattern.isEmpty) {
@@ -35,11 +33,13 @@ abstract class StockSelectionController extends BaseController {
       return;
     }
 
-    String query = "name LIKE '$pattern%' ";
+    String query = "name LIKE '%$pattern%' ";
     if (isShowBrand.value && brandManager.ddController.value != null) {
       query =
-          "${query}AND brand_name = '${brandManager.ddController.value?.name}'";
+          "${query}AND brand_name LIKE '%${brandManager.ddController.value?.name}%'";
     }
+
+    print("Query: $query");
 
     final stocks = await dbHelper.getAllWhr(
       tbl: dbTables.tableStocks,
@@ -78,12 +78,15 @@ abstract class StockSelectionController extends BaseController {
       ..refresh();
   }
 
-  void onBrandSelection(Brand? brand) {
+  Future<void> onBrandSelection(Brand? brand) async {
+    // print("Brand: ${brand?.toJson()}");
     if (brand == null) {
       isShowBrandClearIcon.value = false;
     } else {
       isShowBrandClearIcon.value = true;
     }
     brandManager.ddController.value = brand;
+
+    await getStocks(searchController.value.text);
   }
 }

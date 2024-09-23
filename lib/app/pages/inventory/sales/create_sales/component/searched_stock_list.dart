@@ -25,6 +25,7 @@ class SearchedStockList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: stocks.length,
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         return StockItem(
           stock: stocks[index],
