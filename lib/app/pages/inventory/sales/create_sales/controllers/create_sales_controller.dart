@@ -242,8 +242,8 @@ class CreateSalesController extends StockSelectionController {
     for (final i in indexList) {
       final stock = stockList.value[i];
       final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
-      stockQtyController.value.text = qty.toStringAsFixed(2);
       onStockSelection(stock);
+      stockQtyController.value.text = qty.toStringAsFixed(2);
       addSaleItem(
         process: 'inline',
       );
@@ -257,7 +257,6 @@ class CreateSalesController extends StockSelectionController {
     num value,
     int index,
   ) async {
-    log('onDiscountChange called');
     final item = salesItemList.value[index];
     final mrpPrice = item.mrpPrice!;
 
@@ -340,8 +339,9 @@ class CreateSalesController extends StockSelectionController {
     for (final i in indexList) {
       final stock = stockList.value[i];
       final qty = double.tryParse(qtyControllerList[i].text) ?? 0.0;
-      stockQtyController.value.text = qty.toStringAsFixed(2);
       onStockSelection(stock);
+      stockQtyController.value.text = qty.toStringAsFixed(2);
+
       addSaleItem(
         process: 'inline',
       );

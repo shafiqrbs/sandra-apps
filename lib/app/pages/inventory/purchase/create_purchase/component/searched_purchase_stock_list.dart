@@ -45,7 +45,6 @@ class PurchaseItemView extends BaseWidget {
   final Function(num value, int index) onQtyChange;
   final Function(num value, int index) onQtyEditComplete;
   final TextEditingController qtyController;
-
   final int index;
 
   PurchaseItemView({
