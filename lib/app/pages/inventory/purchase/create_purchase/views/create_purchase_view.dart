@@ -5,16 +5,14 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/values/drop_down_decoration.dart';
 import 'package:sandra/app/entity/brand.dart';
-import '../../../../../core/advance_select/advance_select_view.dart';
-import '/app/core/widget/page_back_button.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/widget/app_bar_button_group.dart';
-import '/app/core/widget/app_bar_tittle.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/list_button.dart';
+import '/app/core/widget/page_back_button.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/selected_stock_list_header.dart';
 import '/app/global_widget/product_search_form.dart';
@@ -256,13 +254,15 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
               ),
             ),
           ),
-          ProductSearchForm(
-            searchController: controller.searchController.value,
-            onSearch: controller.getStocks,
-            autoFocus: controller.selectedStock.value == null,
-            isShowSuffixIcon: controller.searchController.value.text.isNotEmpty,
-            onClear: controller.onClearSearchField,
-            selectedStock: controller.selectedStock.value,
+          Obx(
+            () => ProductSearchForm(
+              searchController: controller.searchController.value,
+              onSearch: controller.getStocks,
+              autoFocus: controller.selectedStock.value == null,
+              isShowSuffixIcon: controller.searchController.value.text != '',
+              onClear: controller.onClearSearchField,
+              selectedStock: controller.selectedStock.value,
+            ),
           ),
         ],
       ),

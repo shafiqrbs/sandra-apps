@@ -254,14 +254,16 @@ class CreateSalesView extends BaseView<CreateSalesController> {
               ),
             ),
           ),
-         Obx(()=> ProductSearchForm(
-            searchController: controller.searchController.value,
-            onSearch: controller.getStocks,
-            autoFocus: controller.selectedStock.value == null,
-            isShowSuffixIcon: controller.searchController.value.text != '',
-            onClear: controller.onClearSearchField,
-            selectedStock: controller.selectedStock.value,
-          ),),
+          Obx(
+            () => ProductSearchForm(
+              searchController: controller.searchController.value,
+              onSearch: controller.getStocks,
+              autoFocus: controller.selectedStock.value == null,
+              isShowSuffixIcon: controller.searchController.value.text != '',
+              onClear: controller.onClearSearchField,
+              selectedStock: controller.selectedStock.value,
+            ),
+          ),
         ],
       ),
     );

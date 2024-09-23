@@ -72,11 +72,12 @@ abstract class StockSelectionController extends BaseController {
 
   Future<void> onClearSearchField() async {
     selectedStock.value = null;
-    searchController.value.clear();
+    searchController.value.text = '';
+    stockList.value = [];
     searchController.refresh();
-    stockList
-      ..value = []
-      ..refresh();
+    update();
+    refresh();
+    notifyChildrens();
   }
 
   Future<void> onBrandSelection(Brand? brand) async {
