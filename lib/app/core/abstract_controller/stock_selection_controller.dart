@@ -14,7 +14,7 @@ abstract class StockSelectionController extends BaseController {
   final stockDiscountController = TextEditingController().obs;
   final stockTotalController = TextEditingController().obs;
   final stockDiscountPercentController = TextEditingController().obs;
-  final searchController = TextEditingController().obs;
+  final searchController = Rx<TextEditingController>(TextEditingController());
 
   final qtyControllerList = <TextEditingController>[].obs;
 
@@ -27,6 +27,7 @@ abstract class StockSelectionController extends BaseController {
     String? pattern,
   ) async {
     selectedStock.value = null;
+    searchController.refresh();
 
     if (pattern == null || pattern.isEmpty) {
       stockList.value = [];

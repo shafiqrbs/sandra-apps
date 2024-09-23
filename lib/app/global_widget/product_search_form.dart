@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/core_model/voice_recognition.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '/app/core/core_model/voice_recognition.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/values/app_dimension.dart';
+import '/app/core/widget/quick_navigation_button.dart';
 import '/app/entity/stock.dart';
 
 class ProductSearchForm extends StatelessWidget with AppDimension {
@@ -79,7 +79,7 @@ class ProductSearchForm extends StatelessWidget with AppDimension {
                       isSHowPrefixIcon: false,
                       textEditingController: searchController,
                       isSHowSuffixIcon: isShowSuffixIcon,
-                      borderRaidus: containerBorderRadius,
+                      borderRadius: containerBorderRadius,
                       suffix: Icons.clear,
                       onTap: onClear,
                     ),

@@ -243,7 +243,7 @@ InputDecoration inputDecorationSearch({
   required TextEditingController textEditingController,
   required bool isSHowSuffixIcon,
   required bool isSHowPrefixIcon,
-  double? borderRaidus,
+  double? borderRadius,
   IconData? prefix,
   IconData? suffix,
   Function()? onTap,
@@ -284,7 +284,7 @@ InputDecoration inputDecorationSearch({
     ), // Optional hint text
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        borderRaidus ?? 4,
+        borderRadius ?? 4,
       ),
       // Adjust the border radius as needed
       borderSide: const BorderSide(color: Color(0xFFece2d9)),
