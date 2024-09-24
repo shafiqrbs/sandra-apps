@@ -306,9 +306,17 @@ class SalesItemListView extends BaseWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
 
-                                          decoration: getInputDecoration(
-                                            hint: appLocalization.price,
-                                          ),
+                                          decoration: canEditSalesItemPrice
+                                                  .value
+                                              ? const InputDecoration(
+                                                  border: InputBorder.none,
+                                                  contentPadding:
+                                                      EdgeInsets.fromLTRB(
+                                                          8, 0, 8, 16),
+                                                )
+                                              : getInputDecoration(
+                                                  hint: appLocalization.price,
+                                                ),
                                         ),
                                       );
                                     },
