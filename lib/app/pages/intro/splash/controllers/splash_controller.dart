@@ -12,21 +12,18 @@ class SplashController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await navigatePage();
     await getThemeColor();
+    await navigatePage();
   }
 
   Future<void> getThemeColor() async {
     final isDarkMode = await prefs.getIsEnableDarkMode();
-    if (isDarkMode) {
-      Get.changeThemeMode(ThemeMode.dark);
-    } else {
-      Get.changeThemeMode(ThemeMode.light);
-    }
 
     ColorSchema.fromJson(
-      Get.isDarkMode ? darkColor : lightColor,
+      isDarkMode ? darkColor : lightColor,
     );
+    Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
+    await Get.forceAppUpdate();
   }
 
   Future<void> navigatePage() async {

@@ -128,110 +128,109 @@ class DashboardView extends BaseView<DashboardController> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Obx(
-                () {
-                  return CommonText(
-                    text: controller.isOnline.value
-                        ? appLocalization.online
-                        : appLocalization.offline,
-                    fontSize: 10,
-                    textColor: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  );
-                },
-              ),
-              4.width,
+          Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CommonText(
+                  text: controller.isOnline.value
+                      ? appLocalization.online
+                      : appLocalization.offline,
+                  fontSize: 10,
+                  textColor: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
 
-              Container(
-                height: 20,
-                width: 20,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Center(
-                  child: Obx(
-                    () {
-                      return GestureDetector(
-                        onTap: controller.onTapIsOnline,
-                        child: Container(
-                          height: 16,
-                          width: 16,
-                          decoration: BoxDecoration(
-                            color: controller.isOnline.value
-                                ? colors.primaryColor800
-                                : colors.solidRedColor,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+                4.width,
 
-              12.width,
-              InkWell(
-                onTap: controller.changeTheme,
-                child: Icon(
-                  Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
-                  color: colors.whiteColor,
-                  size: 20,
-                ),
-              ),
-              12.width,
-              Container(
-                margin: const EdgeInsets.only(right: 12),
-                child: SuperTooltip(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                        onTap: controller.logOut,
-                        child: Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: colors.solidBlackColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      16.height,
-                      GestureDetector(
-                        onTap: controller.clearLicense,
-                        child: Text(
-                          'Reset',
-                          style: TextStyle(
-                            color: colors.solidBlackColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  arrowTipDistance: 10,
-                  arrowLength: 8,
-                  arrowBaseWidth: 8,
-                  //right: -16,
-                  hideTooltipOnTap: true,
-                  //elevation: 0,
-                  hasShadow: false,
-                  backgroundColor: Colors.white,
-                  borderRadius: 4,
-                  barrierColor: Colors.transparent,
-                  child: const Icon(
-                    TablerIcons.dots_vertical,
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
                     color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Center(
+                    child: Obx(
+                      () {
+                        return GestureDetector(
+                          onTap: controller.onTapIsOnline,
+                          child: Container(
+                            height: 16,
+                            width: 16,
+                            decoration: BoxDecoration(
+                              color: controller.isOnline.value
+                                  ? colors.primaryColor800
+                                  : colors.solidRedColor,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+
+                12.width,
+                InkWell(
+                  onTap: controller.changeTheme,
+                  child: Icon(
+                    Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
+                    color: colors.whiteColor,
                     size: 20,
                   ),
                 ),
-              ),
+                12.width,
+                Container(
+                  margin: const EdgeInsets.only(right: 12),
+                  child: SuperTooltip(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: controller.logOut,
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: colors.solidBlackColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        16.height,
+                        GestureDetector(
+                          onTap: controller.clearLicense,
+                          child: Text(
+                            'Reset',
+                            style: TextStyle(
+                              color: colors.solidBlackColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    arrowTipDistance: 10,
+                    arrowLength: 8,
+                    arrowBaseWidth: 8,
+                    //right: -16,
+                    hideTooltipOnTap: true,
+                    //elevation: 0,
+                    hasShadow: false,
+                    backgroundColor: Colors.white,
+                    borderRadius: 4,
+                    barrierColor: Colors.transparent,
+                    child: const Icon(
+                      TablerIcons.dots_vertical,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
 
-              // GlobalThreeDotMenu(isAddOption: false,)
-            ],
+                // GlobalThreeDotMenu(isAddOption: false,)
+              ],
+            ),
           ),
         ],
       ),

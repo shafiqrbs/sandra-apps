@@ -21,6 +21,7 @@ const lightColor = {
   'secondary_color_200': '0xFFA0A9AE',
   'secondary_color_100': '0xFFBFC5C8',
   'secondary_color_50': '0xFFEAECED',
+  'solidBlackColor': '0xFF000000',
 };
 
 // dark Color
@@ -29,12 +30,12 @@ const darkColor = {
   'primary_color_800': '0xFF1A1A1A',
   'primary_color_700': '0xFF333333',
   'primary_color_600': '0xFF4D4D4D',
-  'primary_color_500': '0xFF666666',
+  'primary_color_500': '0xFF000000',
   'primary_color_400': '0xFF808080',
   'primary_color_300': '0xFF999999',
   'primary_color_200': '0xFFB3B3B3',
   'primary_color_100': '0xFFCCCCCC',
-  'primary_color_50': '0xFFE6E6E6',
+  'primary_color_50': '0xFF000000',
   'secondary_color_900': '0xFF141D21',
   'secondary_color_800': '0xFF1A252B',
   'secondary_color_700': '0xFF223038',
@@ -44,7 +45,8 @@ const darkColor = {
   'secondary_color_300': '0xFF748289',
   'secondary_color_200': '0xFFA0A9AE',
   'secondary_color_100': '0xFFBFC5C8',
-  'secondary_color_50': '0xFFEAECED',
+  'secondary_color_50': '0xFF000000',
+  'solidBlackColor': '0xFFFFFFFF',
 };
 
 class ColorSchema {
@@ -72,7 +74,6 @@ class ColorSchema {
   Color primaryColor100 = const Color(0xffB0DFC8);
   Color primaryColor50 = const Color(0xffE6F5ED);
 
-
   // Secondary color
   Color secondaryColor900 = const Color(0xff141D21);
   Color secondaryColor800 = const Color(0xff1A252B);
@@ -84,8 +85,6 @@ class ColorSchema {
   Color secondaryColor200 = const Color(0xffA0A9AE);
   Color secondaryColor100 = const Color(0xffBFC5C8);
   Color secondaryColor50 = const Color(0xffEAECED);
-
-
 
   Color blueColor = const Color(0xff0d6efd);
   late Color solidBlueColor = blueColor.withOpacity(0.8);
@@ -161,6 +160,7 @@ class ColorSchema {
       ..secondaryColor300 = parseColor(json['secondary_color_300'])
       ..secondaryColor200 = parseColor(json['secondary_color_200'])
       ..secondaryColor100 = parseColor(json['secondary_color_100'])
-      ..secondaryColor50 = parseColor(json['secondary_color_50']);
+      ..secondaryColor50 = parseColor(json['secondary_color_50'])
+      ..solidBlackColor = parseColor(json['solidBlackColor']);
   }
 }

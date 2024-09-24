@@ -440,8 +440,10 @@ class DashboardController extends BaseController {
       Get.isDarkMode ? darkColor : lightColor,
     );
     Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+    await prefs.setIsEnableDarkMode(isEnableDarkMode: Get.isDarkMode);
     await Get.forceAppUpdate();
 
+    print('pref theme: ${await prefs.getIsEnableDarkMode()}');
     print('Current Theme: ${Get.isDarkMode ? 'Dark' : 'Light'}');
     print('Primary Color: ${ColorSchema().primaryColor900}');
   }
