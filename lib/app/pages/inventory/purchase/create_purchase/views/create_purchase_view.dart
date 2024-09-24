@@ -114,8 +114,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
             visible: controller.isShowBrand.value,
             child: Container(
               margin: const EdgeInsets.only(
-                top: 8,
-                bottom: 8,
+                top: 0,
+                bottom: 0,
                 left: 4,
                 right: 4,
               ),

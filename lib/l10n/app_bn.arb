@@ -385,6 +385,7 @@
   "paymentReceivedSuccessfully" : "পেমেন্ট সফলভাবে গ্রহণ করা হয়েছে",
   "yourDataHasBeenSynced" : "গ্রহণ সফলভাবে যোগ করা হয়েছে",
   "enableDarkMode" : "ডার্ক মোড সক্রিয় করুন",
+  "addItems" : "আইটেম যোগ করুন",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",
@@ -422,8 +423,8 @@
   "enterAmount": "Enter Amount",
   "selectVendor": "Select Vendor",
   "purchaseOrder": "Purchase Order",
-  "isShowBrandOnSales" : "Is show brand on sales",
-  "isShowBrandOnPurchase" : "Is show brand on purchase"
+  "isShowBrandOnSales" : "Enable brand on sales",
+  "isShowBrandOnPurchase" : "Enable brand on purchase"
 
 
 

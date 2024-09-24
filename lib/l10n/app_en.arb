@@ -345,8 +345,9 @@
   "paymentReceivedSuccessfully" : "Payment received successfully",
   "yourDataHasBeenSynced" : "Your data has been synced",
   "enableDarkMode" : "Enable dark mode",
-  "isShowBrandOnSales" : "Is show brand on sales",
-  "isShowBrandOnPurchase" : "Is show brand on purchase"
+  "isShowBrandOnSales" : "Enable brand on sales",
+  "isShowBrandOnPurchase" : "Enable brand on purchase",
+  "addItems" : "Add Items"
 
 
 }

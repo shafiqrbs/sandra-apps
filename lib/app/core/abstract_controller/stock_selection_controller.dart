@@ -19,6 +19,7 @@ abstract class StockSelectionController extends BaseController {
   final qtyControllerList = <TextEditingController>[].obs;
 
   final isShowAddStockButton = false.obs;
+  final selectedStockCount = 0.obs;
   final isShowBrand = false.obs;
   final isShowBrandClearIcon = false.obs;
   final brandManager = BrandManager();

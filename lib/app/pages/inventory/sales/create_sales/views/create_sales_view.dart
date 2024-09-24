@@ -90,7 +90,7 @@ class CreateSalesView extends BaseView<CreateSalesController> {
                 bottom: 7,
               ),
               child: Text(
-                appLocalization.add,
+                '${appLocalization.addItems} | (${controller.selectedStockCount.value})',
                 style: TextStyle(
                   color: colors.whiteColor,
                   fontWeight: FontWeight.bold,
@@ -114,8 +114,8 @@ class CreateSalesView extends BaseView<CreateSalesController> {
             visible: controller.isShowBrand.value,
             child: Container(
               margin: const EdgeInsets.only(
-                top: 8,
-                bottom: 8,
+                top: 0,
+                bottom: 0,
                 left: 4,
                 right: 4,
               ),
