@@ -435,6 +435,12 @@ class DashboardController extends BaseController {
   }
 
   Future<void> changeTheme() async {
+    showSnackBar(
+      type: SnackBarType.warning,
+      title: appLocalization.upcomingFeature,
+      message: appLocalization.comingSoon,
+    );
+    return;
     // Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
     ColorSchema.fromJson(
       Get.isDarkMode ? darkColor : lightColor,

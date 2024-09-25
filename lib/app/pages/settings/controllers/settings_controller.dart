@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/singleton_classes/color_schema.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/base/base_controller.dart';
 
 enum Buttons {
@@ -27,6 +28,12 @@ class SettingsController extends BaseController {
   }
 
   Future<void> setIsEnableDarkMode(bool value) async {
+    showSnackBar(
+      type: SnackBarType.warning,
+      title: appLocalization.upcomingFeature,
+      message: appLocalization.comingSoon,
+    );
+    return;
     isEnableDarkMode.value = value;
     await prefs.setIsEnableDarkMode(
       isEnableDarkMode: value,
