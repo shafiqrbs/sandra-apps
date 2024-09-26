@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
 import '/app/core/base/base_controller.dart';
 
 enum MenuView {
@@ -27,18 +28,8 @@ class RestaurantHomeController extends BaseController {
   void goToOrderCart({
     required BuildContext context,
   }) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            child: Container(
-              height: 200,
-              width: 200,
-              child: Center(
-                child: Text('Order Cart'),
-              ),
-            ),
-          );
-        });
+    Get.dialog(
+      OrderCartView(),
+    );
   }
 }
