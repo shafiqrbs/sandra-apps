@@ -575,7 +575,7 @@ class DashboardView extends BaseView<DashboardController> {
         Row(
           children: [
             TbdTextButton(
-              onPressed: () => controller.generateDummySales(),
+              onPressed: controller.goToRestaurantHome,
               text: 'Restaurant Module',
               isSelected: true,
             ),

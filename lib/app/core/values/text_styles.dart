@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 
 import '/app/core/values/app_colors.dart';
 
@@ -238,3 +239,74 @@ final boldTitleSecondaryColorStyle = boldTitleStyle.copyWith(
 final boldTitlePrimaryColorStyle = boldTitleStyle.copyWith(
   color: AppColors.colorPrimary,
 );
+
+class AppTextStyle {
+  // heading
+  static final h1TextStyle700 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    height: 1.42,
+    color: ColorSchema().secondaryColor500,
+    overflow: TextOverflow.ellipsis,
+  );
+  static final h1TextStyle600 = h1TextStyle700.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static final h1TextStyle500 = h1TextStyle700.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+  static final h1TextStyle400 = h1TextStyle700.copyWith(
+    fontWeight: FontWeight.w400,
+  );
+
+  static final h2TextStyle700 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    height: 1.45,
+    color: ColorSchema().secondaryColor500,
+    overflow: TextOverflow.ellipsis,
+  );
+  static final h2TextStyle600 = h2TextStyle700.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static final h2TextStyle500 = h2TextStyle700.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+  static final h2TextStyle400 = h2TextStyle700.copyWith(
+    fontWeight: FontWeight.w400,
+  );
+
+  static final h3TextStyle700 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.4,
+    color: ColorSchema().secondaryColor500,
+    overflow: TextOverflow.ellipsis,
+  );
+  static final h3TextStyle600 = h3TextStyle700.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static final h3TextStyle500 = h3TextStyle700.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+  static final h3TextStyle400 = h3TextStyle700.copyWith(
+    fontWeight: FontWeight.w400,
+  );
+
+  static final h4TextStyle700 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    height: 1.4,
+    color: ColorSchema().secondaryColor500,
+    overflow: TextOverflow.ellipsis,
+  );
+  static final h4TextStyle600 = h4TextStyle700.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static final h4TextStyle500 = h4TextStyle700.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+  static final h4TextStyle400 = h4TextStyle700.copyWith(
+    fontWeight: FontWeight.w400,
+  );
+}

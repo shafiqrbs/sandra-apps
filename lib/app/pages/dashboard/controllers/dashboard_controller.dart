@@ -453,4 +453,10 @@ class DashboardController extends BaseController {
     print('Current Theme: ${Get.isDarkMode ? 'Dark' : 'Light'}');
     print('Primary Color: ${ColorSchema().primaryColor900}');
   }
+
+  void goToRestaurantHome() {
+    Get.toNamed(
+      Routes.restaurantHome,
+    );
+  }
 }
