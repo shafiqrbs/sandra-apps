@@ -23,4 +23,22 @@ class RestaurantHomeController extends BaseController {
       menuView.value = MenuView.list;
     }
   }
+
+  void goToOrderCart({
+    required BuildContext context,
+  }) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              height: 200,
+              width: 200,
+              child: Center(
+                child: Text('Order Cart'),
+              ),
+            ),
+          );
+        });
+  }
 }

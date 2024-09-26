@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/restaurant_module/order_cart/bindings/order_cart_binding.dart';
+import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/bindings/restaurant_home_binding.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/restaurant_home_view.dart';
 
@@ -190,6 +192,11 @@ class AppPages {
       name: Routes.restaurantHome,
       page: RestaurantHomeView.new,
       binding: RestaurantHomeBinding(),
+    ),
+    GetPage(
+      name: Routes.orderCart,
+      page: OrderCartView.new,
+      binding: OrderCartBinding(),
     ),
 
   ];

@@ -34,6 +34,7 @@ abstract class Routes {
   static const themeTestPage = _Paths.themeTestPage;
 
   static const restaurantHome = _Paths.restaurantHome;
+  static const  orderCart = _Paths.orderCart;
 }
 
 abstract class _Paths {
@@ -66,4 +67,5 @@ abstract class _Paths {
   static const accountingPurchase = '/accounting_purchase';
   static const themeTestPage = '/theme_test_page';
   static const restaurantHome = '/restaurantHome';
+  static const  orderCart = '/order_cart';
 }
