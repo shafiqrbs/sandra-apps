@@ -34,7 +34,10 @@ abstract class AppValues {
   static const double radiusZero = 0;
   static const double smallRadius = 8;
   static const double radius_6 = 6;
+  static const double radius_8 = 8;
+  static const double radius_4 = 4;
   static const double radius_12 = 12;
+  static const double radius_100 = 100;
   static const double largeRadius = 24;
   static const double roundedButtonRadius = 24;
   static const double extraLargeRadius = 36;

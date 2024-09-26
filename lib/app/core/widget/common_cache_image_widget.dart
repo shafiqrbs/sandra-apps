@@ -71,6 +71,7 @@ Widget commonCachedNetworkImage(
   double height = 100.0,
   double? width,
   BoxFit? fit,
+  double? radius,
   bool usePlaceholderIfUrlEmpty = true,
   bool isOval = false,
 }) {
@@ -91,7 +92,7 @@ Widget commonCachedNetworkImage(
             ),
           )
         : ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(radius ?? 10),
             child: CachedNetworkImage(
               imageUrl: url,
               height: height,

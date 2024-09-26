@@ -33,6 +33,18 @@ const lightColor = {
   'black_color_200': '0xFF737373',
   'black_color_100': '0xFF8C8C8C',
   'black_color_50': '0xFFE6E6E6',
+
+  // text color
+  'text_color_900': '0xFF000000',
+  'text_color_800': '0xFF0D0D0D',
+  'text_color_700': '0xFF1A1A1A',
+  'text_color_600': '0xFF262626',
+  'text_color_500': '0xFF000000',
+  'text_color_400': '0xFF333333',
+  'text_color_300': '0xFF595959',
+  'text_color_200': '0xFF737373',
+  'text_color_100': '0xFF8C8C8C',
+  'text_color_50': '0xFFE6E6E6',
 };
 
 // dark Color
@@ -69,6 +81,19 @@ const darkColor = {
   'black_color_200': '0xFF737373',
   'black_color_100': '0xFF8C8C8C',
   'black_color_50': '0xFFE6E6E6',
+
+  // text color
+  'text_color_900': '0xFF000000',
+  'text_color_800': '0xFF0D0D0D',
+  'text_color_700': '0xFF1A1A1A',
+  'text_color_600': '0xFF262626',
+  'text_color_500': '0xFF000000',
+  'text_color_400': '0xFF333333',
+  'text_color_300': '0xFF595959',
+  'text_color_200': '0xFF737373',
+  'text_color_100': '0xFF8C8C8C',
+  'text_color_50': '0xFFE6E6E6',
+
 };
 
 class ColorSchema {
@@ -114,11 +139,22 @@ class ColorSchema {
   Color blackColor700 = const Color(0xff1a1a1a);
   Color blackColor600 = const Color(0xff262626);
   Color blackColor500 = const Color(0xff000000);
-  Color blackColor400 = const Color(0xff404040);
+  Color blackColor400 = const Color(0xff333333);
   Color blackColor300 = const Color(0xff595959);
   Color blackColor200 = const Color(0xff737373);
   Color blackColor100 = const Color(0xff8c8c8c);
   Color blackColor50 = const Color(0xffe6e6e6);
+
+  Color textColor900 = const Color(0xff000000);
+  Color textColor800 = const Color(0xff0d0d0d);
+  Color textColor700 = const Color(0xff1a1a1a);
+  Color textColor600 = const Color(0xff262626);
+  Color textColor500 = const Color(0xff000000);
+  Color textColor400 = const Color(0xff333333);
+  Color textColor300 = const Color(0xff595959);
+  Color textColor200 = const Color(0xff737373);
+  Color textColor100 = const Color(0xff8c8c8c);
+  Color textColor50 = const Color(0xffe6e6e6);
 
   Color blueColor = const Color(0xff0d6efd);
   late Color solidBlueColor = blueColor.withOpacity(0.8);
@@ -195,6 +231,26 @@ class ColorSchema {
       ..secondaryColor200 = parseColor(json['secondary_color_200'])
       ..secondaryColor100 = parseColor(json['secondary_color_100'])
       ..secondaryColor50 = parseColor(json['secondary_color_50'])
-      ..solidBlackColor = parseColor(json['solidBlackColor']);
+      ..solidBlackColor = parseColor(json['solidBlackColor'])
+      ..blackColor900 = parseColor(json['black_color_900'])
+      ..blackColor800 = parseColor(json['black_color_800'])
+      ..blackColor700 = parseColor(json['black_color_700'])
+      ..blackColor600 = parseColor(json['black_color_600'])
+      ..blackColor500 = parseColor(json['black_color_500'])
+      ..blackColor400 = parseColor(json['black_color_400'])
+      ..blackColor300 = parseColor(json['black_color_300'])
+      ..blackColor200 = parseColor(json['black_color_200'])
+      ..blackColor100 = parseColor(json['black_color_100'])
+      ..blackColor50 = parseColor(json['black_color_50'])
+      ..textColor900 = parseColor(json['text_color_900'])
+      ..textColor800 = parseColor(json['text_color_800'])
+      ..textColor700 = parseColor(json['text_color_700'])
+      ..textColor600 = parseColor(json['text_color_600'])
+      ..textColor500 = parseColor(json['text_color_500'])
+      ..textColor400 = parseColor(json['text_color_400'])
+      ..textColor300 = parseColor(json['text_color_300'])
+      ..textColor200 = parseColor(json['text_color_200'])
+      ..textColor100 = parseColor(json['text_color_100'])
+      ..textColor50 = parseColor(json['text_color_50']);
   }
 }
