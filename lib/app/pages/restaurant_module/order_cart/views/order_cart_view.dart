@@ -19,7 +19,8 @@ class OrderCartView extends BaseView<OrderCartController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<OrderCartController>(
+    return Container();
+    /*return GetX<OrderCartController>(
       init: OrderCartController(
         itemList: purchaseItemList,
         prePurchase: prePurchase,
@@ -74,7 +75,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
         );
       },
-    );
+    );*/
   }
 }
   
