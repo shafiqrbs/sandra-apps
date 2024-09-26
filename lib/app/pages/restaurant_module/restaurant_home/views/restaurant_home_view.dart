@@ -86,7 +86,6 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           10.height,
           _buildTableList(),
           _buildSearchBar(),
-          10.height,
           _buildMenuList(),
         ],
       ),
@@ -124,7 +123,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   Text(
                     '${appLocalization.table} - 1',
                     style: AppTextStyle.h2TextStyle700.copyWith(
-                      color: colors.blackColor500,
+                      color: colors.textColor500,
                     ),
                   ),
                   14.height,
@@ -274,12 +273,19 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   Widget _buildMenuListView() {
     return Expanded(
       child: Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: colors.whiteColor,
+          borderRadius: BorderRadius.circular(
+            AppValues.radius_8,
+          ),
+        ),
         child: ListView.builder(
           itemCount: 10,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 10,
-          ),
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.all(8),
@@ -314,7 +320,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                             'Margherita Pizza with sau Margherita Pizza ',
                             maxLines: 2,
                             style: AppTextStyle.h3TextStyle700.copyWith(
-                              color: colors.blackColor500,
+                              color: colors.textColor500,
                             ),
                           ),
                         ),
@@ -326,7 +332,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                             Text(
                               '$currency 2700',
                               style: AppTextStyle.h2TextStyle700.copyWith(
-                                color: colors.blackColor600,
+                                color: colors.textColor600,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
