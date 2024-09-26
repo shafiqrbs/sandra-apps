@@ -120,6 +120,7 @@ class ColorSchema {
   Color primaryColor200 = const Color(0xff8AD0AE);
   Color primaryColor100 = const Color(0xffB0DFC8);
   Color primaryColor50 = const Color(0xffE6F5ED);
+  Color primaryColor25 = const Color(0xfff5faf7);
 
   // Secondary color
   Color secondaryColor900 = const Color(0xff141D21);

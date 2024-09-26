@@ -30,25 +30,25 @@ class TransactionMethodItemView extends BaseWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  100,
+                  8,
                 ),
                 color: isSelected
-                    ? colors.secondaryColor400
+                    ? colors.secondaryColor300
                     : colors.secondaryColor50,
               ),
               child: Container(
-                height: 56,
-                width: 56,
+                height: 42,
+                width: 42,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    100,
+                    8,
                   ),
                   color: Colors.transparent,
                 ),
                 child: commonCacheImageWidget(
                   method.imagePath,
-                  30,
-                  width: 30,
+                  24,
+                  width: 24,
                   fit: BoxFit.fill,
                   isOval: true,
                 ),

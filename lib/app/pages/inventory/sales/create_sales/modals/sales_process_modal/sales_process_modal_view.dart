@@ -71,14 +71,14 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                   children: [
                                     Container(
                                       height: 1,
-                                      color: colors.secondaryColor100,
+                                      color: colors.secondaryColor50,
                                     ),
                                     8.height,
                                     _buildInvoiceSummery(),
                                     8.height,
                                     Container(
                                       height: 1,
-                                      color: colors.secondaryColor100,
+                                      color: colors.secondaryColor50,
                                     ),
                                     4.height,
                                     _buildTransactionMethod(context),
@@ -90,7 +90,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                     //_buildProfitView(context),
                                     Container(
                                       height: 1,
-                                      color: colors.secondaryColor100,
+                                      color: colors.secondaryColor50,
                                     ),
                                     8.height,
                                     _buildBottomButton(context),
@@ -308,7 +308,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         fontWeight: FontWeight.normal,
                         fontSize: mediumTFSize.sp,
                       ),
-                      fillColor: colors.primaryColor50,
+                      fillColor: colors.primaryColor25,
                       enabledBorderColor: colors.secondaryColor100,
                       focusedBorderColor: colors.secondaryColor100,
                       errorBorderColor: colors.secondaryColor100,
@@ -469,7 +469,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           bottom: 1,
                         ),
                         width: Get.width * 0.1,
-                        color: const Color(0xFFff3232),
+                        color: colors.primaryColor500,
                       ),
                       4.height,
                       Text(
@@ -514,7 +514,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           bottom: 1,
                         ),
                         width: Get.width * 0.1,
-                        color: const Color(0xFFff3232),
+                        color: colors.primaryColor500,
                       ),
                       4.height,
                       Text(
@@ -559,7 +559,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           bottom: 1,
                         ),
                         width: Get.width * 0.1,
-                        color: const Color(0xFFff3232),
+                        color: colors.primaryColor500,
                       ),
                       4.height,
                       Text(
@@ -679,7 +679,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
-                color: colors.secondaryColor100,
+                color: colors.secondaryColor50,
               ),
             ),
             child: Column(
@@ -698,6 +698,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                               containerBorderRadius,
                             ),
                             height: 24,
+                            width: 60,
                             controller: controller.discountTypeController.value,
                           );
                         },
@@ -763,6 +764,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                         inactiveColor: colors.secondaryColor100,
                         borderRadius: BorderRadius.circular(4),
                         height: 24,
+                        width: 60,
                         controller: controller.showProfit.value,
                       ),
                     ),
@@ -802,7 +804,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
-                color: colors.secondaryColor100,
+                color: colors.secondaryColor50,
               ),
             ),
             child: Row(
