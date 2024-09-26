@@ -6,7 +6,6 @@ import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
-import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_view.dart';
 
@@ -305,7 +304,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                 children: [
                   commonCachedNetworkImage(
                     'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                    height: 100,
+                    height: 74,
+                    width: 120,
                     radius: 2,
                   ),
                   10.width,
@@ -380,89 +380,89 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             ),
           ),
           child: GridView.builder(
-        itemCount: 10,
-        shrinkWrap: true,
-        physics: const ScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: .82,
-        ),
-        itemBuilder: (context, index) {
-          return Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: colors.whiteColor,
-              borderRadius: BorderRadius.circular(
-                AppValues.radius_4,
-              ),
-              border: Border.all(
-                color: colors.secondaryColor100,
-              ),
+            itemCount: 10,
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: .82,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                commonCachedNetworkImage(
-                  'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                  height: 100,
-                  width: double.infinity,
-                  radius: 2,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: colors.whiteColor,
+                  borderRadius: BorderRadius.circular(
+                    AppValues.radius_4,
+                  ),
+                  border: Border.all(
+                    color: colors.secondaryColor100,
+                  ),
                 ),
-                8.height,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 42,
-                        child: Text(
-                          'Margherita Pizza with sau Margherita Pizza ',
-                          maxLines: 2,
-                          style: AppTextStyle.h3TextStyle700.copyWith(
-                            color: colors.textColor500,
-                          ),
-                        ),
-                      ),
-                      8.height,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    commonCachedNetworkImage(
+                      'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                      height: 100,
+                      width: double.infinity,
+                      radius: 2,
+                    ),
+                    8.height,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
+                          SizedBox(
+                            height: 42,
                             child: Text(
-                              '$currency 27000',
-                              style: AppTextStyle.h2TextStyle700.copyWith(
-                                color: colors.textColor600,
-                                fontWeight: FontWeight.bold,
+                              'Margherita Pizza with sau Margherita Pizza ',
+                              maxLines: 2,
+                              style: AppTextStyle.h3TextStyle700.copyWith(
+                                color: colors.textColor500,
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: colors.primaryColor50,
-                              borderRadius: BorderRadius.circular(
-                                AppValues.radius_4,
+                          8.height,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '$currency 27000',
+                                  style: AppTextStyle.h2TextStyle700.copyWith(
+                                    color: colors.textColor600,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                            child: Icon(
-                              TablerIcons.basket,
-                              size: 20,
-                              color: colors.primaryColor500,
-                            ),
+                              Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: colors.primaryColor50,
+                                  borderRadius: BorderRadius.circular(
+                                    AppValues.radius_4,
+                                  ),
+                                ),
+                                child: Icon(
+                                  TablerIcons.basket,
+                                  size: 20,
+                                  color: colors.primaryColor500,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      )),
+              );
+            },
+          )),
     );
   }
 }
