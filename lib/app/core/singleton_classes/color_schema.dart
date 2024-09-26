@@ -22,6 +22,17 @@ const lightColor = {
   'secondary_color_100': '0xFFBFC5C8',
   'secondary_color_50': '0xFFEAECED',
   'solidBlackColor': '0xFF000000',
+
+  'black_color_900': '0xFF000000', // Pure Black
+  'black_color_800': '0xFF0D0D0D',
+  'black_color_700': '0xFF1A1A1A',
+  'black_color_600': '0xFF262626',
+  'black_color_500': '0xFF000000', // Black for 500
+  'black_color_400': '0xFF404040',
+  'black_color_300': '0xFF595959',
+  'black_color_200': '0xFF737373',
+  'black_color_100': '0xFF8C8C8C',
+  'black_color_50': '0xFFE6E6E6',
 };
 
 // dark Color
@@ -47,6 +58,17 @@ const darkColor = {
   'secondary_color_100': '0xFFBFC5C8',
   'secondary_color_50': '0xFF000000',
   'solidBlackColor': '0xFFFFFFFF',
+
+  'black_color_900': '0xFF000000', // Pure Black
+  'black_color_800': '0xFF0D0D0D',
+  'black_color_700': '0xFF1A1A1A',
+  'black_color_600': '0xFF262626',
+  'black_color_500': '0xFF000000', // Black for 500
+  'black_color_400': '0xFF404040',
+  'black_color_300': '0xFF595959',
+  'black_color_200': '0xFF737373',
+  'black_color_100': '0xFF8C8C8C',
+  'black_color_50': '0xFFE6E6E6',
 };
 
 class ColorSchema {
@@ -85,6 +107,18 @@ class ColorSchema {
   Color secondaryColor200 = const Color(0xffA0A9AE);
   Color secondaryColor100 = const Color(0xffBFC5C8);
   Color secondaryColor50 = const Color(0xffEAECED);
+
+  // black color shades
+  Color blackColor900 = const Color(0xff000000);
+  Color blackColor800 = const Color(0xff0d0d0d);
+  Color blackColor700 = const Color(0xff1a1a1a);
+  Color blackColor600 = const Color(0xff262626);
+  Color blackColor500 = const Color(0xff000000);
+  Color blackColor400 = const Color(0xff404040);
+  Color blackColor300 = const Color(0xff595959);
+  Color blackColor200 = const Color(0xff737373);
+  Color blackColor100 = const Color(0xff8c8c8c);
+  Color blackColor50 = const Color(0xffe6e6e6);
 
   Color blueColor = const Color(0xff0d6efd);
   late Color solidBlueColor = blueColor.withOpacity(0.8);

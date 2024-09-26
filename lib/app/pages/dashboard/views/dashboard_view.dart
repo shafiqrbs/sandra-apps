@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/singleton_classes/color_schema.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema_2.dart';
 import 'package:sandra/app/pages/settings/controllers/settings_controller.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
@@ -249,26 +248,6 @@ class DashboardView extends BaseView<DashboardController> {
         14.height,
         _buildButtons(),
       ],
-    );
-  }
-
-  Widget _buildTestColor() {
-    return InkWell(
-      onTap: () {
-        Get.changeTheme(
-          Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
-        );
-        ColorSchema2.fromJson(
-          Get.isDarkMode ? darkColor : lightColor,
-        );
-        print('Get.isDarkMode: ${Get.isDarkMode}');
-        print('colors.primaryColor900: ${colors.primaryColor900}');
-      },
-      child: Container(
-        height: 100,
-        width: 100,
-        color: colors.primaryColor500,
-      ),
     );
   }
 

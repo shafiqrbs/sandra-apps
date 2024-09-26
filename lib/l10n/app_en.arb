@@ -347,7 +347,8 @@
   "enableDarkMode" : "Enable dark mode",
   "isShowBrandOnSales" : "Enable brand on sales",
   "isShowBrandOnPurchase" : "Enable brand on purchase",
-  "addItems" : "Add Items"
+  "addItems" : "Add Items",
+  "table" : "Table"
 
 
 }
