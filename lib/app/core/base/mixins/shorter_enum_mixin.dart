@@ -174,6 +174,5 @@ mixin ShorterEnumMixin {
   WrapCrossAlignment get endWCA => WrapCrossAlignment.end;
   WrapCrossAlignment get centerWCA => WrapCrossAlignment.center;
 
-
   EdgeInsets get zero => EdgeInsets.zero;
 }

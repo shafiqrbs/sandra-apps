@@ -572,6 +572,18 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildTestData() {
     return Column(
       children: [
+        Row(
+          children: [
+            TbdTextButton(
+              onPressed: () => controller.generateDummySales(),
+              text: 'Restaurant Module',
+              isSelected: true,
+            ),
+            Expanded(
+              child: Container(),
+            ),
+          ],
+        ),
         10.height,
         Row(
           children: [

@@ -18,7 +18,7 @@ class DueCustomerListController extends BaseController {
   }
 
   Future<void> getDueCustomerList() async {
-    final data =await dbHelper.getAllWhr(
+    final data = await dbHelper.getAllWhr(
       tbl: dbTables.tableCustomers,
       where: 'balance > 0',
       whereArgs: [],

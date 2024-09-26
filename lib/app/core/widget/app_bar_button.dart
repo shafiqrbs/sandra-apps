@@ -37,9 +37,7 @@ class AppBarButton extends StatelessWidget with AppDimension {
       child: Container(
         decoration: BoxDecoration(
           color: buttonBGColor ??
-              ((isOutline ?? false)
-                  ? colors.whiteColor
-                  : colors.solidRedColor),
+              ((isOutline ?? false) ? colors.whiteColor : colors.solidRedColor),
           borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsets.only(

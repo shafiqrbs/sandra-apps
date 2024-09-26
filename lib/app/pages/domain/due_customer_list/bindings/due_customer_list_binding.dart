@@ -10,4 +10,3 @@ class DueCustomerListBinding extends Bindings {
     );
   }
 }
-  

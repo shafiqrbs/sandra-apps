@@ -22,16 +22,17 @@ class ElevatedContainer extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.elevatedContainerColorOpacity,
-              spreadRadius: 3,
-              blurRadius: 8,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          color: AppColors.pageBackground,),
+        borderRadius: BorderRadius.circular(borderRadius),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.elevatedContainerColorOpacity,
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        color: AppColors.pageBackground,
+      ),
       child: child,
     );
   }

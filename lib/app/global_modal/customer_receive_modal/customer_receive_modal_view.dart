@@ -142,9 +142,7 @@ class CustomerReceiveModalView
                             8.width,
                             AdvancedSwitch(
                               controller: controller.isSms,
-                              onChanged: (value) async {
-
-                              },
+                              onChanged: (value) async {},
                               borderRadius: BorderRadius.circular(4),
                               height: 20,
                               width: 40,
@@ -209,8 +207,6 @@ class CustomerReceiveModalView
       },
     );
   }
-
-
 
   Widget _buildCustomerSearch(
     BuildContext context,

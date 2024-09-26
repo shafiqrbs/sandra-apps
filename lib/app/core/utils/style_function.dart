@@ -165,7 +165,8 @@ InputDecoration formBuilderInputDecorationWithIcon({
     enabledBorder: enabledBorder ?? FBOutlineInputBorder().enabledBorder,
     focusedBorder: focusedBorder ?? FBOutlineInputBorder().focusedBorder,
     errorBorder: errorBorder ?? FBOutlineInputBorder().errorBorder,
-    focusedErrorBorder: focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
+    focusedErrorBorder:
+        focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
     disabledBorder: disabledBorder ?? FBOutlineInputBorder().disabledBorder,
     border: border ?? FBOutlineInputBorder().border,
     prefixIcon: prefix == null
@@ -234,7 +235,7 @@ InputDecoration formBuilderInputDecorationWithIcon({
       ],
     ),
     suffixIconConstraints: const BoxConstraints(),
-   // isDense: true,
+    // isDense: true,
   );
 }
 

@@ -63,7 +63,6 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                         children: [
                           Column(
                             children: [
-
                               _buildTransactionMethod(context),
                               _buildInvoiceSummery(),
                               1.percentHeight,
@@ -86,8 +85,6 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
       },
     );
   }
-
-
 
   Widget _buildSalesItemListView(
     BuildContext context,
@@ -134,7 +131,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                           Get.back(result: controller.purchaseItemList);
+                          Get.back(result: controller.purchaseItemList);
                         },
                         child: Icon(
                           TablerIcons.x,
@@ -154,8 +151,8 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
   }
 
   Widget _buildCustomerSearch(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 4,
@@ -170,7 +167,7 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                   height: textFieldHeight,
                   child: TextFormField(
                     controller:
-                    controller.vendorManager.searchTextController.value,
+                        controller.vendorManager.searchTextController.value,
                     cursorColor: colors.solidBlackColor,
                     decoration: buildInputDecoration(
                       prefixIcon: Icon(
@@ -179,29 +176,29 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
                         color: colors.primaryBlackColor,
                       ),
                       suffixIcon: Obx(
-                            () {
+                        () {
                           return Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               controller.isShowClearIcon.value
                                   ? InkWell(
-                                onTap: () {
-                                  controller.vendorManager
-                                      .searchTextController.value
-                                      .clear();
-                                  controller.isShowClearIcon.value =
-                                  false;
-                                  controller.vendorManager.selectedItem
-                                      .value = null;
-                                  controller.vendorManager.searchedItems
-                                      .value = [];
-                                },
-                                child: Icon(
-                                  TablerIcons.x,
-                                  size: 12,
-                                  color: colors.solidRedColor,
-                                ),
-                              )
+                                      onTap: () {
+                                        controller.vendorManager
+                                            .searchTextController.value
+                                            .clear();
+                                        controller.isShowClearIcon.value =
+                                            false;
+                                        controller.vendorManager.selectedItem
+                                            .value = null;
+                                        controller.vendorManager.searchedItems
+                                            .value = [];
+                                      },
+                                      child: Icon(
+                                        TablerIcons.x,
+                                        size: 12,
+                                        color: colors.solidRedColor,
+                                      ),
+                                    )
                                   : Container(),
                               IconButton(
                                 onPressed: controller.addVendor,
@@ -273,19 +270,19 @@ class PurchaseProcessView extends BaseView<PurchaseProcessController> {
             ],
           ),
           Obx(
-                () => controller.vendorManager.selectedItem.value != null
+            () => controller.vendorManager.selectedItem.value != null
                 ? Column(
-              children: [
-                1.percentHeight,
-                VendorCardView(
-                  data: controller.vendorManager.selectedItem.value!,
-                  index: 0,
-                  onTap: () {},
-                  onReceive: () {},
-                  showReceiveButton: false,
-                ),
-              ],
-            )
+                    children: [
+                      1.percentHeight,
+                      VendorCardView(
+                        data: controller.vendorManager.selectedItem.value!,
+                        index: 0,
+                        onTap: () {},
+                        onReceive: () {},
+                        showReceiveButton: false,
+                      ),
+                    ],
+                  )
                 : Container(),
           ),
           8.height,

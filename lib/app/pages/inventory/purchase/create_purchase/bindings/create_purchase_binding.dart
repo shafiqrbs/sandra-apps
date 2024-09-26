@@ -10,4 +10,3 @@ class CreatePurchaseBinding extends Bindings {
     );
   }
 }
-  

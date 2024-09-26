@@ -160,10 +160,11 @@ class Dot extends StatelessWidget {
                 width: radius,
                 height: radius,
                 decoration: BoxDecoration(
-                    color: color,
-                    shape: type == DotType.circle
-                        ? BoxShape.circle
-                        : BoxShape.rectangle,),
+                  color: color,
+                  shape: type == DotType.circle
+                      ? BoxShape.circle
+                      : BoxShape.rectangle,
+                ),
               ),
             ),
     );

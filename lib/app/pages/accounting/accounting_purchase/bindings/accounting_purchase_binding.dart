@@ -10,4 +10,3 @@ class AccountingPurchaseBinding extends Bindings {
     );
   }
 }
-  

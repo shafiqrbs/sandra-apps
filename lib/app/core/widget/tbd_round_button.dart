@@ -30,7 +30,6 @@ class TbdRoundButton extends StatelessWidget {
             decoration: BoxDecoration(
               color: (bgColor ?? Colors.blue).withOpacity(.2),
               borderRadius: BorderRadius.circular(60),
-
             ),
             child: Container(
               height: 56,

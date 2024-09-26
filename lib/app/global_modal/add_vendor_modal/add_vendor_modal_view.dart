@@ -52,7 +52,7 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                       0.height,
                       FBString(
                         textController:
-                        controller.openingBalanceController.value,
+                            controller.openingBalanceController.value,
                         keyboardType: numberInputType,
                         preFixIcon: TablerIcons.cash,
                         label: appLocalization.openingBalance,

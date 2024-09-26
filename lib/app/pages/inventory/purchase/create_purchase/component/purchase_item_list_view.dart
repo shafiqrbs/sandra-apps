@@ -51,7 +51,9 @@ class PurchaseItemListView extends BaseWidget {
           children: [
             Container(
               //  height: 100,
-              color: index.isEven ? colors.secondaryColor50 : colors.primaryColor50,
+              color: index.isEven
+                  ? colors.secondaryColor50
+                  : colors.primaryColor50,
               margin: const EdgeInsets.only(bottom: 4, left: 16, right: 2),
               padding: const EdgeInsets.only(left: 16, right: 8, bottom: 4),
               child: Stack(

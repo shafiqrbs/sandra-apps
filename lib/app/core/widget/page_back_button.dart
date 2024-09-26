@@ -25,7 +25,7 @@ class PageBackButton extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: CommonText(
-              text: pageTitle??'',
+              text: pageTitle ?? '',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               textColor: Colors.white,

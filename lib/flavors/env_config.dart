@@ -15,9 +15,7 @@ class EnvConfig {
     this.shouldCollectCrashLog = false,
   }) {
     logger = Logger(
-      printer: PrettyPrinter(
-          
-          ),
+      printer: PrettyPrinter(),
     );
   }
 }

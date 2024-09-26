@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -162,7 +162,6 @@ class AdvanceSelect<T> extends FormField<T> {
                       vertical: 0.v,
                       horizontal: 0.h,
                     ),
-
                     child: Column(
                       children: [
                         if (label != null || example != null)
@@ -196,12 +195,13 @@ class AdvanceSelect<T> extends FormField<T> {
                           children: [
                             Expanded(
                               child: Container(
-                                height: lines != null && lines > 1 ? null : textFieldHeight ?? FBInit().tfHeight,
+                                height: lines != null && lines > 1
+                                    ? null
+                                    : textFieldHeight ?? FBInit().tfHeight,
                                 width: textFieldWidth ?? FBInit().tfWidth,
                                 margin: EdgeInsets.zero,
                                 child: Stack(
                                   alignment: Alignment.centerRight,
-
                                   children: [
                                     TextFormField(
                                       controller: TextEditingController(
@@ -243,7 +243,9 @@ class AdvanceSelect<T> extends FormField<T> {
                                                   margin:
                                                       const EdgeInsets.all(10),
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(4),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
                                                     color: Colors.white,
                                                   ),
                                                   child: Column(
@@ -256,9 +258,12 @@ class AdvanceSelect<T> extends FormField<T> {
                                                         children: [
                                                           Text(
                                                             'Select Anyone ${label ?? ''}',
-                                                            style:const TextStyle(
+                                                            style:
+                                                                const TextStyle(
                                                               fontSize: 14,
-                                                              fontWeight: FontWeight.normal,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
                                                             ),
                                                           ).paddingOnly(
                                                             right: 16,
@@ -267,9 +272,10 @@ class AdvanceSelect<T> extends FormField<T> {
                                                             left: 4,
                                                           ),
                                                           IconButton(
-                                                            icon:  Icon(
+                                                            icon: Icon(
                                                               Icons.close,
-                                                              color: colors.solidRedColor,
+                                                              color: colors
+                                                                  .solidRedColor,
                                                               size: 16,
                                                             ),
                                                             onPressed: () {
@@ -377,7 +383,7 @@ class AdvanceSelect<T> extends FormField<T> {
                                                                             ),
                                                                             if (controller.selectedValue ==
                                                                                 controller.filteredItems![index])
-                                                                               Icon(
+                                                                              Icon(
                                                                                 Icons.check,
                                                                                 size: 16,
                                                                                 color: Colors.red,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class ColorSchema2 {
   // Factory constructor to return the singleton instance
   factory ColorSchema2() => _instance;

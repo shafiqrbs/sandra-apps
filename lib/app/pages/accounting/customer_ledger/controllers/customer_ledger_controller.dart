@@ -30,9 +30,9 @@ class CustomerLedgerController extends BaseController {
   }
 
   Future<void> showSalesInformationModal(
-      BuildContext context,
-      CustomerLedger element,
-      ) async {
+    BuildContext context,
+    CustomerLedger element,
+  ) async {
     if (element.sourceInvoice != null) {
       final invoice = Sales(
         salesId: element.sourceInvoice.toString(),
@@ -48,8 +48,7 @@ class CustomerLedgerController extends BaseController {
           ),
         ),
       );
-
-    }else{
+    } else {
       showSnackBar(
         type: SnackBarType.error,
         message: appLocalization.invoiceDataNotAvailable,

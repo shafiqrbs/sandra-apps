@@ -36,15 +36,14 @@ class AddParticularController extends BaseController {
 
   void onSaveTap() {
     if (formKey.currentState!.validate()) {
-
-      if(transactionMethodsManager.selectedItem.value == null){
+      if (transactionMethodsManager.selectedItem.value == null) {
         toast('Please select a transaction method');
         return;
       }
 
       toast('Field is valid');
       toast('Under development the API');
-     // Get.back();
+      // Get.back();
     }
   }
 }

@@ -62,8 +62,7 @@ class DueCustomerListView extends BaseView<DueCustomerListController> {
     return Obx(
       () {
         return ListView.builder(
-          itemCount: controller.dataList.value?.length ??
-              0,
+          itemCount: controller.dataList.value?.length ?? 0,
           controller: controller.customerManager.scrollController,
           padding: const EdgeInsets.only(bottom: 60),
           itemBuilder: (context, index) {

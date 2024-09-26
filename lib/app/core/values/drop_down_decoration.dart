@@ -51,5 +51,4 @@ final dropDownDecoration = CustomDropdownDecoration(
   closedBorderRadius: const BorderRadius.all(
     Radius.circular(4),
   ),
-
 );

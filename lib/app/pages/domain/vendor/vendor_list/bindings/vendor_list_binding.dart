@@ -10,4 +10,3 @@ class VendorListBinding extends Bindings {
     );
   }
 }
-  

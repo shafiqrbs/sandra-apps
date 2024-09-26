@@ -10,4 +10,3 @@ class ExpenseListBinding extends Bindings {
     );
   }
 }
-  

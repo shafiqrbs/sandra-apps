@@ -270,7 +270,8 @@ class LoginView extends BaseView<LoginController> {
                         onTap: () {
                           showSnackBar(
                             type: SnackBarType.error,
-                            message: appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue,
+                            message: appLocalization
+                                .doNotAllowDiscountValueMoreThenSubtotalValue,
                           );
                           toast(appLocalization.underDevelopment);
                         },

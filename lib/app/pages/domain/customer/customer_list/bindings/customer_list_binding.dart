@@ -10,4 +10,3 @@ class CustomerListBinding extends Bindings {
     );
   }
 }
-  

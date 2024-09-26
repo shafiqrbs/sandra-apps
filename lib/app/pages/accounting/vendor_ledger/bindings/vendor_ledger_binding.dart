@@ -10,4 +10,3 @@ class VendorLedgerBinding extends Bindings {
     );
   }
 }
-  

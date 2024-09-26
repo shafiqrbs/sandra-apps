@@ -10,4 +10,3 @@ class CustomerLedgerBinding extends Bindings {
     );
   }
 }
-  

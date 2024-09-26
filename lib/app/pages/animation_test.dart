@@ -42,7 +42,8 @@ class _TabSwitcherExampleState extends State<TabSwitcherExample> {
                   child: Text(
                     _tabs[index],
                     style: TextStyle(
-                      color: _selectedIndex == index ? Colors.white : Colors.black,
+                      color:
+                          _selectedIndex == index ? Colors.white : Colors.black,
                     ),
                   ),
                 ),

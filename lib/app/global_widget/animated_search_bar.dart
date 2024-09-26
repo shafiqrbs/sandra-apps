@@ -28,7 +28,6 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar>
     super.initState();
     _isSearchOpen = widget.isSearchOpen;
     _controller = widget.controller;
-
   }
 
   void _toggleSearch() {

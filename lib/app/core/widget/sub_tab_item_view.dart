@@ -24,9 +24,7 @@ class SubTabItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = ColorSchema();
 
-    final color = isSelected
-        ? Colors.white
-        : ColorSchema().primaryColor500;
+    final color = isSelected ? Colors.white : ColorSchema().primaryColor500;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -49,7 +47,7 @@ class SubTabItemView extends StatelessWidget {
             ),
             2.percentWidth,
             Text(
-              item.localeMethod?.call()??'',
+              item.localeMethod?.call() ?? '',
               style: TextStyle(
                 color: color,
                 fontSize: 14.fSize,

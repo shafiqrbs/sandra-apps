@@ -10,4 +10,3 @@ class HelpConfigBinding extends Bindings {
     );
   }
 }
-  

@@ -42,7 +42,9 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                 children: [
                   Obx(
                     () {
-                      return controller.isLoader.value || controller.connected.value || !controller.hasPrinter.value
+                      return controller.isLoader.value ||
+                              controller.connected.value ||
+                              !controller.hasPrinter.value
                           ? Container()
                           : Column(
                               children: [
@@ -157,21 +159,21 @@ class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if(controller.hasPrinter.value)
-                        Obx(
-                          () => controller.isLoader.value
-                              ? const CircularProgressIndicator(
-                                  color: Colors.red,
-                                )
-                              : RowButton(
-                                  buttonName: appLocalization.print,
-                                  onTap: controller.purchasePrint,
-                                  leftIcon: TablerIcons.printer,
-                                  buttonBGColor: controller.connected.value
-                                      ? Colors.green
-                                      : Colors.red,
-                                ),
-                        ),
+                        if (controller.hasPrinter.value)
+                          Obx(
+                            () => controller.isLoader.value
+                                ? const CircularProgressIndicator(
+                                    color: Colors.red,
+                                  )
+                                : RowButton(
+                                    buttonName: appLocalization.print,
+                                    onTap: controller.purchasePrint,
+                                    leftIcon: TablerIcons.printer,
+                                    buttonBGColor: controller.connected.value
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                          ),
                         4.width,
                         RowButton(
                           buttonName: appLocalization.save,

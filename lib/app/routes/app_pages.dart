@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/bindings/restaurant_home_binding.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/restaurant_home_view.dart';
 
 import '/app/pages/accounting/accounting_purchase/bindings/accounting_purchase_binding.dart';
 import '/app/pages/accounting/accounting_purchase/views/accounting_purchase_view.dart';
@@ -184,5 +186,11 @@ class AppPages {
       page: ThemeTestPageView.new,
       binding: ThemeTestPageBinding(),
     ),
+    GetPage(
+      name: Routes.restaurantHome,
+      page: RestaurantHomeView.new,
+      binding: RestaurantHomeBinding(),
+    ),
+
   ];
 }

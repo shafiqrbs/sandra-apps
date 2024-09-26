@@ -10,4 +10,3 @@ class ThemeTestPageBinding extends Bindings {
     );
   }
 }
-  

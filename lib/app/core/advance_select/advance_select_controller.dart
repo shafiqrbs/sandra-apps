@@ -34,7 +34,6 @@ class ASController<T> extends ChangeNotifier {
       ..notifyListeners();
     notifyListeners();
 
-
     if (kDebugMode) {
       print('selectedValue: $value');
     }

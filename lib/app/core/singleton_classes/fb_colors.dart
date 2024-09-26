@@ -1,10 +1,6 @@
-
-
-
 import 'package:flutter/material.dart';
 
 class FBColors {
-
   // Singleton instance
   static final FBColors _instance = FBColors._();
 
@@ -34,16 +30,16 @@ class FBColors {
 
   // Default colors
   final Map<String, Color> colors = {
-    'fillColor':const Color(0xFFF3F3F3),
-    'cursorColor':const Color(0xFF202020),
-    'prefixIconColor':const Color(0xFFB3261E),
-    'suffixIconColor':const Color(0xFFB3261E),
-    'clearIconColor':Colors.orange,
-    'toolTipColor':Colors.white,
-    'tfToolTipIconColor':const Color(0xFFB3261E),
-    'toolTipContentColor':Colors.black,
-    'validPrefixIconColor':const Color(0xFF989898),
-    'validSuffixIconColor':const Color(0xFF989898),
+    'fillColor': const Color(0xFFF3F3F3),
+    'cursorColor': const Color(0xFF202020),
+    'prefixIconColor': const Color(0xFFB3261E),
+    'suffixIconColor': const Color(0xFFB3261E),
+    'clearIconColor': Colors.orange,
+    'toolTipColor': Colors.white,
+    'tfToolTipIconColor': const Color(0xFFB3261E),
+    'toolTipContentColor': Colors.black,
+    'validPrefixIconColor': const Color(0xFF989898),
+    'validSuffixIconColor': const Color(0xFF989898),
   };
 
   // Getter for colors
@@ -58,7 +54,6 @@ class FBColors {
   Color get validPrefixIconColor => colors['validPrefixIconColor']!;
   Color get validSuffixIconColor => colors['validSuffixIconColor']!;
 
-
   //setter for colors
   set fillColor(Color value) => colors['fillColor'] = value;
   set cursorColor(Color value) => colors['cursorColor'] = value;
@@ -68,13 +63,14 @@ class FBColors {
   set toolTipColor(Color value) => colors['toolTipColor'] = value;
   set tfToolTipIconColor(Color value) => colors['tfToolTipIconColor'] = value;
   set toolTipContentColor(Color value) => colors['toolTipContentColor'] = value;
-  set validPrefixIconColor(Color value) => colors['validPrefixIconColor'] = value;
-  set validSuffixIconColor(Color value) => colors['validSuffixIconColor'] = value;
+  set validPrefixIconColor(Color value) =>
+      colors['validPrefixIconColor'] = value;
+  set validSuffixIconColor(Color value) =>
+      colors['validSuffixIconColor'] = value;
 
   static Color parseColor(dynamic value, Color defaultValue) {
     if (value == null) return defaultValue;
     if (value is Color) return value;
     return Color(int.tryParse(value)!);
   }
-
 }

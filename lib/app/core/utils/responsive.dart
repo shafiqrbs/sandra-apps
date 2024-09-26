@@ -30,10 +30,10 @@ extension ResponsiveExtension on num {
   double get h => (this * _width) / figmaDesignWidth;
 
   ///This method is used to set height with screen height ration
-  double get ph => this/100 * _height;
+  double get ph => this / 100 * _height;
 
   ///This method is used to set height with screen height ration
-  double get pw => this/100 * _width;
+  double get pw => this / 100 * _width;
 
   ///This method is used to set padding/margin (for the top and bottom side) & height of the screen or widget according to the Viewport height.
   double get v => (this * _height) / (figmaDesignHeight - figmaDesignStatusBar);
@@ -44,6 +44,7 @@ extension ResponsiveExtension on num {
     final width = h;
     return height < width ? height.toDoubleValue() : width.toDoubleValue();
   }
+
   /// Calculates the sp (Scalable Pixel) depending on the device's screen size
   double get sp => this * (_width / 3) / 100;
 
@@ -62,9 +63,7 @@ extension ResponsiveHeight on num {
   ///This method is used to set text font size according to Viewport
   Widget get percentHeight => SizedBox(height: ph);
   Widget get percentWidth => SizedBox(width: pw);
-
 }
-
 
 //Then you can use
 

@@ -10,4 +10,3 @@ class CustomerDetailsBinding extends Bindings {
     );
   }
 }
-  

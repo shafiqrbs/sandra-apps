@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 int? parseIntegers(dynamic value) {
-
   if (value is int) {
     return value;
   } else if (value is String) {
@@ -13,11 +11,9 @@ int? parseIntegers(dynamic value) {
 }
 
 double? parseDouble(dynamic value) {
-
   if (value is double || value is int) {
     return value.toDouble();
-  }
-  else if (value is String) {
+  } else if (value is String) {
     return double.tryParse(value);
   } else {
     return 0;
@@ -34,4 +30,3 @@ extension DynamicExtension on dynamic {
   int? toInt() => parseIntegers(this);
   double? toDouble() => parseDouble(this);
 }
-

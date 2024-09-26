@@ -10,4 +10,3 @@ class LoginBinding extends Bindings {
     );
   }
 }
-  

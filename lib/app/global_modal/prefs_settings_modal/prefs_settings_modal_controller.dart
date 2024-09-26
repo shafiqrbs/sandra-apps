@@ -120,7 +120,6 @@ class PrefsSettingsModalController extends BaseController {
     if (Get.isRegistered<CreateSalesController>()) {
       final salesController = Get.find<CreateSalesController>();
       salesController.isShowBrand.value = value;
-
     }
   }
 

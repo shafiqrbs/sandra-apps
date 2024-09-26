@@ -1,9 +1,13 @@
 import 'entity_manager.dart';
 
 class CategoryManager extends EntityManager<Category> {
-  CategoryManager() : super('categories', Category.fromJson,(e) => e.toJson(),);
+  CategoryManager()
+      : super(
+          'categories',
+          Category.fromJson,
+          (e) => e.toJson(),
+        );
 }
-
 
 class Category {
   int? categoryId;
@@ -17,14 +21,14 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    categoryId: json['category_id'],
-    name: json['name'],
-    slug: json['slug'],
-  );
+        categoryId: json['category_id'],
+        name: json['name'],
+        slug: json['slug'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'category_id': categoryId,
-    'name': name,
-    'slug': slug,
-  };
+        'category_id': categoryId,
+        'name': name,
+        'slug': slug,
+      };
 }

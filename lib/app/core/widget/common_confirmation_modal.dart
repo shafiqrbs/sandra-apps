@@ -35,7 +35,7 @@ class CommonConfirmationModal extends BaseWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(
-                 containerBorderRadius,
+                  containerBorderRadius,
                 ),
               ),
               padding: EdgeInsets.only(top: 05.ph),
@@ -71,7 +71,7 @@ class CommonConfirmationModal extends BaseWidget {
                           Get.back(result: false);
                         },
                         child: Container(
-                          height:buttonHeight,
+                          height: buttonHeight,
                           alignment: Alignment.center,
                           padding: const EdgeInsets.only(
                             left: 32,
@@ -81,7 +81,7 @@ class CommonConfirmationModal extends BaseWidget {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                             containerBorderRadius,
+                              containerBorderRadius,
                             ),
                             color: colorSchema.whiteColor,
                             border: Border.all(
@@ -102,7 +102,7 @@ class CommonConfirmationModal extends BaseWidget {
                           Get.back(result: true);
                         },
                         child: Container(
-                          height:buttonHeight,
+                          height: buttonHeight,
                           alignment: Alignment.center,
                           padding: const EdgeInsets.only(
                             left: 32,
@@ -112,7 +112,7 @@ class CommonConfirmationModal extends BaseWidget {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                             containerBorderRadius,
+                              containerBorderRadius,
                             ),
                             color: colorSchema.primaryColor500,
                           ),
@@ -155,7 +155,7 @@ class CommonConfirmationModal extends BaseWidget {
                 child: Icon(
                   TablerIcons.x,
                   color: colorSchema.solidRedColor,
-                  size:closeIconSize,
+                  size: closeIconSize,
                 ),
               ),
             ),

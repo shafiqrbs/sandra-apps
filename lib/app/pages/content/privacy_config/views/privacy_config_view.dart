@@ -6,15 +6,14 @@ import '/app/pages/content/privacy_config/controllers/privacy_config_controller.
 //ignore: must_be_immutable
 class PrivacyConfigView extends BaseView<PrivacyConfigController> {
   PrivacyConfigView({super.key});
-    
+
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
   }
-  
+
   @override
   Widget body(BuildContext context) {
     return Container();
   }
 }
-  

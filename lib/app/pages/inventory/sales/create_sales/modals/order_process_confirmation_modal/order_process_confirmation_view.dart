@@ -158,21 +158,21 @@ class OrderProcessConfirmationView
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if(controller.hasPrinter.value)
-                        Obx(
-                          () => controller.isLoader.value
-                              ? const CircularProgressIndicator(
-                                  color: Colors.red,
-                                )
-                              : RowButton(
-                                  buttonName: appLocalization.print,
-                                  onTap: controller.salesPrint,
-                                  leftIcon: TablerIcons.printer,
-                                  buttonBGColor: controller.connected.value
-                                      ? Colors.green
-                                      : Colors.red,
-                                ),
-                        ),
+                        if (controller.hasPrinter.value)
+                          Obx(
+                            () => controller.isLoader.value
+                                ? const CircularProgressIndicator(
+                                    color: Colors.red,
+                                  )
+                                : RowButton(
+                                    buttonName: appLocalization.print,
+                                    onTap: controller.salesPrint,
+                                    leftIcon: TablerIcons.printer,
+                                    buttonBGColor: controller.connected.value
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                          ),
                         4.width,
                         RowButton(
                           buttonName: appLocalization.save,

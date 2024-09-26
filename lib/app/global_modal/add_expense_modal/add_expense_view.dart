@@ -41,7 +41,8 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                       Expanded(
                         child: AdvanceSelect(
                           isRequired: true,
-                          controller: controller.expenseCategoryManager.asController,
+                          controller:
+                              controller.expenseCategoryManager.asController,
                           hint: appLocalization.selectCategory,
                           isShowSearch: false,
                           itemToString: (data) => data?.name ?? '',
@@ -49,7 +50,6 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                           errorMsg: appLocalization.categoryRequired,
                         ),
                       ),
-
                     ],
                   ),
                   Obx(

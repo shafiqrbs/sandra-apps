@@ -216,9 +216,9 @@ class CreateSalesController extends StockSelectionController {
   }
 
   Future<void> onSearchedStockQtyChange(
-      num value,
-      int index,
-      ) async {
+    num value,
+    int index,
+  ) async {
     // Get the number of controllers with non-empty text
     int nonEmptyControllersCount = qtyControllerList
         .where((controller) => controller.text.isNotEmpty)
@@ -232,7 +232,6 @@ class CreateSalesController extends StockSelectionController {
       selectedStockCount.value = nonEmptyControllersCount;
     }
   }
-
 
   Future<void> onSearchedStockQtyEditComplete(
     num value,

@@ -33,7 +33,7 @@ class SyncModalView extends BaseView<SyncModalController> {
     );
   }
 
-  Widget _buildImportExport(){
+  Widget _buildImportExport() {
     return Column(
       children: [
         Row(
@@ -43,16 +43,14 @@ class SyncModalView extends BaseView<SyncModalController> {
               onPressed: () => controller.changeType(
                 SyncType.import,
               ),
-              isSelected:
-              controller.selectedSyncType.value == SyncType.import,
+              isSelected: controller.selectedSyncType.value == SyncType.import,
             ),
             TbdTextButton(
               text: appLocalization.dataExport,
               onPressed: () => controller.changeType(
                 SyncType.export,
               ),
-              isSelected:
-              controller.selectedSyncType.value == SyncType.export,
+              isSelected: controller.selectedSyncType.value == SyncType.export,
             ),
           ],
         ),

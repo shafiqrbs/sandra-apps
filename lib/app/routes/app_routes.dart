@@ -18,21 +18,22 @@ abstract class Routes {
   static const expense = _Paths.expense;
   static const createPurchase = _Paths.createPurchase;
   static const settings = _Paths.settings;
-  static const  accountConfig = _Paths.accountConfig;
-  static const  privacyConfig = _Paths.privacyConfig;
-  static const  helpConfig = _Paths.helpConfig;
+  static const accountConfig = _Paths.accountConfig;
+  static const privacyConfig = _Paths.privacyConfig;
+  static const helpConfig = _Paths.helpConfig;
   static const vendorList = _Paths.vendorList;
   static const purchaseList = _Paths.purchaseList;
   static const expenseList = _Paths.expenseList;
-  static const  dueCustomerList = _Paths.dueCustomerList;
+  static const dueCustomerList = _Paths.dueCustomerList;
   static const expenseDetails = _Paths.expenseDetails;
   static const particular = _Paths.particular;
   static const createExpense = _Paths.createExpense;
   static const vendorDetails = _Paths.vendorDetails;
   static const accountingSales = _Paths.accountingSales;
   static const accountingPurchase = _Paths.accountingPurchase;
-  static const  themeTestPage = _Paths.themeTestPage;
+  static const themeTestPage = _Paths.themeTestPage;
 
+  static const restaurantHome = _Paths.restaurantHome;
 }
 
 abstract class _Paths {
@@ -50,19 +51,19 @@ abstract class _Paths {
   static const expense = '/expense';
   static const createPurchase = '/create_purchase';
   static const settings = '/settings';
-  static const  accountConfig = '/account_config';
-  static const  privacyConfig = '/privacy_config';
-  static const  helpConfig = '/help_config';
+  static const accountConfig = '/account_config';
+  static const privacyConfig = '/privacy_config';
+  static const helpConfig = '/help_config';
   static const vendorList = '/vendor_list';
   static const purchaseList = '/purchase_list';
   static const expenseList = '/expense_list';
-  static const  dueCustomerList = '/due_customer_list';
+  static const dueCustomerList = '/due_customer_list';
   static const expenseDetails = '/expense_details';
   static const particular = '/particular';
   static const createExpense = '/create_expense';
   static const vendorDetails = '/vendor_details';
   static const accountingSales = '/accounting_sales';
   static const accountingPurchase = '/accounting_purchase';
-  static const  themeTestPage = '/theme_test_page';
-
+  static const themeTestPage = '/theme_test_page';
+  static const restaurantHome = '/restaurantHome';
 }

@@ -23,7 +23,7 @@ class PrinterConnectModalView
         return Center(
           child: SingleChildScrollView(
             child: Container(
-              padding:  EdgeInsets.all(falsePadding.value),
+              padding: EdgeInsets.all(falsePadding.value),
               decoration: BoxDecoration(
                 color: colors.whiteColor,
               ),

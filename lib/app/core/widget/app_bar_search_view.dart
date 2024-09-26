@@ -33,7 +33,6 @@ class AppBarSearchView extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-
     /*if(!showSearchView){
       return PageBackButton(
         pageTitle: pageTitle,
@@ -169,96 +168,98 @@ class AppBarSearchView extends BaseWidget {
                   4,
                 ),
               ),
-            child: TextFormField(
-              controller: controller,
-              autofocus: true,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: colors.solidBlackColor,
-              ),
-              cursorColor: colors.solidBlackColor,
-              onChanged: onSearch,
-              decoration: InputDecoration(
-                prefixIcon: Icon(
-                  TablerIcons.search,
-                  color: colors.primaryColor500,
-                  size: 18,
+              child: TextFormField(
+                controller: controller,
+                autofocus: true,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: colors.solidBlackColor,
                 ),
-                suffixIcon: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () async {
-                        final voiceRecognition = VoiceRecognition();
+                cursorColor: colors.solidBlackColor,
+                onChanged: onSearch,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    TablerIcons.search,
+                    color: colors.primaryColor500,
+                    size: 18,
+                  ),
+                  suffixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          final voiceRecognition = VoiceRecognition();
 
-                        if (!voiceRecognition.isListening) {
-                          await voiceRecognition.startListening(
-                            (result) {
-                              controller.text = result;
-                              if (onSearch != null) {
-                                onSearch!(result)!;
-                              }
-                            },
-                          );
-                        } else {
-                          await voiceRecognition.stopListening();
-                        }
-                      },
-                      icon: Icon(
-                        TablerIcons.microphone,
-                        color: colors.primaryColor500,
+                          if (!voiceRecognition.isListening) {
+                            await voiceRecognition.startListening(
+                              (result) {
+                                controller.text = result;
+                                if (onSearch != null) {
+                                  onSearch!(result)!;
+                                }
+                              },
+                            );
+                          } else {
+                            await voiceRecognition.stopListening();
+                          }
+                        },
+                        icon: Icon(
+                          TablerIcons.microphone,
+                          color: colors.primaryColor500,
+                        ),
                       ),
+                      isShowFilter!
+                          ? IconButton(
+                              onPressed: onFilterTap,
+                              icon: Icon(
+                                TablerIcons.filter,
+                                color: colors.primaryColor500,
+                              ),
+                            )
+                          : Container(),
+                      IconButton(
+                        onPressed: onClearTap,
+                        icon: Icon(
+                          TablerIcons.x,
+                          color: Colors.grey.withOpacity(.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  hintText: appLocalization.hint,
+                  hintStyle: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey.withOpacity(.5),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      4,
                     ),
-                    isShowFilter! ?IconButton(
-                      onPressed: onFilterTap,
-                      icon: Icon(
-                        TablerIcons.filter,
-                        color: colors.primaryColor500,
-                      ),
-                    ) : Container(),
-                    IconButton(
-                      onPressed: onClearTap,
-                      icon: Icon(
-                        TablerIcons.x,
-                        color: Colors.grey.withOpacity(.5),
-                      ),
+                    // Adjust the border radius as needed
+                    borderSide: const BorderSide(
+                      color: Color(0xFFece2d9),
                     ),
-                  ],
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
-                hintText: appLocalization.hint,
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.withOpacity(.5),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    4,
                   ),
-                  // Adjust the border radius as needed
-                  borderSide: const BorderSide(
-                    color: Color(0xFFece2d9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFf5edeb),
+                    ),
                   ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(0),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFf5edeb),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(0),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFf5edeb),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFf5edeb),
+                    ),
                   ),
                 ),
               ),
-            ),
-                        ))
+            ))
         : PageBackButton(
             pageTitle: pageTitle,
           );
