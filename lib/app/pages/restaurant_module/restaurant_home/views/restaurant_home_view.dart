@@ -305,8 +305,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                 children: [
                   commonCachedNetworkImage(
                     'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                    height: 74,
-                    width: 120,
+                    height: 100,
                     radius: 2,
                   ),
                   10.width,
@@ -329,11 +328,13 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
-                              '$currency 2700',
-                              style: AppTextStyle.h2TextStyle700.copyWith(
-                                color: colors.textColor600,
-                                fontWeight: FontWeight.bold,
+                            Expanded(
+                              child: Text(
+                                '$currency 2700',
+                                style: AppTextStyle.h2TextStyle700.copyWith(
+                                  color: colors.textColor600,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Container(
@@ -367,27 +368,34 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   Widget _buildMenuGridView() {
     return Expanded(
       child: Container(
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 10,
+          ),
+          decoration: BoxDecoration(
+            color: colors.whiteColor,
+            borderRadius: BorderRadius.circular(
+              AppValues.radius_8,
+            ),
+          ),
           child: GridView.builder(
         itemCount: 10,
         shrinkWrap: true,
-        physics: ScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 10,
-        ),
+        physics: const ScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 0.8,
+          childAspectRatio: .82,
         ),
         itemBuilder: (context, index) {
           return Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: colors.whiteColor,
               borderRadius: BorderRadius.circular(
-                AppValues.radius_8,
+                AppValues.radius_4,
               ),
               border: Border.all(
                 color: colors.secondaryColor100,
@@ -396,48 +404,59 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Chicken Burger',
-                  style: AppTextStyle.h3TextStyle600.copyWith(
-                    color: colors.blackColor500,
-                  ),
+                commonCachedNetworkImage(
+                  'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                  height: 100,
+                  width: double.infinity,
+                  radius: 2,
                 ),
                 8.height,
-                Text(
-                  'Chicken Burger with extra cheese',
-                  style: AppTextStyle.h4TextStyle400.copyWith(
-                    color: colors.blackColor400,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 42,
+                        child: Text(
+                          'Margherita Pizza with sau Margherita Pizza ',
+                          maxLines: 2,
+                          style: AppTextStyle.h3TextStyle700.copyWith(
+                            color: colors.textColor500,
+                          ),
+                        ),
+                      ),
+                      8.height,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '$currency 27000',
+                              style: AppTextStyle.h2TextStyle700.copyWith(
+                                color: colors.textColor600,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: colors.primaryColor50,
+                              borderRadius: BorderRadius.circular(
+                                AppValues.radius_4,
+                              ),
+                            ),
+                            child: Icon(
+                              TablerIcons.basket,
+                              size: 20,
+                              color: colors.primaryColor500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-                8.height,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '$currency 2700',
-                      style: AppTextStyle.h3TextStyle700.copyWith(
-                        color: colors.primaryColor500,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: colors.primaryColor50,
-                        borderRadius: BorderRadius.circular(
-                          AppValues.radius_4,
-                        ),
-                      ),
-                      child: Text(
-                        appLocalization.add,
-                        style: AppTextStyle.h3TextStyle600.copyWith(
-                          color: colors.primaryColor500,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
