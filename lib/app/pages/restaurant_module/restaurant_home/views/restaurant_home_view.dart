@@ -155,79 +155,81 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
       itemCount: 20,
       spacing: 10,
       itemBuilder: (context, index) {
-        return Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 12,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 14,
-              ),
-              decoration: BoxDecoration(
-                color: colors.whiteColor,
-                borderRadius: BorderRadius.circular(
-                  AppValues.radius_8,
+        return Obx(
+          () => Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 12,
                 ),
-                border: Border.all(
-                  color: colors.secondaryColor100,
-                ),
-              ),
-              child: Column(
-                children: [
-                  10.height,
-                  Text(
-                    '${appLocalization.table} - 1',
-                    style: AppTextStyle.h2TextStyle700.copyWith(
-                      color: colors.textColor500,
-                    ),
-                  ),
-                  14.height,
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colors.primaryColor50,
-                      borderRadius: BorderRadius.circular(
-                        AppValues.radius_4,
-                      ),
-                    ),
-                    child: Text(
-                      '07:02:26',
-                      style: AppTextStyle.h3TextStyle600.copyWith(
-                        color: colors.blackColor400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 0,
-              child: Container(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 26,
+                  horizontal: 12,
+                  vertical: 14,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primaryColor500,
+                  color: colors.whiteColor,
                   borderRadius: BorderRadius.circular(
-                    AppValues.radius_100,
+                    AppValues.radius_8,
+                  ),
+                  border: Border.all(
+                    color: colors.secondaryColor100,
                   ),
                 ),
-                child: Text(
-                  appLocalization.hold,
-                  style: AppTextStyle.h3TextStyle700.copyWith(
-                    color: colors.whiteColor,
+                child: Column(
+                  children: [
+                    10.height,
+                    Text(
+                      '${appLocalization.table} - 1',
+                      style: AppTextStyle.h2TextStyle700.copyWith(
+                        color: colors.textColor500,
+                      ),
+                    ),
+                    14.height,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colors.primaryColor50,
+                        borderRadius: BorderRadius.circular(
+                          AppValues.radius_4,
+                        ),
+                      ),
+                      child: Text(
+                        '07:02:26',
+                        style: AppTextStyle.h3TextStyle600.copyWith(
+                          color: colors.blackColor400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 16,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colors.primaryColor500,
+                    borderRadius: BorderRadius.circular(
+                      AppValues.radius_100,
+                    ),
+                  ),
+                  child: Text(
+                    controller.bottomStatus.value.name.capitalizeFirstLetter(),
+                    style: AppTextStyle.h3TextStyle700.copyWith(
+                      color: colors.whiteColor,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
