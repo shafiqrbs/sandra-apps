@@ -223,116 +223,121 @@ class OrderCartView extends BaseView<OrderCartController> {
               color: colors.blackColor50,
             ),
           ),
-          child: Row(
-            crossAxisAlignment: startCAA,
-            children: [
-              Expanded(
-                child: Text(
-                  index.isEven
-                      ? 'this is test cheese burger with french fry'
-                      : ' Cheese Pizza',
-                  maxLines: 2,
-                  textAlign: TextAlign.start,
-                  style: AppTextStyle.h3TextStyle400.copyWith(
-                    color: colors.textColor600,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 8,
+            ),
+            child: Row(
+              crossAxisAlignment: startCAA,
+              children: [
+                Expanded(
+                  child: Text(
+                    index.isEven
+                        ? 'this is test cheese burger with french fry'
+                        : ' Cheese Pizza',
+                    maxLines: 2,
+                    textAlign: TextAlign.start,
+                    style: AppTextStyle.h3TextStyle400.copyWith(
+                      color: colors.textColor600,
+                    ),
                   ),
                 ),
-              ),
-              20.width,
-              Obx(
-                () {
-                  return Column(
-                    crossAxisAlignment: endCAA,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => controller.decreaseQuantity(index),
-                            onLongPressStart: (details) {
-                              timer = Timer.periodic(
-                                const Duration(milliseconds: 100),
-                                (t) {
-                                  controller.decreaseQuantity(index);
-                                },
-                              );
-                            },
-                            onLongPressEnd: (details) {
-                              if (timer != null) {
-                                timer!.cancel();
-                              }
-                            },
-                            child: Container(
-                              height: 24,
-                              width: 24,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: colors.secondaryColor50,
-                              ),
-                              child: Icon(
-                                TablerIcons.minus,
-                                size: 18,
-                                color: colors.blackColor500,
-                              ),
-                            ),
-                          ),
-                          4.width,
-                          SizedBox(
-                            width: 30,
-                            child: Text(
-                              controller.itemQuantities[index].toString(),
-                              textAlign: TextAlign.center,
-                              style: AppTextStyle.h3TextStyle500.copyWith(
-                                color: colors.textColor500,
+                20.width,
+                Obx(
+                  () {
+                    return Column(
+                      crossAxisAlignment: endCAA,
+                      children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => controller.decreaseQuantity(index),
+                              onLongPressStart: (details) {
+                                timer = Timer.periodic(
+                                  const Duration(milliseconds: 100),
+                                  (t) {
+                                    controller.decreaseQuantity(index);
+                                  },
+                                );
+                              },
+                              onLongPressEnd: (details) {
+                                if (timer != null) {
+                                  timer!.cancel();
+                                }
+                              },
+                              child: Container(
+                                height: 24,
+                                width: 24,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: colors.secondaryColor50,
+                                ),
+                                child: Icon(
+                                  TablerIcons.minus,
+                                  size: 18,
+                                  color: colors.blackColor500,
+                                ),
                               ),
                             ),
-                          ),
-                          4.width,
-                          GestureDetector(
-                            onTap: () => controller.increaseQuantity(index),
-                            onLongPressStart: (details) {
-                              timer = Timer.periodic(
-                                const Duration(milliseconds: 100),
-                                (t) {
-                                  controller.increaseQuantity(index);
-                                },
-                              );
-                            },
-                            onLongPressEnd: (details) {
-                              if (timer != null) {
-                                timer!.cancel();
-                              }
-                            },
-                            child: Container(
-                              height: 24,
-                              width: 24,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: colors.secondaryColor500,
-                              ),
-                              child: Icon(
-                                TablerIcons.plus,
-                                size: 18,
-                                color: colors.whiteColor,
+                            4.width,
+                            SizedBox(
+                              width: 30,
+                              child: Text(
+                                controller.itemQuantities[index].toString(),
+                                textAlign: TextAlign.center,
+                                style: AppTextStyle.h3TextStyle500.copyWith(
+                                  color: colors.textColor500,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      6.height,
-                      Text(
-                        '${currency ?? ''} ${2000 * controller.itemQuantities[index]}',
-                        textAlign: TextAlign.right,
-                        style: AppTextStyle.h3TextStyle400.copyWith(
-                          color: colors.textColor600,
+                            4.width,
+                            GestureDetector(
+                              onTap: () => controller.increaseQuantity(index),
+                              onLongPressStart: (details) {
+                                timer = Timer.periodic(
+                                  const Duration(milliseconds: 100),
+                                  (t) {
+                                    controller.increaseQuantity(index);
+                                  },
+                                );
+                              },
+                              onLongPressEnd: (details) {
+                                if (timer != null) {
+                                  timer!.cancel();
+                                }
+                              },
+                              child: Container(
+                                height: 24,
+                                width: 24,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: colors.secondaryColor500,
+                                ),
+                                child: Icon(
+                                  TablerIcons.plus,
+                                  size: 18,
+                                  color: colors.whiteColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ],
+                        6.height,
+                        Text(
+                          '${currency ?? ''} ${2000 * controller.itemQuantities[index]}',
+                          textAlign: TextAlign.right,
+                          style: AppTextStyle.h3TextStyle400.copyWith(
+                            color: colors.textColor600,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         Positioned(
