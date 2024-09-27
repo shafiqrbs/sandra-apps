@@ -350,7 +350,9 @@
   "addItems" : "Add Items",
   "table" : "Table",
   "kitchen" : "Kitchen",
-  "selectAdditionalTable" : "Select Addition Table"
+  "selectAdditionalTable" : "Select Addition Table",
+  "reserved" : "Reserved",
+  "free" : "Free"
 
 
 }

@@ -392,7 +392,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: .8,
+              childAspectRatio: .78,
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
@@ -473,6 +473,114 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               );
             },
           )),
+    );
+  }
+
+  @override
+  Widget? bottomNavigationBar() {
+    return Container(
+      width: Get.width,
+      padding: const EdgeInsets.symmetric(
+        vertical: 4,
+        horizontal: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+      ),
+      child: Obx(
+        () {
+          return Row(
+            children: [
+              _buildBottomNavbarCard(
+                icon: TablerIcons.tools_kitchen_2,
+                isSelected: controller.bottomStatus.value == BottomStatus.order,
+                text: appLocalization.order,
+                onTap: () {
+                  controller.changeBottomStatus(BottomStatus.order);
+                },
+              ),
+              4.width,
+              _buildBottomNavbarCard(
+                icon: TablerIcons.grill,
+                isSelected:
+                    controller.bottomStatus.value == BottomStatus.kitchen,
+                text: appLocalization.kitchen,
+                onTap: () {
+                  controller.changeBottomStatus(BottomStatus.kitchen);
+                },
+              ),
+              4.width,
+              _buildBottomNavbarCard(
+                icon: TablerIcons.hand_grab,
+                isSelected: controller.bottomStatus.value == BottomStatus.hold,
+                text: appLocalization.hold,
+                onTap: () {
+                  controller.changeBottomStatus(BottomStatus.hold);
+                },
+              ),
+              4.width,
+              _buildBottomNavbarCard(
+                icon: TablerIcons.soup,
+                isSelected:
+                    controller.bottomStatus.value == BottomStatus.reserved,
+                text: appLocalization.reserved,
+                onTap: () {
+                  controller.changeBottomStatus(BottomStatus.reserved);
+                },
+              ),
+              4.width,
+              _buildBottomNavbarCard(
+                icon: TablerIcons.picnic_table,
+                isSelected: controller.bottomStatus.value == BottomStatus.free,
+                text: appLocalization.free,
+                onTap: () {
+                  controller.changeBottomStatus(BottomStatus.free);
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBottomNavbarCard({
+    required IconData icon,
+    required bool isSelected,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              AppValues.radius_4,
+            ),
+            color: isSelected ? colors.secondaryColor500 : Colors.transparent,
+          ),
+          child: Column(
+            mainAxisSize: minMAS,
+            children: [
+              Icon(
+                icon,
+                size: 24,
+                color: isSelected ? colors.whiteColor : colors.blackColor500,
+              ),
+              2.height,
+              Text(
+                text,
+                style: AppTextStyle.h4TextStyle400.copyWith(
+                  color: isSelected ? colors.whiteColor : colors.blackColor500,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

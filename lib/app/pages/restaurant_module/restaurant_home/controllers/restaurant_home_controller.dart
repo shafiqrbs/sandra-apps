@@ -8,9 +8,18 @@ enum MenuView {
   grid,
 }
 
+enum BottomStatus {
+  order,
+  kitchen,
+  hold,
+  reserved,
+  free,
+}
+
 class RestaurantHomeController extends BaseController {
   final searchController = TextEditingController();
   final menuView = Rx<MenuView?>(null);
+  final bottomStatus = Rx<BottomStatus>(BottomStatus.hold);
 
   @override
   Future<void> onInit() async {
@@ -23,6 +32,10 @@ class RestaurantHomeController extends BaseController {
     } else {
       menuView.value = MenuView.list;
     }
+  }
+
+  void changeBottomStatus (BottomStatus status) {
+    bottomStatus.value = status;
   }
 
   void goToOrderCart({
