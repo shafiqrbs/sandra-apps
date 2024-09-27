@@ -9,6 +9,7 @@ class OrderCartController extends BaseController {
   ];
 
   final isAdditionalTableSelected = true.obs;
+  final showQuantityUpdateList = <int>[].obs;
 
   var itemQuantities =
       List<int>.filled(10, 1).obs; // Default quantity of 1 for 10 items
@@ -30,6 +31,14 @@ class OrderCartController extends BaseController {
   void decreaseQuantity(int index) {
     if (itemQuantities[index] > 1) {
       itemQuantities[index]--;
+    }
+  }
+
+  void showQuantityUpdate(int index) {
+    if (showQuantityUpdateList.contains(index)) {
+      showQuantityUpdateList.remove(index);
+    } else {
+      showQuantityUpdateList.add(index);
     }
   }
 }

@@ -347,6 +347,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
+            final isSelected = false.obs;
             return GestureDetector(
               onTap: () => controller.goToOrderCart(
                 context: context,
@@ -456,6 +457,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               childAspectRatio: .78,
             ),
             itemBuilder: (context, index) {
+              final isSelected = false.obs;
               return GestureDetector(
                 onTap: () => controller.goToOrderCart(
                   context: context,

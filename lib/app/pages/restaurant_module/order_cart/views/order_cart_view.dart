@@ -10,6 +10,7 @@ import 'package:sandra/app/bindings/initial_binding.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
+import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
 import '/app/core/base/base_view.dart';
 
@@ -59,6 +60,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 _buildSelectAdditionalTable(),
                 14.height,
                 _buildOrderItemList(),
+                _buildSubTotal(),
               ],
             ),
           ),
@@ -208,11 +210,11 @@ class OrderCartView extends BaseView<OrderCartController> {
         Container(
           margin: const EdgeInsets.only(
             bottom: 8,
-            left: 10,
+            right: 10,
           ),
           padding: const EdgeInsets.symmetric(
             vertical: 8,
-            horizontal: 12,
+            horizontal: 8,
           ),
           decoration: BoxDecoration(
             color: colors.secondaryColor50.withOpacity(.5),
@@ -225,11 +227,18 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
           child: Padding(
             padding: const EdgeInsets.only(
-              left: 8,
+              right: 8,
             ),
             child: Row(
               crossAxisAlignment: startCAA,
               children: [
+                commonCachedNetworkImage(
+                  'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                  width: 50,
+                  height: 50,
+                  radius: AppValues.radius_4,
+                ),
+                8.width,
                 Expanded(
                   child: Text(
                     index.isEven
@@ -245,94 +254,140 @@ class OrderCartView extends BaseView<OrderCartController> {
                 20.width,
                 Obx(
                   () {
-                    return Column(
-                      crossAxisAlignment: endCAA,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () => controller.decreaseQuantity(index),
-                              onLongPressStart: (details) {
-                                timer = Timer.periodic(
-                                  const Duration(milliseconds: 100),
-                                  (t) {
-                                    controller.decreaseQuantity(index);
-                                  },
-                                );
-                              },
-                              onLongPressEnd: (details) {
-                                if (timer != null) {
-                                  timer!.cancel();
-                                }
-                              },
-                              child: Container(
-                                height: 24,
-                                width: 24,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: colors.secondaryColor50,
-                                ),
-                                child: Icon(
-                                  TablerIcons.minus,
-                                  size: 18,
-                                  color: colors.blackColor500,
+                    return Container(
+                      width: 80,
+                      height: 54,
+                      child: Stack(
+                        alignment: Alignment.centerRight,
+                        children: [
+                          Column(
+                            crossAxisAlignment: endCAA,
+                            children: [
+                              Row(
+                                mainAxisAlignment: endMAA,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () =>
+                                        controller.showQuantityUpdate(index),
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      width: 60,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 2,
+                                        horizontal: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          AppValues.radius_4,
+                                        ),
+                                        color: colors.whiteColor,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: centerMAA,
+                                        children: [
+                                          Text(
+                                            controller.itemQuantities[index]
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: AppTextStyle.h3TextStyle500
+                                                .copyWith(
+                                              color: colors.textColor500,
+                                            ),
+                                          ),
+                                          4.width,
+                                          Icon(
+                                            controller.showQuantityUpdateList
+                                                    .contains(index)
+                                                ? TablerIcons.chevron_up
+                                                : TablerIcons.chevron_down,
+                                            size: 16,
+                                            color: colors.blackColor500,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              6.height,
+                              Text(
+                                '${currency ?? ''} ${2000 * controller.itemQuantities[index]}',
+                                textAlign: TextAlign.right,
+                                style: AppTextStyle.h3TextStyle400.copyWith(
+                                  color: colors.textColor600,
                                 ),
                               ),
-                            ),
-                            4.width,
-                            SizedBox(
-                              width: 30,
-                              child: Text(
-                                controller.itemQuantities[index].toString(),
-                                textAlign: TextAlign.center,
-                                style: AppTextStyle.h3TextStyle500.copyWith(
-                                  color: colors.textColor500,
-                                ),
-                              ),
-                            ),
-                            4.width,
-                            GestureDetector(
-                              onTap: () => controller.increaseQuantity(index),
-                              onLongPressStart: (details) {
-                                timer = Timer.periodic(
-                                  const Duration(milliseconds: 100),
-                                  (t) {
-                                    controller.increaseQuantity(index);
-                                  },
-                                );
-                              },
-                              onLongPressEnd: (details) {
-                                if (timer != null) {
-                                  timer!.cancel();
-                                }
-                              },
-                              child: Container(
-                                height: 24,
-                                width: 24,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: colors.secondaryColor500,
-                                ),
-                                child: Icon(
-                                  TablerIcons.plus,
-                                  size: 18,
-                                  color: colors.whiteColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        6.height,
-                        Text(
-                          '${currency ?? ''} ${2000 * controller.itemQuantities[index]}',
-                          textAlign: TextAlign.right,
-                          style: AppTextStyle.h3TextStyle400.copyWith(
-                            color: colors.textColor600,
+                            ],
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            bottom: -2,
+                            child: controller.showQuantityUpdateList
+                                    .contains(index)
+                                ? Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          AppValues.radius_4),
+                                      color: colors.whiteColor,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: centerMAA,
+                                      crossAxisAlignment: centerCAA,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () => controller
+                                              .decreaseQuantity(index),
+                                          onLongPressStart: (details) {
+                                            timer = Timer.periodic(
+                                              const Duration(milliseconds: 100),
+                                              (t) {
+                                                controller
+                                                    .decreaseQuantity(index);
+                                              },
+                                            );
+                                          },
+                                          onLongPressEnd: (details) {
+                                            if (timer != null) {
+                                              timer!.cancel();
+                                            }
+                                          },
+                                          child: Icon(
+                                            TablerIcons.minus,
+                                            size: 16,
+                                            color: colors.blackColor500,
+                                          ),
+                                        ),
+                                        8.width,
+                                        GestureDetector(
+                                          onTap: () => controller
+                                              .increaseQuantity(index),
+                                          onLongPressStart: (details) {
+                                            timer = Timer.periodic(
+                                              const Duration(milliseconds: 100),
+                                              (t) {
+                                                controller
+                                                    .increaseQuantity(index);
+                                              },
+                                            );
+                                          },
+                                          onLongPressEnd: (details) {
+                                            if (timer != null) {
+                                              timer!.cancel();
+                                            }
+                                          },
+                                          child: Icon(
+                                            TablerIcons.plus,
+                                            size: 16,
+                                            color: colors.blackColor500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -341,7 +396,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
         ),
         Positioned(
-          left: 0,
+          right: 0,
           child: Container(
             padding: const EdgeInsets.all(4),
             alignment: Alignment.center,
@@ -358,5 +413,9 @@ class OrderCartView extends BaseView<OrderCartController> {
         ),
       ],
     );
+  }
+
+  Widget _buildSubTotal(){
+    return Container(),
   }
 }
