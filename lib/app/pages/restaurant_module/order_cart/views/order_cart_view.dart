@@ -8,9 +8,15 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/bindings/initial_binding.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/utils/responsive.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
+import 'package:sandra/app/core/widget/common_text.dart';
+import 'package:sandra/app/core/widget/label_value.dart';
+import 'package:sandra/app/global_widget/customer_card_view.dart';
+import 'package:sandra/app/global_widget/transaction_method_item_view.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
 import '/app/core/base/base_view.dart';
 
@@ -60,7 +66,10 @@ class OrderCartView extends BaseView<OrderCartController> {
                 _buildSelectAdditionalTable(),
                 14.height,
                 _buildOrderItemList(),
+                8.height,
                 _buildSubTotal(),
+                12.height,
+                _buildOrderCartInfo(context),
               ],
             ),
           ),
@@ -415,7 +424,385 @@ class OrderCartView extends BaseView<OrderCartController> {
     );
   }
 
-  Widget _buildSubTotal(){
-    return Container();
+  Widget _buildSubTotal() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 6,
+        horizontal: 24,
+      ),
+      decoration: BoxDecoration(
+        color: colors.secondaryColor500,
+      ),
+      child: Row(
+        mainAxisAlignment: spaceBetweenMAA,
+        children: [
+          Text(
+            '${appLocalization.subTotal} - ',
+            style: AppTextStyle.h1TextStyle600.copyWith(
+              color: colors.whiteColor,
+            ),
+          ),
+          Text(
+            '${currency ?? ''} 36.87',
+            style: AppTextStyle.h1TextStyle700.copyWith(
+              color: colors.whiteColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOrderCartInfo(context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 12,
+      ),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+      ),
+      child: Column(
+        children: [
+          _buildCustomerSearch(context),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          height: 1,
+                          color: colors.secondaryColor50,
+                        ),
+                        8.height,
+                        _buildInvoiceSummery(),
+                        8.height,
+                        Container(
+                          height: 1,
+                          color: colors.secondaryColor50,
+                        ),
+                        4.height,
+                        _buildTransactionMethod(context),
+                        0.25.percentHeight,
+                        //_buildPaymentReceiveRow(context),
+                        1.percentHeight,
+                        //_buildUserSelectView(context),
+                        1.percentHeight,
+                        //_buildProfitView(context),
+                        Container(
+                          height: 1,
+                          color: colors.secondaryColor50,
+                        ),
+                        8.height,
+                        //_buildBottomButton(context),
+                        1.percentHeight,
+                      ],
+                    ),
+                    _buildCustomerListView(context),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomerSearch(
+    BuildContext context,
+  ) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: textFieldHeight,
+                child: TextFormField(
+                  controller:
+                      controller.customerManager.searchTextController.value,
+                  cursorColor: colors.solidBlackColor,
+                  decoration: buildInputDecoration(
+                    prefixIcon: Icon(
+                      TablerIcons.search,
+                      size: 16,
+                      color: colors.primaryBlackColor,
+                    ),
+                    suffixIcon: Obx(
+                      () {
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            controller.isShowClearIcon.value
+                                ? InkWell(
+                                    onTap: () {
+                                      controller.customerManager
+                                          .searchTextController.value
+                                          .clear();
+                                      controller.isShowClearIcon.value = false;
+                                      controller.customerManager.selectedItem
+                                          .value = null;
+                                    },
+                                    child: Icon(
+                                      TablerIcons.x,
+                                      size: 12,
+                                      color: colors.solidRedColor,
+                                    ),
+                                  )
+                                : Container(),
+                            IconButton(
+                              onPressed: controller.addCustomer,
+                              icon: Icon(
+                                TablerIcons.user_plus,
+                                size: 20,
+                                color: colors.primaryColor500,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    hintText: appLocalization.searchCustomer,
+                    hintStyle: TextStyle(
+                      color: colors.primaryBlackColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: mediumTFSize.sp,
+                    ),
+                    fillColor: colors.primaryColor25,
+                    enabledBorderColor: colors.secondaryColor100,
+                    focusedBorderColor: colors.secondaryColor100,
+                    errorBorderColor: colors.secondaryColor100,
+                  ),
+                  textAlign: startTA,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: mediumTFSize.sp,
+                  ),
+                  onChanged: (value) async {
+                    if (value.isEmpty ?? true) {
+                      controller.isShowClearIcon.value = false;
+                      controller.customerManager.searchedItems.value = [];
+                      controller.customerManager.selectedItem.value = null;
+                      return;
+                    }
+                    controller.isShowClearIcon.value = true;
+                    await controller.customerManager.searchItemsByName(value);
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        4.height,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CommonText(
+              text: appLocalization.dontYouHaveCustomer,
+              fontSize: smallTFSize,
+              fontWeight: FontWeight.w400,
+              textColor: colors.solidBlackColor,
+            ),
+            InkWell(
+              onTap: controller.addCustomer,
+              child: CommonText(
+                text: appLocalization.addCustomer,
+                fontSize: mediumTFSize,
+                fontWeight: FontWeight.w500,
+                textColor: colors.primaryColor500,
+                textDecoration: TextDecoration.underline,
+              ),
+            ),
+          ],
+        ),
+        Obx(
+          () => controller.customerManager.selectedItem.value != null
+              ? Column(
+                  children: [
+                    1.percentHeight,
+                    CustomerCardView(
+                      data: controller.customerManager.selectedItem.value!,
+                      index: 0,
+                      onTap: () {},
+                      onReceive: () {},
+                      showReceiveButton: false,
+                    ),
+                  ],
+                )
+              : Container(),
+        ),
+        8.height,
+      ],
+    );
+  }
+
+  Widget _buildCustomerListView(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => controller.customerManager.searchedItems.value?.isNotEmpty ?? false
+          ? Container(
+              color: Colors.white,
+              height: 40.ph,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount:
+                    controller.customerManager.searchedItems.value?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return CustomerCardView(
+                    data:
+                        controller.customerManager.searchedItems.value![index],
+                    index: index,
+                    onTap: () {
+                      controller.updateCustomer(
+                        controller.customerManager.searchedItems.value![index],
+                      );
+                      FocusScope.of(context).unfocus();
+                    },
+                    onReceive: () {},
+                    showReceiveButton: false,
+                  );
+                },
+              ),
+            )
+          : Container(),
+    );
+  }
+
+  Widget _buildInvoiceSummery() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 12,
+      ),
+      decoration: BoxDecoration(
+        color: colors.whiteColor,
+        borderRadius: BorderRadius.circular(
+          AppValues.radius_4,
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: minMAS,
+              children: [
+                LabelValue(
+                  label: appLocalization.vat,
+                  value: '${currency ?? ''} 0.00',
+                  dividerText: '',
+                  labelFontSize: 12,
+                  valueFontSize: 12,
+                  valueFontWeight: 900,
+                  padding: EdgeInsets.zero,
+                  margin: const EdgeInsets.only(
+                    bottom: 8,
+                  ),
+                ),
+                LabelValue(
+                  label: appLocalization.sd,
+                  value: '${currency ?? ''} 0.00',
+                  dividerText: '',
+                  labelFontSize: 12,
+                  valueFontSize: 12,
+                  valueFontWeight: 900,
+                  padding: EdgeInsets.zero,
+                  margin: const EdgeInsets.only(
+                    bottom: 8,
+                  ),
+                ),
+                LabelValue(
+                  label: appLocalization.dis,
+                  value: '${currency ?? ''} 0.00',
+                  dividerText: '',
+                  labelFontSize: 12,
+                  valueFontSize: 12,
+                  valueFontWeight: 900,
+                  padding: EdgeInsets.zero,
+
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  AppValues.radius_4,
+                ),
+                color: colors.primaryColor50,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    appLocalization.total,
+                    style: AppTextStyle.h3TextStyle500.copyWith(
+                      color: colors.textColor500,
+                    ),
+                  ),
+                  Text(
+                    '${currency} 34.34',
+                    style: AppTextStyle.h2TextStyle700.copyWith(
+                      color: colors.primaryColor800,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTransactionMethod(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => Column(
+        children: [
+          0.25.percentHeight,
+          if (controller.transactionMethodsManager.allItems.value != null)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Wrap(
+                spacing: 4,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                runSpacing: 8,
+                children:
+                    controller.transactionMethodsManager.allItems.value!.map(
+                  (e) {
+                    final selected =
+                        controller.transactionMethodsManager.selectedItem.value;
+                    return TransactionMethodItemView(
+                      method: e,
+                      isSelected: selected == e,
+                      onTap: () {
+                        controller
+                            .transactionMethodsManager.selectedItem.value = e;
+                      },
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }

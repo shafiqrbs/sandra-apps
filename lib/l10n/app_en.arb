@@ -353,7 +353,9 @@
   "selectAdditionalTable" : "Select Addition Table",
   "reserved" : "Reserved",
   "free" : "Free",
-  "menu" : "Menu"
+  "menu" : "Menu",
+  "sd" : "SD",
+  "dis" : "DIS"
 
 
 }
