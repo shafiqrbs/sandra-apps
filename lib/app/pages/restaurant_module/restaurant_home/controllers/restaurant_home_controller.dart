@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/menu_bottom_sheet.dart';
 import '/app/core/base/base_controller.dart';
 
 enum MenuView {
@@ -20,6 +21,18 @@ class RestaurantHomeController extends BaseController {
   final searchController = TextEditingController();
   final menuView = Rx<MenuView?>(null);
   final bottomStatus = Rx<BottomStatus>(BottomStatus.hold);
+  final List<String> menuItems = [
+    'Pizza',
+    'Burger',
+    'Soup',
+    'Salad',
+    'Set menu',
+    'Juice Special',
+    'Sandwich',
+    'Pasta',
+    'Meat',
+    'Fruits',
+  ];
 
   @override
   Future<void> onInit() async {
@@ -34,7 +47,7 @@ class RestaurantHomeController extends BaseController {
     }
   }
 
-  void changeBottomStatus (BottomStatus status) {
+  void changeBottomStatus(BottomStatus status) {
     bottomStatus.value = status;
   }
 
@@ -44,5 +57,14 @@ class RestaurantHomeController extends BaseController {
     Get.dialog(
       OrderCartView(),
     );
+  }
+
+  void openMenuBottomSheet({
+    required BuildContext context,
+  }) {
+    MenuBottomSheet(
+      context: context,
+      menuItems: menuItems,
+    ).showMenuFromLeft();
   }
 }

@@ -80,12 +80,71 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   @override
   Widget body(BuildContext context) {
     return Obx(
-      () => Column(
+      () => Stack(
+        alignment: Alignment.centerLeft,
         children: [
-          10.height,
-          _buildTableList(),
-          _buildSearchBar(),
-          _buildMenuList(),
+          Column(
+            children: [
+              10.height,
+              _buildTableList(),
+              _buildSearchBar(),
+              _buildMenuList(),
+            ],
+          ),
+          Positioned(
+            left: 0,
+            child: Transform.translate(
+              offset: const Offset(
+                -24,
+                0,
+              ), // Adjust this value to move the widget to the left
+              child: Transform.rotate(
+                angle: -3.14159 / 2, // Rotate 90 degrees (π/2 radians)
+                child: GestureDetector(
+                  onTap: () => controller.openMenuBottomSheet(context: context),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(
+                          AppValues.radius_8,
+                        ),
+                        bottomRight: Radius.circular(
+                          AppValues.radius_8,
+                        ),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          colors.primaryColor500,
+                          colors.secondaryColor500
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize
+                          .min, // Ensure the size is adjusted to content
+                      children: [
+                        Icon(
+                          TablerIcons.tools_kitchen_2,
+                          size: 20,
+                          color: colors.whiteColor,
+                        ),
+                        6.width,
+                        Text(
+                          appLocalization.menu,
+                          style: AppTextStyle.h2TextStyle700.copyWith(
+                            color: colors.whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
