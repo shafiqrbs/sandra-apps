@@ -416,6 +416,6 @@ class OrderCartView extends BaseView<OrderCartController> {
   }
 
   Widget _buildSubTotal(){
-    return Container(),
+    return Container();
   }
 }
