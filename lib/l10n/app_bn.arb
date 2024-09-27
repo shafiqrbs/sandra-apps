@@ -425,7 +425,9 @@
   "selectVendor": "Select Vendor",
   "purchaseOrder": "Purchase Order",
   "isShowBrandOnSales" : "Enable brand on sales",
-  "isShowBrandOnPurchase" : "Enable brand on purchase"
+  "isShowBrandOnPurchase" : "Enable brand on purchase",
+  "kitchen" : "Kitchen",
+  "selectAdditionalTable" : "Select Addition Table"
 
 
 

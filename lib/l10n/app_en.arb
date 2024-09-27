@@ -348,7 +348,9 @@
   "isShowBrandOnSales" : "Enable brand on sales",
   "isShowBrandOnPurchase" : "Enable brand on purchase",
   "addItems" : "Add Items",
-  "table" : "Table"
+  "table" : "Table",
+  "kitchen" : "Kitchen",
+  "selectAdditionalTable" : "Select Addition Table"
 
 
 }

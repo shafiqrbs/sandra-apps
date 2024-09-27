@@ -392,7 +392,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: .82,
+              childAspectRatio: .8,
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
