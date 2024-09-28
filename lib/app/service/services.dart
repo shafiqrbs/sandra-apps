@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
+import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
@@ -922,7 +923,7 @@ class Services {
   }
 
   // Restaurant module
-  Future<bool> getRestaurantTableList() async {
+  Future<List<RestaurantTable>?> getRestaurantTableList() async {
     const endPoint = 'poskeeper-restaurant-table';
     try {
       final response = await dio.get(
@@ -930,13 +931,16 @@ class Services {
         endPoint,
         headers: _buildHeader(),
       );
-      final responseData = response.data;
+      final responseData = response.data as List;
       print('restaurant table list : $responseData');
-      if (responseData == null) return false;
-      return true;
+      if (responseData.isEmpty) return null;
+      return parseList(
+        list: responseData,
+        fromJson: RestaurantTable.fromJson,
+      );
     } catch (e, s) {
       printError(e, s, endPoint);
-      return false;
+      return null;
     }
   }
 }

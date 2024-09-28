@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/menu_bottom_sheet.dart';
 import '/app/core/base/base_controller.dart';
@@ -35,6 +36,7 @@ class RestaurantHomeController extends BaseController {
   ];
   final selectedFoodList = <int>[].obs;
   final selectedTableIndex = 0.obs;
+  final tableList = Rx<List<RestaurantTable>?>(null);
 
   @override
   Future<void> onInit() async {
@@ -44,6 +46,9 @@ class RestaurantHomeController extends BaseController {
 
   Future<void> getRestaurantTableList() async {
     final response = await services.getRestaurantTableList();
+    if (response != null) {
+      tableList.value = response;
+    }
   }
 
   void changeMenuView() {

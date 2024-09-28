@@ -159,9 +159,11 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
 
   Widget _buildTableList() {
     return HorizontalList(
-      itemCount: 20,
+      itemCount: controller.tableList.value?.length ?? 0,
       spacing: 10,
       itemBuilder: (context, index) {
+        final table = controller.tableList.value?[index];
+        if (controller.tableList.value == null) return Container();
         return Obx(
           () => GestureDetector(
             onTap: () {
@@ -200,7 +202,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                     children: [
                       10.height,
                       Text(
-                        '${appLocalization.table} - 1',
+                        table?.tableName ?? '',
                         style: AppTextStyle.h2TextStyle700.copyWith(
                           color: controller.selectedTableIndex.value == index
                               ? colors.whiteColor
