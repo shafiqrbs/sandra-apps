@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
@@ -8,8 +10,8 @@ import '/app/core/base/base_controller.dart';
 class OrderCartController extends BaseController {
   List<String> orderCategoryList = [
     'Order taken by',
-    'Online',
-    'Order table by',
+    'Mr. Alex',
+    'John Doe',
   ];
 
   final isAdditionalTableSelected = true.obs;
@@ -21,6 +23,19 @@ class OrderCartController extends BaseController {
   final customerManager = CustomerManager();
   final isShowClearIcon = false.obs;
   final transactionMethodsManager = TransactionMethodsManager();
+  final discountTypeController = ValueNotifier<bool>(false).obs;
+  final paymentDiscountController = TextEditingController().obs;
+  final amountController = TextEditingController().obs;
+  final discountType = 'flat'.obs;
+  final returnMsg = 'Due'.obs;
+  final salesSubTotal = 0.00.obs;
+  final salesDiscount = 0.00.obs;
+  final salesVat = 0.00.obs;
+  final netTotal = 0.00.obs;
+  final salesReceive = 0.00.obs;
+  final salesPurchasePrice = 0.00.obs;
+  final salesDiscountPercent = 0.00.obs;
+  final salesReturnValue = 0.00.obs;
 
   @override
   Future<void> onInit() async {
@@ -77,5 +92,61 @@ class OrderCartController extends BaseController {
       customerManager.selectedItem.value = customer;
       //FocusScope.of(Get.context!).unfocus();
     }
+  }
+
+  void handleDiscountChange(double discountValue, double? percentValue) {
+    if (discountValue > salesSubTotal.value) {
+      toast(appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue);
+      paymentDiscountController.value.text = '0';
+      salesDiscount.value = 0;
+      netTotal.value = 0;
+      salesReturnValue.value = salesSubTotal.value;
+      return;
+    }
+
+    salesDiscount.value = discountValue;
+
+    if (percentValue != null) {
+      salesDiscountPercent.value = percentValue;
+    }
+  }
+
+  void onAmountChange(String value) {
+    if (value.isNotEmpty) {
+      final returnValue = netTotal.value - value.toDouble();
+      returnMsg.value = returnValue < 0 ? 'Return' : 'Due';
+      salesReturnValue.value = returnValue.toPrecision(2).abs();
+    } else {
+      returnMsg.value = 'Due';
+      salesReturnValue.value = 0.00;
+    }
+  }
+
+  void onDiscountChange(String value) {
+    final discountValue = double.tryParse(value) ?? 0;
+
+    if (discountType.value == 'flat') {
+      handleDiscountChange(discountValue, null);
+    } else if (discountType.value == 'percent') {
+      // Calculate percentage discount
+      final percentDiscount =
+      (salesSubTotal.value * discountValue / 100).toPrecision(2);
+      handleDiscountChange(percentDiscount, discountValue);
+    }
+
+    netTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    salesReturnValue.value = netTotal.value;
+
+    onAmountChange(
+      amountController.value.text.isEmptyOrNull
+          ? '0'
+          : amountController.value.text,
+    );
+
+    salesDiscount.refresh();
+    netTotal.refresh();
+    update();
+    notifyChildrens();
+    refresh();
   }
 }

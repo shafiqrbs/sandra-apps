@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -15,6 +16,7 @@ import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/label_value.dart';
+import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_widget/customer_card_view.dart';
 import 'package:sandra/app/global_widget/transaction_method_item_view.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
@@ -59,18 +61,23 @@ class OrderCartView extends BaseView<OrderCartController> {
             ),
           ),
           child: Obx(
-            () => Column(
-              children: [
-                _buildOrderCategory(),
-                4.height,
-                _buildSelectAdditionalTable(),
-                14.height,
-                _buildOrderItemList(),
-                8.height,
-                _buildSubTotal(),
-                12.height,
-                _buildOrderCartInfo(context),
-              ],
+            () => SingleChildScrollView(
+              child: Container(
+                height: 90.ph,
+                child: Column(
+                  children: [
+                    _buildOrderCategory(),
+                    4.height,
+                    _buildSelectAdditionalTable(),
+                    14.height,
+                    _buildOrderItemList(),
+                    8.height,
+                    _buildSubTotal(),
+                    12.height,
+                    _buildOrderCartInfo(context),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -463,44 +470,29 @@ class OrderCartView extends BaseView<OrderCartController> {
       decoration: BoxDecoration(
         color: colors.primaryColor50,
       ),
-      child: Column(
-        children: [
-          _buildCustomerSearch(context),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-            ),
-            child: Column(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildCustomerSearch(context),
+            Column(
               children: [
                 Stack(
                   children: [
                     Column(
                       children: [
-                        Container(
-                          height: 1,
-                          color: colors.secondaryColor50,
-                        ),
                         8.height,
                         _buildInvoiceSummery(),
                         8.height,
-                        Container(
-                          height: 1,
-                          color: colors.secondaryColor50,
-                        ),
-                        4.height,
                         _buildTransactionMethod(context),
-                        0.25.percentHeight,
-                        //_buildPaymentReceiveRow(context),
-                        1.percentHeight,
-                        //_buildUserSelectView(context),
-                        1.percentHeight,
-                        //_buildProfitView(context),
+                        8.height,
+                        _buildPaymentReceiveRow(context),
+                        10.height,
                         Container(
                           height: 1,
-                          color: colors.secondaryColor50,
+                          color: colors.blackColor100,
                         ),
-                        8.height,
-                        //_buildBottomButton(context),
+                        10.height,
+                        _buildBottomButton(context),
                         1.percentHeight,
                       ],
                     ),
@@ -509,8 +501,8 @@ class OrderCartView extends BaseView<OrderCartController> {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -730,7 +722,6 @@ class OrderCartView extends BaseView<OrderCartController> {
                   valueFontSize: 12,
                   valueFontWeight: 900,
                   padding: EdgeInsets.zero,
-
                 ),
               ],
             ),
@@ -776,7 +767,6 @@ class OrderCartView extends BaseView<OrderCartController> {
     return Obx(
       () => Column(
         children: [
-          0.25.percentHeight,
           if (controller.transactionMethodsManager.allItems.value != null)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -789,7 +779,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                   (e) {
                     final selected =
                         controller.transactionMethodsManager.selectedItem.value;
-                    return TransactionMethodItemView(
+                    return _buildTransactionMethodItemView(
                       method: e,
                       isSelected: selected == e,
                       onTap: () {
@@ -802,6 +792,213 @@ class OrderCartView extends BaseView<OrderCartController> {
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTransactionMethodItemView({
+    required TransactionMethods method,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  AppValues.radius_4,
+                ),
+                color:
+                    isSelected ? colors.secondaryColor500 : Colors.transparent,
+                border: Border.all(
+                  color: isSelected
+                      ? colors.secondaryColor500
+                      : colors.secondaryColor50,
+                ),
+              ),
+              child: Container(
+                height: 22,
+                width: 22,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    8,
+                  ),
+                  color: Colors.transparent,
+                ),
+                child: commonCacheImageWidget(
+                  method.imagePath,
+                  24,
+                  width: 24,
+                  fit: BoxFit.fill,
+                  isOval: true,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPaymentReceiveRow(
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: Obx(
+            () {
+              return AdvancedSwitch(
+                activeChild: const Text('%'),
+                inactiveChild: Text(appLocalization.flat),
+                activeColor: colors.primaryColor700,
+                inactiveColor: colors.secondaryColor100,
+                borderRadius: BorderRadius.circular(
+                  containerBorderRadius,
+                ),
+                height: 36,
+                width: 90,
+                controller: controller.discountTypeController.value,
+              );
+            },
+          ),
+        ),
+        8.width,
+        Expanded(
+          child: SizedBox(
+            height: 36,
+            child: TextFormField(
+              controller: controller.paymentDiscountController.value,
+              cursorColor: colors.solidBlackColor,
+              textAlignVertical: TextAlignVertical.center,
+              decoration: buildInputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 4,
+                ),
+                hintText: appLocalization.discount,
+                hintStyle: TextStyle(
+                  color: colors.primaryBlackColor,
+                  fontWeight: FontWeight.normal,
+                  fontSize: mediumTFSize,
+                ),
+                fillColor: colors.primaryColor50,
+                enabledBorderColor: colors.primaryColor200,
+                focusedBorderColor: colors.primaryColor500,
+                errorBorderColor: colors.primaryColor200,
+              ),
+              inputFormatters: doubleInputFormatter,
+              keyboardType: numberInputType,
+              textAlign: centerTA,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: mediumTFSize,
+              ),
+              onChanged: controller.onDiscountChange,
+            ),
+          ),
+        ),
+        8.width,
+        Expanded(
+          child: SizedBox(
+            height: 36,
+            child: TextFormField(
+              controller: controller.amountController.value,
+              inputFormatters: doubleInputFormatter,
+              textInputAction: doneInputAction,
+              //onEditingComplete: () => controller.showConfirmationDialog(context),
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: regularTFSize,
+              ),
+              cursorColor: colors.solidBlackColor,
+              decoration: buildInputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 4,
+                ),
+                hintText: appLocalization.amount,
+                hintStyle: TextStyle(
+                  color: colors.primaryBlackColor,
+                  fontWeight: FontWeight.normal,
+                  fontSize: mediumTFSize,
+                ),
+                fillColor: colors.primaryColor50,
+                enabledBorderColor: colors.primaryColor200,
+                focusedBorderColor: colors.primaryColor500,
+                errorBorderColor: colors.primaryColor200,
+              ),
+              onChanged: controller.onAmountChange,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBottomButton(
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        _buildButtonView(
+          text: appLocalization.postPrint,
+          icon: TablerIcons.printer,
+          bgColor: colors.secondaryColor500,
+        ),
+        10.width,
+        _buildButtonView(
+          text: appLocalization.save,
+          icon: TablerIcons.device_floppy,
+          bgColor: colors.primaryColor500,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildButtonView({
+    required String text,
+    required IconData icon,
+    required Color bgColor,
+    VoidCallback? onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              AppValues.radius_4,
+            ),
+            color: bgColor,
+          ),
+          child: Row(
+            mainAxisAlignment: centerMAA,
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: colors.whiteColor,
+              ),
+              8.width,
+              Text(
+                text,
+                style: AppTextStyle.h3TextStyle500.copyWith(
+                  color: colors.whiteColor,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
