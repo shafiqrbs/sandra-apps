@@ -920,4 +920,23 @@ class Services {
       return false;
     }
   }
+
+  // Restaurant module
+  Future<bool> getRestaurantTableList() async {
+    const endPoint = 'poskeeper-restaurant-table';
+    try {
+      final response = await dio.get(
+        APIType.public,
+        endPoint,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data;
+      print('restaurant table list : $responseData');
+      if (responseData == null) return false;
+      return true;
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return false;
+    }
+  }
 }

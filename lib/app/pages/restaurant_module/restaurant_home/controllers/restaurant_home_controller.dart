@@ -39,6 +39,11 @@ class RestaurantHomeController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await dataFetcher(future: getRestaurantTableList);
+  }
+
+  Future<void> getRestaurantTableList() async {
+    final response = await services.getRestaurantTableList();
   }
 
   void changeMenuView() {
