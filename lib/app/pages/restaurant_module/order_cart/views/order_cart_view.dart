@@ -175,50 +175,134 @@ class OrderCartView extends BaseView<OrderCartController> {
   }
 
   Widget _buildSelectAdditionalTable() {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 12,
-      ),
-      decoration: BoxDecoration(
-        color: colors.primaryColor500,
-        borderRadius: BorderRadius.circular(
-          AppValues.radius_4,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: spaceBetweenMAA,
-        children: [
-          Text(
-            appLocalization.selectAdditionalTable,
-            style: AppTextStyle.h3TextStyle500.copyWith(
-              color: colors.whiteColor,
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: controller.changeAdditionTableSelection,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 12,
+            ),
+            decoration: BoxDecoration(
+              color: colors.primaryColor500,
+              borderRadius: BorderRadius.circular(
+                AppValues.radius_4,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: spaceBetweenMAA,
+              children: [
+                Text(
+                  appLocalization.selectAdditionalTable,
+                  style: AppTextStyle.h3TextStyle500.copyWith(
+                    color: colors.whiteColor,
+                  ),
+                ),
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      AppValues.radius_4,
+                    ),
+                    border: Border.all(
+                      color: colors.whiteColor,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Icon(
+                    controller.isAdditionalTableSelected.value
+                        ? TablerIcons.chevron_up
+                        : TablerIcons.chevron_down,
+                    color: colors.whiteColor,
+                    size: 12,
+                  ),
+                ),
+              ],
             ),
           ),
-          GestureDetector(
-            onTap: controller.changeAdditionTableSelection,
-            child: Container(
-              height: 20,
-              width: 20,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
+        ),
+        Visibility(
+          visible: controller.isAdditionalTableSelected.value,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 12,
+            ),
+            decoration: BoxDecoration(
+              color: colors.primaryColor50,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(
                   AppValues.radius_4,
                 ),
-                border: Border.all(
-                  color: colors.whiteColor,
-                  width: 1.5,
+                bottomRight: Radius.circular(
+                  AppValues.radius_4,
                 ),
               ),
-              child: controller.isAdditionalTableSelected.value
-                  ? Icon(
-                      TablerIcons.check,
-                      color: colors.whiteColor,
-                      size: 12,
-                    )
-                  : Container(),
+            ),
+            child: Wrap(
+              spacing: 4,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              alignment: startWA,
+              runSpacing: 8,
+              children: [
+                _buildAdditionalTableCardView(index: 0),
+                _buildAdditionalTableCardView(index: 1),
+                _buildAdditionalTableCardView(index: 2),
+                _buildAdditionalTableCardView(index: 3),
+                _buildAdditionalTableCardView(index: 4),
+                _buildAdditionalTableCardView(index: 5),
+              ],
             ),
           ),
-        ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAdditionalTableCardView({
+    required int index,
+  }) {
+    final isSelected = false.obs;
+    return Padding(
+      padding: const EdgeInsets.all(6),
+      child: Obx(
+        () => GestureDetector(
+          onTap: () {
+            isSelected.value = !isSelected.value;
+          },
+          child: Row(
+            mainAxisSize: minMAS,
+            children: [
+              Container(
+                height: 20,
+                width: 20,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    AppValues.radius_4,
+                  ),
+                  border: Border.all(
+                    color: colors.blackColor300,
+                  ),
+                ),
+                child: isSelected.value
+                    ? Icon(
+                        TablerIcons.check,
+                        color: colors.blackColor500,
+                        size: 12,
+                      )
+                    : Container(),
+              ),
+              8.width,
+              Text(
+                'T ${index + 1}',
+                style: AppTextStyle.h3TextStyle500,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
