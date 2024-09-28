@@ -66,6 +66,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 height: 90.ph,
                 child: Column(
                   children: [
+                    _buildStatusBar(),
                     _buildOrderCategory(),
                     4.height,
                     _buildSelectAdditionalTable(),
@@ -82,6 +83,26 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildStatusBar() {
+    return Row(
+      mainAxisAlignment: endMAA,
+      children: [
+        GestureDetector(
+          onTap: Get.back,
+          child: Container(
+            width: 40,
+            alignment: Alignment.centerRight,
+            child: Icon(
+              TablerIcons.x,
+              size: 24,
+              color: colors.blackColor500,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
