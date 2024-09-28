@@ -45,35 +45,37 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               color: colors.primaryColor50,
               borderRadius: BorderRadius.circular(100),
             ),
-            child: Row(
-              children: [
-                Icon(
-                  TablerIcons.shopping_cart_copy,
-                  color: colors.primaryColor500,
-                  size: 18,
-                ),
-                6.width,
-                Text(
-                  '27',
-                  style: AppTextStyle.h3TextStyle600.copyWith(
+            child: Obx(()=>
+              Row(
+                children: [
+                  Icon(
+                    TablerIcons.shopping_cart_copy,
                     color: colors.primaryColor500,
+                    size: 18,
                   ),
-                ),
-                8.width,
-                Text(
-                  '|',
-                  style: AppTextStyle.h3TextStyle600.copyWith(
-                    color: colors.primaryColor200,
+                  6.width,
+                  Text(
+                    controller.selectedFoodList.length.toString(),
+                    style: AppTextStyle.h3TextStyle600.copyWith(
+                      color: colors.primaryColor500,
+                    ),
                   ),
-                ),
-                8.width,
-                Text(
-                  '$currency 2700',
-                  style: AppTextStyle.h3TextStyle700.copyWith(
-                    color: colors.secondaryColor500,
+                  8.width,
+                  Text(
+                    '|',
+                    style: AppTextStyle.h3TextStyle600.copyWith(
+                      color: colors.primaryColor200,
+                    ),
                   ),
-                ),
-              ],
+                  8.width,
+                  Text(
+                    '$currency ${200 * controller.selectedFoodList.length}',
+                    style: AppTextStyle.h3TextStyle700.copyWith(
+                      color: colors.secondaryColor500,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -402,7 +404,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '$currency 2700',
+                                    '$currency 200',
                                     style: AppTextStyle.h2TextStyle700.copyWith(
                                       color: colors.textColor600,
                                       fontWeight: FontWeight.bold,
@@ -512,7 +514,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      '$currency 27000',
+                                      '$currency 200',
                                       style:
                                           AppTextStyle.h2TextStyle700.copyWith(
                                         color: colors.textColor600,
