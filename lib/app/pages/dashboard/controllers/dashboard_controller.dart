@@ -103,6 +103,12 @@ List<Widget> inventoryButtonList = [
     localeMethod: () => appLocalization.purchaseReturn,
     bgColor: colorList.value['red'],
   ),
+  TbdRoundButton(
+    icon: TablerIcons.building_warehouse,
+    onTap: () => navigatePage(Routes.restaurantHome),
+    localeMethod: () => appLocalization.restaurant,
+    bgColor: colorList.value['green'],
+  ),
 ];
 
 List<Widget> accountingButtonList = [
