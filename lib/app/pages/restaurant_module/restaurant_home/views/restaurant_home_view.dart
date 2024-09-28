@@ -167,6 +167,13 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             onTap: () {
               controller.selectedTableIndex.value = index;
             },
+            onLongPress: () {
+              if (controller.selectedTableIndex.value == index) {
+                controller.goToOrderCart(
+                  context: context,
+                );
+              }
+            },
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
