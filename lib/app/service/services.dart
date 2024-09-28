@@ -62,7 +62,6 @@ class Services {
     required String activeKey,
   }) async {
     const endPoint = 'poskeeper-splash';
-
     try {
       final response = await dio.post(
         APIType.public,

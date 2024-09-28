@@ -33,6 +33,7 @@ class RestaurantHomeController extends BaseController {
     'Meat',
     'Fruits',
   ];
+  final selectedFoodList = <int>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -66,5 +67,13 @@ class RestaurantHomeController extends BaseController {
       context: context,
       menuItems: menuItems,
     ).showMenuFromLeft();
+  }
+
+  void selectFoodItem(int index) {
+    if (selectedFoodList.contains(index)) {
+      selectedFoodList.remove(index);
+    } else {
+      selectedFoodList.add(index);
+    }
   }
 }

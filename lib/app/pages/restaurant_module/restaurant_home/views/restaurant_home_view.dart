@@ -32,44 +32,49 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
         onPressed: Get.back,
       ),
       actions: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 14,
-            vertical: 8,
+        GestureDetector(
+          onTap: () => controller.goToOrderCart(
+            context: context,
           ),
-          decoration: BoxDecoration(
-            color: colors.primaryColor50,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                TablerIcons.shopping_cart_copy,
-                color: colors.primaryColor500,
-                size: 18,
-              ),
-              6.width,
-              Text(
-                '27',
-                style: AppTextStyle.h3TextStyle600.copyWith(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: colors.primaryColor50,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  TablerIcons.shopping_cart_copy,
                   color: colors.primaryColor500,
+                  size: 18,
                 ),
-              ),
-              8.width,
-              Text(
-                '|',
-                style: AppTextStyle.h3TextStyle600.copyWith(
-                  color: colors.primaryColor200,
+                6.width,
+                Text(
+                  '27',
+                  style: AppTextStyle.h3TextStyle600.copyWith(
+                    color: colors.primaryColor500,
+                  ),
                 ),
-              ),
-              8.width,
-              Text(
-                '$currency 2700',
-                style: AppTextStyle.h3TextStyle700.copyWith(
-                  color: colors.secondaryColor500,
+                8.width,
+                Text(
+                  '|',
+                  style: AppTextStyle.h3TextStyle600.copyWith(
+                    color: colors.primaryColor200,
+                  ),
                 ),
-              ),
-            ],
+                8.width,
+                Text(
+                  '$currency 2700',
+                  style: AppTextStyle.h3TextStyle700.copyWith(
+                    color: colors.secondaryColor500,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         16.width,
@@ -348,81 +353,83 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           itemCount: 10,
           itemBuilder: (context, index) {
             final isSelected = false.obs;
-            return GestureDetector(
-              onTap: () => controller.goToOrderCart(
-                context: context,
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                margin: const EdgeInsets.only(
-                  bottom: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: colors.whiteColor,
-                  borderRadius: BorderRadius.circular(
-                    AppValues.radius_4,
+            return Obx(
+              () => GestureDetector(
+                onTap: () => controller.selectFoodItem(index),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.only(
+                    bottom: 10,
                   ),
-                  border: Border.all(
-                    color: colors.secondaryColor50,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    commonCachedNetworkImage(
-                      'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                      height: 74,
-                      width: 120,
-                      radius: 2,
+                  decoration: BoxDecoration(
+                    color: colors.whiteColor,
+                    borderRadius: BorderRadius.circular(
+                      AppValues.radius_4,
                     ),
-                    10.width,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 42,
-                            child: Text(
-                              'Margherita Pizza with sau Margherita Pizza ',
-                              maxLines: 2,
-                              style: AppTextStyle.h3TextStyle700.copyWith(
-                                color: colors.textColor500,
+                    border: Border.all(
+                      color: controller.selectedFoodList.contains(index)
+                          ? colors.primaryColor500
+                          : colors.secondaryColor100,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      commonCachedNetworkImage(
+                        'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                        height: 74,
+                        width: 120,
+                        radius: 2,
+                      ),
+                      10.width,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 42,
+                              child: Text(
+                                'Margherita Pizza with sau Margherita Pizza ',
+                                maxLines: 2,
+                                style: AppTextStyle.h3TextStyle700.copyWith(
+                                  color: colors.textColor500,
+                                ),
                               ),
                             ),
-                          ),
-                          8.height,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  '$currency 2700',
-                                  style: AppTextStyle.h2TextStyle700.copyWith(
-                                    color: colors.textColor600,
-                                    fontWeight: FontWeight.bold,
+                            8.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '$currency 2700',
+                                    style: AppTextStyle.h2TextStyle700.copyWith(
+                                      color: colors.textColor600,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: colors.primaryColor50,
-                                  borderRadius: BorderRadius.circular(
-                                    AppValues.radius_4,
+                                Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: colors.primaryColor50,
+                                    borderRadius: BorderRadius.circular(
+                                      AppValues.radius_4,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    TablerIcons.basket,
+                                    size: 20,
+                                    color: colors.primaryColor500,
                                   ),
                                 ),
-                                child: Icon(
-                                  TablerIcons.basket,
-                                  size: 20,
-                                  color: colors.primaryColor500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
@@ -457,80 +464,83 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               childAspectRatio: .78,
             ),
             itemBuilder: (context, index) {
-              final isSelected = false.obs;
-              return GestureDetector(
-                onTap: () => controller.goToOrderCart(
-                  context: context,
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: colors.whiteColor,
-                    borderRadius: BorderRadius.circular(
-                      AppValues.radius_4,
-                    ),
-                    border: Border.all(
-                      color: colors.secondaryColor100,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      commonCachedNetworkImage(
-                        'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                        height: 100,
-                        width: double.infinity,
-                        radius: 2,
+              return Obx(
+                () => GestureDetector(
+                  onTap: () => controller.selectFoodItem(index),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: colors.whiteColor,
+                      borderRadius: BorderRadius.circular(
+                        AppValues.radius_4,
                       ),
-                      8.height,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 42,
-                              child: Text(
-                                'Margherita Pizza with sau Margherita Pizza ',
-                                maxLines: 2,
-                                style: AppTextStyle.h3TextStyle700.copyWith(
-                                  color: colors.textColor500,
+                      border: Border.all(
+                        color: controller.selectedFoodList.contains(index)
+                            ? colors.primaryColor500
+                            : colors.secondaryColor100,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        commonCachedNetworkImage(
+                          'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                          height: 100,
+                          width: double.infinity,
+                          radius: 2,
+                        ),
+                        8.height,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 42,
+                                child: Text(
+                                  'Margherita Pizza with sau Margherita Pizza ',
+                                  maxLines: 2,
+                                  style: AppTextStyle.h3TextStyle700.copyWith(
+                                    color: colors.textColor500,
+                                  ),
                                 ),
                               ),
-                            ),
-                            8.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    '$currency 27000',
-                                    style: AppTextStyle.h2TextStyle700.copyWith(
-                                      color: colors.textColor600,
-                                      fontWeight: FontWeight.bold,
+                              8.height,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '$currency 27000',
+                                      style:
+                                          AppTextStyle.h2TextStyle700.copyWith(
+                                        color: colors.textColor600,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: colors.primaryColor50,
-                                    borderRadius: BorderRadius.circular(
-                                      AppValues.radius_4,
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: colors.primaryColor50,
+                                      borderRadius: BorderRadius.circular(
+                                        AppValues.radius_4,
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      TablerIcons.basket,
+                                      size: 20,
+                                      color: colors.primaryColor500,
                                     ),
                                   ),
-                                  child: Icon(
-                                    TablerIcons.basket,
-                                    size: 20,
-                                    color: colors.primaryColor500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
