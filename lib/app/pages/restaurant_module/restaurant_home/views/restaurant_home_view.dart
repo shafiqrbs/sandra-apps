@@ -371,9 +371,10 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           ),
         ),
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: controller.stockList.value?.length ?? 0,
           itemBuilder: (context, index) {
-            final isSelected = false.obs;
+            final stock = controller.stockList.value?[index];
+            if (controller.stockList.value == null) return Container();
             return Obx(
               () => GestureDetector(
                 onTap: () => controller.selectFoodItem(index),
@@ -396,7 +397,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   child: Row(
                     children: [
                       commonCachedNetworkImage(
-                        'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                        stock?.imagePath ??
+                            'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
                         height: 74,
                         width: 120,
                         radius: 2,
@@ -409,7 +411,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                             SizedBox(
                               height: 42,
                               child: Text(
-                                'Margherita Pizza with sau Margherita Pizza ',
+                                stock?.name ?? '',
                                 maxLines: 2,
                                 style: AppTextStyle.h3TextStyle700.copyWith(
                                   color: colors.textColor500,
@@ -423,7 +425,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '$currency 200',
+                                    '$currency ${stock?.salesPrice}',
                                     style: AppTextStyle.h2TextStyle700.copyWith(
                                       color: colors.textColor600,
                                       fontWeight: FontWeight.bold,
@@ -475,7 +477,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             ),
           ),
           child: GridView.builder(
-            itemCount: 10,
+            itemCount: controller.stockList.value?.length ?? 0,
             shrinkWrap: true,
             physics: const ScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -485,6 +487,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               childAspectRatio: .75,
             ),
             itemBuilder: (context, index) {
+              final stock = controller.stockList.value?[index];
+              if (controller.stockList.value == null) return Container();
               return Obx(
                 () => GestureDetector(
                   onTap: () => controller.selectFoodItem(index),
@@ -505,7 +509,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         commonCachedNetworkImage(
-                          'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                          stock?.imagePath ??
+                              'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
                           height: 100,
                           width: double.infinity,
                           radius: 2,
@@ -518,7 +523,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                               SizedBox(
                                 height: 42,
                                 child: Text(
-                                  'Margherita Pizza with sau Margherita Pizza ',
+                                  stock?.name ?? '',
                                   maxLines: 2,
                                   style: AppTextStyle.h3TextStyle700.copyWith(
                                     color: colors.textColor500,
@@ -533,7 +538,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      '$currency 200',
+                                      '$currency ${stock?.salesPrice}',
                                       style:
                                           AppTextStyle.h2TextStyle700.copyWith(
                                         color: colors.textColor600,

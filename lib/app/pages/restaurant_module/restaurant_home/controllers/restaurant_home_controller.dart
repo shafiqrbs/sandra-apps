@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
+import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/menu_bottom_sheet.dart';
+import 'package:sandra/app/service/parser.dart';
 import '/app/core/base/base_controller.dart';
 
 enum MenuView {
@@ -37,17 +39,35 @@ class RestaurantHomeController extends BaseController {
   final selectedFoodList = <int>[].obs;
   final selectedTableIndex = 0.obs;
   final tableList = Rx<List<RestaurantTable>?>(null);
+  final stockList = Rx<List<Stock?>?>(null);
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    await dataFetcher(future: getRestaurantTableList);
+    await dataFetcher(
+      future: () async {
+        await getRestaurantTableList();
+        await getStockItems();
+      },
+    );
   }
 
   Future<void> getRestaurantTableList() async {
     final response = await services.getRestaurantTableList();
     if (response != null) {
       tableList.value = response;
+    }
+  }
+
+  Future<void> getStockItems() async {
+    final response = await services.getStockItems();
+    print('stock items: $response');
+    if (response != null) {
+      final stockData = await parseList(
+        list: response,
+        fromJson: Stock.fromJson,
+      );
+      stockList.value = stockData;
     }
   }
 

@@ -77,7 +77,8 @@ Widget commonCachedNetworkImage(
 }) {
   if (url!.validate().isEmpty) {
     return placeHolderWidget(height: height, width: width, isOval: isOval);
-  } else if (url.validate().startsWith('http')) {
+  } else if (url.validate().startsWith('http') ||
+      url.validate().startsWith('www')) {
     return isOval
         ? ClipOval(
             child: CachedNetworkImage(
