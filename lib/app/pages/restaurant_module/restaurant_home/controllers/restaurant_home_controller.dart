@@ -34,6 +34,7 @@ class RestaurantHomeController extends BaseController {
     'Fruits',
   ];
   final selectedFoodList = <int>[].obs;
+  final selectedTableIndex = 0.obs;
 
   @override
   Future<void> onInit() async {
