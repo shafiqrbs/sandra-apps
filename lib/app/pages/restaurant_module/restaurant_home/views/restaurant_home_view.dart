@@ -168,6 +168,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           () => GestureDetector(
             onTap: () {
               controller.selectedTableIndex.value = index;
+              final tableStatus = controller.tableStatusList.value[index];
             },
             onLongPress: () {
               if (controller.selectedTableIndex.value == index) {
@@ -245,7 +246,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                       ),
                     ),
                     child: Text(
-                      controller.bottomStatus.value.name
+                      controller.tableStatusList.value[index].name
                           .capitalizeFirstLetter(),
                       style: AppTextStyle.h3TextStyle700.copyWith(
                         color: colors.whiteColor,
