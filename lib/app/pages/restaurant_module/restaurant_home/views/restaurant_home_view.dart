@@ -55,7 +55,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   ),
                   6.width,
                   Text(
-                    controller.selectedFoodList.length.toString(),
+                    controller.addSelectedFoodItem.value.values.length.toString(),
                     style: AppTextStyle.h3TextStyle600.copyWith(
                       color: colors.primaryColor500,
                     ),
@@ -167,8 +167,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
         return Obx(
           () => GestureDetector(
             onTap: () {
-              controller.selectedTableIndex.value = index;
-              final tableStatus = controller.tableStatusList.value[index];
+              controller.selectTable(index, table!);
             },
             onLongPress: () {
               if (controller.selectedTableIndex.value == index) {
@@ -378,7 +377,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             if (controller.stockList.value == null) return Container();
             return Obx(
               () => GestureDetector(
-                onTap: () => controller.selectFoodItem(index),
+                onTap: () => controller.selectFoodItem(index, stock!),
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   margin: const EdgeInsets.only(
@@ -492,7 +491,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               if (controller.stockList.value == null) return Container();
               return Obx(
                 () => GestureDetector(
-                  onTap: () => controller.selectFoodItem(index),
+                  onTap: () => controller.selectFoodItem(index, stock!),
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(

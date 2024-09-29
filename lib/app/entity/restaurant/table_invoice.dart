@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:sandra/app/entity/stock.dart';
+
 import '/app/core/utils/parser_functions.dart';
 
 class TableInvoice {
@@ -17,7 +21,7 @@ class TableInvoice {
   num? total;
   String? tokenNo;
   int? customerId;
-  String? items;
+  List<Stock>? items;
 
   TableInvoice({
     this.tableId,
@@ -57,7 +61,19 @@ class TableInvoice {
       total: parseDouble(json['total']),
       tokenNo: json['token_no'],
       customerId: json['customer_id'],
-      items: json['items'],
+      items: json['items'] == null
+          ? []
+          : json['items'] is String
+              ? List<Stock>.from(
+                  jsonDecode(json['items']).map(
+                    (x) => Stock.fromJson(x),
+                  ),
+                )
+              : List<Stock>.from(
+                  json['items']!.map(
+                    (x) => Stock.fromJson(x),
+                  ),
+                ),
     );
   }
 
@@ -79,7 +95,11 @@ class TableInvoice {
       'total': total,
       'token_no': tokenNo,
       'customer_id': customerId,
-      'items': items,
+      'items': items == null
+          ? null
+          : jsonEncode(
+              items!.map((x) => x.toJson()).toList(),
+            ),
     };
   }
 }

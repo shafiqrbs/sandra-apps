@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
+import 'package:sandra/app/entity/restaurant/table_invoice.dart';
+import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/core/base/base_controller.dart';
@@ -14,7 +19,7 @@ class OrderCartController extends BaseController {
     'John Doe',
   ];
 
-  final isAdditionalTableSelected = true.obs;
+  final isAdditionalTableSelected = false.obs;
   final showQuantityUpdateList = <int>[].obs;
 
   var itemQuantities =
@@ -37,9 +42,39 @@ class OrderCartController extends BaseController {
   final salesDiscountPercent = 0.00.obs;
   final salesReturnValue = 0.00.obs;
 
+  final tableInvoice = Rx<TableInvoice?>(null);
+  final cartItems = Rx<List<Stock>?>(null);
+  final selectedTableId = 0.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
+    final arg = await Get.arguments;
+    if (arg != null) {
+      final invoice = arg['tableInvoice'];
+      try {
+        tableInvoice.value = TableInvoice.fromJson(invoice[0]);
+      }  catch (e,s) {
+        if(kDebugMode){
+          print('Error parsing JSON: $e');
+          print(s);
+        }
+        // TODO
+      }
+      selectedTableId.value = arg['tableId'];
+    }
+    if (tableInvoice.value?.items != null) {
+      try {
+        cartItems.value = tableInvoice.value!.items;
+
+      } catch (e, stackTrace) {
+        print('Error parsing JSON: $e');
+        print(stackTrace);
+      }
+    }
+
+    print('tableInvoice: ${tableInvoice.value}');
+
   }
 
   void changeAdditionTableSelection() {

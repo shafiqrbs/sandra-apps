@@ -16,6 +16,7 @@ import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/label_value.dart';
+import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_widget/customer_card_view.dart';
 import 'package:sandra/app/global_widget/transaction_method_item_view.dart';
@@ -24,6 +25,7 @@ import '/app/core/base/base_view.dart';
 
 //ignore: must_be_immutable
 class OrderCartView extends BaseView<OrderCartController> {
+
   OrderCartView({super.key});
 
   final currency = SetUp().symbol;
@@ -311,10 +313,13 @@ class OrderCartView extends BaseView<OrderCartController> {
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: controller.cartItems.value?.length ?? 0,
         itemBuilder: (context, index) {
+          final item = controller.cartItems.value?[index];
+          if (item == null) return Container();
           return _buildOrderItemCard(
             index: index,
+            item: item,
           );
         },
       ),
@@ -323,6 +328,8 @@ class OrderCartView extends BaseView<OrderCartController> {
 
   Widget _buildOrderItemCard({
     required int index,
+    required Stock item,
+
   }) {
     Timer? timer;
     return Stack(
@@ -354,7 +361,7 @@ class OrderCartView extends BaseView<OrderCartController> {
               crossAxisAlignment: startCAA,
               children: [
                 commonCachedNetworkImage(
-                  'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                  item.imagePath ?? 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
                   width: 50,
                   height: 50,
                   radius: AppValues.radius_4,
@@ -362,9 +369,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 8.width,
                 Expanded(
                   child: Text(
-                    index.isEven
-                        ? 'this is test cheese burger with french fry'
-                        : ' Cheese Pizza',
+                    item.name ?? '',
                     maxLines: 2,
                     textAlign: TextAlign.start,
                     style: AppTextStyle.h3TextStyle400.copyWith(

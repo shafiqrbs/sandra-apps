@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
 import 'package:sandra/app/entity/stock.dart';
@@ -38,7 +41,9 @@ class RestaurantHomeController extends BaseController {
     'Fruits',
   ];
   final selectedFoodList = <int>[].obs;
+  final addSelectedFoodItem = Rx<Map<int, List<Stock>>>(<int, List<Stock>>{});
   final selectedTableIndex = 0.obs;
+  final selectedTableId = 0.obs;
   final tableList = Rx<List<RestaurantTable>?>(null);
   final tableStatusList = Rx<List<BottomStatus>>([]);
   final stockList = Rx<List<Stock?>?>(null);
@@ -52,17 +57,17 @@ class RestaurantHomeController extends BaseController {
         await getRestaurantTableList();
         await getStockItems();
         await insertTableList();
+        selectedTableId.value = tableList.value!.first.id!;
       },
     );
   }
 
   Future<void> insertTableList() async {
-    print('tableInvoiceList: ${tableInvoiceList}');
     if (tableInvoiceList.isEmpty) return;
     await dbHelper.insertList(
       tableName: dbTables.tableTableInvoice,
       dataList: tableInvoiceList.map((e) => e.toJson()).toList(),
-      deleteBeforeInsert: false,
+      deleteBeforeInsert: true,
     );
   }
 
@@ -97,7 +102,6 @@ class RestaurantHomeController extends BaseController {
           total: 0.0,
           tokenNo: '',
           customerId: 0,
-          items: '',
         ),
       );
     }
@@ -128,16 +132,34 @@ class RestaurantHomeController extends BaseController {
     changeTableStatus(status);
   }
 
+  void selectTable(
+    int index,
+    RestaurantTable table,
+  ) {
+    selectedTableIndex.value = index;
+    selectedTableId.value = table.id!;
+  }
+
   void changeTableStatus(BottomStatus status) {
     if (tableStatusList.value.isEmpty) return;
     tableStatusList.value[selectedTableIndex.value] = status;
   }
 
-  void goToOrderCart({
+  Future<void> goToOrderCart({
     required BuildContext context,
-  }) {
+  }) async {
+    final tableInvoice = await dbHelper.getAllWhr(
+      tbl: dbTables.tableTableInvoice,
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
     Get.dialog(
       OrderCartView(),
+      arguments: {
+        'tableId': selectedTableId.value,
+        'tableInvoice': tableInvoice,
+      },
     );
   }
 
@@ -150,11 +172,31 @@ class RestaurantHomeController extends BaseController {
     ).showMenuFromLeft();
   }
 
-  void selectFoodItem(int index) {
-    if (selectedFoodList.contains(index)) {
-      selectedFoodList.remove(index);
-    } else {
-      selectedFoodList.add(index);
-    }
+  Future<void> selectFoodItem(int index, Stock stock) async {
+    addSelectedFoodItem.value.update(
+      selectedTableId.value, // The table ID as the key
+      (value) {
+        value.add(stock); // Add the selected stock to the list
+        return value; // Return the updated list
+      },
+      ifAbsent: () => [
+        stock
+      ], // If no entry exists for the selected table, create a new list
+    );
+
+    print('addSelectedFoodItem: ${addSelectedFoodItem.value}');
+
+    await dbHelper.updateWhere(
+      tbl: dbTables.tableTableInvoice,
+      data: {
+        'items': jsonEncode(addSelectedFoodItem.value[selectedTableId.value]),
+      },
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
+    
+
+    toast('Item added to the cart');
   }
 }
