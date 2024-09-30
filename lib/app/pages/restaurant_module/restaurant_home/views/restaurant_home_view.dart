@@ -55,7 +55,10 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   ),
                   6.width,
                   Text(
-                    controller.addSelectedFoodItem.value.values.length.toString(),
+                    controller.addSelectedFoodItem
+                            .value[controller.selectedTableId.value]?.length
+                            .toString() ??
+                        '0',
                     style: AppTextStyle.h3TextStyle600.copyWith(
                       color: colors.primaryColor500,
                     ),
@@ -69,7 +72,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   ),
                   8.width,
                   Text(
-                    '$currency ${200 * controller.selectedFoodList.length}',
+                    '$currency ${controller.calculateTotalAmount(controller.addSelectedFoodItem.value[controller.selectedTableId.value] ?? [])}',
                     style: AppTextStyle.h3TextStyle700.copyWith(
                       color: colors.secondaryColor500,
                     ),

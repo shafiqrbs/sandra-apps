@@ -109,7 +109,6 @@ class RestaurantHomeController extends BaseController {
 
   Future<void> getStockItems() async {
     final response = await services.getStockItems();
-    print('stock items: $response');
     if (response != null) {
       final stockData = await parseList(
         list: response,
@@ -174,15 +173,16 @@ class RestaurantHomeController extends BaseController {
 
   Future<void> selectFoodItem(int index, Stock stock) async {
     addSelectedFoodItem.value.update(
-      selectedTableId.value, // The table ID as the key
+      selectedTableId.value,
       (value) {
-        value.add(stock); // Add the selected stock to the list
-        return value; // Return the updated list
+        value.add(stock);
+        return value;
       },
       ifAbsent: () => [
-        stock
-      ], // If no entry exists for the selected table, create a new list
+        stock,
+      ],
     );
+    addSelectedFoodItem.refresh();
 
     print('addSelectedFoodItem: ${addSelectedFoodItem.value}');
 
@@ -195,8 +195,15 @@ class RestaurantHomeController extends BaseController {
       whereArgs: [selectedTableId.value],
     );
 
-    
-
     toast('Item added to the cart');
+  }
+
+  // calculate total amount of the selected items
+  double calculateTotalAmount(List<Stock> items) {
+    double totalAmount = 0;
+    for (final Stock item in items) {
+      totalAmount += item.salesPrice!;
+    }
+    return totalAmount;
   }
 }
