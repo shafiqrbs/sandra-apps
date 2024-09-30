@@ -10,6 +10,7 @@ import 'package:sandra/app/entity/restaurant/table_invoice.dart';
 import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_controller.dart';
 
 class OrderCartController extends BaseController {
@@ -57,6 +58,10 @@ class OrderCartController extends BaseController {
       tableName.value = arg['tableName'];
       tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
+    initializeCartItems();
+  }
+
+  void initializeCartItems() {
     if (tableInvoice.value?.items != null) {
       cartItems.value = tableInvoice.value!.items;
       itemQuantities.value = List<int>.filled(
@@ -70,21 +75,55 @@ class OrderCartController extends BaseController {
         }
       }
     }
-
-    print('tableInvoice: ${tableInvoice.value}');
   }
 
   void changeAdditionTableSelection() {
     isAdditionalTableSelected.value = !isAdditionalTableSelected.value;
   }
 
-  void increaseQuantity(int index) {
+  Future<void> updateCartItems() async {
+    final subTotal = calculateTotalAmount(cartItems.value!);
+
+    await dbHelper.updateWhere(
+      tbl: dbTables.tableTableInvoice,
+      data: {
+        'items': jsonEncode(cartItems.value),
+        'subtotal': subTotal,
+      },
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
+    // get updated cart items
+    final updatedCartItems = await dbHelper.getAllWhr(
+      tbl: dbTables.tableTableInvoice,
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+    tableInvoice.value = TableInvoice.fromJson(updatedCartItems[0]);
+    cartItems.value = tableInvoice.value!.items;
+    tableInvoice.refresh();
+
+    // update restaurant controller addSelectedFoodItem value
+    final restaurantController = Get.find<RestaurantHomeController>();
+    restaurantController.addSelectedFoodItem.value[selectedTableId.value] =
+        cartItems.value ?? [];
+    restaurantController.addSelectedFoodItem.refresh();
+  }
+
+  Future<void> increaseQuantity(int index) async {
     itemQuantities[index]++;
+    // update invoiceTable items quantity
+    cartItems.value![index].quantity = itemQuantities[index];
+    updateCartItems();
   }
 
   void decreaseQuantity(int index) {
     if (itemQuantities[index] > 1) {
       itemQuantities[index]--;
+      // update invoiceTable items quantity
+      cartItems.value![index].quantity = itemQuantities[index];
+      updateCartItems();
     }
   }
 
@@ -104,7 +143,6 @@ class OrderCartController extends BaseController {
         child: AddCustomerModalView(),
       ),
     ) as Customer?;
-    print('result: $result');
 
     if (result != null) {
       customerManager.selectedItem.value = result;
@@ -142,17 +180,6 @@ class OrderCartController extends BaseController {
     }
   }
 
-  void onAmountChange(String value) {
-    if (value.isNotEmpty) {
-      final returnValue = netTotal.value - value.toDouble();
-      returnMsg.value = returnValue < 0 ? 'Return' : 'Due';
-      salesReturnValue.value = returnValue.toPrecision(2).abs();
-    } else {
-      returnMsg.value = 'Due';
-      salesReturnValue.value = 0.00;
-    }
-  }
-
   void onDiscountChange(String value) {
     final discountValue = double.tryParse(value) ?? 0;
 
@@ -179,5 +206,24 @@ class OrderCartController extends BaseController {
     update();
     notifyChildrens();
     refresh();
+  }
+
+  void onAmountChange(String value) {
+    if (value.isNotEmpty) {
+      final returnValue = netTotal.value - value.toDouble();
+      returnMsg.value = returnValue < 0 ? 'Return' : 'Due';
+      salesReturnValue.value = returnValue.toPrecision(2).abs();
+    } else {
+      returnMsg.value = 'Due';
+      salesReturnValue.value = 0.00;
+    }
+  }
+
+  double calculateTotalAmount(List<Stock> items) {
+    double totalAmount = 0;
+    for (final Stock item in items) {
+      totalAmount += item.salesPrice! * item.quantity!;
+    }
+    return totalAmount;
   }
 }
