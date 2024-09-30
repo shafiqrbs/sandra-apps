@@ -274,6 +274,9 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           Expanded(
             child: TextFormField(
               controller: controller.searchController,
+              onChanged: (value) {
+                controller.onSearch(value);
+              },
               decoration: InputDecoration(
                 hintText: appLocalization.search,
                 hintStyle: AppTextStyle.h3TextStyle400.copyWith(
@@ -374,9 +377,9 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           ),
         ),
         child: ListView.builder(
-          itemCount: controller.stockList.value?.length ?? 0,
+          itemCount: controller.filteredStockList.value?.length ?? 0,
           itemBuilder: (context, index) {
-            final stock = controller.stockList.value?[index];
+            final stock = controller.filteredStockList.value?[index];
             if (controller.stockList.value == null) return Container();
             return Obx(
               () => GestureDetector(
@@ -480,7 +483,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             ),
           ),
           child: GridView.builder(
-            itemCount: controller.stockList.value?.length ?? 0,
+            itemCount: controller.filteredStockList.value?.length ?? 0,
             shrinkWrap: true,
             physics: const ScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -490,7 +493,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               childAspectRatio: .75,
             ),
             itemBuilder: (context, index) {
-              final stock = controller.stockList.value?[index];
+              final stock = controller.filteredStockList.value?[index];
               if (controller.stockList.value == null) return Container();
               return Obx(
                 () => GestureDetector(

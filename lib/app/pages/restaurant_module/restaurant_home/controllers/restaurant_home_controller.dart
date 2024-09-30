@@ -37,6 +37,7 @@ class RestaurantHomeController extends BaseController {
   final tableList = Rx<List<RestaurantTable>?>(null);
   final tableStatusList = Rx<List<BottomStatus>>([]);
   final stockList = Rx<List<Stock?>?>(null);
+  final filteredStockList = Rx<List<Stock?>?>(null);
   RxList<TableInvoice> tableInvoiceList = RxList<TableInvoice>([]);
 
   @override
@@ -106,6 +107,7 @@ class RestaurantHomeController extends BaseController {
         fromJson: Stock.fromJson,
       );
       stockList.value = stockData;
+      filteredStockList.value = stockData;
     }
   }
 
@@ -235,6 +237,19 @@ class RestaurantHomeController extends BaseController {
     );
 
     toast('Item added to the cart');
+  }
+
+  Future<void> onSearch(String value) async {
+    debouncer.call(
+          () async {
+        final searchValue = value.toLowerCase();
+        final filteredList = stockList.value?.where((stock) {
+          return stock?.name?.toLowerCase().contains(searchValue) ?? false;
+        }).toList();
+
+        filteredStockList.value = filteredList;
+      },
+    );
   }
 
   // calculate total amount of the selected items
