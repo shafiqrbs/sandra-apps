@@ -813,9 +813,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                   valueFontSize: 12,
                   valueFontWeight: 900,
                   padding: EdgeInsets.zero,
-                  margin: const EdgeInsets.only(
-                    bottom: 8,
-                  ),
+                  margin: EdgeInsets.zero,
                 ),
                 LabelValue(
                   label: appLocalization.sd,
@@ -825,9 +823,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                   valueFontSize: 12,
                   valueFontWeight: 900,
                   padding: EdgeInsets.zero,
-                  margin: const EdgeInsets.only(
-                    bottom: 8,
-                  ),
+                  margin: EdgeInsets.zero,
                 ),
                 LabelValue(
                   label: appLocalization.dis,
@@ -879,31 +875,46 @@ class OrderCartView extends BaseView<OrderCartController> {
   Widget _buildTransactionMethod(
     BuildContext context,
   ) {
+    print(
+        'TransactionMethod: ${controller.transactionMethodsManager.allItems}');
     return Obx(
       () => Column(
         children: [
           if (controller.transactionMethodsManager.allItems.value != null)
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Wrap(
-                spacing: 4,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                runSpacing: 8,
-                children:
-                    controller.transactionMethodsManager.allItems.value!.map(
-                  (e) {
-                    final selected =
-                        controller.transactionMethodsManager.selectedItem.value;
-                    return _buildTransactionMethodItemView(
-                      method: e,
-                      isSelected: selected == e,
-                      onTap: () {
-                        controller
-                            .transactionMethodsManager.selectedItem.value = e;
-                      },
-                    );
-                  },
-                ).toList(),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 8,
+              ),
+              decoration: BoxDecoration(
+                color: colors.whiteColor,
+                borderRadius: BorderRadius.circular(
+                  AppValues.radius_4,
+                ),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Wrap(
+                  spacing: 4,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  runSpacing: 8,
+                  children:
+                      controller.transactionMethodsManager.allItems.value!.map(
+                    (e) {
+                      final selected = controller
+                          .transactionMethodsManager.selectedItem.value;
+                      return _buildTransactionMethodItemView(
+                        method: e,
+                        isSelected: selected == e,
+                        onTap: () {
+                          controller
+                              .transactionMethodsManager.selectedItem.value = e;
+                        },
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
             ),
         ],
@@ -923,13 +934,15 @@ class OrderCartView extends BaseView<OrderCartController> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 12,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   AppValues.radius_4,
                 ),
-                color:
-                    isSelected ? colors.secondaryColor500 : Colors.transparent,
+                color: Colors.transparent,
                 border: Border.all(
                   color: isSelected
                       ? colors.secondaryColor500
@@ -937,8 +950,8 @@ class OrderCartView extends BaseView<OrderCartController> {
                 ),
               ),
               child: Container(
-                height: 22,
-                width: 22,
+                //height: 22,
+                //width: 22,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                     8,
@@ -949,9 +962,17 @@ class OrderCartView extends BaseView<OrderCartController> {
                   method.imagePath,
                   24,
                   width: 24,
-                  fit: BoxFit.fill,
-                  isOval: true,
+                  fit: BoxFit.cover,
                 ),
+              ),
+            ),
+            4.height,
+            Text(
+              method.methodMode ?? '',
+              style: AppTextStyle.h3TextStyle400.copyWith(
+                color: isSelected
+                    ? colors.textColor500
+                    : colors.textColor300,
               ),
             ),
           ],

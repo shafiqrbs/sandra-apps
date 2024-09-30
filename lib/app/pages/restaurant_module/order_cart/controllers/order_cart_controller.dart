@@ -58,10 +58,10 @@ class OrderCartController extends BaseController {
       tableName.value = arg['tableName'];
       tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
-    initializeCartItems();
+    await initializeCartItems();
   }
 
-  void initializeCartItems() {
+  Future<void> initializeCartItems() async {
     if (tableInvoice.value?.items != null) {
       cartItems.value = tableInvoice.value!.items;
       itemQuantities.value = List<int>.filled(
@@ -75,6 +75,12 @@ class OrderCartController extends BaseController {
         }
       }
     }
+
+    await transactionMethodsManager.getAll();
+    transactionMethodsManager.selectedItem.value = transactionMethodsManager
+        .allItems.value
+        ?.where((element) => element.isDefault == 1)
+        .first;
   }
 
   void changeAdditionTableSelection() {
