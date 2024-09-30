@@ -177,7 +177,28 @@ class RestaurantHomeController extends BaseController {
   }
 
   Future<void> selectFoodItem(int index, Stock stock) async {
+
     addSelectedFoodItem.value.update(
+      selectedTableId.value,
+          (value) {
+        // Check if the stock item already exists in the list
+        final existingStock = value.firstWhereOrNull((s) => s.itemId == stock.itemId);
+        if (existingStock != null) {
+          // If it exists, increment the quantity
+          existingStock.quantity = existingStock.quantity! + 1;
+        } else {
+          // If it doesn't exist, add it to the list with a quantity of 1
+          stock.quantity = 1;
+          value.add(stock);
+        }
+        return value;
+      },
+      ifAbsent: () => [
+        stock..quantity = 1,
+      ],
+    );
+
+    /*addSelectedFoodItem.value.update(
       selectedTableId.value,
       (value) {
         value.add(stock);
@@ -186,7 +207,7 @@ class RestaurantHomeController extends BaseController {
       ifAbsent: () => [
         stock,
       ],
-    );
+    );*/
     addSelectedFoodItem.refresh();
 
     print('addSelectedFoodItem: ${addSelectedFoodItem.value}');
@@ -207,7 +228,7 @@ class RestaurantHomeController extends BaseController {
   double calculateTotalAmount(List<Stock> items) {
     double totalAmount = 0;
     for (final Stock item in items) {
-      totalAmount += item.salesPrice!;
+      totalAmount += item.salesPrice! * item.quantity!;
     }
     return totalAmount;
   }

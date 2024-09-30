@@ -59,6 +59,16 @@ class OrderCartController extends BaseController {
     }
     if (tableInvoice.value?.items != null) {
       cartItems.value = tableInvoice.value!.items;
+      itemQuantities.value = List<int>.filled(
+        cartItems.value!.length,
+        1,
+      );
+      for (int i = 0; i < cartItems.value!.length; i++) {
+        final cartItem = cartItems.value![i];
+        if (cartItem.quantity! > 1) {
+          itemQuantities[i] = cartItem.quantity!;
+        }
+      }
     }
 
     print('tableInvoice: ${tableInvoice.value}');

@@ -442,7 +442,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                               ),
                               6.height,
                               Text(
-                                '${currency ?? ''} ${2000 * controller.itemQuantities[index]}',
+                                '${currency ?? ''} ${item.salesPrice! * controller.itemQuantities[index]}',
                                 textAlign: TextAlign.right,
                                 style: AppTextStyle.h3TextStyle400.copyWith(
                                   color: colors.textColor600,
