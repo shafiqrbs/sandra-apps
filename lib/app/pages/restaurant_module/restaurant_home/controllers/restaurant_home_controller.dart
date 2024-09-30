@@ -147,6 +147,18 @@ class RestaurantHomeController extends BaseController {
   Future<void> goToOrderCart({
     required BuildContext context,
   }) async {
+
+    final subtotal = calculateTotalAmount(addSelectedFoodItem.value[selectedTableId.value]!);
+
+    await dbHelper.updateWhere(
+      tbl: dbTables.tableTableInvoice,
+      data: {
+        'subtotal': subtotal,
+      },
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
     final tableInvoice = await dbHelper.getAllWhr(
       tbl: dbTables.tableTableInvoice,
       where: 'table_id = ?',

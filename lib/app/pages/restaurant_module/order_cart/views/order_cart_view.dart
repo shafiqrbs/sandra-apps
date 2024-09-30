@@ -565,7 +565,7 @@ class OrderCartView extends BaseView<OrderCartController> {
             ),
           ),
           Text(
-            '${currency ?? ''} 36.87',
+            '${currency ?? ''} ${controller.tableInvoice.value?.subTotal ?? 0.00}',
             style: AppTextStyle.h1TextStyle700.copyWith(
               color: colors.whiteColor,
               fontWeight: FontWeight.bold,
