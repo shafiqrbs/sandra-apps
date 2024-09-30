@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
 import 'package:sandra/app/entity/stock.dart';
@@ -28,18 +29,7 @@ class RestaurantHomeController extends BaseController {
   final searchController = TextEditingController();
   final menuView = Rx<MenuView?>(null);
   final bottomStatus = Rx<BottomStatus>(BottomStatus.hold);
-  final List<String> menuItems = [
-    'Pizza',
-    'Burger',
-    'Soup',
-    'Salad',
-    'Set menu',
-    'Juice Special',
-    'Sandwich',
-    'Pasta',
-    'Meat',
-    'Fruits',
-  ];
+  final menuItems = Rx<List<Category>?>(null);
   final selectedFoodList = <int>[].obs;
   final addSelectedFoodItem = Rx<Map<int, List<Stock>>>(<int, List<Stock>>{});
   final selectedTableIndex = 0.obs;
@@ -57,6 +47,7 @@ class RestaurantHomeController extends BaseController {
         await getRestaurantTableList();
         await getStockItems();
         await insertTableList();
+        await getCategories();
         selectedTableId.value = tableList.value!.first.id!;
       },
     );
@@ -116,6 +107,14 @@ class RestaurantHomeController extends BaseController {
       );
       stockList.value = stockData;
     }
+  }
+
+  Future<void> getCategories() async {
+    final getData = await dbHelper.getAll(
+      tbl: dbTables.tableCategories,
+    );
+    final categories = getData.map((e) => Category.fromJson(e)).toList();
+    menuItems.value = categories;
   }
 
   void changeMenuView() {
@@ -186,7 +185,7 @@ class RestaurantHomeController extends BaseController {
   }) {
     MenuBottomSheet(
       context: context,
-      menuItems: menuItems,
+      menuItems: menuItems.value ?? [],
     ).showMenuFromLeft();
   }
 

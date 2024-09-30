@@ -6,9 +6,10 @@ import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
+import 'package:sandra/app/entity/category.dart';
 
 class MenuBottomSheet {
-  final List<String> menuItems;
+  final List<Category> menuItems;
   final BuildContext context;
 
   MenuBottomSheet({
@@ -78,6 +79,7 @@ class MenuBottomSheet {
               padding: EdgeInsets.zero,
               itemCount: menuItems.length,
               itemBuilder: (context, index) {
+                final item = menuItems[index];
                 return Container(
                   margin: const EdgeInsets.only(
                     bottom: 8,
@@ -93,7 +95,7 @@ class MenuBottomSheet {
                     color: colors.secondaryColor50,
                   ),
                   child: Text(
-                    menuItems[index],
+                    item.name ?? '',
                     style: AppTextStyle.h2TextStyle500.copyWith(
                       color: colors.textColor500,
                     ),
@@ -105,56 +107,57 @@ class MenuBottomSheet {
           Positioned(
             right: 0,
             child: Transform.translate(
-            offset: const Offset(
-              65,
-              0,
-            ), // Adjust this value to move the widget to the left
-            child: Transform.rotate(
-              angle: -3.14159 / 2, // Rotate 90 degrees (π/2 radians)
-              child: GestureDetector(
-                onTap: Get.back,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(
-                        AppValues.radius_8,
-                      ),
-                      bottomRight: Radius.circular(
-                        AppValues.radius_8,
-                      ),
-                    ),
-                    gradient: LinearGradient(
-                      colors: [
-                        colors.primaryColor500,
-                        colors.secondaryColor500
-                      ],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize
-                        .min, // Ensure the size is adjusted to content
-                    children: [
-                      Icon(
-                        TablerIcons.tools_kitchen_2,
-                        size: 20,
-                        color: colors.whiteColor,
-                      ),
-                      6.width,
-                      Text(
-                        appLocalization.menu,
-                        style: AppTextStyle.h2TextStyle700.copyWith(
-                          color: colors.whiteColor,
+              offset: const Offset(
+                65,
+                0,
+              ), // Adjust this value to move the widget to the left
+              child: Transform.rotate(
+                angle: -3.14159 / 2, // Rotate 90 degrees (π/2 radians)
+                child: GestureDetector(
+                  onTap: Get.back,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(
+                          AppValues.radius_8,
+                        ),
+                        bottomRight: Radius.circular(
+                          AppValues.radius_8,
                         ),
                       ),
-                    ],
+                      gradient: LinearGradient(
+                        colors: [
+                          colors.primaryColor500,
+                          colors.secondaryColor500
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize
+                          .min, // Ensure the size is adjusted to content
+                      children: [
+                        Icon(
+                          TablerIcons.tools_kitchen_2,
+                          size: 20,
+                          color: colors.whiteColor,
+                        ),
+                        6.width,
+                        Text(
+                          appLocalization.menu,
+                          style: AppTextStyle.h2TextStyle700.copyWith(
+                            color: colors.whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),)
+          )
         ],
       ),
     );
