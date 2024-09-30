@@ -142,6 +142,7 @@ class RestaurantHomeController extends BaseController {
   void changeTableStatus(BottomStatus status) {
     if (tableStatusList.value.isEmpty) return;
     tableStatusList.value[selectedTableIndex.value] = status;
+    tableStatusList.refresh();
   }
 
   Future<void> goToOrderCart({
