@@ -45,6 +45,7 @@ class OrderCartController extends BaseController {
   final tableInvoice = Rx<TableInvoice?>(null);
   final cartItems = Rx<List<Stock>?>(null);
   final selectedTableId = 0.obs;
+  final tableName = ''.obs;
 
   @override
   Future<void> onInit() async {
@@ -52,29 +53,15 @@ class OrderCartController extends BaseController {
     final arg = await Get.arguments;
     if (arg != null) {
       final invoice = arg['tableInvoice'];
-      try {
-        tableInvoice.value = TableInvoice.fromJson(invoice[0]);
-      }  catch (e,s) {
-        if(kDebugMode){
-          print('Error parsing JSON: $e');
-          print(s);
-        }
-        // TODO
-      }
       selectedTableId.value = arg['tableId'];
+      tableName.value = arg['tableName'];
+      tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
     if (tableInvoice.value?.items != null) {
-      try {
-        cartItems.value = tableInvoice.value!.items;
-
-      } catch (e, stackTrace) {
-        print('Error parsing JSON: $e');
-        print(stackTrace);
-      }
+      cartItems.value = tableInvoice.value!.items;
     }
 
     print('tableInvoice: ${tableInvoice.value}');
-
   }
 
   void changeAdditionTableSelection() {
@@ -82,7 +69,6 @@ class OrderCartController extends BaseController {
   }
 
   void increaseQuantity(int index) {
-    print('on tap');
     itemQuantities[index]++;
   }
 
@@ -165,7 +151,7 @@ class OrderCartController extends BaseController {
     } else if (discountType.value == 'percent') {
       // Calculate percentage discount
       final percentDiscount =
-      (salesSubTotal.value * discountValue / 100).toPrecision(2);
+          (salesSubTotal.value * discountValue / 100).toPrecision(2);
       handleDiscountChange(percentDiscount, discountValue);
     }
 

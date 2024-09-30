@@ -25,7 +25,6 @@ import '/app/core/base/base_view.dart';
 
 //ignore: must_be_immutable
 class OrderCartView extends BaseView<OrderCartController> {
-
   OrderCartView({super.key});
 
   final currency = SetUp().symbol;
@@ -90,8 +89,14 @@ class OrderCartView extends BaseView<OrderCartController> {
 
   Widget _buildStatusBar() {
     return Row(
-      mainAxisAlignment: endMAA,
+      mainAxisAlignment: spaceBetweenMAA,
       children: [
+        Text(
+          '${appLocalization.table}: ${controller.tableName.value}',
+          style: AppTextStyle.h2TextStyle500.copyWith(
+            color: colors.blackColor500,
+          ),
+        ),
         GestureDetector(
           onTap: Get.back,
           child: Container(
@@ -329,7 +334,6 @@ class OrderCartView extends BaseView<OrderCartController> {
   Widget _buildOrderItemCard({
     required int index,
     required Stock item,
-
   }) {
     Timer? timer;
     return Stack(
@@ -361,7 +365,8 @@ class OrderCartView extends BaseView<OrderCartController> {
               crossAxisAlignment: startCAA,
               children: [
                 commonCachedNetworkImage(
-                  item.imagePath ?? 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                  item.imagePath ??
+                      'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
                   width: 50,
                   height: 50,
                   radius: AppValues.radius_4,

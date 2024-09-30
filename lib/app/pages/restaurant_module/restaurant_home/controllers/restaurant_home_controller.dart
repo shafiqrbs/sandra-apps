@@ -153,10 +153,15 @@ class RestaurantHomeController extends BaseController {
       whereArgs: [selectedTableId.value],
     );
 
+    final tableName = tableList.value!
+        .firstWhere((element) => element.id == selectedTableId.value)
+        .tableName;
+
     Get.dialog(
       OrderCartView(),
       arguments: {
         'tableId': selectedTableId.value,
+        'tableName': tableName,
         'tableInvoice': tableInvoice,
       },
     );
