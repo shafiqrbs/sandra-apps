@@ -147,8 +147,9 @@ class RestaurantHomeController extends BaseController {
   Future<void> goToOrderCart({
     required BuildContext context,
   }) async {
-
-    final subtotal = calculateTotalAmount(addSelectedFoodItem.value[selectedTableId.value]!);
+    final subtotal = calculateTotalAmount(
+      addSelectedFoodItem.value[selectedTableId.value] ?? [],
+    );
 
     await dbHelper.updateWhere(
       tbl: dbTables.tableTableInvoice,
@@ -189,12 +190,12 @@ class RestaurantHomeController extends BaseController {
   }
 
   Future<void> selectFoodItem(int index, Stock stock) async {
-
     addSelectedFoodItem.value.update(
       selectedTableId.value,
-          (value) {
+      (value) {
         // Check if the stock item already exists in the list
-        final existingStock = value.firstWhereOrNull((s) => s.itemId == stock.itemId);
+        final existingStock =
+            value.firstWhereOrNull((s) => s.itemId == stock.itemId);
         if (existingStock != null) {
           // If it exists, increment the quantity
           existingStock.quantity = existingStock.quantity! + 1;
