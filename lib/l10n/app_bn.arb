@@ -388,6 +388,7 @@
   "addItems" : "আইটেম যোগ করুন",
   "table" : "টেবিল",
   "allCategory" : "সব ক্যাটাগরি",
+  "booked" : "বুক করা",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",

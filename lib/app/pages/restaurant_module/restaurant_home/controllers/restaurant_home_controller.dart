@@ -21,7 +21,7 @@ enum BottomStatus {
   order,
   kitchen,
   hold,
-  reserved,
+  booked,
   free,
 }
 

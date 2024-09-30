@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
@@ -30,6 +31,12 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           color: colors.whiteColor,
         ),
         onPressed: Get.back,
+      ),
+      title: Text(
+        appLocalization.pos,
+        style: AppTextStyle.h1TextStyle700.copyWith(
+          color: colors.whiteColor,
+        ),
       ),
       actions: [
         GestureDetector(
@@ -95,7 +102,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
         children: [
           Column(
             children: [
-              10.height,
+              0.height,
               _buildTableList(),
               _buildSearchBar(),
               _buildMenuList(),
@@ -187,7 +194,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                     top: 12,
                   ),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
+                    horizontal: 16,
                     vertical: 14,
                   ),
                   decoration: BoxDecoration(
@@ -203,7 +210,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   ),
                   child: Column(
                     children: [
-                      10.height,
+                      4.height,
                       Text(
                         table?.tableName ?? '',
                         style: AppTextStyle.h2TextStyle700.copyWith(
@@ -212,7 +219,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                               : colors.textColor500,
                         ),
                       ),
-                      14.height,
+                      4.height,
                       Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 4,
@@ -267,8 +274,9 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   Widget _buildSearchBar() {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 16,
+        horizontal: 8,
       ),
+      height: 40.sp,
       child: Row(
         children: [
           Expanded(
@@ -334,8 +342,14 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           GestureDetector(
             onTap: controller.changeMenuView,
             child: Container(
+              height: double.infinity,
               padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.all(4),
+              width: 36.sp,
+              margin: const EdgeInsets.only(
+                left: 4,
+                top: 4,
+                bottom: 4,
+              ),
               decoration: BoxDecoration(
                 color: colors.whiteColor,
                 borderRadius: BorderRadius.circular(
@@ -367,8 +381,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
       child: Container(
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 10,
+          horizontal: 8,
+          vertical: 4,
         ),
         decoration: BoxDecoration(
           color: colors.whiteColor,
@@ -473,8 +487,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
       child: Container(
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 10,
+            horizontal: 8,
+            vertical: 4,
           ),
           decoration: BoxDecoration(
             color: colors.whiteColor,
@@ -537,36 +551,41 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                                 ),
                               ),
                               8.height,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      '$currency ${stock?.salesPrice}',
-                                      style:
-                                          AppTextStyle.h2TextStyle700.copyWith(
-                                        color: colors.textColor600,
-                                        fontWeight: FontWeight.bold,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: 8,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '$currency ${stock?.salesPrice}',
+                                        style:
+                                            AppTextStyle.h2TextStyle700.copyWith(
+                                          color: colors.textColor600,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: colors.primaryColor50,
-                                      borderRadius: BorderRadius.circular(
-                                        AppValues.radius_4,
+                                    Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: colors.primaryColor50,
+                                        borderRadius: BorderRadius.circular(
+                                          AppValues.radius_4,
+                                        ),
+                                      ),
+                                      child: Icon(
+                                        TablerIcons.basket,
+                                        size: 20,
+                                        color: colors.primaryColor500,
                                       ),
                                     ),
-                                    child: Icon(
-                                      TablerIcons.basket,
-                                      size: 20,
-                                      color: colors.primaryColor500,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -627,10 +646,10 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               _buildBottomNavbarCard(
                 icon: TablerIcons.soup,
                 isSelected:
-                    controller.bottomStatus.value == BottomStatus.reserved,
-                text: appLocalization.reserved,
+                    controller.bottomStatus.value == BottomStatus.booked,
+                text: appLocalization.booked,
                 onTap: () {
-                  controller.changeBottomStatus(BottomStatus.reserved);
+                  controller.changeBottomStatus(BottomStatus.booked);
                 },
               ),
               4.width,

@@ -358,7 +358,8 @@
   "dis" : "DIS",
   "restaurant" : "Restaurant",
   "postPrint" : "POS print",
-  "allCategory" : "All Category"
+  "allCategory" : "All Category",
+  "booked" : "Booked"
 
 
 }
