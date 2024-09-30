@@ -7,6 +7,7 @@ import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/entity/category.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 
 class MenuBottomSheet {
   final List<Category> menuItems;
@@ -51,6 +52,7 @@ class MenuBottomSheet {
 
   Widget _buildMenuList() {
     final colors = ColorSchema();
+    final controller = Get.find<RestaurantHomeController>();
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxHeight: Get.height * .4,
@@ -74,34 +76,79 @@ class MenuBottomSheet {
               ),
             ),
             padding: const EdgeInsets.all(16),
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              itemCount: menuItems.length,
-              itemBuilder: (context, index) {
-                final item = menuItems[index];
-                return Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 8,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 14,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      AppValues.radius_4,
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: controller.allCategory,
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 8,
                     ),
-                    color: colors.secondaryColor50,
-                  ),
-                  child: Text(
-                    item.name ?? '',
-                    style: AppTextStyle.h2TextStyle500.copyWith(
-                      color: colors.textColor500,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        AppValues.radius_4,
+                      ),
+                      color: colors.secondaryColor50,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          appLocalization.allCategory,
+                          style: AppTextStyle.h2TextStyle500.copyWith(
+                            color: colors.textColor500,
+                          ),
+                        ),
+                        Icon(
+                          TablerIcons.reload,
+                          color: colors.textColor500,
+                          size: 20,
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: menuItems.length,
+                    itemBuilder: (context, index) {
+                      final item = menuItems[index];
+                      return GestureDetector(
+                        onTap: () => controller.filterByCategory(
+                          item,
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 8,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 14,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              AppValues.radius_4,
+                            ),
+                            color: colors.secondaryColor50,
+                          ),
+                          child: Text(
+                            item.name ?? '',
+                            style: AppTextStyle.h2TextStyle500.copyWith(
+                              color: colors.textColor500,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Positioned(

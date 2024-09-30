@@ -357,7 +357,8 @@
   "sd" : "SD",
   "dis" : "DIS",
   "restaurant" : "Restaurant",
-  "postPrint" : "POS print"
+  "postPrint" : "POS print",
+  "allCategory" : "All Category"
 
 
 }

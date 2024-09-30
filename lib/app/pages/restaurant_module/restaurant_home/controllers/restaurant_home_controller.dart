@@ -241,7 +241,7 @@ class RestaurantHomeController extends BaseController {
 
   Future<void> onSearch(String value) async {
     debouncer.call(
-          () async {
+      () async {
         final searchValue = value.toLowerCase();
         final filteredList = stockList.value?.where((stock) {
           return stock?.name?.toLowerCase().contains(searchValue) ?? false;
@@ -250,6 +250,20 @@ class RestaurantHomeController extends BaseController {
         filteredStockList.value = filteredList;
       },
     );
+  }
+
+  void allCategory() {
+    Get.back();
+    filteredStockList.value = stockList.value;
+  }
+
+  void filterByCategory(Category category) {
+    Get.back();
+    final filteredList = stockList.value?.where((stock) {
+      return stock?.categoryId == category.categoryId;
+    }).toList();
+
+    filteredStockList.value = filteredList;
   }
 
   // calculate total amount of the selected items
