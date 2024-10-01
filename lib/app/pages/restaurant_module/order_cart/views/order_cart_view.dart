@@ -1092,6 +1092,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           text: appLocalization.save,
           icon: TablerIcons.device_floppy,
           bgColor: colors.primaryColor500,
+          onTap: () => controller.showConfirmationDialog(context),
         ),
       ],
     );

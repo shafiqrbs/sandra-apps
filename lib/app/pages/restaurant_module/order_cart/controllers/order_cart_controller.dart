@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
+import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/pages/inventory/sales/create_sales/modals/order_process_confirmation_modal/order_process_confirmation_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_controller.dart';
 
@@ -232,4 +235,129 @@ class OrderCartController extends BaseController {
     }
     return totalAmount;
   }
+
+  /*Future<Sales?> generateSales() async {
+    if (salesItemList.isEmpty) {
+      return null;
+    }
+
+    final timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+    calculateAllSubtotal();
+
+    final sales = Sales(
+      salesId: preSales == null ? timeStamp : preSales!.salesId,
+      invoice: preSales == null ? timeStamp : preSales!.invoice,
+      createdAt: preSales == null
+          ? DateFormat('MM-dd-yyyy hh:mm a').format(
+        DateTime.now(),
+      )
+          : preSales!.createdAt,
+      updatedAt: preSales == null
+          ? null
+          : DateFormat('MM-dd-yyyy hh:mm a').format(
+        DateTime.now(),
+      ),
+      process: 'sales',
+      printWithoutDiscount: printWithoutDiscount.value.value ? 1 : 0,
+      subTotal: salesSubTotal.value,
+      discountType: discountType.value,
+      discount: salesDiscount.value,
+      netTotal: netTotal.value,
+      vat: salesVat.value,
+      discountCalculation: paymentDiscountController.value.text.toDouble(),
+      received: amountController.value.text.toDouble(),
+      salesItem: salesItemList,
+      createdById: LoggedUser().userId,
+      createdBy: LoggedUser().username,
+      salesBy: userManager.value.asController.selectedValue?.fullName,
+      salesById: userManager.value.asController.selectedValue?.userId,
+      isOnline: preSales == null ? 0 : preSales!.isOnline,
+    );
+
+    if (customerManager.selectedItem.value != null) {
+      sales.setCustomerData(
+        customerManager.selectedItem.value!,
+      );
+    }
+    if (transactionMethodsManager.selectedItem.value != null) {
+      sales.setTransactionMethodData(
+        transactionMethodsManager.selectedItem.value!,
+      );
+    }
+
+    createdSales.value = sales;
+
+    update();
+    notifyChildrens();
+    refresh();
+
+    return sales;
+  }
+
+  Future<void> showConfirmationDialog(
+      BuildContext context,
+      ) async {
+    if (cartItems.value == null || cartItems.value!.isEmpty) {
+      toast(appLocalization.noDataFound);
+      return;
+    }
+    //if (!formKey.currentState!.validate()) return;
+
+    final isZeroSalesAllowed = await prefs.getIsZeroSalesAllowed();
+    final sales = await generateSales();
+
+    if (sales == null) {
+      toast(appLocalization.failed);
+      return;
+    }
+
+    final isCustomerNotSelected = customerManager.selectedItem.value == null;
+    final isCustomerSelected = customerManager.selectedItem.value != null;
+    final amountText = amountController.value.text;
+    final isAmountEmpty = amountText.isEmptyOrNull;
+    final amount = double.tryParse(amountText) ?? 0;
+    final isInvalidAmount = amount > 0 && amount < netTotal.value;
+
+    if (!isZeroSalesAllowed &&
+        isCustomerNotSelected &&
+        amount < netTotal.value) {
+      toast(appLocalization.dueSalesWithoutCustomer);
+      return;
+    }
+
+    if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
+      sales.received = netTotal.value;
+    } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
+      toast(appLocalization.thisAmountIsNotValid);
+      return;
+    }
+
+    if (amount > netTotal.value) {
+      sales.received = netTotal.value;
+    }
+
+    if (!context.mounted) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return DialogPattern(
+          title: appLocalization.orderProcessing,
+          subTitle: '',
+          child: OrderProcessConfirmationView(
+            sales: sales,
+            isEdit: false,
+            //isEdit: preSales != null,
+          ),
+        );
+      },
+    );
+
+    if (confirmed != null && confirmed) {
+      log('order process confirmed');
+      Get.back(
+        result: cartItems.value,
+      );
+    }
+  }*/
 }
