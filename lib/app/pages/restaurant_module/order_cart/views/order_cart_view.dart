@@ -65,19 +65,22 @@ class OrderCartView extends BaseView<OrderCartController> {
             () => SingleChildScrollView(
               child: Container(
                 height: 90.ph,
-                child: Column(
-                  children: [
-                    _buildStatusBar(),
-                    _buildOrderCategory(),
-                    4.height,
-                    _buildSelectAdditionalTable(),
-                    14.height,
-                    _buildOrderItemList(),
-                    8.height,
-                    _buildSubTotal(),
-                    12.height,
-                    _buildOrderCartInfo(context),
-                  ],
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      _buildStatusBar(),
+                      _buildOrderCategory(),
+                      4.height,
+                      _buildSelectAdditionalTable(),
+                      14.height,
+                      _buildOrderItemList(),
+                      8.height,
+                      _buildSubTotal(),
+                      12.height,
+                      _buildOrderCartInfo(context),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -858,7 +861,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                     ),
                   ),
                   Text(
-                    '${currency} 34.34',
+                    '${currency ?? ''} ${controller.tableInvoice.value?.subTotal ?? 0.00}',
                     style: AppTextStyle.h2TextStyle700.copyWith(
                       color: colors.primaryColor800,
                     ),
@@ -970,9 +973,7 @@ class OrderCartView extends BaseView<OrderCartController> {
             Text(
               method.methodMode ?? '',
               style: AppTextStyle.h3TextStyle400.copyWith(
-                color: isSelected
-                    ? colors.textColor500
-                    : colors.textColor300,
+                color: isSelected ? colors.textColor500 : colors.textColor300,
               ),
             ),
           ],
@@ -1034,7 +1035,12 @@ class OrderCartView extends BaseView<OrderCartController> {
                 fontWeight: FontWeight.w400,
                 fontSize: mediumTFSize,
               ),
-              onChanged: controller.onDiscountChange,
+              onChanged: (value) {
+                controller.salesSubTotal.value = double.tryParse(
+                  controller.tableInvoice.value?.subTotal.toString() ?? '00',
+                )!;
+                controller.onDiscountChange(value);
+              },
             ),
           ),
         ),
@@ -1046,7 +1052,7 @@ class OrderCartView extends BaseView<OrderCartController> {
               controller: controller.amountController.value,
               inputFormatters: doubleInputFormatter,
               textInputAction: doneInputAction,
-              //onEditingComplete: () => controller.showConfirmationDialog(context),
+              onEditingComplete: () => controller.showConfirmationDialog(context),
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -1069,7 +1075,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 focusedBorderColor: colors.primaryColor500,
                 errorBorderColor: colors.primaryColor200,
               ),
-              onChanged: controller.onAmountChange,
+              onChanged: (value)=> controller.onAmountChange(value),
             ),
           ),
         ),

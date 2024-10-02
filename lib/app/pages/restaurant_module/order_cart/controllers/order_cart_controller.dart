@@ -57,6 +57,7 @@ class OrderCartController extends BaseController {
   final userManager = UserManager().obs;
   final printWithoutDiscount = ValueNotifier<bool>(false).obs;
   Rx<Sales?> createdSales = Rx<Sales?>(null);
+  final formKey = GlobalKey<FormState>();
 
   @override
   Future<void> onInit() async {
@@ -253,9 +254,11 @@ class OrderCartController extends BaseController {
     }
     salesSubTotal.value = salesSubTotal.value.toPrecision(2);
     salesPurchasePrice.value = salesPurchasePrice.value.toPrecision(2);
+    netTotal.value = salesSubTotal.value;
 
     salesSubTotal.refresh();
     salesPurchasePrice.refresh();
+    netTotal.refresh();
     update();
   }
 
@@ -317,6 +320,7 @@ class OrderCartController extends BaseController {
       ) async {
 
     // insert cartItems into salesItemList
+    if(cartItems.value == null) return;
     for (final Stock item in cartItems.value!) {
       final salesItem = SalesItem(
         stockId: item.globalId,
@@ -341,7 +345,7 @@ class OrderCartController extends BaseController {
       toast(appLocalization.noDataFound);
       return;
     }
-    //if (!formKey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) return;
 
     final isZeroSalesAllowed = await prefs.getIsZeroSalesAllowed();
     final sales = await generateSales();
@@ -399,5 +403,7 @@ class OrderCartController extends BaseController {
         result: cartItems.value,
       );
     }
+    salesSubTotal.value = 0;
+    salesItemList.clear();
   }
 }
