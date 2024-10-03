@@ -249,13 +249,12 @@ class SalesListController extends BaseController {
   }
 
   void goToCreateSales() {
-    print(SetUp().mainAppName);
     if (SetUp().mainAppName == 'restaurant') {
-      Get.toNamed(
+      Get.offNamed(
         Routes.restaurantHome,
       );
     } else {
-      Get.toNamed(
+      Get.offNamed(
         Routes.createSales,
       );
     }

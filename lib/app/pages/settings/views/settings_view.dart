@@ -3,6 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '/app/core/base/base_view.dart';
@@ -128,7 +129,7 @@ class SettingsView extends BaseView<SettingsController> {
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
-                      //Get.toNamed(Routes.helpConfig);
+                      Get.toNamed(Routes.helpPage);
                     },
                     leading: const Icon(TablerIcons.help),
                     title: Text(

@@ -259,7 +259,8 @@ class AppBarSearchView extends BaseWidget {
                   ),
                 ),
               ),
-            ))
+            ),
+          )
         : PageBackButton(
             pageTitle: pageTitle,
           );
