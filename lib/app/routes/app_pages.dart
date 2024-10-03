@@ -32,6 +32,8 @@ import '/app/pages/domain/vendor/vendor_details/bindings/vendor_details_binding.
 import '/app/pages/domain/vendor/vendor_details/views/vendor_details_view.dart';
 import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
 import '/app/pages/domain/vendor/vendor_list/views/vendor_list_view.dart';
+import '/app/pages/help_page/bindings/help_page_binding.dart';
+import '/app/pages/help_page/views/help_page_view.dart';
 import '/app/pages/intro/license/bindings/license_binding.dart';
 import '/app/pages/intro/license/views/license_view.dart';
 import '/app/pages/intro/login/bindings/login_binding.dart';
@@ -197,6 +199,11 @@ class AppPages {
       name: Routes.orderCart,
       page: OrderCartView.new,
       binding: OrderCartBinding(),
+    ),
+    GetPage(
+      name: Routes.helpPage,
+      page: HelpPageView.new,
+      binding: HelpPageBinding(),
     ),
 
   ];

@@ -35,6 +35,9 @@ abstract class Routes {
 
   static const restaurantHome = _Paths.restaurantHome;
   static const  orderCart = _Paths.orderCart;
+  static const  helpPage = _Paths.helpPage;
+
+
 }
 
 abstract class _Paths {
@@ -68,4 +71,6 @@ abstract class _Paths {
   static const themeTestPage = '/theme_test_page';
   static const restaurantHome = '/restaurantHome';
   static const  orderCart = '/order_cart';
+  static const  helpPage = '/help_page';
+
 }
