@@ -90,7 +90,7 @@ class SetUp {
       ..address = json['address']
       ..locationName = json['locationName']
       ..mainApp = json['main_app']
-      ..mainAppName = json['main_app_name']
+      ..mainAppName = json['mainAppName']
       ..appsManual = json['appsManual']
       ..website = json['website']
       ..vatRegNo = json['vatRegNo']
@@ -161,7 +161,7 @@ class SetUp {
       'address': address,
       'locationName': locationName,
       'main_app': mainApp,
-      'main_app_name': mainAppName,
+      'mainAppName': mainAppName,
       'appsManual': appsManual,
       'website': website,
       'vatRegNo': vatRegNo,

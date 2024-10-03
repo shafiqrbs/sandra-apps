@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
@@ -248,9 +249,15 @@ class DashboardController extends BaseController {
   }
 
   void goToSales() {
-    Get.toNamed(
-      Routes.createSales,
-    );
+    if (SetUp().mainAppName == 'restaurant') {
+      Get.toNamed(
+        Routes.restaurantHome,
+      );
+    } else {
+      Get.toNamed(
+        Routes.createSales,
+      );
+    }
   }
 
   void goToPo() {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/page_state.dart';
@@ -248,9 +249,16 @@ class SalesListController extends BaseController {
   }
 
   void goToCreateSales() {
-    Get.offNamed(
-      Routes.createSales,
-    );
+    print(SetUp().mainAppName);
+    if (SetUp().mainAppName == 'restaurant') {
+      Get.toNamed(
+        Routes.restaurantHome,
+      );
+    } else {
+      Get.toNamed(
+        Routes.createSales,
+      );
+    }
   }
 
   Future<void> onClearSearchText() async {
