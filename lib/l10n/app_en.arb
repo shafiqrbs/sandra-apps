@@ -359,7 +359,8 @@
   "restaurant" : "Restaurant",
   "postPrint" : "POS print",
   "allCategory" : "All Category",
-  "booked" : "Booked"
+  "booked" : "Booked",
+  "orderTakenBy" : "OrderBy"
 
 
 }

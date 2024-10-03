@@ -126,6 +126,9 @@ class OrderCartView extends BaseView<OrderCartController> {
             initialItem: controller.orderCategoryList[0],
             onChanged: (value) {
               log('changing value to: $value');
+              if (value != null) {
+                controller.selectedOrderCategory.value = value;
+              }
             },
             closedHeaderPadding: const EdgeInsets.symmetric(
               horizontal: 10,
@@ -154,30 +157,33 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
         ),
         8.width,
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 6,
-            horizontal: 12,
-          ),
-          decoration: BoxDecoration(
-            color: colors.primaryColor500,
-            borderRadius: BorderRadius.circular(AppValues.radius_4),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                TablerIcons.chef_hat,
-                size: 24,
-                color: colors.whiteColor,
-              ),
-              4.width,
-              Text(
-                appLocalization.kitchen,
-                style: AppTextStyle.h3TextStyle500.copyWith(
+        GestureDetector(
+          onTap: controller.kitchenPrint,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 6,
+              horizontal: 12,
+            ),
+            decoration: BoxDecoration(
+              color: colors.primaryColor500,
+              borderRadius: BorderRadius.circular(AppValues.radius_4),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  TablerIcons.chef_hat,
+                  size: 24,
                   color: colors.whiteColor,
                 ),
-              ),
-            ],
+                4.width,
+                Text(
+                  appLocalization.kitchen,
+                  style: AppTextStyle.h3TextStyle500.copyWith(
+                    color: colors.whiteColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -1052,7 +1058,8 @@ class OrderCartView extends BaseView<OrderCartController> {
               controller: controller.amountController.value,
               inputFormatters: doubleInputFormatter,
               textInputAction: doneInputAction,
-              onEditingComplete: () => controller.showConfirmationDialog(context),
+              onEditingComplete: () =>
+                  controller.showConfirmationDialog(context),
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -1075,7 +1082,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 focusedBorderColor: colors.primaryColor500,
                 errorBorderColor: colors.primaryColor200,
               ),
-              onChanged: (value)=> controller.onAmountChange(value),
+              onChanged: (value) => controller.onAmountChange(value),
             ),
           ),
         ),

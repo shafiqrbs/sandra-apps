@@ -24,6 +24,9 @@ class OrderProcessConfirmationView
 
   @override
   Widget build(BuildContext context) {
+    for(final salesItem in sales.salesItem!){
+      print('salesItem inside order process: ${salesItem.toJson()}');
+    }
     return GetX<OrderProcessConfirmationController>(
       init: OrderProcessConfirmationController(
         sales: sales,

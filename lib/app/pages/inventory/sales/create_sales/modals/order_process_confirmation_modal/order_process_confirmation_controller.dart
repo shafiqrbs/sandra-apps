@@ -57,6 +57,7 @@ class OrderProcessConfirmationController extends PrinterController {
     }
   }
 
+
   Future<void> saveSales() async {
     if (isEdit) {
       await _updateSales();

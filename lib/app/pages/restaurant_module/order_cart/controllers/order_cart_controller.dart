@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
@@ -25,6 +26,7 @@ class OrderCartController extends BaseController {
     'Mr. Alex',
     'John Doe',
   ];
+  final selectedOrderCategory = 'Order taken by'.obs;
 
   final isAdditionalTableSelected = false.obs;
   final showQuantityUpdateList = <int>[].obs;
@@ -271,13 +273,12 @@ class OrderCartController extends BaseController {
     calculateAllSubtotal();
 
     final sales = Sales(
-      salesId:  timeStamp,
-      invoice: timeStamp ,
+      salesId: timeStamp,
+      invoice: timeStamp,
       createdAt: DateFormat('MM-dd-yyyy hh:mm a').format(
         DateTime.now(),
       ),
-      updatedAt:null,
-
+      updatedAt: null,
       process: 'sales',
       printWithoutDiscount: printWithoutDiscount.value.value ? 1 : 0,
       subTotal: salesSubTotal.value,
@@ -316,11 +317,10 @@ class OrderCartController extends BaseController {
   }
 
   Future<void> showConfirmationDialog(
-      BuildContext context,
-      ) async {
-
+    BuildContext context,
+  ) async {
     // insert cartItems into salesItemList
-    if(cartItems.value == null) return;
+    if (cartItems.value == null) return;
     for (final Stock item in cartItems.value!) {
       final salesItem = SalesItem(
         stockId: item.globalId,
@@ -405,5 +405,51 @@ class OrderCartController extends BaseController {
     }
     salesSubTotal.value = 0;
     salesItemList.clear();
+  }
+
+  void generateSalesItem() {
+    if (cartItems.value == null) return;
+    salesItemList.clear();
+    for (final Stock item in cartItems.value!) {
+      final salesItem = SalesItem(
+        stockId: item.globalId,
+        barcode: item.barcode,
+        stockName: item.name,
+        brandName: item.brandName,
+        unit: item.unit,
+        mrpPrice: item.salesPrice,
+        salesPrice: item.salesPrice,
+        discountPrice: 0,
+        purchasePrice: item.purchasePrice,
+        itemPercent: 0,
+        customPrice: 0,
+        quantity: item.quantity,
+        subTotal: item.salesPrice! * item.quantity!,
+        discountPercent: 0,
+      );
+      salesItemList.add(salesItem);
+    }
+  }
+
+  Future<void> kitchenPrint() async {
+    try {
+      generateSalesItem();
+      final sales = await generateSales();
+      if (sales == null) return;
+      final printController = Get.put(PrinterController());
+      final isPrinted = await printController.printRestaurantKitchen(
+        sales: sales,
+        table: tableName.value,
+        orderTakenBy: selectedOrderCategory.value,
+      );
+
+      if (isPrinted) {
+        toast(appLocalization.success);
+      } else {
+        toast(appLocalization.failed);
+      }
+    } catch (e) {
+      toast(appLocalization.failed);
+    }
   }
 }

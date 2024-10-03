@@ -189,6 +189,28 @@ class PrinterController extends BaseController {
     }
   }
 
+  Future<bool> printRestaurantKitchen({
+    required Sales sales,
+    required String table,
+    required String orderTakenBy,
+  }) async {
+    final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+    if (connectionStatus) {
+      final data = await kitchenTemplateOne(
+        sales: sales,
+        table: table,
+        orderTakenBy: orderTakenBy,
+      );
+      return PrintBluetoothThermal.writeBytes(data); // init
+    } else {
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.connectPrinter,
+      );
+      return false;
+    }
+  }
+
   Future<bool> printPurchase(
     Purchase purchase,
   ) async {
@@ -341,6 +363,8 @@ class PrinterController extends BaseController {
     );
     bytes += generator.text('------------------------------------------------');
 
+    print(sales.salesItem!.length);
+
     if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
       for (final SalesItem rowData in sales.salesItem!) {
         bytes += generator.row(
@@ -480,6 +504,189 @@ class PrinterController extends BaseController {
         ),
       ],
     );
+
+    //bytes += generator.text(SetUp().printFooter ?? '');
+    // TODO: do it dynamic
+    bytes += generator.feed(newLine);
+    bytes += generator.text(
+      SetUp().website ?? 'TerminalBd.com',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+    return bytes;
+  }
+
+  Future<List<int>> kitchenTemplateOne({
+    required Sales sales,
+    required String table,
+    required String orderTakenBy,
+  }) async {
+    List<int> bytes = [];
+    final profile = await CapabilityProfile.load();
+    final paperType = await prefs.getPrintPaperType();
+
+    final generator = Generator(
+      paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+      profile,
+    );
+
+// Add shop name
+    bytes += generator.text(
+      'Kitchen',
+      styles: const PosStyles(
+        bold: true,
+        height: PosTextSize.size2,
+        align: PosAlign.center,
+      ),
+    );
+
+    // Add subtitle
+    bytes += generator.text(
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : 'Shop Name',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+      linesAfter: 1,
+    );
+
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${appLocalization.table}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: table,
+          width: 4,
+        ),
+        PosColumn(
+          text: '${appLocalization.orderTakenBy}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: orderTakenBy,
+          width: 4,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${"bill".tr}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: sales.invoice ?? '',
+          width: 4,
+        ),
+        PosColumn(
+          text: '${appLocalization.sales}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: sales.salesId ?? '',
+          width: 4,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${"date".tr}: ',
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
+          text: sales.createdAt.toString(),
+          width: 4,
+        ),
+        PosColumn(
+          text: '${"mode".tr}: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: ' Now it empty ',
+          width: 4,
+        ),
+      ],
+    );
+    bytes += generator.feed(1);
+
+    // Add table headers
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Item Name',
+          width: 7,
+        ),
+        PosColumn(
+          text: 'Rate',
+          styles: const PosStyles(
+            align: PosAlign.center,
+          ),
+        ),
+        PosColumn(
+          text: 'Qty',
+          width: 1,
+          styles: const PosStyles(
+            align: PosAlign.center,
+          ),
+        ),
+        PosColumn(
+          text: 'Total',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+      ],
+    );
+    bytes += generator.text('------------------------------------------------');
+
+    print(sales.salesItem!.length);
+
+    if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
+      for (final SalesItem rowData in sales.salesItem!) {
+        bytes += generator.row(
+          [
+            PosColumn(
+              text: rowData.stockName ?? '',
+              width: 7,
+            ),
+            PosColumn(
+              text: rowData.salesPrice?.toString() ?? '',
+              styles: const PosStyles(
+                align: PosAlign.center,
+              ),
+            ),
+            PosColumn(
+              text: rowData.quantity?.toString() ?? '',
+              width: 1,
+              styles: const PosStyles(
+                align: PosAlign.center,
+              ),
+            ),
+            PosColumn(
+              text: rowData.subTotal.toString() ?? '',
+              styles: const PosStyles(
+                align: PosAlign.right,
+              ),
+            ),
+          ],
+        );
+      }
+    }
+    bytes += generator.text('------------------------------------------------');
+    bytes += generator.text('----------------- Thank You --------------------');
 
     //bytes += generator.text(SetUp().printFooter ?? '');
     // TODO: do it dynamic

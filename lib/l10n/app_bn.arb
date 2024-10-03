@@ -389,6 +389,7 @@
   "table" : "টেবিল",
   "allCategory" : "সব ক্যাটাগরি",
   "booked" : "বুক করা",
+  "orderTakenBy" : "অর্ডার নেওয়া",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",
   "noInternet" : "No Internet",
