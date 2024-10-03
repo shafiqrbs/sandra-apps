@@ -3,7 +3,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
 import '/app/core/base/base_view.dart';
-import '/app/pages/help_page/controllers/help_page_controller.dart';
+import '/app/pages/content/help_page/controllers/help_page_controller.dart';
 
 //ignore: must_be_immutable
 class HelpPageView extends BaseView<HelpPageController> {
