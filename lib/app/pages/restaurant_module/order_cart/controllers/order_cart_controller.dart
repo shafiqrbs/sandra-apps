@@ -294,6 +294,7 @@ class OrderCartController extends BaseController {
       salesBy: userManager.value.asController.selectedValue?.fullName,
       salesById: userManager.value.asController.selectedValue?.userId,
       isOnline: 0,
+      tokenNo: generateTokenWithInvoiceAndTimestamp(timeStamp),
     );
 
     if (customerManager.selectedItem.value != null) {
@@ -451,5 +452,42 @@ class OrderCartController extends BaseController {
     } catch (e) {
       toast(appLocalization.failed);
     }
+  }
+
+  Future<void> tokenPrint() async {
+    try {
+      generateSalesItem();
+      final sales = await generateSales();
+      if (sales == null) return;
+      final printController = Get.put(PrinterController());
+      final isPrinted = await printController.printRestaurantToken(
+        sales: sales,
+        table: tableName.value,
+        orderTakenBy: selectedOrderCategory.value,
+      );
+
+      if (isPrinted) {
+        toast(appLocalization.success);
+      } else {
+        toast(appLocalization.failed);
+      }
+    } catch (e) {
+      toast(appLocalization.failed);
+    }
+  }
+
+  String generateTokenWithInvoiceAndTimestamp(String invoiceNumber) {
+    // Get the last two digits of the current timestamp (milliseconds)
+    int timestampPart = DateTime.now().millisecondsSinceEpoch %
+        100; // Last two digits of the timestamp
+
+    // Get the last two digits of the invoice number
+    int invoicePart =
+        int.parse(invoiceNumber) % 100; // Last two digits of the invoice number
+
+    // Combine the two parts to form a 4-digit token
+    int token = (invoicePart * 100) + timestampPart;
+
+    return token.toString();
   }
 }
