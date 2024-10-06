@@ -415,8 +415,25 @@ class OrderCartView extends BaseView<OrderCartController> {
                                         horizontal: 4,
                                       ),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          AppValues.radius_4,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: const Radius.circular(
+                                            AppValues.radius_4,
+                                          ),
+                                          topRight: const Radius.circular(
+                                            AppValues.radius_4,
+                                          ),
+                                          bottomLeft: Radius.circular(
+                                            controller.showQuantityUpdateList
+                                                    .contains(index)
+                                                ? 0
+                                                : AppValues.radius_4,
+                                          ),
+                                          bottomRight: Radius.circular(
+                                            controller.showQuantityUpdateList
+                                                    .contains(index)
+                                                ? 0
+                                                : AppValues.radius_4,
+                                          ),
                                         ),
                                         color: colors.whiteColor,
                                       ),
@@ -462,10 +479,17 @@ class OrderCartView extends BaseView<OrderCartController> {
                             child: controller.showQuantityUpdateList
                                     .contains(index)
                                 ? Container(
+                                    width: 60,
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          AppValues.radius_4),
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(
+                                          AppValues.radius_6,
+                                        ),
+                                        bottomRight: Radius.circular(
+                                          AppValues.radius_6,
+                                        ),
+                                      ),
                                       color: colors.whiteColor,
                                     ),
                                     child: Row(
