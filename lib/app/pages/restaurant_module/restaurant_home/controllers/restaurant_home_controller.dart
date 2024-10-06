@@ -28,7 +28,7 @@ enum BottomStatus {
 class RestaurantHomeController extends BaseController {
   final searchController = TextEditingController();
   final menuView = Rx<MenuView?>(null);
-  final bottomStatus = Rx<BottomStatus>(BottomStatus.hold);
+  final bottomStatus = Rx<BottomStatus>(BottomStatus.free);
   final menuItems = Rx<List<Category>?>(null);
   final selectedFoodList = <int>[].obs;
   final addSelectedFoodItem = Rx<Map<int, List<Stock>>>(<int, List<Stock>>{});
@@ -127,21 +127,42 @@ class RestaurantHomeController extends BaseController {
     }
   }
 
-  void changeBottomStatus(BottomStatus status) {
+  Future<void> changeBottomStatus(BottomStatus status) async {
     bottomStatus.value = status;
     changeTableStatus(status);
   }
 
-  void selectTable(
+  Future<void> selectTable(
     int index,
     RestaurantTable table,
-  ) {
+  ) async {
     selectedTableIndex.value = index;
     selectedTableId.value = table.id!;
+    final getData = await dbHelper.getAllWhr(
+      tbl: dbTables.tableTableInvoice,
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+    final status = getData.first['process'];
+    changeBottomStatus(
+      BottomStatus.values.firstWhere(
+        (e) => e.name == status,
+      ),
+    );
   }
 
-  void changeTableStatus(BottomStatus status) {
+  Future<void> changeTableStatus(BottomStatus status) async {
     if (tableStatusList.value.isEmpty) return;
+
+    await dbHelper.updateWhere(
+      tbl: dbTables.tableTableInvoice,
+      data: {
+        'process': status.name,
+      },
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
     tableStatusList.value[selectedTableIndex.value] = status;
     tableStatusList.refresh();
   }
