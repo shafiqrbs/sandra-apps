@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class OrderCartController extends BaseController {
   final printWithoutDiscount = ValueNotifier<bool>(false).obs;
   Rx<Sales?> createdSales = Rx<Sales?>(null);
   final formKey = GlobalKey<FormState>();
+  Timer? timer;
 
   @override
   Future<void> onInit() async {
@@ -154,6 +156,33 @@ class OrderCartController extends BaseController {
       // update invoiceTable items quantity
       cartItems.value![index].quantity = itemQuantities[index];
       updateCartItems();
+    }
+  }
+
+  void startQuantityDecreaseTimer(int index) {
+    stopQuantityTimer(); // Ensure no other timer is running
+    timer = Timer.periodic(
+      const Duration(milliseconds: 100),
+          (t) {
+        decreaseQuantity(index);
+      },
+    );
+  }
+
+  void startQuantityIncreaseTimer(int index) {
+    stopQuantityTimer(); // Ensure no other timer is running
+    timer = Timer.periodic(
+      const Duration(milliseconds: 100),
+          (t) {
+        increaseQuantity(index);
+      },
+    );
+  }
+
+  void stopQuantityTimer() {
+    if (timer != null) {
+      timer!.cancel();
+      timer = null;
     }
   }
 

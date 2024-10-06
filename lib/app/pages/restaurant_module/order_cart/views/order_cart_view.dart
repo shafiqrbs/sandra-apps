@@ -125,7 +125,6 @@ class OrderCartView extends BaseView<OrderCartController> {
             items: controller.orderCategoryList,
             initialItem: controller.orderCategoryList[0],
             onChanged: (value) {
-              log('changing value to: $value');
               if (value != null) {
                 controller.selectedOrderCategory.value = value;
               }
@@ -344,7 +343,6 @@ class OrderCartView extends BaseView<OrderCartController> {
     required int index,
     required Stock item,
   }) {
-    Timer? timer;
     return Stack(
       alignment: Alignment.centerLeft,
       children: [
@@ -478,18 +476,12 @@ class OrderCartView extends BaseView<OrderCartController> {
                                           onTap: () => controller
                                               .decreaseQuantity(index),
                                           onLongPressStart: (details) {
-                                            timer = Timer.periodic(
-                                              const Duration(milliseconds: 100),
-                                              (t) {
-                                                controller
-                                                    .decreaseQuantity(index);
-                                              },
-                                            );
+                                            controller
+                                                .startQuantityDecreaseTimer(
+                                                    index);
                                           },
                                           onLongPressEnd: (details) {
-                                            if (timer != null) {
-                                              timer!.cancel();
-                                            }
+                                            controller.stopQuantityTimer();
                                           },
                                           child: Icon(
                                             TablerIcons.minus,
@@ -502,18 +494,12 @@ class OrderCartView extends BaseView<OrderCartController> {
                                           onTap: () => controller
                                               .increaseQuantity(index),
                                           onLongPressStart: (details) {
-                                            timer = Timer.periodic(
-                                              const Duration(milliseconds: 100),
-                                              (t) {
-                                                controller
-                                                    .increaseQuantity(index);
-                                              },
-                                            );
+                                            controller
+                                                .startQuantityIncreaseTimer(
+                                                    index);
                                           },
                                           onLongPressEnd: (details) {
-                                            if (timer != null) {
-                                              timer!.cancel();
-                                            }
+                                            controller.stopQuantityTimer();
                                           },
                                           child: Icon(
                                             TablerIcons.plus,
