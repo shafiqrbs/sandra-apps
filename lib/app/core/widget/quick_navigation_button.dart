@@ -217,28 +217,28 @@ class QuickNavigationButton extends BaseWidget {
         ),
       ),
       builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: 4,
-            right: 4,
-            top: 16,
-            bottom: 16,
-          ),
-          child: SingleChildScrollView(
+        return SizedBox(
+          height: Get.height * 0.8,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 4,
+              right: 4,
+              top: 16,
+              bottom: 16,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
+              children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       margin: const EdgeInsets.only(
-                        left: 16,
+                        left: 6,
                         right: 16,
                       ),
                       child: Text(
                         appLocalization.quickNavigation,
+                        textAlign: TextAlign.left,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -254,61 +254,69 @@ class QuickNavigationButton extends BaseWidget {
                     ),
                   ],
                 ),
-                16.height,
-                /*Wrap(
-                  spacing: 4,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  runSpacing: 8,
-                  children: buttonList,
-                ),*/
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: startCAA,
-                    children: [
-                      dividerWidget(),
-                      CommonText(
-                        text: appLocalization.accounting,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      dividerWidget(),
-                      16.height,
-                      Wrap(
-                        spacing: 4,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        runSpacing: 8,
-                        children: accountingButtonList,
-                      ),
-                      dividerWidget(),
-                      CommonText(
-                        text: appLocalization.inventory,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      dividerWidget(),
-                      16.height,
-                      Wrap(
-                        spacing: 4,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        runSpacing: 8,
-                        children: inventoryButtonList,
-                      ),
-                      dividerWidget(),
-                      CommonText(
-                        text: appLocalization.configuration,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      dividerWidget(),
-                      16.height,
-                      Wrap(
-                        spacing: 4,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        runSpacing: 8,
-                        children: configButtonList,
-                      ),
-                    ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+
+                        16.height,
+                        /*Wrap(
+                          spacing: 4,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          runSpacing: 8,
+                          children: buttonList,
+                        ),*/
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            crossAxisAlignment: startCAA,
+                            children: [
+                              CommonText(
+                                text: appLocalization.accounting,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              dividerWidget(),
+                              16.height,
+                              Wrap(
+                                spacing: 4,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                runSpacing: 8,
+                                children: accountingButtonList,
+                              ),
+                              CommonText(
+                                text: appLocalization.inventory,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              dividerWidget(),
+                              16.height,
+                              Wrap(
+                                spacing: 4,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                runSpacing: 8,
+                                children: inventoryButtonList,
+                              ),
+                              CommonText(
+                                text: appLocalization.configuration,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              dividerWidget(),
+                              16.height,
+                              Wrap(
+                                spacing: 4,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                runSpacing: 8,
+                                children: configButtonList,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -320,8 +328,8 @@ class QuickNavigationButton extends BaseWidget {
   }
 
   Widget dividerWidget() {
-    return const Divider(
-      color: Colors.grey,
+    return Divider(
+      color: colors.secondaryColor50,
       thickness: 1,
     );
   }
