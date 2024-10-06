@@ -72,6 +72,7 @@ class OrderCartController extends BaseController {
       tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
     await initializeCartItems();
+    await getSalesUser();
   }
 
   Future<void> initializeCartItems() async {
@@ -94,6 +95,16 @@ class OrderCartController extends BaseController {
         .allItems.value
         ?.where((element) => element.isDefault == 1)
         .first;
+  }
+
+  Future<void> getSalesUser() async {
+    final users = await dbHelper.getAll(tbl: dbTables.tableUsers);
+    final List<User> userList = [];
+    orderCategoryList.removeRange(1, orderCategoryList.length);
+    for (final user in users) {
+      userList.add(User.fromJson(user));
+      orderCategoryList.add(user['full_name']);
+    }
   }
 
   void changeAdditionTableSelection() {
