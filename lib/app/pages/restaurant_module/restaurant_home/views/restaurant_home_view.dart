@@ -415,19 +415,29 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                     ),
                   ),
                   child: Row(
+                    crossAxisAlignment: startCAA,
                     children: [
                       commonCachedNetworkImage(
                         stock?.imagePath ??
                             'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                        height: 74,
+                        //height: 74,
                         width: 120,
                         radius: 2,
+                        fit: BoxFit.fitWidth,
                       ),
                       10.width,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              stock?.categoryName ?? '',
+                              maxLines: 1,
+                              style: AppTextStyle.h4TextStyle400.copyWith(
+                                color: colors.textColor300,
+                                fontSize: 10,
+                              ),
+                            ),
                             SizedBox(
                               height: 42,
                               child: Text(
@@ -540,6 +550,14 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                stock?.categoryName ?? '',
+                                maxLines: 1,
+                                style: AppTextStyle.h4TextStyle400.copyWith(
+                                  color: colors.textColor300,
+                                  fontSize: 10,
+                                ),
+                              ),
                               SizedBox(
                                 height: 42,
                                 child: Text(

@@ -286,6 +286,12 @@ class OrderCartController extends BaseController {
     return totalAmount;
   }
 
+  double calculateVatAmount(double percentage,) {
+    double vatAmount = 0;
+    vatAmount = (salesSubTotal.value * percentage / 100).toPrecision(2);
+    return vatAmount;
+  }
+
   void calculateAllSubtotal() {
     salesSubTotal.value = 0;
     salesPurchasePrice.value = 0;

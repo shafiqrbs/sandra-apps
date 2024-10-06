@@ -818,75 +818,79 @@ class OrderCartView extends BaseView<OrderCartController> {
           AppValues.radius_4,
         ),
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: minMAS,
-              children: [
-                LabelValue(
-                  label: appLocalization.vat,
-                  value: '${currency ?? ''} 0.00',
-                  dividerText: '',
-                  labelFontSize: 12,
-                  valueFontSize: 12,
-                  valueFontWeight: 900,
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
-                ),
-                LabelValue(
-                  label: appLocalization.sd,
-                  value: '${currency ?? ''} 0.00',
-                  dividerText: '',
-                  labelFontSize: 12,
-                  valueFontSize: 12,
-                  valueFontWeight: 900,
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
-                ),
-                LabelValue(
-                  label: appLocalization.dis,
-                  value: '${currency ?? ''} 0.00',
-                  dividerText: '',
-                  labelFontSize: 12,
-                  valueFontSize: 12,
-                  valueFontWeight: 900,
-                  padding: EdgeInsets.zero,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 16,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  AppValues.radius_4,
-                ),
-                color: colors.primaryColor50,
-              ),
+      child: Obx(
+        () => Row(
+          children: [
+            Expanded(
               child: Column(
+                mainAxisSize: minMAS,
                 children: [
-                  Text(
-                    appLocalization.total,
-                    style: AppTextStyle.h3TextStyle500.copyWith(
-                      color: colors.textColor500,
-                    ),
+                  LabelValue(
+                    label: appLocalization.vat,
+                    value: '${currency ?? ''} ${controller.calculateVatAmount(
+                      SetUp().vatPercentage?.toDouble() ?? 0,
+                    )}',
+                    dividerText: '',
+                    labelFontSize: 12,
+                    valueFontSize: 12,
+                    valueFontWeight: 900,
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
                   ),
-                  Text(
-                    '${currency ?? ''} ${controller.tableInvoice.value?.subTotal ?? 0.00}',
-                    style: AppTextStyle.h2TextStyle700.copyWith(
-                      color: colors.primaryColor800,
-                    ),
+                  LabelValue(
+                    label: appLocalization.sd,
+                    value: '${currency ?? ''} 0.00',
+                    dividerText: '',
+                    labelFontSize: 12,
+                    valueFontSize: 12,
+                    valueFontWeight: 900,
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
+                  ),
+                  LabelValue(
+                    label: appLocalization.dis,
+                    value: '${currency ?? ''} 0.00',
+                    dividerText: '',
+                    labelFontSize: 12,
+                    valueFontSize: 12,
+                    valueFontWeight: 900,
+                    padding: EdgeInsets.zero,
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    AppValues.radius_4,
+                  ),
+                  color: colors.primaryColor50,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      appLocalization.total,
+                      style: AppTextStyle.h3TextStyle500.copyWith(
+                        color: colors.textColor500,
+                      ),
+                    ),
+                    Text(
+                      '${currency ?? ''} ${controller.tableInvoice.value?.subTotal ?? 0.00}',
+                      style: AppTextStyle.h2TextStyle700.copyWith(
+                        color: colors.primaryColor800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1039,7 +1043,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                   fontWeight: FontWeight.normal,
                   fontSize: mediumTFSize,
                 ),
-                fillColor: colors.primaryColor50,
+                fillColor: colors.whiteColor,
                 enabledBorderColor: colors.primaryColor200,
                 focusedBorderColor: colors.primaryColor500,
                 errorBorderColor: colors.primaryColor200,
@@ -1087,10 +1091,23 @@ class OrderCartView extends BaseView<OrderCartController> {
                   fontWeight: FontWeight.normal,
                   fontSize: mediumTFSize,
                 ),
-                fillColor: colors.primaryColor50,
+                fillColor: colors.whiteColor,
                 enabledBorderColor: colors.primaryColor200,
                 focusedBorderColor: colors.primaryColor500,
                 errorBorderColor: colors.primaryColor200,
+              ).copyWith(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: colors.primaryColor400,
+                    width: 2,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: colors.primaryColor400,
+                    width: 2,
+                  ),
+                ),
               ),
               onChanged: (value) => controller.onAmountChange(value),
             ),
