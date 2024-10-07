@@ -830,9 +830,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                 children: [
                   LabelValue(
                     label: appLocalization.vat,
-                    value: '${currency ?? ''} ${controller.calculateVatAmount(
-                      SetUp().vatPercentage?.toDouble() ?? 0,
-                    )}',
+                    value: '${currency ?? ''} ${controller.salesVat.value}',
                     dividerText: '',
                     labelFontSize: 12,
                     valueFontSize: 12,
@@ -852,7 +850,8 @@ class OrderCartView extends BaseView<OrderCartController> {
                   ),
                   LabelValue(
                     label: appLocalization.dis,
-                    value: '${currency ?? ''} 0.00',
+                    value:
+                        '${currency ?? ''} ${controller.salesDiscount.value}',
                     dividerText: '',
                     labelFontSize: 12,
                     valueFontSize: 12,
@@ -883,7 +882,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                       ),
                     ),
                     Text(
-                      '${currency ?? ''} ${controller.tableInvoice.value?.subTotal ?? 0.00}',
+                      '${currency ?? ''} ${controller.netTotal}',
                       style: AppTextStyle.h2TextStyle700.copyWith(
                         color: colors.primaryColor800,
                       ),
@@ -901,8 +900,6 @@ class OrderCartView extends BaseView<OrderCartController> {
   Widget _buildTransactionMethod(
     BuildContext context,
   ) {
-    print(
-        'TransactionMethod: ${controller.transactionMethodsManager.allItems}');
     return Obx(
       () => Column(
         children: [

@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
@@ -75,6 +76,23 @@ class OrderCartController extends BaseController {
     }
     await initializeCartItems();
     await getSalesUser();
+    await initializeVariables();
+  }
+
+  Future<void> initializeVariables() async {
+    final getDataFromDb = await dbHelper.getAllWhr(
+      tbl: dbTables.tableTableInvoice,
+      where: 'table_id = ?',
+      whereArgs: [selectedTableId.value],
+    );
+
+    salesSubTotal.value = getDataFromDb[0]['subtotal'].toDouble();
+
+    salesVat
+      ..value = calculateVatAmount(
+        SetUp().vatPercentage?.toDouble() ?? 0,
+      )
+      ..refresh();
   }
 
   Future<void> initializeCartItems() async {
@@ -114,13 +132,18 @@ class OrderCartController extends BaseController {
   }
 
   Future<void> updateCartItems() async {
-    final subTotal = calculateTotalAmount(cartItems.value!);
+    salesSubTotal.value = calculateTotalAmount(cartItems.value!);
+    salesVat.value = calculateVatAmount(
+      SetUp().vatPercentage?.toDouble() ?? 0,
+    );
+    //netTotal.value = subTotal + salesVat.value - salesDiscount.value;
 
     await dbHelper.updateWhere(
       tbl: dbTables.tableTableInvoice,
       data: {
         'items': jsonEncode(cartItems.value),
-        'subtotal': subTotal,
+        'subtotal': salesSubTotal.value,
+        'total': netTotal.value,
       },
       where: 'table_id = ?',
       whereArgs: [selectedTableId.value],
@@ -135,6 +158,7 @@ class OrderCartController extends BaseController {
     tableInvoice.value = TableInvoice.fromJson(updatedCartItems[0]);
     cartItems.value = tableInvoice.value!.items;
     tableInvoice.refresh();
+    netTotal.refresh();
 
     // update restaurant controller addSelectedFoodItem value
     final restaurantController = Get.find<RestaurantHomeController>();
@@ -163,7 +187,7 @@ class OrderCartController extends BaseController {
     stopQuantityTimer(); // Ensure no other timer is running
     timer = Timer.periodic(
       const Duration(milliseconds: 100),
-          (t) {
+      (t) {
         decreaseQuantity(index);
       },
     );
@@ -173,7 +197,7 @@ class OrderCartController extends BaseController {
     stopQuantityTimer(); // Ensure no other timer is running
     timer = Timer.periodic(
       const Duration(milliseconds: 100),
-          (t) {
+      (t) {
         increaseQuantity(index);
       },
     );
@@ -286,9 +310,14 @@ class OrderCartController extends BaseController {
     return totalAmount;
   }
 
-  double calculateVatAmount(double percentage,) {
+  double calculateVatAmount(
+    double percentage,
+  ) {
     double vatAmount = 0;
-    vatAmount = (salesSubTotal.value * percentage / 100).toPrecision(2);
+    vatAmount = (salesSubTotal.value * (percentage / 100)).toPrecision(2);
+    netTotal
+      ..value = (salesSubTotal.value + vatAmount).toPrecision(2)
+      ..refresh();
     return vatAmount;
   }
 
@@ -302,11 +331,11 @@ class OrderCartController extends BaseController {
     }
     salesSubTotal.value = salesSubTotal.value.toPrecision(2);
     salesPurchasePrice.value = salesPurchasePrice.value.toPrecision(2);
-    netTotal.value = salesSubTotal.value;
+    //netTotal.value = salesSubTotal.value;
 
     salesSubTotal.refresh();
     salesPurchasePrice.refresh();
-    netTotal.refresh();
+    //netTotal.refresh();
     update();
   }
 
