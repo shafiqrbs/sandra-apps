@@ -571,4 +571,9 @@ class OrderCartController extends BaseController {
     cartItems.value!.removeAt(index);
     updateCartItems();
   }
+
+  void changeDiscountType(bool value) {
+    discountType.value = value ? 'percent' : 'flat';
+    onDiscountChange(paymentDiscountController.value.text);
+  }
 }

@@ -1021,6 +1021,9 @@ class OrderCartView extends BaseView<OrderCartController> {
                 height: 36,
                 width: 90,
                 controller: controller.discountTypeController.value,
+                onChanged: (value) {
+                  controller.changeDiscountType(value);
+                },
               );
             },
           ),
