@@ -527,6 +527,13 @@ class PrinterController extends BaseController {
       ],
     );
 
+    bytes += generator.text(
+      SetUp().printFooter ?? '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+
     //bytes += generator.text(SetUp().printFooter ?? '');
     // TODO: do it dynamic
     bytes += generator.feed(newLine);
@@ -684,6 +691,13 @@ class PrinterController extends BaseController {
       }
     }
 
+    bytes += generator.text(
+      SetUp().printFooter ?? '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+
     //bytes += generator.text(SetUp().printFooter ?? '');
     // TODO: do it dynamic
     bytes += generator.feed(newLine);
@@ -808,6 +822,13 @@ class PrinterController extends BaseController {
       styles: const PosStyles(
         bold: true,
         height: PosTextSize.size3,
+        align: PosAlign.center,
+      ),
+    );
+
+    bytes += generator.text(
+      SetUp().printFooter ?? '',
+      styles: const PosStyles(
         align: PosAlign.center,
       ),
     );
@@ -1049,6 +1070,13 @@ class PrinterController extends BaseController {
       ],
     );
     bytes += generator.feed(1);
+
+    bytes += generator.text(
+      SetUp().printFooter ?? '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
 
     //bytes += generator.text(SetUp().printFooter ?? '');
     bytes += generator.feed(1);
