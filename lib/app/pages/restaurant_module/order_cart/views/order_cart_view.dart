@@ -547,17 +547,20 @@ class OrderCartView extends BaseView<OrderCartController> {
         ),
         Positioned(
           right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(4),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: colors.whiteColor,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              TablerIcons.trash,
-              color: colors.redColor,
-              size: 16,
+          child: InkWell(
+            onTap: () => controller.deleteItem(index),
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: colors.whiteColor,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                TablerIcons.trash,
+                color: colors.redColor,
+                size: 16,
+              ),
             ),
           ),
         ),

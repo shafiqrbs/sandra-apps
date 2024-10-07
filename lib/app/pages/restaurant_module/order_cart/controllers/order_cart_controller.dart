@@ -536,4 +536,10 @@ class OrderCartController extends BaseController {
 
     return token.toString();
   }
+
+  void deleteItem(int index) {
+    // delete item from cartItems
+    cartItems.value!.removeAt(index);
+    updateCartItems();
+  }
 }
