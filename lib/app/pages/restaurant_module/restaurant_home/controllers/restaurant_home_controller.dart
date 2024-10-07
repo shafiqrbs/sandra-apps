@@ -212,7 +212,7 @@ class RestaurantHomeController extends BaseController {
     ).showMenuFromLeft();
   }
 
-  Future<void> selectFoodItem(int index, Stock stock) async {
+  Future<void> selectFoodItem( Stock stock) async {
     addSelectedFoodItem.value.update(
       selectedTableId.value,
       (value) {

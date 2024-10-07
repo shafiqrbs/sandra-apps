@@ -397,7 +397,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             if (controller.stockList.value == null) return Container();
             return Obx(
               () => GestureDetector(
-                onTap: () => controller.selectFoodItem(index, stock!),
+                onTap: () => controller.selectFoodItem(stock!),
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   margin: const EdgeInsets.only(
@@ -521,7 +521,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
               if (controller.stockList.value == null) return Container();
               return Obx(
                 () => GestureDetector(
-                  onTap: () => controller.selectFoodItem(index, stock!),
+                  onTap: () => controller.selectFoodItem(stock!),
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(

@@ -70,7 +70,7 @@ class OrderProcessConfirmationController extends PrinterController {
       await _insertSales();
     }
     if (SetUp().mainAppName == 'restaurant') {
-      //await _deleteItemsFromRestaurantCart();
+      await _deleteItemsFromRestaurantCart();
     }
 
     showSnackBar(
@@ -109,6 +109,12 @@ class OrderProcessConfirmationController extends PrinterController {
     restaurantController.tableStatusList
             .value[restaurantController.selectedTableIndex.value] =
         BottomStatus.free;
+    restaurantController.bottomStatus.value = BottomStatus.free;
+    restaurantController.addSelectedFoodItem.value.remove(
+      orderCartController.selectedTableId.value,
+    );
+    restaurantController.tableInvoiceList.refresh();
+    restaurantController.addSelectedFoodItem.refresh();
     restaurantController.tableStatusList.refresh();
   }
 
