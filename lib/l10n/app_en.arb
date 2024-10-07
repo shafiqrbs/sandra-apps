@@ -360,7 +360,8 @@
   "postPrint" : "POS print",
   "allCategory" : "All Category",
   "booked" : "Booked",
-  "orderTakenBy" : "OrderBy"
+  "orderTakenBy" : "OrderBy",
+  "sc" : "SC"
 
 
 }

@@ -839,7 +839,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                     margin: EdgeInsets.zero,
                   ),
                   LabelValue(
-                    label: appLocalization.sd,
+                    label: appLocalization.sc,
                     value: '${currency ?? ''} 0.00',
                     dividerText: '',
                     labelFontSize: 12,
