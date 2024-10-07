@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/restaurant/table_invoice.dart';
+import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/sales.dart';
@@ -57,18 +63,53 @@ class OrderProcessConfirmationController extends PrinterController {
     }
   }
 
-
   Future<void> saveSales() async {
     if (isEdit) {
       await _updateSales();
     } else {
       await _insertSales();
     }
+    if (SetUp().mainAppName == 'restaurant') {
+      //await _deleteItemsFromRestaurantCart();
+    }
+
     showSnackBar(
       type: SnackBarType.success,
       title: appLocalization.success,
       message: appLocalization.salesHaveBeenAdded,
     );
+  }
+
+  Future<void> _deleteItemsFromRestaurantCart() async {
+    final orderCartController = Get.find<OrderCartController>();
+    final restaurantController = Get.find<RestaurantHomeController>();
+
+    await dbHelper.updateWhere(
+      tbl: dbTables.tableTableInvoice,
+      data: {
+        'items': jsonEncode([]),
+        'process': 'free',
+        'subtotal': '0.0',
+        'total': '0.0',
+      },
+      where: 'table_id = ?',
+      whereArgs: [orderCartController.selectedTableId.value],
+    );
+
+    final getTableInvoice = await dbHelper.getAll(
+      tbl: dbTables.tableTableInvoice,
+    );
+
+    restaurantController.tableInvoiceList.value = getTableInvoice
+        .map(
+          (e) => TableInvoice.fromJson(e),
+        )
+        .toList();
+
+    restaurantController.tableStatusList
+            .value[restaurantController.selectedTableIndex.value] =
+        BottomStatus.free;
+    restaurantController.tableStatusList.refresh();
   }
 
   Future<void> _updateSales() async {
