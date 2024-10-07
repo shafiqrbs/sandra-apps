@@ -234,19 +234,7 @@ class RestaurantHomeController extends BaseController {
       ],
     );
 
-    /*addSelectedFoodItem.value.update(
-      selectedTableId.value,
-      (value) {
-        value.add(stock);
-        return value;
-      },
-      ifAbsent: () => [
-        stock,
-      ],
-    );*/
     addSelectedFoodItem.refresh();
-
-    print('addSelectedFoodItem: ${addSelectedFoodItem.value}');
 
     await dbHelper.updateWhere(
       tbl: dbTables.tableTableInvoice,
@@ -257,7 +245,10 @@ class RestaurantHomeController extends BaseController {
       whereArgs: [selectedTableId.value],
     );
 
-    toast('Item added to the cart');
+    toast(
+      'Item added to the cart',
+      gravity: ToastGravity.TOP,
+    );
   }
 
   Future<void> onSearch(String value) async {
