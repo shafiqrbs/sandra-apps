@@ -275,7 +275,11 @@ class OrderCartController extends BaseController {
       handleDiscountChange(percentDiscount, discountValue);
     }
 
-    netTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    //netTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    salesSubTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    salesVat.value = calculateVatAmount(
+      SetUp().vatPercentage?.toDouble() ?? 0,
+    );
     salesReturnValue.value = netTotal.value;
 
     onAmountChange(
