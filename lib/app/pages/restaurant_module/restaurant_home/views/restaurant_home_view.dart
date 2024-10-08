@@ -518,7 +518,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           itemCount: controller.filteredStockList.value?.length ?? 0,
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.zero,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
           itemBuilder: (context, index) {
