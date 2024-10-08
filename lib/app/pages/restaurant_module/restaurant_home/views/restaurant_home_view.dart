@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -79,7 +80,11 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                   ),
                   8.width,
                   Text(
-                    '$currency ${controller.calculateTotalAmount(controller.addSelectedFoodItem.value[controller.selectedTableId.value] ?? [])}',
+                    '$currency ${controller.calculateTotalAmount(
+                      controller.addSelectedFoodItem
+                              .value[controller.selectedTableId.value] ??
+                          [],
+                    )}',
                     style: AppTextStyle.h3TextStyle700.copyWith(
                       color: colors.secondaryColor500,
                     ),
@@ -133,7 +138,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                       gradient: LinearGradient(
                         colors: [
                           colors.primaryColor500,
-                          colors.secondaryColor500
+                          colors.secondaryColor500,
                         ],
                         begin: Alignment.bottomLeft,
                         end: Alignment.topRight,
@@ -495,126 +500,243 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   Widget _buildMenuGridView() {
     return Expanded(
       child: Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.symmetric(
-            horizontal: 8,
-            vertical: 4,
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
+        decoration: BoxDecoration(
+          color: colors.whiteColor,
+          borderRadius: BorderRadius.circular(
+            AppValues.radius_8,
           ),
-          decoration: BoxDecoration(
-            color: colors.whiteColor,
-            borderRadius: BorderRadius.circular(
-              AppValues.radius_8,
-            ),
+        ),
+        child: MasonryGridView.builder(
+          gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
           ),
-          child: GridView.builder(
-            itemCount: controller.filteredStockList.value?.length ?? 0,
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: .75,
-            ),
-            itemBuilder: (context, index) {
-              final stock = controller.filteredStockList.value?[index];
-              if (controller.stockList.value == null) return Container();
-              return Obx(
-                () => GestureDetector(
-                  onTap: () => controller.selectFoodItem(stock!),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: colors.whiteColor,
-                      borderRadius: BorderRadius.circular(
-                        AppValues.radius_4,
-                      ),
-                      border: Border.all(
-                        color: controller.selectedFoodList.contains(index)
-                            ? colors.primaryColor500
-                            : colors.secondaryColor100,
-                      ),
+          itemCount: controller.filteredStockList.value?.length ?? 0,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          padding: const EdgeInsets.all(8),
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          itemBuilder: (context, index) {
+            final stock = controller.filteredStockList.value?[index];
+            if (controller.stockList.value == null) return Container();
+            return Obx(
+              () => GestureDetector(
+                onTap: () => controller.selectFoodItem(stock!),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: colors.whiteColor,
+                    borderRadius: BorderRadius.circular(
+                      AppValues.radius_4,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        commonCachedNetworkImage(
-                          stock?.imagePath ??
-                              'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-                          height: 100,
-                          width: double.infinity,
-                          radius: 2,
-                        ),
-                        8.height,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                stock?.categoryName ?? '',
-                                maxLines: 1,
-                                style: AppTextStyle.h4TextStyle400.copyWith(
-                                  color: colors.textColor300,
-                                  fontSize: 10,
-                                ),
+                    border: Border.all(
+                      color: controller.selectedFoodList.contains(index)
+                          ? colors.primaryColor500
+                          : colors.secondaryColor100,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      commonCachedNetworkImage(
+                        stock?.imagePath ??
+                            'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                        width: double.infinity,
+                        radius: 2,
+                      ),
+                      8.height,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            stock?.categoryName ?? '',
+                            maxLines: 1,
+                            style: AppTextStyle.h4TextStyle400.copyWith(
+                              color: colors.textColor300,
+                              fontSize: 10,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 42,
+                            child: Text(
+                              stock?.name ?? '',
+                              maxLines: 2,
+                              style: AppTextStyle.h3TextStyle700.copyWith(
+                                color: colors.textColor500,
                               ),
-                              SizedBox(
-                                height: 42,
+                            ),
+                          ),
+                          8.height,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
                                 child: Text(
-                                  stock?.name ?? '',
-                                  maxLines: 2,
-                                  style: AppTextStyle.h3TextStyle700.copyWith(
-                                    color: colors.textColor500,
+                                  '$currency ${stock?.salesPrice}',
+                                  style: AppTextStyle.h2TextStyle700.copyWith(
+                                    color: colors.textColor600,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              8.height,
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: 8,
+                              Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: colors.primaryColor50,
+                                  borderRadius: BorderRadius.circular(
+                                    AppValues.radius_4,
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '$currency ${stock?.salesPrice}',
-                                        style: AppTextStyle.h2TextStyle700
-                                            .copyWith(
-                                          color: colors.textColor600,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                        color: colors.primaryColor50,
-                                        borderRadius: BorderRadius.circular(
-                                          AppValues.radius_4,
-                                        ),
-                                      ),
-                                      child: Icon(
-                                        TablerIcons.basket,
-                                        size: 20,
-                                        color: colors.primaryColor500,
-                                      ),
-                                    ),
-                                  ],
+                                child: Icon(
+                                  TablerIcons.basket,
+                                  size: 20,
+                                  color: colors.primaryColor500,
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
-          )),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
+        decoration: BoxDecoration(
+          color: colors.whiteColor,
+          borderRadius: BorderRadius.circular(
+            AppValues.radius_8,
+          ),
+        ),
+        child: GridView.builder(
+          itemCount: controller.filteredStockList.value?.length ?? 0,
+          shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: .75,
+          ),
+          itemBuilder: (context, index) {
+            final stock = controller.filteredStockList.value?[index];
+            if (controller.stockList.value == null) return Container();
+            return Obx(
+              () => GestureDetector(
+                onTap: () => controller.selectFoodItem(stock!),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: colors.whiteColor,
+                    borderRadius: BorderRadius.circular(
+                      AppValues.radius_4,
+                    ),
+                    border: Border.all(
+                      color: controller.selectedFoodList.contains(index)
+                          ? colors.primaryColor500
+                          : colors.secondaryColor100,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      commonCachedNetworkImage(
+                        stock?.imagePath ??
+                            'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
+                        width: double.infinity,
+                        radius: 2,
+                      ),
+                      8.height,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              stock?.categoryName ?? '',
+                              maxLines: 1,
+                              style: AppTextStyle.h4TextStyle400.copyWith(
+                                color: colors.textColor300,
+                                fontSize: 10,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 42,
+                              child: Text(
+                                stock?.name ?? '',
+                                maxLines: 2,
+                                style: AppTextStyle.h3TextStyle700.copyWith(
+                                  color: colors.textColor500,
+                                ),
+                              ),
+                            ),
+                            8.height,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '$currency ${stock?.salesPrice}',
+                                      style:
+                                          AppTextStyle.h2TextStyle700.copyWith(
+                                        color: colors.textColor600,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: colors.primaryColor50,
+                                      borderRadius: BorderRadius.circular(
+                                        AppValues.radius_4,
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      TablerIcons.basket,
+                                      size: 20,
+                                      color: colors.primaryColor500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 
