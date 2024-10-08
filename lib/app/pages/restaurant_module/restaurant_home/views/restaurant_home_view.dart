@@ -232,7 +232,7 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                           ),
                         ),
                         child: Text(
-                          '07:02:26',
+                          controller.tableStatusTimeList.value[index],
                           style: AppTextStyle.h3TextStyle600.copyWith(
                             color: colors.blackColor400,
                           ),
@@ -581,8 +581,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
                                     Expanded(
                                       child: Text(
                                         '$currency ${stock?.salesPrice}',
-                                        style:
-                                            AppTextStyle.h2TextStyle700.copyWith(
+                                        style: AppTextStyle.h2TextStyle700
+                                            .copyWith(
                                           color: colors.textColor600,
                                           fontWeight: FontWeight.bold,
                                         ),

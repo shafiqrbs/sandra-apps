@@ -89,6 +89,7 @@ class OrderProcessConfirmationController extends PrinterController {
       data: {
         'items': jsonEncode([]),
         'process': 'free',
+        'order_time': '00:00:00',
         'subtotal': '0.0',
         'total': '0.0',
       },
@@ -110,6 +111,8 @@ class OrderProcessConfirmationController extends PrinterController {
             .value[restaurantController.selectedTableIndex.value] =
         BottomStatus.free;
     restaurantController.bottomStatus.value = BottomStatus.free;
+    restaurantController.tableStatusTimeList
+        .value[restaurantController.selectedTableIndex.value] = '00:00:00';
     restaurantController.addSelectedFoodItem.value.remove(
       orderCartController.selectedTableId.value,
     );

@@ -7,6 +7,7 @@ import '/app/core/utils/parser_functions.dart';
 class TableInvoice {
   int? tableId;
   String? process;
+  String? orderTime;
   String? orderBy;
   String? additionalTable;
   num? amount;
@@ -26,6 +27,7 @@ class TableInvoice {
   TableInvoice({
     this.tableId,
     this.process,
+    this.orderTime,
     this.orderBy,
     this.additionalTable,
     this.amount,
@@ -47,6 +49,7 @@ class TableInvoice {
     return TableInvoice(
       tableId: json['table_id'],
       process: json['process'],
+      orderTime: json['order_time'],
       orderBy: json['order_by'],
       additionalTable: json['additional_table'],
       amount: parseDouble(json['amount']),
@@ -81,6 +84,7 @@ class TableInvoice {
     return {
       'table_id': tableId,
       'process': process,
+      'order_time': orderTime,
       'order_by': orderBy,
       'additional_table': additionalTable,
       'amount': amount,

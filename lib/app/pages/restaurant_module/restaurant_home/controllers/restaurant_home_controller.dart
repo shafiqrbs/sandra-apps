@@ -36,6 +36,7 @@ class RestaurantHomeController extends BaseController {
   final selectedTableId = 0.obs;
   final tableList = Rx<List<RestaurantTable>?>(null);
   final tableStatusList = Rx<List<BottomStatus>>([]);
+  final tableStatusTimeList = Rx<List<String>>([]);
   final stockList = Rx<List<Stock?>?>(null);
   final filteredStockList = Rx<List<Stock?>?>(null);
   RxList<TableInvoice> tableInvoiceList = RxList<TableInvoice>([]);
@@ -71,6 +72,10 @@ class RestaurantHomeController extends BaseController {
         tableList.value?.length ?? 0,
         BottomStatus.free,
       );
+      tableStatusTimeList.value = List.filled(
+        tableList.value?.length ?? 0,
+        '00:00:00',
+      );
     }
 
     tableInvoiceList.clear();
@@ -80,6 +85,7 @@ class RestaurantHomeController extends BaseController {
         TableInvoice(
           tableId: tableList.value![i].id,
           process: tableStatusList.value[i].name,
+          orderTime: tableStatusTimeList.value[i],
           orderBy: '1',
           additionalTable: '0',
           amount: 0.0,
@@ -132,6 +138,15 @@ class RestaurantHomeController extends BaseController {
     changeTableStatus(status);
   }
 
+  String tableStatusTime(int index) {
+    if (tableStatusTimeList.value[index] != '00:00:00') {
+      return tableStatusTimeList.value[index];
+    }
+    return tableStatusList.value[index].name == 'free'
+        ? '00:00:00'
+        : DateTime.now().toString().split(' ')[1].substring(0, 8);
+  }
+
   Future<void> selectTable(
     int index,
     RestaurantTable table,
@@ -153,18 +168,26 @@ class RestaurantHomeController extends BaseController {
 
   Future<void> changeTableStatus(BottomStatus status) async {
     if (tableStatusList.value.isEmpty) return;
+    if (status == BottomStatus.free) {
+      tableStatusTimeList.value[selectedTableIndex.value] = '00:00:00';
+      tableStatusTimeList.refresh();
+    }
 
     await dbHelper.updateWhere(
       tbl: dbTables.tableTableInvoice,
       data: {
         'process': status.name,
+        'order_time': tableStatusTimeList.value[selectedTableIndex.value],
       },
       where: 'table_id = ?',
       whereArgs: [selectedTableId.value],
     );
 
     tableStatusList.value[selectedTableIndex.value] = status;
+    tableStatusTimeList.value[selectedTableIndex.value] =
+        tableStatusTime(selectedTableIndex.value);
     tableStatusList.refresh();
+    tableStatusTimeList.refresh();
   }
 
   Future<void> goToOrderCart({
@@ -212,7 +235,7 @@ class RestaurantHomeController extends BaseController {
     ).showMenuFromLeft();
   }
 
-  Future<void> selectFoodItem( Stock stock) async {
+  Future<void> selectFoodItem(Stock stock) async {
     addSelectedFoodItem.value.update(
       selectedTableId.value,
       (value) {
