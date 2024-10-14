@@ -8,6 +8,7 @@ import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
+import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_view.dart';
 
@@ -94,6 +95,8 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
             ),
           ),
         ),
+        8.width,
+        QuickNavigationButton(),
         16.width,
       ],
     );

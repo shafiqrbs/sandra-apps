@@ -12,10 +12,10 @@ class LicenseController extends BaseController {
 
 
   final licenseNumberController = TextEditingController(
-    text: kDebugMode ? (true ? '01839723678' : '01852892044') : '',
+    text: kDebugMode ? (false ? '01839723678' : '01852892044') : '',
   );
   final activeKeyController = TextEditingController(
-    text: kDebugMode ? (true ? '1684187269' : '1551378444') : '',
+    text: kDebugMode ? (false ? '1684187269' : '1551378444') : '',
   );
 
   Future<void> submitLicense() async {
