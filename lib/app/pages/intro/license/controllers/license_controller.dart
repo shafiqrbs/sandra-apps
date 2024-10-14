@@ -9,11 +9,13 @@ import '/app/routes/app_pages.dart';
 
 class LicenseController extends BaseController {
   final formKey = GlobalKey<FormState>();
+
+
   final licenseNumberController = TextEditingController(
-    text: kDebugMode ? '01852892044' : '',
+    text: kDebugMode ? (true ? '01839723678' : '01852892044') : '',
   );
   final activeKeyController = TextEditingController(
-    text: kDebugMode ? '1551378444' : '',
+    text: kDebugMode ? (true ? '1684187269' : '1551378444') : '',
   );
 
   Future<void> submitLicense() async {

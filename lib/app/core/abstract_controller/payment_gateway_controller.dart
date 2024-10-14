@@ -47,8 +47,7 @@ abstract class PaymentGatewayController extends BaseController {
     await transactionMethodsManager.getAll();
     transactionMethodsManager.selectedItem.value = transactionMethodsManager
         .allItems.value
-        ?.where((element) => element.isDefault == 1)
-        .first;
+        ?.firstWhereOrNull((element) => element.isDefault == 1);
     await userManager.value.fillAsController();
     userManager.value.asController.selectedValue =
         userManager.value.asController.items?.firstWhereOrNull(
