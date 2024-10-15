@@ -170,9 +170,14 @@ class OrderProcessConfirmationController extends PrinterController {
 
   void _navigateToLanding() {
     logger.i('saving');
-    Get
-      ..back()
-      ..back();
+    if (SetUp().mainAppName == 'restaurant') {
+      Get.back();
+    } else {
+      Get
+        ..back()
+        ..back();
+    }
+
     if (Get.isRegistered<CreateSalesController>()) {
       final createSalesController = Get.find<CreateSalesController>();
       createSalesController.salesItemList.value = [];

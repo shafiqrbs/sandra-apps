@@ -18,6 +18,7 @@ import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/entity/user.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/pages/inventory/sales/create_sales/modals/order_process_confirmation_modal/order_process_confirmation_controller.dart';
 import 'package:sandra/app/pages/inventory/sales/create_sales/modals/order_process_confirmation_modal/order_process_confirmation_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_controller.dart';
@@ -466,7 +467,15 @@ class OrderCartController extends BaseController {
 
     if (!context.mounted) return;
 
-    final confirmed = await showDialog<bool>(
+    final orderProcessConfirmationController = Get.put(
+      OrderProcessConfirmationController(
+        sales: sales,
+        isEdit: false,
+      ),
+    );
+    await orderProcessConfirmationController.saveSales();
+
+    /*final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return DialogPattern(
@@ -486,7 +495,7 @@ class OrderCartController extends BaseController {
       Get.back(
         result: cartItems.value,
       );
-    }
+    }*/
     salesSubTotal.value = 0;
     salesItemList.clear();
   }
