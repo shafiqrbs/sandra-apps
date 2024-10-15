@@ -95,7 +95,9 @@ class OrderCartView extends BaseView<OrderCartController> {
       mainAxisAlignment: spaceBetweenMAA,
       children: [
         Text(
-          '${appLocalization.table}: ${controller.tableName.value}',
+          controller.isTableEnabled.value
+              ? '${appLocalization.table}: ${controller.tableName.value}'
+              : '',
           style: AppTextStyle.h2TextStyle500.copyWith(
             color: colors.blackColor500,
           ),

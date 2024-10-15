@@ -63,6 +63,7 @@ class OrderCartController extends BaseController {
   Rx<Sales?> createdSales = Rx<Sales?>(null);
   final formKey = GlobalKey<FormState>();
   Timer? timer;
+  final isTableEnabled = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -74,6 +75,7 @@ class OrderCartController extends BaseController {
       tableName.value = arg['tableName'];
       tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
+    isTableEnabled.value = await prefs.getIsisTableEnabled();
     await initializeCartItems();
     await getSalesUser();
     await initializeVariables();
