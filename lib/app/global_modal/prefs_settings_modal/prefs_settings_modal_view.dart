@@ -5,6 +5,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import '/app/core/base/base_view.dart';
 
 import 'prefs_settings_modal_controller.dart';
@@ -22,7 +23,10 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                _buildRestaurant(),
+                Visibility(
+                  visible: SetUp().mainAppName == 'restaurant',
+                  child: _buildRestaurant(),
+                ),
                 _buildSales(),
                 _buildPurchase(),
                 _buildPrinter(),
