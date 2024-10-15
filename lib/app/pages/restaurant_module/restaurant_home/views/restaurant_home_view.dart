@@ -759,6 +759,12 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
       ),
       child: Obx(
         () {
+          if (!controller.isTableEnabled.value) {
+            return const SizedBox(
+              height: 0,
+              width: 0,
+            );
+          }
           return Row(
             children: [
               _buildBottomNavbarCard(
