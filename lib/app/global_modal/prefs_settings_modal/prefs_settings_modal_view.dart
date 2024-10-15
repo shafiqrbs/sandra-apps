@@ -22,575 +22,636 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    dividerWidget(),
-                    Row(
-                      children: [
-                        Icon(
-                          TablerIcons.shopping_cart,
-                          color: colors.primaryColor700,
-                          size: 24,
-                        ),
-                        8.width,
-                        Text(
-                          appLocalization.sales.toUpperCase(),
-                          style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: colors.primaryColor700,
-                          ),
-                        ),
-                      ],
+                _buildRestaurant(),
+                _buildSales(),
+                _buildPurchase(),
+                _buildPrinter(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildRestaurant() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        dividerWidget(),
+        Row(
+          children: [
+            Icon(
+              TablerIcons.building_store,
+              color: colors.primaryColor700,
+              size: 24,
+            ),
+            8.width,
+            Text(
+              appLocalization.restaurant.toUpperCase(),
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: colors.primaryColor700,
+              ),
+            ),
+          ],
+        ),
+        dividerWidget(),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 24,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
                     ),
-                    dividerWidget(),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 24,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.salesOnlineOffline,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isSalesOnline,
-                                onChanged: (value) async {
-                                  await controller.setSalesOnline(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue: controller.isSalesOnline.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.salesAllowedWithoutPayment,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isZeroSalesAllowed,
-                                onChanged: (value) async {
-                                  await controller.setZeroSalesAllowed(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue:
-                                    controller.isZeroSalesAllowed.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.autoSalesApproval,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isSalesAutoApproved,
-                                onChanged: (value) async {
-                                  await controller.setSalesAutoApproved(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue:
-                                    controller.isSalesAutoApproved.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.isShowBrandOnSales,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isShowBrandOnSales,
-                                onChanged: (value) async {
-                                  await controller.setShowBrandOnSales(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue:
-                                    controller.isShowBrandOnSales.value,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    dividerWidget(),
-                    Row(
-                      children: [
-                        Icon(
-                          TablerIcons.truck_delivery,
-                          color: colors.primaryColor700,
-                          size: 24,
-                        ),
-                        8.width,
-                        Text(
-                          appLocalization.purchase.toUpperCase(),
-                          style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: colors.primaryColor700,
-                          ),
-                        ),
-                      ],
-                    ),
-                    dividerWidget(),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 24,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.purchaseOnlineOffline,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isPurchaseOnline,
-                                onChanged: (value) async {
-                                  await controller.setPurchaseOnline(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue: controller.isPurchaseOnline.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.autoPurchaseApproval,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isPurchaseAutoApproved,
-                                onChanged: (value) async {
-                                  await controller
-                                      .setPurchaseAutoApproved(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue:
-                                    controller.isPurchaseAutoApproved.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Row(
-                            mainAxisAlignment: spaceBetweenMAA,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  appLocalization.isShowBrandOnPurchase,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              AdvancedSwitch(
-                                controller: controller.isShowBrandOnPurchase,
-                                onChanged: (value) async {
-                                  await controller
-                                      .setShowBrandOnPurchase(value);
-                                },
-                                borderRadius: BorderRadius.circular(4),
-                                height: 20,
-                                width: 40,
-                                activeColor: colors.primaryColor700,
-                                inactiveColor: colors.secondaryColor100,
-                                initialValue:
-                                    controller.isShowBrandOnPurchase.value,
-                              ),
-                            ],
-                          ),
-                          16.height,
-                          Column(
-                            children: [
-                              _buildSettingButton(
-                                text: appLocalization.purchaseConfig,
-                                trailingIcon: TablerIcons.chevron_right,
-                                isOpen: controller.buttons.value ==
-                                    Buttons.purchase,
-                                onTap: () {
-                                  controller.changeButton(Buttons.purchase);
-                                },
-                              ),
-                              if (controller.buttons.value == Buttons.purchase)
-                                8.height,
-                              if (controller.buttons.value == Buttons.purchase)
-                                Container(
-                                  color: Colors.white,
-                                  width: Get.width,
-                                  padding: const EdgeInsets.only(
-                                    left: 16,
-                                    right: 0,
-                                    top: 16,
-                                    bottom: 16,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 0),
-                                        child: Row(
-                                          mainAxisAlignment: spaceBetweenMAA,
-                                          children: [
-                                            Text(
-                                              appLocalization.totalPrice,
-                                              style: GoogleFonts.roboto(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            AdvancedSwitch(
-                                              controller:
-                                                  controller.isTotalPurchase,
-                                              onChanged: (value) async {
-                                                await controller
-                                                    .setTotalPurchase(value);
-                                              },
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              height: 20,
-                                              width: 40,
-                                              activeColor:
-                                                  colors.primaryColor700,
-                                              inactiveColor:
-                                                  colors.secondaryColor100,
-                                              initialValue: controller
-                                                  .isTotalPurchase.value,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      16.height,
-                                      _buildCustomRadioButton(
-                                        title: appLocalization.purchaseWithMrp,
-                                        isSelected:
-                                            controller.selectedPurchase.value ==
-                                                'purchase_with_mrp',
-                                        onTap: () {
-                                          controller.changePurchase(
-                                              'purchase_with_mrp');
-                                        },
-                                      ),
-                                      16.height,
-                                      _buildCustomRadioButton(
-                                        title: appLocalization.purchasePrice,
-                                        isSelected:
-                                            controller.selectedPurchase.value ==
-                                                'purchase_price',
-                                        onTap: () {
-                                          controller
-                                              .changePurchase('purchase_price');
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                dividerWidget(),
-                Row(
-                  children: [
-                    Icon(
-                      TablerIcons.printer,
-                      color: colors.primaryColor700,
-                      size: 24,
-                    ),
-                    8.width,
-                    Text(
-                      appLocalization.printer.toUpperCase(),
+                    child: Text(
+                      appLocalization.tableEnableDisable,
                       style: GoogleFonts.roboto(
                         fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: colors.primaryColor700,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                  ],
-                ),
-                dividerWidget(),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 24,
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: spaceBetweenMAA,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                              left: 8,
-                            ),
-                            child: Text(
-                              appLocalization.printer,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          AdvancedSwitch(
-                            controller: controller.isHasPrinter,
-                            onChanged: (value) async {
-                              await controller.setHasPrinter(value);
-                            },
-                            borderRadius: BorderRadius.circular(4),
-                            height: 20,
-                            width: 40,
-                            activeColor: colors.primaryColor700,
-                            inactiveColor: colors.secondaryColor100,
-                            initialValue: controller.isHasPrinter.value,
-                          ),
-                        ],
-                      ),
-                      16.height,
-                      Column(
-                        children: [
-                          _buildSettingButton(
-                            text: appLocalization.printPaperType,
-                            //icon: TablerIcons.printer,
-                            trailingIcon: TablerIcons.chevron_right,
-                            isOpen: controller.buttons.value ==
-                                Buttons.printPaperType,
-                            onTap: () {
-                              controller.changeButton(Buttons.printPaperType);
-                            },
-                          ),
-                          if (controller.buttons.value !=
-                              Buttons.printPaperType)
-                            16.height,
-                          if (controller.buttons.value ==
-                              Buttons.printPaperType)
-                            Container(
-                              margin: const EdgeInsets.only(
-                                top: 8,
-                              ),
-                              padding: const EdgeInsets.only(
-                                bottom: 16,
-                              ),
-                              color: Colors.white,
-                              width: Get.width,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: controller.printerTypeList.length,
-                                itemBuilder: (context, index) {
-                                  final item =
-                                      controller.printerTypeList[index];
+                  AdvancedSwitch(
+                    controller: controller.isTableEnabled,
+                    onChanged: (value) async {
+                      await controller.setTableEnable(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isTableEnabled.value,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 16,
-                                      top: 16,
-                                    ),
-                                    child: Obx(
-                                      () {
-                                        return _buildCustomRadioButton(
-                                          title: item.value ?? '',
-                                          isSelected:
-                                              controller.printerType.value ==
-                                                  item.value,
-                                          onTap: () {
-                                            controller
-                                                .setPrinterType(item.value);
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  );
-
-                                  return RadioListTile<String>(
-                                    title: Text(
-                                      item.value ?? '',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        color: colors.solidBlackColor,
-                                      ),
-                                    ),
-                                    value: item.value ?? '',
-                                    groupValue: controller.printerType.value,
-                                    onChanged: controller.setPrinterType,
-                                    activeColor: colors.solidRedColor,
-                                    contentPadding: const EdgeInsets.only(
-                                      left: 24,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                        ],
+  Widget _buildSales() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        dividerWidget(),
+        Row(
+          children: [
+            Icon(
+              TablerIcons.shopping_cart,
+              color: colors.primaryColor700,
+              size: 24,
+            ),
+            8.width,
+            Text(
+              appLocalization.sales.toUpperCase(),
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: colors.primaryColor700,
+              ),
+            ),
+          ],
+        ),
+        dividerWidget(),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 24,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.salesOnlineOffline,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                      Row(
-                        mainAxisAlignment: spaceBetweenMAA,
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isSalesOnline,
+                    onChanged: (value) async {
+                      await controller.setSalesOnline(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isSalesOnline.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.salesAllowedWithoutPayment,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isZeroSalesAllowed,
+                    onChanged: (value) async {
+                      await controller.setZeroSalesAllowed(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isZeroSalesAllowed.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.autoSalesApproval,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isSalesAutoApproved,
+                    onChanged: (value) async {
+                      await controller.setSalesAutoApproved(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isSalesAutoApproved.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.isShowBrandOnSales,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isShowBrandOnSales,
+                    onChanged: (value) async {
+                      await controller.setShowBrandOnSales(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isShowBrandOnSales.value,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPurchase() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        dividerWidget(),
+        Row(
+          children: [
+            Icon(
+              TablerIcons.truck_delivery,
+              color: colors.primaryColor700,
+              size: 24,
+            ),
+            8.width,
+            Text(
+              appLocalization.purchase.toUpperCase(),
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: colors.primaryColor700,
+              ),
+            ),
+          ],
+        ),
+        dividerWidget(),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 24,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.purchaseOnlineOffline,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isPurchaseOnline,
+                    onChanged: (value) async {
+                      await controller.setPurchaseOnline(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isPurchaseOnline.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.autoPurchaseApproval,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isPurchaseAutoApproved,
+                    onChanged: (value) async {
+                      await controller.setPurchaseAutoApproved(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isPurchaseAutoApproved.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.isShowBrandOnPurchase,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isShowBrandOnPurchase,
+                    onChanged: (value) async {
+                      await controller.setShowBrandOnPurchase(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isShowBrandOnPurchase.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Column(
+                children: [
+                  _buildSettingButton(
+                    text: appLocalization.purchaseConfig,
+                    trailingIcon: TablerIcons.chevron_right,
+                    isOpen: controller.buttons.value == Buttons.purchase,
+                    onTap: () {
+                      controller.changeButton(Buttons.purchase);
+                    },
+                  ),
+                  if (controller.buttons.value == Buttons.purchase) 8.height,
+                  if (controller.buttons.value == Buttons.purchase)
+                    Container(
+                      color: Colors.white,
+                      width: Get.width,
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 0,
+                        top: 16,
+                        bottom: 16,
+                      ),
+                      child: Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                              left: 8,
-                            ),
-                            child: Text(
-                              appLocalization.printEndNewLine,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 80,
-                            height: textFieldHeight,
-                            child: TextFormField(
-                              controller: controller.printNewLineController,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0),
+                            child: Row(
+                              mainAxisAlignment: spaceBetweenMAA,
+                              children: [
+                                Text(
+                                  appLocalization.totalPrice,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                AdvancedSwitch(
+                                  controller: controller.isTotalPurchase,
+                                  onChanged: (value) async {
+                                    await controller.setTotalPurchase(value);
+                                  },
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryColor700,
+                                  inactiveColor: colors.secondaryColor100,
+                                  initialValue:
+                                      controller.isTotalPurchase.value,
+                                ),
                               ],
-                              onChanged: (value) {
-                                controller.setPrinterNewLine(
-                                    int.tryParse(value) ?? 0);
-                              },
-                              onFieldSubmitted: (value) {
-                                controller.setPrinterNewLine(
-                                    int.tryParse(value) ?? 0);
-                              },
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: '1',
-                                hintStyle: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: colors.primaryBlackColor,
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
-                                ),
-                                filled: true,
-                                fillColor: colors.primaryColor50,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: BorderSide(
-                                    color: colors.secondaryColor100,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: BorderSide(
-                                    color: colors.secondaryColor100,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: BorderSide(
-                                    color: colors.secondaryColor100,
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
-                          /*if (controller.printerType.value.isEmpty)
+                          16.height,
+                          _buildCustomRadioButton(
+                            title: appLocalization.purchaseWithMrp,
+                            isSelected: controller.selectedPurchase.value ==
+                                'purchase_with_mrp',
+                            onTap: () {
+                              controller.changePurchase('purchase_with_mrp');
+                            },
+                          ),
+                          16.height,
+                          _buildCustomRadioButton(
+                            title: appLocalization.purchasePrice,
+                            isSelected: controller.selectedPurchase.value ==
+                                'purchase_price',
+                            onTap: () {
+                              controller.changePurchase('purchase_price');
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPrinter() {
+    return Column(
+      children: [
+        dividerWidget(),
+        Row(
+          children: [
+            Icon(
+              TablerIcons.printer,
+              color: colors.primaryColor700,
+              size: 24,
+            ),
+            8.width,
+            Text(
+              appLocalization.printer.toUpperCase(),
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: colors.primaryColor700,
+              ),
+            ),
+          ],
+        ),
+        dividerWidget(),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 24,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.printer,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isHasPrinter,
+                    onChanged: (value) async {
+                      await controller.setHasPrinter(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isHasPrinter.value,
+                  ),
+                ],
+              ),
+              16.height,
+              Column(
+                children: [
+                  _buildSettingButton(
+                    text: appLocalization.printPaperType,
+                    //icon: TablerIcons.printer,
+                    trailingIcon: TablerIcons.chevron_right,
+                    isOpen: controller.buttons.value == Buttons.printPaperType,
+                    onTap: () {
+                      controller.changeButton(Buttons.printPaperType);
+                    },
+                  ),
+                  if (controller.buttons.value != Buttons.printPaperType)
+                    16.height,
+                  if (controller.buttons.value == Buttons.printPaperType)
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: 8,
+                      ),
+                      padding: const EdgeInsets.only(
+                        bottom: 16,
+                      ),
+                      color: Colors.white,
+                      width: Get.width,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.printerTypeList.length,
+                        itemBuilder: (context, index) {
+                          final item = controller.printerTypeList[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                              top: 16,
+                            ),
+                            child: Obx(
+                              () {
+                                return _buildCustomRadioButton(
+                                  title: item.value ?? '',
+                                  isSelected: controller.printerType.value ==
+                                      item.value,
+                                  onTap: () {
+                                    controller.setPrinterType(item.value);
+                                  },
+                                );
+                              },
+                            ),
+                          );
+
+                          return RadioListTile<String>(
+                            title: Text(
+                              item.value ?? '',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: colors.solidBlackColor,
+                              ),
+                            ),
+                            value: item.value ?? '',
+                            groupValue: controller.printerType.value,
+                            onChanged: controller.setPrinterType,
+                            activeColor: colors.solidRedColor,
+                            contentPadding: const EdgeInsets.only(
+                              left: 24,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.printEndNewLine,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 80,
+                    height: textFieldHeight,
+                    child: TextFormField(
+                      controller: controller.printNewLineController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      onChanged: (value) {
+                        controller.setPrinterNewLine(int.tryParse(value) ?? 0);
+                      },
+                      onFieldSubmitted: (value) {
+                        controller.setPrinterNewLine(int.tryParse(value) ?? 0);
+                      },
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: '1',
+                        hintStyle: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: colors.primaryBlackColor,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        filled: true,
+                        fillColor: colors.primaryColor50,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: BorderSide(
+                            color: colors.secondaryColor100,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: BorderSide(
+                            color: colors.secondaryColor100,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: BorderSide(
+                            color: colors.secondaryColor100,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  /*if (controller.printerType.value.isEmpty)
                         const CircularProgressIndicator()
                       else
                         DropdownButton<int>(
@@ -601,16 +662,12 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                             controller.setPrinterNewLine(value);
                           },
                         ),*/
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 

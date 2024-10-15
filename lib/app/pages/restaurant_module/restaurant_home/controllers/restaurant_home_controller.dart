@@ -40,10 +40,12 @@ class RestaurantHomeController extends BaseController {
   final stockList = Rx<List<Stock?>?>(null);
   final filteredStockList = Rx<List<Stock?>?>(null);
   RxList<TableInvoice> tableInvoiceList = RxList<TableInvoice>([]);
+  final isTableEnabled = false.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    isTableEnabled.value = await prefs.getIsisTableEnabled();
     await dataFetcher(
       future: () async {
         await getRestaurantTableList();

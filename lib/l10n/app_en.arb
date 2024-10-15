@@ -361,7 +361,8 @@
   "allCategory" : "All Category",
   "booked" : "Booked",
   "orderTakenBy" : "OrderBy",
-  "sc" : "SC"
+  "sc" : "SC",
+  "tableEnableDisable" : "Table Enable/Disable"
 
 
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 import 'package:sandra/app/pages/inventory/sales/create_sales/controllers/create_sales_controller.dart';
+import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
 import '/app/core/base/base_controller.dart';
 
@@ -14,6 +15,7 @@ enum Buttons {
 class PrefsSettingsModalController extends BaseController {
   final buttons = Rx<Buttons?>(null);
   final isSalesOnline = ValueNotifier(false);
+  final isTableEnabled = ValueNotifier(false);
   final isPurchaseOnline = ValueNotifier(false);
   final isZeroSalesAllowed = ValueNotifier(false);
   final isHasPrinter = ValueNotifier(false);
@@ -41,6 +43,7 @@ class PrefsSettingsModalController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    isTableEnabled.value = await prefs.getIsisTableEnabled();
     isSalesOnline.value = await prefs.getIsSalesOnline();
     isPurchaseOnline.value = await prefs.getIsPurchaseOnline();
     isZeroSalesAllowed.value = await prefs.getIsZeroSalesAllowed();
@@ -54,6 +57,17 @@ class PrefsSettingsModalController extends BaseController {
     isTotalPurchase.value = await prefs.getTotalPriceConfig();
     isShowBrandOnPurchase.value = await prefs.getIsShowBrandOnPurchase();
     isShowBrandOnSales.value = await prefs.getIsShowBrandOnSales();
+  }
+
+  Future<void> setTableEnable(bool value) async {
+    isTableEnabled.value = value;
+    await prefs.setIsTableEnabled(
+      isTableEnabled: value,
+    );
+    if (Get.isRegistered<RestaurantHomeController>()) {
+      final restaurantHomeController = Get.find<RestaurantHomeController>();
+      restaurantHomeController.isTableEnabled.value = value;
+    }
   }
 
   Future<void> setSalesOnline(bool value) async {

@@ -111,7 +111,10 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
           Column(
             children: [
               0.height,
-              _buildTableList(),
+              Visibility(
+                visible: controller.isTableEnabled.value,
+                child: _buildTableList(),
+              ),
               _buildSearchBar(),
               _buildMenuList(),
             ],

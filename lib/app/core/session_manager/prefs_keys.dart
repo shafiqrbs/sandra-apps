@@ -5,6 +5,7 @@ const prefsLoggedUserPassword = 'loggedUserPassword';
 const prefsIsLicenseValid = 'isLicenseValid';
 const prefsPrinterPaperType = 'printPaperType';
 const prefsIsSalesOnline = 'isSalesOnline';
+const prefsIsisTableEnabled = 'isisTableEnabled';
 const prefsIsPurchaseOnline = 'isPurchaseOnline';
 const prefsIsZeroAllowed = 'isZeroAllowed';
 const prefsIsPrinterAllowed = 'isPrinterAllowed';

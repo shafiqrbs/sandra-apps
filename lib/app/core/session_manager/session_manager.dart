@@ -153,6 +153,21 @@ class SessionManager {
     return prefs.getString(prefsPrinterPaperType) ?? '80 mm';
   }
 
+  /// Set is table enable
+  Future<void> setIsTableEnabled({
+    required bool isTableEnabled,
+  }) async {
+    await prefs.setBool(
+      prefsIsisTableEnabled,
+      isTableEnabled,
+    );
+  }
+
+  /// Get is table enable
+  Future<bool> getIsisTableEnabled() async {
+    return prefs.getBool(prefsIsisTableEnabled) ?? false;
+  }
+
   /// Set is sales online
   Future<void> setIsSalesOnline({
     required bool isSalesOnline,
