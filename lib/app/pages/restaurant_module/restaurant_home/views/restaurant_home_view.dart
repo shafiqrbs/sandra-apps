@@ -7,7 +7,9 @@ import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
+import 'package:sandra/app/core/widget/app_bar_search_view.dart';
 import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
+import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 import '/app/core/base/base_view.dart';
@@ -25,21 +27,12 @@ class RestaurantHomeView extends BaseView<RestaurantHomeController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
+      centerTitle: false,
       backgroundColor: colors.primaryColor500,
-      leading: IconButton(
-        icon: Icon(
-          TablerIcons.arrow_left,
-          size: 24,
-          color: colors.whiteColor,
-        ),
-        onPressed: Get.back,
+      title: PageBackButton(
+        pageTitle: appLocalization.pos,
       ),
-      title: Text(
-        appLocalization.pos,
-        style: AppTextStyle.h1TextStyle700.copyWith(
-          color: colors.whiteColor,
-        ),
-      ),
+      automaticallyImplyLeading: false,
       actions: [
         GestureDetector(
           onTap: () => controller.goToOrderCart(
