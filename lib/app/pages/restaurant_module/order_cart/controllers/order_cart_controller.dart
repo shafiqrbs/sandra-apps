@@ -275,7 +275,8 @@ class OrderCartController extends BaseController {
     }
 
     //netTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
-    salesSubTotal.value = (salesSubTotal.value - salesDiscount.value).toPrecision(2);
+    salesSubTotal.value =
+        (salesSubTotal.value - salesDiscount.value).toPrecision(2);
     salesVat.value = calculateVatAmount(
       SetUp().vatPercentage?.toDouble() ?? 0,
     );
@@ -373,6 +374,8 @@ class OrderCartController extends BaseController {
       salesById: userManager.value.asController.selectedValue?.userId,
       isOnline: 0,
       tokenNo: generateTokenWithInvoiceAndTimestamp(timeStamp),
+      approvedBy: LoggedUser().username,
+      approvedById: LoggedUser().userId,
     );
 
     if (customerManager.selectedItem.value != null) {
