@@ -83,6 +83,7 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                     ],
                   ),
                 ),
+                16.height,
                 Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
