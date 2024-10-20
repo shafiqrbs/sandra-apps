@@ -362,7 +362,11 @@
   "booked" : "Booked",
   "orderTakenBy" : "OrderBy",
   "sc" : "SC",
-  "tableEnableDisable" : "Table Enable/Disable"
+  "tableEnableDisable" : "Table Enable/Disable",
+  "theAmountMustBeEqualOrMoreThanNetTotal" : "The amount must be equal or more than net total",
+  "eitherSelectCustomerOrEnterValidAmount" : "Either select customer or enter valid amount"
+
+
 
 
 }
