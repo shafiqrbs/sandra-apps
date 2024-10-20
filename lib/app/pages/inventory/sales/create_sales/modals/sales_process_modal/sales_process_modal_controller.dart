@@ -290,7 +290,7 @@ class SalesProcessModalController extends PaymentGatewayController {
       print('isInvalidAmount: $isInvalidAmount');
     }
 
-    if (isZeroSalesAllowed) {
+/*    if (isZeroSalesAllowed) {
       if (isCustomerSelected) {
         if (amount == 0) {
           sales.due = netTotal.value;
@@ -315,6 +315,30 @@ class SalesProcessModalController extends PaymentGatewayController {
           sales.due = netTotal.value - amount;
         } else {
           sales.due = 0;
+        }
+      } else {
+        if (isInvalidAmount) {
+          toast(appLocalization.theAmountMustBeEqualOrMoreThanNetTotal);
+          return;
+        }
+      }
+    }*/
+
+    if (isCustomerSelected) {
+      if (amount == 0) {
+        sales.due = netTotal.value;
+      } else if (isInvalidAmount) {
+        sales.due = netTotal.value - amount;
+      } else {
+        sales.due = 0;
+      }
+    } else {
+      if (isZeroSalesAllowed) {
+        if (amount == 0) {
+          sales.received = netTotal.value;
+        } else if (isInvalidAmount) {
+          toast(appLocalization.eitherSelectCustomerOrEnterValidAmount);
+          return;
         }
       } else {
         if (isInvalidAmount) {
