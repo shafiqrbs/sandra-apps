@@ -53,23 +53,26 @@ class SyncModalController extends BaseController {
 
     final license = await prefs.getLicenseKey();
     final activeKey = await prefs.getActiveKey();
+    bool? isInserted;
     await dataFetcher(
       future: () async {
-        final value = await services.submitLicense(
-          license: license,
-          activeKey: activeKey,
-        );
-        if (value != null) {
-          final isInserted = await insertSplashDataToDb(
-            splashData: value,
+        try {
+          final value = await services.submitLicense(
+            license: license,
+            activeKey: activeKey,
           );
-
-          if (isInserted) {
-            toast(appLocalization.licenseAndKeyValidatedSuccessfully);
+          if (value != null) {
+            isInserted = await insertSplashDataToDb(
+              splashData: value,
+            );
           }
+        } catch (e) {
+          isInserted = false;
         }
       },
     );
+
+    showStatus(isSynced: isInserted);
   }
 
   Future<bool> insertSplashDataToDb({
@@ -255,22 +258,27 @@ class SyncModalController extends BaseController {
       return;
     }
 
+    bool? isStockItemSynced;
+
     await dataFetcher(
       future: () async {
-        final stockItemList = await services.getStockItems();
-        if (stockItemList?.isNotEmpty ?? false) {
-          await dbHelper.insertList(
-            tableName: dbTables.tableStocks,
-            dataList: stockItemList!,
-            deleteBeforeInsert: true,
-          );
-          showSnackBar(
-            type: SnackBarType.success,
-            message: appLocalization.fetchSuccessfully,
-          );
+        try {
+          final stockItemList = await services.getStockItems();
+          if (stockItemList?.isNotEmpty ?? false) {
+            await dbHelper.insertList(
+              tableName: dbTables.tableStocks,
+              dataList: stockItemList!,
+              deleteBeforeInsert: true,
+            );
+          }
+          isStockItemSynced = true;
+        } catch (e) {
+          isStockItemSynced = false;
         }
       },
     );
+
+    showStatus(isSynced: isStockItemSynced);
   }
 
   Future<void> importMasterData() async {
@@ -286,9 +294,11 @@ class SyncModalController extends BaseController {
       return;
     }
 
-    try {
-      await dataFetcher(
-        future: () async {
+    bool? isMasterDataSynced;
+
+    await dataFetcher(
+      future: () async {
+        try {
           final masterData = await services.getMasterData();
           if (masterData?.isNotEmpty ?? false) {
             if (masterData!['setup'] != null &&
@@ -314,23 +324,15 @@ class SyncModalController extends BaseController {
                 }
               },
             );
-            showSnackBar(
-              message: appLocalization.fetchSuccessfully,
-              type: SnackBarType.success,
-            );
           }
-        },
-      );
-    } catch (e, s) {
-      if (kDebugMode) {
-        print(e);
-        print(s);
-      }
-      showSnackBar(
-        message: appLocalization.somethingWentWrong,
-        type: SnackBarType.error,
-      );
-    }
+          isMasterDataSynced = true;
+        } catch (e) {
+          isMasterDataSynced = false;
+        }
+      },
+    );
+
+    showStatus(isSynced: isMasterDataSynced);
   }
 
   Future<bool> needExport() async {
@@ -359,5 +361,21 @@ class SyncModalController extends BaseController {
     }
 
     return true;
+  }
+
+  void showStatus({
+    required bool? isSynced,
+  }) {
+    if (isSynced ?? false) {
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.fetchSuccessfully,
+      );
+    } else {
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.somethingWentWrong,
+      );
+    }
   }
 }
