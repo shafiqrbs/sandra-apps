@@ -4,10 +4,9 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:sandra/app/core/values/app_strings.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/entity/sales.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/core/widget/add_button.dart';
@@ -21,6 +20,7 @@ import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/core/widget/sub_tab_item_view.dart';
+import '/app/entity/sales.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';
 
 class SalesListView extends BaseView<SalesListController> {
