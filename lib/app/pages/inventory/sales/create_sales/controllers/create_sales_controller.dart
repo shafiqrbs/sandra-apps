@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/abstract_controller/stock_selection_controller.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/stock.dart';

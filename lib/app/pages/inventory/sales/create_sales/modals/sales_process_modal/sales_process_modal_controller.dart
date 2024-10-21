@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -277,20 +278,74 @@ class SalesProcessModalController extends PaymentGatewayController {
     final amountText = amountController.value.text;
     final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = double.tryParse(amountText) ?? 0;
-    final isInvalidAmount = amount > 0 && amount < netTotal.value;
+    final isInvalidAmount = amount >= 0 && amount < netTotal.value;
 
-    if (!isZeroSalesAllowed &&
-        isCustomerNotSelected &&
-        amount < netTotal.value) {
-      toast(appLocalization.dueSalesWithoutCustomer);
-      return;
+    if (kDebugMode) {
+      print('isZeroSalesAllowed: $isZeroSalesAllowed');
+      print('isCustomerNotSelected: $isCustomerNotSelected');
+      print('isCustomerSelected: $isCustomerSelected');
+      print('amountText: $amountText');
+      print('isAmountEmpty: $isAmountEmpty');
+      print('amount: $amount');
+      print('isInvalidAmount: $isInvalidAmount');
     }
 
-    if (isZeroSalesAllowed && isCustomerNotSelected && isAmountEmpty) {
-      sales.received = netTotal.value;
-    } else if (isZeroSalesAllowed && isCustomerNotSelected && isInvalidAmount) {
-      toast(appLocalization.thisAmountIsNotValid);
-      return;
+/*    if (isZeroSalesAllowed) {
+      if (isCustomerSelected) {
+        if (amount == 0) {
+          sales.due = netTotal.value;
+        } else if (isInvalidAmount) {
+          sales.due = netTotal.value - amount;
+        } else {
+          sales.due = 0;
+        }
+      } else {
+        if (amount == 0) {
+          sales.received = netTotal.value;
+        } else if (isInvalidAmount) {
+          toast(appLocalization.eitherSelectCustomerOrEnterValidAmount);
+          return;
+        }
+      }
+    } else {
+      if (isCustomerSelected) {
+        if (amount == 0) {
+          sales.due = netTotal.value;
+        } else if (isInvalidAmount) {
+          sales.due = netTotal.value - amount;
+        } else {
+          sales.due = 0;
+        }
+      } else {
+        if (isInvalidAmount) {
+          toast(appLocalization.theAmountMustBeEqualOrMoreThanNetTotal);
+          return;
+        }
+      }
+    }*/
+
+    if (isCustomerSelected) {
+      if (amount == 0) {
+        sales.due = netTotal.value;
+      } else if (isInvalidAmount) {
+        sales.due = netTotal.value - amount;
+      } else {
+        sales.due = 0;
+      }
+    } else {
+      if (isZeroSalesAllowed) {
+        if (amount == 0) {
+          sales.received = netTotal.value;
+        } else if (isInvalidAmount) {
+          toast(appLocalization.eitherSelectCustomerOrEnterValidAmount);
+          return;
+        }
+      } else {
+        if (isInvalidAmount) {
+          toast(appLocalization.theAmountMustBeEqualOrMoreThanNetTotal);
+          return;
+        }
+      }
     }
 
     if (amount > netTotal.value) {
