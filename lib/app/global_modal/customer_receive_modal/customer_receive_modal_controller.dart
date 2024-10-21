@@ -70,13 +70,13 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       future: () async {
         isSubmitted = await services.postCustomerReceive(
           customer: customerManager.selectedItem.value!.customerId!.toString(),
-          method: 'receive',
-          mode: transactionMethodsManager.selectedItem.value!.methodId!
+          method:  transactionMethodsManager.selectedItem.value!.methodId!
               .toString(),
+          mode:'Due',
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
-          isSms: isSms.value == true ? '1' : '0',
+          isSms: isSms.value ? '1' : '0',
         );
       },
     );
