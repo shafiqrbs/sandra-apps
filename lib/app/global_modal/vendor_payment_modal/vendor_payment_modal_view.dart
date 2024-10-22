@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -132,6 +133,48 @@ class VendorPaymentModalView extends BaseView<VendorPaymentModalController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CommonText(text: appLocalization.sms),
+                                8.width,
+                                AdvancedSwitch(
+                                  controller: controller.isSms,
+                                  onChanged: (value) async {},
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryColor700,
+                                  inactiveColor: colors.secondaryColor100,
+                                  initialValue: controller.isSms.value,
+                                ),
+                              ],
+                            ),
+                            8.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CommonText(text: appLocalization.approve),
+                                8.width,
+                                AdvancedSwitch(
+                                  controller: controller.isApprove,
+                                  onChanged: (value) async {},
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryColor700,
+                                  inactiveColor: colors.secondaryColor100,
+                                  initialValue: controller.isApprove.value,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      16.width,
                       Expanded(
                         child: Container(
                           alignment: Alignment.center,

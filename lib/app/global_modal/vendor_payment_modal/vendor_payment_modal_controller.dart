@@ -17,6 +17,8 @@ class VendorPaymentModalController extends BaseController {
   final addRemarkController = TextEditingController().obs;
   final selectedPaymentMode = 'cash'.obs;
   final isShowClearIcon = false.obs;
+  final isSms = ValueNotifier(false);
+  final isApprove = ValueNotifier(false);
 
   VendorPaymentModalController({
     Vendor? vendor,
@@ -78,7 +80,7 @@ class VendorPaymentModalController extends BaseController {
       future: () async {
         isSubmitted = await services.postVendorPayment(
           vendor: vendorManager.selectedItem.value!.vendorId!.toString(),
-          method:  transactionMethodsManager.selectedItem.value!.methodId!
+          method: transactionMethodsManager.selectedItem.value!.methodId!
               .toString(),
           mode: 'Due',
           amount: amountController.value.text,

@@ -49,7 +49,7 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       final String numberedErrors = errors
           .asMap()
           .entries
-          .map((entry) => "${entry.key + 1}. ${entry.value}")
+          .map((entry) => '${entry.key + 1}. ${entry.value}')
           .join('\n');
 
       showSnackBar(
@@ -70,9 +70,9 @@ class CustomerReceiveModalController extends PaymentGatewayController {
       future: () async {
         isSubmitted = await services.postCustomerReceive(
           customer: customerManager.selectedItem.value!.customerId!.toString(),
-          method:  transactionMethodsManager.selectedItem.value!.methodId!
+          method: transactionMethodsManager.selectedItem.value!.methodId!
               .toString(),
-          mode:'Due',
+          mode: 'Due',
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,

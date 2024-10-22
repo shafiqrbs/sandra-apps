@@ -135,20 +135,42 @@ class CustomerReceiveModalView
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        child: Column(
                           children: [
-                            CommonText(text: appLocalization.sms),
-                            8.width,
-                            AdvancedSwitch(
-                              controller: controller.isSms,
-                              onChanged: (value) async {},
-                              borderRadius: BorderRadius.circular(4),
-                              height: 20,
-                              width: 40,
-                              activeColor: colors.primaryColor700,
-                              inactiveColor: colors.secondaryColor100,
-                              initialValue: controller.isSms.value,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CommonText(text: appLocalization.sms),
+                                8.width,
+                                AdvancedSwitch(
+                                  controller: controller.isSms,
+                                  onChanged: (value) async {},
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryColor700,
+                                  inactiveColor: colors.secondaryColor100,
+                                  initialValue: controller.isSms.value,
+                                ),
+                              ],
+                            ),
+                            8.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CommonText(text: appLocalization.approve),
+                                8.width,
+                                AdvancedSwitch(
+                                  controller: controller.isApprove,
+                                  onChanged: (value) async {},
+                                  borderRadius: BorderRadius.circular(4),
+                                  height: 20,
+                                  width: 40,
+                                  activeColor: colors.primaryColor700,
+                                  inactiveColor: colors.secondaryColor100,
+                                  initialValue: controller.isApprove.value,
+                                ),
+                              ],
                             ),
                           ],
                         ),
