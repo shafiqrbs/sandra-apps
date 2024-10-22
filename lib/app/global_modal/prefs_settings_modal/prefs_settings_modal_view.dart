@@ -734,11 +734,11 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
   }
 
   Widget _buildSettingButton({
-    IconData? icon,
     required String text,
     required IconData trailingIcon,
     required bool isOpen,
     required VoidCallback onTap,
+    IconData? icon,
   }) {
     return InkWell(
       onTap: onTap,

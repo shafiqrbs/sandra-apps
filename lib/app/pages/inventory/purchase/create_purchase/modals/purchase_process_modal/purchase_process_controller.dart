@@ -232,9 +232,25 @@ class PurchaseProcessController extends BaseController {
       );
       return;
     }
+    purchase.subTotal = netTotal.value;
 
-    if (amount > netTotal.value) {
-      purchase.received = netTotal.value;
+    if (amount >= netTotal.value) {
+      purchase
+        ..received = netTotal.value
+        ..due = 0;
+    } else {
+      if (purchase.purchaseMode == 'purchase_with_mrp') {
+        purchase
+          ..due = 0
+          ..received = amount
+          ..netTotal = amount
+          ..discount = netTotal.value - amount;
+      } else {
+        purchase
+          ..due = netTotal.value - amount
+          ..received = amount
+          ..netTotal = netTotal.value;
+      }
     }
 
     if (!context.mounted) return;
