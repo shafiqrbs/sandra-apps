@@ -452,8 +452,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                   child: Column(
                     children: [
                       4.height,
-                      SelectedStockListHeader(),
-                      4.height,
                       SizedBox(
                         height: 75.ph,
                         child: PurchaseItemListView(
