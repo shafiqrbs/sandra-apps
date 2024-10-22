@@ -17,18 +17,20 @@ import '/app/routes/app_pages.dart';
 import 'app_bar_button.dart';
 import 'tbd_round_button.dart';
 
-ValueNotifier<Map<String, Color>> colorList = ValueNotifier({
-  'blue': ColorSchema().solidBlueColor,
-  'green': ColorSchema().solidGreenColor,
-  'red': ColorSchema().solidRedColor,
-  'yellow': ColorSchema().solidYellowColor,
-  'grey': ColorSchema().solidGreyColor,
-  'purple': ColorSchema().solidPurpleColor,
-  'orange': ColorSchema().solidOrangeColor,
-  'olive': ColorSchema().solidOliveColor,
-  'marun': ColorSchema().solidMarunColor,
-  'navyBlue': ColorSchema().solidNavyBlueColor,
-});
+ValueNotifier<Map<String, Color>> colorList = ValueNotifier(
+  {
+    'blue': ColorSchema().solidBlueColor,
+    'green': ColorSchema().solidGreenColor,
+    'red': ColorSchema().solidRedColor,
+    'yellow': ColorSchema().solidYellowColor,
+    'grey': ColorSchema().solidGreyColor,
+    'purple': ColorSchema().solidPurpleColor,
+    'orange': ColorSchema().solidOrangeColor,
+    'olive': ColorSchema().solidOliveColor,
+    'marun': ColorSchema().solidMarunColor,
+    'navyBlue': ColorSchema().solidNavyBlueColor,
+  },
+);
 
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
@@ -185,6 +187,12 @@ class QuickNavigationButton extends BaseWidget {
       localeMethod: () => appLocalization.sync,
       bgColor: colorList.value['marun'],
     ),
+    TbdRoundButton(
+      icon: TablerIcons.refresh_dot,
+      onTap: () => navigatePage(Routes.offlineSyncProcess),
+      localeMethod: () => appLocalization.offlineSyncProcess,
+      bgColor: colorList.value['olive'],
+    ),
   ];
 
   @override
@@ -260,7 +268,6 @@ class QuickNavigationButton extends BaseWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-
                         16.height,
                         /*Wrap(
                           spacing: 4,

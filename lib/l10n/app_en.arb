@@ -364,7 +364,8 @@
   "sc" : "SC",
   "tableEnableDisable" : "Table Enable/Disable",
   "theAmountMustBeEqualOrMoreThanNetTotal" : "The amount must be equal or more than net total",
-  "eitherSelectCustomerOrEnterValidAmount" : "Either select customer or enter valid amount"
+  "eitherSelectCustomerOrEnterValidAmount" : "Either select customer or enter valid amount",
+  "offlineSyncProcess" : "Offline sync process"
 
 
 

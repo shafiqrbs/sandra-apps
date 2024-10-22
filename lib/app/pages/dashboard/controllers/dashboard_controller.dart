@@ -221,6 +221,12 @@ List<Widget> configButtonList = [
     localeMethod: () => appLocalization.sync,
     bgColor: colorList.value['marun'],
   ),
+  TbdRoundButton(
+    icon: TablerIcons.refresh_dot,
+    onTap: () => navigatePage(Routes.offlineSyncProcess),
+    localeMethod: () => appLocalization.offlineSyncProcess,
+    bgColor: colorList.value['olive'],
+  ),
 ];
 
 class DashboardController extends BaseController {
