@@ -46,7 +46,7 @@ class CustomerListController extends BaseController {
     );
     if (isNewReceived != null && isNewReceived) {
       Get.offNamed(
-        Routes.salesList,
+        Routes.accountingSales,
       );
     }
   }

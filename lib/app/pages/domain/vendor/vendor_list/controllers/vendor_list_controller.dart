@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import '/app/entity/vendor.dart';
@@ -29,5 +31,22 @@ class VendorListController extends BaseController {
     vendorManager.allItems.refresh();
     isSearchSelected.value = false;
     await vendorManager.paginate();
+  }
+
+  Future<void> showVendorPaymentModal(Vendor? element) async {
+    final isNewReceived = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.payment,
+        subTitle: '',
+        child: VendorPaymentModalView(
+          vendor: element,
+        ),
+      ),
+    );
+    if (isNewReceived != null && isNewReceived) {
+      Get.offNamed(
+        Routes.accountingPurchase,
+      );
+    }
   }
 }

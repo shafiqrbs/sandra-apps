@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/widget/common_text.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
@@ -78,12 +81,54 @@ class VendorListView extends BaseView<VendorListController> {
                   },
                 );
               },
-              onReceive: () {},
+              onReceive: () async {
+                await controller.showVendorPaymentModal(element);
+              },
               showReceiveButton: true,
             );
           },
         );
       },
     );
+  }
+
+  @override
+  Widget floatingActionButton() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 40),
+      child: InkWell(
+        onTap: () => controller.showVendorPaymentModal(null),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+          decoration: BoxDecoration(
+            color: colors.blackColor.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(containerBorderRadius),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                TablerIcons.plus,
+                color: colors.whiteColor,
+                size: 18,
+              ),
+              8.width,
+              CommonText(
+                text: appLocalization.payment,
+                textColor: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  FloatingActionButtonLocation? floatingActionButtonLocation() {
+    return FloatingActionButtonLocation.endFloat;
   }
 }
