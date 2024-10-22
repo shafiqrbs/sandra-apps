@@ -86,8 +86,8 @@ class VendorPaymentModalController extends BaseController {
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
-          isSms: isSms.value,
-          isApprove: isApprove.value,
+          isSms: isSms.value ? 1 : 0,
+          isApprove: isApprove.value ? 1 : 0,
         );
       },
     );

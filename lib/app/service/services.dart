@@ -368,8 +368,8 @@ class Services {
     required String amount,
     required String userId,
     required String? remark,
-    required bool? isSms,
-    required bool? isApprove,
+    required int? isSms,
+    required int? isApprove,
   }) async {
     const endPoint = 'poskeeper-account-receive';
     try {
@@ -404,8 +404,8 @@ class Services {
     required String amount,
     required String userId,
     required String? remark,
-    required bool? isSms,
-    required bool? isApprove,
+    required int? isSms,
+    required int? isApprove,
   }) async {
     const endPoint = 'poskeeper-account-payment';
     try {
