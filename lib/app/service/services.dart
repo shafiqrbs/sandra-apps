@@ -368,7 +368,8 @@ class Services {
     required String amount,
     required String userId,
     required String? remark,
-    String? isSms,
+    required bool? isSms,
+    required bool? isApprove,
   }) async {
     const endPoint = 'poskeeper-account-receive';
     try {
@@ -383,6 +384,7 @@ class Services {
           'user_id': userId,
           'remark': remark,
           'is_sms': isSms,
+          'is_approve': isApprove,
         },
         headers: _buildHeader(),
       );
@@ -402,6 +404,8 @@ class Services {
     required String amount,
     required String userId,
     required String? remark,
+    required bool? isSms,
+    required bool? isApprove,
   }) async {
     const endPoint = 'poskeeper-account-payment';
     try {
@@ -415,6 +419,8 @@ class Services {
           'amount': amount,
           'user_id': userId,
           'remark': remark,
+          'is_sms': isSms,
+          'is_approve': isApprove,
         },
         headers: _buildHeader(),
       );
