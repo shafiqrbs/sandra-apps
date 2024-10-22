@@ -165,6 +165,7 @@ class LicenseView extends BaseView<LicenseController> {
                   label: appLocalization.licenseNumber,
                   errorMsg: appLocalization.licenseNumberRequired,
                   preFixIcon: TablerIcons.license,
+                  keyboardType: numberInputType,
                 ),
                 FBString(
                   textController: controller.activeKeyController,
@@ -174,6 +175,7 @@ class LicenseView extends BaseView<LicenseController> {
                   label: appLocalization.activeNumber,
                   errorMsg: appLocalization.activeNumberRequired,
                   preFixIcon: TablerIcons.key,
+                  keyboardType: numberInputType,
                 ),
               ],
             ),
