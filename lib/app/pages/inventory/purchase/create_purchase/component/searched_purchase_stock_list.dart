@@ -74,8 +74,12 @@ class PurchaseItemView extends BaseWidget {
         }
       },
       child: Container(
-        padding: const EdgeInsets.all(8),
-        child: Obx(
+        padding: const EdgeInsets.only(
+          left: 8,
+          right: 8,
+          top: 2,
+          bottom: 6,
+        ),        child: Obx(
           () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
