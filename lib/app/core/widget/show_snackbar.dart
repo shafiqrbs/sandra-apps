@@ -35,7 +35,7 @@ SnackbarController showSnackBar({
           ),
         ),
         colorText: Colors.white,
-        icon: Icon(
+        icon: const Icon(
           TablerIcons.circle_check,
           color: Colors.white,
           size: 18,
@@ -59,7 +59,7 @@ SnackbarController showSnackBar({
           ),
         ),
         colorText: Colors.white,
-        icon: Icon(
+        icon: const Icon(
           TablerIcons.exclamation_circle,
           color: Colors.white,
           size: 18,
@@ -82,7 +82,7 @@ SnackbarController showSnackBar({
           ),
         ),
         colorText: Colors.white,
-        icon: Icon(
+        icon: const Icon(
           TablerIcons.alert_triangle,
           color: Colors.white,
           size: 18,
@@ -105,7 +105,7 @@ SnackbarController showSnackBar({
           ),
         ),
         colorText: Colors.white,
-        icon: Icon(
+        icon: const Icon(
           TablerIcons.info_circle,
           color: Colors.white,
           size: 18,

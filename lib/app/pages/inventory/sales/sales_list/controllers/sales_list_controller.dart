@@ -213,8 +213,8 @@ class SalesListController extends BaseController {
   ) async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.salesDetails,
+        subTitle: element.customerName??'',
         child: SalesInformationModalView(
           sales: element,
           salesMode: tabPages[selectedIndex.value].slug,
