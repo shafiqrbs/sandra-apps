@@ -90,7 +90,7 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                 bottom: 7,
               ),
               child: Text(
-                appLocalization.add,
+                '${appLocalization.addItems} | (${controller.selectedStockCount.value})',
                 style: TextStyle(
                   color: colors.whiteColor,
                   fontWeight: FontWeight.bold,

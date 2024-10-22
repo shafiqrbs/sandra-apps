@@ -172,11 +172,18 @@ class CreatePurchaseController extends StockSelectionController {
     num value,
     int index,
   ) async {
-    isShowAddStockButton.value = qtyControllerList
-        .asMap()
-        .entries
-        .where((element) => element.value.text.isNotEmpty)
-        .isNotEmpty;
+    // Get the number of controllers with non-empty text
+    final nonEmptyControllersCount = qtyControllerList
+        .where((controller) => controller.text.isNotEmpty)
+        .length;
+
+    // Update the boolean observable value based on whether any controller is non-empty
+    isShowAddStockButton.value = nonEmptyControllersCount > 0;
+
+    // If there are non-empty controllers, update the selected stock count
+    if (nonEmptyControllersCount > 0) {
+      selectedStockCount.value = nonEmptyControllersCount;
+    }
   }
 
   Future<void> onSearchedStockQtyEditComplete(

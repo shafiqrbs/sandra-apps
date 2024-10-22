@@ -218,7 +218,7 @@ class CreateSalesController extends StockSelectionController {
     int index,
   ) async {
     // Get the number of controllers with non-empty text
-    int nonEmptyControllersCount = qtyControllerList
+    final  nonEmptyControllersCount = qtyControllerList
         .where((controller) => controller.text.isNotEmpty)
         .length;
 
