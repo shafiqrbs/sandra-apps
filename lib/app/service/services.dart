@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
+import 'package:sandra/app/entity/sync_list.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
@@ -919,6 +920,27 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return false;
+    }
+  }
+
+  Future<List<SyncList>?> getSyncList() async {
+    const endPoint = 'poskeeper-sync-list';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List;
+      if (responseData.isEmpty) return null;
+      return parseList(
+        list: responseData,
+        fromJson: SyncList.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
     }
   }
 
