@@ -944,6 +944,31 @@ class Services {
     }
   }
 
+  Future<bool> approveSyncList({
+    required SyncList element,
+  }) async {
+    const endPoint = 'poskeeper-sync-process';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'id': element.id.toString(),
+        },
+        query: {
+          'id': element.id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return false;
+    }
+  }
+
   // Restaurant module
   Future<List<RestaurantTable>?> getRestaurantTableList() async {
     const endPoint = 'poskeeper-restaurant-table';
