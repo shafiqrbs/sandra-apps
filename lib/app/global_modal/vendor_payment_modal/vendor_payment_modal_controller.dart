@@ -78,8 +78,9 @@ class VendorPaymentModalController extends BaseController {
       future: () async {
         isSubmitted = await services.postVendorPayment(
           vendor: vendorManager.selectedItem.value!.vendorId!.toString(),
-          method: 'receive',
-          mode: selectedPaymentMode.value,
+          method:  transactionMethodsManager.selectedItem.value!.methodId!
+              .toString(),
+          mode: 'Due',
           amount: amountController.value.text,
           userId: LoggedUser().userId.toString(),
           remark: addRemarkController.value.text,
