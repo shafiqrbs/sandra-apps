@@ -1,8 +1,4 @@
 import 'package:get/get.dart';
-import 'package:sandra/app/pages/restaurant_module/order_cart/bindings/order_cart_binding.dart';
-import 'package:sandra/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
-import 'package:sandra/app/pages/restaurant_module/restaurant_home/bindings/restaurant_home_binding.dart';
-import 'package:sandra/app/pages/restaurant_module/restaurant_home/views/restaurant_home_view.dart';
 
 import '/app/pages/accounting/accounting_purchase/bindings/accounting_purchase_binding.dart';
 import '/app/pages/accounting/accounting_purchase/views/accounting_purchase_view.dart';
@@ -38,6 +34,8 @@ import '/app/pages/intro/login/bindings/login_binding.dart';
 import '/app/pages/intro/login/views/login_view.dart';
 import '/app/pages/intro/splash/bindings/splash_binding.dart';
 import '/app/pages/intro/splash/views/splash_view.dart';
+import '/app/pages/inventory/offline_sync_process/bindings/offline_sync_process_binding.dart';
+import '/app/pages/inventory/offline_sync_process/views/offline_sync_process_view.dart';
 import '/app/pages/inventory/particular/bindings/particular_binding.dart';
 import '/app/pages/inventory/particular/views/particular_view.dart';
 import '/app/pages/inventory/purchase/create_purchase/bindings/create_purchase_binding.dart';
@@ -50,6 +48,10 @@ import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
+import '/app/pages/restaurant_module/order_cart/bindings/order_cart_binding.dart';
+import '/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
+import '/app/pages/restaurant_module/restaurant_home/bindings/restaurant_home_binding.dart';
+import '/app/pages/restaurant_module/restaurant_home/views/restaurant_home_view.dart';
 import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 import '/app/pages/theme_test_page/bindings/theme_test_page_binding.dart';
@@ -197,6 +199,11 @@ class AppPages {
       name: Routes.helpPage,
       page: HelpPageView.new,
       binding: HelpPageBinding(),
+    ),
+    GetPage(
+      name: Routes.offlineSyncProcess,
+      page: OfflineSyncProcessView.new,
+      binding: OfflineSyncProcessBinding(),
     ),
   ];
 }

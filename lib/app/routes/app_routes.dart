@@ -3,7 +3,6 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-
   static const splash = _Paths.splash;
   static const license = _Paths.license;
   static const login = _Paths.login;
@@ -32,12 +31,10 @@ abstract class Routes {
   static const accountingSales = _Paths.accountingSales;
   static const accountingPurchase = _Paths.accountingPurchase;
   static const themeTestPage = _Paths.themeTestPage;
-
   static const restaurantHome = _Paths.restaurantHome;
-  static const  orderCart = _Paths.orderCart;
-  static const  helpPage = _Paths.helpPage;
-
-
+  static const orderCart = _Paths.orderCart;
+  static const helpPage = _Paths.helpPage;
+  static const offlineSyncProcess = _Paths.offlineSyncProcess;
 }
 
 abstract class _Paths {
@@ -70,7 +67,7 @@ abstract class _Paths {
   static const accountingPurchase = '/accounting_purchase';
   static const themeTestPage = '/theme_test_page';
   static const restaurantHome = '/restaurantHome';
-  static const  orderCart = '/order_cart';
-  static const  helpPage = '/help_page';
-
+  static const orderCart = '/order_cart';
+  static const helpPage = '/help_page';
+  static const offlineSyncProcess = '/offline_sync_process';
 }
