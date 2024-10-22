@@ -204,8 +204,8 @@ class PurchaseListController extends BaseController {
   ) async {
     final result = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.purchaseDetails,
+        subTitle: element.vendorName ?? '',
         child: PurchaseInformationView(
           purchase: element,
           purchaseMode: tabPages[selectedIndex.value].slug,
