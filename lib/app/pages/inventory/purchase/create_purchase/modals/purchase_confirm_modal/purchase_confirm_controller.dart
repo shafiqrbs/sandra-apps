@@ -76,11 +76,7 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localUpdate();
     }
-    showSnackBar(
-      type: SnackBarType.success,
-      title: appLocalization.success,
-      message: appLocalization.purchaseHasBeenAdded,
-    );
+
   }
 
   Future<void> _insertPurchase() async {
@@ -91,11 +87,7 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localInsert();
     }
-    showSnackBar(
-      type: SnackBarType.success,
-      title: appLocalization.success,
-      message: appLocalization.purchaseHasBeenAdded,
-    );
+
   }
 
   Future<void> _localInsert() async {
@@ -106,11 +98,11 @@ class PurchaseConfirmController extends PrinterController {
     );
     final isOnline = await prefs.getIsPurchaseOnline();
     if (isOnline) {
-      showSnackBar(
-        type: SnackBarType.error,
-        title: appLocalization.failed,
-        message: appLocalization.onlinePurchaseFailedToSaveLocally,
-      );
+      // showSnackBar(
+      //   type: SnackBarType.error,
+      //   title: appLocalization.failed,
+      //   message: appLocalization.onlinePurchaseFailedToSaveLocally,
+      // );
     }
     _navigateToLanding();
   }
