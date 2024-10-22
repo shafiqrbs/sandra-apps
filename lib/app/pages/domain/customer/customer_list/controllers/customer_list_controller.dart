@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/entity/customer.dart';
@@ -30,5 +32,22 @@ class CustomerListController extends BaseController {
     customerManager.allItems.refresh();
     isSearchSelected.value = false;
     await customerManager.paginate();
+  }
+
+  Future<void> showCustomerReceiveModal(Customer? element) async {
+    final isNewReceived = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.salesReceive,
+        subTitle: '',
+        child: CustomerReceiveModalView(
+          customer: element,
+        ),
+      ),
+    );
+    if (isNewReceived != null && isNewReceived) {
+      Get.offNamed(
+        Routes.salesList,
+      );
+    }
   }
 }
