@@ -222,11 +222,15 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                     ),
                   ),
                 ),
-                5.height,
+                const Divider(),
                 Container(
                   margin: const EdgeInsets.only(
                     left: 8,
                     right: 8,
+                  ),
+                  padding: const EdgeInsets.only(
+                    top: 4,
+                    bottom: 4,
                   ),
                   child: Row(
                     children: [
@@ -234,6 +238,15 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                         flex: 2,
                         child: Column(
                           children: [
+                            Text(
+                              appLocalization.qty,
+                              style: TextStyle(
+                                fontSize: smallTFSize,
+                                color: colors.solidBlackColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            4.height,
                             Container(
                               margin: EdgeInsets.zero,
                               padding: EdgeInsets.zero,
@@ -269,14 +282,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 onChanged: controller.onAddStockQtyChange,
                               ),
                             ),
-                            Text(
-                              appLocalization.qty,
-                              style: TextStyle(
-                                fontSize: smallTFSize,
-                                color: colors.solidBlackColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -285,6 +290,18 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                         flex: 2,
                         child: Column(
                           children: [
+                            Text(
+                              controller.purchaseMode
+                                      ?.replaceAll('_', ' ')
+                                      .toUpperCase() ??
+                                  '',
+                              style: TextStyle(
+                                fontSize: smallTFSize,
+                                color: colors.solidBlackColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            4.height,
                             Container(
                               margin: EdgeInsets.zero,
                               padding: EdgeInsets.zero,
@@ -313,14 +330,6 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                 onChanged: controller.onAddStockQtyChange,
                               ),
                             ),
-                            Text(
-                              controller.purchaseMode ?? '',
-                              style: TextStyle(
-                                fontSize: smallTFSize,
-                                color: colors.solidBlackColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -329,6 +338,15 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                         Expanded(
                           child: Column(
                             children: [
+                              Text(
+                                appLocalization.totalPrice,
+                                style: TextStyle(
+                                  fontSize: smallTFSize,
+                                  color: colors.solidBlackColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              4.height,
                               Container(
                                 margin: EdgeInsets.zero,
                                 padding: EdgeInsets.zero,
@@ -364,45 +382,49 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
                                   onChanged: controller.onTotalPriceChange,
                                 ),
                               ),
-                              Text(
-                                appLocalization.totalPrice,
-                                style: TextStyle(
-                                  fontSize: smallTFSize,
-                                  color: colors.solidBlackColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
                             ],
                           ),
                         ),
                       Expanded(
                         flex: 2,
-                        child: SizedBox(
-                          //  margin: const EdgeInsets.all(5),
-                          height: mediumTextFieldHeight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (controller.selectedStock.value != null) {
-                                controller.addPurchaseItem(
-                                  process: '',
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  containerBorderRadius,
+                        child: Column(
+                          children: [
+                            Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: smallTFSize,
+                                color: colors.solidBlackColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(
+                              //  margin: const EdgeInsets.all(5),
+                              height: mediumTextFieldHeight,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (controller.selectedStock.value != null) {
+                                    controller.addPurchaseItem(
+                                      process: '',
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      containerBorderRadius,
+                                    ),
+                                  ),
+                                  backgroundColor: colors.primaryColor500,
+                                ),
+                                child: CommonText(
+                                  text: appLocalization.add,
+                                  textColor: colors.whiteColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
                                 ),
                               ),
-                              backgroundColor: colors.primaryColor500,
                             ),
-                            child: CommonText(
-                              text: appLocalization.add,
-                              textColor: colors.whiteColor,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                            ),
-                          ),
+                          ],
                         ),
                       ),
                     ],
