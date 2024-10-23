@@ -291,6 +291,9 @@ class DashboardController extends BaseController {
         ),
       ),
     );
+    if (isNewReceived ?? false) {
+      Get.toNamed(Routes.accountingSales);
+    }
   }
 
   Future<void> showVendorPaymentModal() async {
@@ -303,7 +306,9 @@ class DashboardController extends BaseController {
         ),
       ),
     );
-    if (isNewReceived == true) {}
+    if (isNewReceived ?? false) {
+      Get.toNamed(Routes.accountingPurchase);
+    }
   }
 
   void showAddCustomerModal() {
@@ -427,9 +432,9 @@ class DashboardController extends BaseController {
     await prefs.setIsSalesOnline(
       isSalesOnline: isOnline.value,
     );
-    if(isOnline.value){
+    if (isOnline.value) {
       await fetchFinancialData();
-    }else{
+    } else {
       financialData.value = null;
     }
   }
