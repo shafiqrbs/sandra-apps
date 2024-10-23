@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
+import 'package:sandra/app/entity/bank.dart';
+import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/sync_list.dart';
 
@@ -972,6 +974,48 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return false;
+    }
+  }
+
+  Future<List<Bank>?> getBankList() async {
+    const endPoint = 'poskeeper-bank-account';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List;
+      if (responseData.isEmpty) return null;
+      return parseList(
+        list: responseData,
+        fromJson: Bank.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<FinancialData?> getFinancialData() async {
+    const endPoint = 'poskeeper-dashboard';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: FinancialData.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
     }
   }
 

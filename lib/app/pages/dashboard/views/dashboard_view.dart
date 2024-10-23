@@ -242,9 +242,7 @@ class DashboardView extends BaseView<DashboardController> {
         //_buildTestColor(),
         12.height,
         _buildThreeCommonButtons(),
-        _buildBalanceList(),
-        16.height,
-        _buildTitleSubTitleButtonList(),
+        _buildFinancialDataView(),
         14.height,
         _buildButtons(),
       ],
@@ -348,7 +346,7 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.sales,
-                subTitle: '৳ 567333',
+                subTitle: controller.financialData.value?.sales ?? '',
                 icon: TablerIcons.report_analytics,
                 onTap: controller.goToSalesList,
                 bgColor: colors.secondaryBlueColor,
@@ -356,7 +354,7 @@ class DashboardView extends BaseView<DashboardController> {
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.purchase,
-                subTitle: '৳ 567897',
+                subTitle: controller.financialData.value?.purchase ?? '',
                 icon: TablerIcons.cash,
                 onTap: controller.goToPurchaseList,
                 bgColor: colors.secondaryOrangeColor,
@@ -369,7 +367,7 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.due,
-                subTitle: '৳ 567345',
+                subTitle: controller.financialData.value?.due ?? '',
                 icon: TablerIcons.cash,
                 onTap: controller.goToDueCustomerList,
                 bgColor: colors.secondaryGreenColor,
@@ -377,7 +375,7 @@ class DashboardView extends BaseView<DashboardController> {
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.expense,
-                subTitle: '৳ 567000',
+                subTitle: controller.financialData.value?.expenditure ?? '',
                 icon: TablerIcons.moneybag,
                 onTap: controller.goToExpenseList,
                 bgColor: colors.secondaryGreyColor,
@@ -432,6 +430,23 @@ class DashboardView extends BaseView<DashboardController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildFinancialDataView() {
+    return Obx(
+      () {
+        if (controller.financialData.value == null) {
+          return Container();
+        }
+        return Column(
+          children: [
+            _buildBalanceList(),
+            16.height,
+            _buildTitleSubTitleButtonList(),
+          ],
+        );
+      },
     );
   }
 

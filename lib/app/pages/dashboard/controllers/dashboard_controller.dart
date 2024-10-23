@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/financial_data.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/entity/sales.dart';
@@ -237,15 +238,29 @@ class DashboardController extends BaseController {
 
   List<Widget> dashboardButtonList = [];
 
+  final financialData = Rx<FinancialData?>(null);
+
   @override
   Future<void> onInit() async {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsSalesOnline();
+    if (isOnline.value) {
+      await fetchFinancialData();
+    }
   }
 
-  void changeTab(SelectedTab dashboard) {
-    selectedTab.value = dashboard;
+  Future<void> fetchFinancialData() async {
+    FinancialData? data;
+
+    await dataFetcher(
+      future: () async {
+        data = await services.getFinancialData();
+      },
+    );
+    if (data != null) {
+      financialData.value = data;
+    }
   }
 
   void goToSales() {
@@ -408,9 +423,15 @@ class DashboardController extends BaseController {
 
   Future<void> onTapIsOnline() async {
     isOnline.value = !isOnline.value;
+    update();
     await prefs.setIsSalesOnline(
       isSalesOnline: isOnline.value,
     );
+    if(isOnline.value){
+      await fetchFinancialData();
+    }else{
+      financialData.value = null;
+    }
   }
 
   Future<void> generateDummySales({
