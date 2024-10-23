@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
@@ -497,5 +498,23 @@ class DashboardController extends BaseController {
     Get.toNamed(
       Routes.restaurantHome,
     );
+  }
+
+  Future<void> onTransactionOverviewTap(TransactionOverview item) async {
+    List<Bank>? list;
+    await dataFetcher(
+      future: () async {
+        list = await services.getBankList();
+      },
+    );
+    if (list != null) {
+      await Get.dialog(
+        DialogPattern(
+          title: item.name ?? '',
+          subTitle: '',
+          child: Container(),
+        ),
+      );
+    }
   }
 }

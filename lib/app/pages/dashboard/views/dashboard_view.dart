@@ -4,15 +4,12 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema.dart';
-import 'package:sandra/app/pages/settings/controllers/settings_controller.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/core/widget/common_text.dart';
 import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/tbd_round_button.dart';
 import '/app/core/widget/tbd_text_button.dart';
 import '/app/core/widget/title_subtitle_button.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
@@ -260,25 +257,16 @@ class DashboardView extends BaseView<DashboardController> {
         //color: Color(0xffF7EDE9),
       ),
       child: Row(
-        children: [
-          _buildBalanceCard(
-            onTap: controller.cashOnTap,
-            title: appLocalization.cash,
-            amount: '৳ 567',
-          ),
-          8.width,
-          _buildBalanceCard(
-            onTap: controller.bankOnTap,
-            title: appLocalization.bank,
-            amount: '৳ 567',
-          ),
-          8.width,
-          _buildBalanceCard(
-            onTap: controller.mobileOnTap,
-            title: appLocalization.mobile,
-            amount: '৳ 567',
-          ),
-        ],
+        children: controller.financialData.value?.transactionOverview
+                ?.map(
+                  (item) => _buildBalanceCard(
+                    onTap:()=> controller.onTransactionOverviewTap(item),
+                    title: item.name ?? '',
+                    amount: item.amount ?? '',
+                  ),
+                )
+                .toList() ??
+            [],
       ),
     );
   }
@@ -299,6 +287,9 @@ class DashboardView extends BaseView<DashboardController> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),
+          ),
+          margin: const EdgeInsets.only(
+            right: 8,
           ),
           child: Column(
             crossAxisAlignment: startCAA,
