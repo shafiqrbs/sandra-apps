@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
@@ -507,13 +509,64 @@ class DashboardController extends BaseController {
         list = await services.getBankList();
       },
     );
-    if (list != null) {
+
+    if (list != null && list!.isNotEmpty) {
       await Get.dialog(
         DialogPattern(
           title: item.name ?? '',
           subTitle: '',
-          child: Container(),
+          child: list?.isEmpty ?? false
+              ? NoRecordFoundView()
+              : Container(
+                  height: Get.height * 0.5,
+                  margin: const EdgeInsets.all(10),
+                  child: ListView.builder(
+                    itemCount: list!.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final bank = list![index];
+                      return Container(
+                        margin: const EdgeInsets.only(
+                          bottom: 10,
+                          left: 4,
+                          right: 4,
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              bank.name ?? '',
+                              style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              bank.amount ?? '',
+                              style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
         ),
+      );
+    } else {
+      showSnackBar(
+        type: SnackBarType.error,
+        title: appLocalization.error,
+        message: appLocalization.noDataFound,
       );
     }
   }
