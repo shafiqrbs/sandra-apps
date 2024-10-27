@@ -977,17 +977,20 @@ class Services {
     }
   }
 
-  Future<List<Bank>?> getBankList() async {
+  Future<List<Bank>?> getBankList({
+    required String? methodId,
+  }) async {
     const endPoint = 'poskeeper-bank-account';
     try {
       final response = await dio.post(
         APIType.public,
         endPoint,
-        {},
+        {
+          'method_id': methodId,
+        },
         headers: _buildHeader(),
       );
       final responseData = response.data as List;
-      if (responseData.isEmpty) return null;
       return parseList(
         list: responseData,
         fromJson: Bank.fromJson,

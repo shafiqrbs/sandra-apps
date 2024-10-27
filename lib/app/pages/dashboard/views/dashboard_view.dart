@@ -260,9 +260,9 @@ class DashboardView extends BaseView<DashboardController> {
         children: controller.financialData.value?.transactionOverview
                 ?.map(
                   (item) => _buildBalanceCard(
-                    onTap:()=> controller.onTransactionOverviewTap(item),
+                    onTap: () => controller.onTransactionOverviewTap(item),
                     title: item.name ?? '',
-                    amount: item.amount ?? '',
+                    amount: '${controller.currency} ${item.amount ?? ''}',
                   ),
                 )
                 .toList() ??
@@ -337,7 +337,8 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.sales,
-                subTitle: controller.financialData.value?.sales ?? '',
+                subTitle:
+                    '${controller.currency} ${controller.financialData.value?.sales ?? ''}',
                 icon: TablerIcons.report_analytics,
                 onTap: controller.goToSalesList,
                 bgColor: colors.secondaryBlueColor,
@@ -345,7 +346,8 @@ class DashboardView extends BaseView<DashboardController> {
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.purchase,
-                subTitle: controller.financialData.value?.purchase ?? '',
+                subTitle:
+                    '${controller.currency} ${controller.financialData.value?.purchase ?? ''}',
                 icon: TablerIcons.cash,
                 onTap: controller.goToPurchaseList,
                 bgColor: colors.secondaryOrangeColor,
@@ -358,7 +360,8 @@ class DashboardView extends BaseView<DashboardController> {
             children: [
               TitleSubtitleButton(
                 title: appLocalization.due,
-                subTitle: controller.financialData.value?.due ?? '',
+                subTitle:
+                    '${controller.currency} ${controller.financialData.value?.due ?? ''}',
                 icon: TablerIcons.cash,
                 onTap: controller.goToDueCustomerList,
                 bgColor: colors.secondaryGreenColor,
@@ -366,7 +369,8 @@ class DashboardView extends BaseView<DashboardController> {
               10.width,
               TitleSubtitleButton(
                 title: appLocalization.expense,
-                subTitle: controller.financialData.value?.expenditure ?? '',
+                subTitle:
+                    '${controller.currency} ${controller.financialData.value?.expenditure ?? ''}',
                 icon: TablerIcons.moneybag,
                 onTap: controller.goToExpenseList,
                 bgColor: colors.secondaryGreyColor,

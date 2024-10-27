@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:sandra/app/core/values/app_strings.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/core/core_model/setup.dart';
-import '/app/core/widget/row_button.dart';
-import '/app/entity/customer_ledger.dart';
 
 import '/app/core/base/base_view.dart';
+import '/app/core/core_model/page_state.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/core/widget/add_button.dart';
 import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
@@ -20,6 +18,7 @@ import '/app/core/widget/no_record_found_view.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
+import '/app/entity/customer_ledger.dart';
 import '/app/pages/accounting/accounting_sales/controllers/accounting_sales_controller.dart';
 
 //ignore: must_be_immutable

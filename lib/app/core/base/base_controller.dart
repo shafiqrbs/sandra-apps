@@ -36,6 +36,7 @@ abstract class BaseController extends GetxController {
   DbTables get dbTables => DbTables();
 
   SetUp get setUp => SetUp();
+  String get currency => setUp.symbol??'';
 
   final voiceRecognition = VoiceRecognition();
 

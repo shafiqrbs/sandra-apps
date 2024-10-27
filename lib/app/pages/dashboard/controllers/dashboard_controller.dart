@@ -506,17 +506,19 @@ class DashboardController extends BaseController {
     List<Bank>? list;
     await dataFetcher(
       future: () async {
-        list = await services.getBankList();
+        list = await services.getBankList(
+          methodId: item.id.toString(),
+        );
       },
     );
 
-    if (list != null && list!.isNotEmpty) {
+    if (list != null) {
       await Get.dialog(
         DialogPattern(
           title: item.name ?? '',
-          subTitle: '',
+          subTitle: '$currency  ${item.amount ?? ''}',
           child: list?.isEmpty ?? false
-              ? NoRecordFoundView()
+              ? Container()
               : Container(
                   height: Get.height * 0.5,
                   margin: const EdgeInsets.all(10),
@@ -548,7 +550,7 @@ class DashboardController extends BaseController {
                               ),
                             ),
                             Text(
-                              bank.amount ?? '',
+                              '$currency ${bank.amount ?? ''}',
                               style: GoogleFonts.roboto(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800,
