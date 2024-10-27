@@ -1,4 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/bindings/initial_binding.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/show_snackbar.dart';
@@ -22,12 +26,43 @@ class AddProductModalViewController extends BaseController {
   final openingQtyController = TextEditingController();
   final descriptionController = TextEditingController();
 
+  Stock? preStock;
+
   @override
   Future<void> onInit() async {
     super.onInit();
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      preStock = args['stock'] as Stock?;
+      if (kDebugMode) {
+        print('preStock: ${preStock?.toJson()}');
+      }
+    }
     await categoryManager.fillAsController();
     await brandManager.fillAsController();
     await unitManager.fillAsController();
+
+    if (preStock != null) {
+      nameController.text = preStock!.name ?? '';
+      if (preStock!.categoryId != null) {
+        categoryManager.asController.selectedValue =
+            categoryManager.asController.items?.firstWhereOrNull(
+          (element) => element.categoryId == preStock?.categoryId,
+        );
+      }
+      if (preStock!.brandName != null) {
+        brandManager.asController.selectedValue =
+            brandManager.asController.items?.firstWhereOrNull(
+          (element) => element.name == preStock?.brandName,
+        );
+      }
+      if (preStock!.unit != null) {
+        unitManager.asController.selectedValue =
+            unitManager.asController.items?.firstWhereOrNull(
+          (element) => element.unitId == preStock?.unit.toInt(),
+        );
+      }
+    }
   }
 
   void onResetTap() {
