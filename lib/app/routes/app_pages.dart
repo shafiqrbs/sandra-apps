@@ -24,6 +24,8 @@ import '/app/pages/domain/customer/customer_list/bindings/customer_list_binding.
 import '/app/pages/domain/customer/customer_list/views/customer_list_view.dart';
 import '/app/pages/domain/due_customer_list/bindings/due_customer_list_binding.dart';
 import '/app/pages/domain/due_customer_list/views/due_customer_list_view.dart';
+import '/app/pages/domain/user_list_page/bindings/user_list_page_binding.dart';
+import '/app/pages/domain/user_list_page/views/user_list_page_view.dart';
 import '/app/pages/domain/vendor/vendor_details/bindings/vendor_details_binding.dart';
 import '/app/pages/domain/vendor/vendor_details/views/vendor_details_view.dart';
 import '/app/pages/domain/vendor/vendor_list/bindings/vendor_list_binding.dart';
@@ -36,6 +38,8 @@ import '/app/pages/intro/splash/bindings/splash_binding.dart';
 import '/app/pages/intro/splash/views/splash_view.dart';
 import '/app/pages/inventory/brand_list_page/bindings/brand_list_page_binding.dart';
 import '/app/pages/inventory/brand_list_page/views/brand_list_page_view.dart';
+import '/app/pages/inventory/category_list_page/bindings/category_list_page_binding.dart';
+import '/app/pages/inventory/category_list_page/views/category_list_page_view.dart';
 import '/app/pages/inventory/offline_sync_process/bindings/offline_sync_process_binding.dart';
 import '/app/pages/inventory/offline_sync_process/views/offline_sync_process_view.dart';
 import '/app/pages/inventory/particular/bindings/particular_binding.dart';
@@ -58,8 +62,6 @@ import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 import '/app/pages/theme_test_page/bindings/theme_test_page_binding.dart';
 import '/app/pages/theme_test_page/views/theme_test_page_view.dart';
-import '/app/pages/inventory/category_list_page/bindings/category_list_page_binding.dart';
-import '/app/pages/inventory/category_list_page/views/category_list_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -218,6 +220,11 @@ class AppPages {
       name: Routes.categoryListPage,
       page: CategoryListPageView.new,
       binding: CategoryListPageBinding(),
+    ),
+    GetPage(
+      name: Routes.userListPage,
+      page: () => UserListPageView(),
+      binding: UserListPageBinding(),
     ),
   ];
 }
