@@ -372,10 +372,7 @@
   "failedToUpdateProduct" : "Failed to update product",
   "brandList" : "Brand List",
   "unitList" : "Unit List",
-  "categoryList" : "Category List"
-
-
-
-
+  "categoryList" : "Category List",
+  "userList" : "User List"
 
 }
