@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/app_bar_button_group.dart';
+import 'package:sandra/app/core/widget/app_bar_search_view.dart';
+import 'package:sandra/app/core/widget/quick_navigation_button.dart';
+import 'package:sandra/app/core/widget/search_button.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/inventory/category_list_page/controllers/category_list_page_controller.dart';
 
@@ -8,12 +13,101 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
     
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
+    return AppBar(
+      centerTitle: false,
+      backgroundColor: colors.primaryColor500,
+      title: Obx(
+            () {
+          return AppBarSearchView(
+            pageTitle: appLocalization.categoryList,
+            controller: controller.categoryManager.searchTextController.value,
+            onSearch: controller.categoryManager.searchItemsByNameOnAllItem,
+            onMicTap: controller.isSearchSelected.toggle,
+            onFilterTap: () {},
+            onClearTap: controller.onClearSearchText,
+            showSearchView: controller.isSearchSelected.value,
+            isShowFilter: false,
+          );
+        },
+      ),
+      automaticallyImplyLeading: false,
+      actions: [
+        Obx(
+              () {
+            if (controller.isSearchSelected.value) {
+              return Container();
+            }
+            return AppBarButtonGroup(
+              children: [
+                SearchButton(
+                  onTap: controller.isSearchSelected.toggle,
+                ),
+                QuickNavigationButton(),
+              ],
+            );
+          },
+        ),
+      ],
+    );
   }
   
   @override
   Widget body(BuildContext context) {
-    return Container();
+    return Obx(
+          () {
+        return ListView.builder(
+          itemCount: controller.categoryManager.allItems.value?.length ?? 0,
+          controller: controller.categoryManager.scrollController,
+          padding: const EdgeInsets.only(bottom: 60),
+          itemBuilder: (context, index) {
+            final element = controller.categoryManager.allItems.value![index];
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    containerBorderRadius,
+                  ),
+                  border: Border.all(
+                    color: index.isEven
+                        ? colors.secondaryColor100
+                        : colors.primaryColor100,
+                  ),
+                  color: index.isEven
+                      ? colors.secondaryColor50
+                      : colors.primaryColor50,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                '${index+1}. ${element.name??''}',
+                                style: TextStyle(
+                                  fontSize: mediumTFSize,
+                                  color: colors.solidBlackColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
   

@@ -111,9 +111,16 @@ List<Widget> inventoryButtonList = [
   TbdRoundButton(
     text: appLocalization.brand,
     icon: TablerIcons.clipboard_data,
-    onTap: ()=>navigatePage(Routes.brandListPage),
+    onTap: () => navigatePage(Routes.brandListPage),
     localeMethod: () => appLocalization.brand,
     bgColor: colorList.value['olive'],
+  ),
+  TbdRoundButton(
+    text: appLocalization.category,
+    icon: TablerIcons.category,
+    onTap: () => navigatePage(Routes.categoryListPage),
+    localeMethod: () => appLocalization.category,
+    bgColor: colorList.value['purple'],
   ),
 ];
 

@@ -365,7 +365,7 @@
   "tableEnableDisable" : "Table Enable/Disable",
   "theAmountMustBeEqualOrMoreThanNetTotal" : "The amount must be equal or more than net total",
   "eitherSelectCustomerOrEnterValidAmount" : "Either select customer or enter valid amount",
-  "offlineSyncProcess" : "Offline sync process",
+  "offlineSyncProcess" : "Offline Sync",
   "syncList" : "Sync List",
   "edit" : "Edit",
   "update" : "Update",
