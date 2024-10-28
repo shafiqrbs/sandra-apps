@@ -37,28 +37,22 @@ class StockCardView extends BaseWidget {
   final int index;
   final Rx<bool> isSelectedItem;
   final Rx<bool> isBookmarked;
+  final Future<void> Function(Stock element) onTap;
 
   StockCardView({
     required this.element,
     required this.index,
     required this.isSelectedItem,
     required this.isBookmarked,
+    required this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.dialog(
-          DialogPattern(
-            title: appLocalization.stockDetails,
-            subTitle: '',
-            child: StockDetailsModal(
-              element: element,
-            ),
-          ),
-        );
+      onTap: () async {
+        await onTap(element);
       },
       child: Stack(
         children: [

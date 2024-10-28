@@ -94,6 +94,7 @@ class StockListView extends BaseView<StockListController> {
 
         return StockCardView(
           element: element,
+          onTap: controller.showStockDetailsModal,
           index: index,
           isSelectedItem: isSelectedItem,
           isBookmarked: isBookmarked,

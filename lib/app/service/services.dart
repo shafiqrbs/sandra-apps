@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
+import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/entity/sync_list.dart';
 
 import '/app/core/core_model/logged_user.dart';
@@ -1032,11 +1033,38 @@ class Services {
         headers: _buildHeader(),
       );
       final responseData = response.data as List;
-      print('restaurant table list : $responseData');
       if (responseData.isEmpty) return null;
       return parseList(
         list: responseData,
         fromJson: RestaurantTable.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<StockDetails?> getStockDetails({
+    required int id,
+  }) async {
+    const endPoint = 'poskeeper-stock-edit';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'id': id,
+        },
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: StockDetails.fromJson,
       );
     } catch (e, s) {
       printError(e, s, endPoint);

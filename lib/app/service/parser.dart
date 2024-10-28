@@ -10,7 +10,7 @@ Future<List<T>?> parseList<T>({
 
   try {
     if (kDebugMode) {
-      print('\x1B[31m Parsing List $T \x1B[0m\n');
+      print('\x1B[33m Parsing List $T \x1B[0m\n');
     }
     return await compute(
       _parseListInIsolate,
@@ -19,9 +19,10 @@ Future<List<T>?> parseList<T>({
         fromJson,
       ),
     );
-  } catch (e) {
+  } catch (e,s) {
     if (kDebugMode) {
-      print('Error parsing list: $e');
+      print('\x1B[31m Error parsing list: $e \x1B[0m\n');
+      print(s);
     }
   }
   return null;
@@ -49,7 +50,7 @@ Future<T?> parseObject<T>({
 
   try {
     if (kDebugMode) {
-      print('\x1B[31m Parsing Object $T \x1B[0m\n');
+      print('\x1B[33m Parsing Object $T \x1B[0m\n');
     }
     return await compute(
       _parseObjectInIsolate,
@@ -58,9 +59,10 @@ Future<T?> parseObject<T>({
         fromJson,
       ),
     );
-  } catch (e) {
+  } catch (e,s) {
     if (kDebugMode) {
-      print('Error parsing object: $e');
+      print('\x1B[31m Error parsing object: $e \x1B[0m\n');
+      print(s);
     }
   }
   return null;
