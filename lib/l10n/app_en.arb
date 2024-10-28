@@ -366,7 +366,10 @@
   "theAmountMustBeEqualOrMoreThanNetTotal" : "The amount must be equal or more than net total",
   "eitherSelectCustomerOrEnterValidAmount" : "Either select customer or enter valid amount",
   "offlineSyncProcess" : "Offline sync process",
-  "syncList" : "Sync List"
+  "syncList" : "Sync List",
+  "edit" : "Edit",
+  "update" : "Update",
+  "failedToUpdateProduct" : "Failed to update product"
 
 
 

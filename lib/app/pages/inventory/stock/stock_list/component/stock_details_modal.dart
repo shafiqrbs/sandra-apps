@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/entity/stock.dart';
@@ -10,7 +11,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'stock_card_view.dart';
 
 class StockDetailsModal extends BaseWidget {
-  final Stock element;
+  final StockDetails element;
   StockDetailsModal({
     required this.element,
     super.key,

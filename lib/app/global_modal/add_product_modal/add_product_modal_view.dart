@@ -175,11 +175,18 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                       leftIcon: TablerIcons.restore,
                     ),
                     2.percentWidth,
-                    RowButton(
-                      buttonName: appLocalization.save,
-                      onTap: controller.onSaveTap,
-                      leftIcon: TablerIcons.device_floppy,
-                    ),
+                    if (controller.isEdit.value)
+                      RowButton(
+                        buttonName: appLocalization.edit,
+                        onTap: controller.onEditTap,
+                        leftIcon: TablerIcons.pencil,
+                      ),
+                    if (!controller.isEdit.value)
+                      RowButton(
+                        buttonName: appLocalization.save,
+                        onTap: controller.onSaveTap,
+                        leftIcon: TablerIcons.device_floppy,
+                      ),
                   ],
                 ),
                 // 6.percentHeight,

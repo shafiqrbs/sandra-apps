@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/entity/stock_details.dart';
+import 'package:sandra/app/pages/inventory/stock/stock_list/component/stock_details_modal.dart';
 import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -62,7 +63,7 @@ class StockListController extends BaseController {
     return stockManager.paginate();
   }
 
- Future<void> showStockDetailsModal(Stock element) async {
+  Future<void> showStockDetailsModal(Stock element) async {
     StockDetails? stockDetails;
 
     await dataFetcher(
@@ -72,5 +73,16 @@ class StockListController extends BaseController {
         );
       },
     );
+    if (stockDetails != null) {
+      await Get.dialog(
+        DialogPattern(
+          title: stockDetails!.name!,
+          subTitle: '',
+          child: StockDetailsModal(
+            element: stockDetails!,
+          ),
+        ),
+      );
+    }
   }
 }
