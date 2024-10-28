@@ -29,5 +29,9 @@ class BrandListPageController extends BaseController {
         child: AddBrandModalView(),
       ),
     );
+    if (data != null) {
+      await onClearSearchText();
+      await brandManager.paginate();
+    }
   }
 }

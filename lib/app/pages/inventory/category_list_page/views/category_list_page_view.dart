@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/add_button.dart';
 import 'package:sandra/app/core/widget/app_bar_button_group.dart';
 import 'package:sandra/app/core/widget/app_bar_search_view.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
@@ -10,14 +11,14 @@ import '/app/pages/inventory/category_list_page/controllers/category_list_page_c
 //ignore: must_be_immutable
 class CategoryListPageView extends BaseView<CategoryListPageController> {
   CategoryListPageView({super.key});
-    
+
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
       backgroundColor: colors.primaryColor500,
       title: Obx(
-            () {
+        () {
           return AppBarSearchView(
             pageTitle: appLocalization.categoryList,
             controller: controller.categoryManager.searchTextController.value,
@@ -33,12 +34,15 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
       automaticallyImplyLeading: false,
       actions: [
         Obx(
-              () {
+          () {
             if (controller.isSearchSelected.value) {
               return Container();
             }
             return AppBarButtonGroup(
               children: [
+                AddButton(
+                  onTap: controller.onAddCategory,
+                ),
                 SearchButton(
                   onTap: controller.isSearchSelected.toggle,
                 ),
@@ -50,11 +54,11 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
       ],
     );
   }
-  
+
   @override
   Widget body(BuildContext context) {
     return Obx(
-          () {
+      () {
         return ListView.builder(
           itemCount: controller.categoryManager.allItems.value?.length ?? 0,
           controller: controller.categoryManager.scrollController,
@@ -88,7 +92,7 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
                             child: Container(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                '${index+1}. ${element.name??''}',
+                                '${index + 1}. ${element.name ?? ''}',
                                 style: TextStyle(
                                   fontSize: mediumTFSize,
                                   color: colors.solidBlackColor,
@@ -110,4 +114,3 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
     );
   }
 }
-  

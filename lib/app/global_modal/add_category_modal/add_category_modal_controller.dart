@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/base/base_controller.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
-import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/category.dart';
 
-class AddBrandModalController extends BaseController {
+class AddCategoryModalController extends BaseController {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController().obs;
 
@@ -12,28 +12,28 @@ class AddBrandModalController extends BaseController {
     nameController.value.clear();
   }
 
-  Future<void> addMasterData() async {
-    Brand? createBrand;
+  Future<void> addCategory() async {
     if (formKey.currentState!.validate()) {
+      Category? createdCategory;
       await dataFetcher(
         future: () async {
-          createBrand = await services.addBrand(
+          createdCategory = await services.addCategory(
             name: nameController.value.text,
           );
-          if (createBrand != null) {
+          if (createdCategory != null) {
             await dbHelper.insertList(
               deleteBeforeInsert: false,
-              tableName: dbTables.tableBrands,
+              tableName: dbTables.tableCategories,
               dataList: [
-                createBrand!.toJson(),
+                createdCategory!.toJson(),
               ],
             );
           }
         },
       );
-      if (createBrand != null) {
+      if (createdCategory != null) {
         Get.back(
-          result: createBrand,
+          result: createdCategory,
         );
         showSnackBar(
           type: SnackBarType.success,

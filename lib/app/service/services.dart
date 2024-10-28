@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' hide Category;
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/stock_details.dart';
@@ -1159,7 +1160,6 @@ class Services {
 
   Future<Brand?> addBrand({
     required String name,
-    required String mode,
   }) async {
     const endPoint = 'poskeeper-masterdata-create';
     try {
@@ -1168,7 +1168,7 @@ class Services {
         endPoint,
         {
           'name': name,
-          'mode': mode,
+          'mode': 'brand',
         },
         headers: _buildHeader(),
       );
@@ -1177,6 +1177,32 @@ class Services {
       return parseObject(
         object: responseData,
         fromJson: Brand.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<Category?> addCategory({
+    required String name,
+  }) async {
+    const endPoint = 'poskeeper-masterdata-create';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'name': name,
+          'mode': 'category',
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Category.fromJson,
       );
     } catch (e, s) {
       printError(e, s, endPoint);
