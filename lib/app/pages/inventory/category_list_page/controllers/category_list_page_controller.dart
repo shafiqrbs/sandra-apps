@@ -25,7 +25,7 @@ class CategoryListPageController extends BaseController {
   Future<void> onAddCategory() async {
     final data = await Get.dialog(
       DialogPattern(
-        title: appLocalization.add,
+        title: appLocalization.addCategory,
         subTitle: '',
         child: AddCategoryModalView(),
       ),
