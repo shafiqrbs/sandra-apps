@@ -446,7 +446,10 @@
   "syncList" : "Sync List",
   "edit" : "Edit",
   "update" : "Update",
-  "failedToUpdateProduct" : "Failed to update product"
+  "failedToUpdateProduct" : "Failed to update product",
+  "brandList" : "Brand List",
+  "unitList" : "Unit List",
+  "categoryList" : "Category List"
 
 
 
