@@ -450,7 +450,9 @@
   "brandList" : "Brand List",
   "unitList" : "Unit List",
   "categoryList" : "Category List",
-  "userList" : "User List"
+  "userList" : "User List",
+  "roles" : "Roles",
+  "manager" : "Manager"
 
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/add_button.dart';
 import 'package:sandra/app/core/widget/app_bar_button_group.dart';
 import 'package:sandra/app/core/widget/app_bar_search_view.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
@@ -39,6 +40,9 @@ class UserListPageView extends BaseView<UserListPageController> {
             }
             return AppBarButtonGroup(
               children: [
+                AddButton(
+                  onTap: controller.addUser,
+                ),
                 SearchButton(
                   onTap: controller.isSearchSelected.toggle,
                 ),
@@ -97,7 +101,6 @@ class UserListPageView extends BaseView<UserListPageController> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
                       Row(
@@ -128,7 +131,6 @@ class UserListPageView extends BaseView<UserListPageController> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     ],

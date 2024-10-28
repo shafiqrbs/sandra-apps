@@ -32,13 +32,13 @@ class User {
         fullName: json['full_name'],
         email: json['email'],
         password: json['password'],
-        roles: json['roles'],
+        roles: json['roles'] is List ? json['roles'].join(',') : json['roles'],
       );
 
   Map<String, dynamic> toJson() => {
         'user_id': userId,
-        'username': username,
-        'fullName': fullName,
+        'user_name': username,
+        'full_name': fullName,
         'email': email,
         'password': password,
         'roles': roles,

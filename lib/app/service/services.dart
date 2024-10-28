@@ -7,6 +7,7 @@ import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/entity/sync_list.dart';
+import 'package:sandra/app/entity/user.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
@@ -27,6 +28,7 @@ class Services {
   factory Services() {
     return instance;
   }
+
   Services._privateConstructor();
 
   static final Services instance = Services._privateConstructor();
@@ -1112,6 +1114,41 @@ class Services {
       return parseObject(
         object: responseData,
         fromJson: Stock.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<User?> addUser({
+    required String name,
+    required String userName,
+    required String mobile,
+    required String email,
+    required String address,
+    required String role,
+  }) async {
+    const endPoint = 'poskeeper-user-create';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'name': name,
+          'user_name': userName,
+          'mobile': mobile,
+          'email': email,
+          'address': address,
+          'user_role': role,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: User.fromJson,
       );
     } catch (e, s) {
       printError(e, s, endPoint);

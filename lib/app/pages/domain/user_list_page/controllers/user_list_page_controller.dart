@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/user.dart';
+import 'package:sandra/app/global_modal/add_user_modal/add_user_modal_view.dart';
 import '/app/core/base/base_controller.dart';
 
 class UserListPageController extends BaseController {
@@ -45,6 +48,19 @@ class UserListPageController extends BaseController {
       if (kDebugMode) {
         print('Error searching items by name: $e');
       }
+    }
+  }
+
+  Future<void> addUser() async {
+    final user = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.add,
+        subTitle: '',
+        child: AddUserModalView(),
+      ),
+    );
+    if (user != null) {
+      await onClearSearchText();
     }
   }
 }
