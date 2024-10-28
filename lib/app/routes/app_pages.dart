@@ -34,6 +34,8 @@ import '/app/pages/intro/login/bindings/login_binding.dart';
 import '/app/pages/intro/login/views/login_view.dart';
 import '/app/pages/intro/splash/bindings/splash_binding.dart';
 import '/app/pages/intro/splash/views/splash_view.dart';
+import '/app/pages/inventory/brand_list_page/bindings/brand_list_page_binding.dart';
+import '/app/pages/inventory/brand_list_page/views/brand_list_page_view.dart';
 import '/app/pages/inventory/offline_sync_process/bindings/offline_sync_process_binding.dart';
 import '/app/pages/inventory/offline_sync_process/views/offline_sync_process_view.dart';
 import '/app/pages/inventory/particular/bindings/particular_binding.dart';
@@ -204,6 +206,11 @@ class AppPages {
       name: Routes.offlineSyncProcess,
       page: OfflineSyncProcessView.new,
       binding: OfflineSyncProcessBinding(),
+    ),
+    GetPage(
+      name: Routes.brandListPage,
+      page: BrandListPageView.new,
+      binding: BrandListPageBinding(),
     ),
   ];
 }
