@@ -58,6 +58,8 @@ import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 import '/app/pages/theme_test_page/bindings/theme_test_page_binding.dart';
 import '/app/pages/theme_test_page/views/theme_test_page_view.dart';
+import '/app/pages/inventory/category_list_page/bindings/category_list_page_binding.dart';
+import '/app/pages/inventory/category_list_page/views/category_list_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -211,6 +213,11 @@ class AppPages {
       name: Routes.brandListPage,
       page: BrandListPageView.new,
       binding: BrandListPageBinding(),
+    ),
+    GetPage(
+      name: Routes.categoryListPage,
+      page: CategoryListPageView.new,
+      binding: CategoryListPageBinding(),
     ),
   ];
 }
