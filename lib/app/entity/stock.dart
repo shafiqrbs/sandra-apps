@@ -15,8 +15,10 @@ class Stock extends Parser {
   int? itemId;
   int? categoryId;
   String? categoryName;
+  num? brandId;
   String? brandName;
   String? barcode;
+  num? unitId;
   String? unit;
   String? name;
   String? printName;
@@ -31,8 +33,10 @@ class Stock extends Parser {
     this.itemId,
     this.categoryId,
     this.categoryName,
+    this.brandId,
     this.brandName,
     this.barcode,
+    this.unitId,
     this.unit,
     this.name,
     this.printName,
@@ -52,8 +56,10 @@ class Stock extends Parser {
       itemId: json['item_id'],
       categoryId: json['category_id'],
       categoryName: json['category_name'],
+      brandId: json['brand_id'],
       brandName: json['brand_name'],
       barcode: json['barcode'],
+      unitId: json['unit_id'],
       unit: json['unit'],
       name: json['name'],
       printName: json['print_name'],
@@ -71,8 +77,10 @@ class Stock extends Parser {
       'item_id': itemId,
       'category_id': categoryId,
       'category_name': categoryName,
+      'brand_id': brandId,
       'brand_name': brandName,
       'barcode': barcode,
+      'unit_id': unitId,
       'unit': unit,
       'name': name,
       'print_name': printName,
