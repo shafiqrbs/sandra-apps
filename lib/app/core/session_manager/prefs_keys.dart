@@ -21,3 +21,4 @@ const prefsIsPurchaseAutoApprove = 'isPurchaseAutoApprove';
 const prefsIsTotalPriceConfig = 'isTotalPriceConfig';
 const prefIsShowBrandOnPurchase = 'isShowBrandOnPurchase';
 const prefIsShowBrandOnSales = 'isShowBrandOnSales';
+const prefIsDashboardOnline = 'isDashboardOnline';

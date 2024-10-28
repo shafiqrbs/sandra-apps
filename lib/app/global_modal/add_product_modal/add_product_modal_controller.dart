@@ -167,7 +167,7 @@ class AddProductModalViewController extends BaseController {
     await dataFetcher(
       future: () async {
         updatedStock = await services.updateStock(
-          id: preStock!.itemId!,
+          id: preStock!.id,
           name: productName,
           categoryId: category?.toString(),
           brandId: brand?.toString(),
@@ -185,7 +185,7 @@ class AddProductModalViewController extends BaseController {
           await dbHelper.updateWhere(
             tbl: dbTables.tableStocks,
             data: updatedStock!.toJson(),
-            where: 'itemId = ?',
+            where: 'item_id = ?',
             whereArgs: [updatedStock!.itemId],
           );
         }

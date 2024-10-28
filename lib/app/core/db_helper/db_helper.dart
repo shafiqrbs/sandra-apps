@@ -163,7 +163,12 @@ class DbHelper {
   }) async {
     final Database? db = await instance.database;
     if (db != null) {
-      return db.update(tbl, data, where: where, whereArgs: whereArgs);
+      return db.update(
+        tbl,
+        data,
+        where: where,
+        whereArgs: whereArgs,
+      );
     }
     return 0;
   }

@@ -1071,4 +1071,51 @@ class Services {
       return null;
     }
   }
+
+  Future<Stock?> updateStock({
+    required id,
+    required String name,
+    required String modelNumber,
+    required String unitId,
+    required String purchasePrice,
+    required String salesPrice,
+    required String discountPrice,
+    required String minQty,
+    required String openingQty,
+    required String description,
+    String? categoryId,
+    String? brandId,
+  }) async {
+    const endPoint = 'poskeeper-stock-update';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'id': id,
+          'name': name,
+          'category_id': categoryId ?? '',
+          'brand_id': brandId ?? '',
+          'model_no': modelNumber,
+          'unit_id': unitId,
+          'purchase_price': purchasePrice,
+          'sales_price': salesPrice,
+          'discount_price': discountPrice,
+          'min_quantity': minQty,
+          'opening_quantity': openingQty,
+          'description': description,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Stock.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
 }

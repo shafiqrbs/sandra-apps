@@ -362,4 +362,19 @@ class SessionManager {
   Future<bool> getIsShowBrandOnSales() async {
     return prefs.getBool(prefIsShowBrandOnSales) ?? false;
   }
+
+  /// set is dashboard online
+  Future<void> setIsDashboardOnline({
+    required bool isDashboardOnline,
+  }) async {
+    await prefs.setBool(
+      prefIsDashboardOnline,
+      isDashboardOnline,
+    );
+  }
+
+  /// get is show brand on sales
+  Future<bool> getIsDashboardOnline() async {
+    return prefs.getBool(prefIsDashboardOnline) ?? true;
+  }
 }

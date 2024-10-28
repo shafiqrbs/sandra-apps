@@ -247,7 +247,7 @@ class DashboardController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
-    isOnline.value = await prefs.getIsSalesOnline();
+    isOnline.value = await prefs.getIsDashboardOnline();
     if (isOnline.value) {
       await fetchFinancialData();
     }
@@ -432,8 +432,8 @@ class DashboardController extends BaseController {
   Future<void> onTapIsOnline() async {
     isOnline.value = !isOnline.value;
     update();
-    await prefs.setIsSalesOnline(
-      isSalesOnline: isOnline.value,
+    await prefs.setIsDashboardOnline(
+      isDashboardOnline: isOnline.value,
     );
     if (isOnline.value) {
       await fetchFinancialData();
