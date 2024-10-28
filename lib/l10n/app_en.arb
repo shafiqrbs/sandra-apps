@@ -375,7 +375,10 @@
   "categoryList" : "Category List",
   "userList" : "User List",
   "roles" : "Roles",
-  "manager" : "Manager"
+  "manager" : "Manager",
+  "addBrand" : "Add Brand",
+  "addUnit" : "Add Unit",
+  "addCategory" : "Add Category"
 
 
 }

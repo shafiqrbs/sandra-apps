@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/widget/add_button.dart';
 import 'package:sandra/app/core/widget/app_bar_button_group.dart';
 import 'package:sandra/app/core/widget/app_bar_search_view.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
@@ -39,6 +40,9 @@ class BrandListPageView extends BaseView<BrandListPageController> {
             }
             return AppBarButtonGroup(
               children: [
+                AddButton(
+                  onTap: controller.onAddBrand,
+                ),
                 SearchButton(
                   onTap: controller.isSearchSelected.toggle,
                 ),
@@ -88,7 +92,7 @@ class BrandListPageView extends BaseView<BrandListPageController> {
                             child: Container(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                '${index+1}. ${element.name??''}',
+                                '${index + 1}. ${element.name ?? ''}',
                                 style: TextStyle(
                                   fontSize: mediumTFSize,
                                   color: colors.solidBlackColor,

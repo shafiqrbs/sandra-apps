@@ -13,8 +13,13 @@ class AddUserModalController extends BaseController {
   final addressController = TextEditingController().obs;
   final selectedRole = 'user'.obs;
 
-
-  void resetField() {}
+  void resetField() {
+    nameController.value.clear();
+    userNameController.value.clear();
+    mobileController.value.clear();
+    emailController.value.clear();
+    addressController.value.clear();
+  }
 
   Future<void> addUser() async {
     if (formKey.currentState!.validate()) {
