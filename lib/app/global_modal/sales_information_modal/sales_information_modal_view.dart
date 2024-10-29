@@ -436,6 +436,9 @@ class SalesInformationModalView
                             onTap: () {
                               //shareContent();
                               // Get.to(OnlineSalesInvoice(element: controller.sales,));
+                              controller.createSalesDetailsPdf(
+                                sales: controller.sales.value!,
+                              );
                             },
                             child: Container(
                               height: 40,

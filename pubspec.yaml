@@ -35,7 +35,9 @@ dependencies:
   nb_utils:
     git: https://github.com/Rissmon/nb_utils
   number_to_character: ^0.0.12
+  open_filex: ^4.5.0
   path: any
+  pdf: ^3.11.1
   permission_handler: ^11.3.1
   pie_chart: ^5.4.0
   print_bluetooth_thermal:
@@ -49,6 +51,7 @@ dependencies:
   speech_to_text: ^6.6.2
   sqflite: ^2.3.3+1
   super_tooltip: ^2.0.7
+  syncfusion_flutter_pdfviewer: ^27.1.57
   url_launcher: ^6.3.0
 
 dev_dependencies:
