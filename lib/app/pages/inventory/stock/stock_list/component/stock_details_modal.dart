@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/stock_details.dart';
@@ -29,22 +30,25 @@ class StockDetailsModal extends BaseWidget {
           12.height,
           Padding(
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
             ),
             child: Row(
               mainAxisAlignment: spaceBetweenMAA,
               children: [
                 Expanded(
                   child: Row(
+                    crossAxisAlignment: startCAA,
                     children: [
                       const Icon(
                         TablerIcons.tag,
                         size: 16,
                       ),
                       4.width,
-                      Text(
-                        element.name ?? '',
+                      Expanded(
+                        child: Text(
+                          element.brandName ?? '',
+                        ),
                       ),
                     ],
                   ),
@@ -59,7 +63,7 @@ class StockDetailsModal extends BaseWidget {
                       ),
                       4.width,
                       Text(
-                        element.categoryName ?? 'N/A',
+                        (element.categoryName == null || element.categoryName!.isEmpty ? 'N/A' : element.categoryName) ?? 'N/A',
                       ),
                     ],
                   ),
@@ -73,8 +77,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFF6F1F7),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -82,14 +86,18 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.purchasePrice,
-                    value: element.purchasePrice.toString(),
+                    value: '${SetUp().symbol ?? ''} ${element.purchasePrice.toString()}',
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.mrp,
-                    value: element.salesPrice.toString(),
+                    value: '${SetUp().symbol ?? ''} ${element.salesPrice.toString()}',
                   ),
                 ),
               ],
@@ -100,8 +108,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFFFFFFF),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -109,14 +117,18 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.avgPurchasePrice,
-                    value: element.avgPurchasePrice,
+                    value: '${SetUp().symbol ?? ''} ${element.avgPurchasePrice}',
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.avgMrp,
-                    value: element.avgSalesPrice,
+                    value: '${SetUp().symbol ?? ''} ${element.avgSalesPrice}',
                   ),
                 ),
               ],
@@ -127,8 +139,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFF6F1F7),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -136,12 +148,16 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.purchaseQty,
                     value: element.purchaseQuantity.toString(),
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.salesQty,
                     value: element.salesQuantity.toString(),
                   ),
@@ -154,8 +170,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFFFFFFF),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -163,12 +179,16 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.openingQty,
                     value: element.openingQuantity.toString(),
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.damageQuantity,
                     value: element.damageQuantity.toString(),
                   ),
@@ -181,8 +201,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFF6F1F7),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -190,12 +210,16 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.purchaseReturnQty,
                     value: element.purchaseReturnQuantity.toString(),
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.salesReturnQty,
                     value: element.salesReturnQuantity.toString(),
                   ),
@@ -208,8 +232,8 @@ class StockDetailsModal extends BaseWidget {
               color: Color(0xFFFFFFFF),
             ),
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 8,
+              right: 8,
               top: 4,
               bottom: 4,
             ),
@@ -217,12 +241,16 @@ class StockDetailsModal extends BaseWidget {
               children: [
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.adjustQty,
                     value: element.adjustQuantity.toString(),
                   ),
                 ),
                 Expanded(
                   child: labelValue.copyWith(
+                    labelFlex: 4,
+                    valueFlex: 3,
                     label: appLocalization.bonusQty,
                     value: element.bonusQuantity.toString(),
                   ),

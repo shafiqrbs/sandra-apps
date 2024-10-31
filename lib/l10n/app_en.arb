@@ -383,10 +383,10 @@
   "delete" : "Delete",
   "remove" : "Remove",
   "avgMrp" : "Avg. Mrp",
-  "avgPurchasePrice": "Avg. Purchase Price",
+  "avgPurchasePrice": "Avg. Pur. Price",
   "remainingQty" : "Remaining QTY",
   "salesReturnQty" : "Sales Return Qty",
-  "purchaseReturnQty" : "Purchase Return Qty",
+  "purchaseReturnQty" : "Pur. Return Qty",
   "adjustQty" : "Adjust Qty",
   "bonusQty" : "Bonus Qty",
   "damageQty" : "Damage Qty"
