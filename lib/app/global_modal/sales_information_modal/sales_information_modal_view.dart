@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
@@ -331,26 +332,43 @@ class SalesInformationModalView
                 if (isShowFooter ?? true)
                   Row(
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => controller.deleteSales(
-                            onDeleted: onDeleted,
-                          ),
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                containerBorderRadius,
+                      Visibility(
+                        visible: controller.sales.value?.approvedBy == null &&
+                            controller.isManager,
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () => controller.deleteSales(
+                              onDeleted: onDeleted,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.secondaryRedColor,
                               ),
-                              color: colors.solidRedColor,
-                            ),
-                            margin: const EdgeInsets.only(
-                              left: 4,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                TablerIcons.trash,
-                                color: colors.primaryColor50,
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.trash,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.delete,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -363,20 +381,33 @@ class SalesInformationModalView
                           child: InkWell(
                             onTap: () => controller.salesPrint(context),
                             child: Container(
-                              height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.primaryColor50,
+                                color: colors.secondaryBlueColor,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
                               ),
-                              child: const Center(
-                                child: Icon(
-                                  TablerIcons.printer,
-                                  color: Colors.green,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.printer,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.print,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -384,26 +415,41 @@ class SalesInformationModalView
                         ),
                       ),
                       Visibility(
-                        visible: controller.salesMode == 'online' ||
-                            controller.salesMode == 'local',
+                        visible: (controller.salesMode == 'online' ||
+                                controller.salesMode == 'local') &&
+                            controller.sales.value?.approvedBy == null &&
+                            controller.isManager,
                         child: Expanded(
                           child: InkWell(
                             onTap: controller.goToEditSales,
                             child: Container(
-                              height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.solidBlueColor,
+                                color: colors.secondaryGreenColor,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
                               ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
                               child: Center(
-                                child: Icon(
-                                  TablerIcons.pencil,
-                                  color: colors.whiteColor,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.pencil,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.edit,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -414,17 +460,76 @@ class SalesInformationModalView
                         child: InkWell(
                           onTap: controller.copySales,
                           child: Container(
-                            height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 containerBorderRadius,
                               ),
-                              color: colors.primaryColor400,
+                              color: colors.solidOliveColor.withOpacity(.2),
                             ),
                             margin: const EdgeInsets.only(
                               left: 4,
                             ),
-                            child: const Center(child: Icon(TablerIcons.copy)),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 6,
+                            ),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    TablerIcons.copy,
+                                    size: 18,
+                                    color: colors.solidBlackColor,
+                                  ),
+                                  2.height,
+                                  Text(
+                                    appLocalization.copy,
+                                    style: AppTextStyle.h4TextStyle400,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: controller.salesMode == 'online',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              toast('Sales return is under development');
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.solidPurpleColor.withOpacity(.2),
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.receipt_refund,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.returnn,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -441,48 +546,33 @@ class SalesInformationModalView
                               );
                             },
                             child: Container(
-                              height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.solidBlueColor,
+                                color: colors.secondaryGreyColor,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
                               ),
-                              child: Center(
-                                child: Icon(
-                                  TablerIcons.share,
-                                  color: colors.solidRedColor,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: controller.salesMode == 'online',
-                        child: Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              toast('Sales return is under development');
-                            },
-                            child: Container(
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  containerBorderRadius,
-                                ),
-                                color: colors.primaryColor500,
-                              ),
-                              margin: const EdgeInsets.only(
-                                left: 4,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
                               ),
                               child: Center(
-                                child: Icon(
-                                  TablerIcons.receipt_refund,
-                                  color: colors.whiteColor,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.share,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.share,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

@@ -466,7 +466,8 @@
   "purchaseReturnQty" : "Purchase Return Qty",
   "adjustQty" : "Adjust Qty",
   "bonusQty" : "Bonus Qty",
-  "damageQty" : "Damage Qty"
+  "damageQty" : "Damage Qty",
+  "copy" : "Copy"
 
 
 

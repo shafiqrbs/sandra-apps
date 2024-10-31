@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/add_button.dart';
 import 'package:sandra/app/core/widget/app_bar_button_group.dart';
 import 'package:sandra/app/core/widget/app_bar_search_view.dart';
@@ -97,7 +99,7 @@ class UserListPageView extends BaseView<UserListPageController> {
                                   child: Container(
                                     padding: const EdgeInsets.only(top: 4),
                                     child: Text(
-                                      '${index + 1}. ${element.username ?? ''}',
+                                      element.username ?? '',
                                       style: TextStyle(
                                         fontSize: mediumTFSize,
                                         color: colors.solidBlackColor,
@@ -162,6 +164,13 @@ class UserListPageView extends BaseView<UserListPageController> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                    ),
+                  ),
+                  const Positioned(
+                    right: 24,
+                    child: Icon(
+                      TablerIcons.chevron_right,
+                      size: 18,
                     ),
                   ),
                 ],

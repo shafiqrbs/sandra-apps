@@ -317,8 +317,8 @@ class SalesListView extends BaseView<SalesListController> {
           if (element.approvedBy == null)
             if (controller.isManager)
               Positioned(
-                right: 0,
-                top: 4,
+                right: 8,
+                top: index == 0 ? 12 : 4,
                 child: DeleteButton(
                   onTap: () => controller.deleteSales(
                     salesId: element.salesId!,
