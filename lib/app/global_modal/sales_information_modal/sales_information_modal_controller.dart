@@ -184,6 +184,7 @@ class SalesInformationModalController extends PrinterController {
                   ),
                 ),
               ),
+              pw.SizedBox(height: 10),
               pw.Container(
                 child: pw.Text(
                   '${setUp.address}',
@@ -192,8 +193,10 @@ class SalesInformationModalController extends PrinterController {
                     color: PdfColors.black,
                     fontWeight: pw.FontWeight.bold,
                   ),
+                  textAlign: pw.TextAlign.center,
                 ),
               ),
+              pw.SizedBox(height: 20),
               pw.Container(
                 child: pw.Text(
                   'Sales Invoice',
@@ -354,39 +357,7 @@ class SalesInformationModalController extends PrinterController {
               ),
               pw.SizedBox(height: 10),
 
-              // Totals Section
-              /*pw.Row(
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    pw.Container(),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      mainAxisAlignment: pw.MainAxisAlignment.end,
-                      children: [
-                        _buildTotalRow('SubTotal', '${sales.subTotal}'),
-                        _buildTotalRow(
-                            'Discount (${sales.discountCalculation.toString()})',
-                            '${sales.discount}'),
-                        _buildTotalRow('Total', '${sales.netTotal}'),
-                        _buildTotalRow('Receive', '${sales.received}'),
-                        _buildTotalRow('Due', '${sales.due}'),
-                      ],
-                    ),
-                  ]),*/
-
               pw.SizedBox(height: 20),
-
-              /*// Footer Icons (e.g., buttons for actions)
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildIcon(PdfColors.red, 'Delete'),
-                  _buildIcon(PdfColors.green200, 'Print'),
-                  _buildIcon(PdfColors.blue, 'Edit'),
-                  _buildIcon(PdfColors.green400, 'Copy'),
-                  _buildIcon(PdfColors.blueAccent, 'Share'),
-                ],
-              ),*/
             ],
           );
         },
