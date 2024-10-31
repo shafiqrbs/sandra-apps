@@ -65,77 +65,106 @@ class UserListPageView extends BaseView<UserListPageController> {
           padding: const EdgeInsets.only(bottom: 60),
           itemBuilder: (context, index) {
             final element = controller.userManager.allItems.value![index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    containerBorderRadius,
-                  ),
-                  border: Border.all(
-                    color: index.isEven
-                        ? colors.secondaryColor100
-                        : colors.primaryColor100,
-                  ),
-                  color: index.isEven
-                      ? colors.secondaryColor50
-                      : colors.primaryColor50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                '${index + 1}. ${element.username ?? ''}',
-                                style: TextStyle(
-                                  fontSize: mediumTFSize,
-                                  color: colors.solidBlackColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+            return Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 2,
+                      left: 16,
+                      right: 16,
+                      top: 2,
+                    ),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          containerBorderRadius,
+                        ),
+                        color: index.isEven
+                            ? colors.secondaryColor50
+                            : colors.primaryColor50,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                '${element.fullName ?? ''}',
-                                style: TextStyle(
-                                  fontSize: mediumTFSize,
-                                  color: colors.solidBlackColor,
-                                  fontWeight: FontWeight.w600,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(32, 16, 12, 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '${index + 1}. ${element.username ?? ''}',
+                                      style: TextStyle(
+                                        fontSize: mediumTFSize,
+                                        color: colors.solidBlackColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                ' ${element.email ?? ''}',
-                                style: TextStyle(
-                                  fontSize: mediumTFSize,
-                                  color: colors.solidBlackColor,
-                                  fontWeight: FontWeight.w600,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      element.fullName ?? '',
+                                      style: TextStyle(
+                                        fontSize: mediumTFSize,
+                                        color: colors.solidBlackColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      ' ${element.email ?? ''}',
+                                      style: TextStyle(
+                                        fontSize: mediumTFSize,
+                                        color: colors.solidBlackColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    left: 0,
+                    child: Container(
+                      height: 36,
+                      width: 36,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colors.primaryColor100.withOpacity(.5),
+                      ),
+                      //padding: const EdgeInsets.all(8),
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          fontSize: smallTFSize,
+                          color: colors.solidBlackColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           },
