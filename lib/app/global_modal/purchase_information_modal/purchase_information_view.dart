@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import '/app/entity/purchase.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -342,20 +343,33 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                               onDeleted: onDeleted,
                             ),
                             child: Container(
-                              height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.solidRedColor,
+                                color: colors.secondaryRedColor,
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
                               ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
                               child: Center(
-                                child: Icon(
-                                  TablerIcons.trash,
-                                  color: colors.whiteColor,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.trash,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.delete,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -368,20 +382,33 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             child: InkWell(
                               onTap: () => controller.purchasePrint(context),
                               child: Container(
-                                height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.primaryColor50,
+                                  color: colors.secondaryBlueColor,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
                                 ),
-                                child: const Center(
-                                  child: Icon(
-                                    TablerIcons.printer,
-                                    color: Colors.green,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 6,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        TablerIcons.printer,
+                                        color: colors.solidBlackColor,
+                                        size: 18,
+                                      ),
+                                      2.height,
+                                      Text(
+                                        appLocalization.print,
+                                        style: AppTextStyle.h4TextStyle400,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -395,20 +422,33 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                             child: InkWell(
                               onTap: controller.goToEditPurchase,
                               child: Container(
-                                height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.solidBlueColor,
+                                  color: colors.secondaryGreenColor,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
                                 ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 6,
+                                ),
                                 child: Center(
-                                  child: Icon(
-                                    TablerIcons.pencil,
-                                    color: colors.whiteColor,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        TablerIcons.pencil,
+                                        color: colors.solidBlackColor,
+                                        size: 18,
+                                      ),
+                                      2.height,
+                                      Text(
+                                        appLocalization.edit,
+                                        style: AppTextStyle.h4TextStyle400,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -419,18 +459,35 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           child: InkWell(
                             onTap: controller.copyPurchase,
                             child: Container(
-                              height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                   containerBorderRadius,
                                 ),
-                                color: colors.primaryColor400,
+                                color: colors.solidOliveColor.withOpacity(.2),
                               ),
                               margin: const EdgeInsets.only(
                                 left: 4,
                               ),
-                              child:
-                                  const Center(child: Icon(TablerIcons.copy)),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.copy,
+                                      size: 18,
+                                      color: colors.solidBlackColor,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.copy,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -440,24 +497,38 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           child: Expanded(
                             child: InkWell(
                               onTap: () {
+                                toast('Sales return is under development');
                                 //shareContent();
                                 // Get.to(OnlineSalesInvoice(element: controller.sales,));
                               },
                               child: Container(
-                                height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.solidBlueColor,
+                                  color: colors.solidPurpleColor.withOpacity(.2),
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
                                 ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 6,
+                                ),
                                 child: Center(
-                                  child: Icon(
-                                    TablerIcons.share,
-                                    color: colors.blackColor,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        TablerIcons.receipt_refund,
+                                        color: colors.solidBlackColor,
+                                        size: 18,
+                                      ),
+                                      2.height,
+                                      Text(
+                                        appLocalization.returnn,
+                                        style: AppTextStyle.h4TextStyle400,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -472,20 +543,33 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                 toast('Sales return is under development');
                               },
                               child: Container(
-                                height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.primaryColor500,
+                                  color: colors.secondaryGreyColor,
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
                                 ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 6,
+                                ),
                                 child: Center(
-                                  child: Icon(
-                                    TablerIcons.receipt_refund,
-                                    color: colors.whiteColor,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        TablerIcons.share,
+                                        color: colors.solidBlackColor,
+                                        size: 18,
+                                      ),
+                                      2.height,
+                                      Text(
+                                        appLocalization.share,
+                                        style: AppTextStyle.h4TextStyle400,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
