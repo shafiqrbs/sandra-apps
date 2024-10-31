@@ -31,14 +31,14 @@ class CommonConfirmationModal extends BaseWidget {
           children: [
             Container(
               width: 100.pw,
-              height: 30.ph,
+              height: 26.ph,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(
                   containerBorderRadius,
                 ),
               ),
-              padding: EdgeInsets.only(top: 05.ph),
+              padding: EdgeInsets.only(top: 08.ph),
               margin: EdgeInsets.only(
                 top: 8.ph,
                 left: 4,
