@@ -10,7 +10,7 @@ const lightColor = {
   'primary_color_300': '0xFF54BB89',
   'primary_color_200': '0xFF8AD0AE',
   'primary_color_100': '0xFFB0DFC8',
-  'primary_color_50': '0xFFE6F5ED',
+  'primary_color_50': '0xFFF4F4F5',
   'secondary_color_900': '0xFF141D21',
   'secondary_color_800': '0xFF1A252B',
   'secondary_color_700': '0xFF223038',
@@ -20,7 +20,7 @@ const lightColor = {
   'secondary_color_300': '0xFF748289',
   'secondary_color_200': '0xFFA0A9AE',
   'secondary_color_100': '0xFFBFC5C8',
-  'secondary_color_50': '0xFFEAECED',
+  'secondary_color_50': '0xFFFDFDFD',
   'solidBlackColor': '0xFF000000',
 
   'black_color_900': '0xFF000000', // Pure Black
@@ -119,7 +119,7 @@ class ColorSchema {
   Color primaryColor300 = const Color(0xff54BB89);
   Color primaryColor200 = const Color(0xff8AD0AE);
   Color primaryColor100 = const Color(0xffB0DFC8);
-  Color primaryColor50 = const Color(0xffE6F5ED);
+  Color primaryColor50 = const Color(0xffF4F4F5);
   Color primaryColor25 = const Color(0xfff5faf7);
 
   // Secondary color
@@ -132,7 +132,7 @@ class ColorSchema {
   Color secondaryColor300 = const Color(0xff748289);
   Color secondaryColor200 = const Color(0xffA0A9AE);
   Color secondaryColor100 = const Color(0xffBFC5C8);
-  Color secondaryColor50 = const Color(0xffEAECED);
+  Color secondaryColor50 = const Color(0xffF5F5F5);
 
   // black color shades
   Color blackColor900 = const Color(0xff000000);

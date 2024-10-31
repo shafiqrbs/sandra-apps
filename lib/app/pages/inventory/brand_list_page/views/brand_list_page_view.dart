@@ -66,17 +66,13 @@ class BrandListPageView extends BaseView<BrandListPageController> {
           itemBuilder: (context, index) {
             final element = controller.brandManager.allItems.value![index];
             return Container(
-              margin: const EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 4),
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                     containerBorderRadius,
                   ),
-                  border: Border.all(
-                    color: index.isEven
-                        ? colors.secondaryColor100
-                        : colors.primaryColor100,
-                  ),
+
                   color: index.isEven
                       ? colors.secondaryColor50
                       : colors.primaryColor50,
