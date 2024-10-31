@@ -173,13 +173,14 @@ class AddProductModalView extends BaseView<AddProductModalViewController> {
                       buttonName: appLocalization.reset,
                       onTap: controller.onResetTap,
                       leftIcon: TablerIcons.restore,
+                      isOutline: true,
                     ),
                     2.percentWidth,
                     if (controller.isEdit.value)
                       RowButton(
-                        buttonName: appLocalization.edit,
+                        buttonName: appLocalization.save,
                         onTap: controller.onEditTap,
-                        leftIcon: TablerIcons.pencil,
+                        leftIcon: TablerIcons.device_floppy,
                       ),
                     if (!controller.isEdit.value)
                       RowButton(

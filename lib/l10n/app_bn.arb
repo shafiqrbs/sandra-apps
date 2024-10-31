@@ -455,7 +455,18 @@
   "manager" : "Manager",
   "addBrand" : "Add Brand",
     "addUnit" : "Add Unit",
-    "addCategory" : "Add Category"
+    "addCategory" : "Add Category",
+    "updateProduct": "Update Product",
+    "delete" : "Delete",
+    "remove" : "Remove",
+    "avgMrp" : "Avg. Mrp",
+    "avgPurchasePrice": "Avg. Purchase Price",
+  "remainingQty" : "Remaining QTY",
+  "salesReturnQty" : "Sales Return Qty",
+  "purchaseReturnQty" : "Purchase Return Qty",
+  "adjustQty" : "Adjust Qty",
+  "bonusQty" : "Bonus Qty",
+  "damageQty" : "Damage Qty"
 
 
 

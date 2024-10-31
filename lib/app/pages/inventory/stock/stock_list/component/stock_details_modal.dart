@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
@@ -27,9 +28,43 @@ class StockDetailsModal extends BaseWidget {
         children: [
           12.height,
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Text(
-              element.name ?? '',
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+            ),
+            child: Row(
+              mainAxisAlignment: spaceBetweenMAA,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        TablerIcons.tag,
+                        size: 16,
+                      ),
+                      4.width,
+                      Text(
+                        element.name ?? '',
+                      ),
+                    ],
+                  ),
+                ),
+                8.width,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        TablerIcons.category,
+                        size: 16,
+                      ),
+                      4.width,
+                      Text(
+                        element.categoryName ?? 'N/A',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           12.height,
@@ -53,7 +88,7 @@ class StockDetailsModal extends BaseWidget {
                 ),
                 Expanded(
                   child: labelValue.copyWith(
-                    label: appLocalization.qty,
+                    label: appLocalization.mrp,
                     value: element.salesPrice.toString(),
                   ),
                 ),
@@ -73,52 +108,16 @@ class StockDetailsModal extends BaseWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.avgPurchasePrice,
+                    value: element.avgPurchasePrice,
+                  ),
                 ),
                 Expanded(
-                  child: labelValue,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFF6F1F7),
-            ),
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 4,
-              bottom: 4,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: labelValue,
-                ),
-                Expanded(
-                  child: labelValue,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFFFFFFF),
-            ),
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 4,
-              bottom: 4,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: labelValue,
-                ),
-                Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.avgMrp,
+                    value: element.avgSalesPrice,
+                  ),
                 ),
               ],
             ),
@@ -136,10 +135,16 @@ class StockDetailsModal extends BaseWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.purchaseQty,
+                    value: element.purchaseQuantity.toString(),
+                  ),
                 ),
                 Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.salesQty,
+                    value: element.salesQuantity.toString(),
+                  ),
                 ),
               ],
             ),
@@ -157,10 +162,70 @@ class StockDetailsModal extends BaseWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.openingQty,
+                    value: element.openingQuantity.toString(),
+                  ),
                 ),
                 Expanded(
-                  child: labelValue,
+                  child: labelValue.copyWith(
+                    label: appLocalization.damageQuantity,
+                    value: element.damageQuantity.toString(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF6F1F7),
+            ),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 4,
+              bottom: 4,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: labelValue.copyWith(
+                    label: appLocalization.purchaseReturnQty,
+                    value: element.purchaseReturnQuantity.toString(),
+                  ),
+                ),
+                Expanded(
+                  child: labelValue.copyWith(
+                    label: appLocalization.salesReturnQty,
+                    value: element.salesReturnQuantity.toString(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFFFFFFF),
+            ),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 4,
+              bottom: 4,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: labelValue.copyWith(
+                    label: appLocalization.adjustQty,
+                    value: element.adjustQuantity.toString(),
+                  ),
+                ),
+                Expanded(
+                  child: labelValue.copyWith(
+                    label: appLocalization.bonusQty,
+                    value: element.bonusQuantity.toString(),
+                  ),
                 ),
               ],
             ),
@@ -170,29 +235,6 @@ class StockDetailsModal extends BaseWidget {
             children: [
               Expanded(
                 child: InkWell(
-                  onTap: _showEditStockDialog,
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        containerBorderRadius,
-                      ),
-                      color: colors.solidBlueColor,
-                    ),
-                    margin: const EdgeInsets.only(
-                      left: 4,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        TablerIcons.pencil,
-                        color: colors.whiteColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: InkWell(
                   onTap: _deleteStock,
                   child: Container(
                     height: 40,
@@ -200,15 +242,60 @@ class StockDetailsModal extends BaseWidget {
                       borderRadius: BorderRadius.circular(
                         containerBorderRadius,
                       ),
-                      color: colors.solidRedColor,
+                      color: colors.secondaryRedColor,
                     ),
                     margin: const EdgeInsets.only(
                       left: 4,
                     ),
                     child: Center(
-                      child: Icon(
-                        TablerIcons.trash,
-                        color: colors.primaryColor50,
+                      child: Row(
+                        mainAxisAlignment: centerMAA,
+                        children: [
+                          Icon(
+                            TablerIcons.trash,
+                            color: colors.solidBlackColor,
+                            size: 18,
+                          ),
+                          4.width,
+                          Text(
+                            appLocalization.remove,
+                            style: AppTextStyle.h3TextStyle500,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: InkWell(
+                  onTap: _showEditStockDialog,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        containerBorderRadius,
+                      ),
+                      color: colors.secondaryGreenColor,
+                    ),
+                    margin: const EdgeInsets.only(
+                      left: 4,
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: centerMAA,
+                        children: [
+                          Icon(
+                            TablerIcons.pencil,
+                            color: colors.solidBlackColor,
+                            size: 18,
+                          ),
+                          4.width,
+                          Text(
+                            appLocalization.edit,
+                            style: AppTextStyle.h3TextStyle500,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -225,7 +312,7 @@ class StockDetailsModal extends BaseWidget {
   void _showEditStockDialog() {
     Get.dialog(
       DialogPattern(
-        title: appLocalization.add,
+        title: appLocalization.updateProduct,
         subTitle: '',
         child: AddProductModalView(),
       ),

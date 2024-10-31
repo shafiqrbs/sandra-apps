@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/pages/inventory/stock/stock_list/component/stock_details_modal.dart';
 import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
@@ -77,7 +78,8 @@ class StockListController extends BaseController {
       await Get.dialog(
         DialogPattern(
           title: stockDetails!.name!,
-          subTitle: '',
+          subTitle: '${stockDetails!.remainingQuantity.toString()} ${stockDetails!.unitName}',
+          subTitleStyle: AppTextStyle.h2TextStyle600,
           child: StockDetailsModal(
             element: stockDetails!,
           ),

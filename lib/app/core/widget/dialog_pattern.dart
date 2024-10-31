@@ -5,10 +5,12 @@ import '/app/core/base/base_widget.dart';
 class DialogPattern extends BaseWidget {
   final String title;
   final String subTitle;
+  TextStyle? subTitleStyle;
   final Widget child;
   DialogPattern({
     required this.title,
     required this.subTitle,
+    this.subTitleStyle,
     required this.child,
     super.key,
   });
@@ -82,7 +84,7 @@ class DialogPattern extends BaseWidget {
                                 child: Text(
                                   subTitle,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
+                                  style: subTitleStyle ?? TextStyle(
                                     fontSize: subHeaderTFSize,
                                     color: colors.primaryBlackColor,
                                   ),
