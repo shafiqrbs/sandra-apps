@@ -337,39 +337,44 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
               isShowFooter!
                   ? Row(
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => controller.deletePurchase(
-                              onDeleted: onDeleted,
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  containerBorderRadius,
+                        Visibility(
+                          visible:
+                              controller.purchase.value?.approvedBy == null &&
+                                  controller.isManager,
+                          child: Expanded(
+                            child: InkWell(
+                              onTap: () => controller.deletePurchase(
+                                onDeleted: onDeleted,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    containerBorderRadius,
+                                  ),
+                                  color: colors.secondaryRedColor,
                                 ),
-                                color: colors.secondaryRedColor,
-                              ),
-                              margin: const EdgeInsets.only(
-                                left: 4,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 6,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      TablerIcons.trash,
-                                      color: colors.solidBlackColor,
-                                      size: 18,
-                                    ),
-                                    2.height,
-                                    Text(
-                                      appLocalization.delete,
-                                      style: AppTextStyle.h4TextStyle400,
-                                    ),
-                                  ],
+                                margin: const EdgeInsets.only(
+                                  left: 4,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 6,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        TablerIcons.trash,
+                                        color: colors.solidBlackColor,
+                                        size: 18,
+                                      ),
+                                      2.height,
+                                      Text(
+                                        appLocalization.delete,
+                                        style: AppTextStyle.h4TextStyle400,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -506,7 +511,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                                   borderRadius: BorderRadius.circular(
                                     containerBorderRadius,
                                   ),
-                                  color: colors.solidPurpleColor.withOpacity(.2),
+                                  color:
+                                      colors.solidPurpleColor.withOpacity(.2),
                                 ),
                                 margin: const EdgeInsets.only(
                                   left: 4,
@@ -536,7 +542,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           ),
                         ),
                         Visibility(
-                          visible: controller.purchaseMode == 'online',
+                          visible: controller.purchaseMode == 'online' ||
+                              controller.purchaseMode == 'local',
                           child: Expanded(
                             child: InkWell(
                               onTap: () {
