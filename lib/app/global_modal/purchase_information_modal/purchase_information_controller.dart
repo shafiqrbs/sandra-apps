@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/core/utils/static_utility_function.dart';
 
@@ -126,5 +127,11 @@ class PurchaseInformationController extends PrinterController {
     if (isDeleted) {
       onDeleted!();
     }
+  }
+
+  Future<void> createPurchaseDetailsPdf({
+    required Purchase purchase,
+  }) async {
+    await generatePurchasePdf(purchase);
   }
 }

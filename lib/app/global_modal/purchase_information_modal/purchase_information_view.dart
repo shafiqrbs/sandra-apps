@@ -540,7 +540,9 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           child: Expanded(
                             child: InkWell(
                               onTap: () {
-                                toast('Sales return is under development');
+                                controller.createPurchaseDetailsPdf(
+                                  purchase: controller.purchase.value!,
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(

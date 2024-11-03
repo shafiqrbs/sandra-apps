@@ -539,8 +539,6 @@ class SalesInformationModalView
                         child: Expanded(
                           child: InkWell(
                             onTap: () {
-                              //shareContent();
-                              // Get.to(OnlineSalesInvoice(element: controller.sales,));
                               controller.createSalesDetailsPdf(
                                 sales: controller.sales.value!,
                               );
