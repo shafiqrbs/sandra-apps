@@ -360,7 +360,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
       () {
         if (controller.selectedIndex.value == 0) {
           return Container(
-            margin: const EdgeInsets.only(bottom: 40),
+            margin: const EdgeInsets.only(bottom: 48),
             child: InkWell(
               onTap: controller.syncPurchase,
               child: Container(
@@ -369,7 +369,7 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primaryColor50,
+                  color: colors.blackColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(containerBorderRadius),
                 ),
                 child: Row(
@@ -377,11 +377,12 @@ class PurchaseListView extends BaseView<PurchaseListController> {
                   children: [
                     Icon(
                       TablerIcons.refresh,
-                      color: colors.solidBlackColor,
+                      color: colors.whiteColor,
                       size: 18,
                     ),
                     CommonText(
                       text: appLocalization.sync,
+                      textColor: colors.whiteColor,
                     ),
                   ],
                 ),

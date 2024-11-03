@@ -98,7 +98,7 @@ class CustomerListView extends BaseView<CustomerListController> {
   @override
   Widget floatingActionButton() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 40),
+      margin: const EdgeInsets.only(bottom: 48),
       child: InkWell(
         onTap: ()=>controller.showCustomerReceiveModal(null),
         child: Container(

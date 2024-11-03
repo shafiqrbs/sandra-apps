@@ -361,7 +361,7 @@ class SalesListView extends BaseView<SalesListController> {
       () {
         if (controller.selectedIndex.value == 0) {
           return Container(
-            margin: const EdgeInsets.only(bottom: 40),
+            margin: const EdgeInsets.only(bottom: 48),
             child: InkWell(
               onTap: controller.syncSales,
               child: Container(
@@ -370,7 +370,7 @@ class SalesListView extends BaseView<SalesListController> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primaryColor50,
+                  color: colors.blackColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(containerBorderRadius),
                 ),
                 child: Row(
@@ -378,11 +378,12 @@ class SalesListView extends BaseView<SalesListController> {
                   children: [
                     Icon(
                       TablerIcons.refresh,
-                      color: colors.solidBlackColor,
+                      color: colors.whiteColor,
                       size: 18,
                     ),
                     CommonText(
                       text: appLocalization.sync,
+                      textColor: colors.whiteColor,
                     ),
                   ],
                 ),
