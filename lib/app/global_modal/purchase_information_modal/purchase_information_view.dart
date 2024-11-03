@@ -422,7 +422,10 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                         ),
                         Visibility(
                           visible: controller.purchaseMode == 'online' ||
-                              controller.purchaseMode == 'local',
+                              controller.purchaseMode == 'local' &&
+                                  controller.purchase.value?.approvedBy ==
+                                      null &&
+                                  controller.isManager,
                           child: Expanded(
                             child: InkWell(
                               onTap: controller.goToEditPurchase,
