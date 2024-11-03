@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
@@ -124,6 +125,16 @@ class CustomerLedgerController extends BaseController {
           customer: customer,
         ),
       ),
+    );
+  }
+
+  Future<void> createLedgerPdf({
+    required List<CustomerLedger> customerLedgerReport,
+    required Customer customer,
+  }) async {
+    await generateCustomerLedgerPdf(
+      ledger: customerLedgerReport,
+      customer: customer,
     );
   }
 }

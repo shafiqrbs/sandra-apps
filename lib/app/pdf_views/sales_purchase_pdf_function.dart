@@ -5,6 +5,8 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/entity/customer.dart';
+import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/entity/sales.dart';
 
@@ -421,6 +423,185 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
   );
 
   await saveAndOpenPdf(pdf, 'purchase_details.pdf');
+}
+
+Future<void> generateCustomerLedgerPdf({
+  required List<CustomerLedger> ledger,
+  required Customer customer,
+}) async {
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return [
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              // Header Section
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().name}',
+                  style: pw.TextStyle(
+                    fontSize: 24,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+              pw.SizedBox(height: 10),
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().address}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+              ),
+              pw.SizedBox(height: 10),
+
+              pw.Container(
+                padding: const pw.EdgeInsets.all(10),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Text(
+                          'Customer: ${customer.name}',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                        ),
+                        pw.Text(
+                          'Contact: ${customer.mobile}',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                    pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Text(
+                          'Balance: ${customer.balance}',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                        ),
+                        pw.Text(
+                          'Address: ${customer.address ?? 'N/A'}',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              // Sales Item Table
+              pw.TableHelper.fromTextArray(
+                headers: [
+                  'S/N',
+                  'Date',
+                  'Method',
+                  'Sales',
+                  'Receive',
+                  'Balance'
+                ],
+                data: ledger
+                    .map(
+                      (item) => [
+                        (ledger.indexOf(item) + 1).toString().padLeft(2, '0'),
+                        item.created,
+                        item.method,
+                        item.sales.toString(),
+                        item.receive.toString(),
+                        item.balance.toString(),
+                      ],
+                    )
+                    .toList(),
+                headerStyle: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.black,
+                ),
+                cellStyle: pw.TextStyle(fontSize: 10),
+                headerDecoration: pw.BoxDecoration(
+                  color: PdfColors.green200,
+                ),
+                cellAlignment: pw.Alignment.centerLeft,
+                cellHeight: 25,
+                headerAlignments: {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
+                cellAlignments: {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
+                columnWidths: {
+                  0: pw.FlexColumnWidth(.4),
+                  1: pw.FlexColumnWidth(2),
+                  2: pw.FlexColumnWidth(1),
+                  3: pw.FlexColumnWidth(1),
+                  4: pw.FlexColumnWidth(1),
+                  5: pw.FlexColumnWidth(1),
+                },
+              ),
+
+              pw.TableHelper.fromTextArray(
+                headers: null,
+                data: [
+                  ['SubTotal', ''],
+                  ['Discount ', ''],
+                  ['Total', ''],
+                  ['Payment', ''],
+                  ['Due', ''],
+                ],
+                columnWidths: {
+                  0: pw.FlexColumnWidth(5.4),
+                  1: pw.FlexColumnWidth(1),
+                },
+                cellStyle: pw.TextStyle(fontSize: 10),
+                headerStyle: pw.TextStyle(fontSize: 10),
+                cellHeight: 25,
+                cellAlignments: {
+                  0: pw.Alignment.centerRight,
+                  1: pw.Alignment.centerRight,
+                },
+              ),
+              //pw.SizedBox(height: 10),
+
+              //pw.SizedBox(height: 20),
+            ],
+          )
+        ];
+      },
+    ),
+  );
+
+  await saveAndOpenPdf(pdf, 'customer_ledger_report.pdf');
 }
 
 Future<void> saveAndOpenPdf(
