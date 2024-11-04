@@ -79,12 +79,12 @@ class VendorCardView extends BaseWidget {
                           icon: TablerIcons.message_circle,
                           color: colors.primaryColor500,
                         ),
-                        18.width,
+                        /*18.width,
                         _buildIconButton(
                           onTap: () {},
                           icon: TablerIcons.eye,
                           color: const Color(0xFF989898),
-                        ),
+                        ),*/
                         if (showReceiveButton) 18.width,
                         if (showReceiveButton)
                           _buildIconButton(
@@ -158,12 +158,17 @@ class VendorCardView extends BaseWidget {
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: color.withOpacity(.2),
+          color: colors.whiteColor,
+          //color: color.withOpacity(.2),
+          border: Border.all(
+            color: colors.secondaryGreyColor,
+          ),
         ),
         child: Icon(
           icon,
-          size: 12,
-          color: color,
+          size: 16,
+          color: colors.solidGreenColor,
+          //color: color,
         ),
       ),
     );
