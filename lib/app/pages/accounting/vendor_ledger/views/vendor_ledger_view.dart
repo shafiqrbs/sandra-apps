@@ -168,9 +168,15 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                       right: 4,
                     ),
                     child: InkWell(
-                      onTap: () async {},
+                      onTap: () async {
+                        await controller.createLedgerPdf(
+                          vendorLedgerReport:
+                              controller.vendorLedgerList.value!,
+                          vendor: controller.vendorManager.selectedItem.value!,
+                        );
+                      },
                       child: Icon(
-                        TablerIcons.share_3,
+                        TablerIcons.share,
                         color: colors.solidBlackColor,
                       ),
                     ),

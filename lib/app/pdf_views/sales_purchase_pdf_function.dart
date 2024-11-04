@@ -9,6 +9,8 @@ import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/entity/vendor.dart';
+import 'package:sandra/app/entity/vendor_ledger.dart';
 
 Future<void> generateSalesPdf(Sales sales) async {
   final pdf = pw.Document();
@@ -582,7 +584,7 @@ Future<void> generateCustomerLedgerPdf({
                 'Total',
                 totalSales.toStringAsFixed(2),
                 totalReceive.toStringAsFixed(2),
-                totalBalance.toStringAsFixed(2),
+                (totalSales - totalReceive).toStringAsFixed(2),
               ],
             ],
             columnWidths: {
@@ -591,8 +593,14 @@ Future<void> generateCustomerLedgerPdf({
               2: pw.FlexColumnWidth(1),
               3: pw.FlexColumnWidth(1),
             },
-            cellStyle: pw.TextStyle(fontSize: 10),
-            headerStyle: pw.TextStyle(fontSize: 10),
+            cellStyle: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+            ),
+            headerStyle: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+            ),
             cellHeight: 25,
             cellAlignments: {
               0: pw.Alignment.centerRight,
@@ -609,6 +617,198 @@ Future<void> generateCustomerLedgerPdf({
   );
 
   await saveAndOpenPdf(pdf, 'customer_ledger_report.pdf');
+}
+
+Future<void> generateVendorLedgerPdf({
+  required List<VendorLedger> ledger,
+  required Vendor vendor,
+}) async {
+  num totalSales = 0;
+  num totalReceive = 0;
+  num totalBalance = 0;
+
+  for (final item in ledger) {
+    totalSales += item.total ?? 0;
+    totalReceive += item.amount ?? 0;
+    totalBalance += item.balance ?? 0;
+  }
+
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        List<pw.Widget> content = [];
+
+        // Header Section
+        content.add(
+          pw.Container(
+            width: double.infinity,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                pw.Text(
+                  '${SetUp().name}',
+                  style: pw.TextStyle(
+                    fontSize: 24,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+                pw.SizedBox(height: 10),
+                pw.Text(
+                  '${SetUp().address}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+                pw.SizedBox(height: 10),
+              ],
+            ),
+          ),
+        );
+
+        // Customer Info
+        content.add(
+          pw.Container(
+            padding: const pw.EdgeInsets.all(10),
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Customer: ${vendor.name}',
+                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text('Contact: ${vendor.mobile}',
+                        style: pw.TextStyle(fontSize: 12)),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Balance: ${vendor.balance}',
+                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text('Address: ${vendor.address ?? 'N/A'}',
+                        style: pw.TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        // Split large data into chunks for table rendering
+        const int chunkSize = 22; // Adjust the chunk size as needed
+        for (int i = 0; i < ledger.length; i += chunkSize) {
+          final chunk = ledger.sublist(
+              i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
+
+          // Add a gap between each chunk
+          content.add(pw.SizedBox(height: 10));
+
+          // Table with Header and Data Rows in Chunks
+          content.add(
+            pw.Table.fromTextArray(
+              headers: ['S/N', 'Date', 'Method', 'Sales', 'Receive', 'Balance'],
+              data: chunk.map((item) {
+                final index = ledger.indexOf(item) + 1;
+                return [
+                  index.toString().padLeft(2, '0'),
+                  item.created,
+                  item.method,
+                  item.total.toString(),
+                  item.amount.toString(),
+                  item.balance.toString(),
+                ];
+              }).toList(),
+              headerStyle: pw.TextStyle(
+                fontSize: 12,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.black,
+              ),
+              cellStyle: pw.TextStyle(fontSize: 10),
+              headerDecoration: pw.BoxDecoration(
+                color: PdfColors.green200,
+              ),
+              cellHeight: 25,
+              columnWidths: {
+                0: pw.FlexColumnWidth(.4),
+                1: pw.FlexColumnWidth(2),
+                2: pw.FlexColumnWidth(1),
+                3: pw.FlexColumnWidth(1),
+                4: pw.FlexColumnWidth(1),
+                5: pw.FlexColumnWidth(1),
+              },
+              headerAlignments: {
+                0: pw.Alignment.center,
+                1: pw.Alignment.centerLeft,
+                2: pw.Alignment.center,
+                3: pw.Alignment.center,
+                4: pw.Alignment.center,
+                5: pw.Alignment.centerRight,
+              },
+              cellAlignments: {
+                0: pw.Alignment.center,
+                1: pw.Alignment.centerLeft,
+                2: pw.Alignment.center,
+                3: pw.Alignment.center,
+                4: pw.Alignment.center,
+                5: pw.Alignment.centerRight,
+              },
+            ),
+          );
+        }
+
+        // Footer Summary Section
+        /*content.add(
+          pw.SizedBox(height: 20),
+        );*/
+        content.add(
+          pw.Table.fromTextArray(
+            headers: null,
+            data: [
+              [
+                'Total',
+                totalSales.toStringAsFixed(2),
+                totalReceive.toStringAsFixed(2),
+                (totalSales - totalReceive).toStringAsFixed(2),
+              ],
+            ],
+            columnWidths: {
+              0: pw.FlexColumnWidth(3.4),
+              1: pw.FlexColumnWidth(1),
+              2: pw.FlexColumnWidth(1),
+              3: pw.FlexColumnWidth(1),
+            },
+            cellStyle: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+            ),
+            headerStyle: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+            ),
+            cellHeight: 25,
+            cellAlignments: {
+              0: pw.Alignment.centerRight,
+              1: pw.Alignment.center,
+              2: pw.Alignment.center,
+              3: pw.Alignment.centerRight,
+            },
+          ),
+        );
+
+        return content;
+      },
+    ),
+  );
+
+  await saveAndOpenPdf(pdf, 'vendor_ledger_report.pdf');
 }
 
 Future<void> saveAndOpenPdf(

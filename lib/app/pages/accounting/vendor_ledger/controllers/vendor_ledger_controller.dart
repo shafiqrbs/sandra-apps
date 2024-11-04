@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/vendor.dart';
 import '/app/entity/vendor_ledger.dart';
@@ -92,6 +93,16 @@ class VendorLedgerController extends BaseController {
           vendor: vendor,
         ),
       ),
+    );
+  }
+
+  Future<void> createLedgerPdf({
+    required List<VendorLedger> vendorLedgerReport,
+    required Vendor vendor,
+  }) async {
+    await generateVendorLedgerPdf(
+      ledger: vendorLedgerReport,
+      vendor: vendor,
     );
   }
 }
