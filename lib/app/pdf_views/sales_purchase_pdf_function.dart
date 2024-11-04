@@ -511,7 +511,7 @@ Future<void> generateCustomerLedgerPdf({
         );
 
         // Split large data into chunks for table rendering
-        const int chunkSize = 22; // Adjust the chunk size as needed
+        const int chunkSize = 100; // Adjust the chunk size as needed
         for (int i = 0; i < ledger.length; i += chunkSize) {
           final chunk = ledger.sublist(
               i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
@@ -703,7 +703,7 @@ Future<void> generateVendorLedgerPdf({
         );
 
         // Split large data into chunks for table rendering
-        const int chunkSize = 22; // Adjust the chunk size as needed
+        const int chunkSize = 100; // Adjust the chunk size as needed
         for (int i = 0; i < ledger.length; i += chunkSize) {
           final chunk = ledger.sublist(
               i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
