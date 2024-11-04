@@ -18,11 +18,13 @@ class SalesInformationModalView
   final Sales sales;
   final Function()? onDeleted;
   final bool? isShowFooter;
+  final bool? isFromAccount;
   SalesInformationModalView({
     required this.salesMode,
     required this.sales,
     this.onDeleted,
     this.isShowFooter,
+    this.isFromAccount,
     super.key,
   });
 
@@ -578,6 +580,95 @@ class SalesInformationModalView
                         ),
                       ),
                       4.width,
+                    ],
+                  ),
+                if(isFromAccount ?? false)
+                  Row(
+                    children: [
+                      Visibility(
+                        visible: controller.salesMode == 'online' ||
+                            controller.salesMode == 'local',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () => controller.salesPrint(context),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.secondaryBlueColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.printer,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.print,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: controller.salesMode == 'online' ||
+                            controller.salesMode == 'local',
+                        child: Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              controller.createSalesDetailsPdf(
+                                sales: controller.sales.value!,
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  containerBorderRadius,
+                                ),
+                                color: colors.secondaryGreyColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 4,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 6,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      TablerIcons.share,
+                                      color: colors.solidBlackColor,
+                                      size: 18,
+                                    ),
+                                    2.height,
+                                    Text(
+                                      appLocalization.share,
+                                      style: AppTextStyle.h4TextStyle400,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 1.percentHeight,

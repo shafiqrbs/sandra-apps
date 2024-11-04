@@ -469,7 +469,9 @@
   "adjustQty" : "Adjust Qty",
   "bonusQty" : "Bonus Qty",
   "damageQty" : "Damage Qty",
-  "copy" : "Copy"
+  "copy" : "Copy",
+  "customerLedger" : "Customer Ledger",
+  "vendorLedger" : "Vendor Ledger"
 
 
 

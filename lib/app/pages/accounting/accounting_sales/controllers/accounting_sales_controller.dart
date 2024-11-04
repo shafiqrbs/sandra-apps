@@ -142,6 +142,7 @@ class AccountingSalesController extends BaseController {
             sales: invoice,
             salesMode: 'online',
             isShowFooter: false,
+            isFromAccount: true,
           ),
         ),
       );

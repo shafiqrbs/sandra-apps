@@ -391,7 +391,9 @@
   "bonusQty" : "Bonus Qty",
   "copy" : "Copy",
   "vendors" : "Vendors",
-  "customers" : "Customers"
+  "customers" : "Customers",
+  "customerLedger" : "Customer Ledger",
+  "vendorLedger" : "Vendor Ledger"
 
 
 }

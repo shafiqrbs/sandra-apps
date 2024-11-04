@@ -239,7 +239,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  appLocalization.sales,
+                  appLocalization.purchase,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),
@@ -247,7 +247,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  appLocalization.receive,
+                  appLocalization.payment,
                   textAlign: TextAlign.center,
                   style: headerTextStyle,
                 ),

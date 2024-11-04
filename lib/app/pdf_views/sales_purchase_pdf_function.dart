@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/purchase.dart';
@@ -476,6 +477,16 @@ Future<void> generateCustomerLedgerPdf({
                   textAlign: pw.TextAlign.center,
                 ),
                 pw.SizedBox(height: 10),
+                pw.Text(
+                  appLocalization.customerLedger,
+                  style: pw.TextStyle(
+                    fontSize: 20,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+                pw.SizedBox(height: 10),
               ],
             ),
           ),
@@ -680,6 +691,16 @@ Future<void> generateVendorLedgerPdf({
                   '${SetUp().address}',
                   style: pw.TextStyle(
                     fontSize: 16,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+                pw.SizedBox(height: 10),
+                pw.Text(
+                  appLocalization.vendorLedger,
+                  style: pw.TextStyle(
+                    fontSize: 20,
                     color: PdfColors.black,
                     fontWeight: pw.FontWeight.bold,
                   ),
