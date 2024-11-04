@@ -182,15 +182,20 @@ class PrinterController extends BaseController {
   Future<bool> printSales(
     Sales sales,
   ) async {
-    final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
-    if (connectionStatus) {
-      final data = await templateOne(sales: sales);
-      return PrintBluetoothThermal.writeBytes(data); // init
-    } else {
-      showSnackBar(
-        type: SnackBarType.success,
-        message: appLocalization.connectPrinter,
-      );
+    try{
+      final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+      if (connectionStatus) {
+        final data = await templateOne(sales: sales);
+        return PrintBluetoothThermal.writeBytes(data); // init
+      } else {
+        showSnackBar(
+          type: SnackBarType.success,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+    } catch(e,err){
+      print('Error in print: $e, $err');
       return false;
     }
   }
@@ -404,10 +409,7 @@ class PrinterController extends BaseController {
           styles: const PosStyles(align: PosAlign.right),
         ),
         PosColumn(
-          text: sales.createdAt != null
-              ? DateFormat('dd-MM-yy h:mm a')
-                  .format(DateTime.parse(sales.createdAt!))
-              : '',
+          text: sales.createdAt ?? '',
           width: 4,
         ),
         PosColumn(
@@ -613,6 +615,7 @@ class PrinterController extends BaseController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 
@@ -777,6 +780,7 @@ class PrinterController extends BaseController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 
@@ -912,6 +916,7 @@ class PrinterController extends BaseController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 
@@ -1156,6 +1161,7 @@ class PrinterController extends BaseController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 

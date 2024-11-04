@@ -246,6 +246,7 @@ class PosTemplate extends PrinterController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 
@@ -484,6 +485,7 @@ class PosTemplate extends PrinterController {
         align: PosAlign.center,
       ),
     );
+    bytes += generator.cut();
     return bytes;
   }
 }
