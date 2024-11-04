@@ -748,8 +748,8 @@ Future<void> generateVendorLedgerPdf({
                   'S/N',
                   'Date',
                   'Method',
-                  'Sales',
-                  'Receive',
+                  'Purchase',
+                  'Payment',
                   'Balance',
                 ],
                 data: chunk.map((item) {

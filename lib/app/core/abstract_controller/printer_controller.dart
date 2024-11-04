@@ -5,12 +5,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
+import 'package:sandra/app/entity/vendor.dart';
+import 'package:sandra/app/entity/vendor_ledger.dart';
 import 'package:sandra/app/pdf_views/pos_functions.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -273,6 +276,25 @@ class PrinterController extends BaseController {
     }
   }
 
+  Future<void> printVendorLedger({
+    required List<VendorLedger> ledger,
+    required Vendor vendor,
+  }) async {
+    final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+    if (connectionStatus) {
+      final data = await PosTemplate().vendorLedgerTemplate(
+        ledger: ledger,
+        vendor: vendor,
+      );
+      await PrintBluetoothThermal.writeBytes(data); // init
+    } else {
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.connectPrinter,
+      );
+    }
+  }
+
   //disconnect the connected printer
   Future<void> disconnect() async {
     await PrintBluetoothThermal.disconnect;
@@ -332,7 +354,7 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: '${"bill".tr}: ',
+          text: 'Bill: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -342,7 +364,7 @@ class PrinterController extends BaseController {
           width: 4,
         ),
         PosColumn(
-          text: '${appLocalization.sales}: ',
+          text: 'Sales By: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -356,25 +378,51 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: '${"date".tr}: ',
+          text: 'Cus: ',
           styles: const PosStyles(align: PosAlign.right),
         ),
         PosColumn(
-          text: sales.createdAt.toString(),
+          text: sales.customerName ?? '',
           width: 4,
         ),
         PosColumn(
-          text: '${"mode".tr}: ',
+          text: 'Mob: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
         ),
         PosColumn(
-          text: ' Now it empty ',
+          text: sales.customerMobile ?? '',
           width: 4,
         ),
       ],
     );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Date: ',
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
+          text: sales.createdAt != null
+              ? DateFormat('dd-MM-yy h:mm a')
+                  .format(DateTime.parse(sales.createdAt!))
+              : '',
+          width: 4,
+        ),
+        PosColumn(
+          text: 'Mode: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+        PosColumn(
+          text: sales.methodMode ?? '',
+          width: 4,
+        ),
+      ],
+    );
+
     bytes += generator.feed(1);
 
     // Add table headers
