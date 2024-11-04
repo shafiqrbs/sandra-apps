@@ -429,19 +429,32 @@ Future<void> generateCustomerLedgerPdf({
   required List<CustomerLedger> ledger,
   required Customer customer,
 }) async {
+  num totalSales = 0;
+  num totalReceive = 0;
+  num totalBalance = 0;
+
+  for (final item in ledger) {
+    totalSales += item.total ?? 0;
+    totalReceive += item.amount ?? 0;
+    totalBalance += item.balance ?? 0;
+  }
+
   final pdf = pw.Document();
 
   pdf.addPage(
     pw.MultiPage(
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
-        return [
-          pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.center,
-            children: [
-              // Header Section
-              pw.Container(
-                child: pw.Text(
+        List<pw.Widget> content = [];
+
+        // Header Section
+        content.add(
+          pw.Container(
+            width: double.infinity,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                pw.Text(
                   '${SetUp().name}',
                   style: pw.TextStyle(
                     fontSize: 24,
@@ -449,10 +462,8 @@ Future<void> generateCustomerLedgerPdf({
                     fontWeight: pw.FontWeight.bold,
                   ),
                 ),
-              ),
-              pw.SizedBox(height: 10),
-              pw.Container(
-                child: pw.Text(
+                pw.SizedBox(height: 10),
+                pw.Text(
                   '${SetUp().address}',
                   style: pw.TextStyle(
                     fontSize: 16,
@@ -461,142 +472,138 @@ Future<void> generateCustomerLedgerPdf({
                   ),
                   textAlign: pw.TextAlign.center,
                 ),
-              ),
-              pw.SizedBox(height: 10),
+                pw.SizedBox(height: 10),
+              ],
+            ),
+          ),
+        );
 
-              pw.Container(
-                padding: const pw.EdgeInsets.all(10),
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+        // Customer Info
+        content.add(
+          pw.Container(
+            padding: const pw.EdgeInsets.all(10),
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text(
-                          'Customer: ${customer.name}',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                          ),
-                          maxLines: 1,
-                        ),
-                        pw.Text(
-                          'Contact: ${customer.mobile}',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text(
-                          'Balance: ${customer.balance}',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                          ),
-                          maxLines: 1,
-                        ),
-                        pw.Text(
-                          'Address: ${customer.address ?? 'N/A'}',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
+                    pw.Text('Customer: ${customer.name}',
+                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text('Contact: ${customer.mobile}',
+                        style: pw.TextStyle(fontSize: 12)),
                   ],
                 ),
-              ),
-
-              // Sales Item Table
-              pw.TableHelper.fromTextArray(
-                headers: [
-                  'S/N',
-                  'Date',
-                  'Method',
-                  'Sales',
-                  'Receive',
-                  'Balance'
-                ],
-                data: ledger
-                    .map(
-                      (item) => [
-                        (ledger.indexOf(item) + 1).toString().padLeft(2, '0'),
-                        item.created,
-                        item.method,
-                        item.sales.toString(),
-                        item.receive.toString(),
-                        item.balance.toString(),
-                      ],
-                    )
-                    .toList(),
-                headerStyle: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: pw.FontWeight.bold,
-                  color: PdfColors.black,
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Balance: ${customer.balance}',
+                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text('Address: ${customer.address ?? 'N/A'}',
+                        style: pw.TextStyle(fontSize: 12)),
+                  ],
                 ),
-                cellStyle: pw.TextStyle(fontSize: 10),
-                headerDecoration: pw.BoxDecoration(
-                  color: PdfColors.green200,
-                ),
-                cellAlignment: pw.Alignment.centerLeft,
-                cellHeight: 25,
-                headerAlignments: {
-                  0: pw.Alignment.center,
-                  1: pw.Alignment.centerLeft,
-                  2: pw.Alignment.center,
-                  3: pw.Alignment.center,
-                  4: pw.Alignment.center,
-                  5: pw.Alignment.centerRight,
-                },
-                cellAlignments: {
-                  0: pw.Alignment.center,
-                  1: pw.Alignment.centerLeft,
-                  2: pw.Alignment.center,
-                  3: pw.Alignment.center,
-                  4: pw.Alignment.center,
-                  5: pw.Alignment.centerRight,
-                },
-                columnWidths: {
-                  0: pw.FlexColumnWidth(.4),
-                  1: pw.FlexColumnWidth(2),
-                  2: pw.FlexColumnWidth(1),
-                  3: pw.FlexColumnWidth(1),
-                  4: pw.FlexColumnWidth(1),
-                  5: pw.FlexColumnWidth(1),
-                },
-              ),
+              ],
+            ),
+          ),
+        );
 
-              pw.TableHelper.fromTextArray(
-                headers: null,
-                data: [
-                  ['SubTotal', ''],
-                  ['Discount ', ''],
-                  ['Total', ''],
-                  ['Payment', ''],
-                  ['Due', ''],
-                ],
-                columnWidths: {
-                  0: pw.FlexColumnWidth(5.4),
-                  1: pw.FlexColumnWidth(1),
-                },
-                cellStyle: pw.TextStyle(fontSize: 10),
-                headerStyle: pw.TextStyle(fontSize: 10),
-                cellHeight: 25,
-                cellAlignments: {
-                  0: pw.Alignment.centerRight,
-                  1: pw.Alignment.centerRight,
-                },
-              ),
-              //pw.SizedBox(height: 10),
+        // Split large data into chunks for table rendering
+        const int chunkSize = 22; // Adjust the chunk size as needed
+        for (int i = 0; i < ledger.length; i += chunkSize) {
+          final chunk = ledger.sublist(
+              i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
 
-              //pw.SizedBox(height: 20),
+          // Add a gap between each chunk
+          content.add(pw.SizedBox(height: 10));
+
+          // Table with Header and Data Rows in Chunks
+          content.add(
+            pw.Table.fromTextArray(
+              headers: ['S/N', 'Date', 'Method', 'Sales', 'Receive', 'Balance'],
+              data: chunk.map((item) {
+                final index = ledger.indexOf(item) + 1;
+                return [
+                  index.toString().padLeft(2, '0'),
+                  item.created,
+                  item.method,
+                  item.total.toString(),
+                  item.amount.toString(),
+                  item.balance.toString(),
+                ];
+              }).toList(),
+              headerStyle: pw.TextStyle(
+                fontSize: 12,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.black,
+              ),
+              cellStyle: pw.TextStyle(fontSize: 10),
+              headerDecoration: pw.BoxDecoration(
+                color: PdfColors.green200,
+              ),
+              cellHeight: 25,
+              columnWidths: {
+                0: pw.FlexColumnWidth(.4),
+                1: pw.FlexColumnWidth(2),
+                2: pw.FlexColumnWidth(1),
+                3: pw.FlexColumnWidth(1),
+                4: pw.FlexColumnWidth(1),
+                5: pw.FlexColumnWidth(1),
+              },
+              headerAlignments: {
+                0: pw.Alignment.center,
+                1: pw.Alignment.centerLeft,
+                2: pw.Alignment.center,
+                3: pw.Alignment.center,
+                4: pw.Alignment.center,
+                5: pw.Alignment.centerRight,
+              },
+              cellAlignments: {
+                0: pw.Alignment.center,
+                1: pw.Alignment.centerLeft,
+                2: pw.Alignment.center,
+                3: pw.Alignment.center,
+                4: pw.Alignment.center,
+                5: pw.Alignment.centerRight,
+              },
+            ),
+          );
+        }
+
+        // Footer Summary Section
+        /*content.add(
+          pw.SizedBox(height: 20),
+        );*/
+        content.add(
+          pw.Table.fromTextArray(
+            headers: null,
+            data: [
+              [
+                'Total',
+                totalSales.toStringAsFixed(2),
+                totalReceive.toStringAsFixed(2),
+                totalBalance.toStringAsFixed(2),
+              ],
             ],
-          )
-        ];
+            columnWidths: {
+              0: pw.FlexColumnWidth(3.4),
+              1: pw.FlexColumnWidth(1),
+              2: pw.FlexColumnWidth(1),
+              3: pw.FlexColumnWidth(1),
+            },
+            cellStyle: pw.TextStyle(fontSize: 10),
+            headerStyle: pw.TextStyle(fontSize: 10),
+            cellHeight: 25,
+            cellAlignments: {
+              0: pw.Alignment.centerRight,
+              1: pw.Alignment.center,
+              2: pw.Alignment.center,
+              3: pw.Alignment.centerRight,
+            },
+          ),
+        );
+
+        return content;
       },
     ),
   );
