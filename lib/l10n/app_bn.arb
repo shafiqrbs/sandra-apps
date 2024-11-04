@@ -471,7 +471,8 @@
   "damageQty" : "Damage Qty",
   "copy" : "Copy",
   "customerLedger" : "Customer Ledger",
-  "vendorLedger" : "Vendor Ledger"
+  "vendorLedger" : "Vendor Ledger",
+  "createNewUser" : "Create New User"
 
 
 

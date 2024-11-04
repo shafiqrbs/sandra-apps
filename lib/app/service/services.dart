@@ -148,7 +148,8 @@ class Services {
         'mobile': mobile,
         'address': address,
         'email': email,
-        'openingBalance': openingBalance,
+        'opening_balance': openingBalance,
+        'user_id': LoggedUser().userId?.toString(),
       };
 
       final response = await dio.post(
@@ -184,7 +185,8 @@ class Services {
         'mobile': mobile,
         'address': address,
         'email': email,
-        'openingBalance': openingBalance,
+        'opening_balance': openingBalance,
+        'user_id': LoggedUser().userId?.toString(),
       };
 
       final response = await dio.post(

@@ -393,7 +393,8 @@
   "vendors" : "Vendors",
   "customers" : "Customers",
   "customerLedger" : "Customer Ledger",
-  "vendorLedger" : "Vendor Ledger"
+  "vendorLedger" : "Vendor Ledger",
+   "createNewUser" : "Create New User"
 
 
 }

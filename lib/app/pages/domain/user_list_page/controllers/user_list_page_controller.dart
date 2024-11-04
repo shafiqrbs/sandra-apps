@@ -54,7 +54,7 @@ class UserListPageController extends BaseController {
   Future<void> addUser() async {
     final user = await Get.dialog(
       DialogPattern(
-        title: appLocalization.add,
+        title: appLocalization.createNewUser,
         subTitle: '',
         child: AddUserModalView(),
       ),
