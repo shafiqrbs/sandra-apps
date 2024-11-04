@@ -72,6 +72,14 @@ class PosTemplate extends PrinterController {
       ),
       linesAfter: 1,
     );
+    bytes += generator.text(
+      'Customer Ledger',
+      styles: const PosStyles(
+        align: PosAlign.center,
+        bold: true,
+      ),
+      linesAfter: 1,
+    );
 
     bytes += generator.row(
       [
@@ -298,6 +306,15 @@ class PosTemplate extends PrinterController {
       isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : 'Shop Address',
       styles: const PosStyles(
         align: PosAlign.center,
+      ),
+      linesAfter: 1,
+    );
+
+    bytes += generator.text(
+      'Vendor Ledger',
+      styles: const PosStyles(
+        align: PosAlign.center,
+        bold: true,
       ),
       linesAfter: 1,
     );
