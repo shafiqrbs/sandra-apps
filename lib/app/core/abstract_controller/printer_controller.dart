@@ -9,6 +9,9 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/customer.dart';
+import 'package:sandra/app/entity/customer_ledger.dart';
+import 'package:sandra/app/pdf_views/pos_functions.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
@@ -248,6 +251,25 @@ class PrinterController extends BaseController {
         message: appLocalization.connectPrinter,
       );
       return false;
+    }
+  }
+
+  Future<void> printCustomerLedger({
+    required List<CustomerLedger> ledger,
+    required Customer customer,
+  }) async {
+    final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+    if (connectionStatus) {
+      final data = await PosTemplate().customerLedgerTemplate(
+        ledger: ledger,
+        customer: customer,
+      );
+      await PrintBluetoothThermal.writeBytes(data); // init
+    } else {
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.connectPrinter,
+      );
     }
   }
 

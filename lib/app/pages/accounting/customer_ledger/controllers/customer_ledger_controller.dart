@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -133,6 +134,16 @@ class CustomerLedgerController extends BaseController {
     required Customer customer,
   }) async {
     await generateCustomerLedgerPdf(
+      ledger: customerLedgerReport,
+      customer: customer,
+    );
+  }
+
+  Future<void> printCustomerLedger({
+    required List<CustomerLedger> customerLedgerReport,
+    required Customer customer,
+  }) async {
+    PrinterController().printCustomerLedger(
       ledger: customerLedgerReport,
       customer: customer,
     );

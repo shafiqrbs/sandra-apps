@@ -143,7 +143,12 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       right: 4,
                     ),
                     child: InkWell(
-                      onTap: () async {},
+                      onTap: () async {
+                        await controller.printCustomerLedger(
+                          customerLedgerReport: controller.customerLedgerReport.value!,
+                          customer: controller.customerManager.selectedItem.value!,
+                        );
+                      },
                       child: Icon(
                         TablerIcons.file_text,
                         color: colors.solidBlackColor,

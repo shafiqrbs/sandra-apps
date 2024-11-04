@@ -1,9 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
@@ -74,14 +75,14 @@ Future<void> generateSalesPdf(Sales sales) async {
                       children: [
                         pw.Text(
                           'Customer: ${sales.customerName}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Invoice: ${sales.invoice}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -93,14 +94,14 @@ Future<void> generateSalesPdf(Sales sales) async {
                       children: [
                         pw.Text(
                           'Contact: ${sales.customerMobile}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Approve By: ${sales.approvedBy ?? 'N/A'}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -112,14 +113,14 @@ Future<void> generateSalesPdf(Sales sales) async {
                       children: [
                         pw.Text(
                           'Date: ${sales.createdAt}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Method: ${sales.methodName ?? 'N/A'}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -152,8 +153,8 @@ Future<void> generateSalesPdf(Sales sales) async {
                   fontWeight: pw.FontWeight.bold,
                   color: PdfColors.black,
                 ),
-                cellStyle: pw.TextStyle(fontSize: 10),
-                headerDecoration: pw.BoxDecoration(
+                cellStyle: const pw.TextStyle(fontSize: 10),
+                headerDecoration: const pw.BoxDecoration(
                   color: PdfColors.green200,
                 ),
                 cellAlignment: pw.Alignment.centerLeft,
@@ -172,7 +173,7 @@ Future<void> generateSalesPdf(Sales sales) async {
                   3: pw.Alignment.center,
                   4: pw.Alignment.centerRight,
                 },
-                columnWidths: {
+                columnWidths: const {
                   0: pw.FlexColumnWidth(.4),
                   1: pw.FlexColumnWidth(3),
                   2: pw.FlexColumnWidth(1),
@@ -193,7 +194,7 @@ Future<void> generateSalesPdf(Sales sales) async {
                   ['Receive', '${sales.received}'],
                   ['Due', '${(sales.netTotal ?? 0) - (sales.received ?? 0)}'],
                 ],
-                columnWidths: {
+                columnWidths: const {
                   0: pw.FlexColumnWidth(5.4),
                   1: pw.FlexColumnWidth(1),
                 },
@@ -209,7 +210,7 @@ Future<void> generateSalesPdf(Sales sales) async {
 
               pw.SizedBox(height: 20),
             ],
-          )
+          ),
         ];
       },
     ),
@@ -280,14 +281,14 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                       children: [
                         pw.Text(
                           'Vendor: ${purchase.vendorName}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Invoice: ${purchase.invoice}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -299,14 +300,14 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                       children: [
                         pw.Text(
                           'Contact: ${purchase.vendorMobile}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Approve By: ${purchase.approvedBy ?? 'N/A'}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -318,14 +319,14 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                       children: [
                         pw.Text(
                           'Date: ${purchase.createdAt}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
                         ),
                         pw.Text(
                           'Method: ${purchase.methodName ?? 'N/A'}',
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                             fontSize: 12,
                           ),
                           maxLines: 1,
@@ -358,8 +359,8 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                   fontWeight: pw.FontWeight.bold,
                   color: PdfColors.black,
                 ),
-                cellStyle: pw.TextStyle(fontSize: 10),
-                headerDecoration: pw.BoxDecoration(
+                cellStyle: const pw.TextStyle(fontSize: 10),
+                headerDecoration: const pw.BoxDecoration(
                   color: PdfColors.green200,
                 ),
                 cellAlignment: pw.Alignment.centerLeft,
@@ -371,14 +372,14 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                   3: pw.Alignment.center,
                   4: pw.Alignment.centerRight,
                 },
-                cellAlignments: {
+                cellAlignments: const {
                   0: pw.Alignment.center,
                   1: pw.Alignment.centerLeft,
                   2: pw.Alignment.center,
                   3: pw.Alignment.center,
                   4: pw.Alignment.centerRight,
                 },
-                columnWidths: {
+                columnWidths: const {
                   0: pw.FlexColumnWidth(.4),
                   1: pw.FlexColumnWidth(3),
                   2: pw.FlexColumnWidth(1),
@@ -393,16 +394,16 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
                   ['SubTotal', '${purchase.subTotal}'],
                   [
                     'Discount (${purchase.discountCalculation.toString()})',
-                    '${purchase.discount}'
+                    '${purchase.discount}',
                   ],
                   ['Total', '${purchase.netTotal}'],
                   ['Payment', '${purchase.received}'],
                   [
                     'Due',
-                    '${(purchase.netTotal ?? 0) - (purchase.received?.toDouble() ?? 0)}'
+                    '${(purchase.netTotal ?? 0) - (purchase.received?.toDouble() ?? 0)}',
                   ],
                 ],
-                columnWidths: {
+                columnWidths: const {
                   0: pw.FlexColumnWidth(5.4),
                   1: pw.FlexColumnWidth(1),
                 },
@@ -418,7 +419,7 @@ Future<void> generatePurchasePdf(Purchase purchase) async {
 
               pw.SizedBox(height: 20),
             ],
-          )
+          ),
         ];
       },
     ),
@@ -490,19 +491,27 @@ Future<void> generateCustomerLedgerPdf({
                 pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text('Customer: ${customer.name}',
-                        style: pw.TextStyle(fontSize: 12)),
-                    pw.Text('Contact: ${customer.mobile}',
-                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text(
+                      'Customer: ${customer.name}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
+                    pw.Text(
+                      'Contact: ${customer.mobile}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
                 pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text('Balance: ${customer.balance}',
-                        style: pw.TextStyle(fontSize: 12)),
-                    pw.Text('Address: ${customer.address ?? 'N/A'}',
-                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text(
+                      'Balance: ${customer.balance}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
+                    pw.Text(
+                      'Address: ${customer.address ?? 'N/A'}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
               ],
@@ -514,62 +523,72 @@ Future<void> generateCustomerLedgerPdf({
         const int chunkSize = 100; // Adjust the chunk size as needed
         for (int i = 0; i < ledger.length; i += chunkSize) {
           final chunk = ledger.sublist(
-              i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
+            i,
+            i + chunkSize > ledger.length ? ledger.length : i + chunkSize,
+          );
 
           // Add a gap between each chunk
-          content.add(pw.SizedBox(height: 10));
+          content
+            ..add(pw.SizedBox(height: 10))
 
-          // Table with Header and Data Rows in Chunks
-          content.add(
-            pw.Table.fromTextArray(
-              headers: ['S/N', 'Date', 'Method', 'Sales', 'Receive', 'Balance'],
-              data: chunk.map((item) {
-                final index = ledger.indexOf(item) + 1;
-                return [
-                  index.toString().padLeft(2, '0'),
-                  item.created,
-                  item.method,
-                  item.total.toString(),
-                  item.amount.toString(),
-                  item.balance.toString(),
-                ];
-              }).toList(),
-              headerStyle: pw.TextStyle(
-                fontSize: 12,
-                fontWeight: pw.FontWeight.bold,
-                color: PdfColors.black,
+            // Table with Header and Data Rows in Chunks
+            ..add(
+              pw.TableHelper.fromTextArray(
+                headers: [
+                  'S/N',
+                  'Date',
+                  'Method',
+                  'Sales',
+                  'Receive',
+                  'Balance'
+                ],
+                data: chunk.map((item) {
+                  final index = ledger.indexOf(item) + 1;
+                  return [
+                    index.toString().padLeft(2, '0'),
+                    item.created,
+                    item.method,
+                    item.total.toString(),
+                    item.amount.toString(),
+                    item.balance.toString(),
+                  ];
+                }).toList(),
+                headerStyle: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.black,
+                ),
+                cellStyle: const pw.TextStyle(fontSize: 10),
+                headerDecoration: const pw.BoxDecoration(
+                  color: PdfColors.green200,
+                ),
+                cellHeight: 25,
+                columnWidths: const {
+                  0: pw.FlexColumnWidth(.4),
+                  1: pw.FlexColumnWidth(2),
+                  2: pw.FlexColumnWidth(1),
+                  3: pw.FlexColumnWidth(1),
+                  4: pw.FlexColumnWidth(1),
+                  5: pw.FlexColumnWidth(1),
+                },
+                headerAlignments: const {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
+                cellAlignments: {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
               ),
-              cellStyle: pw.TextStyle(fontSize: 10),
-              headerDecoration: pw.BoxDecoration(
-                color: PdfColors.green200,
-              ),
-              cellHeight: 25,
-              columnWidths: {
-                0: pw.FlexColumnWidth(.4),
-                1: pw.FlexColumnWidth(2),
-                2: pw.FlexColumnWidth(1),
-                3: pw.FlexColumnWidth(1),
-                4: pw.FlexColumnWidth(1),
-                5: pw.FlexColumnWidth(1),
-              },
-              headerAlignments: {
-                0: pw.Alignment.center,
-                1: pw.Alignment.centerLeft,
-                2: pw.Alignment.center,
-                3: pw.Alignment.center,
-                4: pw.Alignment.center,
-                5: pw.Alignment.centerRight,
-              },
-              cellAlignments: {
-                0: pw.Alignment.center,
-                1: pw.Alignment.centerLeft,
-                2: pw.Alignment.center,
-                3: pw.Alignment.center,
-                4: pw.Alignment.center,
-                5: pw.Alignment.centerRight,
-              },
-            ),
-          );
+            );
         }
 
         // Footer Summary Section
@@ -577,7 +596,7 @@ Future<void> generateCustomerLedgerPdf({
           pw.SizedBox(height: 20),
         );*/
         content.add(
-          pw.Table.fromTextArray(
+          pw.TableHelper.fromTextArray(
             headers: null,
             data: [
               [
@@ -682,19 +701,27 @@ Future<void> generateVendorLedgerPdf({
                 pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text('Company: ${vendor.name}',
-                        style: pw.TextStyle(fontSize: 12)),
-                    pw.Text('Contact: ${vendor.mobile}',
-                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text(
+                      'Company: ${vendor.name}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
+                    pw.Text(
+                      'Contact: ${vendor.mobile}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
                 pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text('Balance: ${vendor.balance}',
-                        style: pw.TextStyle(fontSize: 12)),
-                    pw.Text('Address: ${vendor.address ?? 'N/A'}',
-                        style: pw.TextStyle(fontSize: 12)),
+                    pw.Text(
+                      'Balance: ${vendor.balance}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
+                    pw.Text(
+                      'Address: ${vendor.address ?? 'N/A'}',
+                      style: const pw.TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
               ],
@@ -706,62 +733,72 @@ Future<void> generateVendorLedgerPdf({
         const int chunkSize = 100; // Adjust the chunk size as needed
         for (int i = 0; i < ledger.length; i += chunkSize) {
           final chunk = ledger.sublist(
-              i, i + chunkSize > ledger.length ? ledger.length : i + chunkSize);
+            i,
+            i + chunkSize > ledger.length ? ledger.length : i + chunkSize,
+          );
 
           // Add a gap between each chunk
-          content.add(pw.SizedBox(height: 10));
+          content
+            ..add(pw.SizedBox(height: 10))
 
-          // Table with Header and Data Rows in Chunks
-          content.add(
-            pw.Table.fromTextArray(
-              headers: ['S/N', 'Date', 'Method', 'Sales', 'Receive', 'Balance'],
-              data: chunk.map((item) {
-                final index = ledger.indexOf(item) + 1;
-                return [
-                  index.toString().padLeft(2, '0'),
-                  item.created,
-                  item.method,
-                  item.total.toString(),
-                  item.amount.toString(),
-                  item.balance.toString(),
-                ];
-              }).toList(),
-              headerStyle: pw.TextStyle(
-                fontSize: 12,
-                fontWeight: pw.FontWeight.bold,
-                color: PdfColors.black,
+            // Table with Header and Data Rows in Chunks
+            ..add(
+              pw.TableHelper.fromTextArray(
+                headers: [
+                  'S/N',
+                  'Date',
+                  'Method',
+                  'Sales',
+                  'Receive',
+                  'Balance',
+                ],
+                data: chunk.map((item) {
+                  final index = ledger.indexOf(item) + 1;
+                  return [
+                    index.toString().padLeft(2, '0'),
+                    item.created,
+                    item.method,
+                    item.total.toString(),
+                    item.amount.toString(),
+                    item.balance.toString(),
+                  ];
+                }).toList(),
+                headerStyle: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.black,
+                ),
+                cellStyle: const pw.TextStyle(fontSize: 10),
+                headerDecoration: const pw.BoxDecoration(
+                  color: PdfColors.green200,
+                ),
+                cellHeight: 25,
+                columnWidths: const {
+                  0: pw.FlexColumnWidth(.4),
+                  1: pw.FlexColumnWidth(2),
+                  2: pw.FlexColumnWidth(1),
+                  3: pw.FlexColumnWidth(1),
+                  4: pw.FlexColumnWidth(1),
+                  5: pw.FlexColumnWidth(1),
+                },
+                headerAlignments: const {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
+                cellAlignments: const {
+                  0: pw.Alignment.center,
+                  1: pw.Alignment.centerLeft,
+                  2: pw.Alignment.center,
+                  3: pw.Alignment.center,
+                  4: pw.Alignment.center,
+                  5: pw.Alignment.centerRight,
+                },
               ),
-              cellStyle: pw.TextStyle(fontSize: 10),
-              headerDecoration: pw.BoxDecoration(
-                color: PdfColors.green200,
-              ),
-              cellHeight: 25,
-              columnWidths: {
-                0: pw.FlexColumnWidth(.4),
-                1: pw.FlexColumnWidth(2),
-                2: pw.FlexColumnWidth(1),
-                3: pw.FlexColumnWidth(1),
-                4: pw.FlexColumnWidth(1),
-                5: pw.FlexColumnWidth(1),
-              },
-              headerAlignments: {
-                0: pw.Alignment.center,
-                1: pw.Alignment.centerLeft,
-                2: pw.Alignment.center,
-                3: pw.Alignment.center,
-                4: pw.Alignment.center,
-                5: pw.Alignment.centerRight,
-              },
-              cellAlignments: {
-                0: pw.Alignment.center,
-                1: pw.Alignment.centerLeft,
-                2: pw.Alignment.center,
-                3: pw.Alignment.center,
-                4: pw.Alignment.center,
-                5: pw.Alignment.centerRight,
-              },
-            ),
-          );
+            );
         }
 
         // Footer Summary Section
@@ -769,7 +806,7 @@ Future<void> generateVendorLedgerPdf({
           pw.SizedBox(height: 20),
         );*/
         content.add(
-          pw.Table.fromTextArray(
+          pw.TableHelper.fromTextArray(
             headers: null,
             data: [
               [
@@ -779,7 +816,7 @@ Future<void> generateVendorLedgerPdf({
                 (totalSales - totalReceive).toStringAsFixed(2),
               ],
             ],
-            columnWidths: {
+            columnWidths: const {
               0: pw.FlexColumnWidth(3.4),
               1: pw.FlexColumnWidth(1),
               2: pw.FlexColumnWidth(1),
@@ -794,7 +831,7 @@ Future<void> generateVendorLedgerPdf({
               fontWeight: pw.FontWeight.bold,
             ),
             cellHeight: 25,
-            cellAlignments: {
+            cellAlignments: const {
               0: pw.Alignment.centerRight,
               1: pw.Alignment.center,
               2: pw.Alignment.center,
@@ -822,7 +859,9 @@ Future<void> saveAndOpenPdf(
     await file.writeAsBytes(await pdf.save());
     await OpenFilex.open(file.path);
   } catch (e) {
-    print('Error creating PDF: $e');
+    if (kDebugMode) {
+      print('Error creating PDF: $e');
+    }
   }
 }
 
@@ -871,7 +910,9 @@ pw.Widget _buildIcon(PdfColor color, String label) {
       pw.SizedBox(height: 5),
       pw.Text(
         label,
-        style: pw.TextStyle(fontSize: 8),
+        style: const pw.TextStyle(
+          fontSize: 8,
+        ),
       ),
     ],
   );
