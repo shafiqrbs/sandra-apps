@@ -391,6 +391,8 @@
   "booked" : "বুক করা",
   "orderTakenBy" : "অর্ডার নেওয়া",
   "tableEnableDisable" : "টেবিল সক্রিয়/অক্ষম করুন",
+  "vendors" : "বিক্রেতা",
+  "customers" : "গ্রাহক",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

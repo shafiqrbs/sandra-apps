@@ -682,7 +682,7 @@ Future<void> generateVendorLedgerPdf({
                 pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text('Customer: ${vendor.name}',
+                    pw.Text('Company: ${vendor.name}',
                         style: pw.TextStyle(fontSize: 12)),
                     pw.Text('Contact: ${vendor.mobile}',
                         style: pw.TextStyle(fontSize: 12)),

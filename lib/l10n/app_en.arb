@@ -389,8 +389,9 @@
   "purchaseReturnQty" : "Pur. Return Qty",
   "adjustQty" : "Adjust Qty",
   "bonusQty" : "Bonus Qty",
-  "damageQty" : "Damage Qty",
-  "copy" : "Copy"
+  "copy" : "Copy",
+  "vendors" : "Vendors",
+  "customers" : "Customers"
 
 
 }

@@ -72,7 +72,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                       cursorColor: colors.solidBlackColor,
                       onChanged: controller.searchCustomer,
                       decoration: inputDecorationAppbarSearch(
-                        hint: appLocalization.searchCustomer,
+                        hint: appLocalization.searchVendor,
                         textEditingController:
                             controller.vendorManager.searchTextController.value,
                         isSHowSuffixIcon: controller.vendorManager
