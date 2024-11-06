@@ -1,18 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
+
+import '/app/core/base/base_controller.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/vendor.dart';
 import '/app/entity/vendor_ledger.dart';
 import '/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
-import '/app/core/base/base_controller.dart';
 
 class VendorLedgerController extends BaseController {
   Vendor? vendor;
 
-  final vendorLedgerList = Rx<List<VendorLedger>?>(null);
   final vendorManager = VendorManager();
+  final pagingController = Rx<PagingController<int, VendorLedger>>(
+    PagingController<int, VendorLedger>(
+      firstPageKey: 1,
+    ),
+  );
 
   @override
   Future<void> onInit() async {
@@ -23,17 +31,64 @@ class VendorLedgerController extends BaseController {
       vendorManager.selectedItem.value = vendor;
     }
 
-    await fetchLedgerReport();
-  }
-
-  Future<void> fetchLedgerReport() async {
-    await dataFetcher(
-      future: () async {
-        vendorLedgerList.value = await services.getVendorLedgerReport(
-          vendorId: vendor!.vendorId.toString(),
+    pagingController.value.addPageRequestListener(
+      (pageKey) {
+        fetchLedgerReport(
+          pageKey: pageKey,
         );
       },
     );
+    try {
+      updatePageState(PageState.loading);
+      await fetchLedgerReport(
+        pageKey: 1,
+      );
+    } catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
+  }
+
+  Future<void> fetchLedgerReport({
+    required int pageKey,
+  }) async {
+    List<VendorLedger>? apiDataList;
+
+    await dataFetcher(
+      future: () async {
+        apiDataList = await services.getVendorLedgerReport(
+          vendorId: vendor!.vendorId.toString(),
+          pageKey: pageKey,
+        );
+      },
+      shouldShowLoader: false,
+    );
+
+    if (apiDataList == null) {
+      pagingController.value.error = true;
+      return;
+    }
+
+    if ((apiDataList?.length ?? 0) < pageLimit) {
+      pagingController.value.appendLastPage(apiDataList!);
+    } else {
+      pagingController.value.appendPage(
+        apiDataList!,
+        pageKey + 1,
+      );
+    }
+
+    update();
+    refresh();
+    notifyChildrens();
   }
 
   Future<void> updateVendor(Vendor data) async {
@@ -50,7 +105,8 @@ class VendorLedgerController extends BaseController {
     // Refresh the selected item to notify listeners
     vendorManager.selectedItem.refresh();
 
-    await fetchLedgerReport();
+    vendor = data;
+    await refreshData();
 
     // Unfocus the current focus scope to hide the keyboard
     FocusScope.of(Get.context!).unfocus();
@@ -115,5 +171,22 @@ class VendorLedgerController extends BaseController {
       ledger: vendorLedgerReport,
       vendor: vendor,
     );
+  }
+
+  Future<void> refreshData() async {
+    updatePageState(PageState.loading);
+    try {
+      pagingController.value.refresh();
+
+      await fetchLedgerReport(
+        pageKey: 1,
+      );
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
   }
 }

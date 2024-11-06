@@ -634,6 +634,7 @@ class Services {
 
   Future<List<VendorLedger>?> getVendorLedgerReport({
     required String? vendorId,
+    required int pageKey,
   }) async {
     const endPoint = 'poskeeper-vendor-ledger';
     try {
@@ -642,9 +643,11 @@ class Services {
         endPoint,
         {
           'vendor_id': vendorId,
+          'page': pageKey,
         },
         query: {
           'vendor_id': vendorId,
+          'page': pageKey,
         },
         headers: _buildHeader(),
       );
