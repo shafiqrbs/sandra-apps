@@ -86,24 +86,22 @@ class SettingsView extends BaseView<SettingsController> {
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
-                    onPressed: (BuildContext context) {},
-                    leading: const Icon(TablerIcons.printer),
+                    onPressed: (BuildContext context) async {
+                      await controller.showPrinterConnectModal();
+                    },
+                    leading: Obx(
+                      () => Icon(
+                        TablerIcons.printer,
+                        color: controller.connected.value
+                            ? colors.greenColor
+                            : colors.redColor,
+                      ),
+                    ),
                     title: Text(
                       appLocalization.printer,
                       style: commonTextStyle(),
                     ),
-                    trailing: AdvancedSwitch(
-                      controller: controller.isPrinterAllowed,
-                      onChanged: (value) async {
-                        await controller.setIsPrinterAllowed(value);
-                      },
-                      borderRadius: BorderRadius.circular(4),
-                      height: 20,
-                      width: 40,
-                      activeColor: colors.primaryColor700,
-                      inactiveColor: colors.secondaryColor100,
-                      initialValue: controller.isPrinterAllowed.value,
-                    ),
+                    trailing: const Icon(TablerIcons.chevron_right),
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
