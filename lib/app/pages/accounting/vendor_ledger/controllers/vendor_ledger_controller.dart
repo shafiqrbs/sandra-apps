@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/entity/purchase.dart';
+import 'package:sandra/app/global_modal/purchase_information_modal/purchase_information_view.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -187,6 +190,30 @@ class VendorLedgerController extends BaseController {
       } else {
         updatePageState(PageState.success);
       }
+    }
+  }
+
+  Future<void> showInvoiceDetailsModal(VendorLedger element) async {
+    if (element.sourceInvoice != null) {
+      final invoice = Purchase(
+        purchaseId: element.sourceInvoice.toString(),
+      );
+      await Get.dialog(
+        DialogPattern(
+          title: appLocalization.purchaseDetails,
+          subTitle: element.name ?? '',
+          child: PurchaseInformationView(
+            purchase: invoice,
+            purchaseMode: 'online',
+            isShowFooter: false,
+          ),
+        ),
+      );
+    } else {
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.invoiceDataNotAvailable,
+      );
     }
   }
 }

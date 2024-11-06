@@ -89,7 +89,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           Expanded(
                             child: CommonIconText(
                               icon: TablerIcons.file_invoice,
-                              text: '${controller.purchase.value!.invoice}',
+                              text: controller.purchase.value!.invoice??'',
                               fontSize: mediumTFSize,
                             ),
                           ),

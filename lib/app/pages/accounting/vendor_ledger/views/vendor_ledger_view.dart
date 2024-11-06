@@ -310,6 +310,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                           InkWell(
                             onTap: () {
                               // toast('INVOICE DETAILS MODAL is under developement');
+                              controller.showInvoiceDetailsModal(data);
                             },
                             child: Container(
                               padding: const EdgeInsets.only(
