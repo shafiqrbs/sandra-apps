@@ -80,25 +80,32 @@ class DashboardView extends BaseView<DashboardController> {
 
   @override
   Widget body(BuildContext context) {
-    return Column(
-      mainAxisAlignment: startMAA,
-      crossAxisAlignment: endCAA,
-      children: [
-        _buildTopBar(context),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.zero,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  1.height,
-                  _buildDashboard(),
-                ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        if (controller.isOnline.value) {
+          await controller.fetchFinancialData();
+        }
+      },
+      child: Column(
+        mainAxisAlignment: startMAA,
+        crossAxisAlignment: endCAA,
+        children: [
+          _buildTopBar(context),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.zero,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    1.height,
+                    _buildDashboard(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
