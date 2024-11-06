@@ -151,7 +151,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       onTap: () async {
                         await controller.printCustomerLedger(
                           customerLedgerReport:
-                              controller.customerLedgerReport.value!,
+                              controller.pagingController.value.itemList!,
                           customer:
                               controller.customerManager.selectedItem.value!,
                         );
@@ -183,7 +183,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       onTap: () async {
                         await controller.createLedgerPdf(
                           customerLedgerReport:
-                              controller.customerLedgerReport.value!,
+                              controller.pagingController.value.itemList!,
                           customer:
                               controller.customerManager.selectedItem.value!,
                         );

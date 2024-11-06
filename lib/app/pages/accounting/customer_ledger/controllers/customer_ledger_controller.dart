@@ -18,8 +18,6 @@ import '/app/global_modal/sales_information_modal/sales_information_modal_view.d
 class CustomerLedgerController extends BaseController {
   Customer? customer;
 
-  final customerLedgerReport = Rx<List<CustomerLedger>?>(null);
-
   final customerManager = CustomerManager();
   final pagingController = Rx<PagingController<int, CustomerLedger>>(
     PagingController<int, CustomerLedger>(
