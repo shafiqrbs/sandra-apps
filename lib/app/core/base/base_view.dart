@@ -48,7 +48,7 @@ abstract class BaseView<Controller extends BaseController>
           annotatedRegion(context),
           Obx(
             () => controller.pageState == PageState.loading
-                ? _showLoading()
+                ? Container()
                 : Container(),
           ),
           Obx(

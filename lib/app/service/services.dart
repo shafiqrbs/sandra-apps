@@ -604,6 +604,7 @@ class Services {
 
   Future<List<CustomerLedger>?> getCustomerLedgerReport({
     required String? customerId,
+    required int pageKey,
   }) async {
     const endPoint = 'poskeeper-customer-ledger';
     try {
@@ -612,9 +613,11 @@ class Services {
         endPoint,
         {
           'customer_id': customerId,
+          'page': pageKey,
         },
         query: {
           'customer_id': customerId,
+          'page': pageKey,
         },
         headers: _buildHeader(),
       );

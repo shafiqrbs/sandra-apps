@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
+import 'package:sandra/app/core/core_model/page_state.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -18,6 +21,11 @@ class CustomerLedgerController extends BaseController {
   final customerLedgerReport = Rx<List<CustomerLedger>?>(null);
 
   final customerManager = CustomerManager();
+  final pagingController = Rx<PagingController<int, CustomerLedger>>(
+    PagingController<int, CustomerLedger>(
+      firstPageKey: 1,
+    ),
+  );
 
   @override
   Future<void> onInit() async {
@@ -28,7 +36,31 @@ class CustomerLedgerController extends BaseController {
       customerManager.selectedItem.value = customer;
     }
 
-    await fetchLedgerReport();
+    pagingController.value.addPageRequestListener(
+      (pageKey) {
+        fetchLedgerReport(
+          pageKey: pageKey,
+        );
+      },
+    );
+
+    try {
+      updatePageState(PageState.loading);
+      await fetchLedgerReport(
+        pageKey: 1,
+      );
+    } catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
   }
 
   Future<void> showSalesInformationModal(
@@ -58,14 +90,38 @@ class CustomerLedgerController extends BaseController {
     }
   }
 
-  Future<void> fetchLedgerReport() async {
+  Future<void> fetchLedgerReport({
+    required int pageKey,
+  }) async {
+    List<CustomerLedger>? apiDataList;
+
     await dataFetcher(
       future: () async {
-        customerLedgerReport.value = await services.getCustomerLedgerReport(
+        apiDataList = await services.getCustomerLedgerReport(
           customerId: customer!.customerId.toString(),
+          pageKey: pageKey,
         );
       },
+      shouldShowLoader: false,
     );
+
+    if (apiDataList == null) {
+      pagingController.value.error = true;
+      return;
+    }
+
+    if ((apiDataList?.length ?? 0) < pageLimit) {
+      pagingController.value.appendLastPage(apiDataList!);
+    } else {
+      pagingController.value.appendPage(
+        apiDataList!,
+        pageKey + 1,
+      );
+    }
+
+    update();
+    refresh();
+    notifyChildrens();
   }
 
   Future<void> updateCustomer(Customer data) async {
@@ -81,9 +137,8 @@ class CustomerLedgerController extends BaseController {
 
     // Refresh the selected item to notify listeners
     customerManager.selectedItem.refresh();
-
-    await fetchLedgerReport();
-
+    customer = data;
+    await refreshData();
     // Unfocus the current focus scope to hide the keyboard
     FocusScope.of(Get.context!).unfocus();
 
@@ -147,5 +202,22 @@ class CustomerLedgerController extends BaseController {
       ledger: customerLedgerReport,
       customer: customer,
     );
+  }
+
+  Future<void> refreshData() async {
+    updatePageState(PageState.loading);
+    try {
+      pagingController.value.refresh();
+
+      await fetchLedgerReport(
+        pageKey: 1,
+      );
+    } finally {
+      if (pagingController.value.itemList == null) {
+        updatePageState(PageState.failed);
+      } else {
+        updatePageState(PageState.success);
+      }
+    }
   }
 }
