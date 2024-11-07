@@ -80,21 +80,22 @@ class DashboardView extends BaseView<DashboardController> {
 
   @override
   Widget body(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        if (controller.isOnline.value) {
-          await controller.fetchFinancialData();
-        }
-      },
-      child: Column(
-        mainAxisAlignment: startMAA,
-        crossAxisAlignment: endCAA,
-        children: [
-          _buildTopBar(context),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.zero,
+    return Column(
+      mainAxisAlignment: startMAA,
+      crossAxisAlignment: endCAA,
+      children: [
+        _buildTopBar(context),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.zero,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                if (controller.isOnline.value) {
+                  await controller.fetchFinancialData();
+                }
+              },
               child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     1.height,
@@ -104,8 +105,8 @@ class DashboardView extends BaseView<DashboardController> {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -385,7 +386,7 @@ class DashboardView extends BaseView<DashboardController> {
             ],
           ),
           10.height,
-          if (kDebugMode) _buildTestData(),
+          //  if (kDebugMode) _buildTestData(),
         ],
       ),
     );
