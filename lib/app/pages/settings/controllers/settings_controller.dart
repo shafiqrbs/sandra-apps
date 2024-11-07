@@ -61,8 +61,8 @@ class SettingsController extends PrinterController {
   Future<void> showPrinterConnectModal() async {
     await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.printerSetup,
+        subTitle: appLocalization.connectYourPrinter,
         child: PrinterConnectModalView(),
       ),
     );

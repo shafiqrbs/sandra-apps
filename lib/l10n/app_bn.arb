@@ -472,11 +472,8 @@
   "copy" : "Copy",
   "customerLedger" : "Customer Ledger",
   "vendorLedger" : "Vendor Ledger",
-  "createNewUser" : "Create New User"
-
-
-
-
-
+  "createNewUser" : "Create New User",
+  "printerSetup" : "Printer Setup",
+  "connectYourPrinter" : "Connect your printer"
 
 }
