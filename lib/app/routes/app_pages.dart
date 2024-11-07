@@ -52,6 +52,8 @@ import '/app/pages/inventory/sales/create_sales/bindings/create_sales_binding.da
 import '/app/pages/inventory/sales/create_sales/views/create_sales_view.dart';
 import '/app/pages/inventory/sales/sales_list/bindings/sales_list_binding.dart';
 import '/app/pages/inventory/sales/sales_list/views/sales_list_view.dart';
+import '/app/pages/inventory/sales/sales_return_page/bindings/sales_return_page_binding.dart';
+import '/app/pages/inventory/sales/sales_return_page/views/sales_return_page_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
 import '/app/pages/restaurant_module/order_cart/bindings/order_cart_binding.dart';
@@ -223,8 +225,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.userListPage,
-      page: () => UserListPageView(),
+      page: UserListPageView.new,
       binding: UserListPageBinding(),
+    ),
+    GetPage(
+      name: Routes.salesReturnPage,
+      page: SalesReturnPageView.new,
+      binding: SalesReturnPageBinding(),
     ),
   ];
 }

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -133,5 +132,14 @@ class SalesInformationModalController extends PrinterController {
     required Sales sales,
   }) async {
     await generateSalesPdf(sales);
+  }
+
+  void returnSales() {
+    Get.offNamed(
+      Routes.salesReturnPage,
+      arguments: {
+        'sales': sales.value,
+      },
+    );
   }
 }

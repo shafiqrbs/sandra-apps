@@ -386,6 +386,7 @@
   "avgPurchasePrice": "Avg. Pur. Price",
   "remainingQty" : "Remaining QTY",
   "salesReturnQty" : "Sales Return Qty",
+  "salesReturnPageTitle" : "Sales Return",
   "purchaseReturnQty" : "Pur. Return Qty",
   "adjustQty" : "Adjust Qty",
   "bonusQty" : "Bonus Qty",
@@ -396,7 +397,11 @@
   "vendorLedger" : "Vendor Ledger",
    "createNewUser" : "Create New User",
   "printerSetup" : "Printer Setup",
-  "connectYourPrinter" : "Connect your printer"
+  "connectYourPrinter" : "Connect your printer",
+  "adjustment" : "Adjustment",
+  "totalReturnAmount" : "Total Return Amount"
+
+
 
 
 }

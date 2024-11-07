@@ -474,6 +474,8 @@
   "vendorLedger" : "Vendor Ledger",
   "createNewUser" : "Create New User",
   "printerSetup" : "Printer Setup",
-  "connectYourPrinter" : "Connect your printer"
-
+  "connectYourPrinter" : "Connect your printer",
+  "salesReturnPageTitle" : "Sales Return",
+  "adjustment" : "Adjustment",
+  "totalReturnAmount" : "Total Return Amount"
 }

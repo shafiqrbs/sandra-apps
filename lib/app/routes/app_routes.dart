@@ -37,8 +37,8 @@ abstract class Routes {
   static const offlineSyncProcess = _Paths.offlineSyncProcess;
   static const brandListPage = _Paths.brandListPage;
   static const categoryListPage = _Paths.categoryListPage;
-  static const  userListPage = _Paths.userListPage;
-
+  static const userListPage = _Paths.userListPage;
+  static const salesReturnPage = _Paths.salesReturnPage;
 }
 
 abstract class _Paths {
@@ -76,6 +76,6 @@ abstract class _Paths {
   static const offlineSyncProcess = '/offline_sync_process';
   static const brandListPage = '/brand_list_page';
   static const categoryListPage = '/category_list_page';
-  static const  userListPage = '/user_list_page';
-
+  static const userListPage = '/user_list_page';
+  static const salesReturnPage = '/sales_return_page';
 }
