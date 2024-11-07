@@ -25,7 +25,7 @@ BUILD_NUMBER=1
 #cp build/app/outputs/flutter-apk/app-release.apk "appza_demo_v${month}.${day}.1.apk"
 
 # works on mac
-cp build/app/outputs/flutter-apk/app-release.apk  ~/Desktop/terminalBd_v${month}.${day}.${BUILD_NUMBER}.apk
+cp build/app/outputs/flutter-apk/app-release.apk  ~/Desktop/terminalbd_v${month}.${day}.${BUILD_NUMBER}.apk
 
 
 # Output a message indicating that the build is complete
