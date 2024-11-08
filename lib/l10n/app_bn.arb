@@ -456,13 +456,13 @@
   "roles" : "Roles",
   "manager" : "Manager",
   "addBrand" : "Add Brand",
-    "addUnit" : "Add Unit",
-    "addCategory" : "Add Category",
-    "updateProduct": "Update Product",
-    "delete" : "Delete",
-    "remove" : "Remove",
-    "avgMrp" : "Avg. Mrp",
-    "avgPurchasePrice": "Avg. Purchase Price",
+  "addUnit" : "Add Unit",
+  "addCategory" : "Add Category",
+  "updateProduct": "Update Product",
+  "delete" : "Delete",
+  "remove" : "Remove",
+  "avgMrp" : "Avg. Mrp",
+  "avgPurchasePrice": "Avg. Purchase Price",
   "remainingQty" : "Remaining QTY",
   "salesReturnQty" : "Sales Return Qty",
   "purchaseReturnQty" : "Purchase Return Qty",
@@ -477,5 +477,6 @@
   "connectYourPrinter" : "Connect your printer",
   "salesReturnPageTitle" : "Sales Return",
   "adjustment" : "Adjustment",
-  "totalReturnAmount" : "Total Return Amount"
+  "totalReturnAmount" : "Total Return Amount",
+  "advanceFilter" : "Advance Filter"
 }

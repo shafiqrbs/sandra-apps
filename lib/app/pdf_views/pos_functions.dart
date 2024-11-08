@@ -241,7 +241,7 @@ class PosTemplate extends PrinterController {
     //bytes += generator.text(SetUp().printFooter ?? '');
     bytes += generator.feed(1);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'www.poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -470,17 +470,10 @@ class PosTemplate extends PrinterController {
 
     bytes += generator.feed(1);
 
-    bytes += generator.text(
-      SetUp().printFooter ?? '',
-      styles: const PosStyles(
-        align: PosAlign.center,
-      ),
-    );
-
     //bytes += generator.text(SetUp().printFooter ?? '');
     bytes += generator.feed(1);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'www.poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),

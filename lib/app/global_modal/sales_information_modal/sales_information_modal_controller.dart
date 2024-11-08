@@ -58,7 +58,7 @@ class SalesInformationModalController extends PrinterController {
         context: context,
         builder: (context) {
           return DialogPattern(
-            title: 'title',
+            title: 'PrinterSetup',
             subTitle: 'subTitle',
             child: PrinterConnectModalView(),
           );

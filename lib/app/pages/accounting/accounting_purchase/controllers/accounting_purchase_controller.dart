@@ -109,8 +109,8 @@ class AccountingPurchaseController extends BaseController {
   }) async {
     final value = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.purchase,
+        subTitle: '',
         child: GlobalFilterModalView(),
       ),
     );
