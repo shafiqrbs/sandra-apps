@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/stock_details.dart';
@@ -63,7 +64,11 @@ class StockDetailsModal extends BaseWidget {
                       ),
                       4.width,
                       Text(
-                        (element.categoryName == null || element.categoryName!.isEmpty ? 'N/A' : element.categoryName) ?? 'N/A',
+                        (element.categoryName == null ||
+                                    element.categoryName!.isEmpty
+                                ? 'N/A'
+                                : element.categoryName) ??
+                            'N/A',
                       ),
                     ],
                   ),
@@ -89,7 +94,8 @@ class StockDetailsModal extends BaseWidget {
                     labelFlex: 4,
                     valueFlex: 3,
                     label: appLocalization.purchasePrice,
-                    value: '${SetUp().symbol ?? ''} ${element.purchasePrice.toString()}',
+                    value:
+                        '${SetUp().symbol ?? ''} ${element.purchasePrice.toString()}',
                   ),
                 ),
                 Expanded(
@@ -97,7 +103,8 @@ class StockDetailsModal extends BaseWidget {
                     labelFlex: 4,
                     valueFlex: 3,
                     label: appLocalization.mrp,
-                    value: '${SetUp().symbol ?? ''} ${element.salesPrice.toString()}',
+                    value:
+                        '${SetUp().symbol ?? ''} ${element.salesPrice.toString()}',
                   ),
                 ),
               ],
@@ -120,7 +127,8 @@ class StockDetailsModal extends BaseWidget {
                     labelFlex: 4,
                     valueFlex: 3,
                     label: appLocalization.avgPurchasePrice,
-                    value: '${SetUp().symbol ?? ''} ${element.avgPurchasePrice}',
+                    value:
+                        '${SetUp().symbol ?? ''} ${element.avgPurchasePrice}',
                   ),
                 ),
                 Expanded(
@@ -259,77 +267,80 @@ class StockDetailsModal extends BaseWidget {
             ),
           ),
           12.height,
-          Row(
-            children: [
-              Expanded(
-                child: InkWell(
-                  onTap: _deleteStock,
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        containerBorderRadius,
+          Visibility(
+            visible: isManager,
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: _deleteStock,
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          containerBorderRadius,
+                        ),
+                        color: colors.secondaryRedColor,
                       ),
-                      color: colors.secondaryRedColor,
-                    ),
-                    margin: const EdgeInsets.only(
-                      left: 4,
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: centerMAA,
-                        children: [
-                          Icon(
-                            TablerIcons.trash,
-                            color: colors.solidBlackColor,
-                            size: 18,
-                          ),
-                          4.width,
-                          Text(
-                            appLocalization.remove,
-                            style: AppTextStyle.h3TextStyle500,
-                          ),
-                        ],
+                      margin: const EdgeInsets.only(
+                        left: 4,
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: InkWell(
-                  onTap: _showEditStockDialog,
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        containerBorderRadius,
-                      ),
-                      color: colors.secondaryGreenColor,
-                    ),
-                    margin: const EdgeInsets.only(
-                      left: 4,
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: centerMAA,
-                        children: [
-                          Icon(
-                            TablerIcons.pencil,
-                            color: colors.solidBlackColor,
-                            size: 18,
-                          ),
-                          4.width,
-                          Text(
-                            appLocalization.edit,
-                            style: AppTextStyle.h3TextStyle500,
-                          ),
-                        ],
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: centerMAA,
+                          children: [
+                            Icon(
+                              TablerIcons.trash,
+                              color: colors.solidBlackColor,
+                              size: 18,
+                            ),
+                            4.width,
+                            Text(
+                              appLocalization.remove,
+                              style: AppTextStyle.h3TextStyle500,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: InkWell(
+                    onTap: _showEditStockDialog,
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          containerBorderRadius,
+                        ),
+                        color: colors.secondaryGreenColor,
+                      ),
+                      margin: const EdgeInsets.only(
+                        left: 4,
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: centerMAA,
+                          children: [
+                            Icon(
+                              TablerIcons.pencil,
+                              color: colors.solidBlackColor,
+                              size: 18,
+                            ),
+                            4.width,
+                            Text(
+                              appLocalization.edit,
+                              style: AppTextStyle.h3TextStyle500,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           12.height,
         ],
