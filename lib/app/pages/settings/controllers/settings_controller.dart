@@ -5,6 +5,7 @@ import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 import '/app/core/base/base_controller.dart';
 
 enum Buttons {
@@ -65,6 +66,18 @@ class SettingsController extends PrinterController {
         subTitle: appLocalization.connectYourPrinter,
         child: PrinterConnectModalView(),
       ),
+    );
+  }
+
+  Future<void> clearLicense() async {
+    await prefs.setIsLicenseValid(
+      isLicenseValid: false,
+    );
+    await prefs.setIsLogin(
+      isLogin: false,
+    );
+    Get.offAllNamed(
+      Routes.splash,
     );
   }
 }

@@ -159,7 +159,7 @@ class DashboardView extends BaseView<DashboardController> {
                     ),
                   ),
                 ),
-                12.width,
+                16.width,
                 controller.isManager
                     ? GestureDetector(
                         child: Icon(
@@ -169,7 +169,7 @@ class DashboardView extends BaseView<DashboardController> {
                         ),
                       )
                     : Container(),
-                controller.isManager ? 12.width : Container(),
+                controller.isManager ? 16.width : Container(),
 
                 InkWell(
                   onTap: controller.changeTheme,
@@ -179,7 +179,7 @@ class DashboardView extends BaseView<DashboardController> {
                     size: 20,
                   ),
                 ),
-                12.width,
+                16.width,
                 Container(
                   margin: const EdgeInsets.only(right: 12),
                   child: SuperTooltip(
@@ -190,17 +190,6 @@ class DashboardView extends BaseView<DashboardController> {
                           onTap: controller.logOut,
                           child: Text(
                             'Logout',
-                            style: TextStyle(
-                              color: colors.solidBlackColor,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        16.height,
-                        GestureDetector(
-                          onTap: controller.clearLicense,
-                          child: Text(
-                            'Reset',
                             style: TextStyle(
                               color: colors.solidBlackColor,
                               fontSize: 16,

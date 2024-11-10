@@ -76,6 +76,17 @@ class SettingsView extends BaseView<SettingsController> {
                   ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
+                      controller.clearLicense();
+                    },
+                    leading: const Icon(TablerIcons.reload),
+                    title: Text(
+                      appLocalization.reset,
+                      style: commonTextStyle(),
+                    ),
+                    trailing: const Icon(TablerIcons.chevron_right),
+                  ),
+                  SettingsTile.navigation(
+                    onPressed: (BuildContext context) {
                       //Get.toNamed(Routes.accountConfig);
                     },
                     leading: const Icon(TablerIcons.user_cog),
