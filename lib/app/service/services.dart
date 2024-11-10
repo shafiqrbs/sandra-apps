@@ -9,6 +9,7 @@ import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/entity/sync_list.dart';
+import 'package:sandra/app/entity/system_overview_report.dart';
 import 'package:sandra/app/entity/user.dart';
 
 import '/app/core/core_model/logged_user.dart';
@@ -1035,7 +1036,31 @@ class Services {
     }
   }
 
-
+  Future<SystemOverViewReport?> getSystemOverViewReport({
+    required String userId,
+  }) async {
+    const endPoint = 'poskeeper-system-overview';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {},
+        query: {
+          'user_id': userId,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: SystemOverViewReport.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
 
   // Restaurant module
   Future<List<RestaurantTable>?> getRestaurantTableList() async {
