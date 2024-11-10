@@ -494,7 +494,9 @@ class SalesInformationModalView
                       ),
                     ),
                     Visibility(
-                      visible: controller.salesMode == 'online',
+                      visible: controller.salesMode == 'online' &&
+                          controller.sales.value?.approvedBy != null &&
+                          controller.isManager,
                       child: Expanded(
                         child: InkWell(
                           onTap: controller.returnSales,
