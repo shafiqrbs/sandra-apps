@@ -11,6 +11,8 @@ import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
+import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';
+import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_view.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
 import '/app/entity/sales.dart';
@@ -223,6 +225,20 @@ List<Widget> createButtonList = [
     bgColor: colorList.value['green'],
     permission: true,
   ),
+  TbdRoundButton(
+    icon: TablerIcons.clipboard_data,
+    onTap: DashboardController().showAddBrandModal,
+    localeMethod: () => appLocalization.brand,
+    bgColor: colorList.value['olive'],
+    permission: true,
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.category,
+    onTap: DashboardController().showAddCategoryModal,
+    localeMethod: () => appLocalization.category,
+    bgColor: colorList.value['purple'],
+    permission: true,
+  ),
 ];
 
 List<Widget> configButtonList = [
@@ -409,6 +425,26 @@ class DashboardController extends BaseController {
         print('Product added');
       }
     }
+  }
+
+  Future<void> showAddBrandModal() async {
+    final data = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.addBrand,
+        subTitle: '',
+        child: AddBrandModalView(),
+      ),
+    );
+  }
+
+  Future<void> showAddCategoryModal() async {
+    final data = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.addCategory,
+        subTitle: '',
+        child: AddCategoryModalView(),
+      ),
+    );
   }
 
   void goToSalesList() {

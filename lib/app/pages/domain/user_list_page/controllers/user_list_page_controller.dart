@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/user.dart';
 import 'package:sandra/app/global_modal/add_user_modal/add_user_modal_view.dart';
 import '/app/core/base/base_controller.dart';
@@ -52,6 +53,15 @@ class UserListPageController extends BaseController {
   }
 
   Future<void> addUser() async {
+    if (!isManager) {
+      showSnackBar(
+        title: appLocalization.alert,
+        message: appLocalization.permissionDenied,
+        type: SnackBarType.error,
+      );
+      return;
+    }
+
     final user = await Get.dialog(
       DialogPattern(
         title: appLocalization.createNewUser,
