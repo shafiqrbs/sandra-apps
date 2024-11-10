@@ -89,7 +89,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           Expanded(
                             child: CommonIconText(
                               icon: TablerIcons.file_invoice,
-                              text: controller.purchase.value!.invoice??'',
+                              text: controller.purchase.value!.invoice ?? '',
                               fontSize: mediumTFSize,
                             ),
                           ),
@@ -421,8 +421,8 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           ),
                         ),
                         Visibility(
-                          visible: controller.purchaseMode == 'online' ||
-                              controller.purchaseMode == 'local' &&
+                          visible: (controller.purchaseMode == 'online' ||
+                              controller.purchaseMode == 'local') &&
                                   controller.purchase.value?.approvedBy ==
                                       null &&
                                   controller.isManager,
@@ -500,8 +500,10 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
                           ),
                         ),
                         Visibility(
-                          visible: controller.purchaseMode == 'online' ||
-                              controller.purchaseMode == 'local',
+                          visible: controller.purchaseMode == 'online' &&
+                                  controller.purchase.value?.approvedBy !=
+                                      null &&
+                                  controller.isManager,
                           child: Expanded(
                             child: InkWell(
                               onTap: () {
