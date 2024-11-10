@@ -97,33 +97,36 @@ class CustomerListView extends BaseView<CustomerListController> {
 
   @override
   Widget floatingActionButton() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 48),
-      child: InkWell(
-        onTap: ()=>controller.showCustomerReceiveModal(null),
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          decoration: BoxDecoration(
-            color: colors.blackColor.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(containerBorderRadius),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                TablerIcons.plus,
-                color: colors.whiteColor,
-                size: 18,
-              ),
-              8.width,
-              CommonText(
-                text: appLocalization.receive,
-                textColor: Colors.white,
-              ),
-            ],
+    return Visibility(
+      visible: controller.isRoleAccountReceive,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 48),
+        child: InkWell(
+          onTap: () => controller.showCustomerReceiveModal(null),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: colors.blackColor.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(containerBorderRadius),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  TablerIcons.plus,
+                  color: colors.whiteColor,
+                  size: 18,
+                ),
+                8.width,
+                CommonText(
+                  text: appLocalization.receive,
+                  textColor: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),

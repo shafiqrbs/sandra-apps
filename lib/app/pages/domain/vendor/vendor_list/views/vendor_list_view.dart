@@ -94,33 +94,36 @@ class VendorListView extends BaseView<VendorListController> {
 
   @override
   Widget floatingActionButton() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 40),
-      child: InkWell(
-        onTap: () => controller.showVendorPaymentModal(null),
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          decoration: BoxDecoration(
-            color: colors.blackColor.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(containerBorderRadius),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                TablerIcons.plus,
-                color: colors.whiteColor,
-                size: 18,
-              ),
-              8.width,
-              CommonText(
-                text: appLocalization.payment,
-                textColor: Colors.white,
-              ),
-            ],
+    return Visibility(
+      visible: controller.isRoleAccountPayment,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 40),
+        child: InkWell(
+          onTap: () => controller.showVendorPaymentModal(null),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: colors.blackColor.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(containerBorderRadius),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  TablerIcons.plus,
+                  color: colors.whiteColor,
+                  size: 18,
+                ),
+                8.width,
+                CommonText(
+                  text: appLocalization.payment,
+                  textColor: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),
