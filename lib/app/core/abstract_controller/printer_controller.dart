@@ -339,7 +339,7 @@ class PrinterController extends BaseController {
 
 // Add shop name
     bytes += generator.text(
-      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : 'Shop Name',
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : '',
       styles: const PosStyles(
         bold: true,
         height: PosTextSize.size2,
@@ -349,7 +349,15 @@ class PrinterController extends BaseController {
 
     // Add subtitle
     bytes += generator.text(
-      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : 'Shop Address',
+      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+      linesAfter: 1,
+    );
+
+    bytes += generator.text(
+      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : '',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -610,7 +618,7 @@ class PrinterController extends BaseController {
     // TODO: do it dynamic
     bytes += generator.feed(newLine);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -645,7 +653,7 @@ class PrinterController extends BaseController {
 
     // Add subtitle
     bytes += generator.text(
-      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : 'Shop Name',
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : '',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -775,7 +783,7 @@ class PrinterController extends BaseController {
     // TODO: do it dynamic
     bytes += generator.feed(newLine);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -810,7 +818,7 @@ class PrinterController extends BaseController {
 
     // Add subtitle
     bytes += generator.text(
-      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : 'Shop Name',
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : '',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -911,7 +919,7 @@ class PrinterController extends BaseController {
     // TODO: do it dynamic
     bytes += generator.feed(newLine);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -955,7 +963,7 @@ class PrinterController extends BaseController {
 
 // Add shop name
     bytes += generator.text(
-      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : 'Shop Name',
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : '',
       styles: const PosStyles(
         bold: true,
         height: PosTextSize.size2,
@@ -965,7 +973,7 @@ class PrinterController extends BaseController {
 
     // Add subtitle
     bytes += generator.text(
-      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : 'Shop Address',
+      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : '',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -1156,7 +1164,7 @@ class PrinterController extends BaseController {
     //bytes += generator.text(SetUp().printFooter ?? '');
     bytes += generator.feed(1);
     bytes += generator.text(
-      SetUp().website ?? 'TerminalBd.com',
+      SetUp().website ?? 'poskeeper.com',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
