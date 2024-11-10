@@ -162,6 +162,7 @@ class DashboardView extends BaseView<DashboardController> {
                 16.width,
                 controller.isManager
                     ? GestureDetector(
+                  onTap: controller.goToReportList,
                         child: Icon(
                           TablerIcons.report,
                           color: colors.whiteColor,

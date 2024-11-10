@@ -252,7 +252,7 @@ List<Widget> configButtonList = [
   TbdRoundButton(
     icon: TablerIcons.database_cog,
     onTap: () {
-      if(!isManager) {
+      if (!isManager) {
         showSnackBar(
           type: SnackBarType.warning,
           title: appLocalization.alert,
@@ -275,7 +275,7 @@ List<Widget> configButtonList = [
   TbdRoundButton(
     icon: TablerIcons.rotate_rectangle,
     onTap: () {
-      if(!isManager) {
+      if (!isManager) {
         showSnackBar(
           type: SnackBarType.warning,
           title: appLocalization.alert,
@@ -696,5 +696,11 @@ class DashboardController extends BaseController {
         message: appLocalization.noDataFound,
       );
     }
+  }
+
+  Future<void> goToReportList() async {
+    Get.toNamed(
+      Routes.reportList,
+    );
   }
 }
