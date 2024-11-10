@@ -370,18 +370,45 @@ class DashboardController extends BaseController {
   }
 
   void goToSalesList() {
+    if (!isRoleSales) {
+      showSnackBar(
+        type: SnackBarType.warning,
+        title: appLocalization.alert,
+        message: appLocalization.permissionDenied,
+      );
+      return;
+    }
+
     Get.toNamed(
       Routes.salesList,
     );
   }
 
   void goToPurchaseList() {
+    if (!isRolePurchase) {
+      showSnackBar(
+        type: SnackBarType.warning,
+        title: appLocalization.alert,
+        message: appLocalization.permissionDenied,
+      );
+      return;
+    }
+
     Get.toNamed(
       Routes.purchaseList,
     );
   }
 
   void goToExpenseList() {
+    if (!isRoleExpense) {
+      showSnackBar(
+        type: SnackBarType.warning,
+        title: appLocalization.alert,
+        message: appLocalization.permissionDenied,
+      );
+      return;
+    }
+
     Get.toNamed(
       Routes.expenseList,
     );

@@ -393,6 +393,7 @@
   "tableEnableDisable" : "টেবিল সক্রিয়/অক্ষম করুন",
   "vendors" : "বিক্রেতা",
   "customers" : "গ্রাহক",
+  "permissionDenied" : "অনুমতি অস্বীকৃত",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

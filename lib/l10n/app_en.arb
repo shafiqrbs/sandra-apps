@@ -400,7 +400,8 @@
   "connectYourPrinter" : "Connect your printer",
   "adjustment" : "Adjustment",
   "totalReturnAmount" : "Total Return Amount",
-  "advanceFilter" : "Advance Filter"
+  "advanceFilter" : "Advance Filter",
+  "permissionDenied" : "Permission Denied"
 
 
 
