@@ -39,6 +39,7 @@ abstract class Routes {
   static const categoryListPage = _Paths.categoryListPage;
   static const userListPage = _Paths.userListPage;
   static const salesReturnPage = _Paths.salesReturnPage;
+  static const  reportList = _Paths.reportList;
 }
 
 abstract class _Paths {
@@ -78,4 +79,5 @@ abstract class _Paths {
   static const categoryListPage = '/category_list_page';
   static const userListPage = '/user_list_page';
   static const salesReturnPage = '/sales_return_page';
+  static const  reportList = '/report_list';
 }

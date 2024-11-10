@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/report/report_list/bindings/report_list_binding.dart';
+import 'package:sandra/app/pages/report/report_list/views/report_list_view.dart';
 
 import '/app/pages/accounting/accounting_purchase/bindings/accounting_purchase_binding.dart';
 import '/app/pages/accounting/accounting_purchase/views/accounting_purchase_view.dart';
@@ -232,6 +234,11 @@ class AppPages {
       name: Routes.salesReturnPage,
       page: SalesReturnPageView.new,
       binding: SalesReturnPageBinding(),
+    ),
+    GetPage(
+      name: Routes.reportList,
+      page: ReportListView.new,
+      binding: ReportListBinding(),
     ),
   ];
 }
