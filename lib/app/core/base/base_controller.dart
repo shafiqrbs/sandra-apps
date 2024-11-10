@@ -45,6 +45,13 @@ abstract class BaseController extends GetxController {
   LoggedUser get loggedUser => LoggedUser();
 
   final isManager = LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
+  final isRoleSetting = LoggedUser().roles?.contains('ROLE_SETTING') ?? false;
+  final isRolePurchase = LoggedUser().roles?.contains('ROLE_PURCHASE') ?? false;
+  final isRoleSales = LoggedUser().roles?.contains('ROLE_SALES') ?? false;
+  final isRoleExpense = LoggedUser().roles?.contains('ROLE_EXPENSE') ?? false;
+  final isRoleStock = LoggedUser().roles?.contains('ROLE_STOCK') ?? false;
+  final isRoleAccountReceive = LoggedUser().roles?.contains('ROLE_ACCOUNT_RECEIVE') ?? false;
+  final isRoleAccountPayment = LoggedUser().roles?.contains('ROLE_ACCOUNT_PAYMENT') ?? false;
 
   final pageLimit = 25;
 

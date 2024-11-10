@@ -136,46 +136,41 @@ class DashboardView extends BaseView<DashboardController> {
             () => Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CommonText(
-                  text: controller.isOnline.value
-                      ? appLocalization.online
-                      : appLocalization.offline,
-                  fontSize: 10,
-                  textColor: Colors.white,
-                  fontWeight: FontWeight.w400,
-                ),
-
-                4.width,
-
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Center(
-                    child: Obx(
-                      () {
-                        return GestureDetector(
-                          onTap: controller.onTapIsOnline,
-                          child: Container(
-                            height: 16,
-                            width: 16,
-                            decoration: BoxDecoration(
-                              color: controller.isOnline.value
-                                  ? colors.primaryColor800
-                                  : colors.solidRedColor,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                        );
-                      },
+                GestureDetector(
+                  onTap: controller.onTapIsOnline,
+                  child: Container(
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Center(
+                      child: Container(
+                        height: 16,
+                        width: 16,
+                        decoration: BoxDecoration(
+                          color: controller.isOnline.value
+                              ? colors.primaryColor800
+                              : colors.solidRedColor,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-
                 12.width,
+                controller.isManager
+                    ? GestureDetector(
+                        child: Icon(
+                          TablerIcons.report,
+                          color: colors.whiteColor,
+                          size: 20,
+                        ),
+                      )
+                    : Container(),
+                controller.isManager ? 12.width : Container(),
+
                 InkWell(
                   onTap: controller.changeTheme,
                   child: Icon(
@@ -415,21 +410,25 @@ class DashboardView extends BaseView<DashboardController> {
             title: appLocalization.pos,
             buttonColor: colors.solidBlueColor,
             onTap: controller.goToSales,
+            permission: controller.isRoleSales,
           ),
           _buildCommonButtonCard(
             title: appLocalization.receive,
             buttonColor: colors.solidPurpleColor,
             onTap: controller.showCustomerReceiveModal,
+            permission: controller.isRoleAccountReceive,
           ),
           _buildCommonButtonCard(
             title: appLocalization.po,
             buttonColor: colors.solidOrangeColor,
             onTap: controller.goToPo,
+            permission: controller.isRolePurchase,
           ),
           _buildCommonButtonCard(
             title: appLocalization.pay,
             buttonColor: colors.solidOliveColor,
             onTap: controller.showVendorPaymentModal,
+            permission: controller.isRoleAccountPayment,
           ),
         ],
       ),
@@ -457,7 +456,9 @@ class DashboardView extends BaseView<DashboardController> {
     required String title,
     required Color buttonColor,
     required Function()? onTap,
+    required bool permission,
   }) {
+    if (!permission) return Container();
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
