@@ -4,7 +4,9 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/bank.dart';
@@ -58,18 +60,21 @@ List<Widget> inventoryButtonList = [
     onTap: () => navigatePage(Routes.salesList),
     localeMethod: () => appLocalization.sales,
     bgColor: colorList.value['blue'],
+    permission: isRoleSales,
   ),
   TbdRoundButton(
     icon: TablerIcons.truck_delivery,
     onTap: () => navigatePage(Routes.purchaseList),
     localeMethod: () => appLocalization.purchase,
     bgColor: colorList.value['orange'],
+    permission: isRolePurchase,
   ),
   TbdRoundButton(
     icon: TablerIcons.packages,
     onTap: () => navigatePage(Routes.stockList),
     localeMethod: () => appLocalization.stocks,
     bgColor: colorList.value['green'],
+    permission: isRoleStock,
   ),
   TbdRoundButton(
     icon: TablerIcons.credit_card_refund,
@@ -82,18 +87,21 @@ List<Widget> inventoryButtonList = [
     },
     localeMethod: () => appLocalization.salesReturn,
     bgColor: colorList.value['navyBlue'],
+    permission: isManager,
   ),
   TbdRoundButton(
     icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.building_store,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
+    permission: true,
   ),
   TbdRoundButton(
     text: appLocalization.stockList,
@@ -107,6 +115,7 @@ List<Widget> inventoryButtonList = [
     },
     localeMethod: () => appLocalization.purchaseReturn,
     bgColor: colorList.value['red'],
+    permission: isManager,
   ),
   TbdRoundButton(
     text: appLocalization.brand,
@@ -114,6 +123,7 @@ List<Widget> inventoryButtonList = [
     onTap: () => navigatePage(Routes.brandListPage),
     localeMethod: () => appLocalization.brand,
     bgColor: colorList.value['olive'],
+    permission: true,
   ),
   TbdRoundButton(
     text: appLocalization.category,
@@ -121,6 +131,7 @@ List<Widget> inventoryButtonList = [
     onTap: () => navigatePage(Routes.categoryListPage),
     localeMethod: () => appLocalization.category,
     bgColor: colorList.value['purple'],
+    permission: true,
   ),
 ];
 
@@ -138,36 +149,42 @@ List<Widget> accountingButtonList = [
     },
     localeMethod: () => appLocalization.newExpense,
     bgColor: colorList.value['marun'],
+    permission: isRoleExpense,
   ),
   TbdRoundButton(
     icon: TablerIcons.exposure,
     onTap: () => navigatePage(Routes.expenseList),
     localeMethod: () => appLocalization.expense,
     bgColor: colorList.value['grey'],
+    permission: isRoleExpense,
   ),
   TbdRoundButton(
     icon: TablerIcons.shopping_cart,
     onTap: () => navigatePage(Routes.accountingSales),
     localeMethod: () => appLocalization.sales,
     bgColor: colorList.value['blue'],
+    permission: isRoleSales,
   ),
   TbdRoundButton(
     icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.customerList),
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.truck_delivery,
     onTap: () => navigatePage(Routes.accountingPurchase),
     localeMethod: () => appLocalization.purchase,
     bgColor: colorList.value['orange'],
+    permission: isRolePurchase,
   ),
   TbdRoundButton(
     icon: TablerIcons.building_store,
     onTap: () => navigatePage(Routes.vendorList),
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.report,
@@ -180,6 +197,7 @@ List<Widget> accountingButtonList = [
     },
     localeMethod: () => appLocalization.journal,
     bgColor: colorList.value['red'],
+    permission: isManager,
   ),
 ];
 
@@ -189,18 +207,21 @@ List<Widget> createButtonList = [
     onTap: DashboardController().showAddCustomerModal,
     localeMethod: () => appLocalization.customer,
     bgColor: colorList.value['purple'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.building_store,
     onTap: DashboardController().showAddVendorModal,
     localeMethod: () => appLocalization.vendor,
     bgColor: colorList.value['olive'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.box,
     onTap: DashboardController().showAddStockModal,
     localeMethod: () => appLocalization.product,
     bgColor: colorList.value['green'],
+    permission: true,
   ),
 ];
 
@@ -210,10 +231,19 @@ List<Widget> configButtonList = [
     onTap: () => navigatePage(Routes.settings),
     localeMethod: () => appLocalization.global,
     bgColor: colorList.value['green'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.database_cog,
     onTap: () {
+      if(!isManager) {
+        showSnackBar(
+          type: SnackBarType.warning,
+          title: appLocalization.alert,
+          message: appLocalization.permissionDenied,
+        );
+        return;
+      }
       Get.dialog(
         DialogPattern(
           title: appLocalization.inventorySettings,
@@ -224,10 +254,19 @@ List<Widget> configButtonList = [
     },
     localeMethod: () => appLocalization.inventory,
     bgColor: colorList.value['navyBlue'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.rotate_rectangle,
     onTap: () {
+      if(!isManager) {
+        showSnackBar(
+          type: SnackBarType.warning,
+          title: appLocalization.alert,
+          message: appLocalization.permissionDenied,
+        );
+        return;
+      }
       Get.dialog(
         DialogPattern(
           title: appLocalization.synchronization,
@@ -238,18 +277,21 @@ List<Widget> configButtonList = [
     },
     localeMethod: () => appLocalization.sync,
     bgColor: colorList.value['marun'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.refresh_dot,
     onTap: () => navigatePage(Routes.offlineSyncProcess),
     localeMethod: () => appLocalization.offlineSyncProcess,
     bgColor: colorList.value['olive'],
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.users_group,
     onTap: () => navigatePage(Routes.userListPage),
     localeMethod: () => appLocalization.user,
     bgColor: colorList.value['marun'],
+    permission: true,
   ),
 ];
 

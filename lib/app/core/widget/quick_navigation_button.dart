@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/singleton_classes/color_schema.dart';
+import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
@@ -41,18 +42,21 @@ class QuickNavigationButton extends BaseWidget {
       onTap: () => navigatePage(Routes.salesList),
       localeMethod: () => appLocalization.sales,
       bgColor: colorList.value['blue'],
+      permission: isRoleSales,
     ),
     TbdRoundButton(
       icon: TablerIcons.truck_delivery,
       onTap: () => navigatePage(Routes.purchaseList),
       localeMethod: () => appLocalization.purchase,
       bgColor: colorList.value['orange'],
+      permission: isRolePurchase,
     ),
     TbdRoundButton(
       icon: TablerIcons.packages,
       onTap: () => navigatePage(Routes.stockList),
       localeMethod: () => appLocalization.stocks,
       bgColor: colorList.value['green'],
+      permission: isRoleStock,
     ),
     TbdRoundButton(
       icon: TablerIcons.credit_card_refund,
@@ -65,18 +69,21 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.salesReturn,
       bgColor: colorList.value['navyBlue'],
+      permission: isManager,
     ),
     TbdRoundButton(
       icon: TablerIcons.users_group,
       onTap: () => navigatePage(Routes.customerList),
       localeMethod: () => appLocalization.customer,
       bgColor: colorList.value['purple'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.building_store,
       onTap: () => navigatePage(Routes.vendorList),
       localeMethod: () => appLocalization.vendor,
       bgColor: colorList.value['olive'],
+      permission: true,
     ),
     TbdRoundButton(
       text: appLocalization.stockList,
@@ -90,6 +97,7 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.purchaseReturn,
       bgColor: colorList.value['red'],
+      permission: isManager,
     ),
   ];
 
@@ -107,36 +115,42 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.newExpense,
       bgColor: colorList.value['marun'],
+      permission: isRoleExpense,
     ),
     TbdRoundButton(
       icon: TablerIcons.exposure,
       onTap: () => navigatePage(Routes.expenseList),
       localeMethod: () => appLocalization.expense,
       bgColor: colorList.value['grey'],
+      permission: isRoleExpense,
     ),
     TbdRoundButton(
       icon: TablerIcons.shopping_cart,
       onTap: () => navigatePage(Routes.accountingSales),
       localeMethod: () => appLocalization.sales,
       bgColor: colorList.value['blue'],
+      permission: isRoleSales,
     ),
     TbdRoundButton(
       icon: TablerIcons.users_group,
       onTap: () => navigatePage(Routes.customerList),
       localeMethod: () => appLocalization.customer,
       bgColor: colorList.value['purple'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.truck_delivery,
       onTap: () => navigatePage(Routes.accountingPurchase),
       localeMethod: () => appLocalization.purchase,
       bgColor: colorList.value['orange'],
+      permission: isRolePurchase,
     ),
     TbdRoundButton(
       icon: TablerIcons.building_store,
       onTap: () => navigatePage(Routes.vendorList),
       localeMethod: () => appLocalization.vendor,
       bgColor: colorList.value['olive'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.report,
@@ -149,6 +163,7 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.journal,
       bgColor: colorList.value['red'],
+      permission: isManager,
     ),
   ];
 
@@ -158,10 +173,19 @@ class QuickNavigationButton extends BaseWidget {
       onTap: () => navigatePage(Routes.settings),
       localeMethod: () => appLocalization.global,
       bgColor: colorList.value['green'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.database_cog,
       onTap: () {
+        if(!isManager) {
+          showSnackBar(
+            type: SnackBarType.warning,
+            title: appLocalization.alert,
+            message: appLocalization.permissionDenied,
+          );
+          return;
+        }
         Get.dialog(
           DialogPattern(
             title: appLocalization.inventorySettings,
@@ -172,10 +196,19 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.inventory,
       bgColor: colorList.value['navyBlue'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.rotate_rectangle,
       onTap: () {
+        if(!isManager) {
+          showSnackBar(
+            type: SnackBarType.warning,
+            title: appLocalization.alert,
+            message: appLocalization.permissionDenied,
+          );
+          return;
+        }
         Get.dialog(
           DialogPattern(
             title: appLocalization.synchronization,
@@ -186,12 +219,14 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.sync,
       bgColor: colorList.value['marun'],
+      permission: true,
     ),
     TbdRoundButton(
       icon: TablerIcons.refresh_dot,
       onTap: () => navigatePage(Routes.offlineSyncProcess),
       localeMethod: () => appLocalization.offlineSyncProcess,
       bgColor: colorList.value['olive'],
+      permission: true,
     ),
   ];
 

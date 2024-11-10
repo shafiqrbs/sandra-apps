@@ -9,8 +9,10 @@ class TbdRoundButton extends StatelessWidget {
   final String Function()? localeMethod;
   final IconData? icon;
   final Color? bgColor;
+  final bool permission;
 
   const TbdRoundButton({
+    required this.permission,
     this.text,
     super.key,
     this.onTap,
