@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sandra/app/pages/report/report_details/controllers/report_details_controller.dart';
+
 import '/app/core/base/base_view.dart';
+import '../controllers/system_overview_report_controller.dart';
 
 //ignore: must_be_immutable
-class ReportDetailsView extends BaseView<ReportDetailsController> {
-  ReportDetailsView({super.key});
+class SystemOverviewReportView extends BaseView<SystemOverviewReportController> {
+  SystemOverviewReportView({super.key});
     
   @override
   PreferredSizeWidget? appBar(BuildContext context) {

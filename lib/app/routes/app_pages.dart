@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:sandra/app/pages/report/report_details/bindings/report_details_binding.dart';
-import 'package:sandra/app/pages/report/report_details/views/report_details_view.dart';
 import 'package:sandra/app/pages/report/report_list/bindings/report_list_binding.dart';
 import 'package:sandra/app/pages/report/report_list/views/report_list_view.dart';
 
@@ -60,6 +58,8 @@ import '/app/pages/inventory/sales/sales_return_page/bindings/sales_return_page_
 import '/app/pages/inventory/sales/sales_return_page/views/sales_return_page_view.dart';
 import '/app/pages/inventory/stock/stock_list/bindings/stock_list_binding.dart';
 import '/app/pages/inventory/stock/stock_list/views/stock_list_view.dart';
+import '/app/pages/report/report_details/system_overview_report/bindings/system_overview_report_binding.dart';
+import '/app/pages/report/report_details/system_overview_report/views/system_overview_report_view.dart';
 import '/app/pages/restaurant_module/order_cart/bindings/order_cart_binding.dart';
 import '/app/pages/restaurant_module/order_cart/views/order_cart_view.dart';
 import '/app/pages/restaurant_module/restaurant_home/bindings/restaurant_home_binding.dart';
@@ -243,9 +243,10 @@ class AppPages {
       binding: ReportListBinding(),
     ),
     GetPage(
-      name: Routes.reportDetails,
-      page: ReportDetailsView.new,
-      binding: ReportDetailsBinding(),
+      name: Routes.systemOverviewReport,
+      page: SystemOverviewReportView.new,
+      binding: SystemOverviewReportBinding(),
     ),
+
   ];
 }
