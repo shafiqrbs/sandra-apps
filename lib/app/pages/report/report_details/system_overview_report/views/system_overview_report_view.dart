@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/values/app_colors.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/label_value.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
@@ -24,6 +24,27 @@ class SystemOverviewReportView
       title: PageBackButton(
         pageTitle: appLocalization.overview,
       ),
+      actions: [
+        IconButton(
+          icon: Icon(
+            TablerIcons.printer,
+            color: colors.whiteColor,
+          ),
+          onPressed: () {
+
+          },
+        ),
+        IconButton(
+          icon: Icon(
+            TablerIcons.share,
+            color: colors.whiteColor,
+          ),
+          onPressed: () {
+            controller.generateSystemOverviewPdf();
+          },
+        ),
+        8.width,
+      ],
     );
   }
 

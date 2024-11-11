@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -11,6 +12,7 @@ import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/entity/system_overview_report.dart';
 import 'package:sandra/app/entity/vendor.dart';
 import 'package:sandra/app/entity/vendor_ledger.dart';
 
@@ -869,6 +871,278 @@ Future<void> generateVendorLedgerPdf({
   await saveAndOpenPdf(pdf, 'vendor_ledger_report.pdf');
 }
 
+Future<void> generateSystemOverViewPdf(
+    SystemOverViewReport systemOverview) async {
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return [
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              // Header Section
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().name}',
+                  style: pw.TextStyle(
+                    fontSize: 24,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+              pw.SizedBox(height: 10),
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().address}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+              ),
+              pw.SizedBox(height: 20),
+              pw.Container(
+                child: pw.Text(
+                  'System Overview',
+                  style: pw.TextStyle(
+                    fontSize: 20,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+              pw.SizedBox(height: 10),
+
+              // Current Stock section
+              pw.Container(
+                padding: const pw.EdgeInsets.all(10),
+                child: pw.Column(children: [
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Current Stock',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Sales Price',
+                            systemOverview.currentStock?.salesPrice ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Profit',
+                            systemOverview.currentStock?.profit ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Purchase Price',
+                            systemOverview.currentStock?.purchasePrice ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Quantity',
+                            systemOverview.currentStock?.quantity ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                    ],
+                  ),
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Income',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Sales',
+                            systemOverview.income?.sales ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Profit',
+                            systemOverview.income?.profit ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Purchase',
+                            systemOverview.income?.purchase ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Expense',
+                            systemOverview.income?.expense ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                    ],
+                  ),
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Purchase',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Purchase',
+                            systemOverview.purchase?.purchase ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Amount',
+                            systemOverview.purchase?.amount ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Payable',
+                            systemOverview.purchase?.payable ?? '',
+                          ),
+                          pw.Container(),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                    ],
+                  ),
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Sales',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Sales',
+                            systemOverview.sales?.sales ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Amount',
+                            systemOverview.sales?.amount ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Receivable',
+                            systemOverview.sales?.receivable ?? '',
+                          ),
+                          pw.Container(),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                    ],
+                  ),
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Transaction',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Cash',
+                            systemOverview.transaction?.cash ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Stock Price',
+                            systemOverview.transaction?.stockPrice ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Receivable',
+                            systemOverview.transaction?.receivable ?? '',
+                          ),
+                          _buildLabelValue(
+                            'Payable',
+                            systemOverview.transaction?.payable ?? '',
+                          ),
+                        ],
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildLabelValue(
+                            'Capital',
+                            systemOverview.transaction?.capital ?? '',
+                          ),
+                          pw.Container(),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                    ],
+                  ),
+                ]),
+              ),
+
+              pw.SizedBox(height: 10),
+
+              pw.SizedBox(height: 20),
+            ],
+          ),
+        ];
+      },
+    ),
+  );
+
+  await saveAndOpenPdf(pdf, 'system_overview_report.pdf');
+}
+
 Future<void> saveAndOpenPdf(
   pw.Document pdf,
   String pathName,
@@ -936,5 +1210,42 @@ pw.Widget _buildIcon(PdfColor color, String label) {
         ),
       ),
     ],
+  );
+}
+
+pw.Widget _buildLabelValue(String label, String value) {
+  return pw.Container(
+    width: Get.width * 0.5,
+    child: pw.Row(
+      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+      children: [
+        pw.Expanded(
+          child: pw.Text(
+            label,
+            style: const pw.TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ),
+        pw.Container(
+          margin: const pw.EdgeInsets.only(left: 6, right: 6),
+          child: pw.Text(
+            ':',
+            style: const pw.TextStyle(
+              fontSize: 14,
+              color: PdfColors.black,
+            ),
+          ),
+        ),
+        pw.Expanded(
+          child: pw.Text(
+            value,
+            style: const pw.TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ),
+      ],
+    ),
   );
 }
