@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -922,212 +923,223 @@ Future<void> generateSystemOverViewPdf(
               // Current Stock section
               pw.Container(
                 padding: const pw.EdgeInsets.all(10),
-                child: pw.Column(children: [
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        'Current Stock',
-                        style: pw.TextStyle(
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
+                child: pw.Column(
+                  children: [
+                    pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          'Current Stock',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      pw.SizedBox(height: 10),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Sales Price',
-                            systemOverview.currentStock?.salesPrice ?? '',
-                          ),
-                          _buildLabelValue(
-                            'Profit',
-                            systemOverview.currentStock?.profit ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Purchase Price',
-                            systemOverview.currentStock?.purchasePrice ?? '',
-                          ),
-                          _buildLabelValue(
-                            'Quantity',
-                            systemOverview.currentStock?.quantity ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.SizedBox(height: 10),
-                    ],
-                  ),
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        'Income',
-                        style: pw.TextStyle(
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
+                        pw.SizedBox(height: 10),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Sales Price',
+                              systemOverview.currentStock?.salesPrice ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Quantity',
+                              systemOverview.currentStock?.quantity ?? '',
+                            ),
+                          ],
                         ),
-                      ),
-                      pw.SizedBox(height: 10),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Sales',
-                            systemOverview.income?.sales ?? '',
-                          ),
-                          _buildLabelValue(
-                            'Profit',
-                            systemOverview.income?.profit ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Purchase',
-                            systemOverview.income?.purchase ?? '',
-                          ),
-                          _buildLabelValue(
-                            'Expense',
-                            systemOverview.income?.expense ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.SizedBox(height: 10),
-                    ],
-                  ),
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        'Purchase',
-                        style: pw.TextStyle(
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Purchase Price',
+                              systemOverview.currentStock?.purchasePrice ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Profit',
+                              systemOverview.currentStock?.profit ?? '',
+                            ),
+                          ],
                         ),
-                      ),
-                      pw.SizedBox(height: 10),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Purchase',
-                            systemOverview.purchase?.purchase ?? '',
+                        pw.SizedBox(height: 10),
+                      ],
+                    ),
+                    pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          'Income',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
                           ),
-                          _buildLabelValue(
-                            'Amount',
-                            systemOverview.purchase?.amount ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Payable',
-                            systemOverview.purchase?.payable ?? '',
-                          ),
-                          pw.Container(),
-                        ],
-                      ),
-                      pw.SizedBox(height: 10),
-                    ],
-                  ),
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        'Sales',
-                        style: pw.TextStyle(
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
                         ),
-                      ),
-                      pw.SizedBox(height: 10),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Sales',
-                            systemOverview.sales?.sales ?? '',
-                          ),
-                          _buildLabelValue(
-                            'Amount',
-                            systemOverview.sales?.amount ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Receivable',
-                            systemOverview.sales?.receivable ?? '',
-                          ),
-                          pw.Container(),
-                        ],
-                      ),
-                      pw.SizedBox(height: 10),
-                    ],
-                  ),
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        'Transaction',
-                        style: pw.TextStyle(
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
+                        pw.SizedBox(height: 10),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Sales',
+                              systemOverview.income?.sales ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Expense',
+                              systemOverview.income?.expense ?? '',
+                            ),
+                          ],
                         ),
-                      ),
-                      pw.SizedBox(height: 10),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Cash',
-                            systemOverview.transaction?.cash ?? '',
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Purchase',
+                              systemOverview.income?.purchase ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Profit',
+                              systemOverview.income?.profit ?? '',
+                            ),
+                          ],
+                        ),
+                        pw.SizedBox(height: 10),
+                      ],
+                    ),
+                    pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          'Purchase',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
                           ),
-                          _buildLabelValue(
-                            'Stock Price',
-                            systemOverview.transaction?.stockPrice ?? '',
+                        ),
+                        pw.SizedBox(height: 10),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Purchase',
+                              systemOverview.purchase?.purchase ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Payable',
+                              systemOverview.purchase?.payable ?? '',
+                            ),
+                          ],
+                        ),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Payment',
+                              systemOverview.purchase?.amount ?? '',
+                            ),
+                            pw.Container(),
+                          ],
+                        ),
+                        pw.SizedBox(height: 10),
+                      ],
+                    ),
+                    pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          'Sales',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Receivable',
-                            systemOverview.transaction?.receivable ?? '',
+                        ),
+                        pw.SizedBox(height: 10),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Sales',
+                              systemOverview.sales?.sales ?? '',
+                            ),
+                            _buildLabelValue(
+                              'Receivable',
+                              systemOverview.sales?.receivable ?? '',
+                            ),
+                          ],
+                        ),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelValue(
+                              'Receive',
+                              systemOverview.sales?.amount ?? '',
+                            ),
+                            pw.Container(),
+                          ],
+                        ),
+                        pw.SizedBox(height: 10),
+                      ],
+                    ),
+                    pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          'Transaction',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
                           ),
-                          _buildLabelValue(
-                            'Payable',
-                            systemOverview.transaction?.payable ?? '',
-                          ),
-                        ],
-                      ),
-                      pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildLabelValue(
-                            'Capital',
-                            systemOverview.transaction?.capital ?? '',
-                          ),
-                          pw.Container(),
-                        ],
-                      ),
-                      pw.SizedBox(height: 10),
-                    ],
-                  ),
-                ]),
+                        ),
+                        pw.SizedBox(height: 10),
+                        pw.Row(
+                          children: [
+                            pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                _buildLabelValue(
+                                  'Cash',
+                                  systemOverview.transaction?.cash ?? '',
+                                ),
+                                _buildLabelValue(
+                                  'Stock Price',
+                                  systemOverview.transaction?.stockPrice ?? '',
+                                ),
+                                _buildLabelValue(
+                                  'Receivable',
+                                  systemOverview.transaction?.receivable ?? '',
+                                ),
+                                _buildLabelValue(
+                                  'Payable',
+                                  systemOverview.transaction?.payable ?? '',
+                                ),
+                                pw.SizedBox(height: 4),
+                                pw.Container(
+                                  height: 1,
+                                  width: Get.width * 0.5,
+                                  color: PdfColors.black,
+                                ),
+                                pw.SizedBox(height: 4),
+                                _buildLabelValue(
+                                  'Capital',
+                                  systemOverview.transaction?.capital ?? '',
+                                  textStyle: pw.TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: pw.FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            _buildLabelValue(
+                              '',
+                              '',
+                              isDivider: false
+                            ),
+                          ]
+                        ),
+                        pw.SizedBox(height: 10),
+                      ],
+                    ),
+                  ],
+                ),
               ),
 
               pw.SizedBox(height: 10),
@@ -1213,7 +1225,7 @@ pw.Widget _buildIcon(PdfColor color, String label) {
   );
 }
 
-pw.Widget _buildLabelValue(String label, String value) {
+pw.Widget _buildLabelValue(String label, String value, {bool isDivider = true, pw.TextStyle? textStyle}) {
   return pw.Container(
     width: Get.width * 0.5,
     child: pw.Row(
@@ -1222,7 +1234,7 @@ pw.Widget _buildLabelValue(String label, String value) {
         pw.Expanded(
           child: pw.Text(
             label,
-            style: const pw.TextStyle(
+            style: textStyle ?? const pw.TextStyle(
               fontSize: 12,
             ),
           ),
@@ -1230,7 +1242,7 @@ pw.Widget _buildLabelValue(String label, String value) {
         pw.Container(
           margin: const pw.EdgeInsets.only(left: 6, right: 6),
           child: pw.Text(
-            ':',
+            isDivider ? ':' : '',
             style: const pw.TextStyle(
               fontSize: 14,
               color: PdfColors.black,
@@ -1240,7 +1252,7 @@ pw.Widget _buildLabelValue(String label, String value) {
         pw.Expanded(
           child: pw.Text(
             value,
-            style: const pw.TextStyle(
+            style: textStyle ??const pw.TextStyle(
               fontSize: 12,
             ),
           ),
