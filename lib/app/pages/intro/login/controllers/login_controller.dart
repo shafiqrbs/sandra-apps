@@ -11,7 +11,7 @@ class LoginController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final userNameController = TextEditingController(
-    text: kDebugMode ? (true ? 'Pharamacy' : 'jpfood') : '',
+    text: kDebugMode ? (true ? 'Pharmacy' : 'jpfood') : '',
   );
   final passwordController = TextEditingController(
     text: kDebugMode ? '@123456' : '',

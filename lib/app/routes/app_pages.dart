@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/report/report_details/bindings/report_details_binding.dart';
+import 'package:sandra/app/pages/report/report_details/views/report_details_view.dart';
 import 'package:sandra/app/pages/report/report_list/bindings/report_list_binding.dart';
 import 'package:sandra/app/pages/report/report_list/views/report_list_view.dart';
 
@@ -239,6 +241,11 @@ class AppPages {
       name: Routes.reportList,
       page: ReportListView.new,
       binding: ReportListBinding(),
+    ),
+    GetPage(
+      name: Routes.reportDetails,
+      page: ReportDetailsView.new,
+      binding: ReportDetailsBinding(),
     ),
   ];
 }
