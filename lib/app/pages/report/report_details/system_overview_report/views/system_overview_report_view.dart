@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/label_value.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
@@ -14,6 +15,8 @@ import '../controllers/system_overview_report_controller.dart';
 class SystemOverviewReportView
     extends BaseView<SystemOverviewReportController> {
   SystemOverviewReportView({super.key});
+
+  final currency = SetUp().symbol;
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -30,9 +33,7 @@ class SystemOverviewReportView
             TablerIcons.printer,
             color: colors.whiteColor,
           ),
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
@@ -99,15 +100,16 @@ class SystemOverviewReportView
             children: [
               LabelValue(
                 label: appLocalization.salesPrice,
-                value: currentStockOverview?.salesPrice ?? '',
+                value:
+                    '${currency ?? ''} ${currentStockOverview?.salesPrice ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.purchasePrice,
-                value: currentStockOverview?.purchasePrice ?? '',
+                value: '${currency ?? ''} ${currentStockOverview?.purchasePrice ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.profit,
-                value: currentStockOverview?.profit ?? '',
+                value: '${currency ?? ''} ${currentStockOverview?.profit ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.quantity,
@@ -137,19 +139,19 @@ class SystemOverviewReportView
             children: [
               LabelValue(
                 label: appLocalization.sales,
-                value: incomeOverview?.sales ?? '',
+                value: '${currency ?? ''} ${incomeOverview?.sales ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.purchase,
-                value: incomeOverview?.purchase ?? '',
+                value: '${currency ?? ''} ${incomeOverview?.purchase ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.profit,
-                value: incomeOverview?.profit ?? '',
+                value: '${currency ?? ''} ${incomeOverview?.profit ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.expense,
-                value: incomeOverview?.expense ?? '',
+                value: '${currency ?? ''} ${incomeOverview?.expense ?? ''}',
               ),
             ],
           ),
@@ -175,15 +177,15 @@ class SystemOverviewReportView
             children: [
               LabelValue(
                 label: appLocalization.purchase,
-                value: purchaseOverview?.purchase ?? '',
+                value: '${currency ?? ''} ${purchaseOverview?.purchase ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.amount,
-                value: purchaseOverview?.amount ?? '',
+                value: '${currency ?? ''} ${purchaseOverview?.amount ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.payable,
-                value: purchaseOverview?.payable ?? '',
+                value: '${currency ?? ''} ${purchaseOverview?.payable ?? ''}',
               ),
             ],
           ),
@@ -209,15 +211,15 @@ class SystemOverviewReportView
             children: [
               LabelValue(
                 label: appLocalization.sales,
-                value: salesOverview?.sales ?? '',
+                value: '${currency ?? ''} ${salesOverview?.sales ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.amount,
-                value: salesOverview?.amount ?? '',
+                value: '${currency ?? ''} ${salesOverview?.amount ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.receivable,
-                value: salesOverview?.receivable ?? '',
+                value: '${currency ?? ''} ${salesOverview?.receivable ?? ''}',
               ),
             ],
           ),
@@ -243,23 +245,25 @@ class SystemOverviewReportView
             children: [
               LabelValue(
                 label: appLocalization.cash,
-                value: transactionOverview?.cash ?? '',
+                value: '${currency ?? ''} ${transactionOverview?.cash ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.stockPrice,
-                value: transactionOverview?.stockPrice ?? '',
+                value:
+                    '${currency ?? ''} ${transactionOverview?.stockPrice ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.receivable,
-                value: transactionOverview?.receivable ?? '',
+                value:
+                    '${currency ?? ''} ${transactionOverview?.receivable ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.payable,
-                value: transactionOverview?.payable ?? '',
+                value: '${currency ?? ''} ${transactionOverview?.payable ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.capital,
-                value: transactionOverview?.capital ?? '',
+                value: '${currency ?? ''} ${transactionOverview?.capital ?? ''}',
               ),
             ],
           ),
