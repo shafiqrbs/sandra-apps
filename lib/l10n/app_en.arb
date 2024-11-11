@@ -80,7 +80,7 @@
   "list" : "List",
   "outstanding" : "Outstanding",
   "brand" : "Brand",
-  "salesPrice" : "Sales",
+  "salesPrice" : "Sales Price",
   "damagePrice" : "Damage",
   "openQuantity" : "Opening",
   "category" : "Category",
@@ -401,7 +401,12 @@
   "adjustment" : "Adjustment",
   "totalReturnAmount" : "Total Return Amount",
   "advanceFilter" : "Advance Filter",
-  "permissionDenied" : "Permission Denied"
+  "permissionDenied" : "Permission Denied",
+  "currentStock" : "Current Stock",
+  "income" : "Income",
+  "transaction" : "Transaction",
+  "stockPrice" : "Stock Price",
+  "capital" : "Capital"
 
 
 
