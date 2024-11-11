@@ -1090,51 +1090,45 @@ Future<void> generateSystemOverViewPdf(
                           ),
                         ),
                         pw.SizedBox(height: 10),
-                        pw.Row(
-                          children: [
-                            pw.Column(
-                              crossAxisAlignment: pw.CrossAxisAlignment.start,
-                              children: [
-                                _buildLabelValue(
-                                  'Cash',
-                                  systemOverview.transaction?.cash ?? '',
+                        pw.Row(children: [
+                          pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              _buildLabelValue(
+                                'Cash',
+                                systemOverview.transaction?.cash ?? '',
+                              ),
+                              _buildLabelValue(
+                                'Stock Price',
+                                systemOverview.transaction?.stockPrice ?? '',
+                              ),
+                              _buildLabelValue(
+                                'Receivable',
+                                systemOverview.transaction?.receivable ?? '',
+                              ),
+                              _buildLabelValue(
+                                'Payable',
+                                systemOverview.transaction?.payable ?? '',
+                              ),
+                              pw.SizedBox(height: 4),
+                              pw.Container(
+                                height: 1,
+                                width: Get.width * 0.5,
+                                color: PdfColors.black,
+                              ),
+                              pw.SizedBox(height: 4),
+                              _buildLabelValue(
+                                'Capital',
+                                systemOverview.transaction?.capital ?? '',
+                                textStyle: pw.TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: pw.FontWeight.bold,
                                 ),
-                                _buildLabelValue(
-                                  'Stock Price',
-                                  systemOverview.transaction?.stockPrice ?? '',
-                                ),
-                                _buildLabelValue(
-                                  'Receivable',
-                                  systemOverview.transaction?.receivable ?? '',
-                                ),
-                                _buildLabelValue(
-                                  'Payable',
-                                  systemOverview.transaction?.payable ?? '',
-                                ),
-                                pw.SizedBox(height: 4),
-                                pw.Container(
-                                  height: 1,
-                                  width: Get.width * 0.5,
-                                  color: PdfColors.black,
-                                ),
-                                pw.SizedBox(height: 4),
-                                _buildLabelValue(
-                                  'Capital',
-                                  systemOverview.transaction?.capital ?? '',
-                                  textStyle: pw.TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: pw.FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            _buildLabelValue(
-                              '',
-                              '',
-                              isDivider: false
-                            ),
-                          ]
-                        ),
+                              ),
+                            ],
+                          ),
+                          _buildLabelValue('', '', isDivider: false),
+                        ]),
                         pw.SizedBox(height: 10),
                       ],
                     ),
@@ -1225,7 +1219,8 @@ pw.Widget _buildIcon(PdfColor color, String label) {
   );
 }
 
-pw.Widget _buildLabelValue(String label, String value, {bool isDivider = true, pw.TextStyle? textStyle}) {
+pw.Widget _buildLabelValue(String label, String value,
+    {bool isDivider = true, pw.TextStyle? textStyle}) {
   return pw.Container(
     width: Get.width * 0.5,
     child: pw.Row(
@@ -1234,9 +1229,10 @@ pw.Widget _buildLabelValue(String label, String value, {bool isDivider = true, p
         pw.Expanded(
           child: pw.Text(
             label,
-            style: textStyle ?? const pw.TextStyle(
-              fontSize: 12,
-            ),
+            style: textStyle ??
+                const pw.TextStyle(
+                  fontSize: 12,
+                ),
           ),
         ),
         pw.Container(
@@ -1252,9 +1248,10 @@ pw.Widget _buildLabelValue(String label, String value, {bool isDivider = true, p
         pw.Expanded(
           child: pw.Text(
             value,
-            style: textStyle ??const pw.TextStyle(
-              fontSize: 12,
-            ),
+            style: textStyle ??
+                const pw.TextStyle(
+                  fontSize: 12,
+                ),
           ),
         ),
       ],

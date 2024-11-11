@@ -7,7 +7,6 @@ import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/label_value.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:sandra/app/entity/system_overview_report.dart';
-
 import '/app/core/base/base_view.dart';
 import '../controllers/system_overview_report_controller.dart';
 
@@ -28,13 +27,6 @@ class SystemOverviewReportView
         pageTitle: appLocalization.overview,
       ),
       actions: [
-        IconButton(
-          icon: Icon(
-            TablerIcons.printer,
-            color: colors.whiteColor,
-          ),
-          onPressed: () {},
-        ),
         IconButton(
           icon: Icon(
             TablerIcons.share,
@@ -105,15 +97,17 @@ class SystemOverviewReportView
               ),
               LabelValue(
                 label: appLocalization.purchasePrice,
-                value: '${currency ?? ''} ${currentStockOverview?.purchasePrice ?? ''}',
-              ),
-              LabelValue(
-                label: appLocalization.profit,
-                value: '${currency ?? ''} ${currentStockOverview?.profit ?? ''}',
+                value:
+                    '${currency ?? ''} ${currentStockOverview?.purchasePrice ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.quantity,
                 value: currentStockOverview?.quantity ?? '',
+              ),
+              LabelValue(
+                label: appLocalization.profit,
+                value:
+                    '${currency ?? ''} ${currentStockOverview?.profit ?? ''}',
               ),
             ],
           ),
@@ -146,12 +140,12 @@ class SystemOverviewReportView
                 value: '${currency ?? ''} ${incomeOverview?.purchase ?? ''}',
               ),
               LabelValue(
-                label: appLocalization.profit,
-                value: '${currency ?? ''} ${incomeOverview?.profit ?? ''}',
-              ),
-              LabelValue(
                 label: appLocalization.expense,
                 value: '${currency ?? ''} ${incomeOverview?.expense ?? ''}',
+              ),
+              LabelValue(
+                label: appLocalization.profit,
+                value: '${currency ?? ''} ${incomeOverview?.profit ?? ''}',
               ),
             ],
           ),
@@ -180,12 +174,12 @@ class SystemOverviewReportView
                 value: '${currency ?? ''} ${purchaseOverview?.purchase ?? ''}',
               ),
               LabelValue(
-                label: appLocalization.amount,
-                value: '${currency ?? ''} ${purchaseOverview?.amount ?? ''}',
-              ),
-              LabelValue(
                 label: appLocalization.payable,
                 value: '${currency ?? ''} ${purchaseOverview?.payable ?? ''}',
+              ),
+              LabelValue(
+                label: appLocalization.payment,
+                value: '${currency ?? ''} ${purchaseOverview?.amount ?? ''}',
               ),
             ],
           ),
@@ -214,12 +208,12 @@ class SystemOverviewReportView
                 value: '${currency ?? ''} ${salesOverview?.sales ?? ''}',
               ),
               LabelValue(
-                label: appLocalization.amount,
-                value: '${currency ?? ''} ${salesOverview?.amount ?? ''}',
-              ),
-              LabelValue(
                 label: appLocalization.receivable,
                 value: '${currency ?? ''} ${salesOverview?.receivable ?? ''}',
+              ),
+              LabelValue(
+                label: appLocalization.receive,
+                value: '${currency ?? ''} ${salesOverview?.amount ?? ''}',
               ),
             ],
           ),
@@ -259,11 +253,13 @@ class SystemOverviewReportView
               ),
               LabelValue(
                 label: appLocalization.payable,
-                value: '${currency ?? ''} ${transactionOverview?.payable ?? ''}',
+                value:
+                    '${currency ?? ''} ${transactionOverview?.payable ?? ''}',
               ),
               LabelValue(
                 label: appLocalization.capital,
-                value: '${currency ?? ''} ${transactionOverview?.capital ?? ''}',
+                value:
+                    '${currency ?? ''} ${transactionOverview?.capital ?? ''}',
               ),
             ],
           ),
