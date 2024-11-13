@@ -77,7 +77,9 @@ class SalesProcessModalController extends PaymentGatewayController {
       notifyChildrens();
       refresh();
     }
-    print('salesItemList: ${jsonEncode(salesItemList)}');
+    if (kDebugMode) {
+      print('salesItemList: ${jsonEncode(salesItemList)}');
+    }
   }
 
   Future<void> baseInit() async {
@@ -224,6 +226,7 @@ class SalesProcessModalController extends PaymentGatewayController {
       salesBy: userManager.value.asController.selectedValue?.fullName,
       salesById: userManager.value.asController.selectedValue?.userId,
       isOnline: preSales == null ? 0 : preSales!.isOnline,
+      purchasePrice: salesPurchasePrice.value,
     );
 
     if (customerManager.selectedItem.value != null) {

@@ -162,7 +162,7 @@ class DashboardView extends BaseView<DashboardController> {
                 16.width,
                 controller.isManager
                     ? GestureDetector(
-                  onTap: controller.goToReportList,
+                        onTap: controller.goToReportList,
                         child: Icon(
                           TablerIcons.report,
                           color: colors.whiteColor,
@@ -197,6 +197,17 @@ class DashboardView extends BaseView<DashboardController> {
                             ),
                           ),
                         ),
+                        if (kDebugMode)
+                          GestureDetector(
+                            onTap: controller.clearLicense,
+                            child: Text(
+                              'Reset',
+                              style: TextStyle(
+                                color: colors.solidBlackColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                     arrowTipDistance: 10,
