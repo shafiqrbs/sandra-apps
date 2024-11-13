@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/entity/sales.dart';
+import 'package:sandra/app/entity/sales_item.dart';
 import '/app/core/base/base_controller.dart';
 
 class SalesReturnPageController extends BaseController {
@@ -11,6 +12,8 @@ class SalesReturnPageController extends BaseController {
   final paymentController = TextEditingController();
   final adjustmentController = TextEditingController();
   final remarkController = TextEditingController();
+
+  final generatedList = <int, SalesItem>{};
 
   @override
   Future<void> onInit() async {
@@ -41,7 +44,24 @@ class SalesReturnPageController extends BaseController {
     }
   }
 
-  void save() {
+  void save() {}
 
+  void addItem(SalesItem item) {
+    generatedList.update(
+      item.stockId!,
+      (existingValue) {
+        return item;
+      },
+      ifAbsent: () {
+        return item;
+      },
+    );
+
+  }
+
+  void removeItem(int? elementId) {
+    if (generatedList.containsKey(elementId)) {
+      generatedList.remove(elementId);
+    }
   }
 }

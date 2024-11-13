@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ import 'package:sandra/app/core/widget/list_button.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';
 import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/core/widget/row_button.dart';
+import 'package:sandra/app/entity/sales_item.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/inventory/sales/sales_return_page/controllers/sales_return_page_controller.dart';
 
@@ -44,6 +46,23 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          if (kDebugMode)
+            ElevatedButton(
+              onPressed: () {
+                controller.generatedList.forEach(
+                  (key, value) {
+                    if (kDebugMode) {
+                      print('key $key');
+                      print('qty : ${value.quantity}');
+                      print('mrp : ${value.mrpPrice}');
+                      print('subtotal : ${value.subTotal}');
+                    }
+                  },
+                );
+              },
+              child: const Text('Print generated List'),
+            ),
+
           DecoratedBox(
             decoration: BoxDecoration(
               color: colors.secondaryColor50,
@@ -181,6 +200,8 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
               ],
             ),
           ),
+
+          //012400011
           SizedBox(
             height: 40.ph,
             child: Obx(
@@ -188,16 +209,17 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                 shrinkWrap: true,
                 itemCount: controller.sales.value?.salesItem?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
+                  // return _cardItem();
                   final elementItem = controller.sales.value!.salesItem![index];
-                  final qtyController = TextEditingController(
-                    text: elementItem.quantity?.toString() ?? '',
-                  );
+                  final initialPrice = elementItem.mrpPrice ?? 0;
+                  final initialQuantity = elementItem.quantity ?? 0;
 
-                  final priceController = TextEditingController(
-                    text: elementItem.mrpPrice?.toString() ?? '',
-                  );
+                  final qtyController = TextEditingController();
 
-                  final total = (elementItem.subTotal?.toString() ?? 0).obs;
+                  final priceController = TextEditingController();
+
+                  final total = '0'.obs;
+                  final elementId = elementItem.stockId;
 
                   return Container(
                     //height: 50,
@@ -229,79 +251,166 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                           ),
                         ),
                         Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.zero,
-                            height: mediumTextFieldHeight,
-                            //width: Get.width * 0.7,
-                            color: colors.primaryColor50,
-                            child: TextFormField(
-                              controller: priceController,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              inputFormatters: doubleInputFormatter,
-                              onChanged: (value) {
-                                elementItem.mrpPrice =
-                                    double.tryParse(value) ?? 0;
-                                total.value = (elementItem.mrpPrice! *
-                                        elementItem.quantity!)
-                                    .toString();
-                              },
-                              style: TextStyle(
-                                fontSize: mediumTFSize,
-                                color: colors.solidBlackColor,
-                                fontWeight: FontWeight.w500,
+                          child: Column(
+                            children: [
+                              Text(
+                                initialPrice.toString(),
                               ),
-                              cursorColor: colors.solidBlackColor,
-                              decoration: getInputDecoration(
-                                hint: '%',
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                height: mediumTextFieldHeight,
+                                //width: Get.width * 0.7,
+                                color: colors.primaryColor50,
+                                child: TextFormField(
+                                  controller: priceController,
+                                  keyboardType: TextInputType.number,
+                                  textAlign: TextAlign.center,
+                                  inputFormatters: doubleInputFormatter,
+                                  onChanged: (value) {
+                                    final parsedPrice =
+                                        double.tryParse(value) ?? 0.0;
+
+                                    if (parsedPrice > initialPrice) {
+                                      priceController.clear();
+                                    }
+
+                                    final qtyText = qtyController.text;
+                                    final priceText = priceController.text;
+
+                                    if (qtyText.isNotEmpty &&
+                                        priceText.isNotEmpty) {
+                                      final quantity =
+                                          double.tryParse(qtyText) ?? 0.0;
+                                      final price =
+                                          double.tryParse(priceText) ?? 0.0;
+
+                                      total.value =
+                                          (quantity * price).toStringAsFixed(
+                                        2,
+                                      );
+
+                                      final item = elementItem
+                                        ..quantity = quantity
+                                        ..mrpPrice = price
+                                        ..subTotal = double.tryParse(
+                                          total.value,
+                                        );
+                                      controller.addItem(item);
+                                    } else {
+                                      total.value = '0';
+                                      controller.removeItem(elementId);
+                                    }
+                                    total.refresh();
+                                  },
+                                  style: TextStyle(
+                                    fontSize: mediumTFSize,
+                                    color: colors.solidBlackColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  cursorColor: colors.solidBlackColor,
+                                  decoration: getInputDecoration(
+                                    hint: appLocalization.price,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         5.width,
                         Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.zero,
-                            height: mediumTextFieldHeight,
-                            //width: Get.width * 0.7,
-                            color: colors.primaryColor50,
-                            child: TextFormField(
-                              controller: qtyController,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              inputFormatters: doubleInputFormatter,
-                              onChanged: (value) {
-                                elementItem.quantity =
-                                    double.tryParse(value) ?? 0;
-                                total.value = (elementItem.mrpPrice! *
-                                        elementItem.quantity!)
-                                    .toString();
-                              },
-                              style: TextStyle(
-                                fontSize: mediumTFSize,
-                                color: colors.solidBlackColor,
-                                fontWeight: FontWeight.w500,
+                          child: Column(
+                            children: [
+                              Text(
+                                initialQuantity.toString(),
                               ),
-                              cursorColor: colors.solidBlackColor,
-                              decoration: getInputDecoration(
-                                hint: '%',
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                height: mediumTextFieldHeight,
+                                //width: Get.width * 0.7,
+                                color: colors.primaryColor50,
+                                child: TextFormField(
+                                  controller: qtyController,
+                                  keyboardType: TextInputType.number,
+                                  textAlign: TextAlign.center,
+                                  inputFormatters: doubleInputFormatter,
+                                  onChanged: (value) {
+                                    final parsedQuantity =
+                                        double.tryParse(value) ?? 0.0;
+
+                                    // Clear the input if the new quantity exceeds the initial quantity
+                                    if (parsedQuantity > initialQuantity) {
+                                      qtyController.clear();
+                                    }
+
+                                    // Calculate the total if both quantity and price fields are filled
+                                    final qtyText = qtyController.text;
+                                    final priceText = priceController.text;
+
+                                    if (qtyText.isNotEmpty &&
+                                        priceText.isNotEmpty) {
+                                      final quantity =
+                                          double.tryParse(qtyText) ?? 0.0;
+                                      final price =
+                                          double.tryParse(priceText) ?? 0.0;
+
+                                      total.value =
+                                          (quantity * price).toStringAsFixed(
+                                        2,
+                                      );
+                                      final item = elementItem
+                                        ..quantity = quantity
+                                        ..mrpPrice = price
+                                        ..subTotal = double.tryParse(
+                                          total.value,
+                                        );
+                                      controller.addItem(item);
+                                    } else {
+                                      total.value = '0';
+                                      controller.removeItem(elementId);
+                                    }
+
+                                    // Refresh to update the UI
+                                    total.refresh();
+                                  },
+                                  style: TextStyle(
+                                    fontSize: mediumTFSize,
+                                    color: colors.solidBlackColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  cursorColor: colors.solidBlackColor,
+                                  decoration: getInputDecoration(
+                                    hint: appLocalization.qty,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         Expanded(
-                          child: Obx(
-                            () => CommonText(
-                              text: total.value.toString(),
-                              fontSize: mediumTFSize,
-                              textColor: colors.solidBlackColor,
-                              fontWeight: FontWeight.w400,
-                              textAlign: TextAlign.right,
-                            ),
+                          child: Column(
+                            children: [
+                              CommonText(
+                                text: elementItem.subTotal.toString(),
+                                fontSize: mediumTFSize,
+                                textColor: colors.solidBlackColor,
+                                fontWeight: FontWeight.w400,
+                                textAlign: TextAlign.right,
+                              ),
+                              const Divider(),
+                              Obx(
+                                () => CommonText(
+                                  text: total.value.toString(),
+                                  fontSize: mediumTFSize,
+                                  textColor: colors.solidBlackColor,
+                                  fontWeight: FontWeight.w400,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
