@@ -403,7 +403,7 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                               const Divider(),
                               Obx(
                                 () => CommonText(
-                                  text: total.value.toString(),
+                                  text: total.value,
                                   fontSize: mediumTFSize,
                                   textColor: colors.solidBlackColor,
                                   fontWeight: FontWeight.w400,
@@ -442,12 +442,14 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
-                    ' ${controller.sales.value!.netTotal}',
-                    style: TextStyle(
-                      fontSize: mediumTFSize,
-                      color: colors.primaryColor500,
-                      fontWeight: FontWeight.w500,
+                  Obx(
+                    () => Text(
+                      controller.totalReturnAmount.value ?? '',
+                      style: TextStyle(
+                        fontSize: mediumTFSize,
+                        color: colors.primaryColor500,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   10.width,
