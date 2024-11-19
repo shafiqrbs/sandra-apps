@@ -14,6 +14,7 @@ import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/entity/system_overview_report.dart';
+import 'package:sandra/app/entity/user_sales_overview_report.dart';
 import 'package:sandra/app/entity/vendor.dart';
 import 'package:sandra/app/entity/vendor_ledger.dart';
 
@@ -1147,6 +1148,146 @@ Future<void> generateSystemOverViewPdf(
   );
 
   await saveAndOpenPdf(pdf, 'system_overview_report.pdf');
+}
+
+Future<void> generateUserSalesOverViewPdf(
+  UserSalesOverviewReport userSales,
+) async {
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return [
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              // Header Section
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().name}',
+                  style: pw.TextStyle(
+                    fontSize: 24,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+              pw.SizedBox(height: 10),
+              pw.Container(
+                child: pw.Text(
+                  '${SetUp().address}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  textAlign: pw.TextAlign.center,
+                ),
+              ),
+              pw.SizedBox(height: 20),
+              pw.Container(
+                child: pw.Text(
+                  'User Sales Overview',
+                  style: pw.TextStyle(
+                    fontSize: 20,
+                    color: PdfColors.black,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+              pw.SizedBox(height: 10),
+
+              // show user name list
+              pw.Container(
+                padding: const pw.EdgeInsets.all(10),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.SizedBox(height: 10),
+                    pw.TableHelper.fromTextArray(
+                      headers: [
+                        'S/N',
+                        'Name',
+                        'Sales',
+                        'Sales Receive',
+                        'Due',
+                        'Due Receive',
+                        'Out Standing'
+                      ],
+                      data: userSales.userSales!
+                          .map(
+                            (item) => [
+                              (userSales.userSales!.indexOf(item) + 1)
+                                  .toString()
+                                  .padLeft(2, '0'),
+                              item.salesBy,
+                              item.total.toString(),
+                              item.amount.toString(),
+                              ((item.total ?? 0) - (item.amount ?? 0))
+                                  .toStringAsFixed(2),
+                              item.dueReceive.toString(),
+                              ((item.total ?? 0) -
+                                      (item.amount ?? 0) -
+                                      (item.dueReceive ?? 0))
+                                  .toStringAsFixed(2),
+                            ],
+                          )
+                          .toList(),
+                      headerStyle: pw.TextStyle(
+                        fontSize: 12,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.black,
+                      ),
+                      cellStyle: const pw.TextStyle(fontSize: 10),
+                      headerDecoration: const pw.BoxDecoration(
+                        color: PdfColors.green200,
+                      ),
+                      cellHeight: 25,
+                      columnWidths: const {
+                        0: pw.FlexColumnWidth(.4),
+                        1: pw.FlexColumnWidth(2),
+                        2: pw.FlexColumnWidth(1),
+                        3: pw.FlexColumnWidth(1),
+                        4: pw.FlexColumnWidth(1),
+                        5: pw.FlexColumnWidth(1),
+                        6: pw.FlexColumnWidth(1),
+                      },
+                      headerAlignments: {
+                        0: pw.Alignment.center,
+                        1: pw.Alignment.centerLeft,
+                        2: pw.Alignment.center,
+                        3: pw.Alignment.center,
+                        4: pw.Alignment.center,
+                        5: pw.Alignment.center,
+                        6: pw.Alignment.center,
+                      },
+                      cellAlignments: {
+                        0: pw.Alignment.center,
+                        1: pw.Alignment.centerLeft,
+                        2: pw.Alignment.centerRight,
+                        3: pw.Alignment.centerRight,
+                        4: pw.Alignment.centerRight,
+                        5: pw.Alignment.centerRight,
+                        6: pw.Alignment.centerRight,
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
+              pw.SizedBox(height: 10),
+
+              pw.SizedBox(height: 20),
+            ],
+          ),
+        ];
+      },
+    ),
+  );
+
+  await saveAndOpenPdf(pdf, 'user_sales_overview_report.pdf');
 }
 
 Future<void> saveAndOpenPdf(

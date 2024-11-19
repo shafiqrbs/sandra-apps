@@ -32,7 +32,7 @@ class UserSalesOverviewReportView
             color: colors.whiteColor,
           ),
           onPressed: () {
-            //controller.generateSystemOverviewPdf();
+            controller.generateUserSalesOverviewPdf();
           },
         ),
         8.width,
