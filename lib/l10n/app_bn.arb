@@ -399,6 +399,8 @@
   "transaction" : "লেনদেন",
   "stockPrice" : "স্টক মূল্য",
   "capital" : "পুঁজি",
+  "moneyReceipt" : "মানি রিসিপ্ট",
+  "inWords" : "কথায়",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:sandra/app/global_modal/sales_information_modal/sales_information_without_invoice_modal_view.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/page_state.dart';
@@ -109,7 +110,7 @@ class AccountingSalesController extends BaseController {
   }) async {
     final value = await Get.dialog(
       DialogPattern(
-        title:  appLocalization.sales,
+        title: appLocalization.sales,
         subTitle: '',
         child: GlobalFilterModalView(),
       ),
@@ -140,6 +141,19 @@ class AccountingSalesController extends BaseController {
           subTitle: element.customerName ?? '',
           child: SalesInformationModalView(
             sales: invoice,
+            salesMode: 'online',
+            isShowFooter: false,
+            isFromAccount: true,
+          ),
+        ),
+      );
+    } else {
+      await Get.dialog(
+        DialogPattern(
+          title: appLocalization.salesDetails,
+          subTitle: '',
+          child: SalesInformationWithoutInvoiceModalView(
+            customerLedger: element,
             salesMode: 'online',
             isShowFooter: false,
             isFromAccount: true,

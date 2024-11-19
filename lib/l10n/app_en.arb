@@ -406,7 +406,9 @@
   "income" : "Income",
   "transaction" : "Transaction",
   "stockPrice" : "Stock Price",
-  "capital" : "Capital"
+  "capital" : "Capital",
+  "moneyReceipt" : "Money Receipt",
+  "inWords" : "In Words"
 
 
 
