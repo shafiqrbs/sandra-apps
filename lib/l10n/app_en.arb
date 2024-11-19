@@ -408,7 +408,8 @@
   "stockPrice" : "Stock Price",
   "capital" : "Capital",
   "moneyReceipt" : "Money Receipt",
-  "inWords" : "In Words"
+  "inWords" : "In Words",
+  "userSalesOverview" : "User Sales Overview"
 
 
 

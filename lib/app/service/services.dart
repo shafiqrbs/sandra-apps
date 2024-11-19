@@ -11,6 +11,7 @@ import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/entity/sync_list.dart';
 import 'package:sandra/app/entity/system_overview_report.dart';
 import 'package:sandra/app/entity/user.dart';
+import 'package:sandra/app/entity/user_sales_overview_report.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
@@ -1055,6 +1056,27 @@ class Services {
       return parseObject(
         object: responseData,
         fromJson: SystemOverViewReport.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<UserSalesOverviewReport?> getUserSalesOverViewReport() async {
+    const endPoint = 'poskeeper-user-sales-overview';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {},
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: UserSalesOverviewReport.fromJson,
       );
     } catch (e, s) {
       printError(e, s, endPoint);

@@ -14,4 +14,8 @@ class ReportListController extends BaseController {
   Future<void> goToSystemOverviewReport() async {
     Get.toNamed(Routes.systemOverviewReport);
   }
+
+  Future<void> goToUserSalesOverviewReport() async {
+    Get.toNamed(Routes.userSalesOverviewReport);
+  }
 }

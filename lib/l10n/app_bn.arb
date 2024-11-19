@@ -401,6 +401,7 @@
   "capital" : "পুঁজি",
   "moneyReceipt" : "মানি রিসিপ্ট",
   "inWords" : "কথায়",
+  "userSalesOverview" : "ব্যবহারকারী বিক্রয় সংক্ষিপ্ত বিবরণ",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

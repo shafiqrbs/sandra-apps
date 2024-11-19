@@ -48,6 +48,17 @@ class ReportListView extends BaseView<ReportListController> {
                     ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
+                  SettingsTile.navigation(
+                    onPressed: (BuildContext context) {
+                      controller.goToUserSalesOverviewReport();
+                    },
+                    leading: const Icon(TablerIcons.report),
+                    title: Text(
+                      appLocalization.userSalesOverview,
+                      style: commonTextStyle(),
+                    ),
+                    trailing: const Icon(TablerIcons.chevron_right),
+                  ),
 
                 ],
               ),
