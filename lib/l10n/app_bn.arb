@@ -402,6 +402,7 @@
   "moneyReceipt" : "মানি রিসিপ্ট",
   "inWords" : "কথায়",
   "userSalesOverview" : "ব্যবহারকারী বিক্রয় সংক্ষিপ্ত বিবরণ",
+  "dueReceive" : "বাকি গ্রহণ",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

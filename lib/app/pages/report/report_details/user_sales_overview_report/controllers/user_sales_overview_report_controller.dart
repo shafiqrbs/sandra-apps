@@ -17,4 +17,21 @@ class UserSalesOverviewReportController extends BaseController {
       userSalesOverViewReport.value = response;
     }
   }
+
+  // calculate due amount
+  double getDueAmount({
+    required double totalAmount,
+    required double receiveAmount,
+  }) {
+    return totalAmount - receiveAmount;
+  }
+
+  // calculate outstanding amount
+  double getOutstandingAmount({
+    required double totalAmount,
+    required double receiveAmount,
+    required double dueReceiveAmount,
+  }) {
+    return totalAmount - (receiveAmount + dueReceiveAmount);
+  }
 }

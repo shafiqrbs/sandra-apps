@@ -409,7 +409,8 @@
   "capital" : "Capital",
   "moneyReceipt" : "Money Receipt",
   "inWords" : "In Words",
-  "userSalesOverview" : "User Sales Overview"
+  "userSalesOverview" : "User Sales Overview",
+  "dueReceive" : "Due Receive"
 
 
 

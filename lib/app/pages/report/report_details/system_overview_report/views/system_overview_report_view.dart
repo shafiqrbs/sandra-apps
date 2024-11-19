@@ -94,20 +94,24 @@ class SystemOverviewReportView
                 label: appLocalization.salesPrice,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.salesPrice ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.purchasePrice,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.purchasePrice ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.quantity,
                 value: currentStockOverview?.quantity ?? '',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.profit,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.profit ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
             ],
           ),
@@ -134,18 +138,22 @@ class SystemOverviewReportView
               LabelValue(
                 label: appLocalization.sales,
                 value: '${currency ?? ''} ${incomeOverview?.sales ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.purchase,
                 value: '${currency ?? ''} ${incomeOverview?.purchase ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.expense,
                 value: '${currency ?? ''} ${incomeOverview?.expense ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.profit,
                 value: '${currency ?? ''} ${incomeOverview?.profit ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
             ],
           ),
@@ -172,14 +180,17 @@ class SystemOverviewReportView
               LabelValue(
                 label: appLocalization.purchase,
                 value: '${currency ?? ''} ${purchaseOverview?.purchase ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.payable,
                 value: '${currency ?? ''} ${purchaseOverview?.payable ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.payment,
                 value: '${currency ?? ''} ${purchaseOverview?.amount ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
             ],
           ),
@@ -206,14 +217,17 @@ class SystemOverviewReportView
               LabelValue(
                 label: appLocalization.sales,
                 value: '${currency ?? ''} ${salesOverview?.sales ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.receivable,
                 value: '${currency ?? ''} ${salesOverview?.receivable ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.receive,
                 value: '${currency ?? ''} ${salesOverview?.amount ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
             ],
           ),
@@ -240,26 +254,31 @@ class SystemOverviewReportView
               LabelValue(
                 label: appLocalization.cash,
                 value: '${currency ?? ''} ${transactionOverview?.cash ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.stockPrice,
                 value:
                     '${currency ?? ''} ${transactionOverview?.stockPrice ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.receivable,
                 value:
                     '${currency ?? ''} ${transactionOverview?.receivable ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.payable,
                 value:
                     '${currency ?? ''} ${transactionOverview?.payable ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
               LabelValue(
                 label: appLocalization.capital,
                 value:
                     '${currency ?? ''} ${transactionOverview?.capital ?? ''}',
+                valueTextAlign: TextAlign.end,
               ),
             ],
           ),

@@ -53,7 +53,7 @@ class LabelValue extends StatelessWidget {
     super.key,
     this.dividerText,
     this.labelFontSize = 14,
-    this.valueFontSize,
+    this.valueFontSize = 14,
     this.labelFlex,
     this.valueFlex,
     this.labelFontWeight,
@@ -156,7 +156,7 @@ class LabelValue extends StatelessWidget {
                 value ?? 'Empty Value',
                 textAlign: valueTextAlign,
                 style: TextStyle(
-                  fontSize: valueFontSize?.fSize ?? 15.fSize,
+                  fontSize: valueFontSize?.fSize ?? 16.fSize,
                   fontWeight: defaultFontWeight[valueFontWeight ?? 500],
                   color: valueColor ?? Colors.black.withOpacity(0.6),
                   fontFamily: fontFamily ?? GoogleFonts.inter().fontFamily,
