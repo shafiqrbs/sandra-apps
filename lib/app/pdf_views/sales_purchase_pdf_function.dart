@@ -1364,24 +1364,17 @@ Future<void> generateSalesWithoutInvoicePdf(
                       width: Get.width,
                     ),
                     _buildLabelValue(
-                      'Total',
-                      ledger.total?.toStringAsFixed(2) ?? '',
-                      width: Get.width,
-                    ),
-                    _buildLabelValue(
                       'Receive',
                       ledger.amount?.toStringAsFixed(2) ?? '',
                       width: Get.width,
                     ),
                     _buildLabelValue(
-                      'Due',
-                      ledger.balance?.toStringAsFixed(2) ?? '',
+                      'Method',
+                      ledger.method ?? '',
                       width: Get.width,
                     ),
                   ],
                 ),
-
-                pw.SizedBox(height: 10),
 
                 pw.SizedBox(height: 20),
               ],
