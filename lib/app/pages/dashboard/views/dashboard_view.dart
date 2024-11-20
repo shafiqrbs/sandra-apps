@@ -197,17 +197,7 @@ class DashboardView extends BaseView<DashboardController> {
                             ),
                           ),
                         ),
-                        if (kDebugMode)
-                          GestureDetector(
-                            onTap: controller.clearLicense,
-                            child: Text(
-                              'Reset',
-                              style: TextStyle(
-                                color: colors.solidBlackColor,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+
                       ],
                     ),
                     arrowTipDistance: 10,
