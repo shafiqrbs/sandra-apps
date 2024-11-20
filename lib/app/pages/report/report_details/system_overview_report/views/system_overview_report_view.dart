@@ -41,6 +41,18 @@ class SystemOverviewReportView
     );
   }
 
+  LabelValue get labelValue => LabelValue(
+    label: 'label',
+    value: 'value',
+    labelFontSize: mediumTFSize,
+    valueFontSize: mediumTFSize,
+    valueFlex: 2,
+    labelFlex: 1,
+    valueTextAlign: TextAlign.end,
+    padding: EdgeInsets.zero,
+    labelFontWeight: 600,
+  );
+
   @override
   Widget body(BuildContext context) {
     return Container(
@@ -90,28 +102,29 @@ class SystemOverviewReportView
           ),
           child: Column(
             children: [
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.salesPrice,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.salesPrice ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.purchasePrice,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.purchasePrice ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.quantity,
                 value: currentStockOverview?.quantity ?? '',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.profit,
                 value:
                     '${currency ?? ''} ${currentStockOverview?.profit ?? ''}',
                 valueTextAlign: TextAlign.end,
+                valueFontWeight: 600,
               ),
             ],
           ),
@@ -135,25 +148,26 @@ class SystemOverviewReportView
           ),
           child: Column(
             children: [
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.sales,
                 value: '${currency ?? ''} ${incomeOverview?.sales ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.purchase,
                 value: '${currency ?? ''} ${incomeOverview?.purchase ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.expense,
                 value: '${currency ?? ''} ${incomeOverview?.expense ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.profit,
                 value: '${currency ?? ''} ${incomeOverview?.profit ?? ''}',
                 valueTextAlign: TextAlign.end,
+                valueFontWeight: 600,
               ),
             ],
           ),
@@ -177,20 +191,21 @@ class SystemOverviewReportView
           ),
           child: Column(
             children: [
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.purchase,
                 value: '${currency ?? ''} ${purchaseOverview?.purchase ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
-                label: appLocalization.payable,
-                value: '${currency ?? ''} ${purchaseOverview?.payable ?? ''}',
-                valueTextAlign: TextAlign.end,
-              ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.payment,
                 value: '${currency ?? ''} ${purchaseOverview?.amount ?? ''}',
                 valueTextAlign: TextAlign.end,
+              ),
+              labelValue.copyWith(
+                label: appLocalization.payable,
+                value: '${currency ?? ''} ${purchaseOverview?.payable ?? ''}',
+                valueTextAlign: TextAlign.end,
+                valueFontWeight: 600,
               ),
             ],
           ),
@@ -214,20 +229,21 @@ class SystemOverviewReportView
           ),
           child: Column(
             children: [
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.sales,
                 value: '${currency ?? ''} ${salesOverview?.sales ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
-                label: appLocalization.receivable,
-                value: '${currency ?? ''} ${salesOverview?.receivable ?? ''}',
-                valueTextAlign: TextAlign.end,
-              ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.receive,
                 value: '${currency ?? ''} ${salesOverview?.amount ?? ''}',
                 valueTextAlign: TextAlign.end,
+              ),
+              labelValue.copyWith(
+                label: appLocalization.receivable,
+                value: '${currency ?? ''} ${salesOverview?.receivable ?? ''}',
+                valueTextAlign: TextAlign.end,
+                valueFontWeight: 600,
               ),
             ],
           ),
@@ -251,34 +267,35 @@ class SystemOverviewReportView
           ),
           child: Column(
             children: [
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.cash,
                 value: '${currency ?? ''} ${transactionOverview?.cash ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.stockPrice,
                 value:
                     '${currency ?? ''} ${transactionOverview?.stockPrice ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.receivable,
                 value:
                     '${currency ?? ''} ${transactionOverview?.receivable ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.payable,
                 value:
                     '${currency ?? ''} ${transactionOverview?.payable ?? ''}',
                 valueTextAlign: TextAlign.end,
               ),
-              LabelValue(
+              labelValue.copyWith(
                 label: appLocalization.capital,
                 value:
                     '${currency ?? ''} ${transactionOverview?.capital ?? ''}',
                 valueTextAlign: TextAlign.end,
+                valueFontWeight: 600,
               ),
             ],
           ),

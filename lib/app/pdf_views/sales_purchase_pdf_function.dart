@@ -1212,9 +1212,8 @@ Future<void> generateUserSalesOverViewPdf(
                         'Name',
                         'Sales',
                         'Sales Receive',
-                        'Due',
+                        'Out Standing',
                         'Due Receive',
-                        'Out Standing'
                       ],
                       data: userSales.userSales!
                           .map(
@@ -1228,10 +1227,7 @@ Future<void> generateUserSalesOverViewPdf(
                               ((item.total ?? 0) - (item.amount ?? 0))
                                   .toStringAsFixed(2),
                               item.dueReceive.toString(),
-                              ((item.total ?? 0) -
-                                      (item.amount ?? 0) -
-                                      (item.dueReceive ?? 0))
-                                  .toStringAsFixed(2),
+
                             ],
                           )
                           .toList(),
@@ -1252,16 +1248,14 @@ Future<void> generateUserSalesOverViewPdf(
                         3: pw.FlexColumnWidth(1),
                         4: pw.FlexColumnWidth(1),
                         5: pw.FlexColumnWidth(1),
-                        6: pw.FlexColumnWidth(1),
                       },
                       headerAlignments: {
                         0: pw.Alignment.center,
                         1: pw.Alignment.centerLeft,
-                        2: pw.Alignment.center,
-                        3: pw.Alignment.center,
-                        4: pw.Alignment.center,
-                        5: pw.Alignment.center,
-                        6: pw.Alignment.center,
+                        2: pw.Alignment.centerRight,
+                        3: pw.Alignment.centerRight,
+                        4: pw.Alignment.centerRight,
+                        5: pw.Alignment.centerRight,
                       },
                       cellAlignments: {
                         0: pw.Alignment.center,
@@ -1270,7 +1264,6 @@ Future<void> generateUserSalesOverViewPdf(
                         3: pw.Alignment.centerRight,
                         4: pw.Alignment.centerRight,
                         5: pw.Alignment.centerRight,
-                        6: pw.Alignment.centerRight,
                       },
                     ),
                   ],

@@ -116,7 +116,7 @@ class UserSalesOverviewReportView
                               ),
                               divider(),
                               labelValue.copyWith(
-                                label: appLocalization.due,
+                                label: appLocalization.outstanding,
                                 value: '$currency ${controller.getDueAmount(
                                       totalAmount: userSales.total ?? 0,
                                       receiveAmount: userSales.amount ?? 0,
@@ -127,7 +127,7 @@ class UserSalesOverviewReportView
                                 value:
                                     '$currency ${userSales.dueReceive?.toStringAsFixed(2) ?? '0.00'}',
                               ),
-                              divider(),
+                              /*divider(),
                               labelValue.copyWith(
                                 label: appLocalization.outstanding,
                                 value:
@@ -139,7 +139,7 @@ class UserSalesOverviewReportView
                                               userSales.dueReceive ?? 0,
                                         ).toStringAsFixed(2)}',
                                 valueFontWeight: 800,
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
