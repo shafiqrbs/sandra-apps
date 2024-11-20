@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
@@ -21,7 +21,6 @@ class SalesInformationWithoutInvoiceModalController extends PrinterController {
   @override
   Future<void> onInit() async {
     super.onInit();
-
   }
 
   Future<void> getSalesItemList() async {
@@ -124,9 +123,9 @@ class SalesInformationWithoutInvoiceModalController extends PrinterController {
   }
 
   Future<void> createSalesDetailsPdf({
-    required Sales sales,
+    required CustomerLedger ledger,
   }) async {
-    await generateSalesPdf(sales);
+    await generateSalesWithoutInvoicePdf(ledger);
   }
 
   void returnSales() {

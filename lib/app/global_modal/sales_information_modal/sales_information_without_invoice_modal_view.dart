@@ -123,9 +123,21 @@ class SalesInformationWithoutInvoiceModalView
                   ),
                   labelValueComponent(
                     isEven: true,
+                    label: appLocalization.total,
+                    value:
+                        '${SetUp().symbol ?? ''} ${customerLedger.total?.toString() ?? '0'}',
+                  ),
+                  labelValueComponent(
+                    isEven: true,
                     label: appLocalization.receive,
-                    value: (SetUp().symbol ?? '') +
-                        (customerLedger.receive?.toString() ?? ''),
+                    value:
+                        '${SetUp().symbol ?? ''} ${customerLedger.amount?.toString() ?? '0'}',
+                  ),
+                  labelValueComponent(
+                    isEven: true,
+                    label: appLocalization.due,
+                    value:
+                        '${SetUp().symbol ?? ''} ${(customerLedger.total ?? 0) - (customerLedger.amount ?? 0)}',
                   ),
                 ],
               ),
@@ -343,7 +355,7 @@ class SalesInformationWithoutInvoiceModalView
                     child: InkWell(
                       onTap: () {
                         controller.createSalesDetailsPdf(
-                          sales: controller.sales.value!,
+                          ledger: customerLedger,
                         );
                       },
                       child: Container(
@@ -433,7 +445,7 @@ class SalesInformationWithoutInvoiceModalView
                     child: InkWell(
                       onTap: () {
                         controller.createSalesDetailsPdf(
-                          sales: controller.sales.value!,
+                          ledger: customerLedger,
                         );
                       },
                       child: Container(

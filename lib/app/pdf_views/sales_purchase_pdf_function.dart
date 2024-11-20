@@ -1290,6 +1290,111 @@ Future<void> generateUserSalesOverViewPdf(
   await saveAndOpenPdf(pdf, 'user_sales_overview_report.pdf');
 }
 
+Future<void> generateSalesWithoutInvoicePdf(
+  CustomerLedger ledger,
+) async {
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return [
+          pw.Container(
+            width: double.infinity,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                // Header Section
+                pw.Container(
+                  child: pw.Text(
+                    '${SetUp().name}',
+                    style: pw.TextStyle(
+                      fontSize: 24,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                  ),
+                ),
+                pw.SizedBox(height: 10),
+                pw.Container(
+                  child: pw.Text(
+                    '${SetUp().address}',
+                    style: pw.TextStyle(
+                      fontSize: 16,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                    textAlign: pw.TextAlign.center,
+                  ),
+                ),
+                pw.SizedBox(height: 20),
+                pw.Container(
+                  child: pw.Text(
+                    'Customer Sales Details',
+                    style: pw.TextStyle(
+                      fontSize: 20,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                  ),
+                ),
+                pw.SizedBox(height: 20),
+
+                pw.Column(
+                  children: [
+                    _buildLabelValue(
+                      'Invoice',
+                      ledger.invoice ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Date',
+                      ledger.created ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Customer',
+                      ledger.customerName ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Contact',
+                      ledger.mobile ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Total',
+                      ledger.total?.toStringAsFixed(2) ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Receive',
+                      ledger.amount?.toStringAsFixed(2) ?? '',
+                      width: Get.width,
+                    ),
+                    _buildLabelValue(
+                      'Due',
+                      ledger.balance?.toStringAsFixed(2) ?? '',
+                      width: Get.width,
+                    ),
+                  ],
+                ),
+
+                pw.SizedBox(height: 10),
+
+                pw.SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ];
+      },
+    ),
+  );
+
+  await saveAndOpenPdf(pdf, 'user_sales_report.pdf');
+}
+
 Future<void> saveAndOpenPdf(
   pw.Document pdf,
   String pathName,
@@ -1360,10 +1465,15 @@ pw.Widget _buildIcon(PdfColor color, String label) {
   );
 }
 
-pw.Widget _buildLabelValue(String label, String value,
-    {bool isDivider = true, pw.TextStyle? textStyle}) {
+pw.Widget _buildLabelValue(
+  String label,
+  String value, {
+  bool isDivider = true,
+  pw.TextStyle? textStyle,
+  double? width,
+}) {
   return pw.Container(
-    width: Get.width * 0.5,
+    width: width ?? Get.width * 0.5,
     child: pw.Row(
       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
       children: [
