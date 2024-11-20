@@ -41,8 +41,8 @@ class SalesInformationWithoutInvoiceModalController extends PrinterController {
     );
   }
 
-  Future<void> salesPrint(BuildContext context) async {
-    final isPrinted = await printSales(sales.value!);
+  Future<void> salesPrint(BuildContext context, CustomerLedger ledger) async {
+    final isPrinted = await printSalesWithoutInvoice(ledger);
     if (isPrinted) {
       return;
     }
@@ -52,8 +52,8 @@ class SalesInformationWithoutInvoiceModalController extends PrinterController {
         context: context,
         builder: (context) {
           return DialogPattern(
-            title: 'PrinterSetup',
-            subTitle: 'subTitle',
+            title: appLocalization.printerSetup,
+            subTitle: appLocalization.connectYourPrinter,
             child: PrinterConnectModalView(),
           );
         },

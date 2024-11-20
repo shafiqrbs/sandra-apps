@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import '/app/core/base/base_view.dart';
 import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
@@ -33,7 +34,10 @@ class PrinterConnectModalView
                     () {
                       return controller.isLoader.value ||
                               controller.connected.value
-                          ? Container()
+                          ? Text(
+                            appLocalization.printerIsAlreadyConnected,
+                            style: AppTextStyle.h2TextStyle500,
+                          )
                           : Column(
                               children: [
                                 Obx(

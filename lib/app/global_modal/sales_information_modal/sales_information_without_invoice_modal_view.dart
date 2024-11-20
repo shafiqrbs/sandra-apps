@@ -123,21 +123,9 @@ class SalesInformationWithoutInvoiceModalView
                   ),
                   labelValueComponent(
                     isEven: true,
-                    label: appLocalization.total,
-                    value:
-                        '${SetUp().symbol ?? ''} ${customerLedger.total?.toString() ?? '0'}',
-                  ),
-                  labelValueComponent(
-                    isEven: true,
                     label: appLocalization.receive,
                     value:
                         '${SetUp().symbol ?? ''} ${customerLedger.amount?.toString() ?? '0'}',
-                  ),
-                  labelValueComponent(
-                    isEven: true,
-                    label: appLocalization.due,
-                    value:
-                        '${SetUp().symbol ?? ''} ${(customerLedger.total ?? 0) - (customerLedger.amount ?? 0)}',
                   ),
                 ],
               ),
@@ -194,7 +182,10 @@ class SalesInformationWithoutInvoiceModalView
                       controller.salesMode == 'local',
                   child: Expanded(
                     child: InkWell(
-                      onTap: () => controller.salesPrint(context),
+                      onTap: () => controller.salesPrint(
+                        context,
+                        customerLedger,
+                      ),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
@@ -403,7 +394,10 @@ class SalesInformationWithoutInvoiceModalView
                       controller.salesMode == 'local',
                   child: Expanded(
                     child: InkWell(
-                      onTap: () => controller.salesPrint(context),
+                      onTap: () => controller.salesPrint(
+                        context,
+                        customerLedger,
+                      ),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(

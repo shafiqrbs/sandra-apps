@@ -182,8 +182,9 @@ class PrinterController extends BaseController {
   Future<bool> printSales(
     Sales sales,
   ) async {
-    try{
-      final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
       if (connectionStatus) {
         final data = await templateOne(sales: sales);
         return PrintBluetoothThermal.writeBytes(data); // init
@@ -194,7 +195,29 @@ class PrinterController extends BaseController {
         );
         return false;
       }
-    } catch(e,err){
+    } catch (e, err) {
+      print('Error in print: $e, $err');
+      return false;
+    }
+  }
+
+  Future<bool> printSalesWithoutInvoice(
+    CustomerLedger ledger,
+  ) async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (connectionStatus) {
+        final data = await salesWithoutInvoiceTemplateOne(ledger: ledger);
+        return PrintBluetoothThermal.writeBytes(data); // init
+      } else {
+        showSnackBar(
+          type: SnackBarType.success,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+    } catch (e, err) {
       print('Error in print: $e, $err');
       return false;
     }
@@ -357,9 +380,10 @@ class PrinterController extends BaseController {
     );
 
     bytes += generator.text(
-      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : '',
+      'Sales Invoice',
       styles: const PosStyles(
         align: PosAlign.center,
+        bold: true,
       ),
       linesAfter: 1,
     );
@@ -381,10 +405,11 @@ class PrinterController extends BaseController {
           styles: const PosStyles(
             align: PosAlign.right,
           ),
+          width: 3
         ),
         PosColumn(
           text: sales.salesId ?? '',
-          width: 4,
+          width: 3,
         ),
       ],
     );
@@ -403,10 +428,32 @@ class PrinterController extends BaseController {
           styles: const PosStyles(
             align: PosAlign.right,
           ),
+          width: 3,
         ),
         PosColumn(
           text: sales.customerMobile ?? '',
+          width: 3,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
           width: 4,
+        ),
+        PosColumn(
+          text: 'Mode: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 3
+        ),
+        PosColumn(
+          text: sales.methodMode ?? '',
+          width: 3,
         ),
       ],
     );
@@ -418,18 +465,9 @@ class PrinterController extends BaseController {
         ),
         PosColumn(
           text: sales.createdAt ?? '',
-          width: 4,
+          width: 10,
         ),
-        PosColumn(
-          text: 'Mode: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-        ),
-        PosColumn(
-          text: sales.methodMode ?? '',
-          width: 4,
-        ),
+
       ],
     );
 
@@ -463,7 +501,7 @@ class PrinterController extends BaseController {
         ),
       ],
     );
-    bytes += generator.text('------------------------------------------------');
+    bytes += generator.text('---------------------------------------------------------------------------');
 
     print(sales.salesItem!.length);
 
@@ -482,7 +520,7 @@ class PrinterController extends BaseController {
               ),
             ),
             PosColumn(
-              text: rowData.quantity?.toString() ?? '',
+              text: int.tryParse(rowData.quantity?.toString() ?? '0').toString(),
               width: 1,
               styles: const PosStyles(
                 align: PosAlign.center,
@@ -498,7 +536,7 @@ class PrinterController extends BaseController {
         );
       }
     }
-    bytes += generator.text('------------------------------------------------');
+    bytes += generator.text('--------------------------------------------------------------------------');
     bytes += generator.row([
       PosColumn(
         text: appLocalization.subTotal,
@@ -606,6 +644,147 @@ class PrinterController extends BaseController {
         ),
       ],
     );
+
+    bytes += generator.text(
+      SetUp().printFooter ?? '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+
+    //bytes += generator.text(SetUp().printFooter ?? '');
+    // TODO: do it dynamic
+    bytes += generator.feed(newLine);
+    bytes += generator.text(
+      SetUp().website ?? 'poskeeper.com',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+    );
+    bytes += generator.cut();
+    return bytes;
+  }
+
+  Future<List<int>> salesWithoutInvoiceTemplateOne({
+    required CustomerLedger ledger,
+  }) async {
+    List<int> bytes = [];
+    final profile = await CapabilityProfile.load();
+    final paperType = await prefs.getPrintPaperType();
+
+    final generator = Generator(
+      paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+      profile,
+    );
+
+// Add shop name
+    bytes += generator.text(
+      isEnglish(SetUp().name ?? '') ? SetUp().name ?? '' : '',
+      styles: const PosStyles(
+        bold: true,
+        height: PosTextSize.size2,
+        align: PosAlign.center,
+      ),
+    );
+
+    // Add subtitle
+    bytes += generator.text(
+      isEnglish(SetUp().address ?? '') ? SetUp().address ?? '' : '',
+      styles: const PosStyles(
+        align: PosAlign.center,
+      ),
+      linesAfter: 1,
+    );
+
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Invoice: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4
+        ),
+        PosColumn(
+          text: ledger.invoice ?? '',
+          width: 8,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Date: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4
+        ),
+        PosColumn(
+          text: ledger.created ?? '',
+          width: 8,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Customer: ',
+          styles: const PosStyles(align: PosAlign.right),
+          width: 4
+        ),
+        PosColumn(
+          text: ledger.customerName ?? '',
+          width: 8,
+        ),
+      ],
+    );
+
+    bytes += generator.row(
+      [
+
+        PosColumn(
+          text: 'Mobile: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4
+        ),
+        PosColumn(
+          text: ledger.mobile ?? '',
+          width: 8,
+        ),
+      ],
+    );
+
+    bytes += generator.feed(1);
+
+    bytes += generator.text('------------------------------------------------');
+
+    bytes += generator.row([
+      PosColumn(
+        text: 'Received',
+        width: 9,
+        styles: const PosStyles(
+          align: PosAlign.right,
+        ),
+      ),
+      PosColumn(
+        text: 'Tk',
+        width: 1,
+        styles: const PosStyles(
+          align: PosAlign.center,
+        ),
+      ),
+      PosColumn(
+        text: ledger.amount?.toString() ?? '',
+        styles: const PosStyles(
+          align: PosAlign.right,
+        ),
+      ),
+    ]);
+
+    bytes += generator.text('------------------------------------------------');
 
     bytes += generator.text(
       SetUp().printFooter ?? '',

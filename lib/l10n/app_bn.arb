@@ -403,6 +403,7 @@
   "inWords" : "কথায়",
   "userSalesOverview" : "ব্যবহারকারী বিক্রয় সংক্ষিপ্ত বিবরণ",
   "dueReceive" : "বাকি গ্রহণ",
+  "printerIsAlreadyConnected" : "প্রিন্টার ইতিমধ্যে সংযুক্ত",
   "sc" : "SC",
   "retry" : "Retry",
   "dueSalesWithoutCustomer" : "Due Sales Without Customer",

@@ -59,8 +59,8 @@ class PurchaseInformationController extends PrinterController {
         context: context,
         builder: (context) {
           return DialogPattern(
-            title: 'title',
-            subTitle: 'subTitle',
+            title: appLocalization.printerSetup,
+            subTitle: appLocalization.connectYourPrinter,
             child: PrinterConnectModalView(),
           );
         },

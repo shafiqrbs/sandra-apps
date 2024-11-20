@@ -410,7 +410,8 @@
   "moneyReceipt" : "Money Receipt",
   "inWords" : "In Words",
   "userSalesOverview" : "User Sales Overview",
-  "dueReceive" : "Due Receive"
+  "dueReceive" : "Due Receive",
+  "printerIsAlreadyConnected" : "Printer is already connected"
 
 
 
