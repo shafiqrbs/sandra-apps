@@ -94,8 +94,8 @@ class UserSalesOverviewReportView
                       children: [
                         Text(
                           '${userSales.salesBy}',
-                          style: AppTextStyle.h1TextStyle600.copyWith(
-                            color: colors.primaryColor500,
+                          style: AppTextStyle.h2TextStyle600.copyWith(
+                            color: colors.primaryColor700,
                           ),
                         ),
                         divider(),
