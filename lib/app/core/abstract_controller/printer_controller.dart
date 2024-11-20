@@ -685,6 +685,15 @@ class PrinterController extends BaseController {
       linesAfter: 1,
     );
 
+    bytes += generator.text(
+      'Receipt Print',
+      styles: const PosStyles(
+        align: PosAlign.center,
+        bold: true,
+      ),
+      linesAfter: 1,
+    );
+
     bytes += generator.row(
       [
         PosColumn(
@@ -736,6 +745,21 @@ class PrinterController extends BaseController {
             width: 4),
         PosColumn(
           text: ledger.mobile ?? '',
+          width: 8,
+        ),
+      ],
+    );
+
+    bytes += generator.row(
+      [
+        PosColumn(
+            text: 'Method: ',
+            styles: const PosStyles(
+              align: PosAlign.right,
+            ),
+            width: 4),
+        PosColumn(
+          text: ledger.method ?? 'N/A',
           width: 8,
         ),
       ],
