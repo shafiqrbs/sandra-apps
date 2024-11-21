@@ -11,6 +11,7 @@ class FinancialData {
   final String? payment;
   final List<TransactionOverview>? transactionOverview;
   final num? version;
+  final String? updateUrl;
 
   FinancialData({
     this.globalOption,
@@ -23,6 +24,7 @@ class FinancialData {
     this.payment,
     this.transactionOverview,
     this.version,
+    this.updateUrl,
   });
 
   // Factory method to create a FinancialData object from JSON
@@ -39,7 +41,8 @@ class FinancialData {
       transactionOverview: (json['transaction_overview'] as List?)?.map((item) {
         return TransactionOverview.fromJson(item);
       }).toList(),
-      version: json['version'] as num?
+      version: json['version'] as num?,
+      updateUrl: json['update_url'] as String?,
     );
   }
 
@@ -58,6 +61,7 @@ class FinancialData {
         return item.toJson();
       }).toList(),
       'version' : version,
+      'update_url' : updateUrl,
     };
   }
 }

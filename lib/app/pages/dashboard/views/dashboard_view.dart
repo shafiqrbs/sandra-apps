@@ -272,7 +272,7 @@ class DashboardView extends BaseView<DashboardController> {
             ],
           ),
           GestureDetector(
-            onTap: (){},
+            onTap: controller.updateApp,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,

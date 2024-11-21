@@ -13,22 +13,23 @@ import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';
 import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_view.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
+
+import '/app/core/base/base_controller.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/test_functions.dart';
+import '/app/core/widget/dialog_pattern.dart';
+import '/app/core/widget/quick_navigation_button.dart';
+import '/app/core/widget/tbd_round_button.dart';
 import '/app/entity/sales.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/global_modal/add_expense_modal/add_expense_view.dart';
 import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
 import '/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import '/app/global_modal/customer_receive_modal/customer_receive_modal_view.dart';
+import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 import '/app/global_modal/sync_modal/sync_modal_view.dart';
 import '/app/global_modal/vendor_payment_modal/vendor_payment_modal_view.dart';
-
-import '/app/core/base/base_controller.dart';
-import '/app/core/widget/dialog_pattern.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/tbd_round_button.dart';
-import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 import '/app/routes/app_pages.dart';
 
 enum SelectedTab {
@@ -702,5 +703,18 @@ class DashboardController extends BaseController {
     Get.toNamed(
       Routes.reportList,
     );
+  }
+
+  Future<void> updateApp() async {
+    if (financialData.value?.updateUrl == null) {
+      showSnackBar(
+        message: appLocalization.somethingWentWrong,
+        type: SnackBarType.error,
+      );
+      return;
+    }
+    final Uri url = Uri.parse(financialData.value!.updateUrl!);
+
+    await url_launcher.launchUrl(url);
   }
 }
