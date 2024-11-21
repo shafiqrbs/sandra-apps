@@ -4,6 +4,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/values/app_values.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/base/base_view.dart';
@@ -80,33 +82,35 @@ class DashboardView extends BaseView<DashboardController> {
 
   @override
   Widget body(BuildContext context) {
-    return Column(
-      mainAxisAlignment: startMAA,
-      crossAxisAlignment: endCAA,
-      children: [
-        _buildTopBar(context),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.zero,
-            child: RefreshIndicator(
-              onRefresh: () async {
-                if (controller.isOnline.value) {
-                  await controller.fetchFinancialData();
-                }
-              },
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    1.height,
-                    _buildDashboard(),
-                  ],
+    return Obx(()=>
+      Column(
+        mainAxisAlignment: startMAA,
+        crossAxisAlignment: endCAA,
+        children: [
+          _buildTopBar(context),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.zero,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  if (controller.isOnline.value) {
+                    await controller.fetchFinancialData();
+                  }
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      1.height,
+                      _buildDashboard(),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -197,7 +201,6 @@ class DashboardView extends BaseView<DashboardController> {
                             ),
                           ),
                         ),
-
                       ],
                     ),
                     arrowTipDistance: 10,
@@ -230,13 +233,65 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
-        //_buildTestColor(),
         12.height,
+        _buildNewUpdateView(),
         _buildThreeCommonButtons(),
         _buildFinancialDataView(),
         14.height,
         _buildButtons(),
       ],
+    );
+  }
+
+  Widget _buildNewUpdateView() {
+    final version = controller.financialData.value?.version;
+    if (version == null || version == AppValues.appVersion) {
+      return Container();
+    }
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+      ),
+      child: Row(
+        mainAxisAlignment: spaceBetweenMAA,
+        children: [
+          Column(
+            crossAxisAlignment: startCAA,
+            children: [
+              Text(
+                appLocalization.updateAvailable,
+                style: AppTextStyle.h2TextStyle600,
+              ),
+              4.height,
+              Text(
+                appLocalization.updateStatus,
+                style: AppTextStyle.h3TextStyle400,
+              ),
+            ],
+          ),
+          GestureDetector(
+            onTap: (){},
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: colors.primaryColor500,
+              ),
+              child: Text(
+                appLocalization.update,
+                style: AppTextStyle.h2TextStyle600.copyWith(
+                  color: colors.whiteColor,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

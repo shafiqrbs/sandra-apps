@@ -147,6 +147,17 @@ class SettingsView extends BaseView<SettingsController> {
                     ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
+                  SettingsTile.navigation(
+                    onPressed: (BuildContext context) async {
+                      await controller.sendLogs();
+                    },
+                    leading: const Icon(TablerIcons.logs),
+                    title: Text(
+                      appLocalization.logger,
+                      style: commonTextStyle(),
+                    ),
+                    trailing: const Icon(TablerIcons.chevron_right),
+                  ),
                 ],
               ),
             ],

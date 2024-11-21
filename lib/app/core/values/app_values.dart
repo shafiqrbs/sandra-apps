@@ -1,4 +1,5 @@
 abstract class AppValues {
+  static const num appVersion = 1;
   static const double padding = 16;
   static const double paddingZero = 0;
   static const double halfPadding = 8;

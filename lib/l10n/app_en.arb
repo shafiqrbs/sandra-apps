@@ -411,7 +411,10 @@
   "inWords" : "In Words",
   "userSalesOverview" : "User Sales Overview",
   "dueReceive" : "Due Receive",
-  "printerIsAlreadyConnected" : "Printer is already connected"
+  "printerIsAlreadyConnected" : "Printer is already connected",
+  "logger" : "Logger",
+  "updateAvailable" : "Update Available",
+  "updateStatus" : "A new version of the app is ready to install"
 
 
 
