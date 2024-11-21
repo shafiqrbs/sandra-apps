@@ -857,13 +857,14 @@ class PrinterController extends BaseController {
         ),
         PosColumn(
           text: table,
-          width: 4,
+          width: 3,
         ),
         PosColumn(
           text: '${appLocalization.orderTakenBy}: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
+          width: 3
         ),
         PosColumn(
           text: orderTakenBy,
@@ -874,7 +875,7 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: '${"bill".tr}: ',
+          text: 'Bill: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -898,22 +899,32 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: '${"date".tr}: ',
           styles: const PosStyles(align: PosAlign.right),
         ),
         PosColumn(
-          text: sales.createdAt.toString(),
           width: 4,
         ),
         PosColumn(
-          text: '${"mode".tr}: ',
+          text: 'Mode: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
         ),
         PosColumn(
-          text: ' Now it empty ',
+          text: sales.methodMode ?? '',
           width: 4,
+        ),
+      ],
+    );
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Date: ',
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+        PosColumn(
+          text: sales.createdAt.toString(),
+          width: 10,
         ),
       ],
     );
@@ -924,11 +935,11 @@ class PrinterController extends BaseController {
       [
         PosColumn(
           text: 'Item Name',
-          width: 7,
+          width: 10,
         ),
         PosColumn(
           text: 'Qty',
-          width: 1,
+          width: 2,
           styles: const PosStyles(
             align: PosAlign.center,
           ),
@@ -945,11 +956,11 @@ class PrinterController extends BaseController {
           [
             PosColumn(
               text: rowData.stockName ?? '',
-              width: 7,
+              width: 10,
             ),
             PosColumn(
               text: rowData.quantity?.toString() ?? '',
-              width: 1,
+              width: 2,
               styles: const PosStyles(
                 align: PosAlign.center,
               ),
@@ -958,6 +969,8 @@ class PrinterController extends BaseController {
         );
       }
     }
+
+    bytes += generator.feed(1);
 
     bytes += generator.text(
       SetUp().printFooter ?? '',

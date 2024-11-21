@@ -18,6 +18,7 @@ import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/entity/user.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
 import 'package:sandra/app/pages/inventory/sales/create_sales/modals/order_process_confirmation_modal/order_process_confirmation_controller.dart';
 import 'package:sandra/app/pages/inventory/sales/create_sales/modals/order_process_confirmation_modal/order_process_confirmation_view.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
@@ -524,7 +525,7 @@ class OrderCartController extends BaseController {
     }
   }
 
-  Future<void> kitchenPrint() async {
+  Future<void> kitchenPrint(BuildContext context) async {
     try {
       generateSalesItem();
       final sales = await generateSales();
@@ -538,15 +539,30 @@ class OrderCartController extends BaseController {
 
       if (isPrinted) {
         toast(appLocalization.success);
+        return;
       } else {
-        toast(appLocalization.failed);
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return DialogPattern(
+                title: appLocalization.printerSetup,
+                subTitle: appLocalization.connectYourPrinter,
+                child: PrinterConnectModalView(),
+              );
+            },
+          );
+        }
       }
-    } catch (e) {
+    } catch (e, err) {
+      if (kDebugMode) {
+        print('error: $e, $err');
+      }
       toast(appLocalization.failed);
     }
   }
 
-  Future<void> tokenPrint() async {
+  Future<void> tokenPrint(BuildContext context) async {
     try {
       generateSalesItem();
       final sales = await generateSales();
@@ -561,7 +577,18 @@ class OrderCartController extends BaseController {
       if (isPrinted) {
         toast(appLocalization.success);
       } else {
-        toast(appLocalization.failed);
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return DialogPattern(
+                title: appLocalization.printerSetup,
+                subTitle: appLocalization.connectYourPrinter,
+                child: PrinterConnectModalView(),
+              );
+            },
+          );
+        }
       }
     } catch (e) {
       toast(appLocalization.failed);

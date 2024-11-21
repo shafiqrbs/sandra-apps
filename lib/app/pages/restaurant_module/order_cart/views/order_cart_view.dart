@@ -70,7 +70,7 @@ class OrderCartView extends BaseView<OrderCartController> {
                   child: Column(
                     children: [
                       _buildStatusBar(),
-                      _buildOrderCategory(),
+                      _buildOrderCategory(context),
                       4.height,
                       _buildSelectAdditionalTable(),
                       14.height,
@@ -118,7 +118,7 @@ class OrderCartView extends BaseView<OrderCartController> {
     );
   }
 
-  Widget _buildOrderCategory() {
+  Widget _buildOrderCategory(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -159,7 +159,7 @@ class OrderCartView extends BaseView<OrderCartController> {
         ),
         8.width,
         GestureDetector(
-          onTap: controller.kitchenPrint,
+          onTap: ()=> controller.kitchenPrint(context),
           child: Container(
             padding: const EdgeInsets.symmetric(
               vertical: 6,
@@ -1131,7 +1131,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           text: appLocalization.postPrint,
           icon: TablerIcons.printer,
           bgColor: colors.secondaryColor500,
-          onTap: controller.tokenPrint,
+          onTap: ()=> controller.tokenPrint(context),
         ),
         10.width,
         _buildButtonView(
