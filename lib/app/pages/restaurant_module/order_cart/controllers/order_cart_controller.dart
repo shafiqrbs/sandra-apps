@@ -374,7 +374,8 @@ class OrderCartController extends BaseController {
       salesItem: salesItemList,
       createdById: LoggedUser().userId,
       createdBy: LoggedUser().username,
-      salesBy: userManager.value.asController.selectedValue?.fullName,
+      salesBy: selectedOrderCategory.value,
+      //salesBy: userManager.value.asController.selectedValue?.fullName,
       salesById: userManager.value.asController.selectedValue?.userId,
       isOnline: 0,
       tokenNo: generateTokenWithInvoiceAndTimestamp(timeStamp),
@@ -534,7 +535,9 @@ class OrderCartController extends BaseController {
       final isPrinted = await printController.printRestaurantKitchen(
         sales: sales,
         table: tableName.value,
-        orderTakenBy: selectedOrderCategory.value,
+        orderTakenBy: selectedOrderCategory.value == 'Order taken by'
+            ? ''
+            : selectedOrderCategory.value,
       );
 
       if (isPrinted) {
@@ -562,6 +565,12 @@ class OrderCartController extends BaseController {
     }
   }
 
+  Future<void> printSalesWithToken(BuildContext context) async {
+    await tokenPrint(context);
+
+    await salesPrint(context);
+  }
+
   Future<void> tokenPrint(BuildContext context) async {
     try {
       generateSalesItem();
@@ -571,7 +580,40 @@ class OrderCartController extends BaseController {
       final isPrinted = await printController.printRestaurantToken(
         sales: sales,
         table: tableName.value,
-        orderTakenBy: selectedOrderCategory.value,
+        orderTakenBy: selectedOrderCategory.value == 'Order taken by'
+            ? ''
+            : selectedOrderCategory.value,
+      );
+
+      if (isPrinted) {
+        toast(appLocalization.success);
+      } else {
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return DialogPattern(
+                title: appLocalization.printerSetup,
+                subTitle: appLocalization.connectYourPrinter,
+                child: PrinterConnectModalView(),
+              );
+            },
+          );
+        }
+      }
+    } catch (e) {
+      toast(appLocalization.failed);
+    }
+  }
+
+  Future<void> salesPrint(BuildContext context) async {
+    try {
+      generateSalesItem();
+      final sales = await generateSales();
+      if (sales == null) return;
+      final printController = Get.put(PrinterController());
+      final isPrinted = await printController.printSales(
+        sales,
       );
 
       if (isPrinted) {

@@ -1131,7 +1131,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           text: appLocalization.postPrint,
           icon: TablerIcons.printer,
           bgColor: colors.secondaryColor500,
-          onTap: ()=> controller.tokenPrint(context),
+          onTap: ()=> controller.printSalesWithToken(context),
         ),
         10.width,
         _buildButtonView(

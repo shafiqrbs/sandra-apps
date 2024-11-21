@@ -627,7 +627,7 @@ class PrinterController extends BaseController {
     bytes += generator.text('------------------------------------------------');
 
     bytes += generator.text(
-      'Sales By: ${sales.salesId ?? 'N/A'}',
+      'Sales By: ${sales.salesBy ?? 'N/A'}',
       styles: const PosStyles(
         align: PosAlign.center,
       ),
@@ -857,23 +857,8 @@ class PrinterController extends BaseController {
         ),
         PosColumn(
           text: table,
-          width: 3,
-        ),
-        PosColumn(
-          text: '${appLocalization.orderTakenBy}: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-          width: 3
-        ),
-        PosColumn(
-          text: orderTakenBy,
           width: 4,
         ),
-      ],
-    );
-    bytes += generator.row(
-      [
         PosColumn(
           text: 'Bill: ',
           styles: const PosStyles(
@@ -884,38 +869,9 @@ class PrinterController extends BaseController {
           text: sales.invoice ?? '',
           width: 4,
         ),
-        PosColumn(
-          text: '${appLocalization.sales}: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-        ),
-        PosColumn(
-          text: sales.salesId ?? '',
-          width: 4,
-        ),
       ],
     );
-    bytes += generator.row(
-      [
-        PosColumn(
-          styles: const PosStyles(align: PosAlign.right),
-        ),
-        PosColumn(
-          width: 4,
-        ),
-        PosColumn(
-          text: 'Mode: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-        ),
-        PosColumn(
-          text: sales.methodMode ?? '',
-          width: 4,
-        ),
-      ],
-    );
+
     bytes += generator.row(
       [
         PosColumn(
@@ -928,6 +884,20 @@ class PrinterController extends BaseController {
         ),
       ],
     );
+
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: '${appLocalization.orderTakenBy}: ',
+          width: 3,
+        ),
+        PosColumn(
+          text: orderTakenBy,
+          width: 9,
+        ),
+      ],
+    );
+
     bytes += generator.feed(1);
 
     // Add table headers
@@ -1038,21 +1008,7 @@ class PrinterController extends BaseController {
           width: 4,
         ),
         PosColumn(
-          text: '${appLocalization.orderTakenBy}: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-        ),
-        PosColumn(
-          text: orderTakenBy,
-          width: 4,
-        ),
-      ],
-    );
-    bytes += generator.row(
-      [
-        PosColumn(
-          text: '${"bill".tr}: ',
+          text: 'Bill: ',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -1061,37 +1017,30 @@ class PrinterController extends BaseController {
           text: sales.invoice ?? '',
           width: 4,
         ),
+      ],
+    );
+
+    bytes += generator.row(
+      [
         PosColumn(
-          text: '${appLocalization.sales}: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
+          text: 'Date: ',
+          styles: const PosStyles(align: PosAlign.right),
         ),
         PosColumn(
-          text: sales.salesId ?? '',
-          width: 4,
+          text: sales.createdAt.toString(),
+          width: 10,
         ),
       ],
     );
     bytes += generator.row(
       [
         PosColumn(
-          text: '${"date".tr}: ',
-          styles: const PosStyles(align: PosAlign.right),
+          text: '${appLocalization.orderTakenBy}: ',
+          width: 3,
         ),
         PosColumn(
-          text: sales.createdAt.toString(),
-          width: 4,
-        ),
-        PosColumn(
-          text: '${"mode".tr}: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-        ),
-        PosColumn(
-          text: ' Now it empty ',
-          width: 4,
+          text: orderTakenBy,
+          width: 9,
         ),
       ],
     );
@@ -1107,6 +1056,8 @@ class PrinterController extends BaseController {
         align: PosAlign.center,
       ),
     );
+
+    bytes += generator.feed(1);
 
     bytes += generator.text(
       SetUp().printFooter ?? '',
