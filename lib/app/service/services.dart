@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart' hide Category;
+import 'package:sandra/app/core/db_helper/db_helper.dart';
+import 'package:sandra/app/core/db_helper/db_tables.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/brand.dart';
 import 'package:sandra/app/entity/category.dart';
@@ -53,19 +55,35 @@ class Services {
     };
   }
 
-  void printError(
+  Future<void> printError(
     dynamic e,
     dynamic s,
     String endPoint,
-  ) {
-    if (kDebugMode) {
-      print('Error: $e');
-      print('Error: $s');
+  ) async {
+    try {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
+      final createdAt = DateTime.now().toString();
+      final error = {
+        'endpoint': endPoint,
+        'created_at': createdAt,
+        'error_text': e.toString(),
+        'stack_trace': s.toString(),
+      };
+      final dbHelper = DbHelper.instance;
+      await dbHelper.insertList(
+        deleteBeforeInsert: false,
+        tableName: DbTables().tableLogger,
+        dataList: [error],
+      );
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Error: $e');
+        print('Error: $s');
+      }
     }
-
-    const endPoint = 'poskeeper-error-log';
-
-    try {} catch (e) {}
   }
 
   Future<Map<String, dynamic>?> submitLicense({
@@ -459,6 +477,34 @@ class Services {
           'is_approve': autoApprove ? '1' : '0',
           'approved_by': autoApprove ? LoggedUser().userId : '',
           'process': 'sales',
+        },
+        headers: _buildHeader(),
+      );
+
+      final responseData = response.data as Map<String, dynamic>?;
+
+      if (responseData == null) return false;
+
+      return responseData['message'] == 'success';
+    } catch (e, s) {
+      printError(e, s, endpointOrderProcess);
+      return false;
+    }
+  }
+
+  Future<bool> postSalesReturn({
+    required Map<String, Object?> content,
+  }) async {
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endpointOrderProcess,
+        {
+          'content': jsonEncode(content),
+          'mode': 'online',
+          'is_approve': '1',
+          'approved_by': LoggedUser().userId,
+          'process': 'sales-return',
         },
         headers: _buildHeader(),
       );

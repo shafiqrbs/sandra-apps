@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/sales.dart';
@@ -47,7 +48,7 @@ class SalesReturnPageController extends BaseController {
     }
   }
 
-  void save() {
+  Future<void> save() async {
     //services.postSales(salesList: salesList, mode: mode)
     final adjustment = double.tryParse(adjustmentController.text) ?? 0;
     final payment = double.tryParse(paymentController.text) ?? 0;
@@ -61,7 +62,73 @@ class SalesReturnPageController extends BaseController {
       return;
     }
 
+    /*   {
+      "sales_id": "051900113",
+    "created_by_id": "122",
+    "subTotal": "300",
+    "receive": "200",
+    "adjustment": "100",
+    "comment": "Test",
+    "items": [
+  {
+    "sales_item_id": "051900113",
+    "sales_price": "120",
+    "quantity": "2",
+    "sub_total": "240"
+  },
+  {
+    "sales_item_id": "051900114",
+    "sales_price": "120",
+    "quantity": "2",
+    "sub_total": "240"
+  }
+    ]
+  }*/
 
+    final data = {
+      'sales_id': sales.value?.salesId,
+      'created_by_id': LoggedUser().userId,
+      'subTotal': totalReturnAmount.value,
+      'receive': paymentController.text,
+      'adjustment': adjustmentController.text,
+      'comment': remarkController.text,
+      'items': generatedList.values
+          .map(
+            (e) => {
+              'sales_item_id': e.stockId,
+              'sales_price': e.salesPrice,
+              'quantity': e.quantity,
+              'sub_total': e.subTotal,
+            },
+          )
+          .toList(),
+    };
+
+    if (kDebugMode) {
+      print('Data: $data');
+    }
+
+    bool? isSuccess;
+
+    await dataFetcher(
+      future: () async {
+        isSuccess = await services.postSalesReturn(
+          content: data,
+        );
+      },
+    );
+
+    if (isSuccess ?? false) {
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.success,
+      );
+    } else {
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.failedToSave,
+      );
+    }
   }
 
   void addItem(SalesItem item) {
