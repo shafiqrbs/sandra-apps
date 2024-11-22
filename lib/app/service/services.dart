@@ -1320,7 +1320,8 @@ class Services {
         APIType.public,
         endPoint,
         {
-          'logs': jsonEncode(logs),
+          'content': jsonEncode(logs),
+          'user_id': LoggedUser().userId,
         },
         headers: _buildHeader(),
       );
