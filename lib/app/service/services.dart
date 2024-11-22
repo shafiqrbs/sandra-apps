@@ -500,7 +500,7 @@ class Services {
         APIType.public,
         endpointOrderProcess,
         {
-          'content': jsonEncode(content),
+          'content': jsonEncode([content]),
           'mode': 'online',
           'is_approve': '1',
           'approved_by': LoggedUser().userId,
@@ -1310,6 +1310,26 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return null;
+    }
+  }
+
+  Future<bool> postLogs({required List<dynamic> logs,}) async{
+    const endPoint = 'poskeeper-logs';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'logs': jsonEncode(logs),
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return false;
     }
   }
 }

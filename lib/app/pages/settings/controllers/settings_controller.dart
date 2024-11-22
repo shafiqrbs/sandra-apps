@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
+import 'package:sandra/app/core/db_helper/db_tables.dart';
 import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
@@ -82,11 +83,40 @@ class SettingsController extends PrinterController {
   }
 
   Future<void> sendLogs() async {
+    final count = await dbHelper.getItemCount(
+      tableName: DbTables().tableLogger,
+    );
+
+    if (count == 0) {
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.noDataFound,
+      );
+      return;
+    }
+
     final result = await confirmationModal(
       msg: appLocalization.areYouSure,
     );
     if (result) {
+      bool? isSuccessful;
 
+      await dataFetcher(
+        future: () async {
+          final logs = await dbHelper.getAll(
+            tbl: DbTables().tableLogger,
+          );
+          isSuccessful = await services.postLogs(
+            logs: logs,
+          );
+        },
+      );
+
+      if (isSuccessful ?? false) {
+        await dbHelper.deleteAll(
+          tbl: DbTables().tableLogger,
+        );
+      }
     }
   }
 }
