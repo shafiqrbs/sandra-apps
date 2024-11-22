@@ -50,6 +50,15 @@ class SalesReturnPageController extends BaseController {
 
   Future<void> save() async {
     //services.postSales(salesList: salesList, mode: mode)
+
+    if(generatedList.isEmpty){
+      showSnackBar(
+        type: SnackBarType.error,
+        message: appLocalization.thisAmountIsNotValid,
+      );
+      return;
+    }
+
     final adjustment = double.tryParse(adjustmentController.text) ?? 0;
     final payment = double.tryParse(paymentController.text) ?? 0;
     final sum = adjustment + payment;
