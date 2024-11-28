@@ -255,5 +255,5 @@ class AppPages {
       binding: UserSalesOverviewReportBinding(),
     ),
 
-  ];
+  ].obs;
 }

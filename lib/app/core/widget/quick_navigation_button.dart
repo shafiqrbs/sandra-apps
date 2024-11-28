@@ -7,6 +7,7 @@ import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/tbd_text_button.dart';
 import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
 import '/app/core/widget/asset_image_view.dart';
 
@@ -33,8 +34,18 @@ ValueNotifier<Map<String, Color>> colorList = ValueNotifier(
   },
 );
 
+enum SelectedTab {
+  accounting,
+  inventory,
+  config,
+}
+
 class QuickNavigationButton extends BaseWidget {
   QuickNavigationButton({super.key});
+
+  final selectedButtonGroup = SelectedTab.accounting.obs;
+
+  List<Widget> quickNavigationButtonList = [];
 
   List<Widget> inventoryButtonList = [
     TbdRoundButton(
@@ -178,7 +189,7 @@ class QuickNavigationButton extends BaseWidget {
     TbdRoundButton(
       icon: TablerIcons.database_cog,
       onTap: () {
-        if(!isManager) {
+        if (!isManager) {
           showSnackBar(
             type: SnackBarType.warning,
             title: appLocalization.alert,
@@ -201,7 +212,7 @@ class QuickNavigationButton extends BaseWidget {
     TbdRoundButton(
       icon: TablerIcons.rotate_rectangle,
       onTap: () {
-        if(!isManager) {
+        if (!isManager) {
           showSnackBar(
             type: SnackBarType.warning,
             title: appLocalization.alert,
@@ -230,8 +241,23 @@ class QuickNavigationButton extends BaseWidget {
     ),
   ];
 
+  void updateSelectedButtonGroup(SelectedTab tab) {
+    selectedButtonGroup.value = tab;
+
+    if (tab == SelectedTab.inventory) {
+      quickNavigationButtonList = inventoryButtonList;
+    }
+    if (tab == SelectedTab.accounting) {
+      quickNavigationButtonList = accountingButtonList;
+    }
+    if (tab == SelectedTab.config) {
+      quickNavigationButtonList = configButtonList;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    quickNavigationButtonList = accountingButtonList;
     return GestureDetector(
       onTap: () => showQuickNavigateBottomSheet(context: context),
       child: const AssetImageView(
@@ -261,7 +287,7 @@ class QuickNavigationButton extends BaseWidget {
       ),
       builder: (BuildContext context) {
         return SizedBox(
-          height: Get.height * 0.8,
+          height: Get.height * 0.5,
           child: Padding(
             padding: const EdgeInsets.only(
               left: 4,
@@ -297,68 +323,19 @@ class QuickNavigationButton extends BaseWidget {
                     ),
                   ],
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        16.height,
-                        /*Wrap(
-                          spacing: 4,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          runSpacing: 8,
-                          children: buttonList,
-                        ),*/
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: startCAA,
-                            children: [
-                              CommonText(
-                                text: appLocalization.accounting,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              dividerWidget(),
-                              16.height,
-                              Wrap(
-                                spacing: 4,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                runSpacing: 8,
-                                children: accountingButtonList,
-                              ),
-                              CommonText(
-                                text: appLocalization.inventory,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              dividerWidget(),
-                              16.height,
-                              Wrap(
-                                spacing: 4,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                runSpacing: 8,
-                                children: inventoryButtonList,
-                              ),
-                              CommonText(
-                                text: appLocalization.configuration,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              dividerWidget(),
-                              16.height,
-                              Wrap(
-                                spacing: 4,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                runSpacing: 8,
-                                children: configButtonList,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                Obx(
+                  () => Column(
+                    children: [
+                      24.height,
+                      _buildButtonGroup(),
+                      24.height,
+                      Wrap(
+                        spacing: 18,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        runSpacing: 16,
+                        children: quickNavigationButtonList,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -366,6 +343,120 @@ class QuickNavigationButton extends BaseWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildButtonGroup() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 4,
+      ),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+        //color: Color(0xffF7EDE9),
+      ),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 800),
+        child: Row(
+          children: [
+            TbdTextButton(
+              flex: 5,
+              selectedBgColor: colors.primaryColor300,
+              text: appLocalization.accounting,
+              onPressed: () => updateSelectedButtonGroup(
+                SelectedTab.accounting,
+              ),
+              isSelected: selectedButtonGroup.value == SelectedTab.accounting,
+            ),
+            TbdTextButton(
+              flex: 4,
+              selectedBgColor: colors.primaryColor300,
+              text: appLocalization.inventory,
+              onPressed: () => updateSelectedButtonGroup(
+                SelectedTab.inventory,
+              ),
+              isSelected: selectedButtonGroup.value == SelectedTab.inventory,
+            ),
+            TbdTextButton(
+              flex: 4,
+              selectedBgColor: colors.primaryColor300,
+              text: appLocalization.config,
+              onPressed: () => updateSelectedButtonGroup(
+                SelectedTab.config,
+              ),
+              isSelected: selectedButtonGroup.value == SelectedTab.config,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickNavigationButtons() {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            16.height,
+            /*Wrap(
+                          spacing: 4,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          runSpacing: 8,
+                          children: buttonList,
+                        ),*/
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: startCAA,
+                children: [
+                  CommonText(
+                    text: appLocalization.accounting,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  dividerWidget(),
+                  16.height,
+                  Wrap(
+                    spacing: 4,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    runSpacing: 8,
+                    children: accountingButtonList,
+                  ),
+                  CommonText(
+                    text: appLocalization.inventory,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  dividerWidget(),
+                  16.height,
+                  Wrap(
+                    spacing: 4,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    runSpacing: 8,
+                    children: inventoryButtonList,
+                  ),
+                  CommonText(
+                    text: appLocalization.configuration,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  dividerWidget(),
+                  16.height,
+                  Wrap(
+                    spacing: 4,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    runSpacing: 8,
+                    children: configButtonList,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
