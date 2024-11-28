@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/bindings/initial_binding.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/utils/style_function.dart';
@@ -19,7 +17,6 @@ import 'package:sandra/app/core/widget/label_value.dart';
 import 'package:sandra/app/entity/stock.dart';
 import 'package:sandra/app/entity/transaction_methods.dart';
 import 'package:sandra/app/global_widget/customer_card_view.dart';
-import 'package:sandra/app/global_widget/transaction_method_item_view.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
 import '/app/core/base/base_view.dart';
 
@@ -63,7 +60,7 @@ class OrderCartView extends BaseView<OrderCartController> {
           ),
           child: Obx(
             () => SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 height: 90.ph,
                 child: Form(
                   key: controller.formKey,
@@ -159,7 +156,7 @@ class OrderCartView extends BaseView<OrderCartController> {
         ),
         8.width,
         GestureDetector(
-          onTap: ()=> controller.kitchenPrint(context),
+          onTap: () => controller.kitchenPrint(context),
           child: Container(
             padding: const EdgeInsets.symmetric(
               vertical: 6,
@@ -1125,22 +1122,68 @@ class OrderCartView extends BaseView<OrderCartController> {
   Widget _buildBottomButton(
     BuildContext context,
   ) {
-    return Row(
-      children: [
-        _buildButtonView(
-          text: appLocalization.postPrint,
-          icon: TablerIcons.printer,
-          bgColor: colors.secondaryColor500,
-          onTap: ()=> controller.printSalesWithToken(context),
-        ),
-        10.width,
-        _buildButtonView(
-          text: appLocalization.save,
-          icon: TablerIcons.device_floppy,
-          bgColor: colors.primaryColor500,
-          onTap: () => controller.showConfirmationDialog(context),
-        ),
-      ],
+    return Obx(
+      () => Column(
+        mainAxisSize: minMAS,
+        children: [
+          Row(
+            children: [
+              _buildButtonView(
+                text: appLocalization.postPrint,
+                icon: TablerIcons.printer,
+                bgColor: colors.secondaryColor500,
+                onTap: () => controller.printSalesWithToken(context),
+              ),
+              10.width,
+              _buildButtonView(
+                text: appLocalization.save,
+                icon: TablerIcons.device_floppy,
+                bgColor: colors.primaryColor500,
+                onTap: () => controller.showConfirmationDialog(context),
+              ),
+            ],
+          ),
+          controller.isAllPrintEnabled.value ? 8.height : Container(),
+          Visibility(
+            visible: controller.isAllPrintEnabled.value,
+            child: GestureDetector(
+              onTap: () => controller.printAll(context),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    AppValues.radius_4,
+                  ),
+                  color: Colors.white,
+                  border: Border.all(
+                    color: colors.secondaryColor500,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: centerMAA,
+                  children: [
+                    Icon(
+                      TablerIcons.printer,
+                      size: 20,
+                      color: colors.secondaryColor500,
+                    ),
+                    8.width,
+                    Text(
+                      appLocalization.allPrint,
+                      style: AppTextStyle.h3TextStyle500.copyWith(
+                        color: colors.secondaryColor500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

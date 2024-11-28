@@ -77,10 +77,6 @@ class PrefsSettingsModalController extends BaseController {
     await prefs.setIsAllPrintEnabled(
       isAllPrintEnabled: value,
     );
-    /*if (Get.isRegistered<RestaurantHomeController>()) {
-      final restaurantHomeController = Get.find<RestaurantHomeController>();
-      restaurantHomeController.isTableEnabled.value = value;
-    }*/
   }
 
   Future<void> setSalesOnline(bool value) async {

@@ -33,6 +33,7 @@ class OrderCartController extends BaseController {
   final selectedOrderCategory = 'Order taken by'.obs;
 
   final isAdditionalTableSelected = false.obs;
+  final isAllPrintEnabled = false.obs;
   final showQuantityUpdateList = <int>[].obs;
 
   var itemQuantities =
@@ -78,6 +79,7 @@ class OrderCartController extends BaseController {
       tableInvoice.value = TableInvoice.fromJson(invoice[0]);
     }
     isTableEnabled.value = await prefs.getIsisTableEnabled();
+    isAllPrintEnabled.value = await prefs.getIsAllPrintEnabled();
     await initializeCartItems();
     await getSalesUser();
     await initializeVariables();
@@ -566,6 +568,14 @@ class OrderCartController extends BaseController {
   }
 
   Future<void> printSalesWithToken(BuildContext context) async {
+    await tokenPrint(context);
+
+    await salesPrint(context);
+  }
+
+  Future<void> printAll(BuildContext context) async {
+    await kitchenPrint(context);
+
     await tokenPrint(context);
 
     await salesPrint(context);

@@ -415,7 +415,8 @@
   "logger" : "Logger",
   "updateAvailable" : "Update Available",
   "updateStatus" : "A new version of the app is ready to install",
-  "allPrintEnableDisable" : "All Print Enable/Disable"
+  "allPrintEnableDisable" : "All Print Enable/Disable",
+  "allPrint" : "All Print"
 
 
 

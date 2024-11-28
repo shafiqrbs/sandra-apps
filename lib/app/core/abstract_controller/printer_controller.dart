@@ -847,6 +847,19 @@ class PrinterController extends BaseController {
       linesAfter: 1,
     );
 
+    bytes += generator.text('------------------------------------------------');
+
+    bytes += generator.text(
+      'Token No: ${sales.tokenNo}',
+      styles: const PosStyles(
+        bold: true,
+        height: PosTextSize.size1,
+        align: PosAlign.center,
+      ),
+    );
+
+    bytes += generator.text('------------------------------------------------');
+
     bytes += generator.row(
       [
         PosColumn(
