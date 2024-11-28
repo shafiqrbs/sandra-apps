@@ -404,6 +404,7 @@
   "userSalesOverview" : "ব্যবহারকারী বিক্রয় সংক্ষিপ্ত বিবরণ",
   "dueReceive" : "বাকি গ্রহণ",
   "printerIsAlreadyConnected" : "প্রিন্টার ইতিমধ্যে সংযুক্ত",
+  "allPrintEnableDisable" : "সমস্ত প্রিন্ট সক্রিয়/অক্ষম করুন",
   "logger" : "Logger",
   "updateAvailable" : "Update Available",
   "updateStatus" : "A new version of the app is ready to install",

@@ -168,6 +168,21 @@ class SessionManager {
     return prefs.getBool(prefsIsisTableEnabled) ?? false;
   }
 
+  /// Set is all print enabled
+  Future<void> setIsAllPrintEnabled({
+    required bool isAllPrintEnabled,
+  }) async {
+    await prefs.setBool(
+      prefsIsAllPrintEnabled,
+      isAllPrintEnabled,
+    );
+  }
+
+  /// Get is all print enabled
+  Future<bool> getIsAllPrintEnabled() async {
+    return prefs.getBool(prefsIsAllPrintEnabled) ?? false;
+  }
+
   /// Set is sales online
   Future<void> setIsSalesOnline({
     required bool isSalesOnline,

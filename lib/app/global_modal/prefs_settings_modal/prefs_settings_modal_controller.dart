@@ -16,6 +16,7 @@ class PrefsSettingsModalController extends BaseController {
   final buttons = Rx<Buttons?>(null);
   final isSalesOnline = ValueNotifier(false);
   final isTableEnabled = ValueNotifier(false);
+  final isAllPrintEnabled = ValueNotifier(false);
   final isPurchaseOnline = ValueNotifier(false);
   final isZeroSalesAllowed = ValueNotifier(false);
   final isHasPrinter = ValueNotifier(false);
@@ -44,6 +45,7 @@ class PrefsSettingsModalController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     isTableEnabled.value = await prefs.getIsisTableEnabled();
+    isAllPrintEnabled.value = await prefs.getIsAllPrintEnabled();
     isSalesOnline.value = await prefs.getIsSalesOnline();
     isPurchaseOnline.value = await prefs.getIsPurchaseOnline();
     isZeroSalesAllowed.value = await prefs.getIsZeroSalesAllowed();
@@ -68,6 +70,17 @@ class PrefsSettingsModalController extends BaseController {
       final restaurantHomeController = Get.find<RestaurantHomeController>();
       restaurantHomeController.isTableEnabled.value = value;
     }
+  }
+
+  Future<void> setAllPrintEnable(bool value) async {
+    isAllPrintEnabled.value = value;
+    await prefs.setIsAllPrintEnabled(
+      isAllPrintEnabled: value,
+    );
+    /*if (Get.isRegistered<RestaurantHomeController>()) {
+      final restaurantHomeController = Get.find<RestaurantHomeController>();
+      restaurantHomeController.isTableEnabled.value = value;
+    }*/
   }
 
   Future<void> setSalesOnline(bool value) async {

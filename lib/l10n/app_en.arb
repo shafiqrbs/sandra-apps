@@ -414,7 +414,8 @@
   "printerIsAlreadyConnected" : "Printer is already connected",
   "logger" : "Logger",
   "updateAvailable" : "Update Available",
-  "updateStatus" : "A new version of the app is ready to install"
+  "updateStatus" : "A new version of the app is ready to install",
+  "allPrintEnableDisable" : "All Print Enable/Disable"
 
 
 

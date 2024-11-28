@@ -97,6 +97,36 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                   ),
                 ],
               ),
+              16.height,
+              Row(
+                mainAxisAlignment: spaceBetweenMAA,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: Text(
+                      appLocalization.allPrintEnableDisable,
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  AdvancedSwitch(
+                    controller: controller.isAllPrintEnabled,
+                    onChanged: (value) async {
+                      await controller.setAllPrintEnable(value);
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    height: 20,
+                    width: 40,
+                    activeColor: colors.primaryColor700,
+                    inactiveColor: colors.secondaryColor100,
+                    initialValue: controller.isAllPrintEnabled.value,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
