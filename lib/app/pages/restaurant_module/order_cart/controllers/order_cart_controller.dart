@@ -72,7 +72,7 @@ class OrderCartController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    final arg = await Get.arguments;
+    final arg = await Get.arguments as Map<String, dynamic>?;
     if (arg != null) {
       final invoice = arg['tableInvoice'];
       selectedTableId.value = arg['tableId'];
