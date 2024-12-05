@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -202,13 +203,13 @@ class SalesProcessModalController extends PaymentGatewayController {
       salesId: preSales == null ? timeStamp : preSales!.salesId,
       invoice: preSales == null ? timeStamp : preSales!.invoice,
       createdAt: preSales == null
-          ? DateFormat('MM-dd-yyyy hh:mm a').format(
+          ? DateFormat(apiDateFormat).format(
               DateTime.now(),
             )
           : preSales!.createdAt,
       updatedAt: preSales == null
           ? null
-          : DateFormat('MM-dd-yyyy hh:mm a').format(
+          : DateFormat(apiDateFormat).format(
               DateTime.now(),
             ),
       process: 'sales',

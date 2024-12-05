@@ -9,6 +9,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
@@ -360,7 +361,7 @@ class OrderCartController extends BaseController {
     final sales = Sales(
       salesId: timeStamp,
       invoice: timeStamp,
-      createdAt: DateFormat('MM-dd-yyyy hh:mm a').format(
+      createdAt: DateFormat(apiDateFormat).format(
         DateTime.now(),
       ),
       updatedAt: null,

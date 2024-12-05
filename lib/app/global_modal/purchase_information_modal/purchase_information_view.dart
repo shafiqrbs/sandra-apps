@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import '/app/entity/purchase.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -48,7 +49,7 @@ class PurchaseInformationView extends BaseView<PurchaseInformationController> {
       builder: (controller) {
         final createdDate = controller.purchase.value!.createdAt != null
             ? DateFormat('dd MMM yyyy').format(
-                DateFormat('MM-dd-yyyy hh:mm a')
+                DateFormat(apiDateFormat)
                     .parse(controller.purchase.value!.createdAt!),
               )
             : '';

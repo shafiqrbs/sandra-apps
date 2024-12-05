@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
@@ -142,13 +143,13 @@ class PurchaseProcessController extends BaseController {
       purchaseId: prePurchase == null ? timeStamp : prePurchase!.purchaseId,
       invoice: prePurchase == null ? timeStamp : prePurchase!.invoice,
       createdAt: prePurchase == null
-          ? DateFormat('MM-dd-yyyy hh:mm a').format(
+          ? DateFormat(apiDateFormat).format(
               DateTime.now(),
             )
           : prePurchase!.createdAt,
       updatedAt: prePurchase == null
           ? null
-          : DateFormat('MM-dd-yyyy hh:mm a').format(
+          : DateFormat(apiDateFormat).format(
               DateTime.now(),
             ),
       process: 'purchase',
