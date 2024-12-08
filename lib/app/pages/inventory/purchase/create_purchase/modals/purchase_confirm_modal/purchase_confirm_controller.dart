@@ -61,11 +61,6 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _insertPurchase();
     }
-    showSnackBar(
-      type: SnackBarType.success,
-      title: appLocalization.success,
-      message: appLocalization.purchaseHasBeenAdded,
-    );
   }
 
   Future<void> _updatePurchase() async {
@@ -76,7 +71,6 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localUpdate();
     }
-
   }
 
   Future<void> _insertPurchase() async {
@@ -87,7 +81,6 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _localInsert();
     }
-
   }
 
   Future<void> _localInsert() async {

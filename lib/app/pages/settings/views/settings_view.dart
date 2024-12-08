@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -137,7 +138,7 @@ class SettingsView extends BaseView<SettingsController> {
                     ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
-                  if (isRoleSetting)
+                  if (isRoleSetting || kDebugMode)
                     SettingsTile.navigation(
                       onPressed: (BuildContext context) {
                         controller.clearLicense();

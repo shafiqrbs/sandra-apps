@@ -73,11 +73,6 @@ class OrderProcessConfirmationController extends PrinterController {
       await _deleteItemsFromRestaurantCart();
     }
 
-    showSnackBar(
-      type: SnackBarType.success,
-      title: appLocalization.success,
-      message: appLocalization.salesHaveBeenAdded,
-    );
   }
 
   Future<void> _deleteItemsFromRestaurantCart() async {
