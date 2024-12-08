@@ -29,7 +29,7 @@ class DueCustomerListController extends BaseController {
   void showAddCustomerModal() {
     final result = Get.dialog(
       DialogPattern(
-        title: 'title',
+        title: appLocalization.addCustomer,
         subTitle: '',
         child: AddCustomerModalView(),
       ),

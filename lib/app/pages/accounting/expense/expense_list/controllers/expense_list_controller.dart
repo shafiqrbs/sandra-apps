@@ -177,8 +177,8 @@ class ExpenseListController extends BaseController {
   Future<void> showFilterModal() async {
     final value = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.expense,
+        subTitle: appLocalization.advanceFilter,
         child: GlobalFilterModalView(
           showCustomer: false,
           showVendor: false,

@@ -233,8 +233,8 @@ class SalesListController extends BaseController {
   }) async {
     final value = await Get.dialog(
       DialogPattern(
-        title: 'title',
-        subTitle: 'subTitle',
+        title: appLocalization.sales,
+        subTitle: appLocalization.advanceFilter,
         child: GlobalFilterModalView(),
       ),
     );

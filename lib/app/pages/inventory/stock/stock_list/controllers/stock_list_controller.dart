@@ -27,8 +27,8 @@ class StockListController extends BaseController {
       context: context,
       builder: (context) {
         return DialogPattern(
-          title: 'title',
-          subTitle: 'subTitle',
+          title: appLocalization.stock,
+          subTitle: appLocalization.advanceFilter,
           child: GlobalFilterModalView(),
         );
       },
