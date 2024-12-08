@@ -339,7 +339,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Text(
                                       createdDate,
                                       textAlign: TextAlign.start,
