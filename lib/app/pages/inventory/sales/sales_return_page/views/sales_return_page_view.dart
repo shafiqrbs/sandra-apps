@@ -293,7 +293,7 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
 
                                       final item = elementItem
                                         ..quantity = quantity
-                                        ..mrpPrice = price
+                                        ..salesPrice = price
                                         ..subTotal = double.tryParse(
                                           total.value,
                                         );
@@ -363,7 +363,7 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                                       );
                                       final item = elementItem
                                         ..quantity = quantity
-                                        ..mrpPrice = price
+                                        ..salesPrice = price
                                         ..subTotal = double.tryParse(
                                           total.value,
                                         );

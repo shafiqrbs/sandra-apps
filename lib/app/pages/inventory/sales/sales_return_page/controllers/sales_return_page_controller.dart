@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +53,7 @@ class SalesReturnPageController extends BaseController {
   Future<void> save() async {
     //services.postSales(salesList: salesList, mode: mode)
 
-    if(generatedList.isEmpty){
+    if (generatedList.isEmpty) {
       showSnackBar(
         type: SnackBarType.error,
         message: appLocalization.thisAmountIsNotValid,
@@ -71,46 +73,31 @@ class SalesReturnPageController extends BaseController {
       return;
     }
 
-    /*   {
-      "sales_id": "051900113",
-    "created_by_id": "122",
-    "subTotal": "300",
-    "receive": "200",
-    "adjustment": "100",
-    "comment": "Test",
-    "items": [
-  {
-    "sales_item_id": "051900113",
-    "sales_price": "120",
-    "quantity": "2",
-    "sub_total": "240"
-  },
-  {
-    "sales_item_id": "051900114",
-    "sales_price": "120",
-    "quantity": "2",
-    "sub_total": "240"
-  }
-    ]
-  }*/
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+
+    if (!confirmation) return;
 
     final data = {
       'sales_id': sales.value?.salesId,
       'created_by_id': LoggedUser().userId,
-      'subTotal': totalReturnAmount.value,
-      'receive': paymentController.text,
-      'adjustment': adjustmentController.text,
+      'sub_total': double.tryParse(totalReturnAmount.value??'0'),
+      'receive': payment,
+      'adjustment': adjustment,
       'comment': remarkController.text,
-      'items': generatedList.values
-          .map(
-            (e) => {
-              'sales_item_id': e.stockId,
-              'sales_price': e.salesPrice,
-              'quantity': e.quantity,
-              'sub_total': e.subTotal,
-            },
-          )
-          .toList(),
+      'items': jsonEncode(
+        generatedList.values
+            .map(
+              (e) => {
+                'sales_item_id': e.stockId,
+                'sales_price': e.salesPrice,
+                'quantity': e.quantity,
+                'sub_total': e.subTotal,
+              },
+            )
+            .toList(),
+      ),
     };
 
     if (kDebugMode) {
