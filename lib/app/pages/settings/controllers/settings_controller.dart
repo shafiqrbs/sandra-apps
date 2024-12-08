@@ -71,6 +71,17 @@ class SettingsController extends PrinterController {
   }
 
   Future<void> clearLicense() async {
+
+    final needExportData = await needExport();
+    if (!needExportData) {
+      return;
+    }
+
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) return;
+
     await prefs.setIsLicenseValid(
       isLicenseValid: false,
     );
@@ -81,6 +92,34 @@ class SettingsController extends PrinterController {
       Routes.splash,
     );
   }
+  Future<bool> needExport() async {
+    final salesCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableSale,
+    );
+
+    if (salesCount > 0) {
+      showSnackBar(
+        message: appLocalization.exportYourSales,
+        type: SnackBarType.warning,
+      );
+      return false;
+    }
+
+    final purchaseCount = await dbHelper.getItemCount(
+      tableName: dbTables.tablePurchase,
+    );
+
+    if (purchaseCount > 0) {
+      showSnackBar(
+        message: appLocalization.exportYourPurchase,
+        type: SnackBarType.warning,
+      );
+      return false;
+    }
+
+    return true;
+  }
+
 
   Future<void> sendLogs() async {
     final count = await dbHelper.getItemCount(

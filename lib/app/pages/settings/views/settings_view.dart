@@ -3,6 +3,7 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/routes/app_pages.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -74,6 +75,7 @@ class SettingsView extends BaseView<SettingsController> {
                       initialValue: controller.isEnableDarkMode.value,
                     ),
                   ),
+                  if(isRoleSetting)
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
                       controller.clearLicense();
