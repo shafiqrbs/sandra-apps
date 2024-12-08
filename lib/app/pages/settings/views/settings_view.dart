@@ -75,18 +75,6 @@ class SettingsView extends BaseView<SettingsController> {
                       initialValue: controller.isEnableDarkMode.value,
                     ),
                   ),
-                  if(isRoleSetting)
-                  SettingsTile.navigation(
-                    onPressed: (BuildContext context) {
-                      controller.clearLicense();
-                    },
-                    leading: const Icon(TablerIcons.reload),
-                    title: Text(
-                      appLocalization.reset,
-                      style: commonTextStyle(),
-                    ),
-                    trailing: const Icon(TablerIcons.chevron_right),
-                  ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) {
                       //Get.toNamed(Routes.accountConfig);
@@ -149,6 +137,18 @@ class SettingsView extends BaseView<SettingsController> {
                     ),
                     trailing: const Icon(TablerIcons.chevron_right),
                   ),
+                  if (isRoleSetting)
+                    SettingsTile.navigation(
+                      onPressed: (BuildContext context) {
+                        controller.clearLicense();
+                      },
+                      leading: const Icon(TablerIcons.reload),
+                      title: Text(
+                        appLocalization.reset,
+                        style: commonTextStyle(),
+                      ),
+                      trailing: const Icon(TablerIcons.chevron_right),
+                    ),
                   SettingsTile.navigation(
                     onPressed: (BuildContext context) async {
                       await controller.sendLogs();
