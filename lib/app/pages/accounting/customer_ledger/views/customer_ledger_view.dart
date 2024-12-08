@@ -5,6 +5,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/retry_view.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
@@ -306,6 +307,11 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                   builderDelegate: PagedChildBuilderDelegate<CustomerLedger>(
                     itemBuilder: (context, item, index) {
                       final data = item;
+                      final createdDate = data.created != null
+                          ? DateFormat(dateFormat).format(
+                        DateFormat(apiDateFormat).parse(data.created!),
+                      )
+                          : '';
                       return Stack(
                         alignment: Alignment.center,
                         children: [
@@ -338,9 +344,7 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                                   Expanded(
                                     flex: 3,
                                     child: Text(
-                                      "${index + 1}. ${DateFormat("dd-M-yy").format(
-                                        DateTime.now(),
-                                      )}",
+                                      createdDate,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         fontSize: mediumTFSize,
