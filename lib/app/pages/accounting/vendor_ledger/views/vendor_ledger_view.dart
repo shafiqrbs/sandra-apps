@@ -5,6 +5,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/core/values/app_strings.dart';
 import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/retry_view.dart';
 import 'package:sandra/app/entity/vendor_ledger.dart';
@@ -305,6 +306,11 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                   builderDelegate: PagedChildBuilderDelegate<VendorLedger>(
                     itemBuilder: (context, item, index) {
                       final data = item;
+                      final createdDate = data.created != null
+                          ? DateFormat(dateFormat).format(
+                              DateFormat(apiDateFormat).parse(data.created!),
+                            )
+                          : '';
                       return Stack(
                         alignment: Alignment.center,
                         children: [
@@ -335,9 +341,7 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                      "${index + 1}. ${DateFormat("dd-M-yy").format(
-                                        DateTime.now(),
-                                      )}",
+                                      createdDate,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         fontSize: mediumTFSize,

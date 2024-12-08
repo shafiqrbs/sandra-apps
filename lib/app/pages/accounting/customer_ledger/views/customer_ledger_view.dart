@@ -309,8 +309,8 @@ class CustomerLedgerView extends BaseView<CustomerLedgerController> {
                       final data = item;
                       final createdDate = data.created != null
                           ? DateFormat(dateFormat).format(
-                        DateFormat(apiDateFormat).parse(data.created!),
-                      )
+                              DateFormat(apiDateFormat).parse(data.created!),
+                            )
                           : '';
                       return Stack(
                         alignment: Alignment.center,
