@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/inventory/sales/sales_return_list_page/sales_return_list_binding.dart';
+import 'package:sandra/app/pages/inventory/sales/sales_return_list_page/sales_return_list_page.dart';
 import 'package:sandra/app/pages/report/report_details/user_sales_overview_report/bindings/user_sales_overview_report_binding.dart';
 import 'package:sandra/app/pages/report/report_details/user_sales_overview_report/views/user_sales_overview_report_view.dart';
 import 'package:sandra/app/pages/report/report_list/bindings/report_list_binding.dart';
@@ -254,6 +256,10 @@ class AppPages {
       page: UserSalesOverviewReportView.new,
       binding: UserSalesOverviewReportBinding(),
     ),
-
+    GetPage(
+      name: Routes.salesReturnListPage,
+      page: SalesReturnListPage.new,
+      binding: SalesReturnListBinding(),
+    ),
   ].obs;
 }

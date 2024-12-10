@@ -1313,7 +1313,9 @@ class Services {
     }
   }
 
-  Future<bool> postLogs({required List<dynamic> logs,}) async{
+  Future<bool> postLogs({
+    required List<dynamic> logs,
+  }) async {
     const endPoint = 'poskeeper-logs';
     try {
       final response = await dio.post(
@@ -1331,6 +1333,29 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return false;
+    }
+  }
+
+  Future<void> getSalesReturnList({
+    required int page,
+  }) async {
+    const endPoint = 'poskeeper-online-sales-return-list';
+    try {
+      final query = <String, dynamic>{
+        'page': page,
+        'limit': 10,
+      };
+      final response = await dio.get(
+        APIType.public,
+        endPoint,
+        query: query,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List;
+      if (responseData.isEmpty) return null;
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
     }
   }
 }

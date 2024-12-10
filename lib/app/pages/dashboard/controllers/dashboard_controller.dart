@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/values/app_global_variables.dart';
-import 'package:sandra/app/core/widget/no_record_found_view.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
@@ -21,7 +18,6 @@ import '/app/core/utils/test_functions.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_round_button.dart';
-import '/app/entity/sales.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import '/app/global_modal/add_expense_modal/add_expense_view.dart';
 import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
@@ -81,13 +77,7 @@ List<Widget> inventoryButtonList = [
   ),
   TbdRoundButton(
     icon: TablerIcons.credit_card_refund,
-    onTap: () {
-      showSnackBar(
-        type: SnackBarType.warning,
-        title: appLocalization.upcomingFeature,
-        message: appLocalization.comingSoon,
-      );
-    },
+    onTap: () => navigatePage(Routes.salesReturnListPage),
     localeMethod: () => appLocalization.salesReturn,
     bgColor: colorList.value['navyBlue'],
     permission: isManager,

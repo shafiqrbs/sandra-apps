@@ -42,6 +42,7 @@ abstract class Routes {
   static const  reportList = _Paths.reportList;
   static const  systemOverviewReport = _Paths.systemOverviewReport;
   static const  userSalesOverviewReport = _Paths.userSalesOverviewReport;
+  static const salesReturnListPage = _Paths.salesReturnListPage;
 }
 
 abstract class _Paths {
@@ -84,4 +85,5 @@ abstract class _Paths {
   static const  reportList = '/report_list';
   static const  systemOverviewReport = '/system_overview_report';
   static const  userSalesOverviewReport = '/user_sales_overview_report';
+  static const salesReturnListPage = '/sales_return_list_page';
 }
