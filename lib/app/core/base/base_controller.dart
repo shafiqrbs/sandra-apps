@@ -5,17 +5,16 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/utils/dispose_devouncer.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
-import '/app/core/core_model/voice_recognition.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/page_state.dart';
 import '/app/core/core_model/setup.dart';
+import '/app/core/core_model/voice_recognition.dart';
 import '/app/core/db_helper/db_helper.dart';
 import '/app/core/db_helper/db_tables.dart';
 import '/app/core/loaders/loader_screen.dart';
 import '/app/core/session_manager/session_manager.dart';
+import '/app/core/utils/dispose_devouncer.dart';
 import '/app/service/client/error_catcher.dart';
 import '/app/service/client/network_error_widgets/error_screen.dart';
 import '/app/service/client/network_error_widgets/no_internet_screen.dart';
@@ -36,7 +35,8 @@ abstract class BaseController extends GetxController {
   DbTables get dbTables => DbTables();
 
   SetUp get setUp => SetUp();
-  String get currency => setUp.symbol??'';
+
+  String get currency => setUp.symbol ?? '';
 
   final voiceRecognition = VoiceRecognition();
 
@@ -50,8 +50,10 @@ abstract class BaseController extends GetxController {
   final isRoleSales = LoggedUser().roles?.contains('ROLE_SALES') ?? false;
   final isRoleExpense = LoggedUser().roles?.contains('ROLE_EXPENSE') ?? false;
   final isRoleStock = LoggedUser().roles?.contains('ROLE_STOCK') ?? false;
-  final isRoleAccountReceive = LoggedUser().roles?.contains('ROLE_ACCOUNT_RECEIVE') ?? false;
-  final isRoleAccountPayment = LoggedUser().roles?.contains('ROLE_ACCOUNT_PAYMENT') ?? false;
+  final isRoleAccountReceive =
+      LoggedUser().roles?.contains('ROLE_ACCOUNT_RECEIVE') ?? false;
+  final isRoleAccountPayment =
+      LoggedUser().roles?.contains('ROLE_ACCOUNT_PAYMENT') ?? false;
 
   final pageLimit = 25;
 

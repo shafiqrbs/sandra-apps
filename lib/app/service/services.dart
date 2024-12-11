@@ -9,6 +9,7 @@ import 'package:sandra/app/entity/brand.dart';
 import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
+import 'package:sandra/app/entity/sales_return.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/entity/sync_list.dart';
 import 'package:sandra/app/entity/system_overview_report.dart';
@@ -1336,14 +1337,13 @@ class Services {
     }
   }
 
-  Future<void> getSalesReturnList({
+  Future<List<SalesReturn>?> getSalesReturnList({
     required int page,
   }) async {
-    const endPoint = 'poskeeper-online-sales-return-list';
+    const endPoint = 'poskeeper-online-sales-return';
     try {
       final query = <String, dynamic>{
         'page': page,
-        'limit': 10,
       };
       final response = await dio.get(
         APIType.public,
@@ -1351,8 +1351,12 @@ class Services {
         query: query,
         headers: _buildHeader(),
       );
-      final responseData = response.data as List;
-      if (responseData.isEmpty) return null;
+      final responseData = response.data as List?;
+      if (responseData == null) return null;
+      return parseList(
+        list: response.data,
+        fromJson: SalesReturn.fromJson,
+      );
     } catch (e, s) {
       printError(e, s, endPoint);
       return null;
