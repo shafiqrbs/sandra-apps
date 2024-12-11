@@ -1,12 +1,7 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
-import '/app/core/base/base_view.dart';
-import '/app/core/utils/responsive.dart';
 import '/app/core/widget/fb_string.dart';
-import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/global_widget/transaction_method_item_view.dart';
 import 'add_expense_controller.dart';
@@ -123,7 +118,8 @@ class AddExpenseView extends BaseView<AddExpenseController> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide: BorderSide(
-                                  color: colors.primaryColor200,
+                                  color: colors.primaryColor500,
+                                  width: 2,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(

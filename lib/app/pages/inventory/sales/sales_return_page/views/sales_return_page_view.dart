@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/core/widget/row_button.dart';
@@ -33,23 +32,6 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          if (kDebugMode)
-            ElevatedButton(
-              onPressed: () {
-                controller.generatedList.forEach(
-                  (key, value) {
-                    if (kDebugMode) {
-                      print('key $key');
-                      print('qty : ${value.quantity}');
-                      print('mrp : ${value.mrpPrice}');
-                      print('subtotal : ${value.subTotal}');
-                    }
-                  },
-                );
-              },
-              child: const Text('Print generated List'),
-            ),
-
           DecoratedBox(
             decoration: BoxDecoration(
               color: colors.secondaryColor50,
@@ -190,7 +172,7 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
 
           //012400011
           SizedBox(
-            height: 40.ph,
+            height: 48.ph,
             child: Obx(
               () => ListView.builder(
                 shrinkWrap: true,
@@ -507,97 +489,96 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.zero,
-                        height: mediumTextFieldHeight,
-                        //width: Get.width * 0.7,
-                        color: colors.whiteColor,
-                        child: TextFormField(
-                          controller: controller.paymentController,
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          inputFormatters: doubleInputFormatter,
-                          onChanged: (value) {},
-                          style: TextStyle(
-                            fontSize: mediumTFSize,
-                            color: colors.solidBlackColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          cursorColor: colors.solidBlackColor,
-                          decoration: getInputDecoration(
-                            hint: appLocalization.payment,
-                          ),
-                        ),
-                      ),
-                    ),
-                    5.width,
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.zero,
-                        height: mediumTextFieldHeight,
-                        //width: Get.width * 0.7,
-                        color: colors.whiteColor,
-                        child: TextFormField(
-                          controller: controller.adjustmentController,
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          inputFormatters: doubleInputFormatter,
-                          onChanged: (value) {},
-                          style: TextStyle(
-                            fontSize: mediumTFSize,
-                            color: colors.solidBlackColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          cursorColor: colors.solidBlackColor,
-                          decoration: getInputDecoration(
-                            hint: appLocalization.adjustment,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                10.height,
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.zero,
-                  padding: EdgeInsets.zero,
-                  height: mediumTextFieldHeight,
-                  //width: Get.width * 0.7,
-                  color: colors.whiteColor,
-                  child: TextFormField(
-                    controller: controller.remarkController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    inputFormatters: doubleInputFormatter,
-                    onChanged: (value) {},
-                    style: TextStyle(
-                      fontSize: mediumTFSize,
-                      color: colors.solidBlackColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    cursorColor: colors.solidBlackColor,
-                    decoration: getInputDecoration(
-                      hint: appLocalization.remark,
-                    ),
-                  ),
-                ),
                 10.height,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RowButton(
-                      buttonName: appLocalization.reset,
-                      leftIcon: TablerIcons.restore,
-                      onTap: controller.resetField,
-                      isOutline: true,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
+                              height: mediumTextFieldHeight,
+                              //width: Get.width * 0.7,
+                              color: colors.whiteColor,
+                              child: TextFormField(
+                                controller: controller.paymentController,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: doubleInputFormatter,
+                                onChanged: (value) {},
+                                style: TextStyle(
+                                  fontSize: mediumTFSize,
+                                  color: colors.solidBlackColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                cursorColor: colors.solidBlackColor,
+                                decoration: getInputDecoration(
+                                  hint: appLocalization.payment,
+                                ).copyWith(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    borderSide: BorderSide(
+                                      color: colors.primaryColor500,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    borderSide: BorderSide(
+                                      color: colors.primaryColor500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          5.width,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
+                              height: mediumTextFieldHeight,
+                              //width: Get.width * 0.7,
+                              color: colors.whiteColor,
+                              child: TextFormField(
+                                controller: controller.adjustmentController,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: doubleInputFormatter,
+                                onChanged: (value) {},
+                                style: TextStyle(
+                                  fontSize: mediumTFSize,
+                                  color: colors.solidBlackColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                cursorColor: colors.solidBlackColor,
+                                decoration: getInputDecoration(
+                                  hint: appLocalization.adjustment,
+                                ).copyWith(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    borderSide: BorderSide(
+                                      color: colors.primaryColor500,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    borderSide: BorderSide(
+                                      color: colors.primaryColor500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     16.width,
                     RowButton(
