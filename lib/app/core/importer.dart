@@ -19,6 +19,7 @@ export 'package:sandra/app/core/widget/no_record_found_view.dart';
 export 'package:sandra/app/core/widget/page_back_button.dart';
 export 'package:sandra/app/core/widget/quick_navigation_button.dart';
 export 'package:sandra/app/core/widget/retry_view.dart';
+export 'package:sandra/app/routes/app_pages.dart';
 
 export '/app/core/base/base_controller.dart';
 export '/app/core/base/mixins/shorter_enum_mixin.dart';

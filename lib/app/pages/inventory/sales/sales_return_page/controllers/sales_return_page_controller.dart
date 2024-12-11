@@ -1,14 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/sales.dart';
 import 'package:sandra/app/entity/sales_item.dart';
-import '/app/core/base/base_controller.dart';
 
 class SalesReturnPageController extends BaseController {
   final sales = Rx<Sales?>(null);
@@ -82,7 +79,7 @@ class SalesReturnPageController extends BaseController {
     final data = {
       'sales_id': sales.value?.salesId,
       'created_by_id': LoggedUser().userId,
-      'sub_total': double.tryParse(totalReturnAmount.value??'0'),
+      'sub_total': double.tryParse(totalReturnAmount.value ?? '0'),
       'receive': payment,
       'adjustment': adjustment,
       'comment': remarkController.text,
@@ -115,9 +112,13 @@ class SalesReturnPageController extends BaseController {
     );
 
     if (isSuccess ?? false) {
+      while (Get.currentRoute != Routes.dashboard) {
+        Get.back();
+      }
+      Get.toNamed(Routes.salesReturnListPage);
       showSnackBar(
-        type: SnackBarType.success,
         message: appLocalization.success,
+        type: SnackBarType.success,
       );
     } else {
       showSnackBar(
