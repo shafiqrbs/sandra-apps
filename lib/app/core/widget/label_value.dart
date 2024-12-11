@@ -1,10 +1,9 @@
-import 'package:sandra/app/core/importer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/extensions/text_style_extensions.dart';
-import '/app/core/utils/responsive.dart';
 
-LabelValue labelValue = LabelValue(
+LabelValue labelValueDefault = LabelValue(
   label: 'label',
   value: 'value',
   dividerText: ':',

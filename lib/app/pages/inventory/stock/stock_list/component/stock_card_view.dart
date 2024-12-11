@@ -1,15 +1,9 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import '/app/core/widget/dialog_pattern.dart';
+
 import '/app/core/base/base_widget.dart';
-import '/app/core/widget/common_icon_text.dart';
 import '/app/core/widget/label_value.dart';
 import '/app/entity/stock.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
-
-import 'stock_details_modal.dart';
 
 final labelValue = LabelValue(
   label: 'label',

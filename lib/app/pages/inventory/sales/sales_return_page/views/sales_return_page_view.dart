@@ -1,21 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/utils/responsive.dart';
 import 'package:sandra/app/core/utils/style_function.dart';
-import 'package:sandra/app/core/widget/app_bar_button_group.dart';
-import 'package:sandra/app/core/widget/common_icon_text.dart';
-import 'package:sandra/app/core/widget/common_text.dart';
-import 'package:sandra/app/core/widget/label_value.dart';
-import 'package:sandra/app/core/widget/list_button.dart';
-import 'package:sandra/app/core/widget/page_back_button.dart';
-import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/core/widget/row_button.dart';
-import 'package:sandra/app/entity/sales_item.dart';
-import '/app/core/base/base_view.dart';
+
 import '/app/pages/inventory/sales/sales_return_page/controllers/sales_return_page_controller.dart';
 
 //ignore: must_be_immutable
@@ -472,11 +459,11 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                     mainAxisAlignment: endMAA,
                     crossAxisAlignment: endCAA,
                     children: [
-                      labelValue.copyWith(
+                      labelValueDefault.copyWith(
                         label: appLocalization.subTotal,
                         value: '${controller.sales.value!.subTotal}',
                       ),
-                      labelValue.copyWith(
+                      labelValueDefault.copyWith(
                         label:
                             '${appLocalization.discount} (${controller.sales.value!.discountCalculation})',
                         value: '${controller.sales.value!.discount}',
@@ -488,11 +475,11 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                           color: colors.primaryColor50,
                         ),
                       ),
-                      labelValue.copyWith(
+                      labelValueDefault.copyWith(
                         label: appLocalization.total,
                         value: '${controller.sales.value!.netTotal}',
                       ),
-                      labelValue.copyWith(
+                      labelValueDefault.copyWith(
                         label: appLocalization.receive,
                         value: '${controller.sales.value!.received}',
                       ),
@@ -503,7 +490,7 @@ class SalesReturnPageView extends BaseView<SalesReturnPageController> {
                           color: colors.primaryColor50,
                         ),
                       ),
-                      labelValue.copyWith(
+                      labelValueDefault.copyWith(
                         label: appLocalization.due,
                         value: (
                           (controller.sales.value!.netTotal ?? 0) -
