@@ -1,17 +1,10 @@
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/utils/test_functions.dart';
-import '/app/core/widget/common_text.dart';
-import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/tbd_text_button.dart';
 import '/app/core/widget/title_subtitle_button.dart';
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
@@ -82,8 +75,8 @@ class DashboardView extends BaseView<DashboardController> {
 
   @override
   Widget body(BuildContext context) {
-    return Obx(()=>
-      Column(
+    return Obx(
+      () => Column(
         mainAxisAlignment: startMAA,
         crossAxisAlignment: endCAA,
         children: [
@@ -94,7 +87,9 @@ class DashboardView extends BaseView<DashboardController> {
               child: RefreshIndicator(
                 onRefresh: () async {
                   if (controller.isOnline.value) {
-                    await controller.fetchFinancialData();
+                    await controller.fetchOnlineFinancialData();
+                  } else {
+                    await controller.fetchOfflineFinancialData();
                   }
                 },
                 child: SingleChildScrollView(

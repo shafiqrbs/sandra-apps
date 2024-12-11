@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class FinancialData {
   final int? globalOption;
   final String? expenditure;
@@ -60,8 +58,8 @@ class FinancialData {
       'transaction_overview': transactionOverview?.map((item) {
         return item.toJson();
       }).toList(),
-      'version' : version,
-      'update_url' : updateUrl,
+      'version': version,
+      'update_url': updateUrl,
     };
   }
 }

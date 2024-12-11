@@ -155,6 +155,26 @@ class DbHelper {
     return [];
   }
 
+  Future<List<Map<String, dynamic>>> getLocalFinancialData({
+    required String tbl,
+    required String where,
+    required List<dynamic> whereArgs,
+    int? limit,
+    int? offset,
+  }) async {
+    if (kDebugMode) {
+      print(where);
+    }
+    final Database? db = await instance.database;
+    if (db != null) {
+      final sql = StringBuffer(
+        'SELECT SUM(net_total) as total, SUM(received) as received,(SUM(net_total) - SUM(received)) as due, method_id FROM sales WHERE is_hold is null or is_hold == 0 GROUP BY method_id',
+      );
+      return db.rawQuery(sql.toString(), whereArgs);
+    }
+    return [];
+  }
+
   Future<int> updateWhere({
     required String tbl,
     required Map<String, dynamic> data,
