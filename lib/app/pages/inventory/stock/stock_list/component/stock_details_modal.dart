@@ -1,20 +1,18 @@
-import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/utils/test_functions.dart';
 import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
-import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
-import '/app/core/base/base_widget.dart';
-import '/app/entity/stock.dart';
-import 'package:nb_utils/nb_utils.dart';
 
+import '/app/core/base/base_widget.dart';
+import '../controllers/stock_list_controller.dart';
 import 'stock_card_view.dart';
 
 class StockDetailsModal extends BaseWidget {
   final StockDetails element;
+
   StockDetailsModal({
     required this.element,
     super.key,
@@ -361,5 +359,30 @@ class StockDetailsModal extends BaseWidget {
     );
   }
 
-  void _deleteStock() {}
+  Future<void> _deleteStock() async {
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (confirmation) {
+      final controller = Get.find<HelperController>();
+      bool? isDeleted;
+      await controller.dataFetcher(
+        future: () async {
+          isDeleted = await controller.services.deleteStock(
+            id: element.id.toString(),
+          );
+        },
+      );
+      if (isDeleted ?? false) {
+        await dbHelper.deleteAllWhr(
+          tbl: dbTables.tableStocks,
+          where: 'item_id = ?',
+          whereArgs: [element.id],
+        );
+        final stockListController = Get.find<StockListController>();
+        await stockListController.refreshList();
+        Get.back();
+      }
+    }
+  }
 }

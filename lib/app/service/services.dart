@@ -1157,12 +1157,9 @@ class Services {
   }) async {
     const endPoint = 'poskeeper-stock-edit';
     try {
-      final response = await dio.post(
+      final response = await dio.get(
         APIType.public,
         endPoint,
-        {
-          'id': id,
-        },
         query: {
           'id': id,
         },
@@ -1360,6 +1357,28 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return null;
+    }
+  }
+
+  Future<bool> deleteStock({
+    required String id,
+  }) async {
+    const endPoint = 'poskeeper-stock-delete';
+    try {
+      final response = await dio.get(
+        APIType.public,
+        endPoint,
+        query: {
+          'id': id,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return false;
+      return responseData['status'] == 'success';
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return false;
     }
   }
 }
