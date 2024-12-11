@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/db_helper/db_tables.dart';

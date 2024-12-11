@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import '/app/core/singleton_classes/color_schema.dart';
+import 'package:sandra/app/core/importer.dart';
 
-import '/app/core/utils/responsive.dart';
-import '/app/core/values/app_dimension.dart';
-import 'common_text.dart';
+import '/app/core/singleton_classes/color_schema.dart';
 import 'draw_icon.dart';
 
-class AppBarButton extends StatelessWidget with AppDimension {
+class AppBarButton extends StatelessWidget {
   final String? buttonName;
   final Color? buttonTextColor;
   final Color? buttonBGColor;

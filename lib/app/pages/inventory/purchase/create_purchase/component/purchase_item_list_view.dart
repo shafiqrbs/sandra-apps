@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/widget/common_header_text.dart';
 
 import '/app/core/base/base_widget.dart';
@@ -10,11 +10,12 @@ import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/entity/purchase_item.dart';
 
-class PurchaseItemListView extends BaseWidget {
+class PurchaseItemListView extends StatelessWidget {
   final List<PurchaseItem> salesItems;
   final Function(int index) onItemRemove;
   final Function(num onQtyChange, int index) onQtyChange;
   final Function(num onQtyChange, int index) onPriceChange;
+
   PurchaseItemListView({
     required this.salesItems,
     required this.onItemRemove,

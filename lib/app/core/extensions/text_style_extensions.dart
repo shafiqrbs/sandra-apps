@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 extension TextStyleExtension on TextStyle {

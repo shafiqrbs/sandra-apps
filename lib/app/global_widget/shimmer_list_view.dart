@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerListView extends StatelessWidget {

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/singleton_classes/color_schema.dart';
-import '/app/core/values/app_dimension.dart';
 
-class CommonHeaderText extends StatelessWidget with AppDimension {
+class CommonHeaderText extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final double? borderRadius;

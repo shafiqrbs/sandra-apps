@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/domain/vendor/vendor_details/controllers/vendor_details_controller.dart';
 

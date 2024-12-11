@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/responsive.dart';

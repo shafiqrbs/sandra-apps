@@ -1,20 +1,23 @@
 import 'package:faker/faker.dart' as fakers;
 import 'package:number_to_character/number_to_character.dart';
+
 import '/app/core/db_helper/db_helper.dart';
 import '/app/core/db_helper/db_tables.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/sales.dart';
 
 final converter = NumberToCharacterConverter('en');
-DbHelper get dbHelper => DbHelper.instance;
+
+DbHelper get db => DbHelper.instance;
+
 DbTables get dbTables => DbTables();
 
 Future<void> clearSalesTable() async {
-  await dbHelper.deleteAll(tbl: dbTables.tableSale);
+  await db.deleteAll(tbl: dbTables.tableSale);
 }
 
 Future<void> clearSPurchaseTable() async {
-  await dbHelper.deleteAll(tbl: dbTables.tablePurchase);
+  await db.deleteAll(tbl: dbTables.tablePurchase);
 }
 
 Sales generateRandomSales({
@@ -59,7 +62,8 @@ Sales generateRandomSales({
     comment: faker.lorem.sentence(),
     tokenNo: faker.guid.guid(),
     couponCode: faker.randomGenerator.integer(1000).toString(),
-    salesItem: [], // You can generate random SalesItem objects similarly
+    salesItem: [],
+    // You can generate random SalesItem objects similarly
     isOnline: faker.randomGenerator.integer(2),
   );
 }
@@ -103,7 +107,8 @@ Purchase generateRandomPurchase({
     comment: faker.lorem.sentence(),
     tokenNo: faker.guid.guid(),
     couponCode: faker.randomGenerator.integer(1000).toString(),
-    purchaseItem: [], // You can generate random SalesItem objects similarly
+    purchaseItem: [],
+    // You can generate random SalesItem objects similarly
     isOnline: faker.randomGenerator.integer(2),
   );
 }

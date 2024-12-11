@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 
 enum DotType { square, circle, diamond, icon }
 

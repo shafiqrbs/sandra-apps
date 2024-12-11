@@ -62,7 +62,7 @@ class ${pageClassName}Controller extends BaseController {
   );
 
   // Create and write the views file
-  final String viewsContent = '''import 'package:flutter/material.dart';
+  final String viewsContent = '''import 'package:sandra/app/core/importer.dart';
 import '/app/core/base/base_view.dart';
 import '/app/pages/$pageFileName/controllers/${pageFileName}_controller.dart';
 

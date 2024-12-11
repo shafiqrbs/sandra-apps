@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/app/core/widget/custom_animation_widget.dart';

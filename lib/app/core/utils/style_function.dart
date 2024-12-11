@@ -1,18 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/singleton_classes/fb_colors.dart';
 import '/app/core/singleton_classes/fb_outline_input_border.dart';
 import '/app/core/singleton_classes/fb_typography.dart';
-import '/app/core/values/app_dimension.dart';
 
-class Responsive with AppDimension {}
-
-final appDimension = Responsive();
 final colors = ColorSchema();
 
 InputDecoration getInputDecoration({
@@ -91,12 +85,12 @@ InputDecoration inputDecorationAppbarSearch({
     contentPadding: EdgeInsets.zero,
     hintText: hint.tr,
     hintStyle: TextStyle(
-      fontSize: appDimension.regularTFSize,
+      fontSize: regularTFSize,
       color: colors.primaryBlackColor,
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: colors.secondaryColor100,
@@ -104,7 +98,7 @@ InputDecoration inputDecorationAppbarSearch({
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: colors.secondaryColor100,
@@ -112,7 +106,7 @@ InputDecoration inputDecorationAppbarSearch({
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: colors.secondaryColor100,
@@ -277,12 +271,14 @@ InputDecoration inputDecorationSearch({
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 12,
       vertical: 10,
-    ), // Adjust the padding as needed
+    ),
+    // Adjust the padding as needed
     hintText: hint.tr,
     hintStyle: TextStyle(
       fontSize: 16,
       color: Colors.grey.withOpacity(.5),
-    ), // Optional hint text
+    ),
+    // Optional hint text
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         borderRadius ?? 4,
@@ -330,7 +326,7 @@ InputDecoration buildInputDecoration({
     suffixIcon: suffixIcon,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: enabledBorderColor,
@@ -338,7 +334,7 @@ InputDecoration buildInputDecoration({
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: focusedBorderColor,
@@ -346,13 +342,13 @@ InputDecoration buildInputDecoration({
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(color: errorBorderColor),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
-        appDimension.containerBorderRadius,
+        containerBorderRadius,
       ),
       borderSide: BorderSide(
         color: focusedBorderColor,

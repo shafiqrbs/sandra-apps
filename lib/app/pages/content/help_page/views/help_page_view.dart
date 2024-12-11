@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/widget/page_back_button.dart';

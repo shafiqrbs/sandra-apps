@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 
 class ColorLoader2 extends StatefulWidget {
   final Color color1;

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 
 extension OutlineInputBorderExtensions on OutlineInputBorder {
   static OutlineInputBorder fromJson(Map<String, dynamic> json) {

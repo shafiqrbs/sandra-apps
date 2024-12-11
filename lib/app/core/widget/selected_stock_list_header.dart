@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
 import '/app/core/base/base_widget.dart';
 import '/app/core/singleton_classes/color_schema.dart';

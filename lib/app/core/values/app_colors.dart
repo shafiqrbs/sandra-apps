@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:sandra/app/core/importer.dart';
 
 abstract class AppColors {
   static const Color pageBackground = Color(0xFFFAFBFD);

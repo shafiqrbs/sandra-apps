@@ -1,18 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import '/app/core/base/base_controller.dart';
+import 'package:sandra/app/core/importer.dart';
+
 import '/app/core/core_model/setup.dart';
 import '/app/core/singleton_classes/color_schema.dart';
-import '/app/core/utils/responsive.dart';
-import '/app/core/values/app_dimension.dart';
 
 class LanguageController extends BaseController {}
 
-class LanguageChangeDropDown extends StatelessWidget with AppDimension {
+class LanguageChangeDropDown extends StatelessWidget {
   final colorSchema = ColorSchema();
   final BaseController gc = Get.put(LanguageController());
+
   LanguageChangeDropDown({super.key});
 
   final setUp = SetUp();
