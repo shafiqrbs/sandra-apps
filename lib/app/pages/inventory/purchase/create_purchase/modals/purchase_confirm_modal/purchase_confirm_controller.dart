@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 import '/app/entity/purchase.dart';
@@ -10,6 +9,7 @@ import '/app/pages/inventory/purchase/create_purchase/controllers/create_purchas
 class PurchaseConfirmController extends PrinterController {
   final Purchase purchase;
   final bool isEdit;
+
   PurchaseConfirmController({
     required this.purchase,
     required this.isEdit,
@@ -61,6 +61,7 @@ class PurchaseConfirmController extends PrinterController {
     } else {
       await _insertPurchase();
     }
+    await dbHelper.deleteAll(tbl: dbTables.tablePurchaseItem);
   }
 
   Future<void> _updatePurchase() async {

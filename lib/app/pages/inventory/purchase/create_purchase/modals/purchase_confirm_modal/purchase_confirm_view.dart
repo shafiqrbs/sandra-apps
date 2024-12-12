@@ -1,11 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_view.dart';
-import '/app/core/utils/responsive.dart';
 import '/app/core/widget/row_button.dart';
 import '/app/entity/purchase.dart';
 import '/app/global_widget/shimmer_list_view.dart';
@@ -14,11 +8,13 @@ import 'purchase_confirm_controller.dart';
 class PurchaseConfirmView extends BaseView<PurchaseConfirmController> {
   final Purchase purchase;
   final bool isEdit;
+
   PurchaseConfirmView({
     required this.purchase,
     required this.isEdit,
     super.key,
   });
+
   final falsePadding = 16.0.obs;
 
   @override

@@ -1,13 +1,10 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '/app/core/abstract_controller/stock_selection_controller.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/purchase_item.dart';
 import '/app/entity/stock.dart';
 import '/app/pages/inventory/purchase/create_purchase/modals/purchase_process_modal/purchase_process_view.dart';
-import '/app/routes/app_pages.dart';
 
 class CreatePurchaseController extends StockSelectionController {
   Purchase? prePurchase;
@@ -43,7 +40,23 @@ class CreatePurchaseController extends StockSelectionController {
           calculateAllSubtotal();
         }
       }
+    } else {
+      final itemCount = await dbHelper.getItemCount(
+        tableName: dbTables.tablePurchaseItem,
+        limit: 1,
+      );
+      if (itemCount > 0) {
+        final purchaseItem = await dbHelper.getAll(
+          tbl: dbTables.tablePurchaseItem,
+        );
+        purchaseItemList.value = purchaseItem
+            .map(
+              (e) => PurchaseItem.fromJson(e),
+            )
+            .toList();
+      }
     }
+    calculateAllSubtotal();
   }
 
   void setData(
@@ -121,6 +134,11 @@ class CreatePurchaseController extends StockSelectionController {
 
     // Add stock to purchaseItemList
     purchaseItemList.value.add(purchaseItem);
+    await dbHelper.insertList(
+      deleteBeforeInsert: false,
+      tableName: dbTables.tablePurchaseItem,
+      dataList: [purchaseItem.toJson()],
+    );
 
     // Reset fields after item is added
     resetAfterItemAdd();
