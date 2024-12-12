@@ -1,11 +1,9 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/pages/inventory/purchase/create_purchase/controllers/create_purchase_controller.dart';
 import 'package:sandra/app/pages/inventory/sales/create_sales/controllers/create_sales_controller.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
+
 import '/app/pages/dashboard/controllers/dashboard_controller.dart';
-import '/app/core/base/base_controller.dart';
 
 enum Buttons {
   printPaperType,
@@ -193,6 +191,9 @@ class PrefsSettingsModalController extends BaseController {
         }
       }
 
+      await dbHelper.deleteAll(
+        tbl: dbTables.tablePurchaseItem,
+      );
       selectedPurchase.value = config;
       await prefs.setPurchaseConfig(config);
     }
