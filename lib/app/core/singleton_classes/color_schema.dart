@@ -93,7 +93,6 @@ const darkColor = {
   'text_color_200': '0xFF737373',
   'text_color_100': '0xFF8C8C8C',
   'text_color_50': '0xFFE6E6E6',
-
 };
 
 class ColorSchema {
@@ -205,53 +204,97 @@ class ColorSchema {
 
   // Method to update the color schema
   factory ColorSchema.fromJson(Map<String, dynamic> json) {
-    T parseColor<T>(
-      dynamic value,
-    ) {
+    T? parseColor<T>(dynamic value) {
+      if (value == null) return null;
       return Color(int.tryParse(value)!) as T;
     }
 
-    return ColorSchema()
-      ..primaryColor900 = parseColor(json['primary_color_900'])
-      ..primaryColor800 = parseColor(json['primary_color_800'])
-      ..primaryColor700 = parseColor(json['primary_color_700'])
-      ..primaryColor600 = parseColor(json['primary_color_600'])
-      ..primaryColor500 = parseColor(json['primary_color_500'])
-      ..primaryColor400 = parseColor(json['primary_color_400'])
-      ..primaryColor300 = parseColor(json['primary_color_300'])
-      ..primaryColor200 = parseColor(json['primary_color_200'])
-      ..primaryColor100 = parseColor(json['primary_color_100'])
-      ..primaryColor50 = parseColor(json['primary_color_50'])
-      ..secondaryColor900 = parseColor(json['secondary_color_900'])
-      ..secondaryColor800 = parseColor(json['secondary_color_800'])
-      ..secondaryColor700 = parseColor(json['secondary_color_700'])
-      ..secondaryColor600 = parseColor(json['secondary_color_600'])
-      ..secondaryColor500 = parseColor(json['secondary_color_500'])
-      ..secondaryColor400 = parseColor(json['secondary_color_400'])
-      ..secondaryColor300 = parseColor(json['secondary_color_300'])
-      ..secondaryColor200 = parseColor(json['secondary_color_200'])
-      ..secondaryColor100 = parseColor(json['secondary_color_100'])
-      ..secondaryColor50 = parseColor(json['secondary_color_50'])
-      ..solidBlackColor = parseColor(json['solidBlackColor'])
-      ..blackColor900 = parseColor(json['black_color_900'])
-      ..blackColor800 = parseColor(json['black_color_800'])
-      ..blackColor700 = parseColor(json['black_color_700'])
-      ..blackColor600 = parseColor(json['black_color_600'])
-      ..blackColor500 = parseColor(json['black_color_500'])
-      ..blackColor400 = parseColor(json['black_color_400'])
-      ..blackColor300 = parseColor(json['black_color_300'])
-      ..blackColor200 = parseColor(json['black_color_200'])
-      ..blackColor100 = parseColor(json['black_color_100'])
-      ..blackColor50 = parseColor(json['black_color_50'])
-      ..textColor900 = parseColor(json['text_color_900'])
-      ..textColor800 = parseColor(json['text_color_800'])
-      ..textColor700 = parseColor(json['text_color_700'])
-      ..textColor600 = parseColor(json['text_color_600'])
-      ..textColor500 = parseColor(json['text_color_500'])
-      ..textColor400 = parseColor(json['text_color_400'])
-      ..textColor300 = parseColor(json['text_color_300'])
-      ..textColor200 = parseColor(json['text_color_200'])
-      ..textColor100 = parseColor(json['text_color_100'])
-      ..textColor50 = parseColor(json['text_color_50']);
+    final schema = ColorSchema();
+
+    // Assign values only if they exist in the JSON
+    if (json.containsKey('primary_color_900'))
+      schema.primaryColor900 = parseColor(json['primary_color_900']);
+    if (json.containsKey('primary_color_800'))
+      schema.primaryColor800 = parseColor(json['primary_color_800']);
+    if (json.containsKey('primary_color_700'))
+      schema.primaryColor700 = parseColor(json['primary_color_700']);
+    if (json.containsKey('primary_color_600'))
+      schema.primaryColor600 = parseColor(json['primary_color_600']);
+    if (json.containsKey('primary_color_500'))
+      schema.primaryColor500 = parseColor(json['primary_color_500']);
+    if (json.containsKey('primary_color_400'))
+      schema.primaryColor400 = parseColor(json['primary_color_400']);
+    if (json.containsKey('primary_color_300'))
+      schema.primaryColor300 = parseColor(json['primary_color_300']);
+    if (json.containsKey('primary_color_200'))
+      schema.primaryColor200 = parseColor(json['primary_color_200']);
+    if (json.containsKey('primary_color_100'))
+      schema.primaryColor100 = parseColor(json['primary_color_100']);
+    if (json.containsKey('primary_color_50'))
+      schema.primaryColor50 = parseColor(json['primary_color_50']);
+    if (json.containsKey('secondary_color_900'))
+      schema.secondaryColor900 = parseColor(json['secondary_color_900']);
+    if (json.containsKey('secondary_color_800'))
+      schema.secondaryColor800 = parseColor(json['secondary_color_800']);
+    if (json.containsKey('secondary_color_700'))
+      schema.secondaryColor700 = parseColor(json['secondary_color_700']);
+    if (json.containsKey('secondary_color_600'))
+      schema.secondaryColor600 = parseColor(json['secondary_color_600']);
+    if (json.containsKey('secondary_color_500'))
+      schema.secondaryColor500 = parseColor(json['secondary_color_500']);
+    if (json.containsKey('secondary_color_400'))
+      schema.secondaryColor400 = parseColor(json['secondary_color_400']);
+    if (json.containsKey('secondary_color_300'))
+      schema.secondaryColor300 = parseColor(json['secondary_color_300']);
+    if (json.containsKey('secondary_color_200'))
+      schema.secondaryColor200 = parseColor(json['secondary_color_200']);
+    if (json.containsKey('secondary_color_100'))
+      schema.secondaryColor100 = parseColor(json['secondary_color_100']);
+    if (json.containsKey('secondary_color_50'))
+      schema.secondaryColor50 = parseColor(json['secondary_color_50']);
+    if (json.containsKey('solidBlackColor'))
+      schema.solidBlackColor = parseColor(json['solidBlackColor']);
+    if (json.containsKey('black_color_900'))
+      schema.blackColor900 = parseColor(json['black_color_900']);
+    if (json.containsKey('black_color_800'))
+      schema.blackColor800 = parseColor(json['black_color_800']);
+    if (json.containsKey('black_color_700'))
+      schema.blackColor700 = parseColor(json['black_color_700']);
+    if (json.containsKey('black_color_600'))
+      schema.blackColor600 = parseColor(json['black_color_600']);
+    if (json.containsKey('black_color_500'))
+      schema.blackColor500 = parseColor(json['black_color_500']);
+    if (json.containsKey('black_color_400'))
+      schema.blackColor400 = parseColor(json['black_color_400']);
+    if (json.containsKey('black_color_300'))
+      schema.blackColor300 = parseColor(json['black_color_300']);
+    if (json.containsKey('black_color_200'))
+      schema.blackColor200 = parseColor(json['black_color_200']);
+    if (json.containsKey('black_color_100'))
+      schema.blackColor100 = parseColor(json['black_color_100']);
+    if (json.containsKey('black_color_50'))
+      schema.blackColor50 = parseColor(json['black_color_50']);
+    if (json.containsKey('text_color_900'))
+      schema.textColor900 = parseColor(json['text_color_900']);
+    if (json.containsKey('text_color_800'))
+      schema.textColor800 = parseColor(json['text_color_800']);
+    if (json.containsKey('text_color_700'))
+      schema.textColor700 = parseColor(json['text_color_700']);
+    if (json.containsKey('text_color_600'))
+      schema.textColor600 = parseColor(json['text_color_600']);
+    if (json.containsKey('text_color_500'))
+      schema.textColor500 = parseColor(json['text_color_500']);
+    if (json.containsKey('text_color_400'))
+      schema.textColor400 = parseColor(json['text_color_400']);
+    if (json.containsKey('text_color_300'))
+      schema.textColor300 = parseColor(json['text_color_300']);
+    if (json.containsKey('text_color_200'))
+      schema.textColor200 = parseColor(json['text_color_200']);
+    if (json.containsKey('text_color_100'))
+      schema.textColor100 = parseColor(json['text_color_100']);
+    if (json.containsKey('text_color_50'))
+      schema.textColor50 = parseColor(json['text_color_50']);
+
+    return schema;
   }
 }

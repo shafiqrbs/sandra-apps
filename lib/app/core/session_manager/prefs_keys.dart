@@ -23,3 +23,4 @@ const prefsIsTotalPriceConfig = 'isTotalPriceConfig';
 const prefIsShowBrandOnPurchase = 'isShowBrandOnPurchase';
 const prefIsShowBrandOnSales = 'isShowBrandOnSales';
 const prefIsDashboardOnline = 'isDashboardOnline';
+const prefsSelectedThemeName = 'selectedThemeName';

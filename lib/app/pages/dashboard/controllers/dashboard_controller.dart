@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
@@ -304,16 +302,35 @@ class DashboardController extends BaseController {
   List<Widget> dashboardButtonList = [];
 
   final financialData = Rx<FinancialData?>(null);
+  final themeList = <String>[].obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsDashboardOnline();
+    await fetchThemeList();
     if (isOnline.value) {
       await fetchOnlineFinancialData();
     } else {
       await fetchOfflineFinancialData();
+    }
+  }
+
+  Future<void> fetchThemeList() async {
+    final themeCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableColorPlate,
+      limit: 1,
+    );
+    print('themeCount: $themeCount');
+    if (themeCount > 0) {
+      final themeList = await db.getAll(tbl: dbTables.tableColorPlate);
+      this.themeList.value = themeList
+          .map(
+            (e) => e['theme_name'].toString(),
+          )
+          .toList();
+      print('themeList: $themeList');
     }
   }
 
@@ -336,7 +353,6 @@ class DashboardController extends BaseController {
       where: '',
       whereArgs: [],
     );
-    print('Offline Data: $data');
   }
 
   void goToSales() {
@@ -596,24 +612,23 @@ class DashboardController extends BaseController {
     );
   }
 
-  Future<void> changeTheme() async {
-    showSnackBar(
-      type: SnackBarType.warning,
-      title: appLocalization.upcomingFeature,
-      message: appLocalization.comingSoon,
+  Future<void> changeTheme({
+    required String themeName,
+  }) async {
+    /// get theme from db
+    final theme = await db.getAllWhr(
+      tbl: dbTables.tableColorPlate,
+      where: 'theme_name = ?',
+      whereArgs: [themeName],
+      limit: 1,
     );
-    return;
-    // Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
-    ColorSchema.fromJson(
-      Get.isDarkMode ? darkColor : lightColor,
-    );
-    Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
-    await prefs.setIsEnableDarkMode(isEnableDarkMode: Get.isDarkMode);
-    await Get.forceAppUpdate();
-
-    print('pref theme: ${await prefs.getIsEnableDarkMode()}');
-    print('Current Theme: ${Get.isDarkMode ? 'Dark' : 'Light'}');
-    print('Primary Color: ${ColorSchema().primaryColor900}');
+    if (theme.isNotEmpty) {
+      ColorSchema.fromJson(theme[0]);
+      await prefs.setSelectedThemeName(
+        themeName: themeName,
+      );
+      await Get.forceAppUpdate();
+    }
   }
 
   void goToRestaurantHome() {

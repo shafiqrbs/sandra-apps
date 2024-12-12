@@ -1,29 +1,13 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
-import '/app/routes/app_pages.dart';
 
 class SplashController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getThemeColor();
     await navigatePage();
-  }
-
-  Future<void> getThemeColor() async {
-    final isDarkMode = await prefs.getIsEnableDarkMode();
-
-    ColorSchema.fromJson(
-      isDarkMode ? darkColor : lightColor,
-    );
-    Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
-    await Get.forceAppUpdate();
   }
 
   Future<void> navigatePage() async {

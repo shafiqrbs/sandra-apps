@@ -172,7 +172,7 @@ class DashboardView extends BaseView<DashboardController> {
                 controller.isManager ? 16.width : Container(),
 
                 InkWell(
-                  onTap: controller.changeTheme,
+                  // onTap: controller.changeTheme,
                   child: Icon(
                     Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
                     color: colors.whiteColor,
@@ -228,6 +228,7 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
+        if (kDebugMode) _buildThemeSelector(),
         12.height,
         _buildNewUpdateView(),
         _buildThreeCommonButtons(),
@@ -235,6 +236,33 @@ class DashboardView extends BaseView<DashboardController> {
         14.height,
         _buildButtons(),
       ],
+    );
+  }
+
+  Widget _buildThemeSelector() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      decoration: BoxDecoration(
+        color: colors.primaryColor50,
+      ),
+      child: DropdownMenu<String>(
+        dropdownMenuEntries: controller.themeList
+            .map(
+              (e) => DropdownMenuEntry<String>(
+                value: e,
+                label: e,
+              ),
+            )
+            .toList(),
+        onSelected: (String? value) {
+          if (value != null) {
+            controller.changeTheme(themeName: value);
+          }
+        },
+      ),
     );
   }
 

@@ -392,4 +392,19 @@ class SessionManager {
   Future<bool> getIsDashboardOnline() async {
     return prefs.getBool(prefIsDashboardOnline) ?? true;
   }
+
+  // set selected theme name
+  Future<void> setSelectedThemeName({
+    required String themeName,
+  }) async {
+    await prefs.setString(
+      prefsSelectedThemeName,
+      themeName,
+    );
+  }
+
+  // get selected theme name
+  Future<String?> getSelectedThemeName() async {
+    return prefs.getString(prefsSelectedThemeName);
+  }
 }

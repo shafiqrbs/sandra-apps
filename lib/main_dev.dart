@@ -42,6 +42,33 @@ Future<void> main() async {
       final prefs = SessionManager();
       final lang = await prefs.getLanguage();
 
+      final selectedTheme = await prefs.getSelectedThemeName();
+      if (kDebugMode) {
+        print('selectedTheme: $selectedTheme');
+      }
+      if (selectedTheme != null) {
+        final theme = await db.getAllWhr(
+          tbl: dbTables.tableColorPlate,
+          where: 'theme_name = ?',
+          whereArgs: [selectedTheme],
+          limit: 1,
+        );
+        if (theme.isNotEmpty) {
+          ColorSchema.fromJson(theme[0]);
+        }
+      } else {
+        final firstTheme = await db.getAll(
+          tbl: dbTables.tableColorPlate,
+          limit: 1,
+        );
+        if (firstTheme.isNotEmpty) {
+          await prefs.setSelectedThemeName(
+            themeName: firstTheme[0]['theme_name'],
+          );
+          ColorSchema.fromJson(firstTheme[0]);
+        }
+      }
+
       runApp(
         MyApp(
           lang: lang,
@@ -49,6 +76,10 @@ Future<void> main() async {
       );
     },
     (exception, stackTrace) async {
+      if (kDebugMode) {
+        print('exception: $exception');
+        print('stackTrace: $stackTrace');
+      }
       final createdAt = DateTime.now().toString();
       final error = {
         'endpoint': 'from_main_dev_runZonedGuarded',
