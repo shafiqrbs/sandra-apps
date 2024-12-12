@@ -1,11 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
-import 'package:sandra/app/core/widget/quick_navigation_button.dart';
 import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
 

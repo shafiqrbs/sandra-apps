@@ -193,10 +193,16 @@ class DbHelper {
     return 0;
   }
 
-  Future<int> getItemCount({String? tableName}) async {
+  // get item count from table
+  Future<int> getItemCount({
+    String? tableName,
+    int? limit,
+  }) async {
     final Database? db = await instance.database;
     if (db != null) {
-      final result = await db.rawQuery('SELECT COUNT(*) FROM $tableName');
+      final result = await db.rawQuery(
+        'SELECT COUNT(*) FROM $tableName LIMIT $limit',
+      );
       return Sqflite.firstIntValue(result) ?? 0;
     }
     return 0;

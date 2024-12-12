@@ -1,3 +1,4 @@
+export 'package:flutter/foundation.dart' hide Category;
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_tabler_icons/flutter_tabler_icons.dart';

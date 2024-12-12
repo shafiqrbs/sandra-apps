@@ -45,9 +45,22 @@ class CreateSalesController extends StockSelectionController {
       }
       if (args['sales_item_list'] != null) {
         salesItemList.value = args['sales_item_list'] as List<SalesItem>;
-        calculateAllSubtotal();
+      }
+    } else {
+      final itemCount = await dbHelper.getItemCount(
+        tableName: dbTables.tableSalesItem,
+        limit: 1,
+      );
+      if (itemCount > 0) {
+        final salesItem = await dbHelper.getAll(tbl: dbTables.tableSalesItem);
+        salesItemList.value = salesItem
+            .map(
+              (e) => SalesItem.fromJson(e),
+            )
+            .toList();
       }
     }
+    calculateAllSubtotal();
   }
 
   void goToListPage() {
@@ -169,6 +182,11 @@ class CreateSalesController extends StockSelectionController {
 
     // Add salesItem to the list and reset state
     salesItemList.value.add(salesItem);
+    await dbHelper.insertList(
+      deleteBeforeInsert: false,
+      tableName: dbTables.tableSalesItem,
+      dataList: [salesItem.toJson()],
+    );
     resetAfterItemAdd();
   }
 
@@ -218,7 +236,7 @@ class CreateSalesController extends StockSelectionController {
     int index,
   ) async {
     // Get the number of controllers with non-empty text
-    final  nonEmptyControllersCount = qtyControllerList
+    final nonEmptyControllersCount = qtyControllerList
         .where((controller) => controller.text.isNotEmpty)
         .length;
 

@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'api_options.dart';
 import 'error_catcher.dart';
 import 'utils/failures.dart';
-import 'utils/pretty_dio_logger.dart';
 
 class RestClient {
   static final RestClient _instance = RestClient._internal();
@@ -323,7 +322,7 @@ class RestClient {
     _dio.interceptors.clear();
 
     if (kDebugMode) {
-       interceptorList.add(PrettyDioLogger());
+      // interceptorList.add(PrettyDioLogger());
     }
     _dio.interceptors.addAll(interceptorList);
   }

@@ -1,11 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/entity/restaurant/table_invoice.dart';
 import 'package:sandra/app/pages/restaurant_module/order_cart/controllers/order_cart_controller.dart';
 import 'package:sandra/app/pages/restaurant_module/restaurant_home/controllers/restaurant_home_controller.dart';
@@ -17,6 +13,7 @@ import '/app/pages/inventory/sales/create_sales/controllers/create_sales_control
 class OrderProcessConfirmationController extends PrinterController {
   final Sales sales;
   final bool isEdit;
+
   OrderProcessConfirmationController({
     required this.sales,
     required this.isEdit,
@@ -73,6 +70,7 @@ class OrderProcessConfirmationController extends PrinterController {
       await _deleteItemsFromRestaurantCart();
     }
 
+    await dbHelper.deleteAll(tbl: dbTables.tableSalesItem);
   }
 
   Future<void> _deleteItemsFromRestaurantCart() async {
