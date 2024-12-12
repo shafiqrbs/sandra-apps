@@ -228,7 +228,7 @@ class DashboardView extends BaseView<DashboardController> {
   Widget _buildDashboard() {
     return Column(
       children: [
-        if (kDebugMode) _buildThemeSelector(),
+        //if (kDebugMode) _buildThemeSelector(),
         12.height,
         _buildNewUpdateView(),
         _buildThreeCommonButtons(),
