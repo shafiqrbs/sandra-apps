@@ -5,9 +5,6 @@ import '/flavors/build_config.dart';
 import '/flavors/env_config.dart';
 import '/flavors/environment.dart';
 import 'app/bindings/initial_binding.dart';
-import 'app/core/db_helper/db_helper.dart';
-import 'app/core/db_helper/db_tables.dart';
-import 'app/core/session_manager/session_manager.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -27,6 +24,19 @@ Future<void> main() async {
         envType: Environment.development,
         envConfig: devConfig,
       );
+
+      final themeCount = await db.getItemCount(
+        tableName: dbTables.tableColorPlate,
+        limit: 1,
+      );
+      if (themeCount == 0) {
+        final themeList = await services.getThemeList();
+        await db.insertList(
+          deleteBeforeInsert: true,
+          tableName: dbTables.tableColorPlate,
+          dataList: themeList,
+        );
+      }
 
       await InitialBinding().dependencies();
       final prefs = SessionManager();

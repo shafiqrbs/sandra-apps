@@ -1,15 +1,10 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/core_model/setup.dart';
-import '/app/core/db_helper/db_helper.dart';
-import '/app/core/session_manager/session_manager.dart';
-import '/app/core/widget/common_confirmation_modal.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-final prefs = SessionManager();
+import '/app/core/core_model/setup.dart';
+import '/app/core/widget/common_confirmation_modal.dart';
+
 final dbHelper = DbHelper.instance;
 
 Future<bool> insertSplashDataToDb({

@@ -21,4 +21,5 @@ class DbTables {
   final String tableExpenseCategory = 'expense_category';
   final String tableTableInvoice = 'table_invoice';
   final String tableLogger = 'logger';
+  final String tableColorPlate = 'color_plate';
 }

@@ -1381,4 +1381,20 @@ class Services {
       return false;
     }
   }
+
+  Future<List<Map<String, dynamic>>> getThemeList() async {
+    const endPoint = 'poskeeper-color-plate';
+    try {
+      final response = await dio.get(
+        APIType.public,
+        endPoint,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List;
+      return responseData.map((e) => e as Map<String, dynamic>).toList();
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return [];
+    }
+  }
 }

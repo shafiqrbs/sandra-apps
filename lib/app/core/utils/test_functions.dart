@@ -1,16 +1,11 @@
 import 'package:faker/faker.dart' as fakers;
 import 'package:number_to_character/number_to_character.dart';
+import 'package:sandra/app/core/importer.dart';
 
-import '/app/core/db_helper/db_helper.dart';
-import '/app/core/db_helper/db_tables.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/sales.dart';
 
 final converter = NumberToCharacterConverter('en');
-
-DbHelper get db => DbHelper.instance;
-
-DbTables get dbTables => DbTables();
 
 Future<void> clearSalesTable() async {
   await db.deleteAll(tbl: dbTables.tableSale);
