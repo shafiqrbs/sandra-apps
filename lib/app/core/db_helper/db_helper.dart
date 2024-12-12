@@ -58,6 +58,15 @@ class DbHelper {
     return openDatabase(path, version: _dbVersion);
   }
 
+  Future<bool> _tableExists(Database db, String tableName) async {
+    final tables = await db.query(
+      'sqlite_master',
+      where: 'type = ? AND name = ?',
+      whereArgs: ['table', tableName],
+    );
+    return tables.isNotEmpty;
+  }
+
   Future<void> insertList({
     required bool deleteBeforeInsert,
     required String tableName,
@@ -68,6 +77,11 @@ class DbHelper {
       if (kDebugMode) {
         print('Inserting data to $tableName');
       }
+
+      if (!await _tableExists(db, tableName)) {
+        return;
+      }
+
       final Batch batch = db.batch();
 
       if (deleteBeforeInsert) {
@@ -96,6 +110,10 @@ class DbHelper {
   }) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if (!await _tableExists(db, tbl)) {
+        return [];
+      }
+
       final result = await db.query(
         tbl,
         limit: limit,
@@ -110,6 +128,9 @@ class DbHelper {
   Future<int> deleteAll({required String tbl}) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if (!await _tableExists(db, tbl)) {
+        return 0;
+      }
       return db.rawDelete('DELETE FROM $tbl');
     }
     return 0;
@@ -122,6 +143,9 @@ class DbHelper {
   }) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if (!await _tableExists(db, tbl)) {
+        return 0;
+      }
       return db.rawDelete(
         'DELETE FROM $tbl WHERE $where',
         whereArgs,
@@ -183,6 +207,9 @@ class DbHelper {
   }) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if (!await _tableExists(db, tbl)) {
+        return 0;
+      }
       return db.update(
         tbl,
         data,
@@ -199,7 +226,10 @@ class DbHelper {
     int? limit,
   }) async {
     final Database? db = await instance.database;
-    if (db != null) {
+    if (db != null && tableName != null) {
+      if (!await _tableExists(db, tableName)) {
+        return 0;
+      }
       final result = await db.rawQuery(
         'SELECT COUNT(*) FROM $tableName LIMIT $limit',
       );
@@ -229,6 +259,9 @@ class DbHelper {
   Future<List> find(String tbl, String whr, List whrArgs) async {
     final Database? db = await instance.database;
     if (db != null) {
+      if (!await _tableExists(db, tbl)) {
+        return [];
+      }
       final result = await db.query(tbl, where: whr, whereArgs: whrArgs);
       return result.toList();
     }
