@@ -1,22 +1,14 @@
-import 'package:sandra/app/core/importer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/singleton_classes/color_schema.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/app_global_variables.dart';
-import 'package:sandra/app/core/widget/common_text.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/core/widget/tbd_text_button.dart';
 import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
-import '/app/core/widget/asset_image_view.dart';
 
 import '/app/core/base/base_widget.dart';
-import '/app/core/widget/dialog_pattern.dart';
+import '/app/core/widget/asset_image_view.dart';
 import '/app/global_modal/prefs_settings_modal/prefs_settings_modal_view.dart';
 import '/app/global_modal/sync_modal/sync_modal_view.dart';
-import '/app/routes/app_pages.dart';
-import 'app_bar_button.dart';
 import 'tbd_round_button.dart';
 
 ValueNotifier<Map<String, Color>> colorList = ValueNotifier(
@@ -287,7 +279,7 @@ class QuickNavigationButton extends BaseWidget {
       ),
       builder: (BuildContext context) {
         return SizedBox(
-          height: Get.height * 0.5,
+          height: Get.height * 0.55,
           child: Padding(
             padding: const EdgeInsets.only(
               left: 4,
