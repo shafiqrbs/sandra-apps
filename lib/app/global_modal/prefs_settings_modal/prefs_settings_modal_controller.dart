@@ -172,16 +172,15 @@ class PrefsSettingsModalController extends BaseController {
         config.isNotEmpty &&
         config != selectedPurchase.value) {
       if (Get.isRegistered<CreatePurchaseController>()) {
-        final purchaseController = Get.find<CreatePurchaseController>();
+        final purchaseController = Get.find<CreatePurchaseController>()
+          ..purchaseMode = config;
         if (purchaseController.purchaseItemList.value.isNotEmpty) {
           final isConfirm = await confirmationModal(
             msg: appLocalization.areYouSure,
           );
           if (isConfirm) {
             purchaseController.purchaseItemList.value = [];
-            purchaseController
-              ..purchaseMode = config
-              ..calculateAllSubtotal();
+            purchaseController.calculateAllSubtotal();
             if (purchaseController.prePurchase != null) {
               purchaseController.prePurchase = null;
             }
