@@ -17,12 +17,55 @@ class SettingsController extends PrinterController {
   final buttons = Rx<Buttons?>(null);
   final isPrinterAllowed = ValueNotifier(false);
   final isEnableDarkMode = ValueNotifier(false);
+  final isShowThemeColor = false.obs;
+  final themeList = <String>[].obs;
+  final selectedThemeColor = ''.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     isPrinterAllowed.value = await prefs.getIsPrinterAllowed();
     isEnableDarkMode.value = await prefs.getIsEnableDarkMode();
+    selectedThemeColor.value = await prefs.getSelectedThemeName() ?? '';
+    await fetchThemeList();
+  }
+
+  Future<void> fetchThemeList() async {
+    final themeCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableColorPlate,
+      limit: 1,
+    );
+    print('themeCount: $themeCount');
+    if (themeCount > 0) {
+      final themeList = await db.getAll(tbl: dbTables.tableColorPlate);
+      this.themeList.value = themeList
+          .map(
+            (e) => e['theme_name'].toString(),
+      )
+          .toList();
+      print('themeList: $themeList');
+    }
+  }
+
+  Future<void> changeTheme({
+    required String themeName,
+  }) async {
+    /// get theme from db
+    final theme = await db.getAllWhr(
+      tbl: dbTables.tableColorPlate,
+      where: 'theme_name = ?',
+      whereArgs: [themeName],
+      limit: 1,
+    );
+    if (theme.isNotEmpty) {
+      ColorSchema.fromJson(theme[0]);
+      await prefs.setSelectedThemeName(
+        themeName: themeName,
+      );
+      await Get.forceAppUpdate();
+    }
+    selectedThemeColor.value = themeName;
+    selectedThemeColor.refresh();
   }
 
   Future<void> setIsPrinterAllowed(bool value) async {
