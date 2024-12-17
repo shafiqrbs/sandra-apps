@@ -168,33 +168,47 @@ class PrefsSettingsModalController extends BaseController {
   }
 
   Future<void> changePurchase(String? config) async {
-    if (config != null &&
-        config.isNotEmpty &&
-        config != selectedPurchase.value) {
-      if (Get.isRegistered<CreatePurchaseController>()) {
-        final purchaseController = Get.find<CreatePurchaseController>()
-          ..purchaseMode = config;
-        if (purchaseController.purchaseItemList.value.isNotEmpty) {
-          final isConfirm = await confirmationModal(
-            msg: appLocalization.areYouSure,
-          );
-          if (isConfirm) {
-            purchaseController.purchaseItemList.value = [];
-            purchaseController.calculateAllSubtotal();
-            if (purchaseController.prePurchase != null) {
-              purchaseController.prePurchase = null;
-            }
-          } else {
-            return;
-          }
-        }
-      }
+    // Ensure the new configuration is valid and different from the current one
+    if (config == null || config.isEmpty || config == selectedPurchase.value) {
+      return;
+    }
 
-      await dbHelper.deleteAll(
-        tbl: dbTables.tablePurchaseItem,
-      );
-      selectedPurchase.value = config;
-      await prefs.setPurchaseConfig(config);
+    // Check if the CreatePurchaseController is registered
+    final isControllerRegistered = Get.isRegistered<CreatePurchaseController>();
+
+    if (isControllerRegistered) {
+      final purchaseController = Get.find<CreatePurchaseController>();
+
+      // If there are purchase items, confirm with the user before clearing them
+      if (purchaseController.purchaseItemList.value.isNotEmpty) {
+        final isConfirm = await confirmationModal(
+          msg: appLocalization.areYouSure,
+        );
+
+        if (!isConfirm) {
+          return; // Exit if the user cancels the operation
+        }
+
+        // Clear purchase items and reset related properties
+        purchaseController.purchaseItemList.value = [];
+        purchaseController
+          ..calculateAllSubtotal()
+          ..prePurchase = null;
+      }
+    }
+
+    // Delete all records in the purchase item database table
+    await dbHelper.deleteAll(tbl: dbTables.tablePurchaseItem);
+
+    // Update the selected purchase configuration
+    selectedPurchase.value = config;
+
+    // Save the new purchase configuration in preferences
+    await prefs.setPurchaseConfig(config);
+
+    // Update the purchaseMode in the controller (if registered)
+    if (isControllerRegistered) {
+      Get.find<CreatePurchaseController>().purchaseMode = config;
     }
   }
 }
