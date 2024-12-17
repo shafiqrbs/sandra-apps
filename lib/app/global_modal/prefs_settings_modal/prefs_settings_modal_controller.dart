@@ -20,7 +20,6 @@ class PrefsSettingsModalController extends BaseController {
   final isHasPrinter = ValueNotifier(false);
   final isSalesAutoApproved = ValueNotifier(false);
   final isPurchaseAutoApproved = ValueNotifier(false);
-  final isTotalPurchase = ValueNotifier(false);
   final isShowBrandOnPurchase = ValueNotifier(false);
   final isShowBrandOnSales = ValueNotifier(false);
   final printerType = ''.obs;
@@ -54,7 +53,6 @@ class PrefsSettingsModalController extends BaseController {
     printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
     printNewLineController.text = printerNewLine.value.toString();
     selectedPurchase.value = await prefs.getPurchaseConfig();
-    isTotalPurchase.value = await prefs.getTotalPriceConfig();
     isShowBrandOnPurchase.value = await prefs.getIsShowBrandOnPurchase();
     isShowBrandOnSales.value = await prefs.getIsShowBrandOnSales();
   }
@@ -181,7 +179,9 @@ class PrefsSettingsModalController extends BaseController {
           );
           if (isConfirm) {
             purchaseController.purchaseItemList.value = [];
-            purchaseController.calculateAllSubtotal();
+            purchaseController
+              ..purchaseMode = config
+              ..calculateAllSubtotal();
             if (purchaseController.prePurchase != null) {
               purchaseController.prePurchase = null;
             }
@@ -197,12 +197,5 @@ class PrefsSettingsModalController extends BaseController {
       selectedPurchase.value = config;
       await prefs.setPurchaseConfig(config);
     }
-  }
-
-  Future<void> setTotalPurchase(bool value) async {
-    isTotalPurchase.value = value;
-    await prefs.setTotalPriceConfig(
-      isTotalPrice: value,
-    );
   }
 }

@@ -1,12 +1,7 @@
-import 'package:sandra/app/core/importer.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
-import '/app/core/base/base_view.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import 'prefs_settings_modal_controller.dart';
 
@@ -433,34 +428,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                       ),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 0),
-                            child: Row(
-                              mainAxisAlignment: spaceBetweenMAA,
-                              children: [
-                                Text(
-                                  appLocalization.totalPrice,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                AdvancedSwitch(
-                                  controller: controller.isTotalPurchase,
-                                  onChanged: (value) async {
-                                    await controller.setTotalPurchase(value);
-                                  },
-                                  borderRadius: BorderRadius.circular(4),
-                                  height: 20,
-                                  width: 40,
-                                  activeColor: colors.primaryColor700,
-                                  inactiveColor: colors.secondaryColor100,
-                                  initialValue:
-                                      controller.isTotalPurchase.value,
-                                ),
-                              ],
-                            ),
-                          ),
                           16.height,
                           _buildCustomRadioButton(
                             title: appLocalization.purchaseWithMrp,
