@@ -230,10 +230,18 @@ class DbHelper {
       if (!await _tableExists(db, tableName)) {
         return 0;
       }
-      final result = await db.rawQuery(
-        'SELECT COUNT(*) FROM $tableName LIMIT $limit',
-      );
-      return Sqflite.firstIntValue(result) ?? 0;
+
+      if (limit == null) {
+        final result = await db.rawQuery(
+          'SELECT COUNT(*) FROM $tableName',
+        );
+        return Sqflite.firstIntValue(result) ?? 0;
+      } else {
+        final result = await db.rawQuery(
+          'SELECT COUNT(*) FROM $tableName LIMIT $limit',
+        );
+        return Sqflite.firstIntValue(result) ?? 0;
+      }
     }
     return 0;
   }

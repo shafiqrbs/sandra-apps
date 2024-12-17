@@ -1,16 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sandra/app/core/values/app_global_variables.dart';
-import 'package:sandra/app/routes/app_pages.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/widget/language_change_dropdown.dart';
-import '/app/core/widget/page_back_button.dart';
 import '/app/pages/settings/controllers/settings_controller.dart';
 
 //ignore: must_be_immutable
@@ -154,8 +146,8 @@ class SettingsView extends BaseView<SettingsController> {
                     ),
                     if (isRoleSetting || kDebugMode)
                       SettingsTile.navigation(
-                        onPressed: (BuildContext context) {
-                          controller.clearLicense();
+                        onPressed: (BuildContext context) async {
+                          await controller.clearLicense();
                         },
                         leading: const Icon(TablerIcons.reload),
                         title: Text(
