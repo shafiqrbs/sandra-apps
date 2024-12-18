@@ -1,5 +1,6 @@
 export 'dart:async';
 
+export 'package:dropdown_flutter/custom_dropdown.dart';
 export 'package:flutter/foundation.dart' hide Category;
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';

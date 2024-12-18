@@ -1,13 +1,10 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
+import 'package:sandra/app/core/values/drop_down_decoration.dart';
+import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/category.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/widget/add_button.dart';
-import '/app/core/widget/app_bar_button_group.dart';
 import '/app/core/widget/app_bar_search_view.dart';
-import '/app/core/widget/no_record_found_view.dart';
-import '/app/core/widget/quick_navigation_button.dart';
-import '/app/core/widget/retry_view.dart';
 import '/app/core/widget/search_button.dart';
 import '/app/pages/inventory/stock/stock_list/component/stock_card_view.dart';
 import '/app/pages/inventory/stock/stock_list/controllers/stock_list_controller.dart';
@@ -28,11 +25,10 @@ class StockListView extends BaseView<StockListController> {
             controller: controller.stockManager.searchTextController.value,
             onSearch: controller.stockManager.searchItemsByNameOnAllItem,
             onMicTap: controller.isSearchSelected.toggle,
-            onFilterTap: () => controller.showFilterModal(
-              context: globalKey.currentContext!,
-            ),
+            onFilterTap: () {},
             onClearTap: controller.onClearSearchText,
             showSearchView: controller.isSearchSelected.value,
+            isShowFilter: false,
           );
         },
       ),
@@ -77,7 +73,74 @@ class StockListView extends BaseView<StockListController> {
           content = _buildListView();
         }
 
-        return content;
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: Column(
+                children: [
+                  DropdownFlutter<Brand>.search(
+                    controller: controller.brandManager.ddController,
+                    hintText: appLocalization.brand,
+                    items: controller.brandManager.allItems.value,
+                    onChanged: controller.onBrandSelection,
+                    overlayHeight: 500,
+                    listItemBuilder: (context, value, ___, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    headerBuilder: (context, value, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    decoration: dropDownDecoration,
+                    itemsListPadding: EdgeInsets.zero,
+                    closedHeaderPadding: const EdgeInsets.all(8),
+                  ),
+                  DropdownFlutter<Category>.search(
+                    controller: controller.categoryManager.ddController,
+                    hintText: appLocalization.category,
+                    items: controller.categoryManager.allItems.value,
+                    onChanged: controller.onCategorySelection,
+                    overlayHeight: 500,
+                    listItemBuilder: (context, value, ___, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    headerBuilder: (context, value, option) {
+                      return Text(
+                        value.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
+                    decoration: dropDownDecoration,
+                    itemsListPadding: EdgeInsets.zero,
+                    closedHeaderPadding: const EdgeInsets.all(8),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: content),
+          ],
+        );
       },
     );
   }
