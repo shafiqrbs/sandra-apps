@@ -40,4 +40,21 @@ class BrandListPageController extends BaseController {
     }
     Get.toNamed(Routes.stockList, arguments: {'brand': element});
   }
+
+  Future<void> editBrand(Brand element) async {
+    final data = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.edit,
+        subTitle: '',
+        child: AddBrandModalView(),
+      ),
+      arguments: {
+        'brand': element,
+      },
+    );
+    if (data != null && data is Brand) {
+      await onClearSearchText();
+      await brandManager.paginate();
+    }
+  }
 }
