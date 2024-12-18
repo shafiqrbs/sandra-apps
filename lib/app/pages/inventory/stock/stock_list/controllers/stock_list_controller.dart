@@ -10,6 +10,8 @@ import '/app/global_modal/add_product_modal/add_product_modal_view.dart';
 
 class StockListController extends BaseController {
   final isSearchSelected = false.obs;
+  final isShowBrandClearIcon = false.obs;
+  final isShowCategoryClearIcon = false.obs;
   final stockManager = StockManager();
   final brandManager = BrandManager();
   final categoryManager = CategoryManager();
@@ -76,7 +78,21 @@ class StockListController extends BaseController {
     }
   }
 
-  onBrandSelection(Brand? p1) {}
+  void onBrandSelection(Brand? brand) {
+    if (brand == null) {
+      isShowBrandClearIcon.value = false;
+    } else {
+      isShowBrandClearIcon.value = true;
+    }
+    brandManager.ddController.value = brand;
+  }
 
-  onCategorySelection(Category? p1) {}
+  void onCategorySelection(Category? category) {
+    if (category == null) {
+      isShowCategoryClearIcon.value = false;
+    } else {
+      isShowCategoryClearIcon.value = true;
+    }
+    categoryManager.ddController.value = category;
+  }
 }
