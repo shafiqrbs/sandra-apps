@@ -34,4 +34,5 @@ export '/app/core/base/base_controller.dart';
 export '/app/core/base/mixins/shorter_enum_mixin.dart';
 export '/app/core/utils/static_utility_function.dart';
 export '/app/core/widget/dialog_pattern.dart';
+export '/app/core/widget/row_button.dart';
 export '/app/global_controller/helper_controller.dart';

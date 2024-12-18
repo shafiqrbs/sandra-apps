@@ -40,4 +40,21 @@ class CategoryListPageController extends BaseController {
     }
     Get.toNamed(Routes.stockList, arguments: {'category': element});
   }
+
+  Future<void> editCategory(Category element) async {
+    final data = await Get.dialog(
+      DialogPattern(
+        title: appLocalization.edit,
+        subTitle: '',
+        child: AddCategoryModalView(),
+      ),
+      arguments: {
+        'category': element,
+      },
+    );
+    if (data != null && data is Category) {
+      await onClearSearchText();
+      await categoryManager.paginate();
+    }
+  }
 }

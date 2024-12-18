@@ -113,6 +113,15 @@ class CategoryListPageView extends BaseView<CategoryListPageController> {
                                     ),
                                   ),
                                   16.width,
+                                  InkWell(
+                                    onTap: () =>
+                                        controller.editCategory(element),
+                                    child: const Icon(
+                                      TablerIcons.edit,
+                                      size: 18,
+                                    ),
+                                  ),
+                                  16.width,
                                   const Icon(
                                     TablerIcons.chevron_right,
                                     size: 18,

@@ -1401,6 +1401,34 @@ class Services {
     }
   }
 
+  Future<Category?> updateCategory({
+    required String id,
+    required String name,
+  }) async {
+    const endPoint = 'poskeeper-masterdata-update';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'id': id,
+          'name': name,
+          'mode': 'category',
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Category.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
   Future<bool> postLogs({
     required List<dynamic> logs,
   }) async {

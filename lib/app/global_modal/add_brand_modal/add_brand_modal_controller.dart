@@ -79,7 +79,7 @@ class AddBrandModalController extends BaseController {
   void _onApiCall() {
     if (createBrand != null) {
       Get.back(
-        result: preBrand,
+        result: createBrand,
       );
       showSnackBar(
         type: SnackBarType.success,

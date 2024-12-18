@@ -1,17 +1,8 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/base/base_view.dart';
 import 'package:sandra/app/core/widget/fb_string.dart';
-import 'package:sandra/app/core/widget/row_button.dart';
 import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_controller.dart';
 
 class AddCategoryModalView extends BaseView<AddCategoryModalController> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return GetX<AddCategoryModalController>(
@@ -59,12 +50,20 @@ class AddCategoryModalView extends BaseView<AddCategoryModalController> {
                         isOutline: true,
                       ),
                       16.width,
-                      RowButton(
-                        buttonName: appLocalization.save,
-                        leftIcon: TablerIcons.device_floppy,
-                        onTap: controller.addCategory,
-                        isOutline: false,
-                      ),
+                      if (controller.preCategory != null)
+                        RowButton(
+                          buttonName: appLocalization.update,
+                          leftIcon: TablerIcons.edit,
+                          onTap: controller.updateCategory,
+                          isOutline: false,
+                        ),
+                      if (controller.preCategory == null)
+                        RowButton(
+                          buttonName: appLocalization.save,
+                          leftIcon: TablerIcons.device_floppy,
+                          onTap: controller.addCategory,
+                          isOutline: false,
+                        ),
                     ],
                   ),
                 ),
@@ -75,8 +74,6 @@ class AddCategoryModalView extends BaseView<AddCategoryModalController> {
       },
     );
   }
-
-
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
