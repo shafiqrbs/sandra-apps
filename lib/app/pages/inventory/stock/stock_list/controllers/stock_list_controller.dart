@@ -41,10 +41,8 @@ class StockListController extends BaseController {
 
   Future<void> onClearSearchText() async {
     stockManager.searchTextController.value.clear();
-    stockManager.allItems.value?.clear();
-    stockManager.allItems.refresh();
     isSearchSelected.toggle();
-    await stockManager.paginate();
+    await getStockList(null);
   }
 
   Future<void> refreshList() {
@@ -78,21 +76,83 @@ class StockListController extends BaseController {
     }
   }
 
-  void onBrandSelection(Brand? brand) {
+  Future<void> onBrandSelection(Brand? brand) async {
     if (brand == null) {
       isShowBrandClearIcon.value = false;
     } else {
       isShowBrandClearIcon.value = true;
     }
     brandManager.ddController.value = brand;
+    await getStockList(null);
   }
 
-  void onCategorySelection(Category? category) {
+  Future<void> onCategorySelection(Category? category) async {
     if (category == null) {
       isShowCategoryClearIcon.value = false;
     } else {
       isShowCategoryClearIcon.value = true;
     }
     categoryManager.ddController.value = category;
+    await getStockList(null);
+  }
+
+  Future<void> getStockList(String? temp) async {
+    final brand = brandManager.ddController.value;
+    final category = categoryManager.ddController.value;
+    final search = stockManager.searchTextController.value.text;
+
+    // Helper function to clear and refresh the items
+    void clearAndRefreshItems() {
+      stockManager.allItems.value?.clear();
+      stockManager.allItems.refresh();
+    }
+
+    // Clear items and paginate if no filters are applied
+    if (brand == null && category == null && search.isEmpty) {
+      clearAndRefreshItems();
+      await stockManager.paginate();
+      return;
+    }
+
+    // Build query dynamically based on selected filters
+    final List<String> whereClauses = [];
+    final List<String> whereArgs = [];
+
+    if (search.isNotEmpty) {
+      whereClauses.add('name LIKE ?');
+      whereArgs.add('%$search%');
+    }
+
+    if (brand != null) {
+      whereClauses.add('brand_name = ?');
+      whereArgs.add(brand.name!);
+    }
+
+    if (category != null) {
+      whereClauses.add('category_name = ?');
+      whereArgs.add(category.name!);
+    }
+
+    final query = whereClauses.join(' AND ');
+
+    // if it's a only search query, limit the results to 100
+    final limit =
+        search.isNotEmpty && brand == null && category == null ? 100 : null;
+
+    // Fetch filtered data from the database
+    final data = await db.getAllWhr(
+      tbl: DbTables().tableStocks,
+      where: query,
+      whereArgs: whereArgs,
+      limit: limit,
+    );
+
+    clearAndRefreshItems();
+
+    // Update the stock manager's items if data is not empty
+    if (data.isNotEmpty) {
+      stockManager.allItems.value = data.map((e) => Stock.fromJson(e)).toList();
+      stockManager.allItems.refresh();
+    }
   }
 }

@@ -23,7 +23,7 @@ class StockListView extends BaseView<StockListController> {
           return AppBarSearchView(
             pageTitle: appLocalization.stockList,
             controller: controller.stockManager.searchTextController.value,
-            onSearch: controller.stockManager.searchItemsByNameOnAllItem,
+            onSearch: controller.getStockList,
             onMicTap: controller.isSearchSelected.toggle,
             onFilterTap: () {},
             onClearTap: controller.onClearSearchText,
@@ -64,8 +64,8 @@ class StockListView extends BaseView<StockListController> {
 
         Widget content;
         if (items == null) {
-          content = RetryView(
-            onRetry: () {},
+          content = const Center(
+            child: CircularProgressIndicator(),
           );
         } else if (items.isEmpty) {
           content = NoRecordFoundView();
