@@ -1,16 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:intl/intl.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/core_model/page_state.dart';
-import 'package:sandra/app/core/values/app_strings.dart';
-import 'package:sandra/app/core/widget/no_record_found_view.dart';
-import 'package:sandra/app/core/widget/retry_view.dart';
 import 'package:sandra/app/entity/vendor_ledger.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/global_widget/vendor_card_view.dart';
 import '/app/pages/accounting/vendor_ledger/controllers/vendor_ledger_controller.dart';
@@ -159,6 +149,31 @@ class VendorLedgerView extends BaseView<VendorLedgerController> {
                       },
                       child: Icon(
                         TablerIcons.file_text,
+                        color: colors.solidBlackColor,
+                      ),
+                    ),
+                  ),
+                ),
+                4.width,
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: colors.primaryColor50,
+                      borderRadius: BorderRadius.circular(
+                        containerBorderRadius,
+                      ),
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 4,
+                      bottom: 8,
+                      left: 4,
+                      right: 4,
+                    ),
+                    child: InkWell(
+                      onTap: controller.showEditVendorModal,
+                      child: Icon(
+                        TablerIcons.edit,
                         color: colors.solidBlackColor,
                       ),
                     ),

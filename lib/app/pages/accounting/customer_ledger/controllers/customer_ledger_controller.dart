@@ -1,13 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
-import 'package:sandra/app/core/core_model/page_state.dart';
+import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
-import '/app/core/base/base_controller.dart';
-import '/app/core/widget/dialog_pattern.dart';
 import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
@@ -217,5 +212,18 @@ class CustomerLedgerController extends BaseController {
         updatePageState(PageState.success);
       }
     }
+  }
+
+  void showEditCustomerModal() {
+    Get.dialog(
+      DialogPattern(
+        title: appLocalization.edit,
+        subTitle: '',
+        child: AddCustomerModalView(),
+      ),
+      arguments: {
+        'customer': customer,
+      },
+    );
   }
 }

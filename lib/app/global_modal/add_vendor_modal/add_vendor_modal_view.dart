@@ -1,9 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/row_button.dart';
 import 'add_vendor_modal_controller.dart';
@@ -39,27 +35,29 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         textFieldHeight: textFieldHeight,
                       ),
                       0.height,
-                      FBString(
-                        textController: controller.mobileController.value,
-                        keyboardType: phoneInputType,
-                        preFixIcon: TablerIcons.device_mobile,
-                        label: appLocalization.mobile,
-                        hint: appLocalization.enterMobileNumberHere,
-                        errorMsg: appLocalization.mobileNoRequired,
-                        isRequired: true,
-                        textFieldHeight: textFieldHeight,
-                      ),
+                      if (controller.preVendor == null)
+                        FBString(
+                          textController: controller.mobileController.value,
+                          keyboardType: phoneInputType,
+                          preFixIcon: TablerIcons.device_mobile,
+                          label: appLocalization.mobile,
+                          hint: appLocalization.enterMobileNumberHere,
+                          errorMsg: appLocalization.mobileNoRequired,
+                          isRequired: true,
+                          textFieldHeight: textFieldHeight,
+                        ),
                       0.height,
-                      FBString(
-                        textController:
-                            controller.openingBalanceController.value,
-                        keyboardType: numberInputType,
-                        preFixIcon: TablerIcons.cash,
-                        label: appLocalization.openingBalance,
-                        hint: appLocalization.enterOpeningBalance,
-                        isRequired: false,
-                        textFieldHeight: textFieldHeight,
-                      ),
+                      if (controller.preVendor == null)
+                        FBString(
+                          textController:
+                              controller.openingBalanceController.value,
+                          keyboardType: numberInputType,
+                          preFixIcon: TablerIcons.cash,
+                          label: appLocalization.openingBalance,
+                          hint: appLocalization.enterOpeningBalance,
+                          isRequired: false,
+                          textFieldHeight: textFieldHeight,
+                        ),
                       0.height,
                       FBString(
                         textController: controller.emailController.value,
@@ -69,7 +67,7 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         preFixIcon: TablerIcons.mail,
                         textFieldHeight: textFieldHeight,
                       ),
-                      0.height,
+                      8.height,
                       FBString(
                         textController: controller.addressController.value,
                         isRequired: false,
@@ -77,7 +75,6 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         hint: appLocalization.enterAddressHere,
                         lines: 4,
                         textInputAction: TextInputAction.done,
-
                         //textFieldHeight: textFieldHeight,
                       ),
                     ],
@@ -101,12 +98,20 @@ class AddVendorModalView extends BaseView<AddVendorModalController> {
                         isOutline: true,
                       ),
                       16.width,
-                      RowButton(
-                        buttonName: appLocalization.save,
-                        leftIcon: TablerIcons.device_floppy,
-                        onTap: controller.addVendor,
-                        isOutline: false,
-                      ),
+                      if (controller.preVendor != null)
+                        RowButton(
+                          buttonName: appLocalization.update,
+                          leftIcon: TablerIcons.edit,
+                          onTap: controller.updateVendor,
+                          isOutline: false,
+                        ),
+                      if (controller.preVendor == null)
+                        RowButton(
+                          buttonName: appLocalization.save,
+                          leftIcon: TablerIcons.device_floppy,
+                          onTap: controller.addVendor,
+                          isOutline: false,
+                        ),
                     ],
                   ),
                 ),

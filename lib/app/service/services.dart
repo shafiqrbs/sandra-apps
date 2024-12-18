@@ -192,6 +192,37 @@ class Services {
     }
   }
 
+  Future<Customer?> updateCustomer({
+    required String customerId,
+    required String name,
+    required String address,
+    required String email,
+  }) async {
+    const endPoint = 'poskeeper-customer-update';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'customer_id': customerId,
+          'name': name,
+          'address': address,
+          'email': email,
+        },
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Customer.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
   Future<Vendor?> addVendor({
     required String name,
     required String mobile,
@@ -215,6 +246,37 @@ class Services {
         endPoint,
         data,
         query: data,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>?;
+      if (responseData == null) return null;
+      return parseObject(
+        object: responseData,
+        fromJson: Vendor.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
+    }
+  }
+
+  Future<Vendor?> updateVendor({
+    required String vendorId,
+    required String name,
+    required String address,
+    required String email,
+  }) async {
+    const endPoint = 'poskeeper-vendor-update';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        {
+          'vendor_id': vendorId,
+          'name': name,
+          'address': address,
+          'email': email,
+        },
         headers: _buildHeader(),
       );
       final responseData = response.data as Map<String, dynamic>?;

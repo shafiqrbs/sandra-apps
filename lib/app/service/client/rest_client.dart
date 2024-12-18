@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sandra/app/service/client/utils/pretty_dio_logger.dart';
 
 import 'api_options.dart';
 import 'error_catcher.dart';
@@ -322,7 +323,7 @@ class RestClient {
     _dio.interceptors.clear();
 
     if (kDebugMode) {
-      // interceptorList.add(PrettyDioLogger());
+      interceptorList.add(PrettyDioLogger());
     }
     _dio.interceptors.addAll(interceptorList);
   }

@@ -1,7 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 
@@ -19,8 +17,22 @@ class AddCustomerModalController extends BaseController {
   final addressController = TextEditingController().obs;
 
   final isUserNameFieldValid = true.obs;
+  Customer? preCustomer;
 
   Customer? createdCustomer;
+
+  @override
+  void onInit() {
+    super.onInit();
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      preCustomer = args['customer'];
+      userNameController.value.text = preCustomer!.name!;
+      mobileController.value.text = preCustomer!.mobile!;
+      emailController.value.text = preCustomer!.email!;
+      addressController.value.text = preCustomer!.address!;
+    }
+  }
 
   Future<void> addCustomer() async {
     if (formKey.currentState!.validate()) {
@@ -45,21 +57,8 @@ class AddCustomerModalController extends BaseController {
           }
         },
       );
-      if (createdCustomer != null) {
-        Get.back(
-          result: createdCustomer,
-        );
-        showSnackBar(
-          type: SnackBarType.success,
-          message: appLocalization.save,
-        );
-      } else {
-        showSnackBar(
-          type: SnackBarType.error,
-          message: appLocalization.failedToCreateCustomer,
-        );
-      }
     }
+    _onApiCall();
   }
 
   void resetField() {
@@ -69,5 +68,42 @@ class AddCustomerModalController extends BaseController {
     emailController.value.clear();
     addressController.value.clear();
     Get.back(result: true);
+  }
+
+  Future<void> updateCustomer() async {
+    if (formKey.currentState!.validate()) {
+      await dataFetcher(
+        future: () async {
+          final response = await services.updateCustomer(
+            customerId: preCustomer!.customerId.toString(),
+            name: userNameController.value.text,
+            address: addressController.value.text,
+            email: emailController.value.text,
+          );
+          if (response != null) {
+            await dbHelper.updateWhere(
+              tbl: dbTables.tableCustomers,
+              data: response.toJson(),
+              where: 'customer_id = ?',
+              whereArgs: [response.customerId],
+            );
+            createdCustomer = response;
+          }
+        },
+      );
+    }
+    _onApiCall();
+  }
+
+  void _onApiCall() {
+    if (createdCustomer != null) {
+      Get.back(
+        result: createdCustomer,
+      );
+      showSnackBar(
+        type: SnackBarType.success,
+        message: appLocalization.save,
+      );
+    }
   }
 }
