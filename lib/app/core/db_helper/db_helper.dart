@@ -162,7 +162,7 @@ class DbHelper {
     int? offset,
   }) async {
     if (kDebugMode) {
-      print(where);
+      print('Where Clause: $where');
     }
 
     final Database? db = await instance.database;

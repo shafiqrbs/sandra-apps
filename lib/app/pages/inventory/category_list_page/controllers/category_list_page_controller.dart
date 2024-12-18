@@ -1,8 +1,6 @@
-import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_view.dart';
-import '/app/core/base/base_controller.dart';
 
 class CategoryListPageController extends BaseController {
   final categoryManager = CategoryManager();
@@ -34,5 +32,12 @@ class CategoryListPageController extends BaseController {
       await onClearSearchText();
       await categoryManager.paginate();
     }
+  }
+
+  void onCategoryTap(Category element) {
+    while (Get.currentRoute != Routes.dashboard) {
+      Get.back();
+    }
+    Get.toNamed(Routes.stockList, arguments: {'category': element});
   }
 }

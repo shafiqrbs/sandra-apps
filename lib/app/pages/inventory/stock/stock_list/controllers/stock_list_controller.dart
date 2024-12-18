@@ -39,7 +39,9 @@ class StockListController extends BaseController {
         );
         isShowCategoryClearIcon.value = true;
       }
+      return;
     }
+
     await getStockList(null);
   }
 
@@ -64,10 +66,8 @@ class StockListController extends BaseController {
     await getStockList(null);
   }
 
-  Future<void> refreshList() {
-    stockManager.allItems.value?.clear();
-    stockManager.allItems.refresh();
-    return stockManager.paginate();
+  Future<void> refreshList() async {
+    await getStockList(null);
   }
 
   Future<void> showStockDetailsModal(Stock element) async {
@@ -116,6 +116,7 @@ class StockListController extends BaseController {
   }
 
   Future<void> getStockList(String? temp) async {
+    print('I have been called');
     final brand = brandManager.ddController.value;
     final category = categoryManager.ddController.value;
     final search = stockManager.searchTextController.value.text;
@@ -168,10 +169,7 @@ class StockListController extends BaseController {
 
     clearAndRefreshItems();
 
-    // Update the stock manager's items if data is not empty
-    if (data.isNotEmpty) {
-      stockManager.allItems.value = data.map((e) => Stock.fromJson(e)).toList();
-      stockManager.allItems.refresh();
-    }
+    stockManager.allItems.value = data.map((e) => Stock.fromJson(e)).toList();
+    stockManager.allItems.refresh();
   }
 }

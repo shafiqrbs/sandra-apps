@@ -200,10 +200,14 @@ class StockListView extends BaseView<StockListController> {
   }
 
   Widget _buildListView() {
+    final needPagination = controller.brandManager.ddController.value == null &&
+        controller.categoryManager.ddController.value == null &&
+        controller.stockManager.searchTextController.value.text.isEmpty;
     return ListView.builder(
       shrinkWrap: true,
       itemCount: controller.stockManager.allItems.value?.length ?? 0,
-      controller: controller.stockManager.scrollController,
+      controller:
+          needPagination ? controller.stockManager.scrollController : null,
       itemBuilder: (context, index) {
         final element = controller.stockManager.allItems.value![index];
         final isSelectedItem = false.obs;
