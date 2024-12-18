@@ -212,8 +212,8 @@ class VendorLedgerController extends BaseController {
     }
   }
 
-  void showEditVendorModal() {
-    Get.dialog(
+  Future<void> showEditVendorModal() async {
+    final data = await Get.dialog(
       DialogPattern(
         title: appLocalization.edit,
         subTitle: '',
@@ -223,5 +223,8 @@ class VendorLedgerController extends BaseController {
         'vendor': vendor,
       },
     );
+    if (data != null && data is Vendor) {
+      updateVendor(data);
+    }
   }
 }

@@ -214,8 +214,8 @@ class CustomerLedgerController extends BaseController {
     }
   }
 
-  void showEditCustomerModal() {
-    Get.dialog(
+  Future<void> showEditCustomerModal() async {
+    final data = await Get.dialog(
       DialogPattern(
         title: appLocalization.edit,
         subTitle: '',
@@ -225,5 +225,8 @@ class CustomerLedgerController extends BaseController {
         'customer': customer,
       },
     );
+    if (data != null && data is Customer) {
+      updateCustomer(data);
+    }
   }
 }
