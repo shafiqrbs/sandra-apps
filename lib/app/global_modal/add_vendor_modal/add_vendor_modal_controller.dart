@@ -36,6 +36,10 @@ class AddVendorModalController extends BaseController {
 
   Future<void> addVendor() async {
     if (formKey.currentState!.validate()) {
+      final confirmation = await confirmationModal(
+        msg: appLocalization.areYouSure,
+      );
+      if (!confirmation) return;
       await dataFetcher(
         future: () async {
           final response = await services.addVendor(
@@ -45,7 +49,7 @@ class AddVendorModalController extends BaseController {
             email: emailController.value.text,
             openingBalance: openingBalanceController.value.text,
           );
-          
+
           if (response != null) {
             await dbHelper.insertList(
               deleteBeforeInsert: false,
@@ -69,11 +73,15 @@ class AddVendorModalController extends BaseController {
     openingBalanceController.value.clear();
     emailController.value.clear();
     addressController.value.clear();
-    Get.back(result: true);
+    // Get.back(result: true);
   }
 
   Future<void> updateVendor() async {
     if (formKey.currentState!.validate()) {
+      final confirmation = await confirmationModal(
+        msg: appLocalization.areYouSure,
+      );
+      if (!confirmation) return;
       await dataFetcher(
         future: () async {
           final response = await services.updateVendor(

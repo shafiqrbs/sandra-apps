@@ -36,6 +36,10 @@ class AddCustomerModalController extends BaseController {
 
   Future<void> addCustomer() async {
     if (formKey.currentState!.validate()) {
+      final confirmation = await confirmationModal(
+        msg: appLocalization.areYouSure,
+      );
+      if (!confirmation) return;
       await dataFetcher(
         future: () async {
           final response = await services.addCustomer(
@@ -67,11 +71,15 @@ class AddCustomerModalController extends BaseController {
     openingBalanceController.value.clear();
     emailController.value.clear();
     addressController.value.clear();
-    Get.back(result: true);
+    // Get.back(result: true);
   }
 
   Future<void> updateCustomer() async {
     if (formKey.currentState!.validate()) {
+      final confirmation = await confirmationModal(
+        msg: appLocalization.areYouSure,
+      );
+      if (!confirmation) return;
       await dataFetcher(
         future: () async {
           final response = await services.updateCustomer(
