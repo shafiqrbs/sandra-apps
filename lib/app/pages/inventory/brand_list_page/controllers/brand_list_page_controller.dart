@@ -1,12 +1,11 @@
-import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/entity/brand.dart';
 import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';
-import '/app/core/base/base_controller.dart';
 
 class BrandListPageController extends BaseController {
   final brandManager = BrandManager();
   final isSearchSelected = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -33,5 +32,12 @@ class BrandListPageController extends BaseController {
       await onClearSearchText();
       await brandManager.paginate();
     }
+  }
+
+  void onBrandTap(Brand element) {
+    while (Get.currentRoute != Routes.dashboard) {
+      Get.back();
+    }
+    Get.toNamed(Routes.stockList, arguments: {'brand': element});
   }
 }

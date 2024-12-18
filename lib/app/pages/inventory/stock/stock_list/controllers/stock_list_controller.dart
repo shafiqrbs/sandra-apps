@@ -21,7 +21,26 @@ class StockListController extends BaseController {
     super.onInit();
     await brandManager.getAll();
     await categoryManager.getAll();
-    await stockManager.paginate();
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      final brand = args['brand'] as Brand?;
+      if (brand != null) {
+        brandManager.ddController.value =
+            brandManager.allItems.value?.firstWhereOrNull(
+          (element) => element.brandId == brand.brandId,
+        );
+        isShowBrandClearIcon.value = true;
+      }
+      final category = args['category'] as Category?;
+      if (category != null) {
+        categoryManager.ddController.value =
+            categoryManager.allItems.value?.firstWhereOrNull(
+          (element) => element.categoryId == category.categoryId,
+        );
+        isShowCategoryClearIcon.value = true;
+      }
+    }
+    await getStockList(null);
   }
 
   Future<void> showAddStockModal() async {
