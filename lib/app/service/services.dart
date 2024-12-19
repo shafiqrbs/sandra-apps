@@ -199,16 +199,19 @@ class Services {
     required String email,
   }) async {
     const endPoint = 'poskeeper-customer-update';
+
     try {
+      final data = {
+        'customer_id': customerId,
+        'name': name,
+        'address': address,
+        'email': email,
+      };
       final response = await dio.post(
         APIType.public,
         endPoint,
-        {
-          'customer_id': customerId,
-          'name': name,
-          'address': address,
-          'email': email,
-        },
+        data,
+        query: data,
         headers: _buildHeader(),
       );
       final responseData = response.data as Map<String, dynamic>?;
@@ -268,15 +271,17 @@ class Services {
   }) async {
     const endPoint = 'poskeeper-vendor-update';
     try {
+      final data = {
+        'vendor_id': vendorId,
+        'name': name,
+        'address': address,
+        'email': email,
+      };
       final response = await dio.post(
         APIType.public,
         endPoint,
-        {
-          'vendor_id': vendorId,
-          'name': name,
-          'address': address,
-          'email': email,
-        },
+        data,
+        query: data,
         headers: _buildHeader(),
       );
       final responseData = response.data as Map<String, dynamic>?;

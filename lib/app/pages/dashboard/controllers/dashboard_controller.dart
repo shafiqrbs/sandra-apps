@@ -302,35 +302,16 @@ class DashboardController extends BaseController {
   List<Widget> dashboardButtonList = [];
 
   final financialData = Rx<FinancialData?>(null);
-  final themeList = <String>[].obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsDashboardOnline();
-    await fetchThemeList();
     if (isOnline.value) {
       await fetchOnlineFinancialData();
     } else {
       await fetchOfflineFinancialData();
-    }
-  }
-
-  Future<void> fetchThemeList() async {
-    final themeCount = await dbHelper.getItemCount(
-      tableName: dbTables.tableColorPlate,
-      limit: 1,
-    );
-    print('themeCount: $themeCount');
-    if (themeCount > 0) {
-      final themeList = await db.getAll(tbl: dbTables.tableColorPlate);
-      this.themeList.value = themeList
-          .map(
-            (e) => e['theme_name'].toString(),
-          )
-          .toList();
-      print('themeList: $themeList');
     }
   }
 

@@ -239,33 +239,6 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
-  Widget _buildThemeSelector() {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
-      decoration: BoxDecoration(
-        color: colors.primaryColor50,
-      ),
-      child: DropdownMenu<String>(
-        dropdownMenuEntries: controller.themeList
-            .map(
-              (e) => DropdownMenuEntry<String>(
-                value: e,
-                label: e,
-              ),
-            )
-            .toList(),
-        onSelected: (String? value) {
-          if (value != null) {
-            controller.changeTheme(themeName: value);
-          }
-        },
-      ),
-    );
-  }
-
   Widget _buildNewUpdateView() {
     final version = controller.financialData.value?.version;
     if (version == null || version == AppValues.appVersion) {
