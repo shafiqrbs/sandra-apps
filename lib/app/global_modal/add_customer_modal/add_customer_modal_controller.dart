@@ -27,10 +27,9 @@ class AddCustomerModalController extends BaseController {
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null) {
       preCustomer = args['customer'];
-      userNameController.value.text = preCustomer!.name!;
-      mobileController.value.text = preCustomer!.mobile!;
-      emailController.value.text = preCustomer!.email!;
-      addressController.value.text = preCustomer!.address!;
+      userNameController.value.text = preCustomer!.name ?? '';
+      emailController.value.text = preCustomer!.email ?? '';
+      addressController.value.text = preCustomer!.address ?? '';
     }
   }
 

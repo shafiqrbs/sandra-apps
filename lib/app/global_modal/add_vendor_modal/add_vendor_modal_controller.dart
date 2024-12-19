@@ -28,9 +28,9 @@ class AddVendorModalController extends BaseController {
     final args = Get.arguments as Map<String, dynamic>?;
     if (args != null) {
       preVendor = args['vendor'];
-      userNameController.value.text = preVendor!.name!;
-      emailController.value.text = preVendor!.email!;
-      addressController.value.text = preVendor!.address!;
+      userNameController.value.text = preVendor!.name ?? '';
+      emailController.value.text = preVendor!.email ?? '';
+      addressController.value.text = preVendor!.address ?? '';
     }
   }
 

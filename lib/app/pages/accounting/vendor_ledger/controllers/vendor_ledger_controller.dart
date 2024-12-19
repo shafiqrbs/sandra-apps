@@ -4,6 +4,7 @@ import 'package:sandra/app/core/widget/show_snackbar.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import 'package:sandra/app/global_modal/purchase_information_modal/purchase_information_view.dart';
+import 'package:sandra/app/pages/domain/vendor/vendor_list/controllers/vendor_list_controller.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/entity/vendor.dart';
@@ -224,7 +225,10 @@ class VendorLedgerController extends BaseController {
       },
     );
     if (data != null && data is Vendor) {
-      updateVendor(data);
+      await updateVendor(data);
+      if (Get.isRegistered<VendorListController>()) {
+        await Get.find<VendorListController>().onClearSearchText();
+      }
     }
   }
 }

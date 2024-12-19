@@ -1,7 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/widget/fb_string.dart';
-import '/app/core/widget/row_button.dart';
 import 'add_vendor_modal_controller.dart';
 
 class AddVendorModalView extends BaseView<AddVendorModalController> {

@@ -1,6 +1,7 @@
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
+import 'package:sandra/app/pages/domain/customer/customer_list/controllers/customer_list_controller.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
 import '/app/core/widget/show_snackbar.dart';
@@ -226,7 +227,10 @@ class CustomerLedgerController extends BaseController {
       },
     );
     if (data != null && data is Customer) {
-      updateCustomer(data);
+      await updateCustomer(data);
+      if (Get.isRegistered<CustomerListController>()) {
+        await Get.find<CustomerListController>().onClearSearchText();
+      }
     }
   }
 }
