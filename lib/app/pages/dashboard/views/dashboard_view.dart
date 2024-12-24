@@ -2,6 +2,7 @@ import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/app_values.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
+import 'package:sandra/app/core/widget/tbd_round_button.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/utils/test_functions.dart';
@@ -541,7 +542,10 @@ class DashboardView extends BaseView<DashboardController> {
               spacing: 18,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               runSpacing: 16,
-              children: controller.dashboardButtonList,
+              children: controller.dashboardButtonList
+                  .whereType<TbdRoundButton>()
+                  .where((button) => button.permission) // Filters by permission
+                  .toList(),
             ),
           ],
         );

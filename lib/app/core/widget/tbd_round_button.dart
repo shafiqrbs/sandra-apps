@@ -1,7 +1,5 @@
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
+import 'package:sandra/app/core/importer.dart';
 
 class TbdRoundButton extends StatelessWidget {
   final String? text;
