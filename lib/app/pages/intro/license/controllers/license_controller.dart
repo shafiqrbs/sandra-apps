@@ -1,15 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
-import '/app/routes/app_pages.dart';
 
 class LicenseController extends BaseController {
   final formKey = GlobalKey<FormState>();
-
 
   final licenseNumberController = TextEditingController(
     text: kDebugMode ? (true ? '01820584047' : '01852892044') : '',
