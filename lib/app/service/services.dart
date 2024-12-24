@@ -207,7 +207,7 @@ class Services {
         'name': name,
         'address': address,
         'email': email,
-      };
+      }..removeWhere((key, value) => value == '');
       final response = await dio.post(
         APIType.public,
         endPoint,
