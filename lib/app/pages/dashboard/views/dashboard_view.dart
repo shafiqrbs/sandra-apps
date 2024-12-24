@@ -381,46 +381,50 @@ class DashboardView extends BaseView<DashboardController> {
           Row(
             mainAxisAlignment: spaceBetweenMAA,
             children: [
-              TitleSubtitleButton(
-                title: appLocalization.sales,
-                subTitle:
-                    '${controller.currency} ${controller.financialData.value?.sales ?? ''}',
-                icon: TablerIcons.report_analytics,
-                onTap: controller.goToSalesList,
-                bgColor: colors.secondaryBlueColor,
-              ),
+              if (isRoleSales)
+                TitleSubtitleButton(
+                  title: appLocalization.sales,
+                  subTitle:
+                      '${controller.currency} ${controller.financialData.value?.sales ?? ''}',
+                  icon: TablerIcons.report_analytics,
+                  onTap: controller.goToSalesList,
+                  bgColor: colors.secondaryBlueColor,
+                ),
               10.width,
-              TitleSubtitleButton(
-                title: appLocalization.purchase,
-                subTitle:
-                    '${controller.currency} ${controller.financialData.value?.purchase ?? ''}',
-                icon: TablerIcons.cash,
-                onTap: controller.goToPurchaseList,
-                bgColor: colors.secondaryOrangeColor,
-              ),
+              if (isRolePurchase)
+                TitleSubtitleButton(
+                  title: appLocalization.purchase,
+                  subTitle:
+                      '${controller.currency} ${controller.financialData.value?.purchase ?? ''}',
+                  icon: TablerIcons.cash,
+                  onTap: controller.goToPurchaseList,
+                  bgColor: colors.secondaryOrangeColor,
+                ),
             ],
           ),
           10.height,
           Row(
             mainAxisAlignment: spaceBetweenMAA,
             children: [
-              TitleSubtitleButton(
-                title: appLocalization.due,
-                subTitle:
-                    '${controller.currency} ${controller.financialData.value?.due ?? ''}',
-                icon: TablerIcons.cash,
-                onTap: controller.goToDueCustomerList,
-                bgColor: colors.secondaryGreenColor,
-              ),
+              if (isRoleSales)
+                TitleSubtitleButton(
+                  title: appLocalization.due,
+                  subTitle:
+                      '${controller.currency} ${controller.financialData.value?.due ?? ''}',
+                  icon: TablerIcons.cash,
+                  onTap: controller.goToDueCustomerList,
+                  bgColor: colors.secondaryGreenColor,
+                ),
               10.width,
-              TitleSubtitleButton(
-                title: appLocalization.expense,
-                subTitle:
-                    '${controller.currency} ${controller.financialData.value?.expenditure ?? ''}',
-                icon: TablerIcons.moneybag,
-                onTap: controller.goToExpenseList,
-                bgColor: colors.secondaryGreyColor,
-              ),
+              if (isRoleExpense)
+                TitleSubtitleButton(
+                  title: appLocalization.expense,
+                  subTitle:
+                      '${controller.currency} ${controller.financialData.value?.expenditure ?? ''}',
+                  icon: TablerIcons.moneybag,
+                  onTap: controller.goToExpenseList,
+                  bgColor: colors.secondaryGreyColor,
+                ),
             ],
           ),
           10.height,

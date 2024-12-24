@@ -1133,10 +1133,14 @@ class Services {
   Future<FinancialData?> getFinancialData() async {
     const endPoint = 'poskeeper-dashboard';
     try {
+      final data = {
+        'user_id': LoggedUser().userId,
+      };
       final response = await dio.post(
         APIType.public,
         endPoint,
-        {},
+        data,
+        query: data,
         headers: _buildHeader(),
       );
       final responseData = response.data as Map<String, dynamic>?;
