@@ -244,7 +244,7 @@ List<Widget> configButtonList = [
     },
     localeMethod: () => appLocalization.inventory,
     bgColor: colorList.value['navyBlue'],
-    permission: true,
+    permission: isManager,
   ),
   TbdRoundButton(
     icon: TablerIcons.rotate_rectangle,
