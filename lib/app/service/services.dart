@@ -53,6 +53,7 @@ class Services {
       'X-API-KEY': 'terminalbd',
       'X-API-VALUE': 'terminalbd@aps',
       'X-API-SECRET': SetUp().uniqueCode ?? '',
+      'X-USER-ID': LoggedUser().userId?.toString() ?? '',
     };
   }
 
@@ -545,6 +546,7 @@ class Services {
           'is_approve': autoApprove ? '1' : '0',
           'approved_by': autoApprove ? LoggedUser().userId : '',
           'process': 'sales',
+          'user_id': LoggedUser().userId,
         },
         headers: _buildHeader(),
       );
