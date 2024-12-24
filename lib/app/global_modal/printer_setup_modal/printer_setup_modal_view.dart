@@ -1,6 +1,7 @@
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sandra/app/core/importer.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 import 'printer_setup_modal_controller.dart';
 
@@ -55,6 +56,7 @@ class PrinterSetupModalView extends BaseView<PrinterSetupModalController> {
           ),
           child: Column(
             children: [
+              10.height,
               Row(
                 mainAxisAlignment: spaceBetweenMAA,
                 children: [
@@ -130,24 +132,6 @@ class PrinterSetupModalView extends BaseView<PrinterSetupModalController> {
                                   },
                                 );
                               },
-                            ),
-                          );
-
-                          return RadioListTile<String>(
-                            title: Text(
-                              item.value ?? '',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: colors.solidBlackColor,
-                              ),
-                            ),
-                            value: item.value ?? '',
-                            groupValue: controller.printerType.value,
-                            onChanged: controller.setPrinterType,
-                            activeColor: colors.solidRedColor,
-                            contentPadding: const EdgeInsets.only(
-                              left: 24,
                             ),
                           );
                         },
@@ -235,6 +219,37 @@ class PrinterSetupModalView extends BaseView<PrinterSetupModalController> {
               ),
             ],
           ),
+        ),
+        16.height,
+        SettingsList(
+          shrinkWrap: true,
+          sections: [
+            SettingsSection(
+              tiles: [
+                SettingsTile.navigation(
+                  onPressed: (BuildContext context) async {
+                    await controller.showPrinterConnectModal();
+                  },
+                  leading: Obx(
+                    () => Icon(
+                      TablerIcons.printer,
+                      color: controller.connected.value
+                          ? colors.greenColor
+                          : colors.redColor,
+                    ),
+                  ),
+                  title: Text(
+                    appLocalization.printer,
+                    style: GoogleFonts.roboto(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  trailing: const Icon(TablerIcons.chevron_right),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

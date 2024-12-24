@@ -1,11 +1,13 @@
+import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/global_modal/printer_connect_modal_view/printer_connect_modal_view.dart';
 
 enum Buttons {
   printPaperType,
   purchase,
 }
 
-class PrinterSetupModalController extends BaseController {
+class PrinterSetupModalController extends PrinterController {
   final buttons = Rx<Buttons?>(null);
   final isHasPrinter = ValueNotifier(false);
   final printerType = ''.obs;
@@ -62,5 +64,15 @@ class PrinterSetupModalController extends BaseController {
       return;
     }
     buttons.value = button;
+  }
+
+  Future<void> showPrinterConnectModal() async {
+    await Get.dialog(
+      DialogPattern(
+        title: appLocalization.printerSetup,
+        subTitle: appLocalization.connectYourPrinter,
+        child: PrinterConnectModalView(),
+      ),
+    );
   }
 }
