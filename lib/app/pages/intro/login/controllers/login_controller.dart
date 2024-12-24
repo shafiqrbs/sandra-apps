@@ -1,11 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
-import '/app/routes/app_pages.dart';
 
 class LoginController extends BaseController {
   final formKey = GlobalKey<FormState>();
@@ -20,6 +15,7 @@ class LoginController extends BaseController {
   final isUserNameFieldValid = true.obs;
   final isPasswordFieldValid = true.obs;
   final isSignUp = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
