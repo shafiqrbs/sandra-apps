@@ -22,21 +22,7 @@ class PrefsSettingsModalController extends BaseController {
   final isPurchaseAutoApproved = ValueNotifier(false);
   final isShowBrandOnPurchase = ValueNotifier(false);
   final isShowBrandOnSales = ValueNotifier(false);
-  final printerType = ''.obs;
   final selectedPurchase = ''.obs;
-  final printerNewLine = 0.obs;
-  final printNewLineController = TextEditingController();
-  final printerTypeList = [
-    const DropdownMenuItem(value: '80 mm', child: Text('80 mm')),
-    const DropdownMenuItem(value: '58 mm', child: Text('58 mm')),
-  ];
-  final newLineList = List<DropdownMenuItem<int>>.generate(
-    11,
-    (index) => DropdownMenuItem(
-      value: index,
-      child: Text(index.toString()),
-    ),
-  );
 
   @override
   Future<void> onInit() async {
@@ -49,9 +35,7 @@ class PrefsSettingsModalController extends BaseController {
     isHasPrinter.value = await prefs.getHasPrinter();
     isSalesAutoApproved.value = await prefs.getIsSalesAutoApprove();
     isPurchaseAutoApproved.value = await prefs.getIsPurchaseAutoApprove();
-    printerType.value = await prefs.getPrintPaperType();
-    printerNewLine.value = await prefs.getNumberOfPrinterNewLine();
-    printNewLineController.text = printerNewLine.value.toString();
+
     selectedPurchase.value = await prefs.getPurchaseConfig();
     isShowBrandOnPurchase.value = await prefs.getIsShowBrandOnPurchase();
     isShowBrandOnSales.value = await prefs.getIsShowBrandOnSales();
@@ -140,23 +124,6 @@ class PrefsSettingsModalController extends BaseController {
       final salesController = Get.find<CreateSalesController>();
       salesController.isShowBrand.value = value;
     }
-  }
-
-  Future<void> setPrinterType(String? value) async {
-    if (value != null) {
-      printerType.value = value;
-      await prefs.setPrintPaperType(
-        value,
-      );
-    }
-  }
-
-  Future<void> setPrinterNewLine(int value) async {
-    printerNewLine.value = value;
-    printNewLineController.text = value.toString();
-    await prefs.setNumberOfPrinterNewLine(
-      value,
-    );
   }
 
   void changeButton(Buttons button) {

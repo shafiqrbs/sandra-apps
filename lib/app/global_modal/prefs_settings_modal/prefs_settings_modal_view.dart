@@ -24,7 +24,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                 ),
                 _buildSales(),
                 _buildPurchase(),
-                _buildPrinter(),
               ],
             ),
           ),
@@ -315,6 +314,52 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
           ),
           child: Column(
             children: [
+              Column(
+                children: [
+                  _buildSettingButton(
+                    text: appLocalization.purchaseConfig,
+                    trailingIcon: TablerIcons.chevron_right,
+                    isOpen: controller.buttons.value == Buttons.purchase,
+                    onTap: () {
+                      controller.changeButton(Buttons.purchase);
+                    },
+                  ),
+                  if (controller.buttons.value == Buttons.purchase) 8.height,
+                  if (controller.buttons.value == Buttons.purchase)
+                    Container(
+                      color: Colors.white,
+                      width: Get.width,
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        top: 16,
+                        bottom: 16,
+                      ),
+                      child: Column(
+                        children: [
+                          16.height,
+                          _buildCustomRadioButton(
+                            title: appLocalization.purchaseWithMrp,
+                            isSelected: controller.selectedPurchase.value ==
+                                'purchase_with_mrp',
+                            onTap: () {
+                              controller.changePurchase('purchase_with_mrp');
+                            },
+                          ),
+                          16.height,
+                          _buildCustomRadioButton(
+                            title: appLocalization.purchasePrice,
+                            isSelected: controller.selectedPurchase.value ==
+                                'purchase_price',
+                            onTap: () {
+                              controller.changePurchase('purchase_price');
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+              16.height,
               Row(
                 mainAxisAlignment: spaceBetweenMAA,
                 children: [
@@ -402,267 +447,6 @@ class PrefsSettingsModalView extends BaseView<PrefsSettingsModalController> {
                     inactiveColor: colors.secondaryColor100,
                     initialValue: controller.isShowBrandOnPurchase.value,
                   ),
-                ],
-              ),
-              16.height,
-              Column(
-                children: [
-                  _buildSettingButton(
-                    text: appLocalization.purchaseConfig,
-                    trailingIcon: TablerIcons.chevron_right,
-                    isOpen: controller.buttons.value == Buttons.purchase,
-                    onTap: () {
-                      controller.changeButton(Buttons.purchase);
-                    },
-                  ),
-                  if (controller.buttons.value == Buttons.purchase) 8.height,
-                  if (controller.buttons.value == Buttons.purchase)
-                    Container(
-                      color: Colors.white,
-                      width: Get.width,
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 0,
-                        top: 16,
-                        bottom: 16,
-                      ),
-                      child: Column(
-                        children: [
-                          16.height,
-                          _buildCustomRadioButton(
-                            title: appLocalization.purchaseWithMrp,
-                            isSelected: controller.selectedPurchase.value ==
-                                'purchase_with_mrp',
-                            onTap: () {
-                              controller.changePurchase('purchase_with_mrp');
-                            },
-                          ),
-                          16.height,
-                          _buildCustomRadioButton(
-                            title: appLocalization.purchasePrice,
-                            isSelected: controller.selectedPurchase.value ==
-                                'purchase_price',
-                            onTap: () {
-                              controller.changePurchase('purchase_price');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPrinter() {
-    return Column(
-      children: [
-        dividerWidget(),
-        Row(
-          children: [
-            Icon(
-              TablerIcons.printer,
-              color: colors.primaryColor700,
-              size: 24,
-            ),
-            8.width,
-            Text(
-              appLocalization.printer.toUpperCase(),
-              style: GoogleFonts.roboto(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: colors.primaryColor700,
-              ),
-            ),
-          ],
-        ),
-        dividerWidget(),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 24,
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: spaceBetweenMAA,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                    ),
-                    child: Text(
-                      appLocalization.printer,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  AdvancedSwitch(
-                    controller: controller.isHasPrinter,
-                    onChanged: (value) async {
-                      await controller.setHasPrinter(value);
-                    },
-                    borderRadius: BorderRadius.circular(4),
-                    height: 20,
-                    width: 40,
-                    activeColor: colors.primaryColor700,
-                    inactiveColor: colors.secondaryColor100,
-                    initialValue: controller.isHasPrinter.value,
-                  ),
-                ],
-              ),
-              16.height,
-              Column(
-                children: [
-                  _buildSettingButton(
-                    text: appLocalization.printPaperType,
-                    //icon: TablerIcons.printer,
-                    trailingIcon: TablerIcons.chevron_right,
-                    isOpen: controller.buttons.value == Buttons.printPaperType,
-                    onTap: () {
-                      controller.changeButton(Buttons.printPaperType);
-                    },
-                  ),
-                  if (controller.buttons.value != Buttons.printPaperType)
-                    16.height,
-                  if (controller.buttons.value == Buttons.printPaperType)
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 8,
-                      ),
-                      padding: const EdgeInsets.only(
-                        bottom: 16,
-                      ),
-                      color: Colors.white,
-                      width: Get.width,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller.printerTypeList.length,
-                        itemBuilder: (context, index) {
-                          final item = controller.printerTypeList[index];
-
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              left: 16,
-                              top: 16,
-                            ),
-                            child: Obx(
-                              () {
-                                return _buildCustomRadioButton(
-                                  title: item.value ?? '',
-                                  isSelected: controller.printerType.value ==
-                                      item.value,
-                                  onTap: () {
-                                    controller.setPrinterType(item.value);
-                                  },
-                                );
-                              },
-                            ),
-                          );
-
-                          return RadioListTile<String>(
-                            title: Text(
-                              item.value ?? '',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: colors.solidBlackColor,
-                              ),
-                            ),
-                            value: item.value ?? '',
-                            groupValue: controller.printerType.value,
-                            onChanged: controller.setPrinterType,
-                            activeColor: colors.solidRedColor,
-                            contentPadding: const EdgeInsets.only(
-                              left: 24,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: spaceBetweenMAA,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                    ),
-                    child: Text(
-                      appLocalization.printEndNewLine,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 80,
-                    height: textFieldHeight,
-                    child: TextFormField(
-                      controller: controller.printNewLineController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      onChanged: (value) {
-                        controller.setPrinterNewLine(int.tryParse(value) ?? 0);
-                      },
-                      onFieldSubmitted: (value) {
-                        controller.setPrinterNewLine(int.tryParse(value) ?? 0);
-                      },
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '1',
-                        hintStyle: GoogleFonts.roboto(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: colors.primaryBlackColor,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        filled: true,
-                        fillColor: colors.primaryColor50,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(
-                            color: colors.secondaryColor100,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(
-                            color: colors.secondaryColor100,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(
-                            color: colors.secondaryColor100,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  /*if (controller.printerType.value.isEmpty)
-                        const CircularProgressIndicator()
-                      else
-                        DropdownButton<int>(
-                          value: controller.printerNewLine.value,
-                          items: controller.newLineList,
-                          onChanged: (value) async {
-                            if (value == null) return;
-                            controller.setPrinterNewLine(value);
-                          },
-                        ),*/
                 ],
               ),
             ],
