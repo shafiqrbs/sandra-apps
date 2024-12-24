@@ -6,6 +6,7 @@ import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';
 import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_view.dart';
+import 'package:sandra/app/global_modal/printer_setup_modal/printer_setup_modal_view.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import '/app/core/utils/test_functions.dart';
@@ -243,7 +244,7 @@ List<Widget> configButtonList = [
     },
     localeMethod: () => appLocalization.inventory,
     bgColor: colorList.value['navyBlue'],
-    permission: isManager,
+    permission: true,
   ),
   TbdRoundButton(
     icon: TablerIcons.rotate_rectangle,
@@ -273,6 +274,21 @@ List<Widget> configButtonList = [
     localeMethod: () => appLocalization.user,
     bgColor: colorList.value['marun'],
     permission: isManager,
+  ),
+  TbdRoundButton(
+    icon: TablerIcons.printer,
+    onTap: () {
+      Get.dialog(
+        DialogPattern(
+          title: appLocalization.printerSetup,
+          subTitle: '',
+          child: PrinterSetupModalView(),
+        ),
+      );
+    },
+    localeMethod: () => appLocalization.printerSetup,
+    bgColor: colorList.value['marun'],
+    permission: true,
   ),
 ];
 
