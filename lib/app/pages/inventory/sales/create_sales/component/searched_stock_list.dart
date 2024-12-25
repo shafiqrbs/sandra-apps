@@ -82,13 +82,14 @@ class StockItem extends BaseWidget {
           bottom: 6,
         ),
         child: Obx(
-          () => Container(
+          () {
+            return Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 12,
               vertical: 6,
             ),
             decoration: BoxDecoration(
-              color: colors.secondaryColor50,
+              color: Get.isDarkMode ? colors.blackColor : colors.secondaryColor50,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 color:
@@ -107,8 +108,8 @@ class StockItem extends BaseWidget {
                           Text(
                             stock.name ?? '',
                             maxLines: 2,
-                            style: const TextStyle(
-                              color: Color(0xFF4D4D4D),
+                            style: TextStyle(
+                              color: Get.isDarkMode ? Colors.white : Color(0xFF4D4D4D),
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               height: 1.5,
@@ -118,8 +119,8 @@ class StockItem extends BaseWidget {
                           Text(
                             stock.brandName ?? '',
                             maxLines: 1,
-                            style: const TextStyle(
-                              color: Color(0xFF4D4D4D),
+                            style: TextStyle(
+                              color:  Get.isDarkMode ? Colors.white : Color(0xFF4D4D4D),
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
                               height: 1.2,
@@ -200,10 +201,10 @@ class StockItem extends BaseWidget {
                       child: RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: 'Stock ',
                               style: TextStyle(
-                                color: Color(0xFF989898),
+                                color:  Get.isDarkMode ? Colors.white : Color(0xFF989898),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                                 height: 1,
@@ -211,17 +212,17 @@ class StockItem extends BaseWidget {
                             ),
                             TextSpan(
                               text: stock.quantity.toString(),
-                              style: const TextStyle(
-                                color: Color(0xFF202020),
+                              style: TextStyle(
+                                color:  Get.isDarkMode ? Colors.white : Color(0xFF202020),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 height: 1,
                               ),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: ' pcs',
                               style: TextStyle(
-                                color: Color(0xFF989898),
+                                color: Get.isDarkMode ? Colors.white : Color(0xFF989898),
                                 fontSize: 8,
                                 fontWeight: FontWeight.w400,
                                 height: 1,
@@ -236,10 +237,10 @@ class StockItem extends BaseWidget {
                       child: RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: '৳ ',
                               style: TextStyle(
-                                color: Color(0xFF989898),
+                                color: Get.isDarkMode ? Colors.white : Color(0xFF989898),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                                 height: 1,
@@ -248,8 +249,8 @@ class StockItem extends BaseWidget {
                             TextSpan(
                               text: stock.salesPrice?.toStringAsFixed(2) ??
                                   '0.00',
-                              style: const TextStyle(
-                                color: Color(0xFF202020),
+                              style: TextStyle(
+                                color: Get.isDarkMode ? Colors.white : Color(0xFF202020),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 height: 1,
@@ -266,10 +267,10 @@ class StockItem extends BaseWidget {
                           () => RichText(
                             text: TextSpan(
                               children: [
-                                const TextSpan(
+                                TextSpan(
                                   text: 'Total ',
                                   style: TextStyle(
-                                    color: Color(0xFF989898),
+                                    color: Get.isDarkMode ? Colors.white : Color(0xFF989898),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     height: 1,
@@ -277,8 +278,8 @@ class StockItem extends BaseWidget {
                                 ),
                                 TextSpan(
                                   text: total.value,
-                                  style: const TextStyle(
-                                    color: Color(0xFF202020),
+                                  style: TextStyle(
+                                    color: Get.isDarkMode ? Colors.white : Color(0xFF202020),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     height: 1,
@@ -294,7 +295,8 @@ class StockItem extends BaseWidget {
                 ),
               ],
             ),
-          ),
+          );
+          },
         ),
       ),
     );

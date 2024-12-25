@@ -611,6 +611,14 @@ class DashboardController extends BaseController {
     }
   }
 
+  Future<void> changeThemeMode() async {
+    print('changeThemeMode: ${Get.isDarkMode}');
+    Get.isDarkMode
+        ? Get.changeThemeMode(ThemeMode.light)
+        : Get.changeThemeMode(ThemeMode.dark);
+    await Get.forceAppUpdate();
+  }
+
   void goToRestaurantHome() {
     Get.toNamed(
       Routes.restaurantHome,

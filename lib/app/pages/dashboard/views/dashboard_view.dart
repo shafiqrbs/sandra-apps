@@ -173,7 +173,7 @@ class DashboardView extends BaseView<DashboardController> {
                 controller.isManager ? 16.width : Container(),
 
                 InkWell(
-                  // onTap: controller.changeTheme,
+                   onTap: controller.changeThemeMode,
                   child: Icon(
                     Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
                     color: colors.whiteColor,

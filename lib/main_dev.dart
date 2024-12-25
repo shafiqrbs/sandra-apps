@@ -43,7 +43,7 @@ Future<void> _initializeApp() async {
 void _initializeEnvironment() {
   final devConfig = EnvConfig(
     appName: 'TerminalBD',
-    baseUrl: 'https://poskeeper.com/flutter-api/',
+    baseUrl: 'https://capsulebd.com/flutter-api/',
     shouldCollectCrashLog: true,
   );
 
