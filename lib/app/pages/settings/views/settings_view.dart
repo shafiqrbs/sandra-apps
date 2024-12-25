@@ -59,7 +59,7 @@ class SettingsView extends BaseView<SettingsController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            appLocalization.enableDarkMode,
+                            appLocalization.theme,
                             style: commonTextStyle(),
                           ),
                         ],

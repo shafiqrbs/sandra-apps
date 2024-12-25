@@ -495,5 +495,7 @@
   "adjustment": "Adjustment",
   "totalReturnAmount": "Total Return Amount",
   "advanceFilter": "Advance Filter",
-  "refundList": "Refund List"
+  "refundList": "Refund List",
+    "theme": "Theme"
+
 }
