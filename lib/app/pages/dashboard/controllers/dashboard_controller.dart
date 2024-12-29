@@ -331,14 +331,21 @@ class DashboardController extends BaseController {
     final salesData = await dbHelper.getLocalSalesFinancialData();
     final purchaseData = await dbHelper.getLocalPurchaseFinancialData();
 
-    final totalSales = salesData.map((e) => e['total']).reduce((a, b) => a + b);
-    final totalSalesReceived =
-        salesData.map((e) => e['received']).reduce((a, b) => a + b) ?? 0;
-    final totalDue = salesData.map((e) => e['due']).reduce((a, b) => a + b);
-    final totalPurchase =
-        purchaseData.map((e) => e['total']).reduce((a, b) => a + b);
-    final totalPurchaseReceived =
-        purchaseData.map((e) => e['received']).reduce((a, b) => a + b);
+    final totalSales = salesData.isEmpty
+        ? 0
+        : salesData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalSalesReceived = salesData.isEmpty
+        ? 0
+        : salesData.map((e) => e['received']).reduce((a, b) => a + b) ?? 0;
+    final totalDue = salesData.isEmpty
+        ? 0
+        : salesData.map((e) => e['due']).reduce((a, b) => a + b);
+    final totalPurchase = purchaseData.isEmpty
+        ? 0
+        : purchaseData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalPurchaseReceived = purchaseData.isEmpty
+        ? 0
+        : purchaseData.map((e) => e['received']).reduce((a, b) => a + b);
 
     if (kDebugMode) {
       print('Sales Data: $salesData');
