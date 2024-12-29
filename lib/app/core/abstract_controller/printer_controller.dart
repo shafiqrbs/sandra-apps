@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
-import 'package:intl/intl.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
@@ -196,7 +194,9 @@ class PrinterController extends BaseController {
         return false;
       }
     } catch (e, err) {
-      print('Error in print: $e, $err');
+      if (kDebugMode) {
+        print('Error in print: $e, $err');
+      }
       return false;
     }
   }
@@ -380,7 +380,7 @@ class PrinterController extends BaseController {
     );
 
     bytes += generator.text(
-      'Sales Invoice',
+      'Invoice : ${sales.invoice}',
       styles: const PosStyles(
         align: PosAlign.center,
         bold: true,
@@ -391,60 +391,24 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: 'Bill: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
+          text: 'Date: ${sales.createdAt ?? ''}',
+          width: 7,
         ),
         PosColumn(
-          text: sales.invoice ?? '',
-          width: 4,
-        ),
-        PosColumn(
-            text: 'Mode: ',
-            styles: const PosStyles(
-              align: PosAlign.right,
-            ),
-            width: 3),
-        PosColumn(
-          text: sales.methodName ?? '',
-          width: 3,
+          text: 'Mode  : ${sales.methodMode ?? ''}',
+          width: 5,
         ),
       ],
     );
     bytes += generator.row(
       [
         PosColumn(
-          text: 'Cus: ',
-          styles: const PosStyles(align: PosAlign.right),
+          text: 'Cus : ${sales.customerName ?? ''}',
+          width: 7,
         ),
         PosColumn(
-          text: sales.customerName ?? '',
-          width: 4,
-        ),
-        PosColumn(
-          text: 'Mob: ',
-          styles: const PosStyles(
-            align: PosAlign.right,
-          ),
-          width: 3,
-        ),
-        PosColumn(
-          text: sales.customerMobile ?? '',
-          width: 3,
-        ),
-      ],
-    );
-
-    bytes += generator.row(
-      [
-        PosColumn(
-          text: 'Date: ',
-          styles: const PosStyles(align: PosAlign.right),
-        ),
-        PosColumn(
-          text: sales.createdAt ?? '',
-          width: 10,
+          text: 'Mobile: ${sales.customerMobile ?? ''}',
+          width: 5,
         ),
       ],
     );
@@ -481,14 +445,17 @@ class PrinterController extends BaseController {
     );
     bytes += generator.text('------------------------------------------------');
 
-    print(sales.salesItem!.length);
+    if (kDebugMode) {
+      print(sales.salesItem!.length);
+    }
 
     if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
+      int index = 1;
       for (final SalesItem rowData in sales.salesItem!) {
         bytes += generator.row(
           [
             PosColumn(
-              text: rowData.stockName ?? '',
+              text: '${index++}.${rowData.stockName ?? ''}',
               width: 7,
             ),
             PosColumn(
@@ -697,11 +664,12 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-            text: 'Invoice: ',
-            styles: const PosStyles(
-              align: PosAlign.right,
-            ),
-            width: 4),
+          text: 'Invoice: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4,
+        ),
         PosColumn(
           text: ledger.invoice ?? '',
           width: 8,
@@ -711,11 +679,12 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-            text: 'Date: ',
-            styles: const PosStyles(
-              align: PosAlign.right,
-            ),
-            width: 4),
+          text: 'Date: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4,
+        ),
         PosColumn(
           text: ledger.created ?? '',
           width: 8,
@@ -725,9 +694,10 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-            text: 'Customer: ',
-            styles: const PosStyles(align: PosAlign.right),
-            width: 4),
+          text: 'Customer: ',
+          styles: const PosStyles(align: PosAlign.right),
+          width: 4,
+        ),
         PosColumn(
           text: ledger.customerName ?? '',
           width: 8,
@@ -738,11 +708,12 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-            text: 'Mobile: ',
-            styles: const PosStyles(
-              align: PosAlign.right,
-            ),
-            width: 4),
+          text: 'Mobile: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4,
+        ),
         PosColumn(
           text: ledger.mobile ?? '',
           width: 8,
@@ -753,11 +724,12 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-            text: 'Method: ',
-            styles: const PosStyles(
-              align: PosAlign.right,
-            ),
-            width: 4),
+          text: 'Method: ',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+          width: 4,
+        ),
         PosColumn(
           text: ledger.method ?? 'N/A',
           width: 8,
