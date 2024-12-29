@@ -37,7 +37,7 @@ class SplashController extends BaseController {
       }
     }
     if (!isLicenseValid) {
-      Get.offAllNamed(Routes.license);
+      Get.offAllNamed(Routes.onboarding);
     }
 
     if (isLicenseValid && !isLogin) {

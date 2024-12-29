@@ -418,5 +418,9 @@
   "allPrintEnableDisable": "All Print Enable/Disable",
   "allPrint": "All Print",
   "refundList": "Refund List",
+  "welcomeToPOSKeeper": "Welcome to POSKeeper",
+  "createYourOnlineStore": "Create your online store",
+  "newStoreDetails" : "Want the same app for your store? Don’t have a store, To create your store click on “New Store”",
+  "newStore": "New Store",
   "theme": "Theme"
 }

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sandra/app/pages/intro/onboarding/bindings/onboarding_binding.dart';
+import 'package:sandra/app/pages/intro/onboarding/views/onboarding_view.dart';
 import 'package:sandra/app/pages/inventory/sales/sales_return_list_page/sales_return_list_binding.dart';
 import 'package:sandra/app/pages/inventory/sales/sales_return_list_page/sales_return_list_page.dart';
 import 'package:sandra/app/pages/report/report_details/user_sales_overview_report/bindings/user_sales_overview_report_binding.dart';
@@ -85,6 +87,11 @@ class AppPages {
       name: Routes.splash,
       page: SplashView.new,
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.onboarding,
+      page: OnboardingView.new,
+      binding: OnboardingBinding(),
     ),
     GetPage(
       name: Routes.license,
