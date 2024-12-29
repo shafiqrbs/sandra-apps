@@ -328,10 +328,65 @@ class DashboardController extends BaseController {
   }
 
   Future<void> fetchOfflineFinancialData() async {
-    final data = await dbHelper.getLocalFinancialData(
-      tbl: dbTables.tableSale,
-      where: '',
-      whereArgs: [],
+    final salesData = await dbHelper.getLocalSalesFinancialData();
+    final purchaseData = await dbHelper.getLocalPurchaseFinancialData();
+
+    final totalSales = salesData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalSalesReceived =
+        salesData.map((e) => e['received']).reduce((a, b) => a + b);
+    final totalDue = salesData.map((e) => e['due']).reduce((a, b) => a + b);
+    final totalPurchase =
+        purchaseData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalPurchaseReceived =
+        purchaseData.map((e) => e['received']).reduce((a, b) => a + b);
+
+    print('Sales Data: $salesData');
+    print('Purchase Data: $purchaseData');
+
+    final List<Map<String, dynamic>> generatedList = [];
+    for (final sales in salesData) {
+      final method = sales['method_mode'];
+      bool isExist = false;
+      for (final purchase in purchaseData) {
+        if (purchase['method_mode'] == method) {
+          generatedList.add(
+            {
+              'method_mode': method,
+              'total': sales['received'] - purchase['received'],
+            },
+          );
+          isExist = true;
+        }
+      }
+      if (!isExist) {
+        generatedList.add(
+          {
+            'method_mode': method,
+            'total': sales['received'],
+          },
+        );
+      }
+    }
+    print('generatedList $generatedList');
+
+    final data = {
+      'sales': totalSales?.toString() ?? '0',
+      'due': totalDue?.toString() ?? '0',
+      'purchase': totalPurchase?.toString() ?? '0',
+      'transaction_overview': generatedList.map((e) {
+        return {
+          'name': e['method_mode'].toString(),
+          'amount': e['total'].toString(),
+        };
+      }).toList(),
+    };
+
+    print('total sale $totalSales');
+    print('total due $totalDue');
+    print('total purchase $totalPurchase');
+
+    financialData.value = FinancialData.fromJson(
+      data,
     );
   }
 

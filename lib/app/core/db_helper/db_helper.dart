@@ -179,22 +179,28 @@ class DbHelper {
     return [];
   }
 
-  Future<List<Map<String, dynamic>>> getLocalFinancialData({
-    required String tbl,
-    required String where,
-    required List<dynamic> whereArgs,
-    int? limit,
-    int? offset,
-  }) async {
-    if (kDebugMode) {
-      print(where);
-    }
+  Future<List<Map<String, dynamic>>> getLocalSalesFinancialData() async {
     final Database? db = await instance.database;
     if (db != null) {
       final sql = StringBuffer(
-        'SELECT SUM(net_total) as total, SUM(received) as received,(SUM(net_total) - SUM(received)) as due, method_id FROM sales WHERE is_hold is null or is_hold == 0 GROUP BY method_id',
+        'SELECT SUM(net_total) as total, SUM(received) as received,(SUM(net_total) - SUM(received)) as due, transaction_methods.method_mode FROM sales INNER JOIN transaction_methods ON sales.method_id = transaction_methods.method_id  WHERE is_hold is null or is_hold == 0 GROUP BY transaction_methods.method_mode',
       );
-      return db.rawQuery(sql.toString(), whereArgs);
+      return db.rawQuery(
+        sql.toString(),
+      );
+    }
+    return [];
+  }
+
+  Future<List<Map<String, dynamic>>> getLocalPurchaseFinancialData() async {
+    final Database? db = await instance.database;
+    if (db != null) {
+      final sql = StringBuffer(
+        'SELECT SUM(net_total) as total, SUM(received) as received,(SUM(net_total) - SUM(received)) as due, transaction_methods.method_mode FROM purchases INNER JOIN transaction_methods ON purchases.method_id = transaction_methods.method_id  WHERE is_hold is null or is_hold == 0 GROUP BY transaction_methods.method_mode',
+      );
+      return db.rawQuery(
+        sql.toString(),
+      );
     }
     return [];
   }
