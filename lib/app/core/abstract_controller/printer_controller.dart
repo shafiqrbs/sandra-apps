@@ -574,7 +574,7 @@ class PrinterController extends BaseController {
     bytes += generator.row(
       [
         PosColumn(
-          text: 'paid',
+          text: 'Paid',
           width: 9,
           styles: const PosStyles(align: PosAlign.right),
         ),
