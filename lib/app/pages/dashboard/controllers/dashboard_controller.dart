@@ -340,8 +340,10 @@ class DashboardController extends BaseController {
     final totalPurchaseReceived =
         purchaseData.map((e) => e['received']).reduce((a, b) => a + b);
 
-    print('Sales Data: $salesData');
-    print('Purchase Data: $purchaseData');
+    if (kDebugMode) {
+      print('Sales Data: $salesData');
+      print('Purchase Data: $purchaseData');
+    }
 
     final List<Map<String, dynamic>> generatedList = [];
     for (final sales in salesData) {
@@ -367,7 +369,9 @@ class DashboardController extends BaseController {
         );
       }
     }
-    print('generatedList $generatedList');
+    if (kDebugMode) {
+      print('generatedList $generatedList');
+    }
 
     final data = {
       'sales': totalSales?.toString() ?? '0',
