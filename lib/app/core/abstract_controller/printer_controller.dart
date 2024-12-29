@@ -395,7 +395,7 @@ class PrinterController extends BaseController {
           width: 7,
         ),
         PosColumn(
-          text: 'Mode  : ${sales.methodMode ?? ''}',
+          text: 'Mode: ${sales.methodMode ?? ''}',
           width: 5,
         ),
       ],
@@ -407,7 +407,7 @@ class PrinterController extends BaseController {
           width: 7,
         ),
         PosColumn(
-          text: 'Mobile: ${sales.customerMobile ?? ''}',
+          text: 'Mob : ${sales.customerMobile ?? ''}',
           width: 5,
         ),
       ],
