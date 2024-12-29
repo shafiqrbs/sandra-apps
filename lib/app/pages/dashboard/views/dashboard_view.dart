@@ -173,7 +173,7 @@ class DashboardView extends BaseView<DashboardController> {
                 controller.isManager ? 16.width : Container(),
 
                 InkWell(
-                   onTap: controller.changeThemeMode,
+                  onTap: controller.changeThemeMode,
                   child: Icon(
                     Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
                     color: colors.whiteColor,
@@ -321,6 +321,7 @@ class DashboardView extends BaseView<DashboardController> {
     final String title = 'Title',
     final String amount = 'Subtitle',
     final Function()? onTap,
+    bool showIcon = true,
   }) {
     return Expanded(
       child: InkWell(
@@ -350,11 +351,12 @@ class DashboardView extends BaseView<DashboardController> {
                     textColor: colors.solidBlackColor,
                   ),
                   6.width,
-                  const Icon(
-                    TablerIcons.chevron_right,
-                    color: Color(0xff202020),
-                    size: 16,
-                  ),
+                  if (showIcon)
+                    const Icon(
+                      TablerIcons.chevron_right,
+                      color: Color(0xff202020),
+                      size: 16,
+                    ),
                 ],
               ),
               CommonText(
@@ -378,6 +380,31 @@ class DashboardView extends BaseView<DashboardController> {
       ),
       child: Column(
         children: [
+          Row(
+            children: [
+              _buildBalanceCard(
+                title: appLocalization.receive,
+                amount:
+                    '${controller.currency} ${controller.financialData.value?.receiveAmount ?? ''}',
+                onTap: () {},
+                showIcon: false,
+              ),
+              _buildBalanceCard(
+                title: appLocalization.payment,
+                amount:
+                    '${controller.currency} ${controller.financialData.value?.paymentAmount ?? ''}',
+                onTap: () {},
+                showIcon: false,
+              ),
+              _buildBalanceCard(
+                title: appLocalization.balance,
+                amount:
+                    '${controller.currency} ${controller.financialData.value?.balanceAmount ?? ''}',
+                onTap: () {},
+                showIcon: false,
+              ),
+            ],
+          ),
           Row(
             mainAxisAlignment: spaceBetweenMAA,
             children: [
@@ -491,7 +518,7 @@ class DashboardView extends BaseView<DashboardController> {
         return Column(
           children: [
             _buildBalanceList(),
-            16.height,
+            0.height,
             _buildTitleSubTitleButtonList(),
           ],
         );

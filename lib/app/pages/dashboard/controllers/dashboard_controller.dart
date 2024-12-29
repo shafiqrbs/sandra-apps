@@ -333,7 +333,7 @@ class DashboardController extends BaseController {
 
     final totalSales = salesData.map((e) => e['total']).reduce((a, b) => a + b);
     final totalSalesReceived =
-        salesData.map((e) => e['received']).reduce((a, b) => a + b);
+        salesData.map((e) => e['received']).reduce((a, b) => a + b) ?? 0;
     final totalDue = salesData.map((e) => e['due']).reduce((a, b) => a + b);
     final totalPurchase =
         purchaseData.map((e) => e['total']).reduce((a, b) => a + b);
@@ -373,6 +373,10 @@ class DashboardController extends BaseController {
       'sales': totalSales?.toString() ?? '0',
       'due': totalDue?.toString() ?? '0',
       'purchase': totalPurchase?.toString() ?? '0',
+      'receive_amount': totalSalesReceived?.toString() ?? '0',
+      'payment_amount': totalPurchaseReceived?.toString() ?? '0',
+      'expense_amount': '0',
+      'balance_amount': (totalSalesReceived - totalPurchaseReceived).toString(),
       'transaction_overview': generatedList.map((e) {
         return {
           'name': e['method_mode'].toString(),
