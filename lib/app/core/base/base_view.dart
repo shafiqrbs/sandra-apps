@@ -1,10 +1,7 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/importer.dart';
 
-import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/values/app_colors.dart';
 import '/app/core/widget/loading.dart';
 import '/flavors/build_config.dart';

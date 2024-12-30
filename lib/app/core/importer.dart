@@ -32,6 +32,7 @@ export 'package:sandra/app/routes/app_pages.dart';
 export 'package:sandra/app/service/services.dart';
 export 'package:video_player/video_player.dart';
 export 'package:youtube_player_flutter/youtube_player_flutter.dart';
+export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 export '/app/core/base/base_controller.dart';
 export '/app/core/base/mixins/shorter_enum_mixin.dart';

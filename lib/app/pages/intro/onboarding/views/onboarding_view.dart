@@ -3,7 +3,6 @@ import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/asset_image_view.dart';
 import 'package:sandra/app/global_widget/video_player_widget.dart';
 import 'package:sandra/app/pages/intro/onboarding/controllers/onboarding_controller.dart';
-import '/app/core/base/base_view.dart';
 
 //ignore: must_be_immutable
 class OnboardingView extends BaseView<OnboardingController> {
@@ -16,27 +15,34 @@ class OnboardingView extends BaseView<OnboardingController> {
 
   @override
   Widget body(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        bottom: 40,
-      ),
-      child: PageView(
-        children: [
-          _buildWelcomeView(),
-          Container(
-            color: Colors.green,
-            child: Center(
-              child: Text('Page 2'),
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(
+            bottom: 40,
           ),
-          Container(
-            color: Colors.blue,
-            child: Center(
-              child: Text('Page 3'),
-            ),
+          height: Get.height * 0.85,
+          child: PageView(
+            controller: controller.pageController,
+            children: [
+              _buildWelcomeView(),
+              Container(
+                color: Colors.green,
+                child: Center(
+                  child: Text('Page 2'),
+                ),
+              ),
+              Container(
+                color: Colors.blue,
+                child: Center(
+                  child: Text('Page 3'),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        _buildPageIndicator(),
+      ],
     );
   }
 
@@ -100,8 +106,7 @@ class OnboardingView extends BaseView<OnboardingController> {
           Container(
             height: 170,
             child: VideoPlayerWidget(
-                videoUrl:
-                    'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB'),
+                videoUrl: 'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB'),
           ),
         ],
       ),
@@ -122,7 +127,12 @@ class OnboardingView extends BaseView<OnboardingController> {
         12.height,
         _buildButtonWidget(
           text: appLocalization.newStore,
-          onPressed: () {},
+          onPressed: () {
+            controller.pageController.nextPage(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeOut,
+            );
+          },
         ),
       ],
     );
@@ -154,7 +164,9 @@ class OnboardingView extends BaseView<OnboardingController> {
         12.height,
         _buildButtonWidget(
           text: appLocalization.setUp,
-          onPressed: () {},
+          onPressed: () {
+            controller.pageController.jumpTo(3);
+          },
           color: colors.secondaryColor500,
         ),
       ],
@@ -180,6 +192,24 @@ class OnboardingView extends BaseView<OnboardingController> {
         text,
         style: AppTextStyle.h3TextStyle600.copyWith(
           color: colors.whiteColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPageIndicator() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      child: SmoothPageIndicator(
+        controller: controller.pageController,
+        count: 3,
+        effect: WormEffect(
+          dotWidth: 12,
+          dotHeight: 4,
+          activeDotColor: colors.primaryColor500,
+          dotColor: colors.primaryColor100,
         ),
       ),
     );

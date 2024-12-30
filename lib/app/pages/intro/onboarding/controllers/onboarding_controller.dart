@@ -1,11 +1,16 @@
-import 'package:get/get.dart';
-  import '/app/core/base/base_controller.dart';
-  
+import 'package:sandra/app/core/importer.dart';
+
 class OnboardingController extends BaseController {
- @override
+  final pageController = PageController();
+
+  @override
   Future<void> onInit() async {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 }
-  
