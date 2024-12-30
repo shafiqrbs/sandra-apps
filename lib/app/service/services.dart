@@ -11,6 +11,7 @@ import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/sales_return.dart';
 import 'package:sandra/app/entity/stock_details.dart';
+import 'package:sandra/app/entity/store_setup.dart';
 import 'package:sandra/app/entity/sync_list.dart';
 import 'package:sandra/app/entity/system_overview_report.dart';
 import 'package:sandra/app/entity/user.dart';
@@ -42,7 +43,8 @@ class Services {
 
   final pref = SessionManager();
   final dio = RestClient(
-    baseUrl: 'http://www.terminalbd.com/flutter-api/',
+    baseUrl: 'http://www.capsulebd.com/flutter-api/',
+    //baseUrl: 'http://www.terminalbd.com/flutter-api/',
     token: '',
   );
 
@@ -1524,6 +1526,26 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> setupStore({
+    required StoreSetup logs,
+  }) async {
+    const endPoint = 'poskeeper-shop-setup';
+    try {
+      final response = await dio.post(
+        APIType.public,
+        endPoint,
+        logs.toJson(),
+        //query: logs.toJson(),
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as Map<String, dynamic>;
+      return responseData;
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return {};
     }
   }
 }
