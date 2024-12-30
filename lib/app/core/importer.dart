@@ -1,5 +1,6 @@
 export 'dart:async';
 
+export 'package:chewie/chewie.dart';
 export 'package:dropdown_flutter/custom_dropdown.dart';
 export 'package:flutter/foundation.dart' hide Category;
 export 'package:flutter/material.dart';
@@ -29,6 +30,8 @@ export 'package:sandra/app/core/widget/quick_navigation_button.dart';
 export 'package:sandra/app/core/widget/retry_view.dart';
 export 'package:sandra/app/routes/app_pages.dart';
 export 'package:sandra/app/service/services.dart';
+export 'package:video_player/video_player.dart';
+export 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 export '/app/core/base/base_controller.dart';
 export '/app/core/base/mixins/shorter_enum_mixin.dart';
