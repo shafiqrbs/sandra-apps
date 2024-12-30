@@ -420,7 +420,14 @@
   "refundList": "Refund List",
   "welcomeToPOSKeeper": "Welcome to POSKeeper",
   "createYourOnlineStore": "Create your online store",
-  "newStoreDetails" : "Want the same app for your store? Don’t have a store, To create your store click on “New Store”",
+  "newStoreDetails": "Want the same app for your store? Don’t have a store, To create your store click on “New Store”",
   "newStore": "New Store",
+  "shopCompanyName": "Shop/Company Name",
+  "businessModel": "Business Model",
+  "areYouInterestedToReadyStock": "Are you interested to ready stock?",
+  "iAcceptTermsAndConditions": "I accept terms and conditions",
+  "loginInformation": "Login Information",
+  "buildStore": "Build Store",
+  "skip": "Skip",
   "theme": "Theme"
 }

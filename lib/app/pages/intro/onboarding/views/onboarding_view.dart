@@ -2,6 +2,10 @@ import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/asset_image_view.dart';
 import 'package:sandra/app/global_widget/video_player_widget.dart';
+import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
+import 'package:sandra/app/pages/intro/create_store/views/create_store_view.dart';
+import 'package:sandra/app/pages/intro/license/controllers/license_controller.dart';
+import 'package:sandra/app/pages/intro/license/views/license_view.dart';
 import 'package:sandra/app/pages/intro/onboarding/controllers/onboarding_controller.dart';
 
 //ignore: must_be_immutable
@@ -14,35 +18,36 @@ class OnboardingView extends BaseView<OnboardingController> {
   }
 
   @override
+  Color pageBackgroundColor() {
+    return colors.primaryColor50;
+  }
+
+  @override
   Widget body(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.only(
-            bottom: 40,
-          ),
-          height: Get.height * 0.85,
-          child: PageView(
-            controller: controller.pageController,
-            children: [
-              _buildWelcomeView(),
-              Container(
-                color: Colors.green,
-                child: Center(
-                  child: Text('Page 2'),
-                ),
+    return ColoredBox(
+      color: colors.primaryColor50,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(
+                bottom: 40,
               ),
-              Container(
-                color: Colors.blue,
-                child: Center(
-                  child: Text('Page 3'),
-                ),
+              height: Get.height * 0.9,
+              color: colors.primaryColor50,
+              child: PageView(
+                controller: controller.pageController,
+                children: [
+                  _buildWelcomeView(),
+                  _buildCreateStoreView(),
+                  _buildLicenseView(),
+                ],
               ),
-            ],
-          ),
+            ),
+            _buildPageIndicator(),
+          ],
         ),
-        _buildPageIndicator(),
-      ],
+      ),
     );
   }
 
@@ -54,19 +59,31 @@ class OnboardingView extends BaseView<OnboardingController> {
       decoration: BoxDecoration(
         color: colors.primaryColor50,
       ),
-      child: Column(
-        children: [
-          20.height,
-          _buildWelcomeHeading(),
-          24.height,
-          _buildVideoSection(),
-          32.height,
-          _buildNewStoreSection(),
-          32.height,
-          _buildSetupSection(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            20.height,
+            _buildWelcomeHeading(),
+            24.height,
+            _buildVideoSection(),
+            32.height,
+            _buildNewStoreSection(),
+            32.height,
+            _buildSetupSection(),
+          ],
+        ),
       ),
     );
+  }
+
+  Widget _buildCreateStoreView() {
+    Get.put(CreateStoreController());
+    return CreateStoreView();
+  }
+
+  Widget _buildLicenseView() {
+    Get.put(LicenseController());
+    return LicenseView();
   }
 
   Widget _buildWelcomeHeading() {
@@ -165,7 +182,7 @@ class OnboardingView extends BaseView<OnboardingController> {
         _buildButtonWidget(
           text: appLocalization.setUp,
           onPressed: () {
-            controller.pageController.jumpTo(3);
+            controller.pageController.jumpTo(1);
           },
           color: colors.secondaryColor500,
         ),
@@ -178,20 +195,23 @@ class OnboardingView extends BaseView<OnboardingController> {
     required Function() onPressed,
     Color? color,
   }) {
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      decoration: BoxDecoration(
-        color: color ?? colors.primaryColor500,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        text,
-        style: AppTextStyle.h3TextStyle600.copyWith(
-          color: colors.whiteColor,
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: double.infinity,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: color ?? colors.primaryColor500,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text(
+          text,
+          style: AppTextStyle.h3TextStyle600.copyWith(
+            color: colors.whiteColor,
+          ),
         ),
       ),
     );
