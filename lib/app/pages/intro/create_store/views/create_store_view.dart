@@ -22,21 +22,27 @@ class CreateStoreView extends BaseView<CreateStoreController> {
       decoration: BoxDecoration(
         color: colors.primaryColor50,
       ),
-      child: SingleChildScrollView(
-        child: Form(
-          key: controller.formKey,
-          child: Column(
-            children: [
-              20.height,
-              _buildWelcomeHeading(),
-              24.height,
-              _buildCreateStoreForm(),
-              24.height,
-              _buildLoginInfoForm(),
-              24.height,
-              _buildButtons(),
-            ],
-          ),
+      child: Form(
+        key: controller.formKey,
+        child: Column(
+          children: [
+            20.height,
+            _buildWelcomeHeading(),
+            24.height,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildCreateStoreForm(),
+                    24.height,
+                    _buildLoginInfoForm(),
+                  ],
+                ),
+              ),
+            ),
+            24.height,
+            _buildButtons(),
+          ],
         ),
       ),
     );
