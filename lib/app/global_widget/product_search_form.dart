@@ -1,8 +1,6 @@
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/core_model/voice_recognition.dart';
-import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/entity/stock.dart';
 
@@ -183,7 +181,7 @@ class ProductSearchForm extends StatelessWidget {
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            "P.P. ${selectedStock?.purchasePrice ?? ''} pc",
+                            "P.P. ${isRoleManager ? selectedStock?.purchasePrice ?? '' : ''}",
                             style: TextStyle(
                               fontSize: smallTFSize,
                               color: colors.solidBlackColor,
