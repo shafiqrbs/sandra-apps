@@ -4,7 +4,7 @@ import 'package:sandra/app/global_modal/add_customer_modal/add_customer_modal_vi
 import 'package:sandra/app/pages/domain/customer/customer_list/controllers/customer_list_controller.dart';
 import 'package:sandra/app/pdf_views/sales_purchase_pdf_function.dart';
 
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/customer_ledger.dart';
 import '/app/entity/sales.dart';

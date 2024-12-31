@@ -1,8 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
+
 import '/app/core/utils/style_function.dart';
-import '/app/core/widget/quick_navigation_button.dart';
 
 enum SnackBarType {
   success,

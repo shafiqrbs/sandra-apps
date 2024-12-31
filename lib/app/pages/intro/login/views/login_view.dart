@@ -1,5 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '/app/core/core_model/setup.dart';

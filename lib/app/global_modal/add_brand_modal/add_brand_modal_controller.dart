@@ -1,5 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/brand.dart';
 
 class AddBrandModalController extends BaseController {

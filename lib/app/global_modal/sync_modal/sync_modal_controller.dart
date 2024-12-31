@@ -5,7 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/setup.dart';
 import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/sales.dart';
 import '/app/pages/inventory/purchase/purchase_list/controllers/purchase_list_controller.dart';
 import '/app/pages/inventory/sales/sales_list/controllers/sales_list_controller.dart';

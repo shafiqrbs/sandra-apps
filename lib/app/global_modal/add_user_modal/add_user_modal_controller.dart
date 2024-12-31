@@ -1,7 +1,7 @@
 import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/base/base_controller.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/user.dart';
 
 class AddUserModalController extends BaseController {

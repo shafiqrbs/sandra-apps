@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/user.dart';
 import 'package:sandra/app/global_modal/add_user_modal/add_user_modal_view.dart';
 import '/app/core/base/base_controller.dart';

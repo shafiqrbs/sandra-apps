@@ -4,7 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/core_model/logged_user.dart';
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/purchase_item.dart';
 import '/app/entity/transaction_methods.dart';

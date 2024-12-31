@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '/app/core/base/base_controller.dart';
 import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/expense_category.dart';
 import '/app/entity/transaction_methods.dart';
 import '/app/entity/user.dart';

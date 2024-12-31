@@ -1,6 +1,6 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/core/widget/tbd_text_button.dart';
 import 'package:sandra/app/global_modal/add_expense_modal/add_expense_view.dart';
 

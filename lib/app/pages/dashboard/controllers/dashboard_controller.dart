@@ -1,7 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';

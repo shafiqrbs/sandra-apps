@@ -1,6 +1,6 @@
 import 'package:sandra/app/core/abstract_controller/printer_controller.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/purchase.dart';
 import 'package:sandra/app/global_modal/add_vendor_modal/add_vendor_modal_view.dart';
 import 'package:sandra/app/global_modal/purchase_information_modal/purchase_information_view.dart';

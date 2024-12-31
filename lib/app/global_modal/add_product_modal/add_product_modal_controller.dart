@@ -6,7 +6,7 @@ import 'package:sandra/app/bindings/initial_binding.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 
 import '/app/core/base/base_controller.dart';
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/brand.dart';
 import '/app/entity/category.dart';
 import '/app/entity/stock.dart';

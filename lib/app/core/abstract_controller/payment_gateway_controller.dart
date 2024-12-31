@@ -1,6 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
 import 'package:get/get.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/entity/customer.dart';

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/customer.dart';
 import 'package:sandra/app/entity/customer_ledger.dart';
 import 'package:sandra/app/entity/vendor.dart';

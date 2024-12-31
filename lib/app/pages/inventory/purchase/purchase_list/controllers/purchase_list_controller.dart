@@ -1,6 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
 
-import '/app/core/widget/show_snackbar.dart';
+import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/purchase.dart';
 import '/app/entity/tab_bar_items.dart';
 import '/app/entity/vendor.dart';

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import '/app/core/utils/static_utility_function.dart';
 import '/app/core/widget/dialog_pattern.dart';
 import '/app/global_modal/add_customer_modal/add_customer_modal_view.dart';
