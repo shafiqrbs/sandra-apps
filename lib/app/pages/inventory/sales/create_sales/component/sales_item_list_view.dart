@@ -1,13 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/app/core/widget/common_text.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/base/base_widget.dart';
 import '/app/core/core_model/setup.dart';
-import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/utils/style_function.dart';
 import '/app/entity/sales_item.dart';
 
@@ -17,6 +12,7 @@ class SalesItemListView extends BaseWidget {
   final Function(num onQtyChange, int index) onQtyChange;
   final Function(num onQtyChange, int index) onDiscountChange;
   final Function(num onSalesPriceChange, int index) onSalesPriceChange;
+
   SalesItemListView({
     required this.salesItems,
     required this.onItemRemove,
@@ -140,7 +136,7 @@ class SalesItemListView extends BaseWidget {
                           ),
                           Expanded(
                             child: Text(
-                              'PP: ${element.purchasePrice}' ?? '',
+                              'PP:  ${isRoleManager ? element.purchasePrice ?? '' : ''}',
                               textAlign: TextAlign.left,
                               style: const TextStyle(
                                 fontSize: 12,
@@ -421,8 +417,8 @@ class SalesItemListView extends BaseWidget {
                                     ),
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.zero,
-                                      hintText: appLocalization
-                                          .subTotal, // Optional hint text
+                                      hintText: appLocalization.subTotal,
+                                      // Optional hint text
                                       border: InputBorder.none,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
