@@ -1,6 +1,9 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/singleton_classes/fb_typography.dart';
+import 'package:sandra/app/core/values/drop_down_decoration.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/fb_string.dart';
+import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
 import 'package:sandra/app/pages/intro/onboarding/controllers/onboarding_controller.dart';
 
@@ -78,6 +81,66 @@ class CreateStoreView extends BaseView<CreateStoreController> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
+                Obx(
+                  () => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        appLocalization.businessModel,
+                        style: FBTypography().tfLabelTS,
+                        maxLines: 1,
+                      ),
+                      4.height,
+                      DropdownFlutter<BusinessType>.search(
+                        hintText: appLocalization.businessModel,
+                        items: controller.businessTypeList.value,
+                        onChanged: controller.onBusinessTypeChange,
+                        overlayHeight: 500,
+                        listItemBuilder: (context, value, ___, option) {
+                          return Text(
+                            value.name ?? '',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          );
+                        },
+                        headerBuilder: (context, value, option) {
+                          return Text(
+                            value.name ?? '',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          );
+                        },
+                        hintBuilder: (context, value, option) {
+                          return Text(
+                            value,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF989898),
+                            ),
+                          );
+                        },
+                        decoration: dropDownDecoration,
+                        itemsListPadding: EdgeInsets.zero,
+                        closedHeaderPadding: const EdgeInsets.all(8),
+                      ),
+                      controller.isShowErrorMsg.value
+                          ? Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                appLocalization.requiredField,
+                                style: FBTypography().tfErrorMsgTS,
+                              ),
+                            )
+                          : Container(),
+                      controller.isShowErrorMsg.value ? 0.height : 12.height,
+                    ],
+                  ),
+                ),
                 FBString(
                   textController: controller.shopNameController,
                   isRequired: true,

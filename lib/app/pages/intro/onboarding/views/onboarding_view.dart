@@ -182,7 +182,7 @@ class OnboardingView extends BaseView<OnboardingController> {
         _buildButtonWidget(
           text: appLocalization.setUp,
           onPressed: () {
-            controller.pageController.jumpTo(1);
+            controller.pageController.jumpToBottom();
           },
           color: colors.secondaryColor500,
         ),

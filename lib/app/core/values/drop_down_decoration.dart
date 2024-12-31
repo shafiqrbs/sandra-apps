@@ -1,4 +1,3 @@
-import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:sandra/app/core/importer.dart';
 
 final dropDownDecoration = CustomDropdownDecoration(
@@ -45,10 +44,14 @@ final dropDownDecoration = CustomDropdownDecoration(
     highlightColor: Colors.grey[800],
   ),
   closedBorder: Border.all(
-    color: Colors.grey,
+    color: const Color(0xFFE3E0E0),
     width: 1,
   ),
   closedBorderRadius: const BorderRadius.all(
     Radius.circular(4),
+  ),
+  errorStyle: const TextStyle(
+    color: Colors.red,
+    fontSize: 12,
   ),
 );

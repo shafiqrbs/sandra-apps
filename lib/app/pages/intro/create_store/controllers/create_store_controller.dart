@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/store_setup.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -7,7 +9,8 @@ import '/app/core/base/base_controller.dart';
 class CreateStoreController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
-  final selectedBusinessType = '';
+  final businessTypeList = Rx<List<BusinessType>?>(null);
+  final selectedBusinessType = Rx<BusinessType?>(null);
   final shopNameController = TextEditingController(text: '');
   final mobileController = TextEditingController(text: '');
   final emailController = TextEditingController(text: '');
@@ -19,20 +22,30 @@ class CreateStoreController extends BaseController {
 
   final isAllowReadyStock = false.obs;
   final isAllowTerms = false.obs;
+  final isShowErrorMsg = false.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    await dataFetcher(future: getBusinessTypeList);
+  }
+
+  Future<void> getBusinessTypeList() async {
+    final response = await services.getBusinessTypeList();
+    businessTypeList.value = response;
   }
 
   Future<void> buildStore() async {
-    if (!formKey.currentState!.validate()) {
+    if (!formKey.currentState!.validate() ||
+        selectedBusinessType.value == null) {
+      isShowErrorMsg.value = true;
       return;
     }
+    isShowErrorMsg.value = false;
 
     // API call to create shop
     final logs = StoreSetup(
-      appSlug: 'medicine',
+      appSlug: selectedBusinessType.value?.appSlug,
       storeName: shopNameController.text,
       mobile: mobileController.text,
       email: emailController.text,
@@ -43,7 +56,23 @@ class CreateStoreController extends BaseController {
       isStock: isAllowReadyStock.value ? 1 : 0,
       termsCondition: isAllowTerms.value ? 1 : 0,
     );
-    final response = await services.setupStore(logs: logs);
-    print('Response: $response');
+
+    await dataFetcher(
+      future: () async {
+        final response = await services.setupStore(logs: logs);
+        if (kDebugMode) {
+          print('Response: $response');
+        }
+      },
+    );
+  }
+
+  Future<void> onBusinessTypeChange(BusinessType? value) async {
+    if (value == null) {
+      isShowErrorMsg.value = true;
+      return;
+    }
+    isShowErrorMsg.value = false;
+    selectedBusinessType.value = value;
   }
 }

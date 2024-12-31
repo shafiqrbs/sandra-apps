@@ -6,6 +6,7 @@ import 'package:sandra/app/core/db_helper/db_helper.dart';
 import 'package:sandra/app/core/db_helper/db_tables.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/brand.dart';
+import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/entity/financial_data.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
@@ -1546,6 +1547,25 @@ class Services {
     } catch (e, s) {
       printError(e, s, endPoint);
       return {};
+    }
+  }
+
+  Future<List<BusinessType>?> getBusinessTypeList() async {
+    const endPoint = 'poskeeper-apps';
+    try {
+      final response = await dio.get(
+        APIType.public,
+        endPoint,
+        headers: _buildHeader(),
+      );
+      final responseData = response.data as List;
+      return parseList(
+        list: responseData,
+        fromJson: BusinessType.fromJson,
+      );
+    } catch (e, s) {
+      printError(e, s, endPoint);
+      return null;
     }
   }
 }
