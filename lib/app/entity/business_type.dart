@@ -28,7 +28,7 @@ class BusinessType with CustomDropdownListFilter {
       title: json['title'],
       licenseNo: json['license_no'],
       activeKey: json['active_key'],
-      userName: json['user_name'],
+      userName: json['username'],
       password: json['password'],
       content: json['content'],
     );
@@ -41,7 +41,7 @@ class BusinessType with CustomDropdownListFilter {
       'title': title,
       'license_no': licenseNo,
       'active_key': activeKey,
-      'user_name': userName,
+      'username': userName,
       'password': password,
       'content': content,
     };

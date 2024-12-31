@@ -1,4 +1,6 @@
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/global_modal/view_demo_modal/view_demo_modal_controller.dart';
 
 class ViewDemoModalView extends BaseView<ViewDemoModalController> {
@@ -12,19 +14,114 @@ class ViewDemoModalView extends BaseView<ViewDemoModalController> {
       init: ViewDemoModalController(),
       builder: (controller) {
         return Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(falsePadding.value),
-              decoration: BoxDecoration(
-                color: colors.whiteColor,
-              ),
+          child: Container(
+            height: Get.height * 0.7,
+            padding: EdgeInsets.all(falsePadding.value),
+            decoration: BoxDecoration(
+              color: colors.whiteColor,
+            ),
+            child: SingleChildScrollView(
+              physics: const ScrollPhysics(),
               child: Column(
-                children: [],
+                children: [
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: controller.businessTypeList.value?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      final item = controller.businessTypeList.value![index];
+                      return _buildDemoCardView(
+                        name: item.name ?? '',
+                        title: item.title ?? '',
+                        subTitle: item.content ?? '',
+                        onTap: () {
+                          controller.navigateToDemo(item);
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildDemoCardView({
+    required String name,
+    required String title,
+    required String subTitle,
+    required Function() onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(
+          bottom: 8,
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: Get.width,
+              margin: const EdgeInsets.only(
+                right: 16,
+              ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 10,
+              ),
+              decoration: BoxDecoration(
+                color: colors.primaryColor50,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: AppTextStyle.h1TextStyle500.copyWith(
+                      color: colors.secondaryColor500,
+                    ),
+                  ),
+                  Text(
+                    title,
+                    style: AppTextStyle.h4TextStyle400.copyWith(
+                      color: colors.secondaryColor400,
+                    ),
+                  ),
+                  4.height,
+                  HtmlWidget(
+                    subTitle,
+                    textStyle: AppTextStyle.h4TextStyle400.copyWith(
+                      color: colors.secondaryColor400,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 0,
+              child: Container(
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(
+                  color: colors.primaryColor600,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  TablerIcons.arrow_right,
+                  color: colors.whiteColor,
+                  size: 20,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
