@@ -296,7 +296,7 @@ class DashboardController extends BaseController {
   final selectedTab = SelectedTab.dashboard.obs;
   final selectedButtonGroup = SelectedButtonGroup.inventory.obs;
   final showOnlineController = ValueNotifier<bool>(false).obs;
-  final isOnline = false.obs;
+  final isOnline = ValueNotifier(false);
 
   List<Widget> dashboardButtonList = [];
 
@@ -307,11 +307,15 @@ class DashboardController extends BaseController {
     super.onInit();
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsDashboardOnline();
-    if (isOnline.value) {
+    await setSalesAndPurchaseOnline(isOnline.value);
+    /*if (isOnline.value) {
+      await prefs.setIsSalesOnline(
+        isSalesOnline: true,
+      );
       await fetchOnlineFinancialData();
     } else {
       await fetchOfflineFinancialData();
-    }
+    }*/
   }
 
   Future<void> fetchOnlineFinancialData() async {
@@ -403,6 +407,24 @@ class DashboardController extends BaseController {
     financialData.value = FinancialData.fromJson(
       data,
     );
+  }
+
+  Future<void> setSalesAndPurchaseOnline(bool value) async {
+    isOnline.value = value;
+    await prefs.setIsDashboardOnline(
+      isDashboardOnline: value,
+    );
+    await prefs.setIsSalesOnline(
+      isSalesOnline: value,
+    );
+    await prefs.setIsPurchaseOnline(
+      isPurchaseOnline: value,
+    );
+    if (value) {
+      await fetchOnlineFinancialData();
+    } else {
+      await fetchOfflineFinancialData();
+    }
   }
 
   void goToSales() {
@@ -615,11 +637,18 @@ class DashboardController extends BaseController {
 
   Future<void> mobileOnTap() async {}
 
-  Future<void> onTapIsOnline() async {
-    isOnline.value = !isOnline.value;
+  Future<void> onTapIsOnline(bool value) async {
+    //isOnline.value = !isOnline.value;
+    isOnline.value = value;
     update();
     await prefs.setIsDashboardOnline(
       isDashboardOnline: isOnline.value,
+    );
+    await prefs.setIsSalesOnline(
+      isSalesOnline: isOnline.value,
+    );
+    await prefs.setIsPurchaseOnline(
+      isPurchaseOnline: isOnline.value,
     );
     if (isOnline.value) {
       await fetchOnlineFinancialData();

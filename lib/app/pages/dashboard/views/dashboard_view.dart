@@ -1,3 +1,4 @@
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/app_values.dart';
@@ -132,11 +133,22 @@ class DashboardView extends BaseView<DashboardController> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Obx(
-            () => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AdvancedSwitch(
+                controller: controller.isOnline,
+                onChanged: (value) async {
+                  controller.onTapIsOnline(value);
+                },
+                borderRadius: BorderRadius.circular(4),
+                height: 20,
+                width: 40,
+                activeColor: colors.primaryColor700,
+                inactiveColor: colors.secondaryColor100,
+                initialValue: controller.isOnline.value,
+              ),
+              /*GestureDetector(
                   onTap: controller.onTapIsOnline,
                   child: Container(
                     height: 20,
@@ -158,68 +170,67 @@ class DashboardView extends BaseView<DashboardController> {
                       ),
                     ),
                   ),
-                ),
-                16.width,
-                controller.isManager
-                    ? GestureDetector(
-                        onTap: controller.goToReportList,
-                        child: Icon(
-                          TablerIcons.report,
-                          color: colors.whiteColor,
-                          size: 20,
-                        ),
-                      )
-                    : Container(),
-                controller.isManager ? 16.width : Container(),
+                ),*/
+              16.width,
+              controller.isManager
+                  ? GestureDetector(
+                      onTap: controller.goToReportList,
+                      child: Icon(
+                        TablerIcons.report,
+                        color: colors.whiteColor,
+                        size: 20,
+                      ),
+                    )
+                  : Container(),
+              controller.isManager ? 16.width : Container(),
 
-                InkWell(
-                  onTap: controller.changeThemeMode,
-                  child: Icon(
-                    Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
-                    color: colors.whiteColor,
+              InkWell(
+                onTap: controller.changeThemeMode,
+                child: Icon(
+                  Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
+                  color: colors.whiteColor,
+                  size: 20,
+                ),
+              ),
+              16.width,
+              Container(
+                margin: const EdgeInsets.only(right: 12),
+                child: SuperTooltip(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GestureDetector(
+                        onTap: controller.logOut,
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: colors.solidBlackColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  arrowTipDistance: 10,
+                  arrowLength: 8,
+                  arrowBaseWidth: 8,
+                  //right: -16,
+                  hideTooltipOnTap: true,
+                  //elevation: 0,
+                  hasShadow: false,
+                  backgroundColor: Colors.white,
+                  borderRadius: 4,
+                  barrierColor: Colors.transparent,
+                  child: const Icon(
+                    TablerIcons.dots_vertical,
+                    color: Colors.white,
                     size: 20,
                   ),
                 ),
-                16.width,
-                Container(
-                  margin: const EdgeInsets.only(right: 12),
-                  child: SuperTooltip(
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        GestureDetector(
-                          onTap: controller.logOut,
-                          child: Text(
-                            'Logout',
-                            style: TextStyle(
-                              color: colors.solidBlackColor,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    arrowTipDistance: 10,
-                    arrowLength: 8,
-                    arrowBaseWidth: 8,
-                    //right: -16,
-                    hideTooltipOnTap: true,
-                    //elevation: 0,
-                    hasShadow: false,
-                    backgroundColor: Colors.white,
-                    borderRadius: 4,
-                    barrierColor: Colors.transparent,
-                    child: const Icon(
-                      TablerIcons.dots_vertical,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
+              ),
 
-                // GlobalThreeDotMenu(isAddOption: false,)
-              ],
-            ),
+              // GlobalThreeDotMenu(isAddOption: false,)
+            ],
           ),
         ],
       ),
