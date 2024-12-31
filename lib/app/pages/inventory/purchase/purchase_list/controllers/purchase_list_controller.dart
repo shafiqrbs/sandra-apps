@@ -330,11 +330,26 @@ class PurchaseListController extends BaseController {
 
     bool? isPurchaseSynced;
 
+    final purchaseData = await dbHelper.getLocalPurchaseFinancialData();
+
+    final totalPurchase = purchaseData.isEmpty
+        ? 0
+        : purchaseData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalPurchaseReceived = purchaseData.isEmpty
+        ? 0
+        : purchaseData.map((e) => e['received']).reduce((a, b) => a + b);
+
+    if (kDebugMode) {
+      print('Purchase Data: $purchaseData');
+    }
+
     await dataFetcher(
       future: () async {
         isPurchaseSynced = await services.postPurchase(
           purchaseList: purchaseList,
           mode: 'offline',
+          total: totalPurchase,
+          amount: totalPurchaseReceived,
         );
       },
     );

@@ -1,23 +1,12 @@
-import 'dart:async';
-
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/importer.dart';
 
-import '/app/core/base/base_controller.dart';
-import '/app/core/core_model/page_state.dart';
-import '/app/core/utils/static_utility_function.dart';
-import '/app/core/widget/dialog_pattern.dart';
-import '/app/core/widget/quick_navigation_button.dart';
 import '/app/core/widget/show_snackbar.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/tab_bar_items.dart';
 import '/app/global_modal/global_filter_modal_view/global_filter_modal_view.dart';
 import '/app/global_modal/sales_information_modal/sales_information_modal_view.dart';
-import '/app/routes/app_pages.dart';
 
 enum SalesListPageTabs {
   local,
@@ -214,7 +203,7 @@ class SalesListController extends BaseController {
     final result = await Get.dialog(
       DialogPattern(
         title: appLocalization.salesDetails,
-        subTitle: element.customerName??'',
+        subTitle: element.customerName ?? '',
         child: SalesInformationModalView(
           sales: element,
           salesMode: tabPages[selectedIndex.value].slug,
@@ -351,11 +340,26 @@ class SalesListController extends BaseController {
 
     bool? isSalesSynced;
 
+    final salesData = await dbHelper.getLocalSalesFinancialData();
+
+    final totalSales = salesData.isEmpty
+        ? 0
+        : salesData.map((e) => e['total']).reduce((a, b) => a + b);
+    final totalSalesReceived = salesData.isEmpty
+        ? 0
+        : salesData.map((e) => e['received']).reduce((a, b) => a + b) ?? 0;
+
+    if (kDebugMode) {
+      print('Sales Data: $salesData');
+    }
+
     await dataFetcher(
       future: () async {
         isSalesSynced = await services.postSales(
           salesList: salesList,
           mode: 'offline',
+          total: totalSales,
+          amount: totalSalesReceived,
         );
       },
     );

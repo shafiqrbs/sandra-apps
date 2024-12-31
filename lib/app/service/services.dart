@@ -537,6 +537,8 @@ class Services {
   Future<bool> postSales({
     required List salesList,
     required String mode,
+    num? total,
+    num? amount,
   }) async {
     try {
       final autoApprove = await pref.getIsSalesAutoApprove();
@@ -550,6 +552,8 @@ class Services {
           'approved_by': autoApprove ? LoggedUser().userId : '',
           'process': 'sales',
           'user_id': LoggedUser().userId,
+          'total': total ?? 0,
+          'amount': amount ?? 0,
         },
         headers: _buildHeader(),
       );
@@ -596,6 +600,8 @@ class Services {
   Future<bool> postPurchase({
     required List purchaseList,
     required String mode,
+    int? total,
+    int? amount,
   }) async {
     try {
       final autoApprove = await pref.getIsPurchaseAutoApprove();
@@ -608,6 +614,9 @@ class Services {
           'is_approve': autoApprove ? '1' : '0',
           'approved_by': autoApprove ? LoggedUser().userId : '',
           'process': 'purchase',
+          'user_id': LoggedUser().userId,
+          'total': total ?? 0,
+          'amount': amount ?? 0,
         },
         headers: _buildHeader(),
       );
