@@ -600,8 +600,8 @@ class Services {
   Future<bool> postPurchase({
     required List purchaseList,
     required String mode,
-    int? total,
-    int? amount,
+    num? total,
+    num? amount,
   }) async {
     try {
       final autoApprove = await pref.getIsPurchaseAutoApprove();
