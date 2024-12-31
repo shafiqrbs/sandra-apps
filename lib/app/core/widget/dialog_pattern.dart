@@ -1,5 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+
 import '/app/core/base/base_widget.dart';
 
 class DialogPattern extends BaseWidget {
@@ -7,6 +7,7 @@ class DialogPattern extends BaseWidget {
   final String subTitle;
   TextStyle? subTitleStyle;
   final Widget child;
+
   DialogPattern({
     required this.title,
     required this.subTitle,
@@ -84,10 +85,11 @@ class DialogPattern extends BaseWidget {
                                 child: Text(
                                   subTitle,
                                   textAlign: TextAlign.left,
-                                  style: subTitleStyle ?? TextStyle(
-                                    fontSize: subHeaderTFSize,
-                                    color: colors.primaryBlackColor,
-                                  ),
+                                  style: subTitleStyle ??
+                                      TextStyle(
+                                        fontSize: subHeaderTFSize,
+                                        color: colors.primaryBlackColor,
+                                      ),
                                 ),
                               ),
                             ],
@@ -129,7 +131,7 @@ class DialogPattern extends BaseWidget {
                   padding: const EdgeInsets.all(8),
                   child: CircleAvatar(
                     child: ClipOval(
-                      child: Image.asset('assets/images/app_logo.png'),
+                      child: Image.asset('assets/images/onboarding_logo.png'),
                     ),
                   ),
                   //child: CircleAvatar(backgroundImage: AssetImage('assets/images/logo.png'), ),

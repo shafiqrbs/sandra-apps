@@ -38,7 +38,7 @@ class OnboardingView extends BaseView<OnboardingController> {
               child: PageView(
                 controller: controller.pageController,
                 children: [
-                  _buildWelcomeView(),
+                  _buildWelcomeView(context),
                   _buildCreateStoreView(),
                   _buildLicenseView(),
                 ],
@@ -51,7 +51,7 @@ class OnboardingView extends BaseView<OnboardingController> {
     );
   }
 
-  Widget _buildWelcomeView() {
+  Widget _buildWelcomeView(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -66,10 +66,12 @@ class OnboardingView extends BaseView<OnboardingController> {
             _buildWelcomeHeading(),
             24.height,
             _buildVideoSection(),
-            32.height,
+            20.height,
             _buildNewStoreSection(),
-            32.height,
+            20.height,
             _buildSetupSection(),
+            20.height,
+            _buildViewDemoButton(context),
           ],
         ),
       ),
@@ -190,10 +192,49 @@ class OnboardingView extends BaseView<OnboardingController> {
     );
   }
 
+  Widget _buildViewDemoButton(BuildContext context) {
+    return InkWell(
+      onTap: () => controller.viewDemoModal(context),
+      child: Container(
+        width: double.infinity,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: colors.whiteColor,
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(
+            color: colors.primaryColor500,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              TablerIcons.eye,
+              size: 20,
+              color: colors.primaryColor500,
+            ),
+            4.width,
+            Text(
+              appLocalization.viewDemo,
+              style: AppTextStyle.h3TextStyle600.copyWith(
+                color: colors.primaryColor500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildButtonWidget({
     required String text,
     required Function() onPressed,
     Color? color,
+    Color? borderColor,
+    Color? textColor,
   }) {
     return InkWell(
       onTap: onPressed,
@@ -206,11 +247,16 @@ class OnboardingView extends BaseView<OnboardingController> {
         decoration: BoxDecoration(
           color: color ?? colors.primaryColor500,
           borderRadius: BorderRadius.circular(4),
+          border: borderColor != null
+              ? Border.all(
+                  color: borderColor,
+                )
+              : null,
         ),
         child: Text(
           text,
           style: AppTextStyle.h3TextStyle600.copyWith(
-            color: colors.whiteColor,
+            color: textColor ?? colors.whiteColor,
           ),
         ),
       ),

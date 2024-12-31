@@ -1,4 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/global_modal/view_demo_modal/view_demo_modal_view.dart';
 
 class OnboardingController extends BaseController {
   final pageController = PageController();
@@ -12,5 +13,18 @@ class OnboardingController extends BaseController {
   void dispose() {
     pageController.dispose();
     super.dispose();
+  }
+
+  Future<void> viewDemoModal(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogPattern(
+          title: appLocalization.viewDemo,
+          subTitle: '',
+          child: ViewDemoModalView(),
+        );
+      },
+    );
   }
 }
