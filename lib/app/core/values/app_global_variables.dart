@@ -1,7 +1,7 @@
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/importer.dart';
 
-bool get isManager => LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
+bool get isRoleManager => LoggedUser().roles?.contains('ROLE_MANAGER') ?? false;
 
 bool get isRoleSetting => LoggedUser().roles?.contains('ROLE_SETTING') ?? false;
 

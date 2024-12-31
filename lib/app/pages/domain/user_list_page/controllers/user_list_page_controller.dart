@@ -53,7 +53,7 @@ class UserListPageController extends BaseController {
   }
 
   Future<void> addUser() async {
-    if (!isManager) {
+    if (!isRoleManager) {
       showSnackBar(
         title: appLocalization.alert,
         message: appLocalization.permissionDenied,

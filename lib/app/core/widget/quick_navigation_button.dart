@@ -71,7 +71,7 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.salesReturn,
       bgColor: colorList.value['navyBlue'],
-      permission: isManager,
+      permission: isRoleManager,
     ),
     TbdRoundButton(
       icon: TablerIcons.users_group,
@@ -99,7 +99,7 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.purchaseReturn,
       bgColor: colorList.value['red'],
-      permission: isManager,
+      permission: isRoleManager,
     ),
   ];
 
@@ -165,7 +165,7 @@ class QuickNavigationButton extends BaseWidget {
       },
       localeMethod: () => appLocalization.journal,
       bgColor: colorList.value['red'],
-      permission: isManager,
+      permission: isRoleManager,
     ),
   ];
 
@@ -180,7 +180,7 @@ class QuickNavigationButton extends BaseWidget {
     TbdRoundButton(
       icon: TablerIcons.database_cog,
       onTap: () {
-        if (!isManager) {
+        if (!isRoleManager) {
           showSnackBar(
             type: SnackBarType.warning,
             title: appLocalization.alert,
@@ -203,7 +203,7 @@ class QuickNavigationButton extends BaseWidget {
     TbdRoundButton(
       icon: TablerIcons.rotate_rectangle,
       onTap: () {
-        if (!isManager) {
+        if (!isRoleManager) {
           showSnackBar(
             type: SnackBarType.warning,
             title: appLocalization.alert,
@@ -249,7 +249,7 @@ class QuickNavigationButton extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     quickNavigationButtonList = accountingButtonList;
-    if (!isManager) {
+    if (!isRoleManager) {
       return const SizedBox();
     }
     return GestureDetector(

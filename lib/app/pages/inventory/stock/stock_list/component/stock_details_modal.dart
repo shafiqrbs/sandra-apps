@@ -266,7 +266,7 @@ class StockDetailsModal extends BaseWidget {
           ),
           12.height,
           Visibility(
-            visible: isManager,
+            visible: isRoleManager,
             child: Row(
               children: [
                 Expanded(

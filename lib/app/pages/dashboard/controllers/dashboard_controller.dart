@@ -72,7 +72,7 @@ List<Widget> inventoryButtonList = [
     onTap: () => navigatePage(Routes.salesReturnListPage),
     localeMethod: () => appLocalization.salesReturn,
     bgColor: colorList.value['navyBlue'],
-    permission: isManager,
+    permission: isRoleManager,
   ),
   TbdRoundButton(
     icon: TablerIcons.users_group,
@@ -100,7 +100,7 @@ List<Widget> inventoryButtonList = [
     },
     localeMethod: () => appLocalization.purchaseReturn,
     bgColor: colorList.value['red'],
-    permission: isManager,
+    permission: isRoleManager,
   ),
   TbdRoundButton(
     text: appLocalization.brand,
@@ -181,7 +181,7 @@ List<Widget> accountingButtonList = [
     },
     localeMethod: () => appLocalization.journal,
     bgColor: colorList.value['red'],
-    permission: isManager,
+    permission: isRoleManager,
   ),
 ];
 
@@ -244,7 +244,7 @@ List<Widget> configButtonList = [
     },
     localeMethod: () => appLocalization.inventory,
     bgColor: colorList.value['navyBlue'],
-    permission: isManager,
+    permission: isRoleManager,
   ),
   TbdRoundButton(
     icon: TablerIcons.rotate_rectangle,
@@ -273,7 +273,7 @@ List<Widget> configButtonList = [
     onTap: () => navigatePage(Routes.userListPage),
     localeMethod: () => appLocalization.user,
     bgColor: colorList.value['marun'],
-    permission: isManager,
+    permission: isRoleManager,
   ),
   TbdRoundButton(
     icon: TablerIcons.printer,

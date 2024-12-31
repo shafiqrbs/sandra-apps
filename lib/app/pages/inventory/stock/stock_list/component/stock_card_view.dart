@@ -2,7 +2,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/base/base_widget.dart';
-import '/app/core/widget/label_value.dart';
 import '/app/entity/stock.dart';
 
 final labelValue = LabelValue(
@@ -154,12 +153,13 @@ class StockCardView extends BaseWidget {
                           value: element.quantity.toString(),
                         ),
                       ),
-                      Expanded(
-                        child: labelValue.copyWith(
-                          label: appLocalization.purchase,
-                          value: element.purchasePrice.toString(),
+                      if (isRoleManager)
+                        Expanded(
+                          child: labelValue.copyWith(
+                            label: appLocalization.purchase,
+                            value: element.purchasePrice.toString(),
+                          ),
                         ),
-                      ),
                       Expanded(
                         child: labelValue.copyWith(
                           label: appLocalization.mrp,
