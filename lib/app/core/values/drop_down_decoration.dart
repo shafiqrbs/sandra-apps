@@ -44,14 +44,10 @@ final dropDownDecoration = CustomDropdownDecoration(
     highlightColor: Colors.grey[800],
   ),
   closedBorder: Border.all(
-    color: const Color(0xFFE3E0E0),
+    color: Colors.grey,
     width: 1,
   ),
   closedBorderRadius: const BorderRadius.all(
     Radius.circular(4),
-  ),
-  errorStyle: const TextStyle(
-    color: Colors.red,
-    fontSize: 12,
   ),
 );

@@ -1,6 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/singleton_classes/fb_typography.dart';
-import 'package:sandra/app/core/values/drop_down_decoration.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/fb_string.dart';
 import 'package:sandra/app/entity/business_type.dart';
@@ -91,7 +90,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                         maxLines: 1,
                       ),
                       4.height,
-                      DropdownFlutter<BusinessType>.search(
+                      DropdownFlutter<BusinessType>(
                         hintText: appLocalization.businessModel,
                         items: controller.businessTypeList.value,
                         onChanged: controller.onBusinessTypeChange,
@@ -124,7 +123,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                             ),
                           );
                         },
-                        decoration: dropDownDecoration,
+                        decoration: controller.dropDownDecoration,
                         itemsListPadding: EdgeInsets.zero,
                         closedHeaderPadding: const EdgeInsets.all(8),
                       ),
