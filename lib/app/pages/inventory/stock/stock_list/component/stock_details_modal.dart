@@ -1,7 +1,5 @@
 import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:sandra/app/core/utils/test_functions.dart';
-import 'package:sandra/app/core/values/app_global_variables.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 import 'package:sandra/app/global_modal/add_product_modal/add_product_modal_view.dart';
@@ -92,8 +90,9 @@ class StockDetailsModal extends BaseWidget {
                     labelFlex: 4,
                     valueFlex: 3,
                     label: appLocalization.purchasePrice,
-                    value:
-                        '${SetUp().symbol ?? ''} ${element.purchasePrice.toString()}',
+                    value: isRoleManager
+                        ? '${SetUp().symbol ?? ''} ${element.purchasePrice.toString()}'
+                        : '',
                   ),
                 ),
                 Expanded(
@@ -125,8 +124,9 @@ class StockDetailsModal extends BaseWidget {
                     labelFlex: 4,
                     valueFlex: 3,
                     label: appLocalization.avgPurchasePrice,
-                    value:
-                        '${SetUp().symbol ?? ''} ${element.avgPurchasePrice}',
+                    value: isRoleManager
+                        ? '${SetUp().symbol ?? ''} ${element.avgPurchasePrice}'
+                        : '',
                   ),
                 ),
                 Expanded(
