@@ -1,17 +1,11 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/widget/show_snackbar.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
-import '/app/core/base/base_view.dart';
 import '/app/core/core_model/setup.dart';
-import '/app/core/utils/responsive.dart';
 import '/app/core/widget/common_cache_image_widget.dart';
-import '/app/core/widget/common_text.dart';
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/language_change_dropdown.dart';
-import '/app/core/widget/row_button.dart';
 import '/app/core/widget/setup_bottom_nav_bar.dart';
 import '/app/pages/intro/login/controllers/login_controller.dart';
 
@@ -27,6 +21,41 @@ class LoginView extends BaseView<LoginController> {
         Container(
           margin: const EdgeInsets.all(8),
           child: LanguageChangeDropDown(),
+        ),
+        Container(
+          margin: const EdgeInsets.only(right: 12),
+          child: SuperTooltip(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: controller.clearLicense,
+                  child: Text(
+                    'Reset',
+                    style: TextStyle(
+                      color: colors.solidBlackColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            arrowTipDistance: 10,
+            arrowLength: 8,
+            arrowBaseWidth: 8,
+            //right: -16,
+            hideTooltipOnTap: true,
+            //elevation: 0,
+            hasShadow: false,
+            backgroundColor: Colors.white,
+            borderRadius: 4,
+            barrierColor: Colors.transparent,
+            child: const Icon(
+              TablerIcons.dots_vertical,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
         ),
       ],
     );

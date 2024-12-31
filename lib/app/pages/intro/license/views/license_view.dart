@@ -1,13 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '/app/core/base/base_view.dart';
-import '/app/core/utils/responsive.dart';
-import '/app/core/widget/common_text.dart';
 import '/app/core/widget/fb_string.dart';
-import '/app/core/widget/row_button.dart';
 import '/app/core/widget/setup_bottom_nav_bar.dart';
 import '/app/pages/intro/license/controllers/license_controller.dart';
 
@@ -135,7 +128,7 @@ class LicenseView extends BaseView<LicenseController> {
                     maxRadius: 65,
                     child: ClipOval(
                       child: Image.asset(
-                        'assets/images/app_logo.png',
+                        'assets/images/onboarding_logo.png',
                       ),
                     ),
                   ),

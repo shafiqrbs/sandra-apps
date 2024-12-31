@@ -29,6 +29,10 @@ class OnboardingView extends BaseView<OnboardingController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            /*Container(
+              alignment: Alignment.centerRight,
+              child: LanguageChangeDropDown(),
+            ),*/
             Container(
               padding: const EdgeInsets.only(
                 bottom: 40,
@@ -62,7 +66,6 @@ class OnboardingView extends BaseView<OnboardingController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            20.height,
             _buildWelcomeHeading(),
             24.height,
             _buildVideoSection(),

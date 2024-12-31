@@ -1,4 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/widget/show_snackbar.dart';
 
 import '/app/core/core_model/logged_user.dart';
 
@@ -53,5 +54,55 @@ class LoginController extends BaseController {
     userNameController.clear();
     passwordController.clear();
     otpController.clear();
+  }
+
+  Future<void> clearLicense() async {
+    final needExportData = await needExport();
+    if (!needExportData) {
+      return;
+    }
+
+    final confirmation = await confirmationModal(
+      msg: appLocalization.areYouSure,
+    );
+    if (!confirmation) return;
+
+    await prefs.setIsLicenseValid(
+      isLicenseValid: false,
+    );
+    await prefs.setIsLogin(
+      isLogin: false,
+    );
+    Get.offAllNamed(
+      Routes.splash,
+    );
+  }
+
+  Future<bool> needExport() async {
+    final salesCount = await dbHelper.getItemCount(
+      tableName: dbTables.tableSale,
+    );
+
+    if (salesCount > 0) {
+      showSnackBar(
+        message: appLocalization.exportYourSales,
+        type: SnackBarType.warning,
+      );
+      return false;
+    }
+
+    final purchaseCount = await dbHelper.getItemCount(
+      tableName: dbTables.tablePurchase,
+    );
+
+    if (purchaseCount > 0) {
+      showSnackBar(
+        message: appLocalization.exportYourPurchase,
+        type: SnackBarType.warning,
+      );
+      return false;
+    }
+
+    return true;
   }
 }
