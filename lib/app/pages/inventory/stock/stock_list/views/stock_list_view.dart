@@ -79,116 +79,120 @@ class StockListView extends BaseView<StockListController> {
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Column(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 4,
-                      right: 4,
-                    ),
-                    child: Stack(
-                      children: [
-                        DropdownFlutter<Brand>.search(
-                          controller: controller.brandManager.ddController,
-                          hintText: appLocalization.brand,
-                          items: controller.brandManager.allItems.value,
-                          onChanged: controller.onBrandSelection,
-                          overlayHeight: 500,
-                          listItemBuilder: (context, value, ___, option) {
-                            return Text(
-                              value.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            );
-                          },
-                          headerBuilder: (context, value, option) {
-                            return Text(
-                              value.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            );
-                          },
-                          decoration: dropDownDecoration,
-                          itemsListPadding: EdgeInsets.zero,
-                          closedHeaderPadding: const EdgeInsets.all(8),
-                        ),
-                        if (controller.isShowBrandClearIcon.value)
-                          Positioned(
-                            right: 30,
-                            top: 0,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    TablerIcons.x,
-                                    color: colors.solidBlackColor,
-                                  ),
-                                  onPressed: () =>
-                                      controller.onBrandSelection(null),
+                  if (controller.brandManager.allItems.value?.isNotEmpty ??
+                      false)
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 4,
+                        right: 4,
+                      ),
+                      child: Stack(
+                        children: [
+                          DropdownFlutter<Brand>.search(
+                            controller: controller.brandManager.ddController,
+                            hintText: appLocalization.brand,
+                            items: controller.brandManager.allItems.value,
+                            onChanged: controller.onBrandSelection,
+                            overlayHeight: 500,
+                            listItemBuilder: (context, value, ___, option) {
+                              return Text(
+                                value.name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 4,
-                      right: 4,
-                    ),
-                    child: Stack(
-                      children: [
-                        DropdownFlutter<Category>.search(
-                          controller: controller.categoryManager.ddController,
-                          hintText: appLocalization.category,
-                          items: controller.categoryManager.allItems.value,
-                          onChanged: controller.onCategorySelection,
-                          overlayHeight: 500,
-                          listItemBuilder: (context, value, ___, option) {
-                            return Text(
-                              value.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            );
-                          },
-                          headerBuilder: (context, value, option) {
-                            return Text(
-                              value.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            );
-                          },
-                          decoration: dropDownDecoration,
-                          itemsListPadding: EdgeInsets.zero,
-                          closedHeaderPadding: const EdgeInsets.all(8),
-                        ),
-                        if (controller.isShowCategoryClearIcon.value)
-                          Positioned(
-                            right: 30,
-                            top: 0,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    TablerIcons.x,
-                                    color: colors.solidBlackColor,
-                                  ),
-                                  onPressed: () =>
-                                      controller.onCategorySelection(null),
+                              );
+                            },
+                            headerBuilder: (context, value, option) {
+                              return Text(
+                                value.name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            ),
+                              );
+                            },
+                            decoration: dropDownDecoration,
+                            itemsListPadding: EdgeInsets.zero,
+                            closedHeaderPadding: const EdgeInsets.all(8),
                           ),
-                      ],
+                          if (controller.isShowBrandClearIcon.value)
+                            Positioned(
+                              right: 30,
+                              top: 0,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      TablerIcons.x,
+                                      color: colors.solidBlackColor,
+                                    ),
+                                    onPressed: () =>
+                                        controller.onBrandSelection(null),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
+                  if (controller.categoryManager.allItems.value?.isNotEmpty ??
+                      false)
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 4,
+                        right: 4,
+                      ),
+                      child: Stack(
+                        children: [
+                          DropdownFlutter<Category>.search(
+                            controller: controller.categoryManager.ddController,
+                            hintText: appLocalization.category,
+                            items: controller.categoryManager.allItems.value,
+                            onChanged: controller.onCategorySelection,
+                            overlayHeight: 500,
+                            listItemBuilder: (context, value, ___, option) {
+                              return Text(
+                                value.name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
+                            },
+                            headerBuilder: (context, value, option) {
+                              return Text(
+                                value.name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
+                            },
+                            decoration: dropDownDecoration,
+                            itemsListPadding: EdgeInsets.zero,
+                            closedHeaderPadding: const EdgeInsets.all(8),
+                          ),
+                          if (controller.isShowCategoryClearIcon.value)
+                            Positioned(
+                              right: 30,
+                              top: 0,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      TablerIcons.x,
+                                      color: colors.solidBlackColor,
+                                    ),
+                                    onPressed: () =>
+                                        controller.onCategorySelection(null),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ),

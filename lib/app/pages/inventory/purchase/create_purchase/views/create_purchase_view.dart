@@ -1,4 +1,3 @@
-import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/drop_down_decoration.dart';
 import 'package:sandra/app/entity/brand.dart';
@@ -101,7 +100,8 @@ class CreatePurchaseView extends BaseView<CreatePurchaseController> {
       () => Column(
         children: [
           Visibility(
-            visible: controller.isShowBrand.value,
+            visible: controller.isShowBrand.value &&
+                (controller.brandManager.allItems.value?.isNotEmpty ?? false),
             child: Container(
               margin: const EdgeInsets.only(
                 top: 0,
