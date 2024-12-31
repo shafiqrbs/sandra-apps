@@ -318,15 +318,6 @@ class CreateStoreView extends BaseView<CreateStoreController> {
         children: [
           Expanded(
             child: _buildButtonWidget(
-              text: appLocalization.buildStore,
-              onPressed: () {
-                controller.buildStore();
-              },
-            ),
-          ),
-          24.width,
-          Expanded(
-            child: _buildButtonWidget(
               text: appLocalization.skip,
               color: colors.secondaryColor500,
               onPressed: () {
@@ -334,6 +325,15 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOut,
                     );
+              },
+            ),
+          ),
+          24.width,
+          Expanded(
+            child: _buildButtonWidget(
+              text: appLocalization.buildStore,
+              onPressed: () {
+                controller.buildStore();
               },
             ),
           ),

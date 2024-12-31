@@ -1,9 +1,10 @@
 import 'package:dropdown_flutter/custom_dropdown.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/store_setup.dart';
+import 'package:sandra/app/routes/app_pages.dart';
 
 import '/app/core/base/base_controller.dart';
 
@@ -117,8 +118,34 @@ class CreateStoreController extends BaseController {
     await dataFetcher(
       future: () async {
         final response = await services.setupStore(logs: logs);
-        if (kDebugMode) {
-          print('Response: $response');
+        await submitLicense(
+          licenseNumber: response['license_no'],
+          activeKey: response['active_key'],
+        );
+      },
+    );
+  }
+
+  Future<void> submitLicense({
+    required String licenseNumber,
+    required String activeKey,
+  }) async {
+    await dataFetcher(
+      future: () async {
+        final value = await services.submitLicense(
+          license: licenseNumber,
+          activeKey: activeKey,
+        );
+        if (value != null) {
+          final isInserted = await insertSplashDataToDb(
+            splashData: value,
+          );
+
+          if (isInserted) {
+            await prefs.setLicenseKey(licenseKey: licenseNumber);
+            await prefs.setActiveKey(activeKey: activeKey);
+            Get.offAllNamed(Routes.login);
+          }
         }
       },
     );
