@@ -30,13 +30,19 @@ class ViewDemoModalView extends BaseView<ViewDemoModalController> {
                     itemCount: controller.businessTypeList.value?.length ?? 0,
                     itemBuilder: (context, index) {
                       final item = controller.businessTypeList.value![index];
-                      return _buildDemoCardView(
-                        name: item.name ?? '',
-                        title: item.title ?? '',
-                        subTitle: item.content ?? '',
-                        onTap: () {
-                          controller.navigateToDemo(item);
-                        },
+                      return Obx(
+                        () => _buildDemoCardView(
+                          name: item.name ?? '',
+                          title: item.title ?? '',
+                          subTitle: item.content ?? '',
+                          onTap: () {
+                            controller.setTappedIndex(index);
+                          },
+                          navigationToDemo: () {
+                            controller.navigateToDemo(item);
+                          },
+                          isTapped: controller.tappedIndex.value == index,
+                        ),
                       );
                     },
                   ),
@@ -54,6 +60,8 @@ class ViewDemoModalView extends BaseView<ViewDemoModalController> {
     required String title,
     required String subTitle,
     required Function() onTap,
+    required Function() navigationToDemo,
+    required bool isTapped,
   }) {
     return InkWell(
       onTap: onTap,
@@ -93,29 +101,34 @@ class ViewDemoModalView extends BaseView<ViewDemoModalController> {
                     ),
                   ),
                   4.height,
-                  HtmlWidget(
-                    subTitle,
-                    textStyle: AppTextStyle.h4TextStyle400.copyWith(
-                      color: colors.secondaryColor400,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                  isTapped
+                      ? HtmlWidget(
+                          subTitle,
+                          textStyle: AppTextStyle.h4TextStyle400.copyWith(
+                            color: colors.secondaryColor400,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
             Positioned(
               right: 0,
-              child: Container(
-                height: 32,
-                width: 32,
-                decoration: BoxDecoration(
-                  color: colors.primaryColor600,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  TablerIcons.arrow_right,
-                  color: colors.whiteColor,
-                  size: 20,
+              child: InkWell(
+                onTap: navigationToDemo,
+                child: Container(
+                  height: 32,
+                  width: 32,
+                  decoration: BoxDecoration(
+                    color: colors.primaryColor600,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    TablerIcons.arrow_right,
+                    color: colors.whiteColor,
+                    size: 20,
+                  ),
                 ),
               ),
             ),

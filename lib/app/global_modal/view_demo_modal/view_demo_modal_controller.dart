@@ -10,6 +10,7 @@ import '/app/core/abstract_controller/printer_controller.dart';
 
 class ViewDemoModalController extends PrinterController {
   final businessTypeList = Rx<List<BusinessType>?>(null);
+  final tappedIndex = (-1).obs;
 
   @override
   Future<void> onInit() async {
@@ -18,6 +19,15 @@ class ViewDemoModalController extends PrinterController {
     final createStoreController = Get.find<CreateStoreController>();
     businessTypeList.value =
         businessTypeList.value ?? createStoreController.businessTypeList.value;
+  }
+
+  void setTappedIndex(int index) {
+    if (tappedIndex.value == index) {
+      tappedIndex.value = -1; // Collapse if the same item is clicked
+    } else {
+      tappedIndex.value = index; // Expand the clicked item
+    }
+    tappedIndex.refresh();
   }
 
   Future<void> navigateToDemo(BusinessType type) async {
@@ -30,10 +40,6 @@ class ViewDemoModalController extends PrinterController {
   Future<void> submitLicense({
     required BusinessType type,
   }) async {
-    print('licenseNo: ${type.licenseNo}');
-    print('activeKey: ${type.activeKey}');
-    print('userName: ${type.userName}');
-    print('password: ${type.password}');
     if (type.licenseNo == null ||
         type.activeKey == null ||
         type.userName == null ||
