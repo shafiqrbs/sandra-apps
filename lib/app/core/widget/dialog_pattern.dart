@@ -6,12 +6,14 @@ class DialogPattern extends BaseWidget {
   final String title;
   final String subTitle;
   TextStyle? subTitleStyle;
+  TextAlign? subTitleAlign;
   final Widget child;
 
   DialogPattern({
     required this.title,
     required this.subTitle,
     this.subTitleStyle,
+    this.subTitleAlign,
     required this.child,
     super.key,
   });
@@ -84,7 +86,7 @@ class DialogPattern extends BaseWidget {
                                 color: Colors.transparent,
                                 child: Text(
                                   subTitle,
-                                  textAlign: TextAlign.left,
+                                  textAlign: subTitleAlign ?? TextAlign.left,
                                   style: subTitleStyle ??
                                       TextStyle(
                                         fontSize: subHeaderTFSize,

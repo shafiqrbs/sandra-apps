@@ -21,7 +21,8 @@ class OnboardingController extends BaseController {
       builder: (context) {
         return DialogPattern(
           title: appLocalization.viewDemo,
-          subTitle: '',
+          subTitle: appLocalization.viewDemoSubtitle,
+          subTitleAlign: TextAlign.center,
           child: ViewDemoModalView(),
         );
       },
