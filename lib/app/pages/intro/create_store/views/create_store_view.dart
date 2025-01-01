@@ -69,13 +69,11 @@ class CreateStoreView extends BaseView<CreateStoreController> {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Text(
-              appLocalization.createYourOnlineStore,
-              style: AppTextStyle.h2TextStyle500.copyWith(
-                color: colors.primaryColor500,
-              ),
+          16.height,
+          Text(
+            appLocalization.createYourOnlineStore,
+            style: AppTextStyle.h2TextStyle500.copyWith(
+              color: colors.primaryColor500,
             ),
           ),
           Divider(
@@ -210,13 +208,11 @@ class CreateStoreView extends BaseView<CreateStoreController> {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Text(
-              appLocalization.loginInformation,
-              style: AppTextStyle.h2TextStyle500.copyWith(
-                color: colors.primaryColor500,
-              ),
+          16.height,
+          Text(
+            appLocalization.loginInformation,
+            style: AppTextStyle.h2TextStyle500.copyWith(
+              color: colors.primaryColor500,
             ),
           ),
           Divider(
@@ -224,7 +220,12 @@ class CreateStoreView extends BaseView<CreateStoreController> {
           ),
           4.height,
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 16,
+              bottom: 4,
+            ),
             child: Column(
               children: [
                 FBString(

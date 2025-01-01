@@ -1,6 +1,6 @@
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
-import 'package:sandra/app/core/widget/asset_image_view.dart';
+import 'package:sandra/app/core/widget/language_change_dropdown.dart';
 import 'package:sandra/app/global_widget/video_player_widget.dart';
 import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
 import 'package:sandra/app/pages/intro/create_store/views/create_store_view.dart';
@@ -26,31 +26,39 @@ class OnboardingView extends BaseView<OnboardingController> {
   Widget body(BuildContext context) {
     return ColoredBox(
       color: colors.primaryColor50,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            /*Container(
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                    bottom: 40,
+                  ),
+                  height: Get.height * 0.9,
+                  color: colors.primaryColor50,
+                  child: PageView(
+                    controller: controller.pageController,
+                    children: [
+                      _buildWelcomeView(context),
+                      _buildCreateStoreView(),
+                      _buildLicenseView(),
+                    ],
+                  ),
+                ),
+                _buildPageIndicator(),
+              ],
+            ),
+          ),
+          Positioned(
+            top: -8,
+            right: 8,
+            child: Container(
               alignment: Alignment.centerRight,
               child: LanguageChangeDropDown(),
-            ),*/
-            Container(
-              padding: const EdgeInsets.only(
-                bottom: 40,
-              ),
-              height: Get.height * 0.9,
-              color: colors.primaryColor50,
-              child: PageView(
-                controller: controller.pageController,
-                children: [
-                  _buildWelcomeView(context),
-                  _buildCreateStoreView(),
-                  _buildLicenseView(),
-                ],
-              ),
             ),
-            _buildPageIndicator(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -66,6 +74,7 @@ class OnboardingView extends BaseView<OnboardingController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            20.height,
             _buildWelcomeHeading(),
             24.height,
             _buildVideoSection(),
@@ -103,8 +112,7 @@ class OnboardingView extends BaseView<OnboardingController> {
   Widget _buildVideoSection() {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 20,
+        vertical: 16,
       ),
       decoration: BoxDecoration(
         color: colors.whiteColor,
@@ -118,17 +126,30 @@ class OnboardingView extends BaseView<OnboardingController> {
               color: colors.primaryColor500,
             ),
           ),
-          20.height,
-          const AssetImageView(
-            fileName: 'onboarding_logo.png',
-            height: 90,
-            width: 90,
+          Divider(
+            color: colors.primaryColor500,
           ),
-          20.height,
-          Container(
-            height: 170,
-            child: VideoPlayerWidget(
-                videoUrl: 'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB'),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: Column(
+              children: [
+                /*20.height,
+            const AssetImageView(
+              fileName: 'onboarding_logo.png',
+              height: 90,
+              width: 90,
+            ),*/
+                20.height,
+                Container(
+                  height: 170,
+                  child: VideoPlayerWidget(
+                      videoUrl:
+                          'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB'),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -136,62 +157,84 @@ class OnboardingView extends BaseView<OnboardingController> {
   }
 
   Widget _buildNewStoreSection() {
-    return Column(
-      children: [
-        Text(
-          appLocalization.newStoreDetails,
-          maxLines: 2,
-          textAlign: TextAlign.center,
-          style: AppTextStyle.h4TextStyle400.copyWith(
-            color: colors.secondaryColor500,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colors.whiteColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Text(
+            appLocalization.newStoreDetails,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            style: AppTextStyle.h4TextStyle400.copyWith(
+              color: colors.secondaryColor500,
+            ),
           ),
-        ),
-        12.height,
-        _buildButtonWidget(
-          text: appLocalization.newStore,
-          onPressed: () {
-            controller.pageController.nextPage(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOut,
-            );
-          },
-        ),
-      ],
+          12.height,
+          _buildButtonWidget(
+            text: appLocalization.newStore,
+            onPressed: () {
+              controller.pageController.nextPage(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeOut,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildSetupSection() {
-    return Column(
-      children: [
-        Text(
-          'Already have a Store! Want to create my own App? ',
-          style: AppTextStyle.h4TextStyle400,
-        ),
-        RichTextWidget(
-          list: [
-            TextSpan(
-              text: 'Click on ',
-              style: AppTextStyle.h4TextStyle400.copyWith(
-                color: colors.blackColor400,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colors.whiteColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Text(
+            '${appLocalization.alreadyHaveAStoreWantToCreateMyOwnApp} ',
+            style: AppTextStyle.h4TextStyle400,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+          ),
+          RichTextWidget(
+            list: [
+              TextSpan(
+                text: '${appLocalization.clickOn} ',
+                style: AppTextStyle.h4TextStyle400.copyWith(
+                  color: colors.blackColor400,
+                ),
               ),
-            ),
-            TextSpan(
-              text: '"${appLocalization.setUp} "',
-              style: AppTextStyle.h4TextStyle600.copyWith(
-                color: colors.secondaryColor500,
+              TextSpan(
+                text: '"${appLocalization.setUp} "',
+                style: AppTextStyle.h4TextStyle600.copyWith(
+                  color: colors.secondaryColor500,
+                ),
               ),
-            ),
-          ],
-        ),
-        12.height,
-        _buildButtonWidget(
-          text: appLocalization.setUp,
-          onPressed: () {
-            controller.pageController.jumpToBottom();
-          },
-          color: colors.secondaryColor500,
-        ),
-      ],
+            ],
+          ),
+          12.height,
+          _buildButtonWidget(
+            text: appLocalization.setUp,
+            onPressed: () {
+              controller.pageController.jumpToBottom();
+            },
+            color: colors.secondaryColor500,
+          ),
+        ],
+      ),
     );
   }
 

@@ -429,6 +429,8 @@
   "loginInformation": "Login Information",
   "buildStore": "Build Store",
   "viewDemo": "View Demo",
+  "clickOn": "Click on",
+  "alreadyHaveAStoreWantToCreateMyOwnApp": "Already have a Store! Want to create my own App?",
   "skip": "Skip",
   "theme": "Theme"
 }

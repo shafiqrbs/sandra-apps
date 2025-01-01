@@ -1,7 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
 
-
-
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
 
@@ -20,7 +18,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    isYoutubeVideo = widget.videoUrl.contains('youtube.com') || widget.videoUrl.contains('youtu.be');
+    isYoutubeVideo = widget.videoUrl.contains('youtube.com') ||
+        widget.videoUrl.contains('youtu.be');
     if (isYoutubeVideo) {
       _initializeYoutubePlayer();
     } else {
@@ -33,7 +32,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     await _videoPlayerController!.initialize();
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController!,
-      autoPlay: true,
+      autoPlay: false,
       looping: true,
     );
     setState(() {});
@@ -43,7 +42,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     _youtubePlayerController = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
       flags: YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
         mute: false,
       ),
     );
@@ -62,16 +61,17 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   Widget build(BuildContext context) {
     return isYoutubeVideo
         ? YoutubePlayer(
-      controller: _youtubePlayerController!,
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.blueAccent,
-    )
-        : _chewieController != null && _chewieController!.videoPlayerController.value.isInitialized
-        ? Chewie(
-      controller: _chewieController!,
-    )
-        : const Center(
-      child: CircularProgressIndicator(),
-    );
+            controller: _youtubePlayerController!,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.blueAccent,
+          )
+        : _chewieController != null &&
+                _chewieController!.videoPlayerController.value.isInitialized
+            ? Chewie(
+                controller: _chewieController!,
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              );
   }
 }
