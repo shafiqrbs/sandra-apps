@@ -239,38 +239,59 @@ class OnboardingView extends BaseView<OnboardingController> {
   }
 
   Widget _buildViewDemoButton(BuildContext context) {
-    return InkWell(
-      onTap: () => controller.viewDemoModal(context),
-      child: Container(
-        width: double.infinity,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-        ),
-        decoration: BoxDecoration(
-          color: colors.whiteColor,
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            color: colors.primaryColor500,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colors.whiteColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Text(
+            '${appLocalization.viewDemoSubtitle} ',
+            style: AppTextStyle.h4TextStyle400,
+            textAlign: TextAlign.center,
+            maxLines: 3,
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              TablerIcons.eye,
-              size: 20,
-              color: colors.primaryColor500,
-            ),
-            4.width,
-            Text(
-              appLocalization.viewDemo,
-              style: AppTextStyle.h3TextStyle600.copyWith(
-                color: colors.primaryColor500,
+          12.height,
+          InkWell(
+            onTap: () => controller.viewDemoModal(context),
+            child: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                color: colors.whiteColor,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(
+                  color: colors.primaryColor500,
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    TablerIcons.eye,
+                    size: 20,
+                    color: colors.primaryColor500,
+                  ),
+                  4.width,
+                  Text(
+                    appLocalization.viewDemo,
+                    style: AppTextStyle.h3TextStyle600.copyWith(
+                      color: colors.primaryColor500,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
