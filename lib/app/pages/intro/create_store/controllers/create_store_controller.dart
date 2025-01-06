@@ -169,7 +169,7 @@ class CreateStoreController extends BaseController {
       context: context,
       builder: (context) {
         return DialogPattern(
-          title: appLocalization.iAcceptTermsAndConditions,
+          title: appLocalization.termsAndConditions,
           subTitle: '',
           subTitleAlign: TextAlign.center,
           child: TermsAndConditionModalView(),
