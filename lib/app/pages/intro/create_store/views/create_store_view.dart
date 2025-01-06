@@ -33,7 +33,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    _buildCreateStoreForm(),
+                    _buildCreateStoreForm(context),
                     24.height,
                     _buildLoginInfoForm(),
                   ],
@@ -58,7 +58,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
     );
   }
 
-  Widget _buildCreateStoreForm() {
+  Widget _buildCreateStoreForm(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -188,6 +188,9 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                 _buildCheckBox(
                   isActive: controller.isAllowTerms,
                   text: appLocalization.iAcceptTermsAndConditions,
+                  textOnTap: () async {
+                    await controller.acceptTerms(context: context);
+                  },
                 ),
               ],
             ),
@@ -266,6 +269,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
   Widget _buildCheckBox({
     required RxBool isActive,
     required String text,
+    VoidCallback? textOnTap,
   }) {
     return Obx(
       () => Row(
@@ -273,7 +277,6 @@ class CreateStoreView extends BaseView<CreateStoreController> {
           InkWell(
             onTap: () {
               isActive.value = !isActive.value;
-              print('isActive: $isActive');
               controller.update();
             },
             child: Container(
@@ -299,10 +302,14 @@ class CreateStoreView extends BaseView<CreateStoreController> {
             ),
           ),
           12.width,
-          Text(
-            text,
-            style: AppTextStyle.h3TextStyle400.copyWith(
-              color: colors.blackColor500,
+          GestureDetector(
+            onTap: textOnTap,
+            child: Text(
+              text,
+              style: AppTextStyle.h3TextStyle400.copyWith(
+                color: colors.blackColor500,
+                decoration: textOnTap != null ? TextDecoration.underline : null,
+              ),
             ),
           ),
         ],

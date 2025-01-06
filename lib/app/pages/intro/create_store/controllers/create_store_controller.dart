@@ -2,8 +2,10 @@ import 'package:dropdown_flutter/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/widget/dialog_pattern.dart';
 import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/store_setup.dart';
+import 'package:sandra/app/pages/intro/create_store/modals/terms_and_condition_modal_view.dart';
 import 'package:sandra/app/routes/app_pages.dart';
 
 import '/app/core/base/base_controller.dart';
@@ -158,5 +160,21 @@ class CreateStoreController extends BaseController {
     }
     isShowErrorMsg.value = false;
     selectedBusinessType.value = value;
+  }
+
+  Future<void> acceptTerms({
+    required BuildContext context,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogPattern(
+          title: appLocalization.iAcceptTermsAndConditions,
+          subTitle: '',
+          subTitleAlign: TextAlign.center,
+          child: TermsAndConditionModalView(),
+        );
+      },
+    );
   }
 }
