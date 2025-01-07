@@ -184,7 +184,7 @@ class DashboardView extends BaseView<DashboardController> {
                   : Container(),
               controller.isManager ? 16.width : Container(),
 
-              InkWell(
+              /*InkWell(
                 onTap: controller.changeThemeMode,
                 child: Icon(
                   Get.isDarkMode ? TablerIcons.sun : TablerIcons.moon,
@@ -192,7 +192,7 @@ class DashboardView extends BaseView<DashboardController> {
                   size: 20,
                 ),
               ),
-              16.width,
+              16.width,*/
               Container(
                 margin: const EdgeInsets.only(right: 12),
                 child: SuperTooltip(
