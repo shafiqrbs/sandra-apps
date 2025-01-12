@@ -37,7 +37,8 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: _getSupportedLocal(),
       locale: Locale(widget.lang),
       theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.light,
+      //darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     );
   }

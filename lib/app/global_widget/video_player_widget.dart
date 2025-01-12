@@ -64,6 +64,17 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             controller: _youtubePlayerController!,
             showVideoProgressIndicator: true,
             progressIndicatorColor: Colors.blueAccent,
+            thumbnail: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(.5),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Icon(
+                TablerIcons.player_play,
+                color: Colors.white,
+                size: 40,
+              ),
+            ),
           )
         : _chewieController != null &&
                 _chewieController!.videoPlayerController.value.isInitialized
