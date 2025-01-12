@@ -91,7 +91,12 @@ class OnboardingView extends BaseView<OnboardingController> {
   }
 
   Widget _buildCreateStoreView() {
-    Get.put(CreateStoreController());
+    final createStoreController = Get.put(CreateStoreController());
+    createStoreController.businessTypeList.value =
+        controller.onBoardSetupData.value?.demo;
+    createStoreController.businessTypeList.refresh();
+    createStoreController.update();
+    print('businessTypeList: ${createStoreController.businessTypeList.value}');
     return CreateStoreView();
   }
 
@@ -145,8 +150,9 @@ class OnboardingView extends BaseView<OnboardingController> {
                 Container(
                   height: 170,
                   child: VideoPlayerWidget(
-                      videoUrl:
-                          'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB'),
+                    videoUrl: controller.onBoardSetupData.value?.videoUrl ??
+                        'https://youtu.be/CPclGyYCGtY?si=ij6TYhxRl-6noWwB',
+                  ),
                 ),
               ],
             ),

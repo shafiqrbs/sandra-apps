@@ -6,9 +6,9 @@ import 'package:sandra/app/core/db_helper/db_helper.dart';
 import 'package:sandra/app/core/db_helper/db_tables.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/brand.dart';
-import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/category.dart';
 import 'package:sandra/app/entity/financial_data.dart';
+import 'package:sandra/app/entity/onboard_entity.dart';
 import 'package:sandra/app/entity/restaurant/restaurant_table.dart';
 import 'package:sandra/app/entity/sales_return.dart';
 import 'package:sandra/app/entity/stock_details.dart';
@@ -1559,18 +1559,18 @@ class Services {
     }
   }
 
-  Future<List<BusinessType>?> getBusinessTypeList() async {
-    const endPoint = 'poskeeper-apps';
+  Future<OnboardEntity?> getOnboardSetup() async {
+    const endPoint = 'poskeeper-onboard';
     try {
       final response = await dio.get(
         APIType.public,
         endPoint,
         headers: _buildHeader(),
       );
-      final responseData = response.data as List;
-      return parseList(
-        list: responseData,
-        fromJson: BusinessType.fromJson,
+      final responseData = response.data as Map<String, dynamic>?;
+      return parseObject(
+        object: responseData,
+        fromJson: OnboardEntity.fromJson,
       );
     } catch (e, s) {
       printError(e, s, endPoint);

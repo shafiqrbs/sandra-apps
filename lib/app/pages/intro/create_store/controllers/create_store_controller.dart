@@ -87,13 +87,13 @@ class CreateStoreController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await dataFetcher(future: getBusinessTypeList);
+    //await dataFetcher(future: getBusinessTypeList);
   }
 
-  Future<void> getBusinessTypeList() async {
+  /*Future<void> getBusinessTypeList() async {
     final response = await services.getBusinessTypeList();
     businessTypeList.value = response;
-  }
+  }*/
 
   Future<void> buildStore() async {
     if (!formKey.currentState!.validate() ||

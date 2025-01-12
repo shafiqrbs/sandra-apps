@@ -1,12 +1,16 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/entity/onboard_entity.dart';
 import 'package:sandra/app/global_modal/view_demo_modal/view_demo_modal_view.dart';
 
 class OnboardingController extends BaseController {
   final pageController = PageController();
+  final onBoardSetupData = Rx<OnboardEntity?>(null);
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    final args = await Get.arguments;
+    onBoardSetupData.value = args['onboardData'];
   }
 
   @override

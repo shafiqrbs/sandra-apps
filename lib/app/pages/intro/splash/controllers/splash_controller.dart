@@ -1,9 +1,12 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/entity/onboard_entity.dart';
 
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/core_model/setup.dart';
 
 class SplashController extends BaseController {
+  final onBoardSetupData = Rx<OnboardEntity?>(null);
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -37,14 +40,28 @@ class SplashController extends BaseController {
       }
     }
     if (!isLicenseValid) {
-      Get.offAllNamed(Routes.onboarding);
-      //Get.offAllNamed(Routes.license);
+      await dataFetcher(future: getOnboardSetup);
+      if (onBoardSetupData.value?.onboard == 1) {
+        Get.offAllNamed(
+          Routes.onboarding,
+          arguments: {'onboardData': onBoardSetupData.value},
+        );
+      } else {
+        Get.offAllNamed(Routes.license);
+      }
     }
 
     if (isLicenseValid && !isLogin) {
       final setupData = await dbHelper.getAll(tbl: dbTables.tableSetup);
       SetUp.fromJson(setupData[0]);
       Get.offAllNamed(Routes.login);
+    }
+  }
+
+  Future<void> getOnboardSetup() async {
+    final response = await services.getOnboardSetup();
+    if (response != null) {
+      onBoardSetupData.value = response;
     }
   }
 }

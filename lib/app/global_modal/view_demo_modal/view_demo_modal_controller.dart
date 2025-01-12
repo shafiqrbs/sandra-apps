@@ -3,7 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/entity/business_type.dart';
-import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
+import 'package:sandra/app/pages/intro/onboarding/controllers/onboarding_controller.dart';
 import 'package:sandra/app/routes/app_pages.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
@@ -16,9 +16,8 @@ class ViewDemoModalController extends PrinterController {
   Future<void> onInit() async {
     super.onInit();
 
-    final createStoreController = Get.find<CreateStoreController>();
-    businessTypeList.value =
-        businessTypeList.value ?? createStoreController.businessTypeList.value;
+    final onboardingController = Get.find<OnboardingController>();
+    businessTypeList.value = onboardingController.onBoardSetupData.value?.demo;
   }
 
   void setTappedIndex(int index) {
