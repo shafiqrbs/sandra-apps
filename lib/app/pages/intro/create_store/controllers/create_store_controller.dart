@@ -84,11 +84,12 @@ class CreateStoreController extends BaseController {
     ),
   );
 
-  @override
+  /* @override
   Future<void> onInit() async {
     super.onInit();
+
     //await dataFetcher(future: getBusinessTypeList);
-  }
+  }*/
 
   /*Future<void> getBusinessTypeList() async {
     final response = await services.getBusinessTypeList();

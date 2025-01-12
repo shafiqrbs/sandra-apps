@@ -2,7 +2,6 @@ import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/core/widget/language_change_dropdown.dart';
 import 'package:sandra/app/global_widget/video_player_widget.dart';
-import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
 import 'package:sandra/app/pages/intro/create_store/views/create_store_view.dart';
 import 'package:sandra/app/pages/intro/license/controllers/license_controller.dart';
 import 'package:sandra/app/pages/intro/license/views/license_view.dart';
@@ -91,12 +90,6 @@ class OnboardingView extends BaseView<OnboardingController> {
   }
 
   Widget _buildCreateStoreView() {
-    final createStoreController = Get.put(CreateStoreController());
-    createStoreController.businessTypeList.value =
-        controller.onBoardSetupData.value?.demo;
-    createStoreController.businessTypeList.refresh();
-    createStoreController.update();
-    print('businessTypeList: ${createStoreController.businessTypeList.value}');
     return CreateStoreView();
   }
 
