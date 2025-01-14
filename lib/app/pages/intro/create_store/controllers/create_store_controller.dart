@@ -15,6 +15,7 @@ class CreateStoreController extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   final businessTypeList = Rx<List<BusinessType>?>(null);
+  final terms = ''.obs;
   final selectedBusinessType = Rx<BusinessType?>(null);
   final shopNameController = TextEditingController(text: '');
   final mobileController = TextEditingController(text: '');
@@ -182,7 +183,9 @@ class CreateStoreController extends BaseController {
           title: appLocalization.termsAndConditions,
           subTitle: '',
           subTitleAlign: TextAlign.center,
-          child: TermsAndConditionModalView(),
+          child: TermsAndConditionModalView(
+            terms: terms.value,
+          ),
         );
       },
     );

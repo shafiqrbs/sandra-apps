@@ -23,41 +23,49 @@ class OnboardingView extends BaseView<OnboardingController> {
 
   @override
   Widget body(BuildContext context) {
-    return ColoredBox(
-      color: colors.primaryColor50,
-      child: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                    bottom: 40,
+    return WillPopScope(
+      onWillPop: () async {
+        bool shouldExit = await confirmationModal(
+          msg: appLocalization.areYouSureYouWantToExit,
+        );
+        return shouldExit; // Return true to exit, false to cancel
+      },
+      child: ColoredBox(
+        color: colors.primaryColor50,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      bottom: 40,
+                    ),
+                    height: Get.height * 0.9,
+                    color: colors.primaryColor50,
+                    child: PageView(
+                      controller: controller.pageController,
+                      children: [
+                        _buildWelcomeView(context),
+                        _buildCreateStoreView(),
+                        _buildLicenseView(),
+                      ],
+                    ),
                   ),
-                  height: Get.height * 0.9,
-                  color: colors.primaryColor50,
-                  child: PageView(
-                    controller: controller.pageController,
-                    children: [
-                      _buildWelcomeView(context),
-                      _buildCreateStoreView(),
-                      _buildLicenseView(),
-                    ],
-                  ),
-                ),
-                _buildPageIndicator(),
-              ],
+                  _buildPageIndicator(),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: -8,
-            right: 8,
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: LanguageChangeDropDown(),
+            Positioned(
+              top: -8,
+              right: 8,
+              child: Container(
+                alignment: Alignment.centerRight,
+                child: LanguageChangeDropDown(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

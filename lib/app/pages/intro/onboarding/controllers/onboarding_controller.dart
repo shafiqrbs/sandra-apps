@@ -15,6 +15,8 @@ class OnboardingController extends BaseController {
 
     final createStoreController = Get.put(CreateStoreController());
     createStoreController.businessTypeList.value = onBoardSetupData.value?.demo;
+    createStoreController.terms.value =
+        onBoardSetupData.value?.termsCondition ?? '';
   }
 
   @override

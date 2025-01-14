@@ -1,9 +1,15 @@
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/values/text_styles.dart';
 import 'package:sandra/app/pages/intro/create_store/controllers/create_store_controller.dart';
 
 class TermsAndConditionModalView extends BaseView<CreateStoreController> {
-  TermsAndConditionModalView({super.key});
+  String terms;
+
+  TermsAndConditionModalView({
+    super.key,
+    required this.terms,
+  });
 
   final falsePadding = 16.0.obs;
 
@@ -61,10 +67,9 @@ class TermsAndConditionModalView extends BaseView<CreateStoreController> {
             physics: const ScrollPhysics(),
             child: Column(
               children: [
-                Text(
-                  termsDummyString,
-                  overflow: TextOverflow.visible,
-                  style: AppTextStyle.h3TextStyle400,
+                HtmlWidget(
+                  terms,
+                  textStyle: AppTextStyle.h3TextStyle400,
                 ),
               ],
             ),

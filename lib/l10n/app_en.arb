@@ -435,5 +435,6 @@
   "skip": "Skip",
   "termsAndConditions": "Terms and Conditions",
   "theme": "Theme",
-  "pleaseAcceptTermsAndConditions": "Please accept terms and conditions"
+  "pleaseAcceptTermsAndConditions": "Please accept terms and conditions",
+  "areYouSureYouWantToExit": "Are you sure you want to exit?"
 }

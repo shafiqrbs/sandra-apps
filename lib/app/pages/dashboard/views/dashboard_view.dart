@@ -77,36 +77,44 @@ class DashboardView extends BaseView<DashboardController> {
 
   @override
   Widget body(BuildContext context) {
-    return Obx(
-      () => Column(
-        mainAxisAlignment: startMAA,
-        crossAxisAlignment: endCAA,
-        children: [
-          _buildTopBar(context),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.zero,
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  if (controller.isOnline.value) {
-                    await controller.fetchOnlineFinancialData();
-                  } else {
-                    await controller.fetchOfflineFinancialData();
-                  }
-                },
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    children: [
-                      1.height,
-                      _buildDashboard(),
-                    ],
+    return WillPopScope(
+      onWillPop: () async {
+        bool shouldExit = await confirmationModal(
+          msg: appLocalization.areYouSureYouWantToExit,
+        );
+        return shouldExit; // Return true to exit, false to cancel
+      },
+      child: Obx(
+        () => Column(
+          mainAxisAlignment: startMAA,
+          crossAxisAlignment: endCAA,
+          children: [
+            _buildTopBar(context),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.zero,
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    if (controller.isOnline.value) {
+                      await controller.fetchOnlineFinancialData();
+                    } else {
+                      await controller.fetchOfflineFinancialData();
+                    }
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      children: [
+                        1.height,
+                        _buildDashboard(),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

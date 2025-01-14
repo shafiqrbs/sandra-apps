@@ -15,13 +15,21 @@ class LicenseView extends BaseView<LicenseController> {
 
   @override
   Widget body(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          _buildForm(),
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        bool shouldExit = await confirmationModal(
+          msg: appLocalization.areYouSureYouWantToExit,
+        );
+        return shouldExit; // Return true to exit, false to cancel
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            _buildForm(),
+          ],
+        ),
       ),
     );
   }
