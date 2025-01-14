@@ -2,7 +2,6 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:sandra/app/core/importer.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
-import '/app/core/singleton_classes/color_schema.dart';
 import '/app/core/singleton_classes/fb_colors.dart';
 import '/app/core/singleton_classes/fb_outline_input_border.dart';
 import '/app/core/singleton_classes/fb_typography.dart';
@@ -226,6 +225,89 @@ InputDecoration formBuilderInputDecorationWithIcon({
                 ),
               )
             : Container(),
+      ],
+    ),
+    suffixIconConstraints: const BoxConstraints(),
+    // isDense: true,
+  );
+}
+
+InputDecoration formBuilderInputDecorationWithPassword({
+  required String hint,
+  required TextEditingController textEditingController,
+  required bool isShowClearIcon,
+  required bool isShowPasswordIcon,
+  bool? isShowToolTip,
+  bool? isValid,
+  String? toolTipContent,
+  Color? toolTipContentColor,
+  Color? toolTipColor,
+  Color? toolTipIconColor,
+  Color? prefixIconColor,
+  Color? validPrefixIconColor,
+  Color? validSuffixIconColor,
+  Color? suffixIconColor,
+  IconData? toolTipIcon,
+  IconData? prefix,
+  IconData? suffix,
+  EdgeInsets? contentPadding,
+  double? prefixIconSize,
+  double? suffixIconSize,
+  TextStyle? hintTextStyle,
+  TextStyle? toolTipTextStyle,
+  OutlineInputBorder? border,
+  OutlineInputBorder? enabledBorder,
+  OutlineInputBorder? focusedBorder,
+  OutlineInputBorder? errorBorder,
+  OutlineInputBorder? focusedErrorBorder,
+  OutlineInputBorder? disabledBorder,
+  Function()? onTap,
+  Function()? passwordOnTap,
+}) {
+  return InputDecoration(
+    contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(8, 8, 8, 8),
+    hintText: hint,
+    hintStyle: hintTextStyle ?? FBTypography().tfHintTS,
+
+    filled: true,
+    fillColor: FBColors().fillColor,
+    //don't remove this errorStyle it is used to remove the error text space
+    errorStyle: const TextStyle(
+      height: -10,
+    ),
+    enabledBorder: enabledBorder ?? FBOutlineInputBorder().enabledBorder,
+    focusedBorder: focusedBorder ?? FBOutlineInputBorder().focusedBorder,
+    errorBorder: errorBorder ?? FBOutlineInputBorder().errorBorder,
+    focusedErrorBorder:
+        focusedErrorBorder ?? FBOutlineInputBorder().focusedErrorBorder,
+    disabledBorder: disabledBorder ?? FBOutlineInputBorder().disabledBorder,
+    border: border ?? FBOutlineInputBorder().border,
+    prefixIcon: prefix == null
+        ? null
+        : Icon(
+            prefix,
+            size: prefixIconSize ?? FBTypography().tfLabelTS.fontSize,
+            color: isValid ?? false
+                ? validPrefixIconColor ?? FBColors().validPrefixIconColor
+                : prefixIconColor ?? FBColors().prefixIconColor,
+          ),
+    prefixIconConstraints: const BoxConstraints(
+      minWidth: 36,
+    ),
+    suffixIcon: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        InkWell(
+          onTap: passwordOnTap,
+          child: Container(
+            margin: const EdgeInsets.only(right: 12),
+            child: Icon(
+              isShowPasswordIcon ? Icons.visibility : Icons.visibility_off,
+              size: suffixIconSize ?? FBTypography().tfLabelTS.fontSize,
+              color: suffixIconColor ?? FBColors().suffixIconColor,
+            ),
+          ),
+        ),
       ],
     ),
     suffixIconConstraints: const BoxConstraints(),

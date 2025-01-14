@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sandra/app/core/utils/static_utility_function.dart';
 import 'package:sandra/app/core/widget/dialog_pattern.dart';
+import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/entity/store_setup.dart';
 import 'package:sandra/app/pages/intro/create_store/modals/terms_and_condition_modal_view.dart';
@@ -97,12 +98,20 @@ class CreateStoreController extends BaseController {
   }*/
 
   Future<void> buildStore() async {
-    if (!formKey.currentState!.validate() ||
+    if (!formKey.currentState!.validate() &&
         selectedBusinessType.value == null) {
       isShowErrorMsg.value = true;
       return;
     }
     isShowErrorMsg.value = false;
+
+    if (!isAllowTerms.value) {
+      showSnackBar(
+        message: appLocalization.pleaseAcceptTermsAndConditions,
+        type: SnackBarType.error,
+      );
+      return;
+    }
 
     // API call to create shop
     final logs = StoreSetup(

@@ -1,11 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/bindings/initial_binding.dart';
 import 'package:sandra/app/entity/stock_details.dart';
 
-import '/app/core/base/base_controller.dart';
 import '/app/core/widget/show_snack_bar.dart';
 import '/app/entity/brand.dart';
 import '/app/entity/category.dart';
@@ -89,7 +84,28 @@ class AddProductModalViewController extends BaseController {
     descriptionController.clear();
   }
 
+  void onResetTapAfterSubmit() {
+    categoryManager.asController.selectedValue = null;
+    brandManager.asController.selectedValue = null;
+    unitManager.asController.selectedValue = null;
+
+    nameController.value = TextEditingValue(text: ' ');
+    modelNumberController.clear();
+    purchasePriceController.value = TextEditingValue(text: ' ');
+    salePriceController.value = TextEditingValue(text: ' ');
+    discountController.clear();
+    minimumQtyController.clear();
+    openingQtyController.clear();
+    descriptionController.clear();
+    Get.focusScope?.unfocus();
+  }
+
   Future<void> onSaveTap() async {
+    if (nameController.text == ' ' ||
+        purchasePriceController.text == ' ' ||
+        salePriceController.text == ' ') {
+      onResetTap();
+    }
     if (!formKey.currentState!.validate()) {
       return;
     }
@@ -134,7 +150,7 @@ class AddProductModalViewController extends BaseController {
       },
     );
     if (createdStock != null) {
-      onResetTap();
+      onResetTapAfterSubmit();
       showSnackBar(
         type: SnackBarType.success,
         message: appLocalization.save,

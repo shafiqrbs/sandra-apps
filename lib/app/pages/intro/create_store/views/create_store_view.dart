@@ -89,7 +89,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        appLocalization.businessModel,
+                        '${appLocalization.businessModel} *',
                         style: FBTypography().tfLabelTS,
                         maxLines: 1,
                       ),

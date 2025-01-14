@@ -1,4 +1,5 @@
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/utils/style_function.dart';
 import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
@@ -272,15 +273,25 @@ class LoginView extends BaseView<LoginController> {
                   ).visible(!controller.isSignUp.value),
                   //16.height,
 
-                  FBString(
-                    textController: controller.passwordController,
-                    isRequired: true,
-                    label: appLocalization.password,
-                    //example: 'example'.tr,
-                    hint: appLocalization.enterPassword,
-                    errorMsg: appLocalization.passwordRequired,
-                    preFixIcon: TablerIcons.key,
-                  ).visible(!controller.isSignUp.value),
+                  Obx(
+                    () => FBString(
+                      textController: controller.passwordController,
+                      isRequired: true,
+                      isShowPassword: controller.isPasswordHidden.value,
+                      label: appLocalization.password,
+                      //example: 'example'.tr,
+                      hint: appLocalization.enterPassword,
+                      errorMsg: appLocalization.passwordRequired,
+                      preFixIcon: TablerIcons.key,
+                      decoration: formBuilderInputDecorationWithPassword(
+                          hint: appLocalization.enterPassword,
+                          textEditingController: controller.passwordController,
+                          isShowClearIcon: false,
+                          isShowPasswordIcon: controller.isPasswordHidden.value,
+                          passwordOnTap: controller.togglePasswordVisibility,
+                          suffixIconSize: 14),
+                    ).visible(!controller.isSignUp.value),
+                  ),
 
                   FBString(
                     textController: controller.otpController,
@@ -292,60 +303,68 @@ class LoginView extends BaseView<LoginController> {
                     preFixIcon: TablerIcons.device_mobile,
                   ).visible(controller.isSignUp.value),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          showSnackBar(
-                            type: SnackBarType.error,
-                            message: appLocalization
-                                .doNotAllowDiscountValueMoreThenSubtotalValue,
-                          );
-                          toast(appLocalization.underDevelopment);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(right: 16),
-                          child: CommonText(
-                            text: appLocalization.forgotPassword,
-                            fontSize: regularTFSize,
-                            textColor: colors.primaryRedColor,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  //_buildForgotPassword(),
                   20.height,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CommonText(
-                        text: appLocalization.donNotHaveAnAccount,
-                        fontSize: subHeaderTFSize,
-                        textColor: colors.primaryBlackColor,
-                      ),
-                      4.width,
-                      CommonText(
-                        text: appLocalization.createAccount,
-                        fontSize: subHeaderTFSize,
-                        textColor: colors.solidBlackColor,
-                        fontWeight: FontWeight.w600,
-                        textDecoration: TextDecoration.underline,
-                      ).onTap(
-                        () {
-                          toast(appLocalization.underDevelopment);
-                        },
-                      ),
-                    ],
-                  ),
+                  // _buildCreateAccount(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildForgotPassword() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        InkWell(
+          onTap: () {
+            showSnackBar(
+              type: SnackBarType.error,
+              message:
+                  appLocalization.doNotAllowDiscountValueMoreThenSubtotalValue,
+            );
+            toast(appLocalization.underDevelopment);
+          },
+          child: Container(
+            margin: const EdgeInsets.only(right: 16),
+            child: CommonText(
+              text: appLocalization.forgotPassword,
+              fontSize: regularTFSize,
+              textColor: colors.primaryRedColor,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCreateAccount() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CommonText(
+          text: appLocalization.donNotHaveAnAccount,
+          fontSize: subHeaderTFSize,
+          textColor: colors.primaryBlackColor,
+        ),
+        4.width,
+        CommonText(
+          text: appLocalization.createAccount,
+          fontSize: subHeaderTFSize,
+          textColor: colors.solidBlackColor,
+          fontWeight: FontWeight.w600,
+          textDecoration: TextDecoration.underline,
+        ).onTap(
+          () {
+            Get.toNamed(Routes.createStore);
+          },
+        ),
+      ],
     );
   }
 

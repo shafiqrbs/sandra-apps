@@ -17,6 +17,13 @@ class LoginController extends BaseController {
   final isPasswordFieldValid = true.obs;
   final isSignUp = false.obs;
 
+  var isPasswordHidden = true.obs;
+
+  // Method to toggle the visibility
+  void togglePasswordVisibility() {
+    isPasswordHidden.value = !isPasswordHidden.value;
+  }
+
   @override
   Future<void> onInit() async {
     super.onInit();
