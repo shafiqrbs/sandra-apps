@@ -179,6 +179,7 @@ class CreateStoreView extends BaseView<CreateStoreController> {
                   label: appLocalization.address,
                   errorMsg: appLocalization.requiredField,
                   keyboardType: textInputType,
+                  lines: 3,
                 ),
                 _buildCheckBox(
                   isActive: controller.isAllowReadyStock,
