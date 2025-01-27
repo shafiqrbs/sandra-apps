@@ -1,4 +1,6 @@
+import 'package:sandra/app/core/core_model/setup.dart';
 import 'package:sandra/app/core/importer.dart';
+import 'package:sandra/app/core/widget/common_cache_image_widget.dart';
 
 import '/app/core/widget/fb_string.dart';
 import '/app/core/widget/setup_bottom_nav_bar.dart';
@@ -132,13 +134,12 @@ class LicenseView extends BaseView<LicenseController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    maxRadius: 65,
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/onboarding_logo.png',
-                      ),
-                    ),
+                  commonCacheImageWidget(
+                    SetUp().logo,
+                    130,
+                    width: 130,
+                    fit: BoxFit.cover,
+                    isOval: true,
                   ),
                 ],
               ),
