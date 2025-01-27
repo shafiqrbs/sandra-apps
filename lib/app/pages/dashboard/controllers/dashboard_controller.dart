@@ -88,7 +88,7 @@ List<Widget> inventoryButtonList = [
     bgColor: colorList.value['olive'],
     permission: isRolePurchase,
   ),
-  TbdRoundButton(
+  /*TbdRoundButton(
     text: appLocalization.stockList,
     icon: TablerIcons.receipt_refund,
     onTap: () {
@@ -101,7 +101,7 @@ List<Widget> inventoryButtonList = [
     localeMethod: () => appLocalization.purchaseReturn,
     bgColor: colorList.value['red'],
     permission: isRoleManager,
-  ),
+  ),*/
   TbdRoundButton(
     text: appLocalization.brand,
     icon: TablerIcons.clipboard_data,
@@ -170,7 +170,7 @@ List<Widget> accountingButtonList = [
     bgColor: colorList.value['olive'],
     permission: isRolePurchase,
   ),
-  TbdRoundButton(
+  /*TbdRoundButton(
     icon: TablerIcons.report,
     onTap: () {
       showSnackBar(
@@ -182,7 +182,7 @@ List<Widget> accountingButtonList = [
     localeMethod: () => appLocalization.journal,
     bgColor: colorList.value['red'],
     permission: isRoleManager,
-  ),
+  ),*/
 ];
 
 List<Widget> createButtonList = [
