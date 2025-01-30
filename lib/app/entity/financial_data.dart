@@ -1,4 +1,7 @@
 class FinancialData {
+  final int? totalSalesInvoice;
+  final int? totalPurchaseInvoice;
+
   final int? globalOption;
   final String? expenditure;
   final String? sales;
@@ -16,6 +19,8 @@ class FinancialData {
   final String? balanceAmount;
 
   FinancialData({
+    this.totalSalesInvoice,
+  this.totalPurchaseInvoice,
     this.globalOption,
     this.expenditure,
     this.sales,
@@ -36,6 +41,9 @@ class FinancialData {
   // Factory method to create a FinancialData object from JSON
   factory FinancialData.fromJson(Map<String, dynamic> json) {
     return FinancialData(
+      // totalInvoice: json['total_invoice'] as int?,
+      totalSalesInvoice: json['total_sales_invoice'] as int?,
+      totalPurchaseInvoice: json['total_purchase_invoice'] as int?,
       globalOption: json['globalOption'] as int?,
       expenditure: json['expenditure'] as String?,
       sales: json['sales'] as String?,
@@ -59,6 +67,8 @@ class FinancialData {
   // Method to convert a FinancialData object to JSON
   Map<String, dynamic> toJson() {
     return {
+      'total_sales_invoice': totalSalesInvoice,
+      'total_purchase_invoice': totalPurchaseInvoice,
       'globalOption': globalOption,
       'expenditure': expenditure,
       'sales': sales,

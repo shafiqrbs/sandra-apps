@@ -185,7 +185,7 @@ class DbHelper {
       if (db != null) {
         final sql = StringBuffer('''
 SELECT 
-    COUNT(sales_id) as total_invoice,
+    COUNT(sales_id) as total_sales_invoice,
     CAST(ROUND(SUM(net_total)) AS INTEGER) as total, 
     CAST(ROUND(SUM(received)) AS INTEGER) as received,
     CAST(ROUND(SUM(net_total) - SUM(received)) AS INTEGER) as due, 
@@ -215,7 +215,7 @@ GROUP BY transaction_methods.method_mode
       final Database? db = await instance.database;
       if (db != null) {
         final sql = StringBuffer(
-          'SELECT COUNT(purchase_id) as total_invoice, CAST(SUM(net_total) AS INTEGER) as total, CAST(SUM(received) AS INTEGER) as received, CAST(SUM(net_total) - SUM(received) AS INTEGER) as due, transaction_methods.method_mode FROM purchases INNER JOIN transaction_methods ON purchases.method_id = transaction_methods.method_id WHERE is_hold is null or is_hold = 0 GROUP BY transaction_methods.method_mode',
+          'SELECT COUNT(purchase_id) as total_purchase_invoice, CAST(SUM(net_total) AS INTEGER) as total, CAST(SUM(received) AS INTEGER) as received, CAST(SUM(net_total) - SUM(received) AS INTEGER) as due, transaction_methods.method_mode FROM purchases INNER JOIN transaction_methods ON purchases.method_id = transaction_methods.method_id WHERE is_hold is null or is_hold = 0 GROUP BY transaction_methods.method_mode',
         );
         return db.rawQuery(
           sql.toString(),

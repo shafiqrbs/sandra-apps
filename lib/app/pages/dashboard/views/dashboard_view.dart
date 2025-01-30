@@ -392,6 +392,8 @@ class DashboardView extends BaseView<DashboardController> {
   }
 
   Widget _buildTitleSubTitleButtonList() {
+    final financialData = controller.financialData.value;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
@@ -431,7 +433,7 @@ class DashboardView extends BaseView<DashboardController> {
                 TitleSubtitleButton(
                   title: appLocalization.sales,
                   subTitle:
-                      '${controller.currency} ${controller.financialData.value?.sales ?? ''}',
+                      '${controller.currency} ${controller.financialData.value?.sales ?? ''} (${financialData?.totalSalesInvoice ?? 0})',
                   icon: TablerIcons.report_analytics,
                   onTap: controller.goToSalesList,
                   bgColor: colors.secondaryBlueColor,
@@ -441,7 +443,7 @@ class DashboardView extends BaseView<DashboardController> {
                 TitleSubtitleButton(
                   title: appLocalization.purchase,
                   subTitle:
-                      '${controller.currency} ${controller.financialData.value?.purchase ?? ''}',
+                      '${controller.currency} ${controller.financialData.value?.purchase ?? ''} (${financialData?.totalPurchaseInvoice ?? 0})',
                   icon: TablerIcons.cash,
                   onTap: controller.goToPurchaseList,
                   bgColor: colors.secondaryOrangeColor,

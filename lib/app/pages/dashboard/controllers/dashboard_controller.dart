@@ -385,6 +385,8 @@ class DashboardController extends BaseController {
     }
 
     final data = {
+      'total_sales_invoice': salesData[0]['total_sales_invoice'],
+      'total_purchase_invoice': purchaseData[0]['total_purchase_invoice'],
       'sales': totalSales?.toString() ?? '0',
       'due': totalDue?.toString() ?? '0',
       'purchase': totalPurchase?.toString() ?? '0',
@@ -400,9 +402,11 @@ class DashboardController extends BaseController {
       }).toList(),
     };
 
-    print('total sale $totalSales');
-    print('total due $totalDue');
-    print('total purchase $totalPurchase');
+    if (kDebugMode) {
+      print('total sale $totalSales');
+      print('total due $totalDue');
+      print('total purchase $totalPurchase');
+    }
 
     financialData.value = FinancialData.fromJson(
       data,
