@@ -548,6 +548,7 @@ class Services {
         {
           'content': jsonEncode(salesList),
           'mode': mode,
+          'total_invoice': salesList.length,
           'is_approve': autoApprove ? '1' : '0',
           'approved_by': autoApprove ? LoggedUser().userId : '',
           'process': 'sales',
@@ -613,6 +614,7 @@ class Services {
           'mode': mode,
           'is_approve': autoApprove ? '1' : '0',
           'approved_by': autoApprove ? LoggedUser().userId : '',
+          'total_invoice': purchaseList.length,
           'process': 'purchase',
           'user_id': LoggedUser().userId,
           'total': total ?? 0,
