@@ -1,16 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:sandra/app/core/values/app_strings.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/abstract_controller/payment_gateway_controller.dart';
 import '/app/core/core_model/logged_user.dart';
 import '/app/core/widget/common_confirmation_modal.dart';
-import '/app/core/widget/dialog_pattern.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
