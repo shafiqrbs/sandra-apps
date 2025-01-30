@@ -484,28 +484,30 @@ class PrinterController extends BaseController {
       }
     }
     bytes += generator.text('------------------------------------------------');
-    bytes += generator.row([
-      PosColumn(
-        text: appLocalization.subTotal,
-        width: 9,
-        styles: const PosStyles(
-          align: PosAlign.right,
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: appLocalization.subTotal,
+          width: 9,
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
         ),
-      ),
-      PosColumn(
-        text: 'Tk',
-        width: 1,
-        styles: const PosStyles(
-          align: PosAlign.center,
+        PosColumn(
+          text: 'Tk',
+          width: 1,
+          styles: const PosStyles(
+            align: PosAlign.center,
+          ),
         ),
-      ),
-      PosColumn(
-        text: sales.subTotal?.toString() ?? '',
-        styles: const PosStyles(
-          align: PosAlign.right,
+        PosColumn(
+          text: sales.subTotal?.toInt().toString() ?? '',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
     if (sales.discountType == 'percent') {
       bytes += generator.row(
         [
@@ -523,7 +525,7 @@ class PrinterController extends BaseController {
             styles: const PosStyles(align: PosAlign.center),
           ),
           PosColumn(
-            text: sales.discount?.toString() ?? '',
+            text: sales.discount?.toInt().toString() ?? '',
             styles: const PosStyles(
               align: PosAlign.right,
             ),
@@ -545,7 +547,7 @@ class PrinterController extends BaseController {
           styles: const PosStyles(align: PosAlign.center),
         ),
         PosColumn(
-          text: sales.discount?.toString() ?? '',
+          text: sales.discount?.toInt().toString() ?? '',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
@@ -591,6 +593,28 @@ class PrinterController extends BaseController {
         ),
       ],
     );
+    if (sales.due != null && sales.due! > 0) {
+      bytes += generator.row(
+        [
+          PosColumn(
+            text: appLocalization.due,
+            width: 9,
+            styles: const PosStyles(align: PosAlign.right),
+          ),
+          PosColumn(
+            text: 'Tk',
+            width: 1,
+            styles: const PosStyles(align: PosAlign.center),
+          ),
+          PosColumn(
+            text: sales.due?.toInt().toString() ?? '',
+            styles: const PosStyles(
+              align: PosAlign.right,
+            ),
+          ),
+        ],
+      );
+    }
     bytes += generator.text('------------------------------------------------');
 
     bytes += generator.text(
@@ -1250,24 +1274,26 @@ class PrinterController extends BaseController {
     ]);
 
     bytes += generator.text('------------------------------------------------');
-    bytes += generator.row([
-      PosColumn(
-        text: 'Net Payable',
-        width: 9,
-        styles: const PosStyles(align: PosAlign.right),
-      ),
-      PosColumn(
-        text: 'Tk',
-        width: 1,
-        styles: const PosStyles(align: PosAlign.center),
-      ),
-      PosColumn(
-        text: purchase.netTotal?.toString() ?? '',
-        styles: const PosStyles(
-          align: PosAlign.right,
+    bytes += generator.row(
+      [
+        PosColumn(
+          text: 'Net Payable',
+          width: 9,
+          styles: const PosStyles(align: PosAlign.right),
         ),
-      ),
-    ]);
+        PosColumn(
+          text: 'Tk',
+          width: 1,
+          styles: const PosStyles(align: PosAlign.center),
+        ),
+        PosColumn(
+          text: purchase.netTotal?.toString() ?? '',
+          styles: const PosStyles(
+            align: PosAlign.right,
+          ),
+        ),
+      ],
+    );
     bytes += generator.row(
       [
         PosColumn(
@@ -1288,6 +1314,7 @@ class PrinterController extends BaseController {
         ),
       ],
     );
+
     bytes += generator.feed(1);
 
     bytes += generator.text(
