@@ -565,7 +565,7 @@ class PrinterController extends BaseController {
         styles: const PosStyles(align: PosAlign.center),
       ),
       PosColumn(
-        text: sales.netTotal?.toString() ?? '',
+        text: sales.netTotal?.round().toString() ?? '',
         styles: const PosStyles(
           align: PosAlign.right,
         ),
@@ -584,7 +584,7 @@ class PrinterController extends BaseController {
           styles: const PosStyles(align: PosAlign.center),
         ),
         PosColumn(
-          text: sales.received?.toString() ?? '',
+          text: sales.received?.round().toString() ?? '',
           styles: const PosStyles(
             align: PosAlign.right,
           ),
