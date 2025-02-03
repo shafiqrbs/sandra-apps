@@ -335,9 +335,15 @@ class DashboardController extends BaseController {
     final salesData = await dbHelper.getLocalSalesFinancialData();
     final purchaseData = await dbHelper.getLocalPurchaseFinancialData();
 
+    final totalSalesInvoice =
+        salesData.isEmpty ? 0 : salesData[0]['total_sales_invoice'];
+    final totalPurchaseInvoice =
+        purchaseData.isEmpty ? 0 : purchaseData[0]['total_purchase_invoice'];
+
     final totalSales = salesData.isEmpty
         ? 0
         : salesData.map((e) => e['total']).reduce((a, b) => a + b);
+
     final totalSalesReceived = salesData.isEmpty
         ? 0
         : salesData.map((e) => e['received']).reduce((a, b) => a + b) ?? 0;
@@ -385,8 +391,8 @@ class DashboardController extends BaseController {
     }
 
     final data = {
-      'total_sales_invoice': salesData[0]['total_sales_invoice'],
-      'total_purchase_invoice': purchaseData[0]['total_purchase_invoice'],
+      'total_sales_invoice': totalSalesInvoice,
+      'total_purchase_invoice': totalPurchaseInvoice,
       'sales': totalSales?.toString() ?? '0',
       'due': totalDue?.toString() ?? '0',
       'purchase': totalPurchase?.toString() ?? '0',
