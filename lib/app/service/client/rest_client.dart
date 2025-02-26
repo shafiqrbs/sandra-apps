@@ -32,6 +32,11 @@ class RestClient {
     return _instance;
   }
 
+  void updateBaseUrl(String newBaseUrl) {
+    baseUrl = newBaseUrl;
+    _dio.options.baseUrl = newBaseUrl;
+  }
+
   RestClient._internal();
 
   late Dio _dio;

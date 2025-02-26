@@ -41,11 +41,20 @@ class Services {
   Services._privateConstructor();
 
   static final Services instance = Services._privateConstructor();
+  String baseUrl = 'http://www.terminalbd.com/flutter-api/';
+
+  void updateBaseUrl(String newBaseUrl) {
+    baseUrl = newBaseUrl;
+    dio
+      ..baseUrl = newBaseUrl
+      ..updateBaseUrl(newBaseUrl);
+  }
 
   final pref = SessionManager();
+
   final dio = RestClient(
-    baseUrl: 'https://demo.poskeeper.com/flutter-api/',
-    //baseUrl: 'http://www.terminalbd.com/flutter-api/',
+    //baseUrl: 'https://demo.poskeeper.com/flutter-api/',
+    baseUrl: 'http://www.terminalbd.com/flutter-api/',
     token: '',
   );
 
@@ -60,11 +69,9 @@ class Services {
     };
   }
 
-  Future<void> printError(
-    dynamic e,
-    dynamic s,
-    String endPoint,
-  ) async {
+  Future<void> printError(dynamic e,
+      dynamic s,
+      String endPoint,) async {
     try {
       if (kDebugMode) {
         print('Error: $e');
@@ -210,7 +217,8 @@ class Services {
         'name': name,
         'address': address,
         'email': email,
-      }..removeWhere((key, value) => value == '');
+      }
+        ..removeWhere((key, value) => value == '');
       final response = await dio.post(
         APIType.public,
         endPoint,
@@ -809,8 +817,9 @@ class Services {
         'end_date': endDate,
         'keyword': keyword,
         'page': page,
-      }..removeWhere(
-          (key, value) => value == null,
+      }
+        ..removeWhere(
+              (key, value) => value == null,
         );
 
       log('page: $page');
@@ -848,8 +857,9 @@ class Services {
         'end_date': endDate,
         'keyword': keyword,
         'page': page,
-      }..removeWhere(
-          (key, value) => value == null,
+      }
+        ..removeWhere(
+              (key, value) => value == null,
         );
 
       final response = await dio.post(

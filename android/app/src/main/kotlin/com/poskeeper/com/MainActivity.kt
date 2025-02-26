@@ -1,4 +1,4 @@
-package com.poskeeper.sales_demo
+package com.poskeeper.com
 
 import io.flutter.embedding.android.FlutterActivity
 

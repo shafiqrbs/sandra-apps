@@ -1,10 +1,7 @@
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/core_model/logged_user.dart';
-import 'package:sandra/app/core/utils/static_utility_function.dart';
+import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/entity/business_type.dart';
 import 'package:sandra/app/pages/intro/onboarding/controllers/onboarding_controller.dart';
-import 'package:sandra/app/routes/app_pages.dart';
 
 import '/app/core/abstract_controller/printer_controller.dart';
 
@@ -46,6 +43,12 @@ class ViewDemoModalController extends PrinterController {
       toast('Something went wrong');
       return;
     }
+    services.dio.baseUrl =
+        type.url ?? 'https://demo.poskeeper.com/flutter-api/';
+    services.updateBaseUrl(
+      type.url ?? 'https://demo.poskeeper.com/flutter-api/',
+    );
+
     await dataFetcher(
       future: () async {
         final value = await services.submitLicense(

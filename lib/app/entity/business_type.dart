@@ -9,6 +9,7 @@ class BusinessType with CustomDropdownListFilter {
   String? userName;
   String? password;
   String? content;
+  String? url;
 
   BusinessType({
     this.appSlug,
@@ -19,6 +20,7 @@ class BusinessType with CustomDropdownListFilter {
     this.userName,
     this.password,
     this.content,
+    this.url,
   });
 
   factory BusinessType.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class BusinessType with CustomDropdownListFilter {
       userName: json['username'],
       password: json['password'],
       content: json['content'],
+      url: json['url'],
     );
   }
 
@@ -44,6 +47,7 @@ class BusinessType with CustomDropdownListFilter {
       'username': userName,
       'password': password,
       'content': content,
+      'url': url,
     };
   }
 
