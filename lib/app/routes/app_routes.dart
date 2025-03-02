@@ -5,7 +5,7 @@ abstract class Routes {
   Routes._();
   static const splash = _Paths.splash;
   static const onboarding = _Paths.onboarding;
-  static const  createStore = _Paths.createStore;
+  static const createStore = _Paths.createStore;
   static const license = _Paths.license;
   static const login = _Paths.login;
   static const dashboard = _Paths.dashboard;
@@ -41,16 +41,17 @@ abstract class Routes {
   static const categoryListPage = _Paths.categoryListPage;
   static const userListPage = _Paths.userListPage;
   static const salesReturnPage = _Paths.salesReturnPage;
-  static const  reportList = _Paths.reportList;
-  static const  systemOverviewReport = _Paths.systemOverviewReport;
-  static const  userSalesOverviewReport = _Paths.userSalesOverviewReport;
+  static const reportList = _Paths.reportList;
+  static const systemOverviewReport = _Paths.systemOverviewReport;
+  static const userSalesOverviewReport = _Paths.userSalesOverviewReport;
   static const salesReturnListPage = _Paths.salesReturnListPage;
+  static const viewDemo = _Paths.viewDemo;
 }
 
 abstract class _Paths {
   static const splash = '/splash';
   static const onboarding = '/onboarding';
-  static const  createStore = '/create_store';
+  static const createStore = '/create_store';
   static const license = '/license';
   static const login = '/login';
   static const dashboard = '/dashboard';
@@ -86,8 +87,9 @@ abstract class _Paths {
   static const categoryListPage = '/category_list_page';
   static const userListPage = '/user_list_page';
   static const salesReturnPage = '/sales_return_page';
-  static const  reportList = '/report_list';
-  static const  systemOverviewReport = '/system_overview_report';
-  static const  userSalesOverviewReport = '/user_sales_overview_report';
+  static const reportList = '/report_list';
+  static const systemOverviewReport = '/system_overview_report';
+  static const userSalesOverviewReport = '/user_sales_overview_report';
   static const salesReturnListPage = '/sales_return_list_page';
+  static const viewDemo = '/view_demo';
 }

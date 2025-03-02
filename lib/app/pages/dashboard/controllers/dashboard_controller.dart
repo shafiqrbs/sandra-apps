@@ -4,6 +4,7 @@ import 'package:sandra/app/core/importer.dart';
 import 'package:sandra/app/core/widget/show_snack_bar.dart';
 import 'package:sandra/app/entity/bank.dart';
 import 'package:sandra/app/entity/financial_data.dart';
+import 'package:sandra/app/entity/onboard_entity.dart';
 import 'package:sandra/app/global_modal/add_brand_modal/add_brand_modal_view.dart';
 import 'package:sandra/app/global_modal/add_category_modal/add_category_modal_view.dart';
 import 'package:sandra/app/global_modal/printer_setup_modal/printer_setup_modal_view.dart';
@@ -297,6 +298,7 @@ class DashboardController extends BaseController {
   final selectedButtonGroup = SelectedButtonGroup.inventory.obs;
   final showOnlineController = ValueNotifier<bool>(false).obs;
   final isOnline = ValueNotifier(false);
+  final onBoardSetupData = Rx<OnboardEntity?>(null);
 
   List<Widget> dashboardButtonList = [];
 
@@ -308,6 +310,11 @@ class DashboardController extends BaseController {
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsDashboardOnline();
     await setSalesAndPurchaseOnline(isOnline.value);
+    await dataFetcher(
+      future: () async {
+        await getOnboardSetup();
+      },
+    );
     /*if (isOnline.value) {
       await prefs.setIsSalesOnline(
         isSalesOnline: true,
@@ -316,6 +323,13 @@ class DashboardController extends BaseController {
     } else {
       await fetchOfflineFinancialData();
     }*/
+  }
+
+  Future<void> getOnboardSetup() async {
+    final response = await services.getOnboardSetup();
+    if (response != null) {
+      onBoardSetupData.value = response;
+    }
   }
 
   Future<void> fetchOnlineFinancialData() async {

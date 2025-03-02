@@ -76,6 +76,8 @@ import '/app/pages/settings/bindings/settings_binding.dart';
 import '/app/pages/settings/views/settings_view.dart';
 import '/app/pages/theme_test_page/bindings/theme_test_page_binding.dart';
 import '/app/pages/theme_test_page/views/theme_test_page_view.dart';
+import '/app/pages/view_demo/bindings/view_demo_binding.dart';
+import '/app/pages/view_demo/views/view_demo_view.dart';
 
 part 'app_routes.dart';
 
@@ -274,6 +276,11 @@ class AppPages {
       name: Routes.salesReturnListPage,
       page: SalesReturnListPage.new,
       binding: SalesReturnListBinding(),
+    ),
+    GetPage(
+      name: Routes.viewDemo,
+      page: () => ViewDemoView(),
+      binding: ViewDemoBinding(),
     ),
   ].obs;
 }

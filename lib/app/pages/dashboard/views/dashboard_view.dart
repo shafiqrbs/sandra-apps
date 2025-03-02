@@ -113,6 +113,8 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
               ),
             ),
+            if (controller.onBoardSetupData.value?.onboard == 1)
+              _buildViewDemo(),
           ],
         ),
       ),
@@ -250,12 +252,40 @@ class DashboardView extends BaseView<DashboardController> {
       children: [
         //if (kDebugMode) _buildThemeSelector(),
         12.height,
+
         _buildNewUpdateView(),
         _buildThreeCommonButtons(),
         _buildFinancialDataView(),
         14.height,
         _buildButtons(),
       ],
+    );
+  }
+
+  Widget _buildViewDemo() {
+    return GestureDetector(
+      onTap: () => Get.toNamed(Routes.viewDemo),
+      child: Container(
+        width: double.infinity,
+        margin: const EdgeInsets.only(
+          bottom: 16,
+        ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 16,
+        ),
+        decoration: BoxDecoration(
+          color: colors.primaryColor400,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text(
+          appLocalization.viewDemo,
+          textAlign: TextAlign.center,
+          style: AppTextStyle.h4TextStyle500.copyWith(
+            color: colors.whiteColor,
+          ),
+        ),
+      ),
     );
   }
 
