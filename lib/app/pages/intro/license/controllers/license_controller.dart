@@ -13,6 +13,10 @@ class LicenseController extends BaseController {
   );
 
   Future<void> submitLicense() async {
+    services.updateBaseUrl(
+      'http://www.terminalbd.com/flutter-api/',
+    );
+
     if (formKey.currentState!.validate()) {
       final licenseNumber = licenseNumberController.text;
       final activeKey = activeKeyController.text;

@@ -113,7 +113,8 @@ class DashboardView extends BaseView<DashboardController> {
                 ),
               ),
             ),
-            if (controller.onBoardSetupData.value?.onboard == 1)
+            if (services.dio.baseUrl ==
+                'https://demo.poskeeper.com/flutter-api/')
               _buildViewDemo(),
           ],
         ),
@@ -271,7 +272,7 @@ class DashboardView extends BaseView<DashboardController> {
           bottom: 16,
         ),
         padding: const EdgeInsets.symmetric(
-          vertical: 12,
+          vertical: 8,
           horizontal: 16,
         ),
         decoration: BoxDecoration(
@@ -279,9 +280,9 @@ class DashboardView extends BaseView<DashboardController> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
-          appLocalization.viewDemo,
+          appLocalization.viewWebDemo,
           textAlign: TextAlign.center,
-          style: AppTextStyle.h4TextStyle500.copyWith(
+          style: AppTextStyle.h2TextStyle500.copyWith(
             color: colors.whiteColor,
           ),
         ),

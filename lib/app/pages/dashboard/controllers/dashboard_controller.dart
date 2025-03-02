@@ -310,11 +310,7 @@ class DashboardController extends BaseController {
     dashboardButtonList = inventoryButtonList;
     isOnline.value = await prefs.getIsDashboardOnline();
     await setSalesAndPurchaseOnline(isOnline.value);
-    await dataFetcher(
-      future: () async {
-        await getOnboardSetup();
-      },
-    );
+
     /*if (isOnline.value) {
       await prefs.setIsSalesOnline(
         isSalesOnline: true,

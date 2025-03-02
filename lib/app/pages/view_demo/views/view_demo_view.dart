@@ -13,9 +13,9 @@ class ViewDemoView extends BaseView<ViewDemoController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
       title: Text(
-        appLocalization.viewDemo,
+        appLocalization.viewWebDemo,
         style: AppTextStyle.h1TextStyle500.copyWith(
-          color: colors.primaryColor600,
+          color: colors.blackColor,
         ),
       ),
       centerTitle: true,
@@ -24,7 +24,7 @@ class ViewDemoView extends BaseView<ViewDemoController> {
       leading: IconButton(
         icon: Icon(
           TablerIcons.arrow_left,
-          color: colors.primaryColor600,
+          color: colors.blackColor,
         ),
         onPressed: Get.back,
       ),
