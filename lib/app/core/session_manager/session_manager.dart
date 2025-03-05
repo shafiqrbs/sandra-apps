@@ -390,7 +390,7 @@ class SessionManager {
 
   /// get is show brand on sales
   Future<bool> getIsDashboardOnline() async {
-    return prefs.getBool(prefIsDashboardOnline) ?? true;
+    return prefs.getBool(prefIsDashboardOnline) ?? false;
   }
 
   // set selected theme name
