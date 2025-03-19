@@ -16,6 +16,9 @@ class LicenseController extends BaseController {
     services.updateBaseUrl(
       'http://www.terminalbd.com/flutter-api/',
     );
+    await prefs.setBaseUrl(
+      'http://www.terminalbd.com/flutter-api/',
+    );
 
     if (formKey.currentState!.validate()) {
       final licenseNumber = licenseNumberController.text;

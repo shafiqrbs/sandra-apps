@@ -48,6 +48,8 @@ class ViewDemoModalController extends PrinterController {
     services.updateBaseUrl(
       type.url ?? 'https://demo.poskeeper.com/flutter-api/',
     );
+    await prefs
+        .setBaseUrl(type.url ?? 'https://demo.poskeeper.com/flutter-api/');
 
     await dataFetcher(
       future: () async {

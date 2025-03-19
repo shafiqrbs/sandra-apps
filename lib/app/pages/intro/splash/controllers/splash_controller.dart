@@ -16,6 +16,18 @@ class SplashController extends BaseController {
   Future<void> navigatePage() async {
     await Future.delayed(const Duration(seconds: 1));
 
+    String finalBaseUrl;
+
+    final String baseUrl = await prefs.getBaseUrl();
+    if (baseUrl.isEmpty) {
+      await prefs.setBaseUrl('http://www.terminalbd.com/flutter-api/');
+      finalBaseUrl = await prefs.getBaseUrl();
+    } else {
+      finalBaseUrl = baseUrl;
+    }
+    services.dio.baseUrl = finalBaseUrl;
+    services.updateBaseUrl(finalBaseUrl);
+
     final bool isLicenseValid = await prefs.getIsLicenseValid();
     final bool isLogin = await prefs.getIsLogin();
 

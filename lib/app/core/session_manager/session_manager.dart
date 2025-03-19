@@ -48,6 +48,21 @@ class SessionManager {
     return prefs.getString(prefsLanguage) ?? 'en';
   }
 
+  /// Set the base url of the app.
+  Future<void> setBaseUrl(
+    String baseUrl,
+  ) async {
+    await prefs.setString(
+      prefsBaseUrl,
+      baseUrl,
+    );
+  }
+
+  /// Get the base url of the app.
+  Future<String> getBaseUrl() async {
+    return prefs.getString(prefsBaseUrl) ?? '';
+  }
+
   /// Set the login status of the user.
   Future<void> setIsLogin({
     required bool isLogin,

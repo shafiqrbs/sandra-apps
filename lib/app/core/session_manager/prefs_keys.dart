@@ -1,4 +1,5 @@
 /*Shared preferences keys*/
+const prefsBaseUrl = 'baseUrl';
 const prefsIsLogin = 'isLogin';
 const prefsLoggedUserName = 'loggedUserName';
 const prefsLoggedUserPassword = 'loggedUserPassword';
