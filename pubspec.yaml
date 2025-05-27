@@ -40,16 +40,13 @@ dependencies:
   pdf: ^3.11.1
   permission_handler: ^11.3.1
   pie_chart: ^5.4.0
-  print_bluetooth_thermal:
-    git:
-      url: https://github.com/penafarhan/print_bluetooth_thermal_plus.git
-      ref: main
+  print_bluetooth_thermal: ^1.1.6
   rename_app: ^1.6.1
   settings_ui: ^2.0.2
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
-  speech_to_text: ^6.6.2
+  speech_to_text: ^7.0.0
   sqflite: ^2.3.3+1
   super_tooltip: ^2.0.7
   syncfusion_flutter_pdfviewer: ^27.1.57
