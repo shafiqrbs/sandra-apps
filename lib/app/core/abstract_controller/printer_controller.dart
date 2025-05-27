@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
@@ -178,14 +180,29 @@ class PrinterController extends BaseController {
   }
 
   Future<bool> printSales(
-    Sales sales,
-  ) async {
+    Sales sales, {
+    bool useImageBasedPrinting = true,
+    double shopNameFontSize = 20.0,
+    double itemFontSize = 12.0,
+    double totalFontSize = 14.0,
+  }) async {
     try {
       final bool connectionStatus =
           await PrintBluetoothThermal.connectionStatus;
       if (connectionStatus) {
-        final data = await templateOne(sales: sales);
-        return PrintBluetoothThermal.writeBytes(data); // init
+        if (useImageBasedPrinting) {
+          // Use new image-based printing with font control
+          return await printSalesWithImageControl(
+            sales,
+            shopNameFontSize: shopNameFontSize,
+            itemFontSize: itemFontSize,
+            totalFontSize: totalFontSize,
+          );
+        } else {
+          // Use legacy ESC/POS printing
+          final data = await templateOne(sales: sales);
+          return PrintBluetoothThermal.writeBytes(data);
+        }
       } else {
         showSnackBar(
           type: SnackBarType.success,
@@ -202,14 +219,25 @@ class PrinterController extends BaseController {
   }
 
   Future<bool> printSalesWithoutInvoice(
-    CustomerLedger ledger,
-  ) async {
+    CustomerLedger ledger, {
+    bool useImageBasedPrinting = true,
+    double headerFontSize = 18.0,
+    double contentFontSize = 12.0,
+  }) async {
     try {
       final bool connectionStatus =
           await PrintBluetoothThermal.connectionStatus;
       if (connectionStatus) {
-        final data = await salesWithoutInvoiceTemplateOne(ledger: ledger);
-        return PrintBluetoothThermal.writeBytes(data); // init
+        if (useImageBasedPrinting) {
+          return await _printSalesWithoutInvoiceImageBased(
+            ledger,
+            headerFontSize: headerFontSize,
+            contentFontSize: contentFontSize,
+          );
+        } else {
+          final data = await salesWithoutInvoiceTemplateOne(ledger: ledger);
+          return PrintBluetoothThermal.writeBytes(data);
+        }
       } else {
         showSnackBar(
           type: SnackBarType.success,
@@ -227,15 +255,28 @@ class PrinterController extends BaseController {
     required Sales sales,
     required String table,
     required String orderTakenBy,
+    bool useImageBasedPrinting = true,
+    double headerFontSize = 18.0,
+    double itemFontSize = 14.0,
   }) async {
     final bool connectionStatus = await PrintBluetoothThermal.connectionStatus;
     if (connectionStatus) {
-      final data = await kitchenTemplateOne(
-        sales: sales,
-        table: table,
-        orderTakenBy: orderTakenBy,
-      );
-      return PrintBluetoothThermal.writeBytes(data); // init
+      if (useImageBasedPrinting) {
+        return await _printKitchenImageBased(
+          sales: sales,
+          table: table,
+          orderTakenBy: orderTakenBy,
+          headerFontSize: headerFontSize,
+          itemFontSize: itemFontSize,
+        );
+      } else {
+        final data = await kitchenTemplateOne(
+          sales: sales,
+          table: table,
+          orderTakenBy: orderTakenBy,
+        );
+        return PrintBluetoothThermal.writeBytes(data);
+      }
     } else {
       showSnackBar(
         type: SnackBarType.success,
@@ -327,6 +368,166 @@ class PrinterController extends BaseController {
   Future<void> disconnect() async {
     await PrintBluetoothThermal.disconnect;
     connected.value = false;
+  }
+
+  // ==================== IMAGE-BASED PRINTING METHODS ====================
+
+  /// Generate text as image for precise font control
+  Future<img.Image> generateTextImage(
+    String text, {
+    double fontSize = 12.0,
+    bool isBold = false,
+    TextAlign textAlign = TextAlign.left,
+    Color textColor = Colors.black,
+    Color backgroundColor = Colors.white,
+  }) async {
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    // Thermal printer width (384 pixels for 58mm, 576 for 80mm)
+    final paperType = await prefs.getPrintPaperType();
+    final double width = paperType == '58 mm' ? 384 : 576;
+    final double height = fontSize * 2.5; // More height for complex scripts
+
+    // Background
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, width, height),
+      Paint()..color = backgroundColor,
+    );
+
+    // Create text painter
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: text,
+        style: TextStyle(
+          fontSize: fontSize,
+          fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+          color: textColor,
+        ),
+      ),
+      textAlign: textAlign,
+      textDirection: TextDirection.ltr,
+    );
+
+    textPainter.layout(maxWidth: width - 20); // 10px padding on each side
+
+    // Calculate vertical centering
+    final double yOffset = (height - textPainter.height) / 2;
+
+    // Calculate horizontal alignment
+    double xOffset = 10; // Default left padding
+    if (textAlign == TextAlign.center) {
+      xOffset = (width - textPainter.width) / 2;
+    } else if (textAlign == TextAlign.right) {
+      xOffset = width - textPainter.width - 10;
+    }
+
+    // Draw text
+    textPainter.paint(canvas, Offset(xOffset, yOffset));
+
+    final picture = recorder.endRecording();
+    final uiImage = await picture.toImage(width.toInt(), height.toInt());
+    final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
+
+    // Convert to img.Image for ESC/POS processing
+    final pngBytes = byteData!.buffer.asUint8List();
+    final image = img.decodeImage(pngBytes);
+
+    return image!;
+  }
+
+  /// Print custom text with specific font size
+  Future<bool> printCustomText(
+    String text, {
+    double fontSize = 12.0,
+    bool isBold = false,
+    TextAlign textAlign = TextAlign.left,
+    bool addFeedAfter = true,
+  }) async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (!connectionStatus) {
+        showSnackBar(
+          type: SnackBarType.error,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+
+      // Generate text as image
+      final image = await generateTextImage(
+        text,
+        fontSize: fontSize,
+        isBold: isBold,
+        textAlign: textAlign,
+      );
+
+      // Create print data
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+      bytes += generator.image(image);
+      if (addFeedAfter) bytes += generator.feed(1);
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in printCustomText: $e');
+      return false;
+    }
+  }
+
+  /// Print multiple lines with different font sizes
+  Future<bool> printMultiSizeText(List<Map<String, dynamic>> textLines) async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (!connectionStatus) {
+        showSnackBar(
+          type: SnackBarType.error,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+
+      for (final line in textLines) {
+        final String text = line['text'] ?? '';
+        final double fontSize = line['fontSize']?.toDouble() ?? 12.0;
+        final bool isBold = line['isBold'] ?? false;
+        final TextAlign textAlign = line['textAlign'] ?? TextAlign.left;
+        final bool addSpace = line['addSpace'] ?? true;
+
+        if (text.isNotEmpty) {
+          final image = await generateTextImage(
+            text,
+            fontSize: fontSize,
+            isBold: isBold,
+            textAlign: textAlign,
+          );
+          bytes += generator.image(image);
+          if (addSpace) bytes += generator.feed(1);
+        }
+      }
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in printMultiSizeText: $e');
+      return false;
+    }
   }
 
   Future<List<int>> templateOne({
@@ -1339,5 +1540,542 @@ class PrinterController extends BaseController {
   bool isEnglish(String input) {
     final regex = RegExp(r'^[\x00-\x7F]+$');
     return regex.hasMatch(input);
+  }
+
+  /// Enhanced sales template with image-based printing for font control
+  Future<bool> printSalesWithImageControl(
+    Sales sales, {
+    double shopNameFontSize = 20.0,
+    double itemFontSize = 12.0,
+    double totalFontSize = 14.0,
+  }) async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (!connectionStatus) {
+        showSnackBar(
+          type: SnackBarType.error,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+      bytes += generator.reset();
+
+      // Shop name with custom font size
+      final shopNameImage = await generateTextImage(
+        SetUp().name ?? '',
+        fontSize: shopNameFontSize,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(shopNameImage);
+
+      // Address
+      final addressImage = await generateTextImage(
+        SetUp().address ?? '',
+        fontSize: 12.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(addressImage);
+      bytes += generator.feed(1);
+
+      // Invoice with custom font size
+      final invoiceImage = await generateTextImage(
+        'Invoice : ${sales.invoice}',
+        fontSize: 16.0,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(invoiceImage);
+      bytes += generator.feed(1);
+
+      // Date and Mode
+      bytes += generator.row([
+        PosColumn(text: 'Date: ${sales.createdAt ?? ''}', width: 7),
+        PosColumn(text: 'Mode: ${sales.methodName ?? ''}', width: 5),
+      ]);
+
+      // Customer info
+      bytes += generator.row([
+        PosColumn(text: 'Cus : ${sales.customerName ?? ''}', width: 7),
+        PosColumn(text: 'Mob : ${sales.customerMobile ?? ''}', width: 5),
+      ]);
+
+      bytes += generator.feed(1);
+
+      // Table headers
+      bytes += generator.row([
+        PosColumn(text: 'Item Name', width: 7),
+        PosColumn(
+            text: 'Rate', styles: const PosStyles(align: PosAlign.center)),
+        PosColumn(
+            text: 'Qty',
+            width: 1,
+            styles: const PosStyles(align: PosAlign.center)),
+        PosColumn(
+            text: 'Total', styles: const PosStyles(align: PosAlign.right)),
+      ]);
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Items with custom font size
+      if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
+        int index = 1;
+        for (final SalesItem rowData in sales.salesItem!) {
+          // Use image-based printing for item names to support Unicode
+          final itemNameImage = await generateTextImage(
+            '${index++}.${rowData.stockName ?? ''}',
+            fontSize: itemFontSize,
+          );
+          bytes += generator.image(itemNameImage);
+
+          // Regular row for price, qty, total
+          bytes += generator.row([
+            PosColumn(text: '', width: 7), // Empty space for item name
+            PosColumn(
+              text: rowData.salesPrice?.toString() ?? '',
+              styles: const PosStyles(align: PosAlign.center),
+            ),
+            PosColumn(
+              text: rowData.quantity?.toStringAsFixed(0) ?? '1',
+              width: 1,
+              styles: const PosStyles(align: PosAlign.center),
+            ),
+            PosColumn(
+              text: rowData.subTotal.toString(),
+              styles: const PosStyles(align: PosAlign.right),
+            ),
+          ]);
+        }
+      }
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Totals with custom font size
+      final subTotalImage = await generateTextImage(
+        'Sub Total: Tk ${sales.subTotal?.toInt().toString() ?? ''}',
+        fontSize: totalFontSize,
+        textAlign: TextAlign.right,
+      );
+      bytes += generator.image(subTotalImage);
+
+      if (sales.discountType == 'percent') {
+        final discountImage = await generateTextImage(
+          'Discount (${sales.discountCalculation?.toString() ?? 0}%): Tk ${sales.discount?.toInt().toString() ?? ''}',
+          fontSize: totalFontSize,
+          textAlign: TextAlign.right,
+        );
+        bytes += generator.image(discountImage);
+      } else {
+        final discountImage = await generateTextImage(
+          'Discount: Tk ${sales.discount?.toInt().toString() ?? ''}',
+          fontSize: totalFontSize,
+          textAlign: TextAlign.right,
+        );
+        bytes += generator.image(discountImage);
+      }
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      final netTotalImage = await generateTextImage(
+        'Net Payable: Tk ${sales.netTotal?.round().toString() ?? ''}',
+        fontSize: totalFontSize + 2,
+        isBold: true,
+        textAlign: TextAlign.right,
+      );
+      bytes += generator.image(netTotalImage);
+
+      final paidImage = await generateTextImage(
+        'Paid: Tk ${sales.received?.round().toString() ?? ''}',
+        fontSize: totalFontSize,
+        textAlign: TextAlign.right,
+      );
+      bytes += generator.image(paidImage);
+
+      if (sales.due != null && sales.due! > 0) {
+        final dueImage = await generateTextImage(
+          'Due: Tk ${sales.due?.toInt().toString() ?? ''}',
+          fontSize: totalFontSize,
+          textAlign: TextAlign.right,
+        );
+        bytes += generator.image(dueImage);
+      }
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Sales by
+      final salesByImage = await generateTextImage(
+        'Sales By: ${sales.salesBy ?? 'N/A'}',
+        fontSize: 12.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(salesByImage);
+      bytes += generator.feed(1);
+
+      // Footer
+      if (SetUp().printFooter?.isNotEmpty == true) {
+        final footerImage = await generateTextImage(
+          SetUp().printFooter!,
+          fontSize: 10.0,
+          textAlign: TextAlign.center,
+        );
+        bytes += generator.image(footerImage);
+      }
+
+      bytes += generator.feed(newLine);
+
+      final websiteImage = await generateTextImage(
+        SetUp().website ?? 'poskeeper.com',
+        fontSize: 10.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(websiteImage);
+
+      bytes += generator.cut();
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in printSalesWithImageControl: $e');
+      return false;
+    }
+  }
+
+  /// Print demo with different font sizes
+  Future<bool> printFontSizeDemo() async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (!connectionStatus) {
+        showSnackBar(
+          type: SnackBarType.error,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+
+      final textLines = [
+        {
+          'text': 'FONT SIZE DEMO',
+          'fontSize': 20.0,
+          'isBold': true,
+          'textAlign': TextAlign.center,
+        },
+        {
+          'text': '=' * 32,
+          'fontSize': 8.0,
+          'textAlign': TextAlign.center,
+        },
+        {
+          'text': 'Size 8px: Small text for details',
+          'fontSize': 8.0,
+        },
+        {
+          'text': 'Size 10px: Regular text',
+          'fontSize': 10.0,
+        },
+        {
+          'text': 'Size 12px: Standard size',
+          'fontSize': 12.0,
+        },
+        {
+          'text': 'Size 14px: Medium text',
+          'fontSize': 14.0,
+          'isBold': true,
+        },
+        {
+          'text': 'Size 16px: Large text',
+          'fontSize': 16.0,
+          'isBold': true,
+        },
+        {
+          'text': 'Size 20px: Extra Large',
+          'fontSize': 20.0,
+          'isBold': true,
+        },
+        {
+          'text': 'Size 24px: Huge!',
+          'fontSize': 24.0,
+          'isBold': true,
+          'textAlign': TextAlign.center,
+        },
+        {
+          'text': 'Perfect font control with image-based printing!',
+          'fontSize': 10.0,
+          'textAlign': TextAlign.center,
+        },
+      ];
+
+      return await printMultiSizeText(textLines);
+    } catch (e) {
+      if (kDebugMode) print('Error in printFontSizeDemo: $e');
+      return false;
+    }
+  }
+
+  /// Image-based sales without invoice printing
+  Future<bool> _printSalesWithoutInvoiceImageBased(
+    CustomerLedger ledger, {
+    double headerFontSize = 18.0,
+    double contentFontSize = 12.0,
+  }) async {
+    try {
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+      bytes += generator.reset();
+
+      // Shop name
+      final shopNameImage = await generateTextImage(
+        SetUp().name ?? '',
+        fontSize: headerFontSize,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(shopNameImage);
+
+      // Address
+      final addressImage = await generateTextImage(
+        SetUp().address ?? '',
+        fontSize: contentFontSize,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(addressImage);
+      bytes += generator.feed(1);
+
+      // Receipt Print header
+      final receiptHeaderImage = await generateTextImage(
+        'Receipt Print',
+        fontSize: headerFontSize - 2,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(receiptHeaderImage);
+      bytes += generator.feed(1);
+
+      // Invoice
+      final invoiceImage = await generateTextImage(
+        'Invoice: ${ledger.invoice ?? ''}',
+        fontSize: contentFontSize,
+      );
+      bytes += generator.image(invoiceImage);
+
+      // Date
+      final dateImage = await generateTextImage(
+        'Date: ${ledger.created ?? ''}',
+        fontSize: contentFontSize,
+      );
+      bytes += generator.image(dateImage);
+
+      // Customer
+      final customerImage = await generateTextImage(
+        'Customer: ${ledger.customerName ?? ''}',
+        fontSize: contentFontSize,
+      );
+      bytes += generator.image(customerImage);
+
+      // Mobile
+      final mobileImage = await generateTextImage(
+        'Mobile: ${ledger.mobile ?? ''}',
+        fontSize: contentFontSize,
+      );
+      bytes += generator.image(mobileImage);
+
+      // Method
+      final methodImage = await generateTextImage(
+        'Method: ${ledger.method ?? 'N/A'}',
+        fontSize: contentFontSize,
+      );
+      bytes += generator.image(methodImage);
+
+      bytes += generator.feed(1);
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Amount received
+      final amountImage = await generateTextImage(
+        'Received: Tk ${ledger.amount?.toString() ?? ''}',
+        fontSize: headerFontSize - 2,
+        isBold: true,
+        textAlign: TextAlign.right,
+      );
+      bytes += generator.image(amountImage);
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Footer
+      if (SetUp().printFooter?.isNotEmpty == true) {
+        final footerImage = await generateTextImage(
+          SetUp().printFooter!,
+          fontSize: contentFontSize - 2,
+          textAlign: TextAlign.center,
+        );
+        bytes += generator.image(footerImage);
+      }
+
+      bytes += generator.feed(newLine);
+
+      final websiteImage = await generateTextImage(
+        SetUp().website ?? 'poskeeper.com',
+        fontSize: contentFontSize - 2,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(websiteImage);
+
+      bytes += generator.cut();
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in _printSalesWithoutInvoiceImageBased: $e');
+      return false;
+    }
+  }
+
+  /// Image-based kitchen printing
+  Future<bool> _printKitchenImageBased({
+    required Sales sales,
+    required String table,
+    required String orderTakenBy,
+    double headerFontSize = 18.0,
+    double itemFontSize = 14.0,
+  }) async {
+    try {
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+      bytes += generator.reset();
+
+      // Kitchen header
+      final kitchenHeaderImage = await generateTextImage(
+        'Kitchen',
+        fontSize: headerFontSize + 4,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(kitchenHeaderImage);
+
+      // Shop name
+      final shopNameImage = await generateTextImage(
+        SetUp().name ?? '',
+        fontSize: headerFontSize - 2,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(shopNameImage);
+      bytes += generator.feed(1);
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Token number
+      final tokenImage = await generateTextImage(
+        'Token No: ${sales.tokenNo}',
+        fontSize: headerFontSize,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(tokenImage);
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Table and Bill info
+      final tableInfoImage = await generateTextImage(
+        '${appLocalization.table}: $table    Bill: ${sales.invoice ?? ''}',
+        fontSize: itemFontSize,
+      );
+      bytes += generator.image(tableInfoImage);
+
+      // Date
+      final dateImage = await generateTextImage(
+        'Date: ${sales.createdAt.toString()}',
+        fontSize: itemFontSize,
+      );
+      bytes += generator.image(dateImage);
+
+      // Order taken by
+      final orderTakenByImage = await generateTextImage(
+        '${appLocalization.orderTakenBy}: $orderTakenBy',
+        fontSize: itemFontSize,
+      );
+      bytes += generator.image(orderTakenByImage);
+
+      bytes += generator.feed(1);
+
+      // Headers
+      final headerImage = await generateTextImage(
+        'Item Name                    Qty',
+        fontSize: itemFontSize,
+        isBold: true,
+      );
+      bytes += generator.image(headerImage);
+
+      bytes +=
+          generator.text('------------------------------------------------');
+
+      // Items
+      if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
+        for (final SalesItem rowData in sales.salesItem!) {
+          final itemText = '${rowData.stockName ?? ''}';
+          final qtyText = '${rowData.quantity?.toString() ?? ''}';
+
+          // Create a formatted line with item name and quantity
+          final itemLineImage = await generateTextImage(
+            '$itemText${' ' * (25 - itemText.length)}$qtyText',
+            fontSize: itemFontSize,
+          );
+          bytes += generator.image(itemLineImage);
+        }
+      }
+
+      bytes += generator.feed(1);
+
+      // Footer
+      if (SetUp().printFooter?.isNotEmpty == true) {
+        final footerImage = await generateTextImage(
+          SetUp().printFooter!,
+          fontSize: itemFontSize - 2,
+          textAlign: TextAlign.center,
+        );
+        bytes += generator.image(footerImage);
+      }
+
+      bytes += generator.feed(newLine);
+
+      final websiteImage = await generateTextImage(
+        SetUp().website ?? 'poskeeper.com',
+        fontSize: itemFontSize - 2,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(websiteImage);
+
+      bytes += generator.cut();
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in _printKitchenImageBased: $e');
+      return false;
+    }
   }
 }
