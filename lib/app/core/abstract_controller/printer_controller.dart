@@ -182,9 +182,9 @@ class PrinterController extends BaseController {
   Future<bool> printSales(
     Sales sales, {
     bool useImageBasedPrinting = true,
-    double shopNameFontSize = 20.0,
-    double itemFontSize = 12.0,
-    double totalFontSize = 14.0,
+    double shopNameFontSize = 18.0,
+    double itemFontSize = 11.0,
+    double totalFontSize = 12.0,
   }) async {
     try {
       final bool connectionStatus =
@@ -205,7 +205,7 @@ class PrinterController extends BaseController {
         }
       } else {
         showSnackBar(
-          type: SnackBarType.success,
+          type: SnackBarType.error,
           message: appLocalization.connectPrinter,
         );
         return false;
@@ -380,22 +380,20 @@ class PrinterController extends BaseController {
     TextAlign textAlign = TextAlign.left,
     Color textColor = Colors.black,
     Color backgroundColor = Colors.white,
+    double? customWidth,
   }) async {
+    if (text.trim().isEmpty) {
+      text = ' '; // Ensure non-empty text
+    }
+
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
 
     // Thermal printer width (384 pixels for 58mm, 576 for 80mm)
     final paperType = await prefs.getPrintPaperType();
-    final double width = paperType == '58 mm' ? 384 : 576;
-    final double height = fontSize * 2.5; // More height for complex scripts
+    final double width = customWidth ?? (paperType == '58 mm' ? 384 : 576);
 
-    // Background
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, width, height),
-      Paint()..color = backgroundColor,
-    );
-
-    // Create text painter
+    // Create text painter first to get accurate dimensions
     final textPainter = TextPainter(
       text: TextSpan(
         text: text,
@@ -403,33 +401,124 @@ class PrinterController extends BaseController {
           fontSize: fontSize,
           fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           color: textColor,
+          fontFamily:
+              'monospace', // Use monospace for better thermal printer compatibility
         ),
       ),
       textAlign: textAlign,
       textDirection: TextDirection.ltr,
     );
 
-    textPainter.layout(maxWidth: width - 20); // 10px padding on each side
+    textPainter.layout(maxWidth: width - 16); // 8px padding on each side
 
-    // Calculate vertical centering
-    final double yOffset = (height - textPainter.height) / 2;
+    // Calculate height based on actual text height with some padding
+    final double height = textPainter.height + 8; // 4px padding top and bottom
+
+    // Background
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, width, height),
+      Paint()..color = backgroundColor,
+    );
 
     // Calculate horizontal alignment
-    double xOffset = 10; // Default left padding
+    double xOffset = 8; // Default left padding
     if (textAlign == TextAlign.center) {
       xOffset = (width - textPainter.width) / 2;
     } else if (textAlign == TextAlign.right) {
-      xOffset = width - textPainter.width - 10;
+      xOffset = width - textPainter.width - 8;
     }
 
-    // Draw text
-    textPainter.paint(canvas, Offset(xOffset, yOffset));
+    // Draw text with top padding
+    textPainter.paint(canvas, Offset(xOffset, 4));
 
     final picture = recorder.endRecording();
     final uiImage = await picture.toImage(width.toInt(), height.toInt());
     final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
 
     // Convert to img.Image for ESC/POS processing
+    final pngBytes = byteData!.buffer.asUint8List();
+    final image = img.decodeImage(pngBytes);
+
+    return image!;
+  }
+
+  /// Generate table row as image for proper alignment
+  Future<img.Image> generateTableRowImage(
+    List<String> columns,
+    List<int> widths, {
+    double fontSize = 12.0,
+    bool isBold = false,
+    List<TextAlign>? alignments,
+  }) async {
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    // Thermal printer width
+    final paperType = await prefs.getPrintPaperType();
+    final double totalWidth = paperType == '58 mm' ? 384 : 576;
+
+    // Calculate column widths as percentages
+    final int totalUnits = widths.fold(0, (sum, width) => sum + width);
+    final List<double> columnWidths =
+        widths.map((w) => (w / totalUnits) * totalWidth).toList();
+
+    // Create text painters for all columns to get max height
+    final List<TextPainter> textPainters = [];
+    double maxHeight = 0;
+
+    for (int i = 0; i < columns.length; i++) {
+      final textPainter = TextPainter(
+        text: TextSpan(
+          text: columns[i],
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+            color: Colors.black,
+            fontFamily: 'monospace',
+          ),
+        ),
+        textAlign: alignments?[i] ?? TextAlign.left,
+        textDirection: TextDirection.ltr,
+      );
+      textPainter.layout(
+          maxWidth: columnWidths[i] - 4); // 2px padding each side
+      textPainters.add(textPainter);
+      maxHeight =
+          maxHeight > textPainter.height ? maxHeight : textPainter.height;
+    }
+
+    final double height = maxHeight + 8; // 4px padding top and bottom
+
+    // Background
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, totalWidth, height),
+      Paint()..color = Colors.white,
+    );
+
+    // Draw each column
+    double currentX = 0;
+    for (int i = 0; i < textPainters.length; i++) {
+      final textPainter = textPainters[i];
+      final columnWidth = columnWidths[i];
+      final align = alignments?[i] ?? TextAlign.left;
+
+      double xOffset;
+      if (align == TextAlign.center) {
+        xOffset = currentX + (columnWidth - textPainter.width) / 2;
+      } else if (align == TextAlign.right) {
+        xOffset = currentX + columnWidth - textPainter.width - 2;
+      } else {
+        xOffset = currentX + 2; // Left align with padding
+      }
+
+      textPainter.paint(canvas, Offset(xOffset, 4));
+      currentX += columnWidth;
+    }
+
+    final picture = recorder.endRecording();
+    final uiImage = await picture.toImage(totalWidth.toInt(), height.toInt());
+    final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
+
     final pngBytes = byteData!.buffer.asUint8List();
     final image = img.decodeImage(pngBytes);
 
@@ -1571,149 +1660,215 @@ class PrinterController extends BaseController {
       bytes += generator.reset();
 
       // Shop name with custom font size
-      final shopNameImage = await generateTextImage(
-        SetUp().name ?? '',
-        fontSize: shopNameFontSize,
-        isBold: true,
-        textAlign: TextAlign.center,
-      );
-      bytes += generator.image(shopNameImage);
+      if (SetUp().name?.isNotEmpty == true) {
+        final shopNameImage = await generateTextImage(
+          SetUp().name!,
+          fontSize: shopNameFontSize,
+          isBold: true,
+          textAlign: TextAlign.center,
+        );
+        bytes += generator.image(shopNameImage);
+      }
 
       // Address
-      final addressImage = await generateTextImage(
-        SetUp().address ?? '',
-        fontSize: 12.0,
-        textAlign: TextAlign.center,
-      );
-      bytes += generator.image(addressImage);
-      bytes += generator.feed(1);
+      if (SetUp().address?.isNotEmpty == true) {
+        final addressImage = await generateTextImage(
+          SetUp().address!,
+          fontSize: 12.0,
+          textAlign: TextAlign.center,
+        );
+        bytes += generator.image(addressImage);
+      }
+
+      // Add spacing
+      final spacingImage = await generateTextImage(' ', fontSize: 4.0);
+      bytes += generator.image(spacingImage);
 
       // Invoice with custom font size
       final invoiceImage = await generateTextImage(
-        'Invoice : ${sales.invoice}',
+        'Invoice: ${sales.invoice ?? 'N/A'}',
         fontSize: 16.0,
         isBold: true,
         textAlign: TextAlign.center,
       );
       bytes += generator.image(invoiceImage);
-      bytes += generator.feed(1);
 
-      // Date and Mode
-      bytes += generator.row([
-        PosColumn(text: 'Date: ${sales.createdAt ?? ''}', width: 7),
-        PosColumn(text: 'Mode: ${sales.methodName ?? ''}', width: 5),
-      ]);
+      // Date and Mode in one row
+      final dateInfoImage = await generateTableRowImage(
+        [
+          'Date: ${sales.createdAt ?? 'N/A'}',
+          'Mode: ${sales.methodName ?? 'Cash'}'
+        ],
+        [7, 5],
+        fontSize: 11.0,
+        alignments: [TextAlign.left, TextAlign.right],
+      );
+      bytes += generator.image(dateInfoImage);
 
-      // Customer info
-      bytes += generator.row([
-        PosColumn(text: 'Cus : ${sales.customerName ?? ''}', width: 7),
-        PosColumn(text: 'Mob : ${sales.customerMobile ?? ''}', width: 5),
-      ]);
+      // Customer info in one row
+      final customerInfoImage = await generateTableRowImage(
+        [
+          'Customer: ${sales.customerName ?? 'N/A'}',
+          'Mobile: ${sales.customerMobile ?? 'N/A'}'
+        ],
+        [7, 5],
+        fontSize: 11.0,
+        alignments: [TextAlign.left, TextAlign.right],
+      );
+      bytes += generator.image(customerInfoImage);
 
-      bytes += generator.feed(1);
+      // Add spacing
+      bytes += generator.image(spacingImage);
 
       // Table headers
-      bytes += generator.row([
-        PosColumn(text: 'Item Name', width: 7),
-        PosColumn(
-            text: 'Rate', styles: const PosStyles(align: PosAlign.center)),
-        PosColumn(
-            text: 'Qty',
-            width: 1,
-            styles: const PosStyles(align: PosAlign.center)),
-        PosColumn(
-            text: 'Total', styles: const PosStyles(align: PosAlign.right)),
-      ]);
-      bytes +=
-          generator.text('------------------------------------------------');
+      final headerImage = await generateTableRowImage(
+        ['Item Name', 'Rate', 'Qty', 'Total'],
+        [7, 2, 1, 2],
+        fontSize: 11.0,
+        isBold: true,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(headerImage);
 
-      // Items with custom font size
+      // Separator line
+      final separatorImage = await generateTextImage(
+        '------------------------------------------------',
+        fontSize: 8.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(separatorImage);
+
+      // Items with proper table formatting
       if (sales.salesItem != null && sales.salesItem!.isNotEmpty) {
         int index = 1;
         for (final SalesItem rowData in sales.salesItem!) {
-          // Use image-based printing for item names to support Unicode
-          final itemNameImage = await generateTextImage(
-            '${index++}.${rowData.stockName ?? ''}',
+          final itemRowImage = await generateTableRowImage(
+            [
+              '${index++}.${rowData.stockName ?? 'Unknown'}',
+              '${rowData.salesPrice?.toStringAsFixed(1) ?? '0.0'}',
+              '${rowData.quantity?.toStringAsFixed(0) ?? '1'}',
+              '${rowData.subTotal?.toStringAsFixed(1) ?? '0.0'}',
+            ],
+            [7, 2, 1, 2],
             fontSize: itemFontSize,
+            alignments: [
+              TextAlign.left,
+              TextAlign.center,
+              TextAlign.center,
+              TextAlign.right
+            ],
           );
-          bytes += generator.image(itemNameImage);
-
-          // Regular row for price, qty, total
-          bytes += generator.row([
-            PosColumn(text: '', width: 7), // Empty space for item name
-            PosColumn(
-              text: rowData.salesPrice?.toString() ?? '',
-              styles: const PosStyles(align: PosAlign.center),
-            ),
-            PosColumn(
-              text: rowData.quantity?.toStringAsFixed(0) ?? '1',
-              width: 1,
-              styles: const PosStyles(align: PosAlign.center),
-            ),
-            PosColumn(
-              text: rowData.subTotal.toString(),
-              styles: const PosStyles(align: PosAlign.right),
-            ),
-          ]);
+          bytes += generator.image(itemRowImage);
         }
       }
 
-      bytes +=
-          generator.text('------------------------------------------------');
+      // Separator line
+      bytes += generator.image(separatorImage);
 
-      // Totals with custom font size
-      final subTotalImage = await generateTextImage(
-        'Sub Total: Tk ${sales.subTotal?.toInt().toString() ?? ''}',
+      // Sub Total
+      final subTotalImage = await generateTableRowImage(
+        [
+          'Sub Total',
+          '',
+          '',
+          'Tk ${sales.subTotal?.toStringAsFixed(2) ?? '0.00'}'
+        ],
+        [7, 2, 1, 2],
         fontSize: totalFontSize,
-        textAlign: TextAlign.right,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
       );
       bytes += generator.image(subTotalImage);
 
-      if (sales.discountType == 'percent') {
-        final discountImage = await generateTextImage(
-          'Discount (${sales.discountCalculation?.toString() ?? 0}%): Tk ${sales.discount?.toInt().toString() ?? ''}',
+      // Discount
+      if (sales.discount != null && sales.discount! > 0) {
+        String discountText = 'Discount';
+        if (sales.discountType == 'percent') {
+          discountText += ' (${sales.discountCalculation?.toString() ?? '0'}%)';
+        }
+        final discountImage = await generateTableRowImage(
+          [
+            discountText,
+            '',
+            '',
+            'Tk ${sales.discount?.toStringAsFixed(2) ?? '0.00'}'
+          ],
+          [7, 2, 1, 2],
           fontSize: totalFontSize,
-          textAlign: TextAlign.right,
-        );
-        bytes += generator.image(discountImage);
-      } else {
-        final discountImage = await generateTextImage(
-          'Discount: Tk ${sales.discount?.toInt().toString() ?? ''}',
-          fontSize: totalFontSize,
-          textAlign: TextAlign.right,
+          alignments: [
+            TextAlign.left,
+            TextAlign.center,
+            TextAlign.center,
+            TextAlign.right
+          ],
         );
         bytes += generator.image(discountImage);
       }
 
-      bytes +=
-          generator.text('------------------------------------------------');
+      // Separator line
+      bytes += generator.image(separatorImage);
 
-      final netTotalImage = await generateTextImage(
-        'Net Payable: Tk ${sales.netTotal?.round().toString() ?? ''}',
+      // Net Total
+      final netTotalImage = await generateTableRowImage(
+        [
+          'Net Payable',
+          '',
+          '',
+          'Tk ${sales.netTotal?.toStringAsFixed(2) ?? '0.00'}'
+        ],
+        [7, 2, 1, 2],
         fontSize: totalFontSize + 2,
         isBold: true,
-        textAlign: TextAlign.right,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
       );
       bytes += generator.image(netTotalImage);
 
-      final paidImage = await generateTextImage(
-        'Paid: Tk ${sales.received?.round().toString() ?? ''}',
+      // Paid
+      final paidImage = await generateTableRowImage(
+        ['Paid', '', '', 'Tk ${sales.received?.toStringAsFixed(2) ?? '0.00'}'],
+        [7, 2, 1, 2],
         fontSize: totalFontSize,
-        textAlign: TextAlign.right,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
       );
       bytes += generator.image(paidImage);
 
+      // Due (if any)
       if (sales.due != null && sales.due! > 0) {
-        final dueImage = await generateTextImage(
-          'Due: Tk ${sales.due?.toInt().toString() ?? ''}',
+        final dueImage = await generateTableRowImage(
+          ['Due', '', '', 'Tk ${sales.due?.toStringAsFixed(2) ?? '0.00'}'],
+          [7, 2, 1, 2],
           fontSize: totalFontSize,
-          textAlign: TextAlign.right,
+          alignments: [
+            TextAlign.left,
+            TextAlign.center,
+            TextAlign.center,
+            TextAlign.right
+          ],
         );
         bytes += generator.image(dueImage);
       }
 
-      bytes +=
-          generator.text('------------------------------------------------');
+      // Separator line
+      bytes += generator.image(separatorImage);
 
       // Sales by
       final salesByImage = await generateTextImage(
@@ -1722,7 +1877,9 @@ class PrinterController extends BaseController {
         textAlign: TextAlign.center,
       );
       bytes += generator.image(salesByImage);
-      bytes += generator.feed(1);
+
+      // Add spacing
+      bytes += generator.image(spacingImage);
 
       // Footer
       if (SetUp().printFooter?.isNotEmpty == true) {
@@ -1734,8 +1891,12 @@ class PrinterController extends BaseController {
         bytes += generator.image(footerImage);
       }
 
-      bytes += generator.feed(newLine);
+      // Add new lines as per settings
+      for (int i = 0; i < newLine; i++) {
+        bytes += generator.image(spacingImage);
+      }
 
+      // Website
       final websiteImage = await generateTextImage(
         SetUp().website ?? 'poskeeper.com',
         fontSize: 10.0,
@@ -1748,6 +1909,220 @@ class PrinterController extends BaseController {
       return await PrintBluetoothThermal.writeBytes(bytes);
     } catch (e) {
       if (kDebugMode) print('Error in printSalesWithImageControl: $e');
+      return false;
+    }
+  }
+
+  /// Print test receipt with properly formatted layout
+  Future<bool> printTestReceipt() async {
+    try {
+      final bool connectionStatus =
+          await PrintBluetoothThermal.connectionStatus;
+      if (!connectionStatus) {
+        showSnackBar(
+          type: SnackBarType.error,
+          message: appLocalization.connectPrinter,
+        );
+        return false;
+      }
+
+      final profile = await CapabilityProfile.load();
+      final paperType = await prefs.getPrintPaperType();
+      final generator = Generator(
+        paperType == '58 mm' ? PaperSize.mm58 : PaperSize.mm80,
+        profile,
+      );
+
+      List<int> bytes = [];
+      bytes += generator.reset();
+
+      // Shop name
+      final shopNameImage = await generateTextImage(
+        'Jonokdllan Pharmacy',
+        fontSize: 18.0,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(shopNameImage);
+
+      // Address
+      final addressImage = await generateTextImage(
+        'Dhaka, Bangladesh',
+        fontSize: 11.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(addressImage);
+
+      // Spacing
+      final spacingImage = await generateTextImage(' ', fontSize: 4.0);
+      bytes += generator.image(spacingImage);
+
+      // Invoice
+      final invoiceImage = await generateTextImage(
+        'Invoice: 1748350028785',
+        fontSize: 14.0,
+        isBold: true,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(invoiceImage);
+
+      // Date and Mode
+      final dateInfoImage = await generateTableRowImage(
+        ['Date: 27-05-2025 06:47 PM', 'Mode: Cash'],
+        [8, 4],
+        fontSize: 10.0,
+        alignments: [TextAlign.left, TextAlign.right],
+      );
+      bytes += generator.image(dateInfoImage);
+
+      // Customer info
+      final customerInfoImage = await generateTableRowImage(
+        ['Customer: N/A', 'Mobile: N/A'],
+        [8, 4],
+        fontSize: 10.0,
+        alignments: [TextAlign.left, TextAlign.right],
+      );
+      bytes += generator.image(customerInfoImage);
+
+      // Spacing
+      bytes += generator.image(spacingImage);
+
+      // Headers
+      final headerImage = await generateTableRowImage(
+        ['Item Name', 'Rate', 'Qty', 'Total'],
+        [7, 2, 1, 2],
+        fontSize: 10.0,
+        isBold: true,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(headerImage);
+
+      // Separator
+      final separatorImage = await generateTextImage(
+        '------------------------------------------------',
+        fontSize: 8.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(separatorImage);
+
+      // Sample item
+      final itemImage = await generateTableRowImage(
+        ['1.Sample Medicine', '2.0', '8', '16.0'],
+        [7, 2, 1, 2],
+        fontSize: 10.0,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(itemImage);
+
+      bytes += generator.image(separatorImage);
+
+      // Sub Total
+      final subTotalImage = await generateTableRowImage(
+        ['Sub Total', '', '', 'Tk 16.0'],
+        [7, 2, 1, 2],
+        fontSize: 11.0,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(subTotalImage);
+
+      // Discount
+      final discountImage = await generateTableRowImage(
+        ['Discount', '', '', 'Tk 0.0'],
+        [7, 2, 1, 2],
+        fontSize: 11.0,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(discountImage);
+
+      bytes += generator.image(separatorImage);
+
+      // Net Payable
+      final netTotalImage = await generateTableRowImage(
+        ['Net Payable', '', '', 'Tk 16.0'],
+        [7, 2, 1, 2],
+        fontSize: 12.0,
+        isBold: true,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(netTotalImage);
+
+      // Paid
+      final paidImage = await generateTableRowImage(
+        ['Paid', '', '', 'Tk 16.0'],
+        [7, 2, 1, 2],
+        fontSize: 11.0,
+        alignments: [
+          TextAlign.left,
+          TextAlign.center,
+          TextAlign.center,
+          TextAlign.right
+        ],
+      );
+      bytes += generator.image(paidImage);
+
+      bytes += generator.image(separatorImage);
+
+      // Sales by
+      final salesByImage = await generateTextImage(
+        'Sales By: Admin',
+        fontSize: 10.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(salesByImage);
+
+      bytes += generator.image(spacingImage);
+
+      // Footer
+      final footerImage = await generateTextImage(
+        'Thank you for your business!',
+        fontSize: 9.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(footerImage);
+
+      // Add spacing
+      for (int i = 0; i < 3; i++) {
+        bytes += generator.image(spacingImage);
+      }
+
+      // Website
+      final websiteImage = await generateTextImage(
+        'poskeeper.com',
+        fontSize: 9.0,
+        textAlign: TextAlign.center,
+      );
+      bytes += generator.image(websiteImage);
+
+      bytes += generator.cut();
+
+      return await PrintBluetoothThermal.writeBytes(bytes);
+    } catch (e) {
+      if (kDebugMode) print('Error in printTestReceipt: $e');
       return false;
     }
   }
