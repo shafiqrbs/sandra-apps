@@ -277,7 +277,7 @@ class SalesProcessModalController extends PaymentGatewayController {
     final amountText = amountController.value.text;
     final isAmountEmpty = amountText.isEmptyOrNull;
     final amount = (num.tryParse(amountText) ?? 0).toInt();
-    final isInvalidAmount = amount >= 0 && amount < netTotal.value;
+    final isInvalidAmount = amount >= 0 && amount < netTotal.value.toInt();
 
     if (kDebugMode) {
       print('isZeroSalesAllowed: $isZeroSalesAllowed');

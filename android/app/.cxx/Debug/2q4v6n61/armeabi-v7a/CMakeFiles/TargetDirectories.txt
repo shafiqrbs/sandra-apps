@@ -1,0 +1,2 @@
+/Users/shafiq/development/sandra-apps/android/app/.cxx/Debug/2q4v6n61/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/shafiq/development/sandra-apps/android/app/.cxx/Debug/2q4v6n61/armeabi-v7a/CMakeFiles/rebuild_cache.dir
