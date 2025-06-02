@@ -625,34 +625,42 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     BuildContext context,
   ) {
     return Obx(
-      () => Column(
-        children: [
-          0.25.percentHeight,
-          if (controller.transactionMethodsManager.allItems.value != null)
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Wrap(
-                spacing: 4,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                runSpacing: 8,
-                children:
-                    controller.transactionMethodsManager.allItems.value!.map(
-                  (e) {
-                    final selected =
-                        controller.transactionMethodsManager.selectedItem.value;
-                    return TransactionMethodItemView(
-                      method: e,
-                      isSelected: selected == e,
-                      onTap: () {
-                        controller
-                            .transactionMethodsManager.selectedItem.value = e;
-                      },
-                    );
-                  },
-                ).toList(),
+      () => Container(
+        decoration: BoxDecoration(
+          color: colors.greenColor,
+          borderRadius: BorderRadius.circular(
+            containerBorderRadius,
+          ),
+        ),
+        child: Column(
+          children: [
+            0.25.percentHeight,
+            if (controller.transactionMethodsManager.allItems.value != null)
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Wrap(
+                  spacing: 4,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  runSpacing: 8,
+                  children:
+                      controller.transactionMethodsManager.allItems.value!.map(
+                    (e) {
+                      final selected = controller
+                          .transactionMethodsManager.selectedItem.value;
+                      return TransactionMethodItemView(
+                        method: e,
+                        isSelected: selected == e,
+                        onTap: () {
+                          controller
+                              .transactionMethodsManager.selectedItem.value = e;
+                        },
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
