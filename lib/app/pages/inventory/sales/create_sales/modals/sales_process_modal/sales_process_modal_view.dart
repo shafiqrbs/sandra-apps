@@ -1,4 +1,3 @@
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
@@ -664,7 +663,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     final discountType = false.obs;
     return Column(
       children: [
-        Container(
+        DecoratedBox(
           decoration: BoxDecoration(
             color: colors.redColor,
             borderRadius: BorderRadius.circular(
@@ -687,19 +686,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                   ),
                   child: Column(
                     children: [
-                      if (false)
-                        AdvancedSwitch(
-                          activeChild: const Text('%'),
-                          inactiveChild: Text(appLocalization.flat),
-                          activeColor: colors.primaryColor700,
-                          inactiveColor: colors.secondaryColor100,
-                          borderRadius: BorderRadius.circular(
-                            containerBorderRadius,
-                          ),
-                          height: 24,
-                          width: 60,
-                          // controller: controller.discountTypeController.value,
-                        ),
                       Row(
                         children: [
                           Expanded(
@@ -724,11 +710,9 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(4),
-                                      margin: const EdgeInsets.only(
-                                        right: 0,
-                                      ),
+                                      margin: EdgeInsets.zero,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFfa5252),
+                                        color: const Color(0xFFfa5252),
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: Icon(
@@ -879,95 +863,56 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
         Row(
           children: [
             Expanded(
-                child: Row(
-              children: [
-                Obx(
-                  () {
-                    return InkWell(
-                      onTap: () {
-                        print('Show profit: ${controller.showProfit.value}');
-                        controller.showProfit.toggle();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        margin: EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFfa5252),
-                          borderRadius: BorderRadius.circular(4),
+              child: Row(
+                children: [
+                  Obx(
+                    () {
+                      return InkWell(
+                        onTap: () {
+                          controller.showProfit.toggle();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          margin: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFfa5252),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            discountType.value
+                                ? TablerIcons.eye_off
+                                : TablerIcons.eye,
+                            size: 24,
+                            color: colors.whiteColor,
+                          ),
                         ),
-                        child: Icon(
-                          discountType.value
-                              ? TablerIcons.eye_off
-                              : TablerIcons.eye,
-                          size: 16,
-                          color: colors.whiteColor,
-                        ),
+                      );
+                    },
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      width: 100,
+                      child: Obx(
+                        () {
+                          return CommonText(
+                            text: controller.showProfit.value
+                                ? (controller.netTotal.value -
+                                        controller.salesPurchasePrice.value)
+                                    .toPrecision(2)
+                                    .toString()
+                                : '',
+                            fontWeight: FontWeight.w400,
+                            fontSize: mediumTFSize,
+                            textColor: colors.solidBlackColor,
+                            textAlign: TextAlign.center,
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-                Expanded(
-                  child: SizedBox(
-                    width: 100,
-                    child: Obx(
-                      () {
-                        return CommonText(
-                          text: controller.showProfit.value
-                              ? (controller.netTotal.value -
-                                      controller.salesPurchasePrice.value)
-                                  .toPrecision(2)
-                                  .toString()
-                              : '',
-                          fontWeight: FontWeight.w400,
-                          fontSize: smallTFSize,
-                          textColor: colors.solidBlackColor,
-                          textAlign: TextAlign.center,
-                        );
-                      },
                     ),
                   ),
-                ),
-              ],
-            )),
-
-            // Expanded(
-            //   child: Row(
-            //     children: [
-            //       AdvancedSwitch(
-            //         inactiveChild: Text(appLocalization.profit),
-            //         activeChild: Text(appLocalization.yes),
-            //         activeColor: colors.primaryColor700,
-            //         inactiveColor: colors.secondaryColor100,
-            //         borderRadius: BorderRadius.circular(
-            //           containerBorderRadius,
-            //         ),
-            //         height: 24,
-            //         width: 60,
-            //         controller: controller.showProfit.value,
-            //       ),
-            //       8.width,
-            //       Expanded(
-            //         child: SizedBox(
-            //           width: 100,
-            //           child: Obx(
-            //             () => CommonText(
-            //               text: controller.showProfit.value.value
-            //                   ? (controller.netTotal.value -
-            //                           controller.salesPurchasePrice.value)
-            //                       .toPrecision(2)
-            //                       .toString()
-            //                   : '',
-            //               fontWeight: FontWeight.w400,
-            //               fontSize: smallTFSize,
-            //               textColor: colors.solidBlackColor,
-            //               textAlign: TextAlign.center,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
+                ],
+              ),
+            ),
             Expanded(
               flex: 2,
               child: Obx(
@@ -985,20 +930,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
           ],
         ),
       ],
-    );
-  }
-
-  Widget _buildUserSelectView(
-    BuildContext context,
-  ) {
-    return Obx(
-      () => AdvanceSelect<User>(
-        isRequired: true,
-        isShowSearch: false,
-        controller: controller.userManager.value.asController,
-        itemToString: (data) => data?.fullName ?? '',
-        hint: appLocalization.selectUser,
-      ),
     );
   }
 
