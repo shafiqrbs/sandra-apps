@@ -92,17 +92,17 @@ class SalesProcessModalController extends PaymentGatewayController {
     calculateAllSubtotal();
     salesReturnValue.value = salesSubTotal.value;
     netTotal.value = salesSubTotal.value;
-    discountTypeController.value.addListener(
-      () {
-        if (discountTypeController.value.value) {
-          discountType.value = 'percent';
-        } else {
-          discountType.value = 'flat';
-        }
-        onDiscountChange(paymentDiscountController.value.text);
-      },
-    );
-    showProfit.value.addListener(showProfit.refresh);
+    // discountTypeController.value.addListener(
+    //   () {
+    //     if (discountTypeController.value.value) {
+    //       discountType.value = 'percent';
+    //     } else {
+    //       discountType.value = 'flat';
+    //     }
+    //     onDiscountChange(paymentDiscountController.value.text);
+    //   },
+    // );
+    // showProfit.value.addListener(showProfit.refresh);
   }
 
   void onDiscountChange(String value) {

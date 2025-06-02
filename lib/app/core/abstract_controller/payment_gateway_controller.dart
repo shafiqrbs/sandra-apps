@@ -1,13 +1,12 @@
+import 'package:nb_utils/nb_utils.dart';
 import 'package:sandra/app/core/importer.dart';
-import 'package:get/get.dart';
 import 'package:sandra/app/core/widget/show_snack_bar.dart';
-import '/app/core/base/base_controller.dart';
+
 import '/app/core/core_model/logged_user.dart';
 import '/app/entity/customer.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/transaction_methods.dart';
 import '/app/entity/user.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 abstract class PaymentGatewayController extends BaseController {
   final salesItemList = <SalesItem>[].obs;
@@ -31,8 +30,8 @@ abstract class PaymentGatewayController extends BaseController {
   final transactionMethodsManager = TransactionMethodsManager();
   final userManager = UserManager().obs;
 
-  final discountTypeController = ValueNotifier<bool>(false).obs;
-  final showProfit = ValueNotifier<bool>(false).obs;
+  // final discountTypeController = ValueNotifier<bool>(false).obs;
+  final showProfit = false.obs;
   final printWithoutDiscount = ValueNotifier<bool>(false).obs;
 
   final salesSubTotal = 0.00.obs;
@@ -58,17 +57,17 @@ abstract class PaymentGatewayController extends BaseController {
     calculateAllSubtotal();
     salesReturnValue.value = salesSubTotal.value;
     netTotal.value = salesSubTotal.value;
-    discountTypeController.value.addListener(
-      () {
-        if (discountTypeController.value.value) {
-          discountType.value = 'percent';
-        } else {
-          discountType.value = 'flat';
-        }
-        onDiscountChange(paymentDiscountController.value.text);
-      },
-    );
-    showProfit.value.addListener(showProfit.refresh);
+    // discountTypeController.value.addListener(
+    //   () {
+    //     if (discountTypeController.value.value) {
+    //       discountType.value = 'percent';
+    //     } else {
+    //       discountType.value = 'flat';
+    //     }
+    //     onDiscountChange(paymentDiscountController.value.text);
+    //   },
+    // );
+    // showProfit.value.addListener(showProfit.refresh);
   }
 
   void changePaymentMode(String value) {
