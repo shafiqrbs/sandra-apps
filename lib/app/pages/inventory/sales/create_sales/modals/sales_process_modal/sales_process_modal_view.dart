@@ -660,6 +660,89 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     return Column(
       spacing: 8,
       children: [
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Obx(
+                () {
+                  return AdvanceSelect<User>(
+                    isRequired: true,
+                    isShowSearch: false,
+                    controller: controller.userManager.value.asController,
+                    itemToString: (data) => data?.fullName ?? '',
+                    hint: appLocalization.selectUser,
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(
+                  left: 8,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: colors.primaryColor50,
+                  borderRadius: BorderRadius.circular(
+                    containerBorderRadius,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        width: 100,
+                        child: Obx(
+                          () {
+                            return CommonText(
+                              text: controller.showProfit.value
+                                  ? (controller.netTotal.value -
+                                          controller.salesPurchasePrice.value)
+                                      .toPrecision(2)
+                                      .toString()
+                                  : '${SetUp().currency ?? ''}',
+                              fontWeight: FontWeight.w400,
+                              fontSize: mediumTFSize,
+                              textColor: colors.solidBlackColor,
+                              textAlign: TextAlign.center,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () {
+                        return InkWell(
+                          onTap: () {
+                            controller.showProfit.toggle();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            margin: EdgeInsets.zero,
+                            decoration: BoxDecoration(
+                              color: colors.primaryColor50,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Icon(
+                              controller.showProfit.value
+                                  ? TablerIcons.moneybag
+                                  : TablerIcons.moneybag,
+                              size: 24,
+                              color: colors.primaryColor400,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
         DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
@@ -812,75 +895,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
               ),
             ],
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Obx(
-                () {
-                  return AdvanceSelect<User>(
-                    isRequired: true,
-                    isShowSearch: false,
-                    controller: controller.userManager.value.asController,
-                    itemToString: (data) => data?.fullName ?? '',
-                    hint: appLocalization.selectUser,
-                  );
-                },
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      width: 100,
-                      child: Obx(
-                        () {
-                          return CommonText(
-                            text: controller.showProfit.value
-                                ? (controller.netTotal.value -
-                                        controller.salesPurchasePrice.value)
-                                    .toPrecision(2)
-                                    .toString()
-                                : appLocalization.profit,
-                            fontWeight: FontWeight.w400,
-                            fontSize: mediumTFSize,
-                            textColor: colors.solidBlackColor,
-                            textAlign: TextAlign.center,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Obx(
-                    () {
-                      return InkWell(
-                        onTap: () {
-                          controller.showProfit.toggle();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          margin: EdgeInsets.zero,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFfa5252),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Icon(
-                            controller.showProfit.value
-                                ? TablerIcons.eye_off
-                                : TablerIcons.eye,
-                            size: 24,
-                            color: colors.whiteColor,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ],
     );
