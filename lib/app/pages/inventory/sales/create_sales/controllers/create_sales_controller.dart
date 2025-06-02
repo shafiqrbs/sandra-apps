@@ -178,7 +178,8 @@ class CreateSalesController extends StockSelectionController {
     // Update salesSubTotal value
     salesSubTotal
       ..value += salesItem.subTotal!
-      ..value = salesSubTotal.value.toPrecision(2);
+      ..value = salesSubTotal.value.toPrecision(2)
+      ..value = salesSubTotal.value.round().toDouble();
 
     // Add salesItem to the list and reset state
     salesItemList.value.add(salesItem);
