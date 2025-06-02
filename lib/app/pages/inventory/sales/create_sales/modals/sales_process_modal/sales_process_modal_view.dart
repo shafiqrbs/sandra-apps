@@ -770,7 +770,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     children: [
                       Obx(
                         () => Text(
-                          controller.salesReturnValue.value.ceil().toString(),
+                          controller.salesReturnValue.value.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: mediumTFSize,
