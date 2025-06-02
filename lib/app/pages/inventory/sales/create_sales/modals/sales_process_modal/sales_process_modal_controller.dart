@@ -169,7 +169,7 @@ class SalesProcessModalController extends PaymentGatewayController {
       salesSubTotal.value += element.subTotal ?? 0;
       salesPurchasePrice.value += element.purchasePrice! * element.quantity!;
     }
-    salesSubTotal.value = salesSubTotal.value.toPrecision(2);
+    salesSubTotal.value = salesSubTotal.value.toPrecision(2).round().toDouble();
     salesPurchasePrice.value = salesPurchasePrice.value.toPrecision(2);
 
     salesSubTotal.refresh();
