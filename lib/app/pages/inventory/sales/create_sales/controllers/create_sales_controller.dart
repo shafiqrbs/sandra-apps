@@ -92,6 +92,7 @@ class CreateSalesController extends StockSelectionController {
     }
 
     salesTotal.value = salesSubTotal.value.toPrecision(2);
+    salesSubTotal.value = salesSubTotal.value.toPrecision(2).round().toDouble();
     salesSubTotal.refresh();
     update();
   }
@@ -322,6 +323,13 @@ class CreateSalesController extends StockSelectionController {
   Future<void> onItemRemove(
     int index,
   ) async {
+    // delete item from database
+    await dbHelper.deleteAllWhr(
+      tbl: dbTables.tableSalesItem,
+      where: 'stock_id = ?',
+      whereArgs: [salesItemList.value[index].stockId],
+    );
+
     salesItemList.value.removeAt(index);
     calculateAllSubtotal();
     salesItemList.refresh();
