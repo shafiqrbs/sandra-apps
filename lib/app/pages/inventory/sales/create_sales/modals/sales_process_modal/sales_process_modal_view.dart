@@ -1,16 +1,8 @@
-import 'package:sandra/app/core/importer.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import '/app/core/core_model/setup.dart';
+import 'package:sandra/app/core/importer.dart';
 
 import '/app/core/advance_select/advance_select_view.dart';
-import '/app/core/base/base_view.dart';
-import '/app/core/utils/responsive.dart';
-import '/app/core/widget/common_text.dart';
-import '/app/core/widget/fb_string.dart';
-import '/app/core/widget/row_button.dart';
+import '/app/core/core_model/setup.dart';
 import '/app/entity/sales.dart';
 import '/app/entity/sales_item.dart';
 import '/app/entity/user.dart';
@@ -21,6 +13,7 @@ import '/app/pages/inventory/sales/create_sales/modals/sales_process_modal/sales
 class SalesProcessModalView extends BaseView<SalesProcessModalController> {
   final Sales? preSales;
   final List<SalesItem> salesItemList;
+
   SalesProcessModalView({
     required this.salesItemList,
     required this.preSales,
@@ -707,7 +700,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     8.width,
                     Expanded(
                       child: SizedBox(
-                        height: 24,
+                        height: MediaQuery.sizeOf(context).height * 0.04,
                         child: TextFormField(
                           controller:
                               controller.paymentDiscountController.value,
