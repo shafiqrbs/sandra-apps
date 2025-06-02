@@ -375,28 +375,6 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
     );
   }
 
-  Widget _buildSelectedCustomerView(
-    BuildContext context,
-  ) {
-    return Obx(
-      () => controller.customerManager.selectedItem.value != null
-          ? Column(
-              children: [
-                1.percentHeight,
-                CustomerCardView(
-                  data: controller.customerManager.selectedItem.value!,
-                  index: 0,
-                  onTap: () {},
-                  onReceive: () {},
-                  showReceiveButton: false,
-                ),
-                1.percentHeight,
-              ],
-            )
-          : Container(),
-    );
-  }
-
   Widget _buildCustomerListView(
     BuildContext context,
   ) {
@@ -689,68 +667,63 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
             ),
           ),
           child: Row(
+            spacing: 8,
             children: [
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    // left: 4,
-                    right: 4,
-                  ),
-                  child: TextFormField(
-                    controller: controller.paymentDiscountController.value,
-                    cursorColor: colors.solidBlackColor,
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: buildInputDecoration(
-                      prefixIcon: Obx(
-                        () => InkWell(
-                          onTap: () {
-                            discountType.toggle();
-                            controller.discountType.value =
-                                discountType.value ? 'percent' : 'flat';
-                            controller.onDiscountChange(
-                              controller.paymentDiscountController.value.text,
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFfa5252),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Icon(
-                              discountType.value
-                                  ? TablerIcons.percentage
-                                  : TablerIcons.currency_taka,
-                              size: 16,
-                              color: colors.whiteColor,
-                            ),
+                child: TextFormField(
+                  controller: controller.paymentDiscountController.value,
+                  cursorColor: colors.solidBlackColor,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: buildInputDecoration(
+                    prefixIcon: Obx(
+                      () => InkWell(
+                        onTap: () {
+                          discountType.toggle();
+                          controller.discountType.value =
+                              discountType.value ? 'percent' : 'flat';
+                          controller.onDiscountChange(
+                            controller.paymentDiscountController.value.text,
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          margin: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFfa5252),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            discountType.value
+                                ? TablerIcons.percentage
+                                : TablerIcons.currency_taka,
+                            size: 16,
+                            color: colors.whiteColor,
                           ),
                         ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 4,
-                      ),
-                      hintText: appLocalization.discount,
-                      hintStyle: TextStyle(
-                        color: colors.primaryBlackColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: mediumTFSize,
-                      ),
-                      fillColor: colors.primaryColor50,
-                      enabledBorderColor: colors.primaryColor200,
-                      focusedBorderColor: colors.primaryColor500,
-                      errorBorderColor: colors.primaryColor200,
                     ),
-                    inputFormatters: doubleInputFormatter,
-                    keyboardType: numberInputType,
-                    textAlign: centerTA,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                    ),
+                    hintText: appLocalization.discount,
+                    hintStyle: TextStyle(
+                      color: colors.primaryBlackColor,
+                      fontWeight: FontWeight.normal,
                       fontSize: mediumTFSize,
                     ),
-                    onChanged: controller.onDiscountChange,
+                    fillColor: colors.primaryColor50,
+                    enabledBorderColor: colors.primaryColor200,
+                    focusedBorderColor: colors.primaryColor500,
+                    errorBorderColor: colors.primaryColor200,
                   ),
+                  inputFormatters: doubleInputFormatter,
+                  keyboardType: numberInputType,
+                  textAlign: centerTA,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: mediumTFSize,
+                  ),
+                  onChanged: controller.onDiscountChange,
                 ),
               ),
               Expanded(
@@ -763,7 +736,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                     borderRadius: BorderRadius.circular(
                       containerBorderRadius,
                     ),
-                    color: colors.greyColor.withOpacity(0.2),
+                    color: colors.secondaryColor300,
                   ),
                   child: Column(
                     mainAxisAlignment: centerMAA,
@@ -774,6 +747,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: mediumTFSize,
+                            color: colors.whiteColor,
                           ),
                         ),
                       ),
@@ -794,7 +768,7 @@ class SalesProcessModalView extends BaseView<SalesProcessModalController> {
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: mediumTFSize,
-                            color: colors.primaryBlackColor,
+                            color: colors.whiteColor,
                           ),
                         ),
                       ),
